@@ -1,4 +1,12 @@
 <div class="sharing">
+  {% comment %}Hatena Bookmark{% endcomment %}
+  <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+    data-hatena-bookmark-layout="standard"
+    data-hatena-bookmark-url="{{ site.url }}{{ page.url }}">
+    <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+  </a>
   {% if site.twitter_tweet_button %}
   <a href="http://twitter.com/share" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.twitter_user }}" data-counturl="{{ site.url }}{{ page.url }}" >Tweet</a>
   {% endif %}
