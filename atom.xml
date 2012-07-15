@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://tokorom.github.com/atom.xml" rel="self"/>
   <link href="http://tokorom.github.com/"/>
-  <updated>2012-07-15T16:02:20+09:00</updated>
+  <updated>2012-07-15T16:48:54+09:00</updated>
   <id>http://tokorom.github.com/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -13,16 +12,22 @@
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
-  <entry>
-    <title type="html"><![CDATA[Macにpandocをインストール中にhs-httpで引っかかった]]></title>
-    <link href="http://tokorom.github.com/blog/2012/07/15/install-pandoc/"/>
-    <updated>2012-07-15T03:13:00+09:00</updated>
-    <id>http://tokorom.github.com/blog/2012/07/15/install-pandoc</id>
-    <content type="html"><![CDATA[<h2>hs-httpがインストールできない!</h2>
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Macにpandocをインストール中にhs-httpで引っかかった]]></title>
+<link href="http://tokorom.github.com/2012/07/15/install-pandoc/"/>
+<updated>2012-07-15T03:13:00+09:00</updated>
+<id>http://tokorom.github.com/2012/07/15/install-pandoc</id>
+
+      <content type="html"><![CDATA[<h2>hs-httpがインストールできない!</h2>
 
 <p>Macにpandocを入れようと気軽にMacPortsで</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
 </span></code></pre></td></tr></table></div></figure>
 
@@ -31,7 +36,7 @@
 
 <p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -74,7 +79,7 @@
 
 <p>それではと gcc-4.2 が入っているか見てみたところ、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ll /usr/bin/gcc*
 </span><span class='line'>  lrwxr-xr-x  1 root  wheel  12 12  4  2011 /usr/bin/gcc -&gt; llvm-gcc-4.2
@@ -84,7 +89,7 @@
 <p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br/>
 それでは <em>gcc-4.2</em> を入れましょうと、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install gcc42
 </span></code></pre></td></tr></table></div></figure>
 
@@ -92,7 +97,7 @@
 <p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
 それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
 </span></code></pre></td></tr></table></div></figure>
 
@@ -101,7 +106,7 @@
 
 <p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
 </span></code></pre></td></tr></table></div></figure>
 
@@ -109,13 +114,13 @@
 <p>がばっちり成功しました!
 もちろんそもそものpandocも、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>で普通にインストールできましたとさ。</p>
-]]></content>
-  </entry>
+<p><a rel="bookmark" href="http://tokorom.github.com/2012/07/15/install-pandoc/">&#9875; Permalink</a></p>]]></content>
+    </entry>
   
 </feed>

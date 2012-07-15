@@ -7,10 +7,9 @@
   <meta charset="utf-8">
   <title>Macにpandocをインストール中にhs-httpで引っかかった - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
   
-  <meta name="description" content="hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで 1
-$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&#8230; 試しに hs-http だけインストールしてみたところ、 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,12 +18,9 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tokorom.github.com/blog/2012/07/15/install-pandoc/">
-  <link href="/favicon.png" rel="icon">
+  <link rel="canonical" href="http://tokorom.github.com/2012/07/15/install-pandoc/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -58,6 +54,8 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
   </script>
 
 
+   
+  <link href="/octopress-favicon.png" rel="icon">
 </head>
 
 <body   >
@@ -83,20 +81,34 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
   
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/archives">Archives</a></li>
 </ul>
 
 </nav>
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
   
   <header>
-    
-      <h1 class="entry-title">Macにpandocをインストール中にhs-httpで引っかかった</h1>
-      <h3><a href="" style="display:none">-</a></h3>
-    
+    <h1 class="entry-title">
+
+Macにpandocをインストール中にhs-httpで引っかかった
+
+</h1>
+<h3><a href="/2012/07/15/install-pandoc/" style="display:none">-</a></h3>
+
     
       <p class="meta">
         
@@ -112,17 +124,16 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 
 <time datetime="2012-07-15T03:13:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-        
+         &bull; <a rel="bookmark" href="/2012/07/15/install-pandoc/">Permalink</a>
       </p>
     
   </header>
-
 
 <div class="entry-content"><h2>hs-httpがインストールできない!</h2>
 
 <p>Macにpandocを入れようと気軽にMacPortsで</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
 </span></code></pre></td></tr></table></div></figure>
 
@@ -131,7 +142,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 <p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -174,7 +185,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 <p>それではと gcc-4.2 が入っているか見てみたところ、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ll /usr/bin/gcc*
 </span><span class='line'>  lrwxr-xr-x  1 root  wheel  12 12  4  2011 /usr/bin/gcc -&gt; llvm-gcc-4.2
@@ -184,7 +195,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 <p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br/>
 それでは <em>gcc-4.2</em> を入れましょうと、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install gcc42
 </span></code></pre></td></tr></table></div></figure>
 
@@ -192,7 +203,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 <p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
 それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
 </span></code></pre></td></tr></table></div></figure>
 
@@ -201,7 +212,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 <p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
 </span></code></pre></td></tr></table></div></figure>
 
@@ -209,7 +220,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 <p>がばっちり成功しました!
 もちろんそもそものpandocも、</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
 </span></code></pre></td></tr></table></div></figure>
 
@@ -225,7 +236,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 <span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
 
-      
+
 
 
 
@@ -238,7 +249,7 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 
 <time datetime="2012-07-15T03:13:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-      
+
 
 <span class="categories">
   
@@ -247,26 +258,36 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 </span>
 
 
+
+      
+
     </p>
     
       <div class="sharing">
   
-  <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
-    data-hatena-bookmark-layout="standard"
-    data-hatena-bookmark-url="http://tokorom.github.com/blog/2012/07/15/install-pandoc/">
-    <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tokorom.github.com/2012/07/15/install-pandoc/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://tokorom.github.com/2012/07/15/install-pandoc/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://tokorom.github.com/2012/07/15/install-pandoc/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
-  </a>
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tokorom.github.com/blog/2012/07/15/install-pandoc/" data-via="tokorom" data-counturl="http://tokorom.github.com/blog/2012/07/15/install-pandoc/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
+</a>
+
 </div>
 
     
@@ -277,16 +298,23 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
   </footer>
 </article>
 
+<section>
+  <h1>Comments</h1>
+  
+
+  
+</section>
+
 </div>
 
 <aside class="sidebar">
-  
-    <section>
+  
+    <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/07/15/install-pandoc/">Macにpandocをインストール中にhs-httpで引っかかった</a>
+        <a href="/2012/07/15/install-pandoc/">Macにpandocをインストール中にhs-httpで引っかかった</a>
       </li>
     
   </ul>
@@ -295,15 +323,9 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 <section>
   <h1>Latest Tweets</h1>
-  <ul id="tweets">
+  <ul id="tweets" data-user="tokorom" data-count="4" data-replies="false">
     <li class="loading">Status updating...</li>
   </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("tokorom", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
   
     <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
   
@@ -313,7 +335,12 @@ $ sudo port install pandoc したところ hs-http のインストールのと�
 
 
 
-  
+
+
+
+
+
+  
 </aside>
 
 
