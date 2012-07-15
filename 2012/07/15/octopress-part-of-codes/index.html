@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TOKOROM BLOG</title>
+  <title>Octopressでソースコードの一部分だけを参照する - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tokorom.github.com/">
+  <link rel="canonical" href="http://tokorom.github.com/2012/07/15/octopress-part-of-codes/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -87,25 +87,24 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
   
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
   <header>
     <h1 class="entry-title">
 
-<a href="/2012/07/15/octopress-part-of-codes/">Octopressでソースコードの一部分だけを参照する</a>
+Octopressでソースコードの一部分だけを参照する
 
 </h1>
 <h3><a href="/2012/07/15/octopress-part-of-codes/" style="display:none">-</a></h3>
@@ -252,38 +251,15 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 <p><strong>*1</strong>: 2012/7/15現在の話。後述のとおり2.1では実装済みなのでじきに普通にできるようになるはず。</p>
 </div>
 
+
   <footer>
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
+    <p class="meta">
       
-  <header>
-    <h1 class="entry-title">
+  
 
-<a href="/2012/07/15/install-pandoc/">Macにpandocをインストール中にhs-httpで引っかかった</a>
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
 
-</h1>
-<h3><a href="/2012/07/15/install-pandoc/" style="display:none">-</a></h3>
 
-    
-      <p class="meta">
-        
 
 
 
@@ -295,133 +271,89 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
   
 
 
-<time datetime="2012-07-15T03:13:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/15/install-pandoc/">Permalink</a>
-      </p>
+<time datetime="2012-07-15T16:55:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mac-octopress/'>mac,octopress</a>
+  
+</span>
+
+
+
+      
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tokorom.github.com/2012/07/15/octopress-part-of-codes/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://tokorom.github.com/2012/07/15/octopress-part-of-codes/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://tokorom.github.com/2012/07/15/octopress-part-of-codes/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
 
-<div class="entry-content"><h2>hs-httpがインストールできない!</h2>
-
-<p>Macにpandocを入れようと気軽にMacPortsで</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&#8230;</p>
-
-<p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
-</span><span class='line'>  ...
-</span><span class='line'>  Configuring HTTP-4000.1.1...
-</span><span class='line'>  ghc: could not execute: /usr/bin/gcc-4.2
-</span><span class='line'>  Command failed:  <span class="nb">cd</span> <span class="s2">&quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&quot;</span> <span class="o">&amp;&amp;</span> runhaskell Setup co
-</span><span class='line'>  nfigure --prefix<span class="o">=</span>/opt/local --with-compiler<span class="o">=</span>/opt/local/bin/ghc
-</span><span class='line'>  Exit code: 1
-</span><span class='line'>  Error: org.macports.configure <span class="k">for </span>port hs-http returned: configure failure: <span class="nb">command </span>execution failed
-</span><span class='line'>  DEBUG: Error code: NONE
-</span><span class='line'>  DEBUG: Backtrace: configure failure: <span class="nb">command </span>execution failed
-</span><span class='line'>      <span class="k">while </span>executing
-</span><span class='line'>  <span class="s2">&quot;$procedure $targetname&quot;</span>
-</span><span class='line'>  Warning: targets not executed <span class="k">for </span>hs-http: org.macports.activate org.macports.configure org.macports.build org.macports.destroot org.macports.install
-</span><span class='line'>  Please see the log file <span class="k">for </span>port hs-http <span class="k">for </span>details:
-</span><span class='line'>      /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/main.log
-</span><span class='line'>  To report a bug, follow the instructions in the guide:    http://guide.macports.org/#project.tickets
-</span><span class='line'>  Error: Processing of port hs-http failed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と、<em>gcc-4.2</em> が実行できないというエラーが発生している。</p>
-
-<h2>gcc-4.2 を用意する</h2>
-
-<p>それではと gcc-4.2 が入っているか見てみたところ、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ll /usr/bin/gcc*
-</span><span class='line'>  lrwxr-xr-x  1 root  wheel  12 12  4  2011 /usr/bin/gcc -&gt; llvm-gcc-4.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br/>
-それでは <em>gcc-4.2</em> を入れましょうと、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install gcc42
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
-それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>pandocのインストール</h2>
-
-<p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>がばっちり成功しました!
-もちろんそもそものpandocも、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で普通にインストールできましたとさ。</p>
 </div>
 
-  <footer>
     
-    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/07/15/install-pandoc/" title="Previous Post: Macにpandocをインストール中にhs-httpで引っかかった">&laquo; Macにpandocをインストール中にhs-httpで引っかかった</a>
+      
+      
+    </p>
   </footer>
+</article>
 
-
-    </article>
+<section>
+  <h1>Comments</h1>
   
-  <div class="pagination">
-    
-    <a href="/archives">Blog Archives</a>
-    
-  </div>
+
+  
+</section>
+
 </div>
 
 <aside class="sidebar">
   
-    
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/07/15/octopress-part-of-codes/">Octopressでソースコードの一部分だけを参照する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/15/install-pandoc/">Macにpandocをインストール中にhs-httpで引っかかった</a>
+      </li>
+    
+  </ul>
+</section>
+
+
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets" data-user="tokorom" data-count="4" data-replies="false">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
     <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
