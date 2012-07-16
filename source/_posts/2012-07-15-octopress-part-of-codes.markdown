@@ -4,7 +4,7 @@ title: "Octopressでソースコードの一部分だけを参照する"
 date: 2012-07-15 16:55
 comments: true
 external-url: 
-categories: [mac,octopress]
+categories: [mac, octopress]
 ---
 
 <!-- more -->
