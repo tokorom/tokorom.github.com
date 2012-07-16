@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://tokorom.github.com/atom.xml" rel="self"/>
   <link href="http://tokorom.github.com/"/>
-  <updated>2012-07-15T17:48:44+09:00</updated>
+  <updated>2012-07-16T14:08:45+09:00</updated>
   <id>http://tokorom.github.com/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -23,7 +23,10 @@
 <updated>2012-07-15T16:55:00+09:00</updated>
 <id>http://tokorom.github.com/2012/07/15/octopress-part-of-codes</id>
 
-      <content type="html"><![CDATA[<h2>おさらい：Octopressでソースコードを表示する</h2>
+      <content type="html"><![CDATA[<!-- more -->
+
+
+<h2>おさらい：Octopressでソースコードを表示する</h2>
 
 <p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
 
@@ -152,12 +155,15 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 
 
 
-<title type="html"><![CDATA[Macにpandocをインストール中にhs-httpで引っかかった]]></title>
+<title type="html"><![CDATA[Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順]]></title>
 <link href="http://tokorom.github.com/2012/07/15/install-pandoc/"/>
 <updated>2012-07-15T03:13:00+09:00</updated>
 <id>http://tokorom.github.com/2012/07/15/install-pandoc</id>
 
-      <content type="html"><![CDATA[<h2>hs-httpがインストールできない!</h2>
+      <content type="html"><![CDATA[<!-- more -->
+
+
+<h2>hs-httpがインストールできない!</h2>
 
 <p>Macにpandocを入れようと気軽にMacPortsで</p>
 

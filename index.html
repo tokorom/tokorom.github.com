@@ -129,130 +129,12 @@
     
   </header>
 
-<div class="entry-content"><h2>おさらい：Octopressでソースコードを表示する</h2>
-
-<p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
-
-<h3>1. 指定のディレクトリにファイルを置く</h3>
-
-<p>置き場所は <em>source/downloads/code</em> 。<br/>
-例えば、ここに <em>sample/test.rb</em> というファイルを置いておく。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ mkdir -p source/downloads/code/sample
-</span><span class='line'>$ cp test.rb source/downloads/code/sample/</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2. include_code でそのファイルを指定する</h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>&#x7b;&#x25; include_code sample/test.rb %}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで↓のようにそのコードが表示できる。</p>
-
-<figure class='code'><figcaption><span>test.rb</span><a href='/downloads/code/sample/test.rb' title='Download code'> download</a></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Float</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">number_decimal_places</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">length</span><span class="o">-</span><span class="mi">2</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">to_fraction</span>
-</span><span class='line'>    <span class="n">higher</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="nb">self</span><span class="o">.</span><span class="n">number_decimal_places</span>
-</span><span class='line'>    <span class="n">lower</span> <span class="o">=</span> <span class="nb">self</span><span class="o">*</span><span class="n">higher</span>
-</span><span class='line'>    <span class="n">gcden</span> <span class="o">=</span> <span class="n">greatest_common_divisor</span><span class="p">(</span><span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">lower</span><span class="o">/</span><span class="n">gcden</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">,</span> <span class="p">(</span><span class="n">higher</span><span class="o">/</span><span class="n">gcden</span><span class="p">)</span><span class="o">.</span><span class="n">round</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">greatest_common_divisor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-</span><span class='line'>     <span class="k">while</span> <span class="n">a</span><span class="o">%</span><span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span>
-</span><span class='line'>       <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">round</span><span class="p">,(</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">round</span>
-</span><span class='line'>     <span class="k">end</span>
-</span><span class='line'>     <span class="k">return</span> <span class="n">b</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>コードの全てでなく、指定した箇所だけ表示したい</h2>
-
-<p>それでは、この <em>test.rb</em> の中の <em>to_fraction</em> というコードだけを表示したい場合はどうしたら良いだろう？<br/>
-じつは現行のOctopressのデフォルトの状態ではそれができない(<strong>*1</strong>)。</p>
-
-<p>ただ、この機能は <strong>v2.1</strong> では既に実装済みのようで、Octopressを master ではなく <strong>2.1</strong> ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。</p>
-
-<p>この経緯については、 <a href="https://github.com/imathis/octopress/pull/478">OctopressのPull request</a> に記録がある。</p>
-
-<h3>2.1 ブランチをpullしてOctopressをアップデート</h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ git pull octopress 2.1
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rake update_source
-</span><span class='line'>$ rake update_style</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上で取り込み完了です。<br/>
-masterでなく <strong>2.1</strong> からpullしていることに注意が必要。</p>
-
-<h3>include_code にstartとendを指定する</h3>
-
-<p>あとは、↓のように <em>include_code</em> で <em>start</em> と <em>end</em> を指定するだけで、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>&#x7b;&#x25; include_code sample/test.rb start:5 end:11 %}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>コードの一部分だけを表示することが可能になる。</p>
-
-<figure class='code'><figcaption><span>test.rb</span><a href='/downloads/code/sample/test.rb' title='Download code'> download</a></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'>  <span class="k">def</span> <span class="nf">to_fraction</span>
-</span><span class='line'>    <span class="n">higher</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="nb">self</span><span class="o">.</span><span class="n">number_decimal_places</span>
-</span><span class='line'>    <span class="n">lower</span> <span class="o">=</span> <span class="nb">self</span><span class="o">*</span><span class="n">higher</span>
-</span><span class='line'>    <span class="n">gcden</span> <span class="o">=</span> <span class="n">greatest_common_divisor</span><span class="p">(</span><span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">lower</span><span class="o">/</span><span class="n">gcden</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">,</span> <span class="p">(</span><span class="n">higher</span><span class="o">/</span><span class="n">gcden</span><span class="p">)</span><span class="o">.</span><span class="n">round</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p><strong>*1</strong>: 2012/7/15現在の話。後述のとおり2.1では実装済みなのでじきに普通にできるようになるはず。</p>
-</div>
+<div class="entry-content"></div>
 
   <footer>
     
+    
+    <p><a rel="full-article" href="/2012/07/15/octopress-part-of-codes/">Read on &rarr;</a></p>
     
   </footer>
 
@@ -275,7 +157,7 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
   <header>
     <h1 class="entry-title">
 
-<a href="/2012/07/15/install-pandoc/">Macにpandocをインストール中にhs-httpで引っかかった</a>
+<a href="/2012/07/15/install-pandoc/">Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</a>
 
 </h1>
 
@@ -299,107 +181,12 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
     
   </header>
 
-<div class="entry-content"><h2>hs-httpがインストールできない!</h2>
-
-<p>Macにpandocを入れようと気軽にMacPortsで</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&#8230;</p>
-
-<p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
-</span><span class='line'>  ...
-</span><span class='line'>  Configuring HTTP-4000.1.1...
-</span><span class='line'>  ghc: could not execute: /usr/bin/gcc-4.2
-</span><span class='line'>  Command failed:  <span class="nb">cd</span> <span class="s2">&quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&quot;</span> <span class="o">&amp;&amp;</span> runhaskell Setup co
-</span><span class='line'>  nfigure --prefix<span class="o">=</span>/opt/local --with-compiler<span class="o">=</span>/opt/local/bin/ghc
-</span><span class='line'>  Exit code: 1
-</span><span class='line'>  Error: org.macports.configure <span class="k">for </span>port hs-http returned: configure failure: <span class="nb">command </span>execution failed
-</span><span class='line'>  DEBUG: Error code: NONE
-</span><span class='line'>  DEBUG: Backtrace: configure failure: <span class="nb">command </span>execution failed
-</span><span class='line'>      <span class="k">while </span>executing
-</span><span class='line'>  <span class="s2">&quot;$procedure $targetname&quot;</span>
-</span><span class='line'>  Warning: targets not executed <span class="k">for </span>hs-http: org.macports.activate org.macports.configure org.macports.build org.macports.destroot org.macports.install
-</span><span class='line'>  Please see the log file <span class="k">for </span>port hs-http <span class="k">for </span>details:
-</span><span class='line'>      /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/main.log
-</span><span class='line'>  To report a bug, follow the instructions in the guide:    http://guide.macports.org/#project.tickets
-</span><span class='line'>  Error: Processing of port hs-http failed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と、<em>gcc-4.2</em> が実行できないというエラーが発生している。</p>
-
-<h2>gcc-4.2 を用意する</h2>
-
-<p>それではと gcc-4.2 が入っているか見てみたところ、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ll /usr/bin/gcc*
-</span><span class='line'>  lrwxr-xr-x  1 root  wheel  12 12  4  2011 /usr/bin/gcc -&gt; llvm-gcc-4.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br/>
-それでは <em>gcc-4.2</em> を入れましょうと、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install gcc42
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
-それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>pandocのインストール</h2>
-
-<p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>がばっちり成功しました!
-もちろんそもそものpandocも、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で普通にインストールできましたとさ。</p>
-</div>
+<div class="entry-content"></div>
 
   <footer>
     
+    
+    <p><a rel="full-article" href="/2012/07/15/install-pandoc/">Read on &rarr;</a></p>
     
   </footer>
 
