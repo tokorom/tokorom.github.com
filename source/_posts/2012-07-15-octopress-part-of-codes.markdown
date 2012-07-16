@@ -7,6 +7,8 @@ external-url:
 categories: [mac,octopress]
 ---
 
+<!-- more -->
+
 ## おさらい：Octopressでソースコードを表示する
 
 まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。

@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "Macにpandocをインストール中にhs-httpで引っかかった"
+title: "Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順"
 date: 2012-07-15 03:13
 comments: true
 categories: [mac]
 ---
+
+<!-- more -->
 
 ## hs-httpがインストールできない!
 
