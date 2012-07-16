@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[TOKOROM BLOG]]></title>
-  <link href="http://tokorom.github.com/atom.xml" rel="self"/>
-  <link href="http://tokorom.github.com/"/>
-  <updated>2012-07-17T00:10:04+09:00</updated>
-  <id>http://tokorom.github.com/</id>
+  <link href="http://www.tokoro.me/atom.xml" rel="self"/>
+  <link href="http://www.tokoro.me/"/>
+  <updated>2012-07-17T00:26:48+09:00</updated>
+  <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
     
@@ -19,9 +19,9 @@
 
 
 <title type="html"><![CDATA[Octopressでソースコードの一部分だけを参照する]]></title>
-<link href="http://tokorom.github.com/2012/07/15/octopress-part-of-codes/"/>
+<link href="http://www.tokoro.me/2012/07/15/octopress-part-of-codes/"/>
 <updated>2012-07-15T16:55:00+09:00</updated>
-<id>http://tokorom.github.com/2012/07/15/octopress-part-of-codes</id>
+<id>http://www.tokoro.me/2012/07/15/octopress-part-of-codes</id>
 
       <content type="html"><![CDATA[<!-- more -->
 
@@ -49,7 +49,7 @@
 
 <p>これで↓のようにそのコードが表示できる。</p>
 
-<figure class='code'><figcaption><span>test.rb</span><a href='http://tokorom.github.com/downloads/code/sample/test.rb' title='Download code'> download</a></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>test.rb</span><a href='http://www.tokoro.me/downloads/code/sample/test.rb' title='Download code'> download</a></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -126,7 +126,7 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 
 <p>コードの一部分だけを表示することが可能になる。</p>
 
-<figure class='code'><figcaption><span>test.rb</span><a href='http://tokorom.github.com/downloads/code/sample/test.rb' title='Download code'> download</a></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>5</span>
+<figure class='code'><figcaption><span>test.rb</span><a href='http://www.tokoro.me/downloads/code/sample/test.rb' title='Download code'> download</a></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
@@ -146,7 +146,7 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 <hr />
 
 <p><strong>*1</strong>: 2012/7/15現在の話。後述のとおり2.1では実装済みなのでじきに普通にできるようになるはず。</p>
-<p><a rel="bookmark" href="http://tokorom.github.com/2012/07/15/octopress-part-of-codes/">&#9875; Permalink</a></p>]]></content>
+<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/15/octopress-part-of-codes/">&#9875; Permalink</a></p>]]></content>
     </entry>
   
     <entry>
@@ -156,9 +156,9 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 
 
 <title type="html"><![CDATA[Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順]]></title>
-<link href="http://tokorom.github.com/2012/07/15/install-pandoc/"/>
+<link href="http://www.tokoro.me/2012/07/15/install-pandoc/"/>
 <updated>2012-07-15T03:13:00+09:00</updated>
-<id>http://tokorom.github.com/2012/07/15/install-pandoc</id>
+<id>http://www.tokoro.me/2012/07/15/install-pandoc</id>
 
       <content type="html"><![CDATA[<!-- more -->
 
@@ -260,7 +260,7 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 
 
 <p>で普通にインストールできましたとさ。</p>
-<p><a rel="bookmark" href="http://tokorom.github.com/2012/07/15/install-pandoc/">&#9875; Permalink</a></p>]]></content>
+<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/15/install-pandoc/">&#9875; Permalink</a></p>]]></content>
     </entry>
   
 </feed>
