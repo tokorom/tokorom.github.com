@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-07-18T02:07:07+09:00</updated>
+  <updated>2012-07-24T04:37:55+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[さくらVPSにJenkinsさんをインストールする]]></title>
+<link href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"/>
+<updated>2012-07-24T02:57:00+09:00</updated>
+<id>http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura</id>
+
+      <content type="html"><![CDATA[<!-- more -->
+
+
+<h2>JDKのインストール</h2>
+
+<p>Javaが未インストールならこちらから。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Jenkinsのインストール</h2>
+
+<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+</span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+</span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Jenkinsの起動</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo service jenkins start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでインストールと起動が完了。簡単すぎる！</p>
+
+<p>試しに</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ curl http://localhost:8080/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とすると、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span><span class="nt">&lt;html&gt;&lt;head&gt;</span> <span class="nt">&lt;title&gt;</span>Dashboard [Jenkins]<span class="nt">&lt;/title&gt;</span>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。</p>
+
+<p>ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo chkconfig jenkins on </span></code></pre></td></tr></table></div></figure>
+
+
+<h2>nginxの設定</h2>
+
+<p>まず、nginxが未インストールなら</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install nginx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でインストールしておく。</p>
+
+<p>Jenkinsにnginx経由でアクセスするために、自分の場合は <strong>/etc/nginx/conf.d/virtual.conf</strong> に以下リバースプロキシの設定を加えた。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name jenkins.自分の.ドメイン
+</span><span class='line'>    location / {
+</span><span class='line'>        proxy_pass http://localhost:8080;
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここでは、 <em>http://jenkins.自分の.ドメイン/</em> でアクセスされたら、 <em>http://localhost:8080/</em> に内部的に転送するよう設定している。
+もし、独自ドメインを使えない場合には、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name 自分のVPSのドメイン
+</span><span class='line'>    location /jenkins {
+</span><span class='line'>        proxy_pass http://localhost:8080;
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>のように設定して、 <em>http://自分のVPSのドメイン/jenkins/</em> でアクセスされたときにJenkinsさんに繋がるようにしたりするよう。</p>
+
+<p>設定し終わり、nginxを再起動してブラウザで <em>*http://jenkins.自分の.ドメイン/</em> を表示すれば、晴れて</p>
+
+<p><img src="http://dl.dropbox.com/u/10351676/images/install-jenkins.jpg" alt="install-jenkins" /></p>
+
+<p>のようにJenkinsさんが使えるようになっているはず。</p>
+
+<h2>Jenkinsへのアクセス制限</h2>
+
+<p>ちなみにこのままだと誰からでもジョブなどが作成できてしまう状態のため、</p>
+
+<p><a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">Standard Securiy Setup</a></p>
+
+<p>を参照してアクセス制限をかけておくことを推奨。</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">&#9875; Permalink</a></p>]]></content>
+    </entry>
   
     <entry>
       
