@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-07-24T04:37:55+09:00</updated>
+  <updated>2012-07-29T16:54:13+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,316 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Jenkins@さくらVPSにOctopressのデプロイを任せてみる]]></title>
+<link href="http://www.tokoro.me/2012/07/25/jenkins-octopress/"/>
+<updated>2012-07-25T01:03:00+09:00</updated>
+<id>http://www.tokoro.me/2012/07/25/jenkins-octopress</id>
+
+      <content type="html"><![CDATA[<!-- more -->
+
+
+<h2>ゴール</h2>
+
+<p>kkk
+Octopressで記事を書いたあと、 <strong>Bitbucket</strong> に <code>git push origin source</code> とするだけで <strong>Github Pages</strong> に勝手にデプロイされるようにする。</p>
+
+<h2>事前準備</h2>
+
+<ul>
+<li>Github PagesにOctopressでブログを投稿できるようにしておく => まだなら <a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">このあたりを参照</a></li>
+<li>さくらVPSを使えるようにしておく</li>
+<li>さくらVPSにJenkinsをインストールしておく => まだなら <a href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">こちらを参照</a></li>
+<li>さくらVPSでGitを使えるようにしておく => まだなら <a href="http://blog.araishi.com/sakura-vps-git-yum-install/">こちらを参照</a></li>
+<li>Githubを使えるようにしておく</li>
+<li>Bitbucketを使えるようにしておく</li>
+</ul>
+
+
+<h2>Jenkinsに入れておく必要のあるPlugin</h2>
+
+<ul>
+<li>RVM Plugin</li>
+</ul>
+
+
+<h2>システム構成</h2>
+
+<h2>アクティビティ図</h2>
+
+<h2>JenkinsからBitbucketとGithubにアクセスできるようにする</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ cd /var/lib/jenkins
+</span><span class='line'>$ sudo -u jenkins -H /usr/local/bin/git config --global user.email "jenkins@your.domain"
+</span><span class='line'>$ sudo -u jenkins -H /usr/local/bin/git config --global user.name "jenkins"
+</span><span class='line'>$ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.domain</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でJenkins用の秘密鍵と公開鍵を作る。
+このとき、パスフレーズを設定しないように注意。</p>
+
+<p>これで <em>/var/lib/jenkins/.ssh/id_rsa.pub</em> という公開鍵ができているはずなので、この公開鍵を <strong>Github</strong> と <strong>Bitbucket</strong> に登録しておく。</p>
+
+<p>ちなみに公開鍵の中身を</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo -u jenkins -H more .ssh/id_rsa.pub</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などで表示し、表示された文字列をそのまま <strong>Github</strong> や <strong>Bitbucket</strong> にコピペすればOK。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo -u jenkins mkdir tmp 
+</span><span class='line'>$ cd tmp
+</span><span class='line'>$ sudo -u jenkins git clone git@bitbucket.org:yourname/yourname.github.com.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で実際に <strong>Bitbucket</strong> からcloneをすると、一度目に限り yes/no が問われるのでそこでyesとしておく必要がある（そうしないとJenkinsから使えない）。</p>
+
+<p>同じく、 <strong>Github</strong> からも一度cloneしておく。</p>
+
+<h2>JenkinsからRVMを使えるようにする</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ cd /var/lib/jenkins
+</span><span class='line'>$ sudo -u jenkins -H -s bash -c 'bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )'
+</span><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl' 
+</span><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm install 1.9.2 -C --with-openssl-dir=~/.rvm/usr --with-readline-dir=~/.rvm/usr --with-zlib-dir=~/.rvm/usr'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、jenkinsユーザでRVMでインストールしたRubyが使えるようになる。</p>
+
+<p>実際にRubyが使えるかどうかは</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; ruby -v'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などで確認できる。</p>
+
+<h2>gemsetを作成して必要なgemのインストール</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm gemset create octopress'
+</span><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm use 1.9.2@octopress; gem install bundle'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>octopress用のoctopressというgemsetを作って、そこに <strong>bundle</strong> をインストールしておく。</p>
+
+<h2>JenkinsのJobの設定</h2>
+
+<p><em>Build a free-style software project</em> をベースに設定した項目は以下のとおり。</p>
+
+<ul>
+<li>Project name
+
+<ul>
+<li><strong>deploy-octopress</strong> (お好みのジョブ名を設定)</li>
+</ul>
+</li>
+<li>Source Code Management
+
+<ul>
+<li><strong>None</strong> (Gitからソースを取得するところを含めてコマンドでやってしまうため)</li>
+</ul>
+</li>
+<li>Build Triggers
+
+<ul>
+<li><strong>Trigger builds remotely</strong>
+
+<ul>
+<li>Authentication Token: <strong>a-word-you-like</strong> (適当なワードを指定する)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Build Environment
+
+<ul>
+<li>Run the build in a RVM-managed environment
+
+<ul>
+<li>Implementation: <strong>1.9.2@octopress</strong> (利用するRubyバージョンとgemset名を設定)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Executable shell
+
+<ul>
+<li>Command</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>rm -rf octopress
+</span><span class='line'>mkdir octopress
+</span><span class='line'>cd octopress
+</span><span class='line'>/usr/local/bin/git init
+</span><span class='line'>/usr/local/bin/git remote add -t source origin git@bitbucket.org:yourname/yourname.github.com.git
+</span><span class='line'>/usr/local/bin/git fetch
+</span><span class='line'>/usr/local/bin/git checkout source
+</span><span class='line'>
+</span><span class='line'>bundle install
+</span><span class='line'>rake generate
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後の <em>Command</em> のところでは、</p>
+
+<ul>
+<li>作業ディレクトリを作り直す</li>
+<li>Bitbucketのリポジトリからsourceブランチを取得</li>
+<li>bundleで必要なgemなどをインストール</li>
+<li>generate &amp; デプロイ!</li>
+</ul>
+
+
+<p>をしている。</p>
+
+<h2>JenkinsにBitbucketからアクセスするためのユーザを追加</h2>
+
+<p>BitbucketからJenkinsにアクセスする際に、 <em>http://usename:password@jenkins.yourdomain</em> みたいにIDとパスワードを埋め込むことになるので、専用のアカウントを作る。</p>
+
+<p>※ ユーザの追加方法については <a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">このあたり</a> を参照</p>
+
+<p>今回は、<strong>bitbucket</strong> というユーザを追加した。</p>
+
+<p>また、 <strong>Manage Jenkins</strong> -> <em>Configure System</em> で、</p>
+
+<ul>
+<li>Access Control
+
+<ul>
+<li>Authorization
+
+<ul>
+<li>Matrix-based security
+
+<ul>
+<li>bitbucketユーザに <strong>Job</strong> の <strong>Read</strong> だけチェック</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。</p>
+
+<h2>Bitbucketのほうの設定</h2>
+
+<p>作成したリポジトリの <strong>Admin</strong> タブの <strong>Services</strong> を選択。</p>
+
+<p><em>Select a service&#8230;</em> の中に <em>POST</em> があるのでそれを選択して、 <strong>Add service</strong>。</p>
+
+<p>設定項目には、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>http://bitbucket:yourpassword@jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と叩くべきURLをそのまま設定する (※ yourpasswordとかyourdomainなどは各自の環境に合わせて変更すること)。</p>
+
+<h2>完成!</h2>
+
+<p>これでひととおりの設定は完了。<br/>
+うまくいっていればいつもどおり記事を書いてコミットした後に <code>git push origin source</code> とBitbucketにpushするだけで、あとは勝手にデプロイしてくれる。<br/>
+このとき、Bitbucketのプライベートリポジトリにファイル一式がバックアップされることにもなる。</p>
+
+<p>なお、sourceブランチがデプロイの対象となっているので、書き途中の記事をBitbucketに保存しておきたい場合には、 <strong>draft</strong> など別のブランチにコミットしておけば書き途中のものが勝手にデプロイされる心配はない。</p>
+
+<h2>課題</h2>
+
+<h3>セキュリティ</h3>
+
+<p>BitbucketからBasic認証つきのURLを叩いているところは改善したほうが良さそう。</p>
+
+<h2>じつは途中ではいろいろと引っかかった</h2>
+
+<p>以上、うまくいった手順をまとめましたが実際にはいくつかひっかかったところがあったので、そこもまとめておく。</p>
+
+<h3>.rvmrc の実行許可の確認が越えられない</h3>
+
+<p>はじめて <em>.rvmrc</em> が設置されたディレクトリに入る際、 <em>.rvmrc</em> の内容を実行して良いか? といった問い合わせが入り、自分で操作しているときは単純に <strong>yes</strong> と応えるだけなのですが、それをJenkinsさんにやってもらう方法がわからなかった。<br/>
+<code>rvmrc trust ディレクトリ名</code>とすれば以降その確認がいらなくなるというのは既知なのだが、Git Plugin を使ってソースを取得すると、その時点でcloneしたディレクトリに入ってしまうのでタイミング的にそれも無理。<br/>
+けっきょくGit Pluginを使うのをあきらめ、ソースのcloneからブランチの切り替えまでコマンドで直接やることとした。</p>
+
+<h3>RVMがうまく扱えない</h3>
+
+<p>ビルド時のコマンドの中で <strong>rvm</strong> を使っているわけですが、やたらとこのコマンドがないといったエラーが出まくり「うぎゃー」となった。
+これは <strong>RVM Plugin</strong> を使えば簡単に解決できた。</p>
+
+<h3>gemがインストールできない</h3>
+
+<p><strong>bundler</strong> を使うため、<code>gem install bundle</code>をビルド時のコマンド中に入れたのだが、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>ERROR:  Loading command: install (LoadError)
+</span><span class='line'>    no such file to load -- zlib</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というエラーで先に進めない。</p>
+
+<p>これはRubyのほうの話で、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl' 
+</span><span class='line'>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm reinstall 1.9.2'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とzlibなどをRVMでインストールした後に、Rubyをreinstallすることで解決。<br/>
+本記事のほうの手順ではきちんと先に <code>rvm pkg install</code> を済ませておくようにしてある。</p>
+
+<h3>rake installに失敗する</h3>
+
+<p>Jenkinsでの<code>rake install</code>時に</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>という確認が出てきたそこでこけていた模様。<br/>
+よくよく考えてみると、<code>rake install</code>はこのリポジトリには適用済みの状態でpushしてあるので不要だった。</p>
+
+<h3>おしまい</h3>
+
+<p>じつにJenkinsで自動デプロイするまでにかかったビルド試行回数は25回。</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/25/jenkins-octopress/">&#9875; Permalink</a></p>]]></content>
+    </entry>
   
     <entry>
       
