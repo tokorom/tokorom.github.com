@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>さくらVPSにJenkinsさんをインストールする - TOKOROM BLOG</title>
+  <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">
+  <link rel="canonical" href="http://www.tokoro.me/2012/07/29/security-for-jenkins/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -105,9 +105,9 @@
   <header>
     <h1 class="entry-title">
 
-さくらVPSにJenkinsさんをインストールする<a class="entry-title-link" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" style="display:none">-</a>
+JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする<a class="entry-title-link" href="http://www.tokoro.me/2012/07/29/security-for-jenkins/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" alt="はてなブックマーク - さくらVPSにJenkinsさんをインストールする" title="はてなブックマーク - さくらVPSにJenkinsさんをインストールする"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/29/security-for-jenkins/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/29/security-for-jenkins/" alt="はてなブックマーク - JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする" title="はてなブックマーク - JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする"></a>
 </h1>
 
     
@@ -124,8 +124,8 @@
   
 
 
-<time datetime="2012-07-24T02:57:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/24/install-jenkins-to-sakura/">Permalink</a>
+<time datetime="2012-07-29T16:00:00+09:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/07/29/security-for-jenkins/">Permalink</a>
       </p>
     
   </header>
@@ -133,66 +133,52 @@
 <div class="entry-content"><!-- more -->
 
 
-<h2>JDKのインストール</h2>
+<p><a href="/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br/>
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。<br/>
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。</p>
 
-<p>Javaが未インストールならこちらから。</p>
+<h2>JenkinsにBitbucketからアクセスするためのユーザを追加</h2>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel</span></code></pre></td></tr></table></div></figure>
+<p>まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。</p>
 
+<p>※ ユーザの追加方法については <a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">このあたり</a> を参照</p>
 
-<h2>Jenkinsのインストール</h2>
+<p>今回は、<strong>bitbucket</strong> というユーザを追加した。</p>
 
-<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
+<p>また、 <strong>Manage Jenkins</strong> -> <strong>Configure System</strong> で、</p>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-</span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-</span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>Access Control
 
+<ul>
+<li>Authorization
 
-<h2>Jenkinsの起動</h2>
+<ul>
+<li>Matrix-based security
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo service jenkins start</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストールと起動が完了。簡単すぎる！</p>
-
-<p>試しに</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ curl http://localhost:8080/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>とすると、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span><span class="nt">&lt;html&gt;&lt;head&gt;</span> <span class="nt">&lt;title&gt;</span>Dashboard [Jenkins]<span class="nt">&lt;/title&gt;</span>...
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>bitbucketユーザに <strong>Job</strong> の <strong>Read</strong> だけチェック</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 
-<p>みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。</p>
+<p>としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。</p>
 
-<p>ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。</p>
+<p>このとき、Anonymousユーザの <strong>Job</strong> の <strong>Read</strong> にチェックがついていれば外しておく。</p>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo chkconfig jenkins on </span></code></pre></td></tr></table></div></figure>
+<h2>Jenkinsへのビルド命令専用のドメインを追加</h2>
 
+<p>これまでは <code>jenkins.yourdomain</code> というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の <code>push-to-jenkins.yourdomain</code> を追加した。<br/>
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。</p>
 
-<h2>nginxの設定</h2>
+<h2>nginxに設定追加</h2>
 
-<p>まず、nginxが未インストールなら</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install nginx</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でインストールしておく。</p>
-
-<p>Jenkinsにnginx経由でアクセスするために、自分の場合は <strong>/etc/nginx/conf.d/virtual.conf</strong> に以下リバースプロキシの設定を加えた。</p>
+<p>nginxのconfに、以下のように<code>push-to-jenkins.yourdomain</code>へのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -201,49 +187,38 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
+<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
 </span><span class='line'>    listen 80;
-</span><span class='line'>    server_name jenkins.自分の.ドメイン
+</span><span class='line'>    server_name push-to-jenkins.yourdomain;
 </span><span class='line'>    location / {
 </span><span class='line'>        proxy_pass http://localhost:8080;
+</span><span class='line'>        proxy_set_header Authorization "Basic XXXXXX";
 </span><span class='line'>    }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>ここでは、 <em>http://jenkins.自分の.ドメイン/</em> でアクセスされたら、 <em>http://localhost:8080/</em> に内部的に転送するよう設定している。
-もし、独自ドメインを使えない場合には、</p>
+<p><strong>XXXXXX</strong> の部分には実際には <strong>bitbucket:yourpassword</strong> というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。<br/>
+Base64エンコードの方法が分からない場合は <a href="http://www.ahref.org/app/base64/base64.cgi">このあたり</a> のサイトでエンコードした文字列をGETするのが手っ取り早い。</p>
+
+<p>設定後にnginxを再起動しておくこと。</p>
+
+<h2>Bitbucketのほうの設定</h2>
+
+<p>該当リポジトリの <strong>Admin</strong> タブの <strong>Services</strong> を選択。</p>
+
+<p>POSTの設定項目を</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
-</span><span class='line'>    listen 80;
-</span><span class='line'>    server_name 自分のVPSのドメイン
-</span><span class='line'>    location /jenkins {
-</span><span class='line'>        proxy_pass http://localhost:8080;
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>http://push-to-jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</span></code></pre></td></tr></table></div></figure>
 
 
-<p>のように設定して、 <em>http://自分のVPSのドメイン/jenkins/</em> でアクセスされたときにJenkinsさんに繋がるようにしたりするよう。</p>
+<p>に変更しておく。</p>
 
-<p>設定し終わり、nginxを再起動してブラウザで <em>*http://jenkins.自分の.ドメイン/</em> を表示すれば、晴れて</p>
+<h2>おしまい</h2>
 
-<p><img src="http://dl.dropbox.com/u/10351676/images/install-jenkins.jpg" alt="install-jenkins" /></p>
-
-<p>のようにJenkinsさんが使えるようになっているはず。</p>
-
-<h2>Jenkinsへのアクセス制限</h2>
-
-<p>ちなみにこのままだと誰からでもジョブなどが作成できてしまう状態のため、</p>
-
-<p><a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">Standard Securiy Setup</a></p>
-
-<p>を参照してアクセス制限をかけておくことを推奨。</p>
+<p>以上の設定がうまく言っていれば、Bitbucketへの<code>git push origin source</code>でOctopressのデプロイが自動的にできるはず。<br/>
+また、このときベーシック認証のIDとPasswordがインターネット上にさらされることもない。</p>
 </div>
 
 
@@ -266,12 +241,12 @@
   
 
 
-<time datetime="2012-07-24T02:57:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
+<time datetime="2012-07-29T16:00:00+09:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/sakura/'>sakura</a>
+    <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/sakura/'>sakura</a>
   
 </span>
 
@@ -289,18 +264,18 @@
   
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/29/security-for-jenkins/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/29/security-for-jenkins/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/29/security-for-jenkins/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
@@ -311,10 +286,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/07/15/octopress-part-of-codes/" title="Previous Post: Octopressでソースコードの一部分だけを参照する">&laquo; Octopressでソースコードの一部分だけを参照する</a>
+        <a class="basic-alignment left" href="/2012/07/29/jenkins-octopress/" title="Previous Post: Jenkins@さくらVPSにOctopressのデプロイを任せてみる">&laquo; Jenkins@さくらVPSにOctopressのデプロイを任せてみる</a>
       
-      
-        <a class="basic-alignment right" href="/2012/07/29/jenkins-octopress/" title="Next Post: Jenkins@さくらVPSにOctopressのデプロイを任せてみる">Jenkins@さくらVPSにOctopressのデプロイを任せてみる &raquo;</a>
       
     </p>
   </footer>
