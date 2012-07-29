@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-07-29T21:41:13+09:00</updated>
+  <updated>2012-07-29T21:43:40+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -138,7 +138,7 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 <li>自分はBitbucketに git push だけしてあとは放っておく</li>
 <li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
 <li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
-<li>作成した記事をGithub Pagesにデプロイする</li>
+<li>Jenkinsは作成した記事をGithub Pagesにデプロイする</li>
 </ol>
 
 
