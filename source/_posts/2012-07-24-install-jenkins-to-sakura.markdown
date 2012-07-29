@@ -7,8 +7,6 @@ external-url:
 categories: [sakura, jenkins]
 ---
 
-<!-- more -->
-
 ## JDKのインストール
 
 Javaが未インストールならこちらから。
@@ -24,6 +22,8 @@ $ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/je
 $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 $ sudo yum install jenkins
 ```
+
+<!-- more -->
 
 ## Jenkinsの起動
 ```

@@ -6,8 +6,6 @@ comments: true
 categories: [mac]
 ---
 
-<!-- more -->
-
 ## hs-httpがインストールできない!
 
 Macにpandocを入れようと気軽にMacPortsで
@@ -19,6 +17,8 @@ $ sudo port install pandoc
 したところ *hs-http* のインストールのところでなにやらエラー...
 
 試しに *hs-http* だけインストールしてみたところ、
+
+<!-- more -->
 
 ``` sh
 $ sudo port -d install hs-http

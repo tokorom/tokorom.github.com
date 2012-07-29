@@ -7,11 +7,20 @@ external-url:
 categories: [sakura, octopress, jenkins]
 ---
 
-<!-- more -->
-
-## ゴール
+## 目的
 
 Octopressで記事を書いたあと、 **Bitbucket** に `git push origin source` とするだけで **Github Pages** に勝手にデプロイされるようにする。
+
+## イメージ
+
+{% img center http://dl.dropbox.com/u/10351676/images/octopress_deploy.png %}
+
+1. 自分はBitbucketに git push だけしてあとは放っておく
+1. Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く
+1. Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する
+1. Jenkinsは作成した記事をGithub Pagesにデプロイする
+
+<!-- more -->
 
 ## 事前準備
 
@@ -25,10 +34,6 @@ Octopressで記事を書いたあと、 **Bitbucket** に `git push origin sourc
 ## Jenkinsに入れておく必要のあるPlugin
 
 * RVM Plugin
-
-## システム構成
-
-## アクティビティ図
 
 ## JenkinsからBitbucketとGithubにアクセスできるようにする
 

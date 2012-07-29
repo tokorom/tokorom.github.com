@@ -7,8 +7,6 @@ external-url:
 categories: [mac, octopress]
 ---
 
-<!-- more -->
-
 ## おさらい：Octopressでソースコードを表示する
 
 まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
@@ -21,6 +19,8 @@ categories: [mac, octopress]
 $ mkdir -p source/downloads/code/sample
 $ cp test.rb source/downloads/code/sample/
 ```
+
+<!-- more -->
 
 ### 2. include_code でそのファイルを指定する
 

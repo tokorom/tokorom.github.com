@@ -7,8 +7,6 @@ external-url:
 categories: [sakura, octopress, jenkins]
 ---
 
-<!-- more -->
-
 [前の記事](/2012/07/29/jenkins-octopress/)でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。  
 つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。  
 ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
@@ -27,6 +25,8 @@ categories: [sakura, octopress, jenkins]
   * Authorization
     * Matrix-based security
       * bitbucketユーザに **Job** の **Read** だけチェック
+
+<!-- more -->
 
 としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
 
