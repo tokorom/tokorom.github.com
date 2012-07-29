@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-07-29T23:11:51+09:00</updated>
+  <updated>2012-07-29T23:54:00+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -80,7 +80,7 @@
 <p><img class="center" src="http://dl.dropbox.com/u/10351676/images/octopress_deploy.png"></p>
 
 <ol>
-<li>自分はBitbucketに git push だけしてあとは放っておく</li>
+<li>自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく</li>
 <li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
 <li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
 <li>Jenkinsは作成した記事をGithub Pagesにデプロイする</li>
