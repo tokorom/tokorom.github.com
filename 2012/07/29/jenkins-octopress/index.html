@@ -130,12 +130,24 @@ Jenkins@さくらVPSにOctopressのデプロイを任せてみる<a class="entry
     
   </header>
 
-<div class="entry-content"><!-- more -->
-
-
-<h2>ゴール</h2>
+<div class="entry-content"><h2>目的</h2>
 
 <p>Octopressで記事を書いたあと、 <strong>Bitbucket</strong> に <code>git push origin source</code> とするだけで <strong>Github Pages</strong> に勝手にデプロイされるようにする。</p>
+
+<h2>イメージ</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/octopress_deploy.png"></p>
+
+<ol>
+<li>自分はBitbucketに git push だけしてあとは放っておく</li>
+<li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
+<li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
+<li>作成した記事をGithub Pagesにデプロイする</li>
+</ol>
+
+
+<!-- more -->
+
 
 <h2>事前準備</h2>
 
@@ -155,10 +167,6 @@ Jenkins@さくらVPSにOctopressのデプロイを任せてみる<a class="entry
 <li>RVM Plugin</li>
 </ul>
 
-
-<h2>システム構成</h2>
-
-<h2>アクティビティ図</h2>
 
 <h2>JenkinsからBitbucketとGithubにアクセスできるようにする</h2>
 

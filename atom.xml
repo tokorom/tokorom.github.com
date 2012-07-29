@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-07-29T17:04:28+09:00</updated>
+  <updated>2012-07-29T21:41:13+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -23,10 +23,7 @@
 <updated>2012-07-29T16:00:00+09:00</updated>
 <id>http://www.tokoro.me/2012/07/29/security-for-jenkins</id>
 
-      <content type="html"><![CDATA[<!-- more -->
-
-
-<p><a href="http://www.tokoro.me/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br/>
+      <content type="html"><![CDATA[<p><a href="http://www.tokoro.me/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br/>
 つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。<br/>
 ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。</p>
 
@@ -58,6 +55,9 @@
 </ul>
 </li>
 </ul>
+
+
+<!-- more -->
 
 
 <p>としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。</p>
@@ -126,12 +126,24 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 <updated>2012-07-29T15:50:00+09:00</updated>
 <id>http://www.tokoro.me/2012/07/29/jenkins-octopress</id>
 
-      <content type="html"><![CDATA[<!-- more -->
-
-
-<h2>ゴール</h2>
+      <content type="html"><![CDATA[<h2>目的</h2>
 
 <p>Octopressで記事を書いたあと、 <strong>Bitbucket</strong> に <code>git push origin source</code> とするだけで <strong>Github Pages</strong> に勝手にデプロイされるようにする。</p>
+
+<h2>イメージ</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/octopress_deploy.png"></p>
+
+<ol>
+<li>自分はBitbucketに git push だけしてあとは放っておく</li>
+<li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
+<li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
+<li>作成した記事をGithub Pagesにデプロイする</li>
+</ol>
+
+
+<!-- more -->
+
 
 <h2>事前準備</h2>
 
@@ -151,10 +163,6 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 <li>RVM Plugin</li>
 </ul>
 
-
-<h2>システム構成</h2>
-
-<h2>アクティビティ図</h2>
 
 <h2>JenkinsからBitbucketとGithubにアクセスできるようにする</h2>
 
@@ -476,10 +484,7 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 <updated>2012-07-24T02:57:00+09:00</updated>
 <id>http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura</id>
 
-      <content type="html"><![CDATA[<!-- more -->
-
-
-<h2>JDKのインストール</h2>
+      <content type="html"><![CDATA[<h2>JDKのインストール</h2>
 
 <p>Javaが未インストールならこちらから。</p>
 
@@ -497,6 +502,11 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 </pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
 </span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 </span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
 
 
 <h2>Jenkinsの起動</h2>
@@ -604,10 +614,7 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 <updated>2012-07-15T16:55:00+09:00</updated>
 <id>http://www.tokoro.me/2012/07/15/octopress-part-of-codes</id>
 
-      <content type="html"><![CDATA[<!-- more -->
-
-
-<h2>おさらい：Octopressでソースコードを表示する</h2>
+      <content type="html"><![CDATA[<h2>おさらい：Octopressでソースコードを表示する</h2>
 
 <p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
 
@@ -620,6 +627,11 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='plain'><span class='line'>$ mkdir -p source/downloads/code/sample
 </span><span class='line'>$ cp test.rb source/downloads/code/sample/</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
 
 
 <h3>2. include_code でそのファイルを指定する</h3>
@@ -741,10 +753,7 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 <updated>2012-07-15T03:13:00+09:00</updated>
 <id>http://www.tokoro.me/2012/07/15/install-pandoc</id>
 
-      <content type="html"><![CDATA[<!-- more -->
-
-
-<h2>hs-httpがインストールできない!</h2>
+      <content type="html"><![CDATA[<h2>hs-httpがインストールできない!</h2>
 
 <p>Macにpandocを入れようと気軽にMacPortsで</p>
 
@@ -756,6 +765,11 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 <p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&#8230;</p>
 
 <p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
+
+<!-- more -->
+
+
+
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>

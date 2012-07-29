@@ -130,10 +130,7 @@ JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込
     
   </header>
 
-<div class="entry-content"><!-- more -->
-
-
-<p><a href="/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br/>
+<div class="entry-content"><p><a href="/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br/>
 つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。<br/>
 ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。</p>
 
@@ -165,6 +162,9 @@ JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込
 </ul>
 </li>
 </ul>
+
+
+<!-- more -->
 
 
 <p>としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。</p>
