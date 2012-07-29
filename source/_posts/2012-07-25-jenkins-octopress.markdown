@@ -15,7 +15,7 @@ Octopressで記事を書いたあと、 **Bitbucket** に `git push origin sourc
 
 {% img center http://dl.dropbox.com/u/10351676/images/octopress_deploy.png %}
 
-1. 自分はBitbucketに git push だけしてあとは放っておく
+1. 自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく
 1. Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く
 1. Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する
 1. Jenkinsは作成した記事をGithub Pagesにデプロイする
