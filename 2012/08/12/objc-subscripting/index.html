@@ -324,8 +324,9 @@ Objective-Cで独自クラスに[]でアクセスする<a class="entry-title-lin
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>NSArray* array = @[@0, @1, @2];
-</span><span class='line'>NSLog( @"array[1] = %@", array[1] ); //&lt; 1</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="err">@</span><span class="mi">0</span><span class="p">,</span> <span class="err">@</span><span class="mi">1</span><span class="p">,</span> <span class="err">@</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span> <span class="s">@&quot;array[1] = %@&quot;</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span> <span class="c1">//&lt; 1</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>と、NSArrayの要素を[]で取得することができるようになります。</p>
