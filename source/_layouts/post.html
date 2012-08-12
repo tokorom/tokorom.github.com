@@ -6,6 +6,9 @@ single: true
 <div>
 {% include post/variables.html %}
 <article class="hentry {% if linklog %}linklog{% endif %}" role="article">
+  {% unless page.sharing == false %}
+    {% include post/sharing.html %}
+  {% endunless %}
   {% include article.html %}
   <footer>
     <p class="meta">
