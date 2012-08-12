@@ -13,6 +13,17 @@
   font-size: 1.5em;
 }
 
+header {
+  hgroup {
+    h1 a {
+      font-size: 0.8em;
+    }
+    h2 {
+      font-size: 0.8em;
+    }
+  }
+}
+
 nav {
   li {
     a:link {
@@ -26,16 +37,22 @@ nav {
 
 article {
   .entry-title {
-    font-size: 1.5em;
-  }
-  h2, section h1 {
     font-size: 1.2em;
   }
+  .entry-title a {
+    font-size: 0.9em;
+  }
+  h2, section h1 {
+    font-size: 0.9em;
+  }
   h3, section h2, section h1 {
-    font-size: 1.0em;
+    font-size: 0.8em;
   }
   .entry-content {
     p {
+      font-size: 0.8em;
+    }
+    li {
       font-size: 0.8em;
     }
   }
