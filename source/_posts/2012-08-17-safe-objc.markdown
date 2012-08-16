@@ -1,0 +1,116 @@
+---
+layout: post
+title: "Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント"
+date: 2012-08-17 07:36
+comments: true
+external-url: 
+categories: objc
+---
+
+## チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？
+
+例えば、こんなコードを書いていませんか？
+```objc Library.hのもしかしたら改善できるかもしれない例
+#import "OtherLibrary1.h"
+#import "OtherLibrary2.h"
+
+@interface Library
+
+@property (strong) OtherLibrary1* otherLibrary1;
+@property (strong) OtherLibrary2* otherLibrary2;
+
+@property (assign) BOOL flag;
+
+@end
+```
+Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？  
+そうしてしまうと、この *Library.h* をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。  
+実際にこの *Library* を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。  
+具体的にはこの状態だと、 **OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る** 状態になってしまっています。
+
+以下、これを解消するための変更例です。
+
+<!-- more -->
+
+## クラスの前方宣言を使い、ヘッダーファイルではimportしない
+
+```objc Library.hの改善例
+@class OtherLibrary1; //< ここではimportしない
+@class OtherLibrary2; //< ここではimportしない
+
+@interface Library
+
+@property (strong) OtherLibrary1* otherLibrary1;
+@property (strong) OtherLibrary2* otherLibrary2;
+
+@property (assign) BOOL flag;
+
+@end
+```
+```objc Library.m
+#import "OtherLibrary1.h"
+#import "OtherLibrary2.h"
+
+@implementation Library
+// 略
+@end
+```
+このように、 **@class** による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを **Opaque pointer: (不透明ポインタ)** と呼ぶそうです。  
+ヘッダーファイルの段階では前方宣言を使ってOpaque pointerに留めておき、実際にこのクラスを利用する実装側(Library.m)のほうでOtherLibrary1.hとOtherLibrary2.hをimportするというのがこの変更です。
+
+これにより、 **Library.hをimportしても、otherLibrary1とotherLibrary2を実際に使わないクラスにはOtherLibrary1とOtherLibrary2の変更が影響しなくなる** というメリットがあります。
+
+## チェック2. なんでもかんでもヘッダーファイルでDelegateの実装を宣言していませんか？
+
+例えば、こんなコードを書いていませんか？
+```objc Library.hのもしかしたら改善できるかもしれない例
+#import "XXX.h"
+
+@interface Library <XXXDelegate>
+
+@property (assign) BOOL flag;
+
+@end
+```
+実際にこれが他のクラスに悪影響を与えるかどうかは、*XXX.h* の内容によって決まってくるのですが、前回の例同様にできればヘッダーファイルでのimportは最小限にしたいところです。  
+それならXXXDelegateも前方宣言(protocolの前方宣言も`@protocol XXXDelegate;`で可能)で解決！としたいところですが、残念ながらプロトコルの実装を宣言する場合にはそのプロトコルの詳細を知る必要があるためその索は使えません。
+
+以下、これを解消するための例です。
+
+## プライベートカテゴリでProtocolの実装宣言をする
+
+```objc Library.hの改善例
+// ヘッダーファイルではimportもprotocolの実装宣言もしない
+
+@interface Library
+
+@property (assign) BOOL flag;
+
+@end
+```
+```objc Library.mの改善例
+#import "XXX.h"
+
+@interface Library () <XXXDelegate>
+@property (strong) XXX* xxx;
+@end
+
+@implementation Library
+// 略
+@end
+```
+ここでは、ヘッダーファイルでのXXXDelegateの実装宣言自体を止めてしまい、Library.mのほうでプライベートカテゴリに対してXXXDelegateの実装宣言をするようにしています。  
+これにより、ヘッダーファイルでXXX.hをimportすることを避けることができます。
+
+## ヘッダーファイルで実装宣言をするべきときとそうでないときの判断
+
+注意しないといけないのは **全てのケースでヘッダーファイルでProtocolの実装宣言をするのがダメというわけではない** ということです。  
+あくまでも **なにも考えずに全てヘッダーファイルでやってしまうのを避けよう** というのが今回言いたかったことです。  
+
+例えば、 **このクラスがXXXDelegateを実装しているということを他のクラスに対して知ってもらいたいケース** では、ヘッダーファイルでXXXDelegateの実装を明示することは適切です。  
+
+個人的には、 **デフォルトではヘッダーファイルで実装宣言をしないで、本当に必要なときだけそうする** というのが良いのではないかと考えています。
+
+
+
+
