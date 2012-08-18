@@ -248,6 +248,21 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
 
 <p>以上の設定がうまく言っていれば、Bitbucketへの<code>git push origin source</code>でOctopressのデプロイが自動的にできるはず。<br/>
 また、このときベーシック認証のIDとPasswordがインターネット上にさらされることもない。</p>
+
+<h2>2012/08/19 追記</h2>
+
+<p>なお、Twitterで<strong>@croquette0212</strong>さんから</p>
+
+<blockquote class="twitter-tweet tw-align-center"><p><a href="https://twitter.com/tokorom"><s>@</s><b>tokorom</b></a> BitBucketとJenkinsの連携ですが、tokenつかうよりもGit PluginのnotifyCommit使う方がセキュリティの設定とかも楽なのでおすすめです! <a href="http://t.co/uBvrf0vL" title="http://kohsuke.org/2011/12/01/polling-must-die-triggering-jenkins-builds-from-a-git-hook/">kohsuke.org/2011/12/01/pol…</a></p>&mdash; Sousai (@croquette0212) <a href="https://twitter.com/croquette0212/status/236403188574613505" data-datetime="2012-08-17T10:04:46+00:00">August 17, 2012</a></blockquote>
+
+
+<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>と教えていただきました。<br/>
+この方法だと外部（ここではBitbucket）から叩くURLになんとジョブ名さえ指定する必要がありません。このNotifyを受けたJenkinsのほうで自動でジョブをさらってスケジューリングしてくれるとのことです。<br/>
+また、このNotifyそのものがジョブを実行するわけではなくあくまでもJenkinsに対する通知だけなので、ジョブの実行権限のあるユーザでURLを叩くにはどうしたらよいだろう？とかセキュリティのことをごたごた考えずに済みます。Jenkinsを運用しているサーバが該当のGitリポジトリをcloneできる状態ならOKなようでとても楽そうです。<br/>
+詳しくは <a href="http://nantekottai.com/2012/07/13/git-hook-and-access-controlled-jenkins/">GitHubとJenkinsの連携</a> をご参照ください。</p>
 </div>
 
 
