@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-08-19T00:56:36+09:00</updated>
+  <updated>2012-09-03T00:55:27+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[GHUnitのテストカバレッジをJenkinsで表示する]]></title>
+<link href="http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/"/>
+<updated>2012-09-02T22:54:00+09:00</updated>
+<id>http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage</id>
+
+      <content type="html"><![CDATA[<h2>概要</h2>
+
+<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ghunit-coverage.png"></p>
+
+<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
+
+<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br/>
+うまく動かない場合の設定の比較などにご参照ください。</p>
+
+<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
