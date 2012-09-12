@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順 - TOKOROM BLOG</title>
+  <title>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2012/07/15/install-pandoc/">
+  <link rel="canonical" href="http://www.tokoro.me/2012/09/12/objc-private-test/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -110,18 +110,18 @@
   
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/15/install-pandoc/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/15/install-pandoc/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/15/install-pandoc/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2012/09/12/objc-private-test/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
@@ -134,9 +134,9 @@
   <header>
     <h1 class="entry-title">
 
-Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順<a class="entry-title-link" href="http://www.tokoro.me/2012/07/15/install-pandoc/" style="display:none">-</a>
+Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい<a class="entry-title-link" href="http://www.tokoro.me/2012/09/12/objc-private-test/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/15/install-pandoc/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/15/install-pandoc/" alt="はてなブックマーク - Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順" title="はてなブックマーク - Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/12/objc-private-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/12/objc-private-test/" alt="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい" title="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい"></a>
 </h1>
 
     
@@ -153,24 +153,56 @@ Macにpandocをインストール中にhs-httpで引っかかったのを解消�
   
 
 
-<time datetime="2012-07-15T03:13:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/15/install-pandoc/">Permalink</a>
+<time datetime="2012-09-12T14:10:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/09/12/objc-private-test/">Permalink</a>
       </p>
     
   </header>
 
-<div class="entry-content"><h2>hs-httpがインストールできない!</h2>
+<div class="entry-content"><p>dkfjさんが <a href="http://d.hatena.ne.jp/dkfj/20120909/1347176787">Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法</a> という記事を書かれていました。</p>
 
-<p>Macにpandocを入れようと気軽にMacPortsで</p>
+<p>せっかくなので私がやっている方法も書かせていただきます。</p>
+
+<h2>テスト対象のクラス</h2>
+
+<p>以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;ExampleClass.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">ExampleClass</span><span class="p">()</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">privateMethod</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">privateMethod</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">flag</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&#8230;</p>
+<h2>テストクラス</h2>
 
-<p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
+<p>自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。</p>
 
 <!-- more -->
 
@@ -194,73 +226,51 @@ Macにpandocをインストール中にhs-httpで引っかかったのを解消�
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
-</span><span class='line'>  ...
-</span><span class='line'>  Configuring HTTP-4000.1.1...
-</span><span class='line'>  ghc: could not execute: /usr/bin/gcc-4.2
-</span><span class='line'>  Command failed:  <span class="nb">cd</span> <span class="s2">&quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&quot;</span> <span class="o">&amp;&amp;</span> runhaskell Setup co
-</span><span class='line'>  nfigure --prefix<span class="o">=</span>/opt/local --with-compiler<span class="o">=</span>/opt/local/bin/ghc
-</span><span class='line'>  Exit code: 1
-</span><span class='line'>  Error: org.macports.configure <span class="k">for </span>port hs-http returned: configure failure: <span class="nb">command </span>execution failed
-</span><span class='line'>  DEBUG: Error code: NONE
-</span><span class='line'>  DEBUG: Backtrace: configure failure: <span class="nb">command </span>execution failed
-</span><span class='line'>      <span class="k">while </span>executing
-</span><span class='line'>  <span class="s2">&quot;$procedure $targetname&quot;</span>
-</span><span class='line'>  Warning: targets not executed <span class="k">for </span>hs-http: org.macports.activate org.macports.configure org.macports.build org.macports.destroot org.macports.install
-</span><span class='line'>  Please see the log file <span class="k">for </span>port hs-http <span class="k">for </span>details:
-</span><span class='line'>      /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/main.log
-</span><span class='line'>  To report a bug, follow the instructions in the guide:    http://guide.macports.org/#project.tickets
-</span><span class='line'>  Error: Processing of port hs-http failed
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;GHUnitIOS/GHUnit.h&gt; </span>
+</span><span class='line'><span class="cp">#import &quot;ExampleClass.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">ExampleClass</span> <span class="nl">(Private)</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">privateMethod</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">ExsampleClassTest</span> : <span class="nc">GHTestCase</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">ExsampleClassTest</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testPrivateMethod</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">ExampleClass</span><span class="o">*</span> <span class="n">example</span> <span class="o">=</span> <span class="p">[</span><span class="n">ExampleClass</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">GHAssertFalse</span><span class="p">([</span><span class="n">example</span> <span class="n">privateMethod</span><span class="p">],</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">example</span><span class="p">.</span><span class="n">flag</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">GHAssertTrue</span><span class="p">([</span><span class="n">example</span> <span class="n">privateMethod</span><span class="p">],</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>と、<em>gcc-4.2</em> が実行できないというエラーが発生している。</p>
+<h2>メリットとデメリット</h2>
 
-<h2>gcc-4.2 を用意する</h2>
+<h3>メリット</h3>
 
-<p>それではと gcc-4.2 が入っているか見てみたところ、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ll /usr/bin/gcc*
-</span><span class='line'>  lrwxr-xr-x  1 root  wheel  12 12  4  2011 /usr/bin/gcc -&gt; llvm-gcc-4.2
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる</li>
+</ul>
 
 
-<p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br/>
-それでは <em>gcc-4.2</em> を入れましょうと、</p>
+<h3>デメリット</h3>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install gcc42
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある</li>
+</ul>
 
-
-<p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
-それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>pandocのインストール</h2>
-
-<p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port -d install hs-http
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>がばっちり成功しました!
-もちろんそもそものpandocも、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>で普通にインストールできましたとさ。</p>
 </div>
 
 
@@ -283,12 +293,12 @@ Macにpandocをインストール中にhs-httpで引っかかったのを解消�
   
 
 
-<time datetime="2012-07-15T03:13:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+<time datetime="2012-09-12T14:10:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mac/'>mac</a>
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/objc/'>objc</a>
   
 </span>
 
@@ -306,18 +316,18 @@ Macにpandocをインストール中にhs-httpで引っかかったのを解消�
   
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/15/install-pandoc/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/15/install-pandoc/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/15/install-pandoc/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2012/09/12/objc-private-test/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
@@ -328,8 +338,8 @@ Macにpandocをインストール中にhs-httpで引っかかったのを解消�
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/2012/09/02/ghunit-jenkins-coverage/" title="Previous Post: GHUnitのテストカバレッジをJenkinsで表示する">&laquo; GHUnitのテストカバレッジをJenkinsで表示する</a>
       
-        <a class="basic-alignment right" href="/2012/07/15/octopress-part-of-codes/" title="Next Post: Octopressでソースコードの一部分だけを参照する">Octopressでソースコードの一部分だけを参照する &raquo;</a>
       
     </p>
   </footer>

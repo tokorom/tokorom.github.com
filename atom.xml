@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2012-09-03T00:55:27+09:00</updated>
+  <updated>2012-09-12T14:29:11+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい]]></title>
+<link href="http://www.tokoro.me/2012/09/12/objc-private-test/"/>
+<updated>2012-09-12T14:10:00+09:00</updated>
+<id>http://www.tokoro.me/2012/09/12/objc-private-test</id>
+
+      <content type="html"><![CDATA[<p>dkfjさんが <a href="http://d.hatena.ne.jp/dkfj/20120909/1347176787">Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法</a> という記事を書かれていました。</p>
+
+<p>せっかくなので私がやっている方法も書かせていただきます。</p>
+
+<h2>テスト対象のクラス</h2>
+
+<p>以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;ExampleClass.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">ExampleClass</span><span class="p">()</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">privateMethod</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">privateMethod</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">flag</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>テストクラス</h2>
+
+<p>自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2012/09/12/objc-private-test/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
