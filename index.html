@@ -106,6 +106,91 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/12/31/mac-terminal-japanese/">Mac + Terminal + Tmux + Vim でクリップボードを快適に使う</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/12/31/mac-terminal-japanese/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/12/31/mac-terminal-japanese/" alt="はてなブックマーク - Mac + Terminal + tmux + vim でクリップボードを快適に使う" title="はてなブックマーク - Mac + Terminal + tmux + vim でクリップボードを快適に使う"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-31T04:47:00+09:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/12/31/mac-terminal-japanese/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>Macの初期設定のたびに混乱してるので再整理しておきます。</p>
+
+<ul>
+<li>Mac</li>
+<li>Terminal</li>
+<li>tmux</li>
+<li>vim</li>
+</ul>
+
+
+<p>で開発をする人向けです。</p>
+
+<h2>まずはMacVim KaoriYa</h2>
+
+<p>MacでVimを使うならひとまず <a href="http://code.google.com/p/macvim-kaoriya/">MacVim KaoriYa</a> は外せません。<br/>
+日本語を扱う上で便利な設定がデフォルトで入ってます。</p>
+
+<p>当然、Terminalでも <strong>Macvim KaoriYa</strong> を使いたいので、 <strong>.zshenv</strong> などに以下のaliasを設定してCUIで <strong>vi</strong> や <strong>vim</strong> を叩いたときにも <strong>MacVim KaoriYa</strong> が使われるようにします。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">if</span> <span class="o">[</span> -f /Applications/MacVim.app/Contents/MacOS/Vim <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">alias </span><span class="nv">vi</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
+</span><span class='line'>  <span class="nb">alias </span><span class="nv">vim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>tmux でも pbcopy/pbpaste が使えるようにする</h2>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2012/12/31/mac-terminal-japanese/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/09/12/objc-private-test/">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/12/objc-private-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/12/objc-private-test/" alt="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい" title="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい"></a>
@@ -410,242 +495,6 @@
     
     
     <p><a rel="full-article" href="/2012/08/12/objc-subscripting/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/08/12/objc-new-statements/">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/12/objc-new-statements/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/12/objc-new-statements/" alt="はてなブックマーク - いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます" title="はてなブックマーク - いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-12T12:50:00+09:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/08/12/objc-new-statements/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。<br/>
-これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!</p>
-
-<h2>Xcode4.4適用前</h2>
-
-<p>Xcode4.3までのこのコードを&#8230;</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Private Category</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Sample</span> <span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">dictionary</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods1</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods2</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods3</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#pragma mark - Main Implementation</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">Sample</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">array</span> <span class="o">=</span> <span class="n">array_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary_</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods1</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods2</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods3</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods2</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">100</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithChar:</span><span class="sc">&#39;a&#39;</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.14f</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods3</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="s">@&quot;1&quot;</span><span class="p">,</span> <span class="s">@&quot;2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool:</span><span class="n">YES</span><span class="p">],</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span><span class="s">@&quot;val1&quot;</span><span class="p">,</span> <span class="s">@&quot;key1&quot;</span><span class="p">,</span> <span class="s">@&quot;val2&quot;</span><span class="p">,</span> <span class="s">@&quot;key2&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Xcode4.4適用後</h2>
-
-<p>Xcode4.4からはこうできます！</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Private Category</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Sample</span> <span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">dictionary</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#pragma mark - Main Implementation</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">Sample</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods1</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods2</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods3</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods2</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="err">@</span><span class="mi">100</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="sc">@&#39;a&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="err">@</span><span class="mf">3.14f</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods3</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">array</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;1&quot;</span><span class="p">,</span> <span class="s">@&quot;2&quot;</span><span class="p">,</span> <span class="err">@</span><span class="p">(</span><span class="n">YES</span><span class="p">)];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;key1&quot;</span><span class="o">:</span> <span class="s">@&quot;val1&quot;</span><span class="p">,</span> <span class="s">@&quot;key2&quot;</span><span class="o">:</span> <span class="s">@&quot;val2&quot;</span><span class="p">};</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下、具体的な内容を説明します。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/08/12/objc-new-statements/">続きを読む &rarr;</a></p>
     
   </footer>
 
