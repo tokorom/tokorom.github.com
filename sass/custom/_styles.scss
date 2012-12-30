@@ -9,8 +9,29 @@
   border: none;
 }
 
+.hatena-bookmark-widget-title {
+  display:none;
+}
+
 .blog-index article .entry-title {
   font-size: 1.5em;
+}
+
+.hatena-bookmark-count a {
+  color: #F66;
+  font-weight: bold;
+  background: #FFF0F0;
+}
+
+.hatena-bookmark-count em a,
+.hatena-bookmark-count strong a {
+  color: #FF0808;
+  font-weight: bold;
+  background: #FCC;
+}
+
+.hatena-bookmark-widget-footer {
+  display:none;
 }
 
 header {
