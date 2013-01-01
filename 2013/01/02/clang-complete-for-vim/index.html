@@ -241,47 +241,27 @@ VimでObjective-Cのコード補完をする With Clang<a class="entry-title-lin
 <p>というコマンドを実行してみます。<br/>
 すると <code>COMPLETION:</code> ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。</p>
 
-<p>同時に、<code>○warnings and ● errorgenerated.</code> とエラーが発生しているのも確認できるかと思います。</p>
+<p>同時に、<code>xxx warnings and xxx errors generated.</code> とエラーが発生しているのも確認できるかと思います。</p>
 
 <h2>clangによる補完時のオプション</h2>
 
 <p>このエラーは、clangに対するオプションの不足によるものです。
 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</p>
 
-<table>
-<thead>
-<tr>
-<th>オプション </th>
-<th> 補足  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-fblocks </td>
-<td> ブロック構文を利用している場合は必須のオプション |</td>
-</tr>
-<tr>
-<td>-fobjc-arc </td>
-<td> ARCを使用している場合は必須のオプション |</td>
-</tr>
-<tr>
-<td>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 </td>
-<td> ターゲットがiOS 4.3 以上であることを示す|</td>
-</tr>
-<tr>
-<td>-include ./<em>*/</em>-Prefix.pch </td>
-<td> プロジェクト内のpch（プリコンパイルヘッダ）のinclude |</td>
-</tr>
-<tr>
-<td>-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks </td>
-<td> iOS標準のフレームワークがあるディレクトリ指定 |</td>
-</tr>
-<tr>
-<td>-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include </td>
-<td> iOS標準クラスのヘッダーがあるディレクトリ指定 |</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>-fblocks</strong><br/>
+=> ブロック構文を利用している場合は必須のオプション |</li>
+<li><strong>-fobjc-arc</strong><br/>
+=> ARCを使用している場合は必須のオプション |</li>
+<li><strong>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300</strong><br/>
+=> ターゲットがiOS 4.3 以上であることを示す|</li>
+<li><strong>-include ./</strong>/*-Prefix.pch**<br/>
+=> プロジェクト内のpch（プリコンパイルヘッダ）のinclude |</li>
+<li><strong>-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks</strong><br/>
+=> iOS標準のフレームワークがあるディレクトリ指定 |</li>
+<li><strong>-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include</strong><br/>
+=> iOS標準クラスのヘッダーがあるディレクトリ指定 |</li>
+</ul>
 
 
 <p>この他、独自のヘッダーファイルがカレントディレクトリの外にある場合は <code>-I</code> の設定を加える必要があります。</p>
