@@ -106,6 +106,79 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/08/12/objc-subscripting/">Objective-Cで独自クラスに[]でアクセスする</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/12/objc-subscripting/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/12/objc-subscripting/" alt="はてなブックマーク - Objective-Cで独自クラスに[]でアクセスする" title="はてなブックマーク - Objective-Cで独自クラスに[]でアクセスする"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T22:34:00+09:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/12/objc-subscripting/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>まず、Xcode4.4から使えるObjective-Cの新しい書き方については <a href="/2012/08/12/objc-new-statements/">前の記事</a> をご参照ください。</p>
+
+<h2>Xcode4.4からMacアプリ開発で使える新しいリテラル</h2>
+
+<p>上記記事には書いていないのですがMac向けのアプリではこの他にも、</p>
+
+<ul>
+<li><strong>array[1]</strong> でNSArrayの要素にアクセスできる</li>
+<li><strong>dictionary[key]</strong> でNSDictionaryの要素にアクセスできる</li>
+<li><strong>@YES</strong>/<strong>@NO</strong> でもNSNumberのインスタンスを作れる</li>
+</ul>
+
+
+<p>といった変更があります。<br/>
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。</p>
+
+<p>※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 <a href="https://twitter.com/k_katsumi">@k_katsumi</a> さんに教えてもらいました。</p>
+
+<h2>でも[]でアクセスする仕組み自体はiOSでも使えます!</h2>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2012/08/12/objc-subscripting/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/08/12/objc-new-statements/">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/12/objc-new-statements/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/12/objc-new-statements/" alt="はてなブックマーク - いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます" title="はてなブックマーク - いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます"></a>
@@ -557,76 +630,6 @@
 
     </article>
   
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/07/15/octopress-part-of-codes/">Octopressでソースコードの一部分だけを参照する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/15/octopress-part-of-codes/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/15/octopress-part-of-codes/" alt="はてなブックマーク - Octopressでソースコードの一部分だけを参照する" title="はてなブックマーク - Octopressでソースコードの一部分だけを参照する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-15T16:55:00+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/15/octopress-part-of-codes/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>おさらい：Octopressでソースコードを表示する</h2>
-
-<p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
-
-<h3>1. 指定のディレクトリにファイルを置く</h3>
-
-<p>置き場所は <em>source/downloads/code</em> 。<br/>
-例えば、ここに <em>sample/test.rb</em> というファイルを置いておく。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ mkdir -p source/downloads/code/sample
-</span><span class='line'>$ cp test.rb source/downloads/code/sample/</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/07/15/octopress-part-of-codes/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -706,7 +709,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Yuta ToKoRo -
+  Copyright &copy; 2013 - Yuta ToKoRo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
