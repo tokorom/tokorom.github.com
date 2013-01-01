@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "VimでObjective-Cのコード補完をする with clang"
+title: "VimでObjective-Cのコード補完を実行する with clang"
 date: 2013-01-02 02:09
 comments: true
 external-url: 
@@ -66,21 +66,25 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
 というコマンドを実行してみます。  
 すると `COMPLETION:` ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
 
-同時に、`○warnings and ● errorgenerated.` とエラーが発生しているのも確認できるかと思います。
+同時に、`xxx warnings and xxx errors generated.` とエラーが発生しているのも確認できるかと思います。
 
 ## clangによる補完時のオプション
 
 このエラーは、clangに対するオプションの不足によるものです。
 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
 
-オプション | 補足  |
---- | ---- |
--fblocks | ブロック構文を利用している場合は必須のオプション |
--fobjc-arc | ARCを使用している場合は必須のオプション |
--D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 | ターゲットがiOS 4.3 以上であることを示す|
--include ./**/*-Prefix.pch | プロジェクト内のpch（プリコンパイルヘッダ）のinclude |
--F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks | iOS標準のフレームワークがあるディレクトリ指定 |
--I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include | iOS標準クラスのヘッダーがあるディレクトリ指定 |
+* **-fblocks**  
+  => ブロック構文を利用している場合は必須のオプション   
+* **-fobjc-arc**  
+  => ARCを使用している場合は必須のオプション   
+* **-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300**  
+  => ターゲットがiOS 4.3 以上であることを示す  
+* **-include ./\*\*/\*-Prefix.pch**  
+  => プロジェクト内のpch（プリコンパイルヘッダ）のinclude   
+* **-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks**  
+  => iOS標準のフレームワークがあるディレクトリ指定   
+* **-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include**  
+  => iOS標準クラスのヘッダーがあるディレクトリ指定   
 
 この他、独自のヘッダーファイルがカレントディレクトリの外にある場合は `-I` の設定を加える必要があります。
 
