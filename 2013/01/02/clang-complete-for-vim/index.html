@@ -386,9 +386,53 @@ clangのオプションは <code>.vimrc</code> でも指定できるのですが
 <p>の <code>[numbers o</code> の直後で補完を実行してみます。<br/>
 上記と全く同じ設定をしているならInsertモード時に <code>Ctrl+x Ctrl+o</code> or <code>Ctrl+x Ctrl+u</code> で実行できるはずです。</p>
 
-<p><img class="center" src="<`2:http://dl.dropbox.com/u/10351676/images/clang_completion.png`>&#8221;></p>
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/clang_completion.png"></p>
 
 <p>ぼくの手元では、きっちり「oからはじまるNSArrayのインスタンスメソッドが一覧表示」されました！</p>
+
+<h2>より便利に使うためのオプションを追加</h2>
+
+<p>なお、実際に使ってみると<code>.clang_complete</code>に全てのディレクトリを追加するのが面倒臭くなってきます。<br/>
+例えば、<code>Classes/XXX/XXX/Views/</code>というディレクトリにあるヘッダーファイルを使っている場合、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>-I Classes/XXX/XXX/Views</span></code></pre></td></tr></table></div></figure>
+
+
+<p>をわざわざ<code>.clang_complete</code>に加えなければいけません。<br/>
+１つなら良いのですがこれがどんどん増えていくようなら<code>.clang_complete</code>のメンテナンスのせいでコーディングリズムが崩れることになりかねません。</p>
+
+<p>例えば、 <strong>カレントディレクトリ以下を再帰的に全て -I に追加してくれるオプション</strong> があればいいのに！<br/>
+と思ったのですが少なくとも自分が調べて限りでは見つかりませんでした。</p>
+
+<p>ということで<code>clang_complete</code>をForkして自分で作りました。<br/>
+ひとまず今は、 <a href="https://github.com/tokorom/clang_complete">tokorom/clang_complete</a> を使っていただければこのオプションが使えます。</p>
+
+<p>以下、具体的な設定値です。</p>
+
+<ul>
+<li>.vimrc (Vundleによるプラグインの設定)</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'>#Bundle <span class="s1">&#39;git://github.com/Rip-Rip/clang_complete.git&#39;</span>
+</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/tokorom/clang_complete.git&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>.vimrc (カレントディレクトリ以下を再帰的に -I で加える)</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">let</span> <span class="k">g</span>:clang_complete_include_current_directory_recursively <span class="p">=</span> <span class="m">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 
