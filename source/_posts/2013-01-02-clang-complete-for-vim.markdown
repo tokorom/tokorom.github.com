@@ -86,7 +86,7 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
 * **-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include**  
   => iOS標準クラスのヘッダーがあるディレクトリ指定   
 
-この他、独自のヘッダーファイルがカレントディレクトリの外にある場合は `-I` の設定を加える必要があります。
+この他、独自のヘッダーファイルがある場合は `-I` の設定を加える必要があります。
 
 これらのオプションを指定してclangを実行してみると、
 
@@ -165,7 +165,41 @@ clangのオプションは `.vimrc` でも指定できるのですが、こい�
 の `[numbers o` の直後で補完を実行してみます。  
 上記と全く同じ設定をしているならInsertモード時に `Ctrl+x Ctrl+o` or `Ctrl+x Ctrl+u` で実行できるはずです。
 
-{% img center <`2:http://dl.dropbox.com/u/10351676/images/clang_completion.png`> %}
+{% img center http://dl.dropbox.com/u/10351676/images/clang_completion.png %}
 
 ぼくの手元では、きっちり「oからはじまるNSArrayのインスタンスメソッドが一覧表示」されました！  
 
+## より便利に使うためのオプションを追加
+
+なお、実際に使ってみると`.clang_complete`に全てのディレクトリを追加するのが面倒臭くなってきます。  
+例えば、`Classes/XXX/XXX/Views/`というディレクトリにあるヘッダーファイルを使っている場合、
+
+```
+-I Classes/XXX/XXX/Views
+```
+
+をわざわざ`.clang_complete`に加えなければいけません。  
+１つなら良いのですがこれがどんどん増えていくようなら`.clang_complete`のメンテナンスのせいでコーディングリズムが崩れることになりかねません。
+
+例えば、 **カレントディレクトリ以下を再帰的に全て -I に追加してくれるオプション** があればいいのに！  
+と思ったのですが少なくとも自分が調べて限りでは見つかりませんでした。
+
+ということで`clang_complete`をForkして自分で作りました。  
+ひとまず今は、 [tokorom/clang_complete](https://github.com/tokorom/clang_complete) を使っていただければこのオプションが使えます。
+
+以下、具体的な設定値です。
+
+- .vimrc (Vundleによるプラグインの設定)
+
+```vim
+#Bundle 'git://github.com/Rip-Rip/clang_complete.git'
+Bundle 'git://github.com/tokorom/clang_complete.git'
+```
+
+- .vimrc (カレントディレクトリ以下を再帰的に -I で加える)
+
+```vim
+let g:clang_complete_include_current_directory_recursively = 1
+```
+
+これでカレントディレクトリ以下のヘッダーファイルであれば買ってにインクルードされるようになります！
