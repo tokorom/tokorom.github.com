@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TOKOROM BLOG</title>
+  <title>Objective-Cで"@dynamic"の使いどころを考える - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/">
+  <link rel="canonical" href="http://www.tokoro.me/2013/01/05/objc-dynamic/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -88,25 +88,53 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
   
     
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/05/objc-dynamic/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/05/objc-dynamic/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/05/objc-dynamic/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
 
+</div>
 
-
-
-
-
-
-
-
-
-    <article >
-      
+  
+  
   <header>
     <h1 class="entry-title">
 
-<a href="/2013/01/05/objc-dynamic/">Objective-Cで&#8221;@dynamic&#8221;の使いどころを考える</a>
+Objective-Cで"@dynamic"の使いどころを考える<a class="entry-title-link" href="http://www.tokoro.me/2013/01/05/objc-dynamic/" style="display:none">-</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/05/objc-dynamic/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/05/objc-dynamic/" alt="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える" title="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える"></a>
 </h1>
@@ -429,38 +457,15 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 それでもぼくは<code>@dynamic</code>を愛しています。  目に見える愛だけが全てではないということなのだと思います。。。</p>
 </div>
 
+
   <footer>
-    
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
+    <p class="meta">
       
-  <header>
-    <h1 class="entry-title">
+  
 
-<a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a>
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/02/clang-complete-for-vim/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/02/clang-complete-for-vim/" alt="はてなブックマーク - VimでObjective-Cのコード補完を実行する with clang" title="はてなブックマーク - VimでObjective-Cのコード補完を実行する with clang"></a>
-</h1>
 
-    
-      <p class="meta">
-        
 
 
 
@@ -472,298 +477,65 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
   
 
 
-<time datetime="2013-01-02T02:09:00+09:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/02/clang-complete-for-vim/">Permalink</a>
-      </p>
+<time datetime="2013-01-05T15:07:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2013</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objc/'>objc</a>
+  
+</span>
+
+
+
+      
+
+    </p>
     
-  </header>
-
-<div class="entry-content"><h2>概要</h2>
-
-<p>VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。</p>
-
-<p>そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。</p>
-
-<p>具体的には、</p>
-
-<ol>
-<li><strong>clangコマンドでのコード補完を試してみる</strong></li>
-<li><strong>その結果をもってVimの <code>clang_complete</code> プラグインを導入する</strong></li>
-</ol>
-
-
-<p>という手順で実施しました。</p>
-
-<p>結果として満足いく補完環境が整いましたので紹介させていただきます。</p>
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/05/objc-dynamic/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/05/objc-dynamic/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/05/objc-dynamic/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
 
 </div>
 
-  <footer>
     
-    
-    <p><a rel="full-article" href="/2013/01/02/clang-complete-for-vim/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
+    <p class="meta">
       
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/12/31/mac-terminal-japanese/">Mac + Terminal + Tmux + Vim でクリップボードを快適に使う</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/12/31/mac-terminal-japanese/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/12/31/mac-terminal-japanese/" alt="はてなブックマーク - Mac + Terminal + tmux + vim でクリップボードを快適に使う" title="はてなブックマーク - Mac + Terminal + tmux + vim でクリップボードを快適に使う"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-31T04:47:00+09:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/12/31/mac-terminal-japanese/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>Macの初期設定のたびに混乱してるので再整理しておきます。</p>
-
-<ul>
-<li>Mac</li>
-<li>Terminal</li>
-<li>tmux</li>
-<li>vim</li>
-</ul>
-
-
-<p>で開発をする人向けです。</p>
-
-<h2>まずはMacVim KaoriYa</h2>
-
-<p>MacでVimを使うならひとまず <a href="http://code.google.com/p/macvim-kaoriya/">MacVim KaoriYa</a> は外せません。<br/>
-日本語を扱う上で便利な設定がデフォルトで入ってます。</p>
-
-<p>当然、Terminalでも <strong>Macvim KaoriYa</strong> を使いたいので、 <strong>.zshenv</strong> などに以下のaliasを設定してCUIで <strong>vi</strong> や <strong>vim</strong> を叩いたときにも <strong>MacVim KaoriYa</strong> が使われるようにします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">if</span> <span class="o">[</span> -f /Applications/MacVim.app/Contents/MacOS/Vim <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">  </span><span class="nb">alias </span><span class="nv">vi</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
-</span><span class='line'>  <span class="nb">alias </span><span class="nv">vim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>tmux でも pbcopy/pbpaste が使えるようにする</h2>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/12/31/mac-terminal-japanese/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
+        <a class="basic-alignment left" href="/2013/01/02/clang-complete-for-vim/" title="Previous Post: VimでObjective-Cのコード補完を実行する with clang">&laquo; VimでObjective-Cのコード補完を実行する with clang</a>
       
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/09/12/objc-private-test/">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/12/objc-private-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/12/objc-private-test/" alt="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい" title="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-12T14:10:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/09/12/objc-private-test/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>dkfjさんが <a href="http://d.hatena.ne.jp/dkfj/20120909/1347176787">Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法</a> という記事を書かれていました。</p>
-
-<p>せっかくなので私がやっている方法も書かせていただきます。</p>
-
-<h2>テスト対象のクラス</h2>
-
-<p>以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;ExampleClass.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ExampleClass</span><span class="p">()</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">privateMethod</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">ExampleClass</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">privateMethod</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>テストクラス</h2>
-
-<p>自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/09/12/objc-private-test/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
       
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/09/02/ghunit-jenkins-coverage/">GHUnitのテストカバレッジをJenkinsで表示する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/" alt="はてなブックマーク - GHUnitのテストカバレッジをJenkinsで表示する" title="はてなブックマーク - GHUnitのテストカバレッジをJenkinsで表示する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-02T22:54:00+09:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/09/02/ghunit-jenkins-coverage/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>概要</h2>
-
-<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
-
-<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ghunit-coverage.png"></p>
-
-<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
-
-<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br/>
-うまく動かない場合の設定の比較などにご参照ください。</p>
-
-<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/09/02/ghunit-jenkins-coverage/">続きを読む &rarr;</a></p>
-    
+    </p>
   </footer>
+</article>
 
-
-    </article>
+<section>
+  <h1>Comments</h1>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/archives">Blog Archives</a>
-    
-  </div>
+
+  
+</section>
+
 </div>
 
 <aside class="sidebar">
@@ -807,11 +579,38 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
   </div>
 </section>
 
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/01/05/objc-dynamic/">Objective-Cで"@dynamic"の使いどころを考える</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する with clang</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/31/mac-terminal-japanese/">Mac + Terminal + tmux + vim でクリップボードを快適に使う</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/12/objc-private-test/">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/02/ghunit-jenkins-coverage/">GHUnitのテストカバレッジをJenkinsで表示する</a>
+      </li>
+    
+  </ul>
+</section>
+
 
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets" data-user="tokorom" data-count="3" data-replies="false">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
     <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
