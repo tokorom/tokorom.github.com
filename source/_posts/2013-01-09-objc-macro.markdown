@@ -20,6 +20,8 @@ NSString* message = [NSString stringWithFormat:@"HELLO %3.1d", 333.333];
 `[NSString stringWithFormat:]`はよく使うのだが長くて面倒...とよく思ってしまう。  
 ということで、
 
+<!-- more -->
+
 ```objc
 #define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]
 ```
