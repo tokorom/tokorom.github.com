@@ -106,6 +106,175 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/01/09/objc-macro/">Objective-Cで最近お気に入りのマクロ４つ</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/09/objc-macro/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/09/objc-macro/" alt="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ" title="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-09T00:17:00+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/09/objc-macro/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>マクロ</h2>
+
+<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
+
+<h2>1. [NSString stringWithFormat:] を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">NSPRINTF</span><span class="p">(</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>2. NSLocalizedString を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">@&quot;KEY&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>NSLocalizedString</code>もよく使うのだが長いしあまり使わない引数がつきまとって面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define LSTR(s) NSLocalizedString((s), nil)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">LSTR</span><span class="p">(</span><span class="s">@&quot;KEY&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>3. クラスメソッドの利用を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">LongLongLongNameClass</span> <span class="n">classMethod</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドの<code>self</code>と比べて面倒だなと思ってしまう。
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define ME [self class]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">ME</span> <span class="n">classMethod</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>4. Blockのお伴の__weakなselfを簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">__weak</span> <span class="n">MyClass</span><span class="o">*</span> <span class="n">SELF</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">doSomethingWithBlock:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">SELF</span> <span class="n">showAlert</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Blockを使ってそこにselfをweakリファレンスで渡したいとき、そのコードの記述が面倒だなと思ってしまう。
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define PREPARE_SELF __weak typeof(self) SELF = self</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">PREPARE_SELF</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">doSomethingWithBlock:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">SELF</span> <span class="n">showAlert</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>参考ページ</h2>
+
+<ul>
+<li><a href="http://www.zero4racer.com/blog/1014">Objective-C の instancetype キーワードが面白い + typeof(self)の考察</a></li>
+</ul>
+
+</div>
+
+  <footer>
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/01/05/objc-dynamic/">Objective-Cで&#8221;@dynamic&#8221;の使いどころを考える</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/05/objc-dynamic/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/05/objc-dynamic/" alt="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える" title="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える"></a>
@@ -406,72 +575,6 @@
     
     
     <p><a rel="full-article" href="/2012/09/12/objc-private-test/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/09/02/ghunit-jenkins-coverage/">GHUnitのテストカバレッジをJenkinsで表示する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/" alt="はてなブックマーク - GHUnitのテストカバレッジをJenkinsで表示する" title="はてなブックマーク - GHUnitのテストカバレッジをJenkinsで表示する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-02T22:54:00+09:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/09/02/ghunit-jenkins-coverage/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>概要</h2>
-
-<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
-
-<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ghunit-coverage.png"></p>
-
-<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
-
-<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br/>
-うまく動かない場合の設定の比較などにご参照ください。</p>
-
-<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/09/02/ghunit-jenkins-coverage/">続きを読む &rarr;</a></p>
     
   </footer>
 

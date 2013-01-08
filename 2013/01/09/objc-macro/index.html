@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする - TOKOROM BLOG</title>
+  <title>Objective-Cで最近お気に入りのマクロ４つ - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2012/07/29/security-for-jenkins/">
+  <link rel="canonical" href="http://www.tokoro.me/2013/01/09/objc-macro/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -110,18 +110,18 @@
   
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/29/security-for-jenkins/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/09/objc-macro/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/29/security-for-jenkins/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/09/objc-macro/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/29/security-for-jenkins/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/09/objc-macro/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
@@ -134,9 +134,9 @@
   <header>
     <h1 class="entry-title">
 
-JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする<a class="entry-title-link" href="http://www.tokoro.me/2012/07/29/security-for-jenkins/" style="display:none">-</a>
+Objective-Cで最近お気に入りのマクロ４つ<a class="entry-title-link" href="http://www.tokoro.me/2013/01/09/objc-macro/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/29/security-for-jenkins/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/29/security-for-jenkins/" alt="はてなブックマーク - JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする" title="はてなブックマーク - JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/09/objc-macro/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/09/objc-macro/" alt="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ" title="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ"></a>
 </h1>
 
     
@@ -153,116 +153,130 @@ JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込
   
 
 
-<time datetime="2012-07-29T16:00:00+09:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/29/security-for-jenkins/">Permalink</a>
+<time datetime="2013-01-09T00:17:00+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/09/objc-macro/">Permalink</a>
       </p>
     
   </header>
 
-<div class="entry-content"><p><a href="/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br/>
-つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。<br/>
-ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。</p>
+<div class="entry-content"><h2>マクロ</h2>
 
-<h2>JenkinsにBitbucketからアクセスするためのユーザを追加</h2>
+<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
 
-<p>まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。</p>
+<h2>1. [NSString stringWithFormat:] を簡単に</h2>
 
-<p>※ ユーザの追加方法については <a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">このあたり</a> を参照</p>
-
-<p>今回は、<strong>bitbucket</strong> というユーザを追加した。</p>
-
-<p>また、 <strong>Manage Jenkins</strong> -> <strong>Configure System</strong> で、</p>
-
-<ul>
-<li>Access Control
-
-<ul>
-<li>Authorization
-
-<ul>
-<li>Matrix-based security
-
-<ul>
-<li>bitbucketユーザに <strong>Job</strong> の <strong>Read</strong> だけチェック</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<!-- more -->
+<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。</p>
+<p>を定義して</p>
 
-<p>このとき、Anonymousユーザの <strong>Job</strong> の <strong>Read</strong> にチェックがついていれば外しておく。</p>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">NSPRINTF</span><span class="p">(</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>Jenkinsへのビルド命令専用のドメインを追加</h2>
 
-<p>これまでは <code>jenkins.yourdomain</code> というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の <code>push-to-jenkins.yourdomain</code> を追加した。<br/>
-これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。</p>
+<p>としています。ちょっと楽！</p>
 
-<h2>nginxに設定追加</h2>
+<h2>2. NSLocalizedString を簡単に</h2>
 
-<p>nginxのconfに、以下のように<code>push-to-jenkins.yourdomain</code>へのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。</p>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">@&quot;KEY&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>NSLocalizedString</code>もよく使うのだが長いしあまり使わない引数がつきまとって面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define LSTR(s) NSLocalizedString((s), nil)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">LSTR</span><span class="p">(</span><span class="s">@&quot;KEY&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>3. クラスメソッドの利用を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">LongLongLongNameClass</span> <span class="n">classMethod</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドの<code>self</code>と比べて面倒だなと思ってしまう。
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define ME [self class]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">ME</span> <span class="n">classMethod</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>4. Blockのお伴の__weakなselfを簡単に</h2>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
-</span><span class='line'>    listen 80;
-</span><span class='line'>    server_name push-to-jenkins.yourdomain;
-</span><span class='line'>    location / {
-</span><span class='line'>        proxy_pass http://localhost:8080;
-</span><span class='line'>        proxy_set_header Authorization "Basic XXXXXX";
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">__weak</span> <span class="n">MyClass</span><span class="o">*</span> <span class="n">SELF</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">doSomethingWithBlock:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">SELF</span> <span class="n">showAlert</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>XXXXXX</strong> の部分には実際には <strong>bitbucket:yourpassword</strong> というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。<br/>
-Base64エンコードの方法が分からない場合は <a href="http://www.ahref.org/app/base64/base64.cgi">このあたり</a> のサイトでエンコードした文字列をGETするのが手っ取り早い。</p>
-
-<p>設定後にnginxを再起動しておくこと。</p>
-
-<h2>Bitbucketのほうの設定</h2>
-
-<p>該当リポジトリの <strong>Admin</strong> タブの <strong>Services</strong> を選択。</p>
-
-<p>POSTの設定項目を</p>
+<p>Blockを使ってそこにselfをweakリファレンスで渡したいとき、そのコードの記述が面倒だなと思ってしまう。
+ということで、</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>http://push-to-jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define PREPARE_SELF __weak typeof(self) SELF = self</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>に変更しておく。</p>
+<p>を定義して</p>
 
-<h2>おしまい</h2>
-
-<p>以上の設定がうまく言っていれば、Bitbucketへの<code>git push origin source</code>でOctopressのデプロイが自動的にできるはず。<br/>
-また、このときベーシック認証のIDとPasswordがインターネット上にさらされることもない。</p>
-
-<h2>2012/08/19 追記</h2>
-
-<p>なお、Twitterで<strong>@croquette0212</strong>さんから</p>
-
-<blockquote class="twitter-tweet tw-align-center"><p><a href="https://twitter.com/tokorom"><s>@</s><b>tokorom</b></a> BitBucketとJenkinsの連携ですが、tokenつかうよりもGit PluginのnotifyCommit使う方がセキュリティの設定とかも楽なのでおすすめです! <a href="http://t.co/uBvrf0vL" title="http://kohsuke.org/2011/12/01/polling-must-die-triggering-jenkins-builds-from-a-git-hook/">kohsuke.org/2011/12/01/pol…</a></p>&mdash; Sousai (@croquette0212) <a href="https://twitter.com/croquette0212/status/236403188574613505" data-datetime="2012-08-17T10:04:46+00:00">August 17, 2012</a></blockquote>
-
-
-<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">PREPARE_SELF</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">doSomethingWithBlock:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">SELF</span> <span class="n">showAlert</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>と教えていただきました。<br/>
-この方法だと外部（ここではBitbucket）から叩くURLになんとジョブ名さえ指定する必要がありません。このNotifyを受けたJenkinsのほうで自動でジョブをさらってスケジューリングしてくれるとのことです。<br/>
-また、このNotifyそのものがジョブを実行するわけではなくあくまでもJenkinsに対する通知だけなので、ジョブの実行権限のあるユーザでURLを叩くにはどうしたらよいだろう？とかセキュリティのことをごたごた考えずに済みます。Jenkinsを運用しているサーバが該当のGitリポジトリをcloneできる状態ならOKなようでとても楽そうです。<br/>
-詳しくは <a href="http://nantekottai.com/2012/07/13/git-hook-and-access-controlled-jenkins/">GitHubとJenkinsの連携</a> をご参照ください。</p>
+<p>としています。ちょっと楽！</p>
+
+<h2>参考ページ</h2>
+
+<ul>
+<li><a href="http://www.zero4racer.com/blog/1014">Objective-C の instancetype キーワードが面白い + typeof(self)の考察</a></li>
+</ul>
+
 </div>
 
 
@@ -285,12 +299,12 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
   
 
 
-<time datetime="2012-07-29T16:00:00+09:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
+<time datetime="2013-01-09T00:17:00+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/sakura/'>sakura</a>
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/objc/'>objc</a>
   
 </span>
 
@@ -308,18 +322,18 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
   
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/29/security-for-jenkins/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/09/objc-macro/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/29/security-for-jenkins/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/09/objc-macro/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/29/security-for-jenkins/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/09/objc-macro/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
@@ -330,10 +344,8 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/07/29/jenkins-octopress/" title="Previous Post: Jenkins@さくらVPSにOctopressのデプロイを任せてみる">&laquo; Jenkins@さくらVPSにOctopressのデプロイを任せてみる</a>
+        <a class="basic-alignment left" href="/2013/01/05/objc-dynamic/" title="Previous Post: Objective-Cで"@dynamic"の使いどころを考える">&laquo; Objective-Cで"@dynamic"の使いどころを考える</a>
       
-      
-        <a class="basic-alignment right" href="/2012/08/12/objc-new-statements/" title="Next Post: いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます &raquo;</a>
       
     </p>
   </footer>
@@ -459,8 +471,8 @@ Base64エンコードの方法が分からない場合は <a href="http://www.ah
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.tokoro.me/2012/07/29/security-for-jenkins/';
-        var disqus_url = 'http://www.tokoro.me/2012/07/29/security-for-jenkins/';
+        var disqus_identifier = 'http://www.tokoro.me/2013/01/09/objc-macro/';
+        var disqus_url = 'http://www.tokoro.me/2013/01/09/objc-macro/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-01-06T13:31:57+09:00</updated>
+  <updated>2013-01-09T00:58:05+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cで最近お気に入りのマクロ４つ]]></title>
+<link href="http://www.tokoro.me/2013/01/09/objc-macro/"/>
+<updated>2013-01-09T00:17:00+09:00</updated>
+<id>http://www.tokoro.me/2013/01/09/objc-macro</id>
+
+      <content type="html"><![CDATA[<h2>マクロ</h2>
+
+<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
+
+<h2>1. [NSString stringWithFormat:] を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">NSPRINTF</span><span class="p">(</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>2. NSLocalizedString を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">@&quot;KEY&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>NSLocalizedString</code>もよく使うのだが長いしあまり使わない引数がつきまとって面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define LSTR(s) NSLocalizedString((s), nil)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="n">LSTR</span><span class="p">(</span><span class="s">@&quot;KEY&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>3. クラスメソッドの利用を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">LongLongLongNameClass</span> <span class="n">classMethod</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドの<code>self</code>と比べて面倒だなと思ってしまう。
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define ME [self class]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">ME</span> <span class="n">classMethod</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>4. Blockのお伴の__weakなselfを簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">__weak</span> <span class="n">MyClass</span><span class="o">*</span> <span class="n">SELF</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">doSomethingWithBlock:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">SELF</span> <span class="n">showAlert</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Blockを使ってそこにselfをweakリファレンスで渡したいとき、そのコードの記述が面倒だなと思ってしまう。
+ということで、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define PREPARE_SELF __weak typeof(self) SELF = self</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を定義して</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">PREPARE_SELF</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">doSomethingWithBlock:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">SELF</span> <span class="n">showAlert</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>としています。ちょっと楽！</p>
+
+<h2>参考ページ</h2>
+
+<ul>
+<li><a href="http://www.zero4racer.com/blog/1014">Objective-C の instancetype キーワードが面白い + typeof(self)の考察</a></li>
+</ul>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/09/objc-macro/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
