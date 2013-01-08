@@ -173,6 +173,11 @@ Objective-Cで最近お気に入りのマクロ４つ<a class="entry-title-link"
 <p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
 ということで、</p>
 
+<!-- more -->
+
+
+
+
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]</span>
 </span></code></pre></td></tr></table></div></figure>
