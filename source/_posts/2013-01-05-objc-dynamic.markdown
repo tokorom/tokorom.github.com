@@ -4,7 +4,7 @@ title: "Objective-Cで\"@dynamic\"の使いどころを考える"
 date: 2013-01-05 15:07
 comments: true
 external-url: 
-categories: [objc]
+categories: [objc,ios]
 ---
 
 ## Objective-Cの @dynamic はお好きですか？
