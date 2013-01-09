@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-01-09T01:00:57+09:00</updated>
+  <updated>2013-01-09T13:30:34+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -26,6 +26,21 @@
       <content type="html"><![CDATA[<h2>マクロ</h2>
 
 <p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
+
+<p><strong> ※2013/1/9 追記 </strong></p>
+
+<p>上記のとおり独自のマクロを使うこと自体に賛否両論あります。<br/>
+例えば独自のマクロを定義して利用することで、</p>
+
+<ul>
+<li>他の人がコードを見たときに分かりづらくなる</li>
+<li>思わぬ不具合が出るケースがある</li>
+<li>名前の衝突リスクがある（マクロは名前空間が使えない）</li>
+</ul>
+
+
+<p>などのデメリットがあります。
+特にチームや会社でのご利用の際にはよくよくご留意をお願いします。</p>
 
 <h2>1. [NSString stringWithFormat:] を簡単に</h2>
 
