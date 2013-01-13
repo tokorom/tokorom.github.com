@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2012/08/12/objc-new-statements/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/08/12/objc-new-statements/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/08/12/objc-new-statements/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2012/08/12/objc-new-statements/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます<a class="entry-title-link" href="http://www.tokoro.me/2012/08/12/objc-new-statements/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/12/objc-new-statements/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/12/objc-new-statements/" alt="はてなブックマーク - いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます" title="はてなブックマーク - いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T12:50:00+09:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/12/objc-new-statements/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。<br/>
+これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!</p>
+
+<h2>Xcode4.4適用前</h2>
+
+<p>Xcode4.3までのこのコードを&#8230;</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Private Category</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">Sample</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">f</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">dictionary</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods1</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods2</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods3</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#pragma mark - Main Implementation</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">Sample</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">array</span> <span class="o">=</span> <span class="n">array_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods1</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods2</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods3</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods2</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">100</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithChar:</span><span class="sc">&#39;a&#39;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.14f</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods3</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="s">@&quot;1&quot;</span><span class="p">,</span> <span class="s">@&quot;2&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool:</span><span class="n">YES</span><span class="p">],</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span><span class="s">@&quot;val1&quot;</span><span class="p">,</span> <span class="s">@&quot;key1&quot;</span><span class="p">,</span> <span class="s">@&quot;val2&quot;</span><span class="p">,</span> <span class="s">@&quot;key2&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Xcode4.4適用後</h2>
+
+<p>Xcode4.4からはこうできます！</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Private Category</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">Sample</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">f</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">dictionary</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#pragma mark - Main Implementation</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">Sample</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods1</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods2</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethods3</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods2</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="err">@</span><span class="mi">100</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="sc">@&#39;a&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="err">@</span><span class="mf">3.14f</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethods3</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">array</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;1&quot;</span><span class="p">,</span> <span class="s">@&quot;2&quot;</span><span class="p">,</span> <span class="err">@</span><span class="p">(</span><span class="n">YES</span><span class="p">)];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;key1&quot;</span><span class="o">:</span> <span class="s">@&quot;val1&quot;</span><span class="p">,</span> <span class="s">@&quot;key2&quot;</span><span class="o">:</span> <span class="s">@&quot;val2&quot;</span><span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下、具体的な内容を説明します。</p>
+
+<!-- more -->
+
+
+<h2>@synthesizeを省略できます</h2>
+
+<figure class='code'><figcaption><span>上記コードにおけるdiff</span></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-@synthesize i = i_;</span>
+</span><span class='line'><span class="gd">-@synthesize c = c_;</span>
+</span><span class='line'><span class="gd">-@synthesize f = f_;</span>
+</span><span class='line'><span class="gd">-@synthesize array = array_;</span>
+</span><span class='line'><span class="gd">-@synthesize dictionary = dictionary_;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これまでは、<code>@property</code>を定義した場合には、<code>@synthesize</code>で自動でgetter/setterを付加するか、<code>@dynamic</code>で自分で実装するかのどちらかが必須でした。</p>
+
+<p>Xcode4.4からは <strong>@synthesizeも@dynamicも書かなかった場合には@synthesizeを付けたのと同じ扱いとなる</strong> ようになりました。</p>
+
+<h2>NSNumber, NSArray, NSDictionary も短いコードで作れます</h2>
+
+<figure class='code'><figcaption><span>上記コードにおけるdiff</span></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'> - (void)privateMethods2
+</span><span class='line'> {
+</span><span class='line'><span class="gd">-  self.i = [NSNumber numberWithInt:100];</span>
+</span><span class='line'><span class="gd">-  self.c = [NSNumber numberWithChar:&#39;a&#39;];</span>
+</span><span class='line'><span class="gd">-  self.f = [NSNumber numberWithFloat:3.14f];</span>
+</span><span class='line'><span class="gi">+  self.i = @100;</span>
+</span><span class='line'><span class="gi">+  self.c = @&#39;a&#39;;</span>
+</span><span class='line'><span class="gi">+  self.f = @3.14f;</span>
+</span><span class='line'> }
+</span><span class='line'>
+</span><span class='line'> - (void)privateMethods3
+</span><span class='line'> {
+</span><span class='line'><span class="gd">-  self.array = [NSArray arrayWithObjects:@&quot;1&quot;, @&quot;2&quot;, [NSNumber numberWithBool:YES], nil];</span>
+</span><span class='line'><span class="gd">-  self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;val1&quot;, @&quot;key1&quot;, @&quot;val2&quot;, @&quot;key2&quot;, nil];</span>
+</span><span class='line'><span class="gi">+  self.array = @[@&quot;1&quot;, @&quot;2&quot;, @(YES)];</span>
+</span><span class='line'><span class="gi">+  self.dictionary = @{@&quot;key1&quot;: @&quot;val1&quot;, @&quot;key2&quot;: @&quot;val2&quot;};</span>
+</span><span class='line'> }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NSStringについては <strong>@&#8221;hoge&#8221;</strong> と <strong>@</strong> を文字列の前に付けることでNSStringのインスタンスを作れるというのが周知の事実です。<br/>
+Xcode4.4ではさらに、</p>
+
+<ul>
+<li>NSNumber</li>
+<li>NSArray</li>
+<li>NSDictionary</li>
+</ul>
+
+
+<p>についても同様の省略形の書き方が追加されました。<br/>
+具体的には、それぞれ</p>
+
+<ul>
+<li>NSNumber <code>@100</code> <code>@3.14</code> <code>@'a'</code> <code>@0xff</code> <code>@(YES)</code></li>
+<li>NSArray <code>@[val1, val2, val3]</code></li>
+<li>NSDictionary <code>@{key1: val1, key2: val2}</code></li>
+</ul>
+
+
+<p>といった書き方ができるようになります。</p>
+
+<p>ずいぶん楽になりますね！<br/>
+この他、<code>@(1 + 2 + 3)</code> といったかんじで括弧内の演算結果でNSNumberのインスタンスを作ることもできます。</p>
+
+<p>上記のとおり、Xcode4.4からは <strong>NSNumber, NSArray, NSDictionaryでも @ を使った省略形が使える</strong> ようになりました。</p>
+
+<h2>privateメソッドの定義を省略できます</h2>
+
+<figure class='code'><figcaption><span>上記コードにおけるdiff</span></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-- (void)privateMethods1;</span>
+</span><span class='line'><span class="gd">-- (void)privateMethods2;</span>
+</span><span class='line'><span class="gd">-- (void)privateMethods3;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これまではprivateメソッドについては無名カテゴリで宣言しておく必要がありました（正確にはそのメソッドを利用するコードの前に宣言しておく必要がありました）。</p>
+
+<p>Xcode4.4からは <strong>あらかじめ宣言されていないメソッドでも同じコード内に実装されていれば使える</strong> ようになりました。</p>
+
+<p><strong>※ なお、このメソッドの宣言の省略はXcode4.3+LLVMでもできるということを、<a href="https://twitter.com/ClimbAppDev">@ClimbAppDev</a>さんからご指摘いただきました。ありがとうございます!</strong></p>
+
+<p><a href="/2012/08/12/objc-subscripting/">次の記事</a> では、[]でNSArrayやNSDictionaryや独自クラスにアクセスできる件について書きます。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T12:50:00+09:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/objc/'>objc</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/08/12/objc-new-statements/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/08/12/objc-new-statements/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2012/08/12/objc-new-statements/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/07/29/security-for-jenkins/" title="Previous Post: JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする">&laquo; JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/08/12/objc-subscripting/" title="Next Post: Objective-Cで独自クラスに[]でアクセスする">Objective-Cで独自クラスに[]でアクセスする &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>引っ越し前のブログ</h1>
+  <p><a href="http://iphone-dev.g.hatena.ne.jp/tokorom/">■ iOS開発関連</a></p>
+  <p><a href="http://vim.g.hatena.ne.jp/tokorom/">■ Vim関連</a></p>
+  <p><a href="http://d.hatena.ne.jp/tokorom/">■ その他</a></p>
+</section>
+
+<section>
+  <h1>About Me</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 5;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/01/14/easy-objc-complement/">もっと簡単にVimでObjective-Cのコード補完を実行する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/objc-macro/">Objective-Cで最近お気に入りのマクロ４つ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/05/objc-dynamic/">Objective-Cで"@dynamic"の使いどころを考える</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する with clang</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/31/mac-terminal-japanese/">Mac + Terminal + tmux + vim でクリップボードを快適に使う</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tokorom" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2012/08/12/objc-new-statements/';
+        var disqus_url = 'http://www.tokoro.me/2012/08/12/objc-new-statements/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>
