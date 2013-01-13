@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-01-14T06:07:54+09:00</updated>
+  <updated>2013-01-14T06:10:05+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -28,7 +28,7 @@
 <p>先日、 <a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。</p>
 
 <p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これによりiOS用のビルド設定を簡単に拡張することができることが分かったためです。<br/>
-具体的には、<code>clang_complete</code>に追加して、後述の拙作の <a href="http://">plugin</a> を１つインストールしていただき、</p>
+具体的には、<code>clang_complete</code>に追加して、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールしていただき、</p>
 
 <ul>
 <li>after/ftplugin/objc.vim</li>
