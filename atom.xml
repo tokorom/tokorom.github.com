@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-01-14T13:45:28+09:00</updated>
+  <updated>2013-01-15T01:30:34+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,175 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[VimでiOSのリファレンスを直接参照したい -> CtrlPの拡張でできるようになりました]]></title>
+<link href="http://www.tokoro.me/2013/01/15/ctrlp-docset/"/>
+<updated>2013-01-15T00:40:00+09:00</updated>
+<id>http://www.tokoro.me/2013/01/15/ctrlp-docset</id>
+
+      <content type="html"><![CDATA[<h2>Vimでリファレンス読む必要ありますか？</h2>
+
+<p>正直微妙なところでしょうか。<br/>
+自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
+
+<p>ただ、せっかく<a href="source/_posts/2013-01-14-easy-objc-complement.markdown">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
+
+<ul>
+<li>Vimでさらっと検索してリファレンスから関数をコピー</li>
+<li>そのままプログラミングにペースト</li>
+</ul>
+
+
+<p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
+
+<p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
+
+<h2>Docsetを検索するCtrlPのエクステンションを作りました</h2>
+
+<p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br/>
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br/>
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
+
+<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
+
+<p>CtrlPについては、</p>
+
+<ul>
+<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
+<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
+</ul>
+
+
+<p>あたりがわかりやすかったです。</p>
+
+<p>インストールして動かすと、</p>
+
+<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg" /></p>
+
+<p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。<br/>
+参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。<br/>
+自分はVim内で完結したいので <a href="https://github.com/yuratomo/w3m.vim">w3m.vim</a> を使ってVim内で表示するように設定しました。</p>
+
+<h2>インストール</h2>
+
+<h3>まずはDocsetがインストールされているか確認</h3>
+
+<p>これがないとはじまりません。<br/>
+あるかどうか心配なかたは、Xcodeを起動し、 <strong>Preferences&#8230;</strong> の <strong>Downloads</strong> を確認してみてください。<br/>
+ここの <strong>Documentation</strong> タブのほうで <strong>iOS 6.0 Library</strong> かそれに相当するものが <strong>Installed</strong> とインストール済みになっていれば問題ありません。<br/>
+なければここからインストールをしてみてください。</p>
+
+<p><img src="http://dl.dropbox.com/u/10351676/images/xcode_docset.jpg" alt="xcode_docset.jpg" /></p>
+
+<p>なお、ここでインストールしたDocsetは、たぶん</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>に配置されると思います。</p>
+
+<h3>CtrlP と ctrlp-docset をインストール</h3>
+
+<p>Vundleを使ってらっしゃるなら、</p>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Bundle <span class="s1">&#39;git://github.com/kien/ctrlp.vim.git&#39;</span>
+</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/tokorom/ctrlp-docset.git&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、その他のかたは各自の環境に合わせて読み替えてください。</p>
+
+<h3>ctrlp-docset の設定</h3>
+
+<p>設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。</p>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし）</span>
+</span><span class='line'><span class="nb">let </span>g:ctrlp_docset_docsetutil_command <span class="o">=</span> <span class="s1">&#39;/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># iOS用のDocsetの場所を指定する（下記と同じ場所なら設定必要なし）</span>
+</span><span class='line'><span class="c"># objc は filetype です / 他の filetype をご利用の場合はそれを設定してください</span>
+</span><span class='line'><span class="nb">let </span>g:ctrlp_docset_filepaths <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;objc&#39;</span>: <span class="s1">&#39;~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset&#39;</span><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>実行!</h2>
+
+<p>これらの設定が全部終わったらVimでObjective-Cのファイルを開いた後に、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>:CtrlPDocset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を実行してみてください。<br/>
+設定がうまくいっていればiOSのクラス/メソッドがインクリメンタル検索できるはずです。</p>
+
+<p>また、参照したいクラス/メソッドを選択（Enter）すればドキュメントがブラウザで開くと思います。</p>
+
+<h2>キーバインドの変更</h2>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nnoremap お好みのキー :&lt;C-u&gt;CtrlPDocset&lt;CR&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ドキュメントをw3mで開きたい</h2>
+
+<p>w3mコマンドが利用できる環境ならもちろん可能です。
+Macなら <code>brew install w3m</code> などであらかじめインストールしておいてください。</p>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># w3m.vim が必要です</span>
+</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/yuratomo/w3m.vim.git&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ドキュメントを開くときのコマンドを変える場合にはこのオプション（%sにURLが渡される）</span>
+</span><span class='line'><span class="nb">let </span>g:ctrlp_docset_accept_command <span class="o">=</span> <span class="s1">&#39;:W3mSplit local %s&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これらの設定をしておけば、ブラウザで開く代わりにVim内でドキュメント参照が完結できるようになるはずです。</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/15/ctrlp-docset/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
