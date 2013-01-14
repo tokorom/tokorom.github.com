@@ -135,8 +135,8 @@
 
 <p>先日、 <a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。</p>
 
-<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これによりiOS用のビルド設定を簡単に拡張することができることが分かったためです。<br/>
-具体的には、<code>clang_complete</code>に追加して、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールしていただき、</p>
+<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これにより<code>clang_complete</code>本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。<br/>
+具体的には、<code>clang_complete</code>ともう１つ、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールいただき、</p>
 
 <ul>
 <li>after/ftplugin/objc.vim</li>
@@ -148,7 +148,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです。<br/>
+<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
 このオプションの中の、</p>
 
 </div>

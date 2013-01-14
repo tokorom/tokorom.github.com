@@ -163,8 +163,8 @@
 
 <p>先日、 <a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。</p>
 
-<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これによりiOS用のビルド設定を簡単に拡張することができることが分かったためです。<br/>
-具体的には、<code>clang_complete</code>に追加して、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールしていただき、</p>
+<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これにより<code>clang_complete</code>本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。<br/>
+具体的には、<code>clang_complete</code>ともう１つ、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールいただき、</p>
 
 <ul>
 <li>after/ftplugin/objc.vim</li>
@@ -176,7 +176,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです。<br/>
+<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
 このオプションの中の、</p>
 
 <!-- more -->
@@ -189,18 +189,18 @@
 </ul>
 
 
-<p>の３つは<code>clang_complete</code>のデフォルト値で、最後の</p>
+<p>の３つは<code>clang_complete</code>にデフォルト値で設定される値で、最後の</p>
 
 <ul>
 <li>ios</li>
 </ul>
 
 
-<p>が今回作成したpluginにより追加できるオプションです。</p>
+<p>が今回作成した<a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a>により追加できるオプションです。</p>
 
 <h2>clang_complete-getopts-ios</h2>
 
-<p><a href="https://github.com/tokorom/clang_complete-getopts-ios">clang_complete-getopts-ios</a> は、clang_complete の plugin です。<br/>
+<p><a href="https://github.com/tokorom/clang_complete-getopts-ios">clang_complete-getopts-ios</a>が新しく作成した clang_complete の plugin です。<br/>
 これを入れることで、clang_completeでのコード補完実行の際に、</p>
 
 <ul>
@@ -212,13 +212,13 @@
 </ul>
 
 
-<p>を自動で行ってくれます。<br/>
-要するに、<a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> で手動で <code>.clang_complete</code> ファイルに設定した項目+αのことを自動でやってくれるようになります。</p>
+<p>という５つのことを自動で行ってくれるようになり、<code>.clang_complete</code>ファイルいらずになります。
+要するに、<a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">前の記事</a> で手動で <code>.clang_complete</code> ファイルに設定した項目+αのことを自動でやってくれるようになります。</p>
 
 <h2>インストール方法</h2>
 
 <ul>
-<li>.vimrc</li>
+<li>pluginをVundleなどでインストール</li>
 </ul>
 
 
@@ -232,7 +232,7 @@
 
 
 <ul>
-<li>after/ftplugin/objc.vim</li>
+<li>after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える</li>
 </ul>
 
 
@@ -243,11 +243,12 @@
 
 <p>この他、clang_complete 自体の設定などについては、 <a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> をご参照ください。</p>
 
-<h2>完了</h2>
+<h2>設定完了！</h2>
 
-<p>以上の設定でたいていのケースではiOSアプリ開発時のコード補完ができるようになっているかと思います。</p>
+<p>以上の設定でたいていのケースではiOSアプリ開発時のコード補完ができるようになっているかと思います。<br/>
+あとは使うだけ！</p>
 
-<h2>オプション</h2>
+<h2>オプション事項</h2>
 
 <h3>SDKを <strong>5.1</strong> にしたい</h3>
 
@@ -256,7 +257,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>といった形で、SDKの場所を上書きしてください。</p>
+<p>といった形で、SDKの場所を設定してあげてください。</p>
 
 <h3>ARC非対応にしたい、その他オプションを加えたい</h3>
 
@@ -265,7 +266,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>をご自由にお書き換えください。</p>
+<p>をご自由にお書き換えください。<br/>
+もちろん、これまでどおり <code>.clang_complete</code> ファイルにオプションを加えることもできます。</p>
 
 <h3>Includeファイル用の検索パスとして加えたくないディレクトリがある</h3>
 
