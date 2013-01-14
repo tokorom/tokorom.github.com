@@ -9,10 +9,10 @@ categories: [ios,vim,objc]
 
 ## 概要
 
-先日、 [VimでObjective-Cのコード補完を実行する With Clang](http://www.tokoro.me/2013/01/02/clang-complete-for-vim/) でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
+先日、 [VimでObjective-Cのコード補完を実行する With Clang](/2013/01/02/clang-complete-for-vim/) でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
 
-というのも、`clang_complete`には`g:clang_auto_user_options`という素晴らしいオプションがあり、これによりiOS用のビルド設定を簡単に拡張することができることが分かったためです。  
-具体的には、`clang_complete`に追加して、後述の拙作の [plugin](https://github.com/tokorom/clang_complete-getopts-ios) を１つインストールしていただき、
+というのも、`clang_complete`には`g:clang_auto_user_options`という素晴らしいオプションがあり、これにより`clang_complete`本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。  
+具体的には、`clang_complete`ともう１つ、後述の拙作の [plugin](https://github.com/tokorom/clang_complete-getopts-ios) を１つインストールいただき、
 
 * after/ftplugin/objc.vim
 
@@ -20,7 +20,7 @@ categories: [ios,vim,objc]
 let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 ```
 
-という設定をするだけで多くのプロジェクトが `.clang_complete` ファイルなしでコード補完できるようになる見込みです。  
+という設定をするだけで多くのプロジェクトが `.clang_complete` ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
 このオプションの中の、
 
 <!-- more -->
@@ -29,15 +29,15 @@ let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 * .clang_complete
 * clang
 
-の３つは`clang_complete`のデフォルト値で、最後の
+の３つは`clang_complete`にデフォルト値で設定される値で、最後の
 
 * ios
 
-が今回作成したpluginにより追加できるオプションです。
+が今回作成した[plugin](https://github.com/tokorom/clang_complete-getopts-ios)により追加できるオプションです。
 
 ## clang_complete-getopts-ios
 
-[clang_complete-getopts-ios](https://github.com/tokorom/clang_complete-getopts-ios) は、clang_complete の plugin です。  
+[clang_complete-getopts-ios](https://github.com/tokorom/clang_complete-getopts-ios)が新しく作成した clang_complete の plugin です。  
 これを入れることで、clang_completeでのコード補完実行の際に、
 
 * `'-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300'`をオプションとして追加する
@@ -46,12 +46,12 @@ let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 * `-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks`をオプションとして追加する
 * `/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include`以下のディレクトリを全てIncludeファイル用の検索パスとして追加する
 
-を自動で行ってくれます。  
-要するに、[VimでObjective-Cのコード補完を実行する With Clang](http://www.tokoro.me/2013/01/02/clang-complete-for-vim/) で手動で `.clang_complete` ファイルに設定した項目+αのことを自動でやってくれるようになります。
+という５つのことを自動で行ってくれるようになり、`.clang_complete`ファイルいらずになります。
+要するに、[前の記事](/2013/01/02/clang-complete-for-vim/) で手動で `.clang_complete` ファイルに設定した項目+αのことを自動でやってくれるようになります。
 
 ## インストール方法
 
-* .vimrc
+* pluginをVundleなどでインストール
 
 ```sh
 # Vundleをご利用の場合
@@ -59,19 +59,20 @@ Bundle 'git@github.com:tokorom/clang_complete.git'
 Bundle 'git://github.com/tokorom/clang_complete-getopts-ios.git'
 ```
 
-* after/ftplugin/objc.vim
+* after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える
 
 ```sh
 let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 ```
 
-この他、clang_complete 自体の設定などについては、 [VimでObjective-Cのコード補完を実行する With Clang](http://www.tokoro.me/2013/01/02/clang-complete-for-vim/) をご参照ください。
+この他、clang_complete 自体の設定などについては、 [VimでObjective-Cのコード補完を実行する With Clang](/2013/01/02/clang-complete-for-vim/) をご参照ください。
 
-## 完了
+## 設定完了！
 
-以上の設定でたいていのケースではiOSアプリ開発時のコード補完ができるようになっているかと思います。
+以上の設定でたいていのケースではiOSアプリ開発時のコード補完ができるようになっているかと思います。  
+あとは使うだけ！
 
-## オプション
+## オプション事項
 
 ### SDKを **5.1** にしたい
 
@@ -79,7 +80,7 @@ let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 let g:clang_complete_getopts_ios_sdk_directory = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk'
 ```
 
-といった形で、SDKの場所を上書きしてください。
+といった形で、SDKの場所を設定してあげてください。
 
 ### ARC非対応にしたい、その他オプションを加えたい
 
@@ -87,7 +88,8 @@ let g:clang_complete_getopts_ios_sdk_directory = '/Applications/Xcode.app/Conten
 let g:clang_complete_getopts_ios_default_options = '-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 ```
 
-をご自由にお書き換えください。
+をご自由にお書き換えください。  
+もちろん、これまでどおり `.clang_complete` ファイルにオプションを加えることもできます。
 
 ### Includeファイル用の検索パスとして加えたくないディレクトリがある
 

@@ -128,6 +128,9 @@ let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 ```
 
+**※2013/1/14 追記**  
+**ここから先の話は、 [次の記事](/2013/01/14/easy-objc-complement/) でもっと簡単な方法も紹介しています
+
 - .clang_complete (実行するディレクトリに配置するclang実行時の追加オプション指定用ファイル)
 
 ```
