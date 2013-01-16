@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-01-15T01:45:45+09:00</updated>
+  <updated>2013-01-17T02:18:53+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた]]></title>
+<link href="http://www.tokoro.me/2013/01/17/tmux-toggle/"/>
+<updated>2013-01-17T01:55:00+09:00</updated>
+<id>http://www.tokoro.me/2013/01/17/tmux-toggle</id>
+
+      <content type="html"><![CDATA[<p><strong> ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします </strong></p>
+
+<h2>導入</h2>
+
+<p><a href="http://d.hatena.ne.jp/naoya/20130108/1357630895">近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について</a> を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。</p>
+
+<p>設定は以下のとおり。</p>
+
+<ul>
+<li>.tmux.conf</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t last-pane
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。</p>
+
+<p>ただ、じつはこの真似をする前には C-t C-t には <code>last-window</code> を割り当てており、paneを使っていないケースではそれはそれで便利だった。</p>
+
+<p>例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。</p>
+
+<h2>改善</h2>
+
+<p>ということで、</p>
+
+<ul>
+<li>paneがあれば <code>last-pane</code></li>
+<li>paneがなければ <code>last-window</code></li>
+<li>ついでにwindowさえもなければ新しいwindowを作って移動</li>
+</ul>
+
+
+<p>というのができれば最強なんじゃないかと思った。<br/>
+そんなんできるんかいな？と思ったけどごくごく普通にできた。</p>
+
+<p>設定は以下のとおり。</p>
+
+<ul>
+<li>.tmux.conf</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t run <span class="s2">&quot;tmux last-pane || tmux last-window || tmux new-window&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>run</code>はshを叩くことを意味し、<code>last-pane</code>と<code>last-window</code>と<code>new-window</code>を<code>||</code>で連結させている。<br/>
+これで、<code>last-pane</code>から順番に試していき、成功したところで終わるという挙動になる。</p>
+
+<p>便利便利！</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/17/tmux-toggle/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       

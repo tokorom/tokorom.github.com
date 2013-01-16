@@ -106,6 +106,111 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/01/17/tmux-toggle/">tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/17/tmux-toggle/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/17/tmux-toggle/" alt="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた" title="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-17T01:55:00+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/17/tmux-toggle/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><strong> ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします </strong></p>
+
+<h2>導入</h2>
+
+<p><a href="http://d.hatena.ne.jp/naoya/20130108/1357630895">近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について</a> を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。</p>
+
+<p>設定は以下のとおり。</p>
+
+<ul>
+<li>.tmux.conf</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t last-pane
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。</p>
+
+<p>ただ、じつはこの真似をする前には C-t C-t には <code>last-window</code> を割り当てており、paneを使っていないケースではそれはそれで便利だった。</p>
+
+<p>例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。</p>
+
+<h2>改善</h2>
+
+<p>ということで、</p>
+
+<ul>
+<li>paneがあれば <code>last-pane</code></li>
+<li>paneがなければ <code>last-window</code></li>
+<li>ついでにwindowさえもなければ新しいwindowを作って移動</li>
+</ul>
+
+
+<p>というのができれば最強なんじゃないかと思った。<br/>
+そんなんできるんかいな？と思ったけどごくごく普通にできた。</p>
+
+<p>設定は以下のとおり。</p>
+
+<ul>
+<li>.tmux.conf</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t run <span class="s2">&quot;tmux last-pane || tmux last-window || tmux new-window&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>run</code>はshを叩くことを意味し、<code>last-pane</code>と<code>last-window</code>と<code>new-window</code>を<code>||</code>で連結させている。<br/>
+これで、<code>last-pane</code>から順番に試していき、成功したところで終わるという挙動になる。</p>
+
+<p>便利便利！</p>
+</div>
+
+  <footer>
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/01/15/ctrlp-docset/">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/15/ctrlp-docset/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/15/ctrlp-docset/" alt="はてなブックマーク - VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました" title="はてなブックマーク - VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました"></a>
@@ -401,77 +506,6 @@
     
     
     <p><a rel="full-article" href="/2013/01/05/objc-dynamic/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/02/clang-complete-for-vim/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/02/clang-complete-for-vim/" alt="はてなブックマーク - VimでObjective-Cのコード補完を実行する with clang" title="はてなブックマーク - VimでObjective-Cのコード補完を実行する with clang"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-02T02:09:00+09:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/02/clang-complete-for-vim/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>概要</h2>
-
-<p>VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。</p>
-
-<p>そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。</p>
-
-<p>具体的には、</p>
-
-<ol>
-<li><strong>clangコマンドでのコード補完を試してみる</strong></li>
-<li><strong>その結果をもってVimの <code>clang_complete</code> プラグインを導入する</strong></li>
-</ol>
-
-
-<p>という手順で実施しました。</p>
-
-<p>結果として満足いく補完環境が整いましたので紹介させていただきます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/01/02/clang-complete-for-vim/">続きを読む &rarr;</a></p>
     
   </footer>
 
