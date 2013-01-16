@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-01-17T02:18:53+09:00</updated>
+  <updated>2013-01-17T02:21:55+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -58,25 +58,6 @@
 </ul>
 
 
-<p>というのができれば最強なんじゃないかと思った。<br/>
-そんなんできるんかいな？と思ったけどごくごく普通にできた。</p>
-
-<p>設定は以下のとおり。</p>
-
-<ul>
-<li>.tmux.conf</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t run <span class="s2">&quot;tmux last-pane || tmux last-window || tmux new-window&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>run</code>はshを叩くことを意味し、<code>last-pane</code>と<code>last-window</code>と<code>new-window</code>を<code>||</code>で連結させている。<br/>
-これで、<code>last-pane</code>から順番に試していき、成功したところで終わるという挙動になる。</p>
-
-<p>便利便利！</p>
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/01/17/tmux-toggle/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
