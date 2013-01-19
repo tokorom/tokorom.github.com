@@ -55,7 +55,7 @@ let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 
 ```sh
 # Vundleをご利用の場合
-Bundle 'git@github.com:tokorom/clang_complete.git'
+Bundle 'git://github.com/Rip-Rip/clang_complete.git'
 Bundle 'git://github.com/tokorom/clang_complete-getopts-ios.git'
 ```
 
