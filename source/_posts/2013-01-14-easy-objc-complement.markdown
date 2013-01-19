@@ -67,6 +67,12 @@ let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 
 この他、clang_complete 自体の設定などについては、 [VimでObjective-Cのコード補完を実行する With Clang](/2013/01/02/clang-complete-for-vim/) をご参照ください。
 
+* .vimrc clang_completeがPythonのライブラリを使うように設定する（どうもこっちのほうが安定してるっぽい）
+
+```sh
+let g:clang_use_library = 1
+```
+
 ## 設定完了！
 
 以上の設定でたいていのケースではiOSアプリ開発時のコード補完ができるようになっているかと思います。  
@@ -85,7 +91,7 @@ let g:clang_complete_getopts_ios_sdk_directory = '/Applications/Xcode.app/Conten
 ### ARC非対応にしたい、その他オプションを加えたい
 
 ```objc
-let g:clang_complete_getopts_ios_default_options = '-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+let g:clang_complete_getopts_ios_default_options = '-w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 ```
 
 をご自由にお書き換えください。  
