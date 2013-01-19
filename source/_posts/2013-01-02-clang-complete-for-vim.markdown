@@ -73,10 +73,12 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
 このエラーは、clangに対するオプションの不足によるものです。
 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
 
+* **-w**  
+  => 全ての警告を無視する（コード補完では警告はいらない）
 * **-fblocks**  
-  => ブロック構文を利用している場合は必須のオプション   
+  => ブロック構文を利用している場合に指定するオプション
 * **-fobjc-arc**  
-  => ARCを使用している場合は必須のオプション   
+  => ARCを使用している場合に指定するオプション   
 * **-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300**  
   => ターゲットがiOS 4.3 以上であることを示す  
 * **-include ./\*\*/\*-Prefix.pch**  
@@ -91,7 +93,7 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
 これらのオプションを指定してclangを実行してみると、
 
 ```
-clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include 
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include 
 ```
 
 無事にerrorなしで補完候補を引き出すことが出来ました。
@@ -134,6 +136,7 @@ let g:clang_auto_select = 0
 - .clang_complete (実行するディレクトリに配置するclang実行時の追加オプション指定用ファイル)
 
 ```
+-w
 -fblocks
 -fobjc-arc
 -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300
