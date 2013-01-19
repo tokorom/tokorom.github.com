@@ -249,10 +249,12 @@ VimでObjective-Cのコード補完を実行する With Clang<a class="entry-tit
 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</p>
 
 <ul>
+<li><strong>-w</strong>
+=> 全ての警告を無視する（コード補完では警告はいらない）</li>
 <li><strong>-fblocks</strong><br/>
-=> ブロック構文を利用している場合は必須のオプション</li>
+=> ブロック構文を利用している場合に指定するオプション</li>
 <li><strong>-fobjc-arc</strong><br/>
-=> ARCを使用している場合は必須のオプション</li>
+=> ARCを使用している場合に指定するオプション</li>
 <li><strong>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300</strong><br/>
 => ターゲットがiOS 4.3 以上であることを示す</li>
 <li><strong>-include ./**/*-Prefix.pch</strong><br/>
@@ -269,7 +271,7 @@ VimでObjective-Cのコード補完を実行する With Clang<a class="entry-tit
 <p>これらのオプションを指定してclangを実行してみると、</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include </span></code></pre></td></tr></table></div></figure>
 
 
 <p>無事にerrorなしで補完候補を引き出すことが出来ました。</p>
@@ -342,7 +344,9 @@ VimでObjective-Cのコード補完を実行する With Clang<a class="entry-tit
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>-fblocks
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>-w
+</span><span class='line'>-fblocks
 </span><span class='line'>-fobjc-arc
 </span><span class='line'>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300
 </span><span class='line'>-include ./**/*-Prefix.pch
