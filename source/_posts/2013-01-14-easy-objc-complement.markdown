@@ -17,7 +17,7 @@ categories: [ios,vim,objc]
 * after/ftplugin/objc.vim
 
 ```sh
-let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
+let g:clang_auto_user_options = 'path, .clang_complete, ios'
 ```
 
 という設定をするだけで多くのプロジェクトが `.clang_complete` ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
@@ -27,9 +27,12 @@ let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
 
 * path
 * .clang_complete
-* clang
+* <del>clang</del>
 
-の３つは`clang_complete`にデフォルト値で設定される値で、最後の
+
+**※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました**
+
+の<del>３つ</del>２つは`clang_complete`にデフォルト値で設定される値で、最後の
 
 * ios
 
@@ -62,7 +65,7 @@ Bundle 'git://github.com/tokorom/clang_complete-getopts-ios.git'
 * after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える
 
 ```sh
-let g:clang_auto_user_options = 'path, .clang_complete, clang, ios'
+let g:clang_auto_user_options = 'path, .clang_complete, ios'
 ```
 
 この他、clang_complete 自体の設定などについては、 [VimでObjective-Cのコード補完を実行する With Clang](/2013/01/02/clang-complete-for-vim/) をご参照ください。
