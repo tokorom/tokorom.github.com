@@ -1,11 +1,4 @@
 <div class="sharing">
-  {% if site.twitter_tweet_button %}
-    {% if site.respectfully_social %}
-      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
-    {% else %}
-      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.twitter_user }}" data-counturl="{{ site.url }}{{ page.url }}" target="_blank" >Tweet</a>
-    {% endif %}
-  {% endif %}
   {% if site.google_plus_one %}
     {% if site.respectfully_social %}
       <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url={{site.url}}{{page.url}}" target="_blank">+1</a>
@@ -21,4 +14,7 @@
     {% endif %}
   {% endif %}
   {% include custom/sharing.html %}
+  {% if site.twitter_tweet_button %}
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.twitter_user }}" data-counturl="{{ site.url }}{{ page.url }}" target="_blank" >Tweet</a>
+  {% endif %}
 </div>
