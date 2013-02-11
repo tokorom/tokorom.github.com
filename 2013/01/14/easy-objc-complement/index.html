@@ -226,7 +226,7 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Vundleをご利用の場合</span>
-</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/Rip-Rip/clang_complete.git&#39;</span>
+</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/tokorom/clang_complete.git&#39;</span>
 </span><span class='line'>Bundle <span class="s1">&#39;git://github.com/tokorom/clang_complete-getopts-ios.git&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -243,13 +243,11 @@
 
 <p>この他、clang_complete 自体の設定などについては、 <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> をご参照ください。</p>
 
-<ul>
-<li>.vimrc clang_completeがPythonのライブラリを使うように設定する（どうもこっちのほうが安定してるっぽい）</li>
-</ul>
-
+<p><s>* .vimrc clang_completeがPythonのライブラリを使うように設定する（どうもこっちのほうが安定してるっぽい）</s>
+* .vimrc clang_completeがPythonのライブラリを使わないよう設定する（2012/2/11現在、Pythonライブラリだとうまく補完できないケースがあった。ただしclang_complete自体はこのオプションをdeprecatedとしている）</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">let </span>g:clang_use_library <span class="o">=</span> 1
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">let </span>g:clang_use_library <span class="o">=</span> 0
 </span></code></pre></td></tr></table></div></figure>
 
 
