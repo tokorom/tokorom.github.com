@@ -58,7 +58,7 @@ let g:clang_auto_user_options = 'path, .clang_complete, ios'
 
 ```sh
 # Vundleをご利用の場合
-Bundle 'git://github.com/Rip-Rip/clang_complete.git'
+Bundle 'git://github.com/tokorom/clang_complete.git'
 Bundle 'git://github.com/tokorom/clang_complete-getopts-ios.git'
 ```
 
@@ -70,10 +70,11 @@ let g:clang_auto_user_options = 'path, .clang_complete, ios'
 
 この他、clang_complete 自体の設定などについては、 [VimでObjective-Cのコード補完を実行する With Clang](/2013/01/02/clang-complete-for-vim/) をご参照ください。
 
-* .vimrc clang_completeがPythonのライブラリを使うように設定する（どうもこっちのほうが安定してるっぽい）
+<s>* .vimrc clang_completeがPythonのライブラリを使うように設定する（どうもこっちのほうが安定してるっぽい）</s>
+* .vimrc clang_completeがPythonのライブラリを使わないよう設定する（2012/2/11現在、Pythonライブラリだとうまく補完できないケースがあった。ただしclang_complete自体はこのオプションをdeprecatedとしている）
 
 ```sh
-let g:clang_use_library = 1
+let g:clang_use_library = 0
 ```
 
 ## 設定完了！
