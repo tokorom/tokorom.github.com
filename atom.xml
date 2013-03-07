@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-02-11T17:31:34+09:00</updated>
+  <updated>2013-03-07T12:46:27+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[BlockInjectionで元のソースコードを汚さないで振る舞い追加]]></title>
+<link href="http://www.tokoro.me/2013/03/07/block-injection/"/>
+<updated>2013-03-07T12:05:00+09:00</updated>
+<id>http://www.tokoro.me/2013/03/07/block-injection</id>
+
+      <content type="html"><![CDATA[<h2>例えばこんなコードに違和感はありませんか？</h2>
+
+<p>自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">sendButtonDidPush:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// トラッキングのためのコード</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">tracker</span> <span class="nl">sendEventWithCategory:</span><span class="s">@&quot;uiAction&quot;</span>
+</span><span class='line'>                      <span class="nl">withAction:</span><span class="s">@&quot;sendButtonDidPush&quot;</span>
+</span><span class='line'>                       <span class="nl">withLabel:</span><span class="nb">nil</span>
+</span><span class='line'>                       <span class="nl">withValue:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>  <span class="c1">// 以降、送信ボタンを押したときの処理</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。</p>
+
+<p>これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。</p>
+
+<p>どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？<br/>
+いわゆるアスペクト指向的なかんじで。</p>
+
+<h2>そんなときに BlockInjection</h2>
+
+<p>ということで本題に入りますが、それを解決するために <a href="https://github.com/tokorom/BlockInjection">BlockInjection</a> というライブラリを作りました。<br/>
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。</p>
+
+<p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/03/07/block-injection/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
