@@ -45,7 +45,7 @@ categories: [ios, objc]
 ``` objective-c
 #import "BILib.h"
 
-[BILib injectToSelector:@selector(sendButtonDidPush:) forClass:[XXXViewController class] preprocess:^{
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{
 
   // sendButtonDidPush: が実行される直前にこのコードが実行されます
   [tracker sendEventWithCategory:@"uiAction"
@@ -66,7 +66,7 @@ categories: [ios, objc]
 そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。
 
 ``` objective-c
-[BILib injectToSelectorWithMethodName:@"sendButtonDidPush:" forClassName:@"XXXViewController" preprocess:^{
+[BILib injectToClassWithName:@"XXXViewController" methodName:@"sendButtonDidPush:" preprocess:^{
   // 埋め込みたい処理
 }];
 ```
@@ -77,7 +77,7 @@ categories: [ios, objc]
 そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
 
 ``` objective-c
-[BILib injectToSelector:@selector(sendButtonDidPush:) forClass:[XXXViewController class] preprocess:^(XXXViewController* vc){
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){
 
   // ここでXXXViewControllerの中身が好きなように参照可能
   NSLog(@"State: %d", vc.state);
@@ -91,7 +91,7 @@ categories: [ios, objc]
 そんなときは埋め込むブロックの第2引数以降で全ての引数が参照できます。
 
 ``` objective-c
-[BILib injectToSelector:@selector(sayMessage:) forClass:[Sample class] preprocess:^(Sample* sample, NSString* message){
+[BILib injectToClass:[Sample class] selector:@selector(sayMessage:) preprocess:^(Sample* sample, NSString* message){
 
   // 例えば、[[Sample new] sayMessage:@"Hello!"]; の引数もここで参照できます
   NSLog(@"sayMessage: %@", message);
@@ -109,7 +109,7 @@ BlockInjectionは、現状（v0.3.0）、1096byte以下のtypeには対応して
 そのため、例えば特定の画面を表示したときに、UIKitが内部的にどんなViewを持っていてどこに配置しているかを調査するために、
 
 ``` objective-c
-[BILib injectToSelector:@selector(setFrame:) forClass:[UIView class] preprocess:^(UIView* view, CGRect frame){
+[BILib injectToClass:[UIView class] selector:@selector(setFrame:) preprocess:^(UIView* view, CGRect frame){
 
   NSLog(@"%@ setFrame:(%f, %f, %f, %f)", NSStringFromClass([view class]), frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 
