@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-03-07T12:46:27+09:00</updated>
+  <updated>2013-04-01T23:53:54+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[BlockInjectionをバージョンアップしました]]></title>
+<link href="http://www.tokoro.me/2013/04/01/blockinjection2/"/>
+<updated>2013-04-01T23:12:00+09:00</updated>
+<id>http://www.tokoro.me/2013/04/01/blockinjection2</id>
+
+      <content type="html"><![CDATA[<h2>BlockInjectionとはなんぞや</h2>
+
+<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br/>
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
+
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
+
+<h2>バージョンアップ内容</h2>
+
+<p><a href="http://www.tokoro.me/2013/03/07/block-injection/">前記事</a> からのバージョンアップ内容は以下です。</p>
+
+<ul>
+<li>リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます）</li>
+<li>クラスメソッドにも対応しました</li>
+<li>複数のクラスやメソッドを一度に追加できるようになりました</li>
+<li>正規表現で指定できるようになりました(※1)</li>
+<li>注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2)</li>
+<li>オマケで単純なメソッド実装置き換え機能も追加しました</li>
+</ul>
+
+
+<h2>UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/04/01/blockinjection2/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       

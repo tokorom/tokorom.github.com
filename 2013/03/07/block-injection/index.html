@@ -220,7 +220,7 @@ BlockInjectionで元のソースコードを汚さないで振る舞い追加<a 
 <span class='line-number'>11</span>
 </pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;BILib.h&quot;</span>
 </span><span class='line'>
-</span><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sendButtonDidPush:</span><span class="p">)</span> <span class="nl">forClass:</span><span class="p">[</span><span class="n">XXXViewController</span> <span class="n">class</span><span class="p">]</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToClass:</span><span class="p">[</span><span class="n">XXXViewController</span> <span class="n">class</span><span class="p">]</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sendButtonDidPush:</span><span class="p">)</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">{</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// sendButtonDidPush: が実行される直前にこのコードが実行されます</span>
 </span><span class='line'>  <span class="p">[</span><span class="n">tracker</span> <span class="nl">sendEventWithCategory:</span><span class="s">@&quot;uiAction&quot;</span>
@@ -244,7 +244,7 @@ BlockInjectionで元のソースコードを汚さないで振る舞い追加<a 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToSelectorWithMethodName:</span><span class="s">@&quot;sendButtonDidPush:&quot;</span> <span class="nl">forClassName:</span><span class="s">@&quot;XXXViewController&quot;</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">{</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToClassWithName:</span><span class="s">@&quot;XXXViewController&quot;</span> <span class="nl">methodName:</span><span class="s">@&quot;sendButtonDidPush:&quot;</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">{</span>
 </span><span class='line'>  <span class="c1">// 埋め込みたい処理</span>
 </span><span class='line'><span class="p">}];</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -261,7 +261,7 @@ BlockInjectionで元のソースコードを汚さないで振る舞い追加<a 
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sendButtonDidPush:</span><span class="p">)</span> <span class="nl">forClass:</span><span class="p">[</span><span class="n">XXXViewController</span> <span class="n">class</span><span class="p">]</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">(</span><span class="n">XXXViewController</span><span class="o">*</span> <span class="n">vc</span><span class="p">){</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToClass:</span><span class="p">[</span><span class="n">XXXViewController</span> <span class="n">class</span><span class="p">]</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sendButtonDidPush:</span><span class="p">)</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">(</span><span class="n">XXXViewController</span><span class="o">*</span> <span class="n">vc</span><span class="p">){</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// ここでXXXViewControllerの中身が好きなように参照可能</span>
 </span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;State: %d&quot;</span><span class="p">,</span> <span class="n">vc</span><span class="p">.</span><span class="n">state</span><span class="p">);</span>
@@ -281,7 +281,7 @@ BlockInjectionで元のソースコードを汚さないで振る舞い追加<a 
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sayMessage:</span><span class="p">)</span> <span class="nl">forClass:</span><span class="p">[</span><span class="n">Sample</span> <span class="n">class</span><span class="p">]</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">(</span><span class="n">Sample</span><span class="o">*</span> <span class="n">sample</span><span class="p">,</span> <span class="n">NSString</span><span class="o">*</span> <span class="n">message</span><span class="p">){</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToClass:</span><span class="p">[</span><span class="n">Sample</span> <span class="n">class</span><span class="p">]</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sayMessage:</span><span class="p">)</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">(</span><span class="n">Sample</span><span class="o">*</span> <span class="n">sample</span><span class="p">,</span> <span class="n">NSString</span><span class="o">*</span> <span class="n">message</span><span class="p">){</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="c1">// 例えば、[[Sample new] sayMessage:@&quot;Hello!&quot;]; の引数もここで参照できます</span>
 </span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;sayMessage: %@&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
@@ -304,7 +304,7 @@ BlockInjectionは、現状（v0.3.0）、1096byte以下のtypeには対応して
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">setFrame:</span><span class="p">)</span> <span class="nl">forClass:</span><span class="p">[</span><span class="n">UIView</span> <span class="n">class</span><span class="p">]</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">(</span><span class="n">UIView</span><span class="o">*</span> <span class="n">view</span><span class="p">,</span> <span class="n">CGRect</span> <span class="n">frame</span><span class="p">){</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="p">[</span><span class="n">BILib</span> <span class="nl">injectToClass:</span><span class="p">[</span><span class="n">UIView</span> <span class="n">class</span><span class="p">]</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">setFrame:</span><span class="p">)</span> <span class="nl">preprocess:</span><span class="o">^</span><span class="p">(</span><span class="n">UIView</span><span class="o">*</span> <span class="n">view</span><span class="p">,</span> <span class="n">CGRect</span> <span class="n">frame</span><span class="p">){</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@ setFrame:(%f, %f, %f, %f)&quot;</span><span class="p">,</span> <span class="n">NSStringFromClass</span><span class="p">([</span><span class="n">view</span> <span class="n">class</span><span class="p">]),</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
 </span><span class='line'>
@@ -400,6 +400,8 @@ BlockInjectionは、現状（v0.3.0）、1096byte以下のtypeには対応して
         <a class="basic-alignment left" href="/2013/01/17/tmux-toggle/" title="Previous Post: tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた">&laquo; tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</a>
       
       
+        <a class="basic-alignment right" href="/2013/04/01/blockinjection2/" title="Next Post: BlockInjectionをバージョンアップしました">BlockInjectionをバージョンアップしました &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -462,6 +464,10 @@ BlockInjectionは、現状（v0.3.0）、1096byte以下のtypeには対応して
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/04/01/blockinjection2/">BlockInjectionをバージョンアップしました</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/03/07/block-injection/">BlockInjectionで元のソースコードを汚さないで振る舞い追加</a>
       </li>
     
@@ -475,10 +481,6 @@ BlockInjectionは、現状（v0.3.0）、1096byte以下のtypeには対応して
     
       <li class="post">
         <a href="/2013/01/14/easy-objc-complement/">もっと簡単にVimでObjective-Cのコード補完を実行する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/09/objc-macro/">Objective-Cで最近お気に入りのマクロ４つ</a>
       </li>
     
   </ul>
