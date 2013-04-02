@@ -34,7 +34,7 @@ Objective-Cの特定のメソッドの前後に処理を追加できるライブ
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
 
 ``` objective-c
-[BILib injectToClassWithNameRegex:BIRegex(@"UIView") methodNameRegex:BIRegex(@"^set.*") postprocess:^{
+[BILib injectToClassWithNameRegex:BIRegex(@"^UIView$") methodNameRegex:BIRegex(@"^set.*$") preprocess:^{
   NSLog(@"%@", [BILib prettyFunction]);
 }];
 ```
@@ -59,10 +59,10 @@ BlockInjectionを使えば、たった3行のコードでこれが実現でき�
 
 ``` objective-c
 NSError* error = nil;
-NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"UIView" options:0 error:&error];
-NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^set.*" options:0 error:&error];
+NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^UIView$" options:0 error:&error];
+NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^set.*$" options:0 error:&error];
 
-[BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex postprocess:^{
+[BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{
   NSLog(@"%@", [BILib prettyFunction]);
 }];
 ```
