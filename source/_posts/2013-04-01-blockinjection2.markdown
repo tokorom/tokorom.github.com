@@ -49,7 +49,6 @@ BlockInjectionを使えば、たった3行のコードでこれが実現でき�
 
 のように全てログ出力されます。
 
-
 `+ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess;` が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。  
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 
@@ -66,3 +65,5 @@ NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWit
   NSLog(@"%@", [BILib prettyFunction]);
 }];
 ```
+
+※2013/04/05追記: ちなみに **特定Prefixのメソッド全てにまとめて振るまいを追加する** というのは [@7gano](https://twitter.com/7gano) さんのアイデアです。
