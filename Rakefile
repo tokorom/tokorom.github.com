@@ -1,6 +1,7 @@
 require "rubygems"
 require "bundler/setup"
 require "stringex"
+require 'rake/dsl_definition' 
 require 'rake/minify'
 
 ## -- Rsync Deploy config -- ##
