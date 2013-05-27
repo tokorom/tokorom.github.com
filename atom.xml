@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-05-23T10:44:05+09:00</updated>
+  <updated>2013-05-28T00:21:20+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[UIAlertViewよりもおとなしいメッセージダイアログを利用する]]></title>
+<link href="http://www.tokoro.me/2013/05/27/ssgentlealertview/"/>
+<updated>2013-05-27T23:30:00+09:00</updated>
+<id>http://www.tokoro.me/2013/05/27/ssgentlealertview</id>
+
+      <content type="html"><![CDATA[<h2>UIAlertViewは警告目的のダイアログ</h2>
+
+<p>そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>一般にアラートは、次のような場合には不要です。
+</span><span class='line'>* なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。
+</span><span class='line'>  代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と記載されています。</p>
+
+<p>その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。<br/>
+それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。</p>
+
+<p>警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。</p>
+
+<h2>警告目的ではない普通のメッセージダイアログ</h2>
+
+<p>それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。</p>
+
+<p><a href="https://github.com/tokorom/SSGentleAlertView">https://github.com/tokorom/SSGentleAlertView</a></p>
+
+<p>このSSGentleAlertViewは、</p>
+
+<ul>
+<li>UIAlertViewと同じコードで利用できる</li>
+<li>UIAlertViewとは違い、外観を変更できる</li>
+<li>デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる</li>
+</ul>
+
+
+<p>という３点に留意して作っています。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/05/27/ssgentlealertview/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -964,33 +1014,6 @@
 
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2012/07/15/octopress-part-of-codes/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順]]></title>
-<link href="http://www.tokoro.me/2012/07/15/install-pandoc/"/>
-<updated>2012-07-15T03:13:00+09:00</updated>
-<id>http://www.tokoro.me/2012/07/15/install-pandoc</id>
-
-      <content type="html"><![CDATA[<h2>hs-httpがインストールできない!</h2>
-
-<p>Macにpandocを入れようと気軽にMacPortsで</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo port install pandoc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&#8230;</p>
-
-<p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/15/install-pandoc/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

@@ -106,6 +106,100 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/01/15/ctrlp-docset/">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/15/ctrlp-docset/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/15/ctrlp-docset/" alt="はてなブックマーク - VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました" title="はてなブックマーク - VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T00:40:00+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/15/ctrlp-docset/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>Vimでリファレンス読む必要ありますか？</h2>
+
+<p>正直微妙なところでしょうか。<br/>
+自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
+
+<p>ただ、せっかく<a href="/2013/01/15/ctrlp-docset/">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
+
+<ul>
+<li>Vimでさらっと検索してリファレンスから関数をコピー</li>
+<li>そのままプログラミングにペースト</li>
+</ul>
+
+
+<p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
+
+<p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
+
+<h2>Docsetを検索するCtrlPのエクステンションを作りました</h2>
+
+<p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br/>
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br/>
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
+
+<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
+
+<p>CtrlPについては、</p>
+
+<ul>
+<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
+<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
+</ul>
+
+
+<p>あたりがわかりやすかったです。</p>
+
+<p>インストールして動かすと、</p>
+
+<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg" /></p>
+
+<p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/01/15/ctrlp-docset/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/01/14/easy-objc-complement/">もっと簡単にVimでObjective-Cのコード補完を実行する</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/14/easy-objc-complement/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/14/easy-objc-complement/" alt="はてなブックマーク - もっと簡単にVimでObjective-Cのコード補完を実行する" title="はてなブックマーク - もっと簡単にVimでObjective-Cのコード補完を実行する"></a>
@@ -378,91 +472,6 @@
     
     
     <p><a rel="full-article" href="/2013/01/02/clang-complete-for-vim/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/12/31/mac-terminal-japanese/">Mac + Terminal + Tmux + Vim でクリップボードを快適に使う</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/12/31/mac-terminal-japanese/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/12/31/mac-terminal-japanese/" alt="はてなブックマーク - Mac + Terminal + tmux + vim でクリップボードを快適に使う" title="はてなブックマーク - Mac + Terminal + tmux + vim でクリップボードを快適に使う"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-31T04:47:00+09:00" pubdate data-updated="true">Dec 31<span>st</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/12/31/mac-terminal-japanese/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>Macの初期設定のたびに混乱してるので再整理しておきます。</p>
-
-<ul>
-<li>Mac</li>
-<li>Terminal</li>
-<li>tmux</li>
-<li>vim</li>
-</ul>
-
-
-<p>で開発をする人向けです。</p>
-
-<h2>まずはMacVim KaoriYa</h2>
-
-<p>MacでVimを使うならひとまず <a href="http://code.google.com/p/macvim-kaoriya/">MacVim KaoriYa</a> は外せません。<br/>
-日本語を扱う上で便利な設定がデフォルトで入ってます。</p>
-
-<p>当然、Terminalでも <strong>Macvim KaoriYa</strong> を使いたいので、 <strong>.zshenv</strong> などに以下のaliasを設定してCUIで <strong>vi</strong> や <strong>vim</strong> を叩いたときにも <strong>MacVim KaoriYa</strong> が使われるようにします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">if</span> <span class="o">[</span> -f /Applications/MacVim.app/Contents/MacOS/Vim <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">  </span><span class="nb">alias </span><span class="nv">vi</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
-</span><span class='line'>  <span class="nb">alias </span><span class="nv">vim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>tmux でも pbcopy/pbpaste が使えるようにする</h2>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/12/31/mac-terminal-japanese/">続きを読む &rarr;</a></p>
     
   </footer>
 
