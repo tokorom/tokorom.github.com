@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-05-28T00:21:20+09:00</updated>
+  <updated>2013-06-12T17:46:39+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)]]></title>
+<link href="http://www.tokoro.me/2013/06/12/xcode5-preview/"/>
+<updated>2013-06-12T01:09:00+09:00</updated>
+<id>http://www.tokoro.me/2013/06/12/xcode5-preview</id>
+
+      <content type="html"><![CDATA[<p><a href="https://twitter.com/tokorom">tokorom@WWDC2013参加中</a>です。<br/>
+WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。</p>
+
+<p>で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。</p>
+
+<p>概要レベルでありますが、なかでも <strong>TDD</strong> とか <strong>CI</strong> まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。<br/>
+あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/06/12/xcode5-preview/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -983,37 +1005,6 @@
 
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Octopressでソースコードの一部分だけを参照する]]></title>
-<link href="http://www.tokoro.me/2012/07/15/octopress-part-of-codes/"/>
-<updated>2012-07-15T16:55:00+09:00</updated>
-<id>http://www.tokoro.me/2012/07/15/octopress-part-of-codes</id>
-
-      <content type="html"><![CDATA[<h2>おさらい：Octopressでソースコードを表示する</h2>
-
-<p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
-
-<h3>1. 指定のディレクトリにファイルを置く</h3>
-
-<p>置き場所は <em>source/downloads/code</em> 。<br/>
-例えば、ここに <em>sample/test.rb</em> というファイルを置いておく。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ mkdir -p source/downloads/code/sample
-</span><span class='line'>$ cp test.rb source/downloads/code/sample/</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/15/octopress-part-of-codes/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>
