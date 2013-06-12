@@ -46,3 +46,7 @@ Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成で�
 ## その他
 
 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
+
+## 参照元
+
+[What's New in Xcode 5](https://developer.apple.com/technologies/tools/whats-new.html)
