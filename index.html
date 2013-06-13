@@ -106,6 +106,69 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/06/13/ios7-video/">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/13/ios7-video/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/13/ios7-video/" alt="はてなブックマーク - iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)" title="はてなブックマーク - iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T01:49:00+09:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/06/13/ios7-video/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino@WWDC2013参加中</a> に寄稿いただきました！</h2>
+
+<p>Appleの公式サイトに <strong>iOS 7</strong> を紹介するビデオが公開されましたね。<br/>
+<a href="http://www.apple.com/ios/ios7/">http://www.apple.com/ios/ios7/</a></p>
+
+<p>特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。<br/>
+これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。</p>
+
+<p>デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/06/13/ios7-video/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/06/12/xcode5-preview/">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/12/xcode5-preview/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/12/xcode5-preview/" alt="はてなブックマーク - Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)" title="はてなブックマーク - Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)"></a>
@@ -407,104 +470,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
     
     
     <p><a rel="full-article" href="/2013/04/01/blockinjection2/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/03/07/block-injection/">BlockInjectionで元のソースコードを汚さないで振る舞い追加</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/03/07/block-injection/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/03/07/block-injection/" alt="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加" title="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-07T12:05:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/03/07/block-injection/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>例えばこんなコードに違和感はありませんか？</h2>
-
-<p>自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">sendButtonDidPush:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">// トラッキングのためのコード</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">tracker</span> <span class="nl">sendEventWithCategory:</span><span class="s">@&quot;uiAction&quot;</span>
-</span><span class='line'>                      <span class="nl">withAction:</span><span class="s">@&quot;sendButtonDidPush&quot;</span>
-</span><span class='line'>                       <span class="nl">withLabel:</span><span class="nb">nil</span>
-</span><span class='line'>                       <span class="nl">withValue:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// ...</span>
-</span><span class='line'>  <span class="c1">// 以降、送信ボタンを押したときの処理</span>
-</span><span class='line'>  <span class="c1">// ...</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。</p>
-
-<p>これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。</p>
-
-<p>どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？<br/>
-いわゆるアスペクト指向的なかんじで。</p>
-
-<h2>そんなときに BlockInjection</h2>
-
-<p>ということで本題に入りますが、それを解決するために <a href="https://github.com/tokorom/BlockInjection">BlockInjection</a> というライブラリを作りました。<br/>
-古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。</p>
-
-<p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/03/07/block-injection/">続きを読む &rarr;</a></p>
     
   </footer>
 

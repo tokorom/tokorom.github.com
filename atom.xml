@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-06-12T17:49:48+09:00</updated>
+  <updated>2013-06-13T18:21:04+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)]]></title>
+<link href="http://www.tokoro.me/2013/06/13/ios7-video/"/>
+<updated>2013-06-13T01:49:00+09:00</updated>
+<id>http://www.tokoro.me/2013/06/13/ios7-video</id>
+
+      <content type="html"><![CDATA[<h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino@WWDC2013参加中</a> に寄稿いただきました！</h2>
+
+<p>Appleの公式サイトに <strong>iOS 7</strong> を紹介するビデオが公開されましたね。<br/>
+<a href="http://www.apple.com/ios/ios7/">http://www.apple.com/ios/ios7/</a></p>
+
+<p>特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。<br/>
+これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。</p>
+
+<p>デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/06/13/ios7-video/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -969,42 +993,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2012/07/29/jenkins-octopress/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[さくらVPSにJenkinsさんをインストールする]]></title>
-<link href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"/>
-<updated>2012-07-24T02:57:00+09:00</updated>
-<id>http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura</id>
-
-      <content type="html"><![CDATA[<h2>JDKのインストール</h2>
-
-<p>Javaが未インストールならこちらから。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Jenkinsのインストール</h2>
-
-<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-</span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-</span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>
