@@ -106,6 +106,88 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/01/09/objc-macro/">Objective-Cで最近お気に入りのマクロ４つ</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/09/objc-macro/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/09/objc-macro/" alt="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ" title="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-09T00:17:00+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/09/objc-macro/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>マクロ</h2>
+
+<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
+
+<p><strong> ※2013/1/9 追記 </strong></p>
+
+<p>上記のとおり独自のマクロを使うこと自体に賛否両論あります。<br/>
+例えば独自のマクロを定義して利用することで、</p>
+
+<ul>
+<li>他の人がコードを見たときに分かりづらくなる</li>
+<li>思わぬ不具合が出るケースがある</li>
+<li>名前の衝突リスクがある（マクロは名前空間が使えない）</li>
+</ul>
+
+
+<p>などのデメリットがあります。
+特にチームや会社でのご利用の際にはよくよくご留意をお願いします。</p>
+
+<h2>1. [NSString stringWithFormat:] を簡単に</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
+ということで、</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/01/09/objc-macro/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/01/05/objc-dynamic/">Objective-Cで&#8221;@dynamic&#8221;の使いどころを考える</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/05/objc-dynamic/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/05/objc-dynamic/" alt="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える" title="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える"></a>
@@ -406,72 +488,6 @@
     
     
     <p><a rel="full-article" href="/2012/09/12/objc-private-test/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/09/02/ghunit-jenkins-coverage/">GHUnitのテストカバレッジをJenkinsで表示する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/" alt="はてなブックマーク - GHUnitのテストカバレッジをJenkinsで表示する" title="はてなブックマーク - GHUnitのテストカバレッジをJenkinsで表示する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-02T22:54:00+09:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/09/02/ghunit-jenkins-coverage/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>概要</h2>
-
-<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
-
-<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ghunit-coverage.png"></p>
-
-<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
-
-<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br/>
-うまく動かない場合の設定の比較などにご参照ください。</p>
-
-<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/09/02/ghunit-jenkins-coverage/">続きを読む &rarr;</a></p>
     
   </footer>
 
