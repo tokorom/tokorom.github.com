@@ -106,6 +106,65 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/06/17/ios7-ui-design/">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/17/ios7-ui-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/17/ios7-ui-design/" alt="はてなブックマーク - 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント" title="はてなブックマーク - 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-17T13:29:00+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/06/17/ios7-ui-design/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino氏</a> からの寄稿です</h2>
+
+<p><a href="/2013/06/13/ios7-video/">前回</a> はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。</p>
+
+<p>今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/06/17/ios7-ui-design/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/06/15/objc-reduce/">Objective-Cのコードを削れるだけ削る7のTips</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/15/objc-reduce/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/15/objc-reduce/" alt="はてなブックマーク - Objective-Cのコードを削れるだけ削る7のTips" title="はてなブックマーク - Objective-Cのコードを削れるだけ削る7のTips"></a>
@@ -479,103 +538,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
     
     
     <p><a rel="full-article" href="/2013/05/27/ssgentlealertview/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/05/23/uikit-images/">UIKitで使われている画像パーツをまとめて取得する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/23/uikit-images/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/23/uikit-images/" alt="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する" title="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-23T10:11:00+09:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/05/23/uikit-images/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>UIKitで使われている画像はどこにある？</h2>
-
-<p>例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。</p>
-
-<p>プログラマというか特にはデザイナさんにとって有用だと思います。</p>
-
-<p>その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。<br/>
-具体的には（これはiOS6.1の場合）、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>が画像パーツを含むファイルになります。</p>
-
-<p>他にも、同じディレクトリに</p>
-
-<ul>
-<li>Shared.artwork</li>
-<li>Shared@2x~ipad.artwork</li>
-<li>Shared@2x~iphone.artwork</li>
-<li>Shared~ipad.artwork</li>
-<li>Shared~iphone.artwork</li>
-</ul>
-
-
-<p>がありますので取りたいものに応じてお好みで。</p>
-
-<p>ひとまず、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>などでこのファイルをデスクトップにでもコピーしておきましょう。</p>
-
-<h2>artworkから画像ファイルを抽出</h2>
-
-<p>で、artworkから肝心の画像ファイルを抽出するのに、 <a href="git://github.com/davepeck/iOS-artwork.git">iOS-artwork</a> というやつを使わせてもらいます。</p>
-
-<p>まずは、これを</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/05/23/uikit-images/">続きを読む &rarr;</a></p>
     
   </footer>
 
