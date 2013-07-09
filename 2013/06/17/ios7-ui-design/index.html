@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2013/06/17/ios7-ui-design/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/06/17/ios7-ui-design/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/06/17/ios7-ui-design/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/06/17/ios7-ui-design/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/06/17/ios7-ui-design/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/06/17/ios7-ui-design/" target="_blank" >Tweet</a>
+  
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント<a class="entry-title-link" href="http://www.tokoro.me/2013/06/17/ios7-ui-design/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/17/ios7-ui-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/17/ios7-ui-design/" alt="はてなブックマーク - 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント" title="はてなブックマーク - 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-17T13:29:00+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/06/17/ios7-ui-design/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino氏</a> からの寄稿です</h2>
+
+<p><a href="/2013/06/13/ios7-video/">前回</a> はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。</p>
+
+<p>今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。</p>
+
+<!-- more -->
+
+
+<h2>&#8220;True simplicity&#8221;</h2>
+
+<p>iOS 7から話題の&#8221;フラットデザイン&#8221;が採用されて、画面デザインは大分シンプルな外観になりました。<br/>
+使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。<br/>
+iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ios7-simplicity-01.png"></p>
+
+<p>ただ、&#8221;Simplicity&#8221;という言葉は、単に外観を表すものとして使われているわけではありません。<br/>
+「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。<br/>
+実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。<br/>
+なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。<br/>
+全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。<br/>
+これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。</p>
+
+<p>アップルは今回、外観的な&#8221;Simplicity&#8221;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。<br/>
+画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。<br/>
+これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。<br/>
+では、アップルの&#8221;Simplicity&#8221;を構成する要素にはどのようなものがあるでしょうか。</p>
+
+<h2>1. &#8220;refining the typography&#8221;</h2>
+
+<p>タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。<br/>
+英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。<br/>
+一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。</p>
+
+<p>ナビゲーションバーのボタンも、アイコンが廃され、テキストのみで簡潔に機能を伝えるものが多いようです。<br/>
+タイポの美しさを最大限に引き出したいという意図だと思われますが、画面のシンプルさを維持するためにボタンの境界線も排除されています。<br/>
+その代わりに、押せるボタンであることを明確に示すために、通常テキストとははっきりと違う色を割り当てて、アプリ全体で一貫して使われています。<br/>
+その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。<br/>
+これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ios7-simplicity-02.png"></p>
+
+<p>私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。
+通常テキストとボタンのテキストの2色だけを使うのが安全です。<br/>
+複数のテキスト色が混ざり合ったインタフェースになってしまうと、どれがボタンなのか判断がつかなくなってしまいます。</p>
+
+<p>もう一つ懸念点があるとすれば、日本語のタイポグラフィーにおいても、英文と同じ可読性・美しさを確保できるかということです。<br/>
+場合によっては、余白を多めに取るなどの工夫を行ったほうがよいことも多そうです。</p>
+
+<h2>2. &#8220;redesigning all the icons&#8221;</h2>
+
+<p>標準アプリのアイコンは全て共通の新しいグリッドシステムに基づいてデザインし直されています。<br/>
+このグリッドシステムに従うことで、アイコンごとのグラフィックのバランスに統一感・一貫性を持たせています。</p>
+
+<p>もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。<br/>
+既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ios7-simplicity-03.png"></p>
+
+<h2>3. &#8220;use of translucency&#8221;</h2>
+
+<p>地味ながらも美しく、活用の余地が大きい機能追加だと思います。<br/>
+画面上部から引き下げるNotification Center、画面下部から引き上げるControl Center、キーボードやダイアログなど、様々なアイテムがすりガラス風の半透明な板で表現され、背景がぼんやりとボケて見えるだけですが、その存在を感じ取ることで「後ろに何かがある」ことを認識できるようになりました。</p>
+
+<p>ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。<br/>
+例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ios7-simplicity-04.png"></p>
+
+<h2>4. &#8220;parallax to create a whole new experience of depth.&#8221;</h2>
+
+<p>今回Keynoteで流されたiOS紹介ビデオの中で、最も会場が沸いた瞬間ではなかったでしょうか。<br/>
+端末を上下左右に傾けると、ダイアログの後ろに隠れていたはずの背景を覗き込む（ように見る）ことができます。<br/>
+パララックス（視差効果）と呼ばれる手法で、手前のレイヤーと後ろのレイヤーにスライドの速度差をつけることで擬似的に奥行きを感じるようになります。<br/>
+ホーム画面（アイコンと壁紙）でも使われていますね。</p>
+
+<p>この効果は、&#8221;translucency&#8221;と同様にフラットでシンプルなデザインを維持したまま、情報量を増やすことなく、非常にリッチで満足感を感じる表現を提供することに成功しそうです。<br/>
+ただ視覚的な効果として利用するのではなく、操作を行うインタフェースそのものにも活用することで、もっと面白いこともできるようになるのではないでしょうか？</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ios7-simplicity-05.png"></p>
+
+<p>さて、iOS 7が今回目指したのは装飾を徹底して削ぎ落とすことによりシンプルでフラットなUIを実現することですが、これはタイポグラフィーが本来持つ美しさを最大限に引き出すと共に、コンテンツに対して敬意を払い、可能な限りコンテンツの邪魔をしないでその内容がユーザーに少しでも伝わりやすい形にする、という狙いがあります。<br/>
+一方で、シンプル・フラットな仮想空間を画面の中に用意しつつも、現実世界を模倣した物理法則・挙動や視覚効果を強く反映させることで、UIに親しみやすさと理解のしやすさ、そして何よりもこれまでになかったようなリッチで満足度の高い体験をもたらしていると、私は考えています。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Atsushi Morino</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-17T13:29:00+09:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design/'>design</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/ui/'>ui</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/06/17/ios7-ui-design/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/06/17/ios7-ui-design/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/06/17/ios7-ui-design/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/06/17/ios7-ui-design/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/06/17/ios7-ui-design/" target="_blank" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/06/15/objc-reduce/" title="Previous Post: Objective-Cのコードを削れるだけ削る7のTips">&laquo; Objective-Cのコードを削れるだけ削る7のTips</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/07/09/objc-travis-coveralls/" title="Next Post: iOSのライブラリだってTravis CIとかCoverallsとか使うべき">iOSのライブラリだってTravis CIとかCoverallsとか使うべき &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>引っ越し前のブログ</h1>
+  <p><a href="http://iphone-dev.g.hatena.ne.jp/tokorom/">■ iOS開発関連</a></p>
+  <p><a href="http://vim.g.hatena.ne.jp/tokorom/">■ Vim関連</a></p>
+  <p><a href="http://d.hatena.ne.jp/tokorom/">■ その他</a></p>
+</section>
+
+<section>
+  <h1>About Me</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 5;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/09/objc-travis-coveralls/">iOSのライブラリだってTravis CIとかCoverallsとか使うべき</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/17/ios7-ui-design/">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/15/objc-reduce/">Objective-Cのコードを削れるだけ削る7のTips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/13/ios7-video/">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/12/xcode5-preview/">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tokorom" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2013/06/17/ios7-ui-design/';
+        var disqus_url = 'http://www.tokoro.me/2013/06/17/ios7-ui-design/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>

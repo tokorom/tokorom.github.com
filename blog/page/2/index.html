@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/blog/page/2/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2013/05/27/ssgentlealertview/">UIAlertViewよりもおとなしいメッセージダイアログを利用する</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/27/ssgentlealertview/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/27/ssgentlealertview/" alt="はてなブックマーク - UIAlertViewよりもおとなしいメッセージダイアログを利用する" title="はてなブックマーク - UIAlertViewよりもおとなしいメッセージダイアログを利用する"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-27T23:30:00+09:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/05/27/ssgentlealertview/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>UIAlertViewは警告目的のダイアログ</h2>
+
+<p>そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>一般にアラートは、次のような場合には不要です。
+</span><span class='line'>* なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。
+</span><span class='line'>  代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と記載されています。</p>
+
+<p>その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。<br/>
+それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。</p>
+
+<p>警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。</p>
+
+<h2>警告目的ではない普通のメッセージダイアログ</h2>
+
+<p>それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。</p>
+
+<p><a href="https://github.com/tokorom/SSGentleAlertView">https://github.com/tokorom/SSGentleAlertView</a></p>
+
+<p>このSSGentleAlertViewは、</p>
+
+<ul>
+<li>UIAlertViewと同じコードで利用できる</li>
+<li>UIAlertViewとは違い、外観を変更できる</li>
+<li>デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる</li>
+</ul>
+
+
+<p>という３点に留意して作っています。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/05/27/ssgentlealertview/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2013/05/23/uikit-images/">UIKitで使われている画像パーツをまとめて取得する</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/23/uikit-images/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/23/uikit-images/" alt="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する" title="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-23T10:11:00+09:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/05/23/uikit-images/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>UIKitで使われている画像はどこにある？</h2>
+
+<p>例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。</p>
+
+<p>プログラマというか特にはデザイナさんにとって有用だと思います。</p>
+
+<p>その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。<br/>
+具体的には（これはiOS6.1の場合）、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>が画像パーツを含むファイルになります。</p>
+
+<p>他にも、同じディレクトリに</p>
+
+<ul>
+<li>Shared.artwork</li>
+<li>Shared@2x~ipad.artwork</li>
+<li>Shared@2x~iphone.artwork</li>
+<li>Shared~ipad.artwork</li>
+<li>Shared~iphone.artwork</li>
+</ul>
+
+
+<p>がありますので取りたいものに応じてお好みで。</p>
+
+<p>ひとまず、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などでこのファイルをデスクトップにでもコピーしておきましょう。</p>
+
+<h2>artworkから画像ファイルを抽出</h2>
+
+<p>で、artworkから肝心の画像ファイルを抽出するのに、 <a href="git://github.com/davepeck/iOS-artwork.git">iOS-artwork</a> というやつを使わせてもらいます。</p>
+
+<p>まずは、これを</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/05/23/uikit-images/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2013/04/01/blockinjection2/">BlockInjectionをバージョンアップしました</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/04/01/blockinjection2/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/04/01/blockinjection2/" alt="はてなブックマーク - BlockInjectionをバージョンアップしました" title="はてなブックマーク - BlockInjectionをバージョンアップしました"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-01T23:12:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/04/01/blockinjection2/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>BlockInjectionとはなんぞや</h2>
+
+<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br/>
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
+
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
+
+<h2>バージョンアップ内容</h2>
+
+<p><a href="/2013/03/07/block-injection/">前記事</a> からのバージョンアップ内容は以下です。</p>
+
+<ul>
+<li>リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます）</li>
+<li>クラスメソッドにも対応しました</li>
+<li>複数のクラスやメソッドを一度に追加できるようになりました</li>
+<li>正規表現で指定できるようになりました(※1)</li>
+<li>注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2)</li>
+<li>オマケで単純なメソッド実装置き換え機能も追加しました</li>
+</ul>
+
+
+<h2>UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/04/01/blockinjection2/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2013/03/07/block-injection/">BlockInjectionで元のソースコードを汚さないで振る舞い追加</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/03/07/block-injection/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/03/07/block-injection/" alt="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加" title="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T12:05:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/03/07/block-injection/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>例えばこんなコードに違和感はありませんか？</h2>
+
+<p>自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">sendButtonDidPush:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// トラッキングのためのコード</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">tracker</span> <span class="nl">sendEventWithCategory:</span><span class="s">@&quot;uiAction&quot;</span>
+</span><span class='line'>                      <span class="nl">withAction:</span><span class="s">@&quot;sendButtonDidPush&quot;</span>
+</span><span class='line'>                       <span class="nl">withLabel:</span><span class="nb">nil</span>
+</span><span class='line'>                       <span class="nl">withValue:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>  <span class="c1">// 以降、送信ボタンを押したときの処理</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。</p>
+
+<p>これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。</p>
+
+<p>どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？<br/>
+いわゆるアスペクト指向的なかんじで。</p>
+
+<h2>そんなときに BlockInjection</h2>
+
+<p>ということで本題に入りますが、それを解決するために <a href="https://github.com/tokorom/BlockInjection">BlockInjection</a> というライブラリを作りました。<br/>
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。</p>
+
+<p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/03/07/block-injection/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2013/01/17/tmux-toggle/">tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/17/tmux-toggle/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/17/tmux-toggle/" alt="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた" title="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-17T01:55:00+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/17/tmux-toggle/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><strong> ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします </strong></p>
+
+<h2>導入</h2>
+
+<p><a href="http://d.hatena.ne.jp/naoya/20130108/1357630895">近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について</a> を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。</p>
+
+<p>設定は以下のとおり。</p>
+
+<ul>
+<li>.tmux.conf</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t last-pane
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。</p>
+
+<p>ただ、じつはこの真似をする前には C-t C-t には <code>last-window</code> を割り当てており、paneを使っていないケースではそれはそれで便利だった。</p>
+
+<p>例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。</p>
+
+<h2>改善</h2>
+
+<p>ということで、</p>
+
+<ul>
+<li>paneがあれば <code>last-pane</code></li>
+<li>paneがなければ <code>last-window</code></li>
+<li>ついでにwindowさえもなければ新しいwindowを作って移動</li>
+</ul>
+
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/01/17/tmux-toggle/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>引っ越し前のブログ</h1>
+  <p><a href="http://iphone-dev.g.hatena.ne.jp/tokorom/">■ iOS開発関連</a></p>
+  <p><a href="http://vim.g.hatena.ne.jp/tokorom/">■ Vim関連</a></p>
+  <p><a href="http://d.hatena.ne.jp/tokorom/">■ その他</a></p>
+</section>
+
+<section>
+  <h1>About Me</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 5;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tokorom" data-count="3" data-replies="false">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>
