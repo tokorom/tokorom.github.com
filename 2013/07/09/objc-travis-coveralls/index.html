@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" target="_blank" >Tweet</a>
+  
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+iOSのライブラリだってTravis CIとかCoverallsとか使うべき<a class="entry-title-link" href="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" alt="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき" title="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T07:00:00+09:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/07/09/objc-travis-coveralls/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png"></p>
+
+<p>今日はGithubに公開したiOS用のライブラリを <strong>Travis CI</strong> と <strong>Coveralls</strong> に対応した手順を紹介したいと思います。</p>
+
+<p>なお、実際にこれらを適用して運用しているリポジトリのサンプルは、</p>
+
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a></p>
+
+<p>になります。</p>
+
+<!-- more -->
+
+
+<h2>前提条件</h2>
+
+<ul>
+<li>GitHubを使っていること</li>
+<li>GitHubでなんらかiOS/Mac用のライブラリを公開していること</li>
+</ul>
+
+
+<h2>Travis CI</h2>
+
+<p><a href="https://travis-ci.org/">https://travis-ci.org/</a></p>
+
+<h3>目的</h3>
+
+<p>公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。<br/>
+iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。</p>
+
+<h3>事前準備</h3>
+
+<ul>
+<li>Travis CIのアカウントを作っておく(GitHubのアカウントで）</li>
+</ul>
+
+
+<h3>Travis CI上で該当のリポジトリをONにする</h3>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/travis_on.png"></p>
+
+<p>Travis CI に行って、このスクリーンショットのように該当リポジトリを <code>ON</code> にするだけです。簡単！</p>
+
+<h3>Makefile を用意する（必須ではない）</h3>
+
+<p>必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。</p>
+
+<p>自分の場合は、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">PROJECT</span> <span class="o">=</span> BlockInjectionTest/BlockInjectionTest.xcodeproj
+</span><span class='line'><span class="nv">TEST_TARGET</span> <span class="o">=</span> Tests
+</span><span class='line'>
+</span><span class='line'>clean:
+</span><span class='line'>  xcodebuild <span class="se">\</span>
+</span><span class='line'>      -project <span class="k">$(</span>PROJECT<span class="k">)</span> <span class="se">\</span>
+</span><span class='line'>      clean
+</span><span class='line'>
+</span><span class='line'><span class="nb">test</span>:
+</span><span class='line'>  xcodebuild <span class="se">\</span>
+</span><span class='line'>      -project <span class="k">$(</span>PROJECT<span class="k">)</span> <span class="se">\</span>
+</span><span class='line'>      -target <span class="k">$(</span>TEST_TARGET<span class="k">)</span> <span class="se">\</span>
+</span><span class='line'>      -sdk iphonesimulator <span class="se">\</span>
+</span><span class='line'>      -configuration Debug <span class="se">\</span>
+</span><span class='line'>      <span class="nv">TEST_AFTER_BUILD</span><span class="o">=</span>YES <span class="se">\</span>
+</span><span class='line'>      <span class="nv">TEST_HOST</span><span class="o">=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんなかんじで、 <code>make test</code> とすると <code>xcodebuild</code> で <code>Tests</code> がビルドされるようにしています。
+<code>TEST_AFTER_BUILD=YES</code> と <code>TEST_HOST=</code> は重要です。</p>
+
+<p>このMakefileを設置したら、まずはローカル環境で <code>make test</code> が成功するかを確認するのが良いと思います。</p>
+
+<h3>.travis.yml を用意する</h3>
+
+<p>次に、Travis CI用の設定ファイル .travis.yml を設置します。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>language: objective-c
+</span><span class='line'>
+</span><span class='line'>script:
+</span><span class='line'>  - make clean <span class="nb">test</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これだけです。
+<code>language</code> でobjective-cを指定し、<code>script</code>で<code>make clean</code>と<code>make test</code>を叩くことを記述しています。<br/>
+なお、<code>script</code> がなくてもデフォルトでObjective-C用のビルドが走るようです。</p>
+
+<p>必要な設定はこれだけです。簡単すぎる！<br/>
+概ね１５分程度でTravis CI対応は終わってしまうくらいです。</p>
+
+<h3>commit &amp; push</h3>
+
+<p>これらの設定が終わったら、GitHubにpushします。<br/>
+すると、自動的にTravis CIで設定した内容が動き始めるはずです。</p>
+
+<h3>確認</h3>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/travis_success.png"></p>
+
+<p>うまくいけば、 <a href="https://travis-ci.org/tokorom/BlockInjection">こんなかんじ</a> でビルド/テスト結果が確認できるはずです。</p>
+
+<p>また、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>https://travis-ci.org/[YOUR_ACCOUNT]/[YOUR_REPOSITORY].png?branch=master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を画像として表示することで、こんなかんじのバッヂも表示できます。せっかくなのでこいつをReadmeに埋め込みましょう。</p>
+
+<p><img class="center" src="https://travis-ci.org/tokorom/BlockInjection.png?branch=master"></p>
+
+<h2>Coveralls</h2>
+
+<p><a href="https://coveralls.io/">https://coveralls.io/</a></p>
+
+<h3>目的</h3>
+
+<p>公開しているライブラリに対してどれくらいテストがきちんと書かれているかを明示できます。<br/>
+例えば、ソースコードの全行を網羅するテストコードを書いてあるなら <code>coverage: 100%</code> という表示になります。<br/>
+100%を目指す必要はないと思いますが、これがあることで、</p>
+
+<ul>
+<li>新しい機能を加えたときなどにきちんとテストを書く後押しになる</li>
+<li>pull reqを送ってもらうときにもテストを意識してもらえるようになる</li>
+<li>利用者に対して安心感を持ってもらえる</li>
+</ul>
+
+
+<p>といった効果がありそうです。</p>
+
+<h3>事前準備</h3>
+
+<ul>
+<li>テストコードを書いておく</li>
+<li>Coverallsのアカウントを作っておく(GitHubのアカウントで）</li>
+</ul>
+
+
+<h3>Coveralls上で該当のリポジトリをONにする</h3>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/coveralls_on.png"></p>
+
+<p>やりかたもUIもTravis CI と同じです。CoverallsのADD REPOページに入って該当リポジトリを <code>ON</code> にするだけです。</p>
+
+<h3>gcovを吐き出す設定を加える</h3>
+
+<p>Makefileにgcovを吐き出す用の設定を追加します。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">test</span>-with-coverage:
+</span><span class='line'>  xcodebuild <span class="se">\</span>
+</span><span class='line'>      -project <span class="k">$(</span>PROJECT<span class="k">)</span> <span class="se">\</span>
+</span><span class='line'>      -target <span class="k">$(</span>TEST_TARGET<span class="k">)</span> <span class="se">\</span>
+</span><span class='line'>      -sdk iphonesimulator <span class="se">\</span>
+</span><span class='line'>      -configuration Debug <span class="se">\</span>
+</span><span class='line'>      <span class="nv">TEST_AFTER_BUILD</span><span class="o">=</span>YES <span class="se">\</span>
+</span><span class='line'>      <span class="nv">TEST_HOST</span><span class="o">=</span> <span class="se">\</span>
+</span><span class='line'>      <span class="nv">GCC_INSTRUMENT_PROGRAM_FLOW_ARCS</span><span class="o">=</span>YES <span class="se">\</span>
+</span><span class='line'>      <span class="nv">GCC_GENERATE_TEST_COVERAGE_FILES</span><span class="o">=</span>YES
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後の２つ <code>GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES</code> と <code>GCC_GENERATE_TEST_COVERAGE_FILES=YES</code> がキーポイントです。</p>
+
+<h3>カバレッジをCoverallsに送る設定を加える</h3>
+
+<p>さらにMakefileにカバレッジをCoverallsに送信するための設定を追加します。<br/>
+<code>coveralls</code> というコマンドが使われていますが、これについてはこの後説明します。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>send-coverage:
+</span><span class='line'>  coveralls <span class="se">\</span>
+</span><span class='line'>      --verbose
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>.travis.yml を更新</h3>
+
+<p>最後に、.travis.yml にCoveralls対応のための設定を追加します。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>language: objective-c
+</span><span class='line'>
+</span><span class='line'>before_install:
+</span><span class='line'>  - sudo easy_install cpp-coveralls
+</span><span class='line'>script:
+</span><span class='line'>  - make clean <span class="nb">test</span>-with-coverage
+</span><span class='line'>after_success:
+</span><span class='line'>  - make send-coverage
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>変更点は以下のとおりです。</p>
+
+<ul>
+<li><code>before_install</code> で Objective-C（正確にはC++）用の <code>coveralls</code> コマンドをインストール</li>
+<li><code>script</code> で <code>make test</code> でなくgcovを吐き出す <code>make test-with-coverage</code> を使うようにする</li>
+<li><code>after_success</code> で <code>make send-coverage</code> を呼び出し、Coverallsにカバレッジ情報を送るようにする</li>
+</ul>
+
+
+<h3>commit &amp; push</h3>
+
+<p>すべての設定が終わったら、GitHubにpushすれば、GitHub -> Travis CI -> Coveralls と自動的に連携していきます。</p>
+
+<h3>確認</h3>
+
+<p>うまく動いていれば、Coverallsで</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/coveralls_list.png"></p>
+
+<p>こんなかんじでカバレッジの確認ができるはずです。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/coveralls_source.png"></p>
+
+<p>また、こんなかんじでソースコードのどの行がカバーされていないかなども確認できます。</p>
+
+<p>なお、Coverallsも</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>https://coveralls.io/repos/[YOUR_ACCOUNT]/[YOUR_REPOSITORY]/badge.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でバッヂの表示ができます。</p>
+
+<p><img class="center" src="https://coveralls.io/repos/tokorom/BlockInjection/badge.png"></p>
+
+<h2>課題</h2>
+
+<ul>
+<li><code>cpp-coveralls</code> で特定のクラスを除外するのがうまくいかない
+
+<ul>
+<li>今は <code>make send-coverage</code> で <code>find ./ -name "*Test.gcno" | xargs rm</code> とかやって特定のgcovのファイルを直接消すという苦肉の策</li>
+</ul>
+</li>
+<li>カバレッジはCoverallsに送る前にも開発中にXcode上で簡単に確認できたら最高なんだが</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T07:00:00+09:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ci/'>ci</a>, <a class='category' href='/blog/categories/objc/'>objc</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" target="_blank" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/06/17/ios7-ui-design/" title="Previous Post: 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント">&laquo; 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>引っ越し前のブログ</h1>
+  <p><a href="http://iphone-dev.g.hatena.ne.jp/tokorom/">■ iOS開発関連</a></p>
+  <p><a href="http://vim.g.hatena.ne.jp/tokorom/">■ Vim関連</a></p>
+  <p><a href="http://d.hatena.ne.jp/tokorom/">■ その他</a></p>
+</section>
+
+<section>
+  <h1>About Me</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 5;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/07/09/objc-travis-coveralls/">iOSのライブラリだってTravis CIとかCoverallsとか使うべき</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/17/ios7-ui-design/">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/15/objc-reduce/">Objective-Cのコードを削れるだけ削る7のTips</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/13/ios7-video/">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/12/xcode5-preview/">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tokorom" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2013/07/09/objc-travis-coveralls/';
+        var disqus_url = 'http://www.tokoro.me/2013/07/09/objc-travis-coveralls/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>
