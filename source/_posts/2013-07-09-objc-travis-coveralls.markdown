@@ -64,11 +64,12 @@ test:
 		-target $(TEST_TARGET) \
 		-sdk iphonesimulator \
 		-configuration Debug \
-		TEST_AFTER_BUILD=YES
+		TEST_AFTER_BUILD=YES \
+		TEST_HOST=
 ```
 
 こんなかんじで、 `make test` とすると `xcodebuild` で `Tests` がビルドされるようにしています。
-`TEST_AFTER_BUILD=YES` は重要です。
+`TEST_AFTER_BUILD=YES` と `TEST_HOST=` は重要です。
 
 このMakefileを設置したら、まずはローカル環境で `make test` が成功するかを確認するのが良いと思います。
 
@@ -150,6 +151,7 @@ test-with-coverage:
 		-sdk iphonesimulator \
 		-configuration Debug \
 		TEST_AFTER_BUILD=YES \
+		TEST_HOST= \
 		GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES \
 		GCC_GENERATE_TEST_COVERAGE_FILES=YES
 ```
