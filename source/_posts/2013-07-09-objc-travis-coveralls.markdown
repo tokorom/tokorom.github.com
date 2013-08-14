@@ -166,7 +166,7 @@ test-with-coverage:
 ```sh
 send-coverage:
 	coveralls \
-		--verbose 
+		-e BlockInjectionTest/Tests 
 ```
 
 ### .travis.yml を更新
@@ -216,9 +216,15 @@ https://coveralls.io/repos/[YOUR_ACCOUNT]/[YOUR_REPOSITORY]/badge.png
 
 {% img center https://coveralls.io/repos/tokorom/BlockInjection/badge.png %}
 
+### カバレッジ計測対象から除外する指定
+
+なお、coverallsをそのまま使うとテストコードもカバレッジの計測対象に含まれてしまいます。  
+そういった計測対象から除外したいファイルがある場合、`-e BlockInjectionTest/Tests` のように除外したいファイルのあるディレクトリを指定します。  
+この場合だと `-e BlockInjectionTest` とか `-e Tests` のようにディレクトリ構造の一部分だけ指定してもうまくいきません。
+
 ## 課題
 
-* `cpp-coveralls` で特定のクラスを除外するのがうまくいかない
-    * 今は `make send-coverage` で `find ./ -name "*Test.gcno" | xargs rm` とかやって特定のgcovのファイルを直接消すという苦肉の策
+* <s>`cpp-coveralls` で特定のクラスを除外するのがうまくいかない</s>
+    * <s>今は `make send-coverage` で `find ./ -name "*Test.gcno" | xargs rm` とかやって特定のgcovのファイルを直接消すという苦肉の策</s>
 * カバレッジはCoverallsに送る前にも開発中にXcode上で簡単に確認できたら最高なんだが
 
