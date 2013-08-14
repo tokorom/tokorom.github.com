@@ -361,7 +361,7 @@ iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>send-coverage:
 </span><span class='line'>  coveralls <span class="se">\</span>
-</span><span class='line'>      --verbose
+</span><span class='line'>      -e BlockInjectionTest/Tests
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -423,13 +423,19 @@ iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的
 
 <p><img class="center" src="https://coveralls.io/repos/tokorom/BlockInjection/badge.png"></p>
 
+<h3>カバレッジ計測対象から除外する指定</h3>
+
+<p>なお、coverallsをそのまま使うとテストコードもカバレッジの計測対象に含まれてしまいます。<br/>
+そういった計測対象から除外したいファイルがある場合、<code>-e BlockInjectionTest/Tests</code> のように除外したいファイルのあるディレクトリを指定します。<br/>
+この場合だと <code>-e BlockInjectionTest</code> とか <code>-e Tests</code> のようにディレクトリ構造の一部分だけ指定してもうまくいきません。</p>
+
 <h2>課題</h2>
 
 <ul>
-<li><code>cpp-coveralls</code> で特定のクラスを除外するのがうまくいかない
+<li><s><code>cpp-coveralls</code> で特定のクラスを除外するのがうまくいかない</s>
 
 <ul>
-<li>今は <code>make send-coverage</code> で <code>find ./ -name "*Test.gcno" | xargs rm</code> とかやって特定のgcovのファイルを直接消すという苦肉の策</li>
+<li><s>今は <code>make send-coverage</code> で <code>find ./ -name "*Test.gcno" | xargs rm</code> とかやって特定のgcovのファイルを直接消すという苦肉の策</s></li>
 </ul>
 </li>
 <li>カバレッジはCoverallsに送る前にも開発中にXcode上で簡単に確認できたら最高なんだが</li>
