@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-08-15T06:17:38+09:00</updated>
+  <updated>2013-09-23T20:40:39+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,93 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[iOS 7はもっさりか？比較検証してみた]]></title>
+<link href="http://www.tokoro.me/2013/09/23/ios7-design/"/>
+<updated>2013-09-23T17:45:00+09:00</updated>
+<id>http://www.tokoro.me/2013/09/23/ios7-design</id>
+
+      <content type="html"><![CDATA[<p><strong>今回の記事はUIデザイナの Morino氏 からの寄稿です。</strong></p>
+
+<p>iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。</p>
+
+<p>特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。
+今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。</p>
+
+<p>頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。</p>
+
+<ul>
+<li>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</li>
+<li>アプリアイコンをタップしてから開くまでの時間</li>
+<li>フォルダをタップしてから開くまでの時間</li>
+<li>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</li>
+</ul>
+
+
+<p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
+
+<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さもあくまで自分で30fpsの動画を目視確認した数値です。</p>
+
+<h2>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/1_unlock.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.5s</li>
+<li>iOS 7（右） : 1.0s</li>
+</ul>
+
+
+<h2>アプリアイコンをタップしてから開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/2_app.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.4s</li>
+<li>iOS 7（右） : 0.7s</li>
+</ul>
+
+
+<h2>フォルダをタップしてから開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/3_folder.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+
+
+<h2>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/4_multi.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+
+
+<p>検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。
+ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。</p>
+
+<p>ではアップルはなぜあえて動きを長くする必要があったのでしょうか？</p>
+
+<p>iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。
+ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。</p>
+
+<p>もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。
+また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。</p>
+
+<p>いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/09/23/ios7-design/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -871,40 +958,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>以下、これを解消するための変更例です。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2012/08/17/safe-objc/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Objective-Cで独自クラスに[]でアクセスする]]></title>
-<link href="http://www.tokoro.me/2012/08/12/objc-subscripting/"/>
-<updated>2012-08-12T22:34:00+09:00</updated>
-<id>http://www.tokoro.me/2012/08/12/objc-subscripting</id>
-
-      <content type="html"><![CDATA[<p>まず、Xcode4.4から使えるObjective-Cの新しい書き方については <a href="http://www.tokoro.me/2012/08/12/objc-new-statements/">前の記事</a> をご参照ください。</p>
-
-<h2>Xcode4.4からMacアプリ開発で使える新しいリテラル</h2>
-
-<p>上記記事には書いていないのですがMac向けのアプリではこの他にも、</p>
-
-<ul>
-<li><strong>array[1]</strong> でNSArrayの要素にアクセスできる</li>
-<li><strong>dictionary[key]</strong> でNSDictionaryの要素にアクセスできる</li>
-<li><strong>@YES</strong>/<strong>@NO</strong> でもNSNumberのインスタンスを作れる</li>
-</ul>
-
-
-<p>といった変更があります。<br/>
-こちらについては残念ながらiOSアプリ開発ではまだ利用できません。</p>
-
-<p>※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 <a href="https://twitter.com/k_katsumi">@k_katsumi</a> さんに教えてもらいました。</p>
-
-<h2>でも[]でアクセスする仕組み自体はiOSでも使えます!</h2>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/08/12/objc-subscripting/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

@@ -106,6 +106,67 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/06/12/xcode5-preview/">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/12/xcode5-preview/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/12/xcode5-preview/" alt="はてなブックマーク - Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)" title="はてなブックマーク - Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-12T01:09:00+09:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/06/12/xcode5-preview/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><a href="https://twitter.com/tokorom">tokorom@WWDC2013参加中</a>です。<br/>
+WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。</p>
+
+<p>で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。</p>
+
+<p>概要レベルでありますが、なかでも <strong>TDD</strong> とか <strong>CI</strong> まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。<br/>
+あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/06/12/xcode5-preview/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/05/27/ssgentlealertview/">UIAlertViewよりもおとなしいメッセージダイアログを利用する</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/27/ssgentlealertview/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/27/ssgentlealertview/" alt="はてなブックマーク - UIAlertViewよりもおとなしいメッセージダイアログを利用する" title="はてなブックマーク - UIAlertViewよりもおとなしいメッセージダイアログを利用する"></a>
@@ -444,94 +505,6 @@
     
     
     <p><a rel="full-article" href="/2013/03/07/block-injection/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/01/17/tmux-toggle/">tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/17/tmux-toggle/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/17/tmux-toggle/" alt="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた" title="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-17T01:55:00+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/17/tmux-toggle/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><strong> ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします </strong></p>
-
-<h2>導入</h2>
-
-<p><a href="http://d.hatena.ne.jp/naoya/20130108/1357630895">近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について</a> を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。</p>
-
-<p>設定は以下のとおり。</p>
-
-<ul>
-<li>.tmux.conf</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t last-pane
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。</p>
-
-<p>ただ、じつはこの真似をする前には C-t C-t には <code>last-window</code> を割り当てており、paneを使っていないケースではそれはそれで便利だった。</p>
-
-<p>例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。</p>
-
-<h2>改善</h2>
-
-<p>ということで、</p>
-
-<ul>
-<li>paneがあれば <code>last-pane</code></li>
-<li>paneがなければ <code>last-window</code></li>
-<li>ついでにwindowさえもなければ新しいwindowを作って移動</li>
-</ul>
-
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/01/17/tmux-toggle/">続きを読む &rarr;</a></p>
     
   </footer>
 

@@ -106,6 +106,130 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/09/23/ios7-design/">iOS 7はもっさりか？比較検証してみた</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/09/23/ios7-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/09/23/ios7-design/" alt="はてなブックマーク - iOS 7はもっさりか？比較検証してみた" title="はてなブックマーク - iOS 7はもっさりか？比較検証してみた"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-23T17:45:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/09/23/ios7-design/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><strong>今回の記事はUIデザイナの Morino氏 からの寄稿です。</strong></p>
+
+<p>iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。</p>
+
+<p>特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。
+今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。</p>
+
+<p>頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。</p>
+
+<ul>
+<li>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</li>
+<li>アプリアイコンをタップしてから開くまでの時間</li>
+<li>フォルダをタップしてから開くまでの時間</li>
+<li>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</li>
+</ul>
+
+
+<p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
+
+<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さもあくまで自分で30fpsの動画を目視確認した数値です。</p>
+
+<h2>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/1_unlock.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.5s</li>
+<li>iOS 7（右） : 1.0s</li>
+</ul>
+
+
+<h2>アプリアイコンをタップしてから開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/2_app.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.4s</li>
+<li>iOS 7（右） : 0.7s</li>
+</ul>
+
+
+<h2>フォルダをタップしてから開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/3_folder.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+
+
+<h2>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/4_multi.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+
+
+<p>検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。
+ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。</p>
+
+<p>ではアップルはなぜあえて動きを長くする必要があったのでしょうか？</p>
+
+<p>iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。
+ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。</p>
+
+<p>もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。
+また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。</p>
+
+<p>いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。</p>
+</div>
+
+  <footer>
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/07/09/objc-travis-coveralls/">iOSのライブラリだってTravis CIとかCoverallsとか使うべき</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" alt="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき" title="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき"></a>
@@ -451,67 +575,6 @@
     
     
     <p><a rel="full-article" href="/2013/06/13/ios7-video/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/06/12/xcode5-preview/">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/12/xcode5-preview/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/12/xcode5-preview/" alt="はてなブックマーク - Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)" title="はてなブックマーク - Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-12T01:09:00+09:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/06/12/xcode5-preview/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><a href="https://twitter.com/tokorom">tokorom@WWDC2013参加中</a>です。<br/>
-WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。</p>
-
-<p>で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。</p>
-
-<p>概要レベルでありますが、なかでも <strong>TDD</strong> とか <strong>CI</strong> まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。<br/>
-あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/06/12/xcode5-preview/">続きを読む &rarr;</a></p>
     
   </footer>
 
