@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-09-23T20:40:39+09:00</updated>
+  <updated>2013-09-23T21:25:13+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -42,7 +42,7 @@
 
 <p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
 
-<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さもあくまで自分で30fpsの動画を目視確認した数値です。</p>
+<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。</p>
 
 <h2>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</h2>
 
