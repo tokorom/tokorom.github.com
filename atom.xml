@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-09-23T21:25:13+09:00</updated>
+  <updated>2013-11-04T16:17:36+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cでカリー化とか部分適用してみる]]></title>
+<link href="http://www.tokoro.me/2013/11/04/objective-c-haskell/"/>
+<updated>2013-11-04T16:09:00+09:00</updated>
+<id>http://www.tokoro.me/2013/11/04/objective-c-haskell</id>
+
+      <content type="html"><![CDATA[<h2>導入</h2>
+
+<p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
+しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
+
+<p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
+
+<p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
+
+<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
+
+<h2>ひとまずのゴール</h2>
+
+<p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) [1, 2, 3]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これです。<br/>
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) ([1, 2, 3])</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
+
+<p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (OP('+') (@3)) (@[@1, @2, @3])</span></code></pre></td></tr></table></div></figure>
+
+
+<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
+
+<p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/11/04/objective-c-haskell/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -908,56 +960,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント]]></title>
-<link href="http://www.tokoro.me/2012/08/17/safe-objc/"/>
-<updated>2012-08-17T07:36:00+09:00</updated>
-<id>http://www.tokoro.me/2012/08/17/safe-objc</id>
-
-      <content type="html"><![CDATA[<h2>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
-
-<p>例えば、こんなコードを書いていませんか？</p>
-
-<figure class='code'><figcaption><span>Library.hのもしかしたら改善できるかもしれない例</span></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;OtherLibrary1.h&quot;</span>
-</span><span class='line'><span class="cp">#import &quot;OtherLibrary2.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Library</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">OtherLibrary1</span><span class="o">*</span> <span class="n">otherLibrary1</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">OtherLibrary2</span><span class="o">*</span> <span class="n">otherLibrary2</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？<br/>
-そうしてしまうと、この <em>Library.h</em> をimportする全てのクラスに、<em>OtherLibrary1.h</em>と<em>OtherLibrary2.h</em>も芋づる式にimportすることを強要することになってしまいます。<br/>
-実際にこの <em>Library</em> を使うクラスでは、<em>otherLibrary1</em>も<em>otherLibrary2</em>も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。<br/>
-具体的にはこの状態だと、 <strong>OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る</strong> 状態になってしまっています。</p>
-
-<p>以下、これを解消するための変更例です。</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/08/17/safe-objc/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

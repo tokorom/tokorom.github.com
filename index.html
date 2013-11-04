@@ -106,6 +106,97 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/11/04/objective-c-haskell/">Objective-Cでカリー化とか部分適用してみる</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/11/04/objective-c-haskell/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/11/04/objective-c-haskell/" alt="はてなブックマーク - Objective-Cでカリー化とか部分適用してみる" title="はてなブックマーク - Objective-Cでカリー化とか部分適用してみる"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T16:09:00+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/11/04/objective-c-haskell/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>導入</h2>
+
+<p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
+しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
+
+<p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
+
+<p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
+
+<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
+
+<h2>ひとまずのゴール</h2>
+
+<p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) [1, 2, 3]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これです。<br/>
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) ([1, 2, 3])</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
+
+<p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (OP('+') (@3)) (@[@1, @2, @3])</span></code></pre></td></tr></table></div></figure>
+
+
+<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
+
+<p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/11/04/objective-c-haskell/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/09/23/ios7-design/">iOS 7はもっさりか？比較検証してみた</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/09/23/ios7-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/09/23/ios7-design/" alt="はてなブックマーク - iOS 7はもっさりか？比較検証してみた" title="はてなブックマーク - iOS 7はもっさりか？比較検証してみた"></a>
@@ -512,69 +603,6 @@
     
     
     <p><a rel="full-article" href="/2013/06/15/objc-reduce/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/06/13/ios7-video/">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/13/ios7-video/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/13/ios7-video/" alt="はてなブックマーク - iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)" title="はてなブックマーク - iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-13T01:49:00+09:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/06/13/ios7-video/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino@WWDC2013参加中</a> に寄稿いただきました！</h2>
-
-<p>Appleの公式サイトに <strong>iOS 7</strong> を紹介するビデオが公開されましたね。<br/>
-<a href="http://www.apple.com/ios/ios7/">http://www.apple.com/ios/ios7/</a></p>
-
-<p>特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。<br/>
-これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。</p>
-
-<p>デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/06/13/ios7-video/">続きを読む &rarr;</a></p>
     
   </footer>
 
