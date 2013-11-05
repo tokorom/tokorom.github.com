@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた - TOKOROM BLOG</title>
+  <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？ - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2013/01/17/tmux-toggle/">
+  <link rel="canonical" href="http://www.tokoro.me/2013/11/05/ios-dev-accounts/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -105,25 +105,25 @@
     <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/17/tmux-toggle/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/11/05/ios-dev-accounts/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/17/tmux-toggle/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/11/05/ios-dev-accounts/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/17/tmux-toggle/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/11/05/ios-dev-accounts/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/01/17/tmux-toggle/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/01/17/tmux-toggle/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/11/05/ios-dev-accounts/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/11/05/ios-dev-accounts/" target="_blank" >Tweet</a>
   
 </div>
 
@@ -132,9 +132,9 @@
   <header>
     <h1 class="entry-title">
 
-tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた<a class="entry-title-link" href="http://www.tokoro.me/2013/01/17/tmux-toggle/" style="display:none">-</a>
+会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？<a class="entry-title-link" href="http://www.tokoro.me/2013/11/05/ios-dev-accounts/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/17/tmux-toggle/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/17/tmux-toggle/" alt="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた" title="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/11/05/ios-dev-accounts/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/11/05/ios-dev-accounts/" alt="はてなブックマーク - 会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？" title="はてなブックマーク - 会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？"></a>
 </h1>
 
     
@@ -151,69 +151,142 @@ tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpane�
   
 
 
-<time datetime="2013-01-17T01:55:00+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/17/tmux-toggle/">Permalink</a>
+<time datetime="2013-11-05T19:21:00+09:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/11/05/ios-dev-accounts/">Permalink</a>
       </p>
     
   </header>
 
-<div class="entry-content"><p><strong> ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします </strong></p>
+<div class="entry-content"><p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br/>
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
 
-<h2>導入</h2>
+<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br/>
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。</p>
 
-<p><a href="http://d.hatena.ne.jp/naoya/20130108/1357630895">近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について</a> を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。</p>
+<h2>iOS Dev Center の構成</h2>
 
-<p>設定は以下のとおり。</p>
+<p>まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/iOSDevCenterStruct.png"></p>
+
+<p>大きくは、</p>
 
 <ul>
-<li>.tmux.conf</li>
+<li>iOS Developer Program</li>
+<li>Member Center</li>
+<li>iTunes Connect</li>
 </ul>
 
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t last-pane
-</span></code></pre></td></tr></table></div></figure>
+<p>に分かれます。</p>
 
+<h2>メンバーを追加する方法が２つある？？</h2>
 
-<p>これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。</p>
-
-<p>ただ、じつはこの真似をする前には C-t C-t には <code>last-window</code> を割り当てており、paneを使っていないケースではそれはそれで便利だった。</p>
-
-<p>例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。</p>
-
-<h2>改善</h2>
-
-<p>ということで、</p>
+<p>今回、私が混乱してしまった部分がここでした。<br/>
+iOSアプリ開発/公開のために必要なアカウントは、</p>
 
 <ul>
-<li>paneがあれば <code>last-pane</code></li>
-<li>paneがなければ <code>last-window</code></li>
-<li>ついでにwindowさえもなければ新しいwindowを作って移動</li>
+<li><code>Member Center</code>の<code>People</code></li>
+<li><code>iTunes Connect</code>の<code>Manage Users</code></li>
 </ul>
 
+
+<p>の2カ所で管理されています。<br/>
+また、この２つのアカウントはそれぞれ別々の用途になります。</p>
+
+<p>個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。</p>
 
 <!-- more -->
 
 
-<p>というのができれば最強なんじゃないかと思った。<br/>
-そんなんできるんかいな？と思ったけどごくごく普通にできた。</p>
+<h2>Member CenterのPeopleに追加すべきユーザは？</h2>
 
-<p>設定は以下のとおり。</p>
+<p>主に<code>iOS Developer Program</code>のページを使うプログラマです。</p>
 
 <ul>
-<li>.tmux.conf</li>
+<li>Certificate（証明書）の発行</li>
+<li>Device（開発機）の登録</li>
+<li>App ID の登録</li>
+<li>Provisioning Profile の発行</li>
 </ul>
 
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t run <span class="s2">&quot;tmux last-pane || tmux last-window || tmux new-window&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>が必要なユーザがこれに該当します。</p>
+
+<h2>iTunes ConnectのManage Usersに追加すべきユーザは？</h2>
+
+<p>リリース担当、経理担当、法務担当などです。</p>
+
+<ul>
+<li>アプリのリリースと管理</li>
+<li>売り上げやダウンロード数の確認</li>
+<li>銀行、税金情報などの管理</li>
+</ul>
 
 
-<p><code>run</code>はshを叩くことを意味し、<code>last-pane</code>と<code>last-window</code>と<code>new-window</code>を<code>||</code>で連結させている。<br/>
-これで、<code>last-pane</code>から順番に試していき、成功したところで終わるという挙動になる。</p>
+<p>が必要なユーザがこれに該当します。</p>
 
-<p>便利便利！</p>
+<h2>留意すべきこと</h2>
+
+<ul>
+<li>この2つに同じApple ID（メールアドレス）で登録することはできない</li>
+<li>Member Centerに登録されたユーザは<code>iOS Developer Program</code>に入れないため開発時に困ることがある</li>
+<li>iTunes Connectに登録されたユーザは<code>iTunes Connect</code>に入れないためリリース作業ができない</li>
+</ul>
+
+
+<p>この２つで別々のアカウントを用意しなくてはならないというところがポイントになります。
+また、通常、社員一人に対して１つのメールアドレスしかないため工夫が必要になります。</p>
+
+<h2>会社での運用はこうするのが良いのでは？</h2>
+
+<ul>
+<li>社員一人ごとに適切な権限のアカウントを個別に発行する</li>
+<li><code>iOS Developer Program</code>にアクセスが必要な社員には 社員名+dev@xxx.com をID＆メールアドレスとしてアカウントを発行する
+
+<ul>
+<li>例：yuta-tokoro<b>+dev</b>@xxx.com</li>
+</ul>
+</li>
+<li>&#8216;iTunes Connect&#8217;にアクセスが必要な社員には 社員名+itunes@xxx.com をID＆メールアドレスとしてアカウントを発行する
+
+<ul>
+<li>例：yuta-tokoro<b>+itunes</b>@xxx.com</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>会社でやらないほうが良さそうなこと</h2>
+
+<ul>
+<li>代表アカウント（Agent）を多数のメンバーで使い回してはいけない
+
+<ul>
+<li>このIDは <code>iOS Developer Program</code>にも<code>iTunes Connect</code>にも入れる最強IDだが&#8230;</li>
+<li>最強IDを不特定多数の人に展開すると社員の出入りがあったときにその管理が煩雑になる
+
+<ul>
+<li>放置しておくと悪意のある退職者が公開中のアプリを削除するなどが可能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>アカウントを発行する際にメールアドレスをそのまま使ってしまわないほうが良さそう（前述のとおり +dev +itunes をつける）</li>
+</ul>
+
+
+<h2>まとめ</h2>
+
+<p>ということで、会社でiOSアプリ開発/運用に必要なアカウントを作る場合には、</p>
+
+<ul>
+<li>１つのメールアドレスで２つのアカウントが作れるような運用をするのが良さそう</li>
+<li>代表アカウントをみんなで使い回さないように注意すべし</li>
+</ul>
+
+
+<p>といったところです。</p>
 </div>
 
 
@@ -236,12 +309,12 @@ tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpane�
   
 
 
-<time datetime="2013-01-17T01:55:00+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2013</time>
+<time datetime="2013-11-05T19:21:00+09:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cui/'>cui</a>, <a class='category' href='/blog/categories/mac/'>mac</a>
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/publish/'>publish</a>
   
 </span>
 
@@ -254,35 +327,33 @@ tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpane�
       <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/17/tmux-toggle/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/11/05/ios-dev-accounts/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/17/tmux-toggle/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/11/05/ios-dev-accounts/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/17/tmux-toggle/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/11/05/ios-dev-accounts/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/01/17/tmux-toggle/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/01/17/tmux-toggle/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/11/05/ios-dev-accounts/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/11/05/ios-dev-accounts/" target="_blank" >Tweet</a>
   
 </div>
 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/01/15/ctrlp-docset/" title="Previous Post: VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました">&laquo; VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</a>
+        <a class="basic-alignment left" href="/2013/11/04/objective-c-haskell/" title="Previous Post: Objective-Cでカリー化とか部分適用してみる">&laquo; Objective-Cでカリー化とか部分適用してみる</a>
       
-      
-        <a class="basic-alignment right" href="/2013/03/07/block-injection/" title="Next Post: BlockInjectionで元のソースコードを汚さないで振る舞い追加">BlockInjectionで元のソースコードを汚さないで振る舞い追加 &raquo;</a>
       
     </p>
   </footer>
@@ -408,8 +479,8 @@ tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpane�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.tokoro.me/2013/01/17/tmux-toggle/';
-        var disqus_url = 'http://www.tokoro.me/2013/01/17/tmux-toggle/';
+        var disqus_identifier = 'http://www.tokoro.me/2013/11/05/ios-dev-accounts/';
+        var disqus_url = 'http://www.tokoro.me/2013/11/05/ios-dev-accounts/';
         var disqus_script = 'embed.js';
       
     (function () {

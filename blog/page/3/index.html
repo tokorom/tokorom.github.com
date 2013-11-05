@@ -106,6 +106,82 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/04/01/blockinjection2/">BlockInjectionをバージョンアップしました</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/04/01/blockinjection2/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/04/01/blockinjection2/" alt="はてなブックマーク - BlockInjectionをバージョンアップしました" title="はてなブックマーク - BlockInjectionをバージョンアップしました"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-01T23:12:00+09:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/04/01/blockinjection2/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>BlockInjectionとはなんぞや</h2>
+
+<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br/>
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
+
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
+
+<h2>バージョンアップ内容</h2>
+
+<p><a href="/2013/03/07/block-injection/">前記事</a> からのバージョンアップ内容は以下です。</p>
+
+<ul>
+<li>リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます）</li>
+<li>クラスメソッドにも対応しました</li>
+<li>複数のクラスやメソッドを一度に追加できるようになりました</li>
+<li>正規表現で指定できるようになりました(※1)</li>
+<li>注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2)</li>
+<li>オマケで単純なメソッド実装置き換え機能も追加しました</li>
+</ul>
+
+
+<h2>UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/04/01/blockinjection2/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/03/07/block-injection/">BlockInjectionで元のソースコードを汚さないで振る舞い追加</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/03/07/block-injection/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/03/07/block-injection/" alt="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加" title="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加"></a>
@@ -437,88 +513,6 @@
     
     
     <p><a rel="full-article" href="/2013/01/14/easy-objc-complement/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/01/09/objc-macro/">Objective-Cで最近お気に入りのマクロ４つ</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/09/objc-macro/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/09/objc-macro/" alt="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ" title="はてなブックマーク - Objective-Cで最近お気に入りのマクロ４つ"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-09T00:17:00+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/09/objc-macro/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>マクロ</h2>
-
-<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
-
-<p><strong> ※2013/1/9 追記 </strong></p>
-
-<p>上記のとおり独自のマクロを使うこと自体に賛否両論あります。<br/>
-例えば独自のマクロを定義して利用することで、</p>
-
-<ul>
-<li>他の人がコードを見たときに分かりづらくなる</li>
-<li>思わぬ不具合が出るケースがある</li>
-<li>名前の衝突リスクがある（マクロは名前空間が使えない）</li>
-</ul>
-
-
-<p>などのデメリットがあります。
-特にチームや会社でのご利用の際にはよくよくご留意をお願いします。</p>
-
-<h2>1. [NSString stringWithFormat:] を簡単に</h2>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
-ということで、</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/01/09/objc-macro/">続きを読む &rarr;</a></p>
     
   </footer>
 

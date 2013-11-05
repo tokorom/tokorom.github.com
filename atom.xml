@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-11-04T16:28:25+09:00</updated>
+  <updated>2013-11-05T19:40:06+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？]]></title>
+<link href="http://www.tokoro.me/2013/11/05/ios-dev-accounts/"/>
+<updated>2013-11-05T19:21:00+09:00</updated>
+<id>http://www.tokoro.me/2013/11/05/ios-dev-accounts</id>
+
+      <content type="html"><![CDATA[<p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br/>
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
+
+<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br/>
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。</p>
+
+<h2>iOS Dev Center の構成</h2>
+
+<p>まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/iOSDevCenterStruct.png"></p>
+
+<p>大きくは、</p>
+
+<ul>
+<li>iOS Developer Program</li>
+<li>Member Center</li>
+<li>iTunes Connect</li>
+</ul>
+
+
+<p>に分かれます。</p>
+
+<h2>メンバーを追加する方法が２つある？？</h2>
+
+<p>今回、私が混乱してしまった部分がここでした。<br/>
+iOSアプリ開発/公開のために必要なアカウントは、</p>
+
+<ul>
+<li><code>Member Center</code>の<code>People</code></li>
+<li><code>iTunes Connect</code>の<code>Manage Users</code></li>
+</ul>
+
+
+<p>の2カ所で管理されています。<br/>
+また、この２つのアカウントはそれぞれ別々の用途になります。</p>
+
+<p>個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/11/05/ios-dev-accounts/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -881,33 +934,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2012/09/12/objc-private-test/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[GHUnitのテストカバレッジをJenkinsで表示する]]></title>
-<link href="http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/"/>
-<updated>2012-09-02T22:54:00+09:00</updated>
-<id>http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage</id>
-
-      <content type="html"><![CDATA[<h2>概要</h2>
-
-<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
-
-<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ghunit-coverage.png"></p>
-
-<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
-
-<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br/>
-うまく動かない場合の設定の比較などにご参照ください。</p>
-
-<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>
