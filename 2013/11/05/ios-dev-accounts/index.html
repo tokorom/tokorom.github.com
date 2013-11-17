@@ -157,17 +157,20 @@
     
   </header>
 
-<div class="entry-content"><figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>## 2013年11月7日追記 ##
-</span><span class='line'>
-</span><span class='line'>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、どうも「Member Centerのほうにアカウント追加 -> 同じアカウントをiTunes Connectに追加」という順番であれば可能ということがわかってきました。逆の順番だとそのアカウントがDeveloper扱いにならずにダメでした。
-</span><span class='line'>
-</span><span class='line'>追加情報などあれば是非おねがいします！</span></code></pre></td></tr></table></div></figure>
+<div class="entry-content"><h2>2013年11月18日 追記</h2>
 
+<p>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、</p>
+
+<ul>
+<li><code>Member Centerのほうにアカウント追加</code> -> <code>iTunes Connectに同じアカウント追加</code>という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能</li>
+<li><code>iTunes Connectにアカウント追加</code> -> <code>Member Centerに同じ追加</code>という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能</li>
+</ul>
+
+
+<p>失礼しました。<br/>
+追加情報などあれば是非おねがいします！</p>
+
+<h2>概要</h2>
 
 <p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br/>
 というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
@@ -241,29 +244,29 @@ iOSアプリ開発/公開のために必要なアカウントは、</p>
 <h2>留意すべきこと</h2>
 
 <ul>
-<li>この2つに同じApple ID（メールアドレス）で登録することはできない</li>
-<li>Member Centerに登録されたユーザは<code>iOS Developer Program</code>に入れないため開発時に困ることがある</li>
-<li>iTunes Connectに登録されたユーザは<code>iTunes Connect</code>に入れないためリリース作業ができない</li>
+<li><s>この2つに同じApple ID（メールアドレス）で登録することはできない</s></li>
+<li>Member Centerだけに登録されたユーザでは<code>iOS Developer Program</code>に入れないため開発時に困ることがある</li>
+<li>iTunes Connectだけに登録されたユーザでは<code>iTunes Connect</code>に入れないためリリース作業ができない</li>
 </ul>
 
 
-<p>この２つで別々のアカウントを用意しなくてはならないというところがポイントになります。
-また、通常、社員一人に対して１つのメールアドレスしかないため工夫が必要になります。</p>
+<p><s>この２つで別々のアカウントを用意しなくてはならないというところがポイントになります。</s>
+<s>また、通常、社員一人に対して１つのメールアドレスしかないため工夫が必要になります。</s></p>
 
 <h2>会社での運用はこうするのが良いのでは？</h2>
 
 <ul>
 <li>社員一人ごとに適切な権限のアカウントを個別に発行する</li>
-<li><code>iOS Developer Program</code>にアクセスが必要な社員には 社員名+dev@xxx.com をID＆メールアドレスとしてアカウントを発行する
+<li><code>iOS Developer Program</code>にアクセスが必要な社員には<s> 社員名+dev@xxx.com をID＆メールアドレスとしてアカウントを発行する</s> そのアカウントだけを発行する
 
 <ul>
-<li>例：yuta-tokoro<b>+dev</b>@xxx.com</li>
+<li><s>例：yuta-tokoro<b>+dev</b>@xxx.com</s></li>
 </ul>
 </li>
-<li>&#8216;iTunes Connect&#8217;にアクセスが必要な社員には 社員名+itunes@xxx.com をID＆メールアドレスとしてアカウントを発行する
+<li>&#8216;iTunes Connect&#8217;にアクセスが必要な社員には<s> 社員名+itunes@xxx.com をID＆メールアドレスとしてアカウントを発行する</s> そのアカウントだけを発行する
 
 <ul>
-<li>例：yuta-tokoro<b>+itunes</b>@xxx.com</li>
+<li><s>例：yuta-tokoro<b>+itunes</b>@xxx.com</s></li>
 </ul>
 </li>
 </ul>
@@ -284,7 +287,7 @@ iOSアプリ開発/公開のために必要なアカウントは、</p>
 </li>
 </ul>
 </li>
-<li>アカウントを発行する際にメールアドレスをそのまま使ってしまわないほうが良さそう（前述のとおり +dev +itunes をつける）</li>
+<li><s>アカウントを発行する際にメールアドレスをそのまま使ってしまわないほうが良さそう（前述のとおり +dev +itunes をつける）</s></li>
 </ul>
 
 
@@ -293,7 +296,7 @@ iOSアプリ開発/公開のために必要なアカウントは、</p>
 <p>ということで、会社でiOSアプリ開発/運用に必要なアカウントを作る場合には、</p>
 
 <ul>
-<li>１つのメールアドレスで２つのアカウントが作れるような運用をするのが良さそう</li>
+<li><s>１つのメールアドレスで２つのアカウントが作れるような運用をするのが良さそう</s></li>
 <li>代表アカウントをみんなで使い回さないように注意すべし</li>
 </ul>
 

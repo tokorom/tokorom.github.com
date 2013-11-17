@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2013-11-07T15:00:31+09:00</updated>
+  <updated>2013-11-18T02:07:10+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -23,17 +23,20 @@
 <updated>2013-11-05T19:21:00+09:00</updated>
 <id>http://www.tokoro.me/2013/11/05/ios-dev-accounts</id>
 
-      <content type="html"><![CDATA[<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>## 2013年11月7日追記 ##
-</span><span class='line'>
-</span><span class='line'>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、どうも「Member Centerのほうにアカウント追加 -> 同じアカウントをiTunes Connectに追加」という順番であれば可能ということがわかってきました。逆の順番だとそのアカウントがDeveloper扱いにならずにダメでした。
-</span><span class='line'>
-</span><span class='line'>追加情報などあれば是非おねがいします！</span></code></pre></td></tr></table></div></figure>
+      <content type="html"><![CDATA[<h2>2013年11月18日 追記</h2>
 
+<p>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、</p>
+
+<ul>
+<li><code>Member Centerのほうにアカウント追加</code> -> <code>iTunes Connectに同じアカウント追加</code>という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能</li>
+<li><code>iTunes Connectにアカウント追加</code> -> <code>Member Centerに同じ追加</code>という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能</li>
+</ul>
+
+
+<p>失礼しました。<br/>
+追加情報などあれば是非おねがいします！</p>
+
+<h2>概要</h2>
 
 <p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br/>
 というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
