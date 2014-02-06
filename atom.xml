@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-01-23T11:49:02+09:00</updated>
+  <updated>2014-02-06T15:57:17+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！]]></title>
+<link href="http://www.tokoro.me/2014/02/06/pbxproj-merge/"/>
+<updated>2014-02-06T14:02:00+09:00</updated>
+<id>http://www.tokoro.me/2014/02/06/pbxproj-merge</id>
+
+      <content type="html"><![CDATA[<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+
+<p>例えば、</p>
+
+<ul>
+<li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
+<li>Bさんが <code>BBLabel.m</code> をプロジェクトに追加して</li>
+</ul>
+
+
+<p>とただそれだけなのにマージのときにコンフリクトする<code>pbxproj</code>さん。。。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/pbxproj_status.png"></p>
+
+<p>ただそれぞれファイルを追加だけのことでコンフリクトするなんて&#8230;<br/>
+どうにかならんもんかいとTwitterでつぶやいたところ、 <a href="https://twitter.com/azu_re">@azu_re</a> さんから有り難い教えが！</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/02/06/pbxproj-merge/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -872,52 +903,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>結果として満足いく補完環境が整いましたので紹介させていただきます。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Mac + Terminal + tmux + vim でクリップボードを快適に使う]]></title>
-<link href="http://www.tokoro.me/2012/12/31/mac-terminal-japanese/"/>
-<updated>2012-12-31T04:47:00+09:00</updated>
-<id>http://www.tokoro.me/2012/12/31/mac-terminal-japanese</id>
-
-      <content type="html"><![CDATA[<p>Macの初期設定のたびに混乱してるので再整理しておきます。</p>
-
-<ul>
-<li>Mac</li>
-<li>Terminal</li>
-<li>tmux</li>
-<li>vim</li>
-</ul>
-
-
-<p>で開発をする人向けです。</p>
-
-<h2>まずはMacVim KaoriYa</h2>
-
-<p>MacでVimを使うならひとまず <a href="http://code.google.com/p/macvim-kaoriya/">MacVim KaoriYa</a> は外せません。<br/>
-日本語を扱う上で便利な設定がデフォルトで入ってます。</p>
-
-<p>当然、Terminalでも <strong>Macvim KaoriYa</strong> を使いたいので、 <strong>.zshenv</strong> などに以下のaliasを設定してCUIで <strong>vi</strong> や <strong>vim</strong> を叩いたときにも <strong>MacVim KaoriYa</strong> が使われるようにします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">if</span> <span class="o">[</span> -f /Applications/MacVim.app/Contents/MacOS/Vim <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">  </span><span class="nb">alias </span><span class="nv">vi</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
-</span><span class='line'>  <span class="nb">alias </span><span class="nv">vim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39;</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>tmux でも pbcopy/pbpaste が使えるようにする</h2>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2012/12/31/mac-terminal-japanese/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

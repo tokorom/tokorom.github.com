@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>UIKitで使われている画像パーツをまとめて取得する - TOKOROM BLOG</title>
+  <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！ - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2013/05/23/uikit-images/">
+  <link rel="canonical" href="http://www.tokoro.me/2014/02/06/pbxproj-merge/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -105,25 +105,25 @@
     <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/05/23/uikit-images/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2014/02/06/pbxproj-merge/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/05/23/uikit-images/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2014/02/06/pbxproj-merge/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2013/05/23/uikit-images/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2014/02/06/pbxproj-merge/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/05/23/uikit-images/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/05/23/uikit-images/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2014/02/06/pbxproj-merge/" data-via="tokorom" data-counturl="http://www.tokoro.me/2014/02/06/pbxproj-merge/" target="_blank" >Tweet</a>
   
 </div>
 
@@ -132,9 +132,9 @@
   <header>
     <h1 class="entry-title">
 
-UIKitで使われている画像パーツをまとめて取得する<a class="entry-title-link" href="http://www.tokoro.me/2013/05/23/uikit-images/" style="display:none">-</a>
+Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！<a class="entry-title-link" href="http://www.tokoro.me/2014/02/06/pbxproj-merge/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/23/uikit-images/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/23/uikit-images/" alt="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する" title="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/02/06/pbxproj-merge/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/02/06/pbxproj-merge/" alt="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！" title="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！"></a>
 </h1>
 
     
@@ -151,121 +151,153 @@ UIKitで使われている画像パーツをまとめて取得する<a class="en
   
 
 
-<time datetime="2013-05-23T10:11:00+09:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/05/23/uikit-images/">Permalink</a>
+<time datetime="2014-02-06T14:02:00+09:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/02/06/pbxproj-merge/">Permalink</a>
       </p>
     
   </header>
 
-<div class="entry-content"><h2>UIKitで使われている画像はどこにある？</h2>
+<div class="entry-content"><h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
 
-<p>例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。</p>
-
-<p>プログラマというか特にはデザイナさんにとって有用だと思います。</p>
-
-<p>その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。<br/>
-具体的には（これはiOS6.1の場合）、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>が画像パーツを含むファイルになります。</p>
-
-<p>他にも、同じディレクトリに</p>
+<p>例えば、</p>
 
 <ul>
-<li>Shared.artwork</li>
-<li>Shared@2x~ipad.artwork</li>
-<li>Shared@2x~iphone.artwork</li>
-<li>Shared~ipad.artwork</li>
-<li>Shared~iphone.artwork</li>
+<li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
+<li>Bさんが <code>BBLabel.m</code> をプロジェクトに追加して</li>
 </ul>
 
 
-<p>がありますので取りたいものに応じてお好みで。</p>
+<p>とただそれだけなのにマージのときにコンフリクトする<code>pbxproj</code>さん。。。</p>
 
-<p>ひとまず、</p>
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/pbxproj_status.png"></p>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>などでこのファイルをデスクトップにでもコピーしておきましょう。</p>
-
-<h2>artworkから画像ファイルを抽出</h2>
-
-<p>で、artworkから肝心の画像ファイルを抽出するのに、 <a href="git://github.com/davepeck/iOS-artwork.git">iOS-artwork</a> というやつを使わせてもらいます。</p>
-
-<p>まずは、これを</p>
+<p>ただそれぞれファイルを追加だけのことでコンフリクトするなんて&#8230;<br/>
+どうにかならんもんかいとTwitterでつぶやいたところ、 <a href="https://twitter.com/azu_re">@azu_re</a> さんから有り難い教えが！</p>
 
 <!-- more -->
 
 
 
 
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tokorom">@tokorom</a> gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&#10;<a href="https://t.co/VxXm0fcJMb">https://t.co/VxXm0fcJMb</a></p>&mdash; azu (@azu_re) <a href="https://twitter.com/azu_re/statuses/430521149861031936">February 4, 2014</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<h2>mergepbxを試してみる</h2>
+
+<p>まだα版ということだがせっかくなので試してみた。基本的には</p>
+
+<p><a href="https://github.com/simonwagner/mergepbx">https://github.com/simonwagner/mergepbx</a></p>
+
+<p>のREADMEどおりにインストール＆設定するだけ。</p>
+
+<p>cloneして</p>
+
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git://github.com/davepeck/iOS-artwork.git
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ ./build.py mergepbx MANIFEST</span></code></pre></td></tr></table></div></figure>
 
 
-<p>などでダウンロードします。</p>
+<p>すると、同ディレクトリに <code>mergepbx</code> というファイルができる。それをPATHの通った場所に設置する。</p>
 
-<p>ただ、これを使うには<code>Python</code>と<code>PIL</code>というライブラリが必要です。<br/>
-たぶん<code>Python</code>は元から入っていると思うので、<code>PIL</code>のほうをbrewなどでインストールします。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>brew install pil
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>インストールし終わったら</p>
+<p><code>~/.gitconfig</code> に以下の設定を追加する</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>mkdir ~/Desktop/UIKitParts
-</span><span class='line'>./iOS-artwork.py <span class="nb">export</span> -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>[merge "mergepbx"]
+</span><span class='line'>  name = XCode project files merger
+</span><span class='line'>  driver = LANG=ja_JP.UTF-8 mergepbx %O %A %B</span></code></pre></td></tr></table></div></figure>
 
 
-<p>と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、</p>
+<p>なお、<code>LANG=</code> ってところはREADMEには書かれていないのですが、ぼくの手元だと</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
-</span><span class='line'>  File <span class="s2">&quot;./iOS-artwork.py&quot;</span>, line 32, in &lt;module&gt;
-</span><span class='line'>    import PIL
-</span><span class='line'>ImportError: No module named PIL
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>merging failed: 'ascii' codec can't decode byte 0xe2 in position 356821: ordinal not in range(128)
+</span><span class='line'>Auto-merging XXX.xcodeproj/project.pbxproj
+</span><span class='line'>CONFLICT (content): Merge conflict in XXX.xcodeproj/project.pbxproj
+</span><span class='line'>Automatic merge failed; fix conflicts and then commit the result.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、</p>
+<p>と日本語まわりでfailedになったので加えました。</p>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span>/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。</p>
-
-<p>気を取り直して、</p>
+<p>次に、<code>.gitattributes</code> で</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>./iOS-artwork.py <span class="nb">export</span> -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>*.pbxproj merge=mergepbx</span></code></pre></td></tr></table></div></figure>
 
 
-<p>を実行すれば、デスクトップの<code>UIKitParts</code>というディレクトリにUIKitの画像一式がもりもりと出力されていくはずです！</p>
+<p>と <code>pbxproj</code>のときはマージに <code>mergepbx</code> を使うように設定を追加という手順です。</p>
 
-<p>ぼくの手元では、</p>
+<h2>mergepbxの結果</h2>
 
-<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/UIKitParts.png"></p>
+<p>ストーリーとしては、</p>
 
-<p>こんなかんじで取得できました。</p>
+<ul>
+<li><code>test1</code>ブランチで 適当なファイルを１つ追加してコミット</li>
+<li><code>test2</code>ブランチで 別の適当なファイルを１つ追加してコミット</li>
+<li><code>test1</code>ブランチで<code>git merge test2</code></li>
+</ul>
+
+
+<p>として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Automatic merge failed; fix conflicts and then commit the result.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と残念ながらうまく自動マージされませんでした。。。</p>
+
+<p>どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。</p>
+
+<p>ただ、READMEの次の項に、 <code>*.pbxproj merge=union</code> が使えるんだったらそれもいいかもよという記述が&#8230;</p>
+
+<h2>merge=union を試してみる</h2>
+
+<p><code>uinon</code>を指定すると、両方で変更が発生した場合、その順番を気にせず両方の変更内容を適用するとのこと。</p>
+
+<p>実際に<code>.gitattributes</code>に</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>*.pbxproj merge=union</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を追加して<code>git merge test2</code>を実行したところ、無事に自動マージされて<code>test1</code>ブランチと<code>test2</code>ブランチでの追加が両方とも反映されました！</p>
+
+<h2>unionでどこまでできる？</h2>
+
+<p>ではunionが実用レベルに耐えられるか軽く検証してみました。</p>
+
+<h3>両方でプロジェクトに対するファイル追加を行った場合</h3>
+
+<p>実際のプロジェクトではこのパターンが大半になると思います。
+このパターンは前述のとおり問題なし。</p>
+
+<h3>片方でプロジェクトからのファイル削除、ファイル名変更を行った場合</h3>
+
+<p>問題なし。</p>
+
+<h3>両方でプロジェクトからのファイル削除を行った場合</h3>
+
+<p>プロジェクトにファイルが残ってしまうケースがある。<br/>
+ただ、プロジェクトにファイルが残っても実ファイルが消えていればビルドエラーで検知可能。</p>
+
+<h3>両方でファイル名変更を行った場合</h3>
+
+<p>それぞれでの変更後のファイル名のファイルがプロジェクトに追加されるというおかしな状態になる。
+実ファイルのほうでコンフリクトが起きるような状態だし検知も可能で発生率も低いので無視しても良さそう。</p>
+
+<h2>まとめ</h2>
+
+<p>ということで、今のところ <code>merge=union</code> を使うのが良さそう。</p>
+
+<p>100%うまくいくわけではないけど、一番多く発生する両方で追加するパターンは自動マージされるようになるため、対応コストは確実に低くなると予想しています。</p>
+
+<p>（まだ少し検証した程度なのでしばらく使ってみます）</p>
 </div>
 
 
@@ -288,12 +320,12 @@ UIKitで使われている画像パーツをまとめて取得する<a class="en
   
 
 
-<time datetime="2013-05-23T10:11:00+09:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time>
+<time datetime="2014-02-06T14:02:00+09:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/objc/'>objc</a>
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/xcode/'>xcode</a>
   
 </span>
 
@@ -306,35 +338,33 @@ UIKitで使われている画像パーツをまとめて取得する<a class="en
       <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/05/23/uikit-images/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2014/02/06/pbxproj-merge/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/05/23/uikit-images/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2014/02/06/pbxproj-merge/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2013/05/23/uikit-images/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2014/02/06/pbxproj-merge/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/05/23/uikit-images/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/05/23/uikit-images/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2014/02/06/pbxproj-merge/" data-via="tokorom" data-counturl="http://www.tokoro.me/2014/02/06/pbxproj-merge/" target="_blank" >Tweet</a>
   
 </div>
 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/04/01/blockinjection2/" title="Previous Post: BlockInjectionをバージョンアップしました">&laquo; BlockInjectionをバージョンアップしました</a>
+        <a class="basic-alignment left" href="/2014/01/23/super-viewcontroller-for-a-library/" title="Previous Post: 提供するXXXViewControllerの親クラスを差し替え可能にしたい!">&laquo; 提供するXXXViewControllerの親クラスを差し替え可能にしたい!</a>
       
-      
-        <a class="basic-alignment right" href="/2013/05/27/ssgentlealertview/" title="Next Post: UIAlertViewよりもおとなしいメッセージダイアログを利用する">UIAlertViewよりもおとなしいメッセージダイアログを利用する &raquo;</a>
       
     </p>
   </footer>
@@ -460,8 +490,8 @@ UIKitで使われている画像パーツをまとめて取得する<a class="en
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.tokoro.me/2013/05/23/uikit-images/';
-        var disqus_url = 'http://www.tokoro.me/2013/05/23/uikit-images/';
+        var disqus_identifier = 'http://www.tokoro.me/2014/02/06/pbxproj-merge/';
+        var disqus_url = 'http://www.tokoro.me/2014/02/06/pbxproj-merge/';
         var disqus_script = 'embed.js';
       
     (function () {

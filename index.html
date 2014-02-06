@@ -106,6 +106,76 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2014/02/06/pbxproj-merge/">Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/02/06/pbxproj-merge/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/02/06/pbxproj-merge/" alt="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！" title="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-06T14:02:00+09:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/02/06/pbxproj-merge/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+
+<p>例えば、</p>
+
+<ul>
+<li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
+<li>Bさんが <code>BBLabel.m</code> をプロジェクトに追加して</li>
+</ul>
+
+
+<p>とただそれだけなのにマージのときにコンフリクトする<code>pbxproj</code>さん。。。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/pbxproj_status.png"></p>
+
+<p>ただそれぞれファイルを追加だけのことでコンフリクトするなんて&#8230;<br/>
+どうにかならんもんかいとTwitterでつぶやいたところ、 <a href="https://twitter.com/azu_re">@azu_re</a> さんから有り難い教えが！</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/02/06/pbxproj-merge/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2014/01/23/super-viewcontroller-for-a-library/">提供するXXXViewControllerの親クラスを差し替え可能にしたい!</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library/" alt="はてなブックマーク - 提供するXXXViewControllerの親クラスを差し替え可能にしたい!" title="はてなブックマーク - 提供するXXXViewControllerの親クラスを差し替え可能にしたい!"></a>
@@ -423,69 +493,6 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
     
     
     <p><a rel="full-article" href="/2013/09/23/ios7-design/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/07/09/objc-travis-coveralls/">iOSのライブラリだってTravis CIとかCoverallsとか使うべき</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" alt="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき" title="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-09T07:00:00+09:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/07/09/objc-travis-coveralls/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png"></p>
-
-<p>今日はGithubに公開したiOS用のライブラリを <strong>Travis CI</strong> と <strong>Coveralls</strong> に対応した手順を紹介したいと思います。</p>
-
-<p>なお、実際にこれらを適用して運用しているリポジトリのサンプルは、</p>
-
-<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a></p>
-
-<p>になります。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/07/09/objc-travis-coveralls/">続きを読む &rarr;</a></p>
     
   </footer>
 
