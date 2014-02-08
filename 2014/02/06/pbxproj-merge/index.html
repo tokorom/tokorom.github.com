@@ -157,7 +157,11 @@ Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしま�
     
   </header>
 
-<div class="entry-content"><h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+<div class="entry-content"><p><strong>2013/02/09 追記</strong><br/>
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！<br/>
+今現在は <code>merge=mergepbx</code> がいい感じになってきているのでそっちがオススメです。</p>
+
+<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
 
 <p>例えば、</p>
 
@@ -196,10 +200,13 @@ Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしま�
 <p>cloneして</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ ./build.py mergepbx MANIFEST</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ ./build.py</span></code></pre></td></tr></table></div></figure>
 
 
 <p>すると、同ディレクトリに <code>mergepbx</code> というファイルができる。それをPATHの通った場所に設置する。</p>
+
+<p><strong>2013/02/09 追記</strong><br/>
+（もしくは自分でビルドしなくても <a href="https://github.com/simonwagner/mergepbx/releases">https://github.com/simonwagner/mergepbx/releases</a> から最新版をダウンロードすることも可能）</p>
 
 <p><code>~/.gitconfig</code> に以下の設定を追加する</p>
 
@@ -208,22 +215,15 @@ Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしま�
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='plain'><span class='line'>[merge "mergepbx"]
 </span><span class='line'>  name = XCode project files merger
-</span><span class='line'>  driver = LANG=ja_JP.UTF-8 mergepbx %O %A %B</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  driver = mergepbx %O %A %B</span></code></pre></td></tr></table></div></figure>
 
 
-<p>なお、<code>LANG=</code> ってところはREADMEには書かれていないのですが、ぼくの手元だと</p>
+<p><s>なお、<code>LANG=</code> ってところはREADMEには書かれていないのですが、ぼくの手元だと</s>
+<s>&#8230;</s>
+<s>と日本語まわりでfailedになったので加えました。</s></p>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>merging failed: 'ascii' codec can't decode byte 0xe2 in position 356821: ordinal not in range(128)
-</span><span class='line'>Auto-merging XXX.xcodeproj/project.pbxproj
-</span><span class='line'>CONFLICT (content): Merge conflict in XXX.xcodeproj/project.pbxproj
-</span><span class='line'>Automatic merge failed; fix conflicts and then commit the result.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と日本語まわりでfailedになったので加えました。</p>
+<p><strong>2012/02/09 追記</strong><br/>
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。</p>
 
 <p>次に、<code>.gitattributes</code> で</p>
 
@@ -244,58 +244,25 @@ Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしま�
 </ul>
 
 
-<p>として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、</p>
+<p><s>として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、</s>
+<s>&#8230;</s>
+<s>と残念ながらうまく自動マージされませんでした。。。</s></p>
 
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>Automatic merge failed; fix conflicts and then commit the result.</span></code></pre></td></tr></table></div></figure>
+<p><s>どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。</s></p>
 
+<p><s>ただ、READMEの次の項に、 <code>*.pbxproj merge=union</code> が使えるんだったらそれもいいかもよという記述が&#8230;</s></p>
 
-<p>と残念ながらうまく自動マージされませんでした。。。</p>
-
-<p>どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。</p>
-
-<p>ただ、READMEの次の項に、 <code>*.pbxproj merge=union</code> が使えるんだったらそれもいいかもよという記述が&#8230;</p>
-
-<h2>merge=union を試してみる</h2>
-
-<p><code>uinon</code>を指定すると、両方で変更が発生した場合、その順番を気にせず両方の変更内容を適用するとのこと。</p>
-
-<p>実際に<code>.gitattributes</code>に</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>*.pbxproj merge=union</span></code></pre></td></tr></table></div></figure>
-
-
-<p>を追加して<code>git merge test2</code>を実行したところ、無事に自動マージされて<code>test1</code>ブランチと<code>test2</code>ブランチでの追加が両方とも反映されました！</p>
-
-<h2>unionでどこまでできる？</h2>
-
-<p>ではunionが実用レベルに耐えられるか軽く検証してみました。</p>
-
-<h3>両方でプロジェクトに対するファイル追加を行った場合</h3>
-
-<p>実際のプロジェクトではこのパターンが大半になると思います。
-このパターンは前述のとおり問題なし。</p>
-
-<h3>片方でプロジェクトからのファイル削除、ファイル名変更を行った場合</h3>
-
-<p>問題なし。</p>
-
-<h3>両方でプロジェクトからのファイル削除を行った場合</h3>
-
-<p>プロジェクトにファイルが残ってしまうケースがある。<br/>
-ただ、プロジェクトにファイルが残っても実ファイルが消えていればビルドエラーで検知可能。</p>
-
-<h3>両方でファイル名変更を行った場合</h3>
-
-<p>それぞれでの変更後のファイル名のファイルがプロジェクトに追加されるというおかしな状態になる。
-実ファイルのほうでコンフリクトが起きるような状態だし検知も可能で発生率も低いので無視しても良さそう。</p>
+<p><strong>2012/02/09 追記</strong><br/>
+mergepbxの最新版ではこのケースがうまく自動マージされるようになりました。cool :)</p>
 
 <h2>まとめ</h2>
 
-<p>ということで、今のところ <code>merge=union</code> を使うのが良さそう。</p>
+<p><s>ということで、今のところ <code>merge=union</code> を使うのが良さそう。</s></p>
 
-<p>100%うまくいくわけではないけど、一番多く発生する両方で追加するパターンは自動マージされるようになるため、対応コストは確実に低くなると予想しています。</p>
+<p><s>100%うまくいくわけではないけど、一番多く発生する両方で追加するパターンは自動マージされるようになるため、対応コストは確実に低くなると予想しています。</s></p>
+
+<p><strong>2012/02/09 追記</strong><br/>
+mergepbxの最新版（0.5以降）を使いましょう！</p>
 
 <p>（まだ少し検証した程度なのでしばらく使ってみます）</p>
 </div>

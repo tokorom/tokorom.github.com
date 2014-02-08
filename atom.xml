@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-02-06T15:57:17+09:00</updated>
+  <updated>2014-02-09T02:11:28+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -23,7 +23,11 @@
 <updated>2014-02-06T14:02:00+09:00</updated>
 <id>http://www.tokoro.me/2014/02/06/pbxproj-merge</id>
 
-      <content type="html"><![CDATA[<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+      <content type="html"><![CDATA[<p><strong>2013/02/09 追記</strong><br/>
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！<br/>
+今現在は <code>merge=mergepbx</code> がいい感じになってきているのでそっちがオススメです。</p>
+
+<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
 
 <p>例えば、</p>
 
