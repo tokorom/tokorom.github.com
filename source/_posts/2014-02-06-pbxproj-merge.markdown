@@ -7,6 +7,11 @@ external-url:
 categories: [xcode,ios]
 ---
 
+**2013/02/09 追記**  
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！  
+今現在は `merge=mergepbx` がいい感じになってきているのでそっちがオススメです。
+
+
 ## 複数人でプログラミングしているとpbxprojがやたらとコンフリクトする
 
 例えば、
@@ -37,29 +42,28 @@ categories: [xcode,ios]
 cloneして
 
 ```
-$ ./build.py mergepbx MANIFEST
+$ ./build.py
 ```
 
 すると、同ディレクトリに `mergepbx` というファイルができる。それをPATHの通った場所に設置する。
+
+**2013/02/09 追記**  
+（もしくは自分でビルドしなくても [https://github.com/simonwagner/mergepbx/releases](https://github.com/simonwagner/mergepbx/releases) から最新版をダウンロードすることも可能）
 
 `~/.gitconfig` に以下の設定を追加する
 
 ```
 [merge "mergepbx"]
   name = XCode project files merger
-  driver = LANG=ja_JP.UTF-8 mergepbx %O %A %B
+  driver = mergepbx %O %A %B
 ```
 
-なお、`LANG=` ってところはREADMEには書かれていないのですが、ぼくの手元だと
+<s>なお、`LANG=` ってところはREADMEには書かれていないのですが、ぼくの手元だと</s>
+<s>...</s>
+<s>と日本語まわりでfailedになったので加えました。</s>
 
-```
-merging failed: 'ascii' codec can't decode byte 0xe2 in position 356821: ordinal not in range(128)
-Auto-merging XXX.xcodeproj/project.pbxproj
-CONFLICT (content): Merge conflict in XXX.xcodeproj/project.pbxproj
-Automatic merge failed; fix conflicts and then commit the result.
-```
-
-と日本語まわりでfailedになったので加えました。
+**2012/02/09 追記**  
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
 
 次に、`.gitattributes` で
 
@@ -77,58 +81,25 @@ Automatic merge failed; fix conflicts and then commit the result.
 - `test2`ブランチで 別の適当なファイルを１つ追加してコミット
 - `test1`ブランチで`git merge test2`
 
-として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、
+<s>として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、</s>
+<s>...</s>
+<s>と残念ながらうまく自動マージされませんでした。。。</s>
 
-```
-Automatic merge failed; fix conflicts and then commit the result.
-```
+<s>どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。</s>
 
-と残念ながらうまく自動マージされませんでした。。。
+<s>ただ、READMEの次の項に、 `*.pbxproj merge=union` が使えるんだったらそれもいいかもよという記述が...</s>
 
-どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。
-
-ただ、READMEの次の項に、 `*.pbxproj merge=union` が使えるんだったらそれもいいかもよという記述が...
-
-## merge=union を試してみる
-
-`uinon`を指定すると、両方で変更が発生した場合、その順番を気にせず両方の変更内容を適用するとのこと。
-
-実際に`.gitattributes`に
-
-```
-*.pbxproj merge=union
-```
-
-を追加して`git merge test2`を実行したところ、無事に自動マージされて`test1`ブランチと`test2`ブランチでの追加が両方とも反映されました！
-
-## unionでどこまでできる？
-
-ではunionが実用レベルに耐えられるか軽く検証してみました。
-
-### 両方でプロジェクトに対するファイル追加を行った場合
-
-実際のプロジェクトではこのパターンが大半になると思います。
-このパターンは前述のとおり問題なし。
-
-### 片方でプロジェクトからのファイル削除、ファイル名変更を行った場合
-
-問題なし。
-
-### 両方でプロジェクトからのファイル削除を行った場合
-
-プロジェクトにファイルが残ってしまうケースがある。  
-ただ、プロジェクトにファイルが残っても実ファイルが消えていればビルドエラーで検知可能。
-
-### 両方でファイル名変更を行った場合
-
-それぞれでの変更後のファイル名のファイルがプロジェクトに追加されるというおかしな状態になる。
-実ファイルのほうでコンフリクトが起きるような状態だし検知も可能で発生率も低いので無視しても良さそう。
+**2012/02/09 追記**  
+mergepbxの最新版ではこのケースがうまく自動マージされるようになりました。cool :)
 
 ## まとめ
 
-ということで、今のところ `merge=union` を使うのが良さそう。
+<s>ということで、今のところ `merge=union` を使うのが良さそう。</s>
 
-100%うまくいくわけではないけど、一番多く発生する両方で追加するパターンは自動マージされるようになるため、対応コストは確実に低くなると予想しています。
+<s>100%うまくいくわけではないけど、一番多く発生する両方で追加するパターンは自動マージされるようになるため、対応コストは確実に低くなると予想しています。</s>
+
+**2012/02/09 追記**  
+mergepbxの最新版（0.5以降）を使いましょう！
 
 （まだ少し検証した程度なのでしばらく使ってみます）
 
