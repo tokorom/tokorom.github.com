@@ -106,6 +106,96 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2014/04/12/improve-storyboard-segue/">Storyboardでの画面遷移をスマートにやる方法</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/04/12/improve-storyboard-segue/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/04/12/improve-storyboard-segue/" alt="はてなブックマーク - Storyboardでの画面遷移をスマートにやる方法" title="はてなブックマーク - Storyboardでの画面遷移をスマートにやる方法"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-12T17:58:00+09:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/04/12/improve-storyboard-segue/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>これは <a href="http://connpass.com/event/5803/">potatotips第６回め</a> で発表した <a href="https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka">この話</a> のまとめと後書きです。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/storyboard_sample.png"></p>
+
+<h2>Storyboardいいですよね！</h2>
+
+<p>Storyboardを使うことで、</p>
+
+<ul>
+<li>画面と画面が疎結合になる</li>
+<li>簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない</li>
+</ul>
+
+
+<p>といったメリットがあります。</p>
+
+<p>Storyboard登場以前だと、次の画面に遷移させるだけでも</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;NextViewController.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NextViewController</span> <span class="o">*</span><span class="n">nextViewController</span> <span class="o">=</span> <span class="p">[</span><span class="n">NextViewController</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">pushViewController:</span><span class="n">nextViewController</span> <span class="nl">animated:</span><span class="n">YES</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（<code>import</code>しないといけない）形でした。</p>
+
+<p>しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。</p>
+
+<h2>ただしStoryboardを使って今まで以上に悪くなるパターンがある</h2>
+
+<p>とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/04/12/improve-storyboard-segue/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2014/02/06/pbxproj-merge/">Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/02/06/pbxproj-merge/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/02/06/pbxproj-merge/" alt="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！" title="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！"></a>
@@ -423,80 +513,6 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
     
     
     <p><a rel="full-article" href="/2013/11/04/objective-c-haskell/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/09/23/ios7-design/">iOS 7はもっさりか？比較検証してみた</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/09/23/ios7-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/09/23/ios7-design/" alt="はてなブックマーク - iOS 7はもっさりか？比較検証してみた" title="はてなブックマーク - iOS 7はもっさりか？比較検証してみた"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-23T17:45:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/09/23/ios7-design/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><strong>今回の記事はUIデザイナの Morino氏 からの寄稿です。</strong></p>
-
-<p>iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。</p>
-
-<p>特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。
-今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。</p>
-
-<p>頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。</p>
-
-<ul>
-<li>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</li>
-<li>アプリアイコンをタップしてから開くまでの時間</li>
-<li>フォルダをタップしてから開くまでの時間</li>
-<li>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</li>
-</ul>
-
-
-<p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
-
-<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/09/23/ios7-design/">続きを読む &rarr;</a></p>
     
   </footer>
 
