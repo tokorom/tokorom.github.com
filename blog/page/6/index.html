@@ -106,6 +106,95 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/08/17/safe-objc/">Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/17/safe-objc/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/17/safe-objc/" alt="はてなブックマーク - Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント" title="はてなブックマーク - Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T07:36:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/08/17/safe-objc/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
+
+<p>例えば、こんなコードを書いていませんか？</p>
+
+<figure class='code'><figcaption><span>Library.hのもしかしたら改善できるかもしれない例</span></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;OtherLibrary1.h&quot;</span>
+</span><span class='line'><span class="cp">#import &quot;OtherLibrary2.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">Library</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">OtherLibrary1</span><span class="o">*</span> <span class="n">otherLibrary1</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">OtherLibrary2</span><span class="o">*</span> <span class="n">otherLibrary2</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？<br/>
+そうしてしまうと、この <em>Library.h</em> をimportする全てのクラスに、<em>OtherLibrary1.h</em>と<em>OtherLibrary2.h</em>も芋づる式にimportすることを強要することになってしまいます。<br/>
+実際にこの <em>Library</em> を使うクラスでは、<em>otherLibrary1</em>も<em>otherLibrary2</em>も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。<br/>
+具体的にはこの状態だと、 <strong>OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る</strong> 状態になってしまっています。</p>
+
+<p>以下、これを解消するための変更例です。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2012/08/17/safe-objc/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/08/12/objc-subscripting/">Objective-Cで独自クラスに[]でアクセスする</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/12/objc-subscripting/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/12/objc-subscripting/" alt="はてなブックマーク - Objective-Cで独自クラスに[]でアクセスする" title="はてなブックマーク - Objective-Cで独自クラスに[]でアクセスする"></a>
@@ -549,81 +638,6 @@
     
     
     <p><a rel="full-article" href="/2012/07/29/jenkins-octopress/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" alt="はてなブックマーク - さくらVPSにJenkinsさんをインストールする" title="はてなブックマーク - さくらVPSにJenkinsさんをインストールする"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-24T02:57:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/24/install-jenkins-to-sakura/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>JDKのインストール</h2>
-
-<p>Javaが未インストールならこちらから。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Jenkinsのインストール</h2>
-
-<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-</span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-</span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/07/24/install-jenkins-to-sakura/">続きを読む &rarr;</a></p>
     
   </footer>
 

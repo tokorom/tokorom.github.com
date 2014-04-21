@@ -106,6 +106,95 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2014/04/21/objc-async-test/">Objective-Cで非同期処理のテストをシンプルに書く方法</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/04/21/objc-async-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/04/21/objc-async-test/" alt="はてなブックマーク - Objective-Cで非同期処理のテストをシンプルに書く方法" title="はてなブックマーク - Objective-Cで非同期処理のテストをシンプルに書く方法"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T17:03:00+09:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/04/21/objc-async-test/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png"></p>
+
+<h2>非同期処理のテストってどう書いてますか？</h2>
+
+<p>標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、</p>
+
+<ul>
+<li>GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する</li>
+<li>GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？）</li>
+<li>expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う</li>
+</ul>
+
+
+<p>となるかと思います。
+ただ、私が調べた時点だとどれもしっくりきませんでした。</p>
+
+<p>まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。</p>
+
+<p>また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えば<code>GHAsyncTestCase</code>を継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前に<code>prepare</code>とかを呼ばないといけないのがちょっと鬱陶しい。</p>
+
+<p>そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。</p>
+
+<h2>こうしたい！</h2>
+
+<p>ぼくとしては理想的にはこういうライブラリを使いたいと思いました。</p>
+
+<ol>
+<li>テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの</li>
+<li>TestCaseの親クラスが限定されないほうがよい</li>
+<li>余分なコードを書かずにシンプルに書きたい</li>
+<li>それを利用することでテストの実行が遅くなったりしない</li>
+</ol>
+
+
+<p>しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/04/21/objc-async-test/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2014/04/12/improve-storyboard-segue/">Storyboardでの画面遷移をスマートにやる方法</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/04/12/improve-storyboard-segue/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/04/12/improve-storyboard-segue/" alt="はてなブックマーク - Storyboardでの画面遷移をスマートにやる方法" title="はてなブックマーク - Storyboardでの画面遷移をスマートにやる方法"></a>
@@ -422,97 +511,6 @@ iOSアプリ開発/公開のために必要なアカウントは、</p>
     
     
     <p><a rel="full-article" href="/2013/11/05/ios-dev-accounts/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/11/04/objective-c-haskell/">Objective-Cでカリー化とか部分適用してみる</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/11/04/objective-c-haskell/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/11/04/objective-c-haskell/" alt="はてなブックマーク - Objective-Cでカリー化とか部分適用してみる" title="はてなブックマーク - Objective-Cでカリー化とか部分適用してみる"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-04T16:09:00+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/11/04/objective-c-haskell/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>導入</h2>
-
-<p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
-しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
-
-<p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
-
-<p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
-
-<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
-
-<h2>ひとまずのゴール</h2>
-
-<p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) [1, 2, 3]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これです。<br/>
-Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) ([1, 2, 3])</span></code></pre></td></tr></table></div></figure>
-
-
-<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
-
-<p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (OP('+') (@3)) (@[@1, @2, @3])</span></code></pre></td></tr></table></div></figure>
-
-
-<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
-
-<p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/11/04/objective-c-haskell/">続きを読む &rarr;</a></p>
     
   </footer>
 

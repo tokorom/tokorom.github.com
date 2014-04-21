@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-04-12T19:06:33+09:00</updated>
+  <updated>2014-04-21T19:10:22+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cで非同期処理のテストをシンプルに書く方法]]></title>
+<link href="http://www.tokoro.me/2014/04/21/objc-async-test/"/>
+<updated>2014-04-21T17:03:00+09:00</updated>
+<id>http://www.tokoro.me/2014/04/21/objc-async-test</id>
+
+      <content type="html"><![CDATA[<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png"></p>
+
+<h2>非同期処理のテストってどう書いてますか？</h2>
+
+<p>標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、</p>
+
+<ul>
+<li>GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する</li>
+<li>GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？）</li>
+<li>expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う</li>
+</ul>
+
+
+<p>となるかと思います。
+ただ、私が調べた時点だとどれもしっくりきませんでした。</p>
+
+<p>まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。</p>
+
+<p>また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えば<code>GHAsyncTestCase</code>を継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前に<code>prepare</code>とかを呼ばないといけないのがちょっと鬱陶しい。</p>
+
+<p>そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。</p>
+
+<h2>こうしたい！</h2>
+
+<p>ぼくとしては理想的にはこういうライブラリを使いたいと思いました。</p>
+
+<ol>
+<li>テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの</li>
+<li>TestCaseの親クラスが限定されないほうがよい</li>
+<li>余分なコードを書かずにシンプルに書きたい</li>
+<li>それを利用することでテストの実行が遅くなったりしない</li>
+</ol>
+
+
+<p>しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/04/21/objc-async-test/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -897,35 +947,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 ということで、</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/01/09/objc-macro/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Objective-Cで"@dynamic"の使いどころを考える]]></title>
-<link href="http://www.tokoro.me/2013/01/05/objc-dynamic/"/>
-<updated>2013-01-05T15:07:00+09:00</updated>
-<id>http://www.tokoro.me/2013/01/05/objc-dynamic</id>
-
-      <content type="html"><![CDATA[<h2>Objective-Cの @dynamic はお好きですか？</h2>
-
-<p>ぼくはけっこう好きです。</p>
-
-<p><code>@synthesize</code>のほうは昔はほぼ必須で書かないといけなかったり <a href="http://www.tokoro.me/2012/08/12/objc-new-statements/">Xcode4.4で省略できるようになった</a> ことで有名ですが、いっぽうで<code>@dynamic</code>のほうはあまり日の目を浴びていない気がします。</p>
-
-<p>そこで、今日は<code>@dynamic</code>について再考してみることにしました。<br/>
-以下、ぼくが思い返してみて<code>@dynamic</code>がこんなときに便利だったと感じたところを２点挙げさせていただきます。<br/>
-みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。</p>
-
-<h2>クラスの内部実装が適当なのを隠すときに</h2>
-
-<p>そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。<br/>
-例えば、ゲームスコアを管理する<code>GameScore</code>クラスを作ったとして、その中で <strong>ハイスコア</strong> とかいくつかのスコアを管理する際、<code>scores</code>というNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/05/objc-dynamic/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

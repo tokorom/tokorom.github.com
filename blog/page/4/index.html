@@ -106,6 +106,104 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/03/07/block-injection/">BlockInjectionで元のソースコードを汚さないで振る舞い追加</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/03/07/block-injection/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/03/07/block-injection/" alt="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加" title="はてなブックマーク - BlockInjectionで元のソースコードを汚さないで振る舞い追加"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T12:05:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/03/07/block-injection/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>例えばこんなコードに違和感はありませんか？</h2>
+
+<p>自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">sendButtonDidPush:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// トラッキングのためのコード</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">tracker</span> <span class="nl">sendEventWithCategory:</span><span class="s">@&quot;uiAction&quot;</span>
+</span><span class='line'>                      <span class="nl">withAction:</span><span class="s">@&quot;sendButtonDidPush&quot;</span>
+</span><span class='line'>                       <span class="nl">withLabel:</span><span class="nb">nil</span>
+</span><span class='line'>                       <span class="nl">withValue:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>  <span class="c1">// 以降、送信ボタンを押したときの処理</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。</p>
+
+<p>これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。</p>
+
+<p>どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？<br/>
+いわゆるアスペクト指向的なかんじで。</p>
+
+<h2>そんなときに BlockInjection</h2>
+
+<p>ということで本題に入りますが、それを解決するために <a href="https://github.com/tokorom/BlockInjection">BlockInjection</a> というライブラリを作りました。<br/>
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。</p>
+
+<p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/03/07/block-injection/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/01/17/tmux-toggle/">tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/17/tmux-toggle/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/17/tmux-toggle/" alt="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた" title="はてなブックマーク - tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた"></a>
@@ -421,74 +519,6 @@
     
     
     <p><a rel="full-article" href="/2013/01/09/objc-macro/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/01/05/objc-dynamic/">Objective-Cで&#8221;@dynamic&#8221;の使いどころを考える</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/05/objc-dynamic/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/05/objc-dynamic/" alt="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える" title="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-05T15:07:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/05/objc-dynamic/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>Objective-Cの @dynamic はお好きですか？</h2>
-
-<p>ぼくはけっこう好きです。</p>
-
-<p><code>@synthesize</code>のほうは昔はほぼ必須で書かないといけなかったり <a href="/2012/08/12/objc-new-statements/">Xcode4.4で省略できるようになった</a> ことで有名ですが、いっぽうで<code>@dynamic</code>のほうはあまり日の目を浴びていない気がします。</p>
-
-<p>そこで、今日は<code>@dynamic</code>について再考してみることにしました。<br/>
-以下、ぼくが思い返してみて<code>@dynamic</code>がこんなときに便利だったと感じたところを２点挙げさせていただきます。<br/>
-みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。</p>
-
-<h2>クラスの内部実装が適当なのを隠すときに</h2>
-
-<p>そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。<br/>
-例えば、ゲームスコアを管理する<code>GameScore</code>クラスを作ったとして、その中で <strong>ハイスコア</strong> とかいくつかのスコアを管理する際、<code>scores</code>というNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/01/05/objc-dynamic/">続きを読む &rarr;</a></p>
     
   </footer>
 
