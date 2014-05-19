@@ -87,7 +87,7 @@ if [ ${CONFIGURATION} = "Debug" ]; then
   marketVersion=$($plistBuddy -c "Print CFBundleShortVersionString" $infoPlist)
 
   versionPrefix="dev-"
-  lastCommitDate=`xcrun git log -1 --format='%ci'`
+  lastCommitDate=$(git log -1 --format='%ci')
   versionSuffix=" ($lastCommitDate)"
 
   versionString=$versionPrefix$marketVersion$versionSuffix
