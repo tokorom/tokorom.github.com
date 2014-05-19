@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-05-19T16:30:58+09:00</updated>
+  <updated>2014-05-19T22:43:23+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -40,7 +40,7 @@
 
 <ul>
 <li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
-<li>Run Scriptで<code>${TEMP_DIR}"/Preprocessed-Info.plist</code>を編集する</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
 </ul>
 
 

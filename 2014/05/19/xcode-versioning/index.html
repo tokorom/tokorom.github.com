@@ -174,7 +174,7 @@
 
 <ul>
 <li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
-<li>Run Scriptで<code>${TEMP_DIR}"/Preprocessed-Info.plist</code>を編集する</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
 </ul>
 
 
@@ -288,13 +288,13 @@
 </span><span class='line'>
 </span><span class='line'><span class="k">  </span><span class="nv">plistBuddy</span><span class="o">=</span><span class="s2">&quot;/usr/libexec/PlistBuddy&quot;</span>
 </span><span class='line'>  <span class="nv">infoPlist</span><span class="o">=</span><span class="k">${</span><span class="nv">TEMP_DIR</span><span class="k">}</span><span class="s2">&quot;/Preprocessed-Info.plist&quot;</span>
-</span><span class='line'>  <span class="nv">marketVersion</span><span class="o">=</span><span class="k">$(</span><span class="nv">$plistBuddy</span> -c <span class="s2">&quot;Print CFBundleShortVersionString&quot;</span> <span class="nv">$infoPlist</span><span class="k">)</span>
+</span><span class='line'>  <span class="nv">currentVersion</span><span class="o">=</span><span class="k">$(</span><span class="nv">$plistBuddy</span> -c <span class="s2">&quot;Print CFBundleVersion&quot;</span> <span class="nv">$infoPlist</span><span class="k">)</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nv">versionPrefix</span><span class="o">=</span><span class="s2">&quot;dev-&quot;</span>
 </span><span class='line'>  <span class="nv">lastCommitDate</span><span class="o">=</span><span class="k">$(</span>git log -1 --format<span class="o">=</span><span class="s1">&#39;%ci&#39;</span><span class="k">)</span>
 </span><span class='line'>  <span class="nv">versionSuffix</span><span class="o">=</span><span class="s2">&quot; ($lastCommitDate)&quot;</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="nv">versionString</span><span class="o">=</span><span class="nv">$versionPrefix$marketVersion$versionSuffix</span>
+</span><span class='line'>  <span class="nv">versionString</span><span class="o">=</span><span class="nv">$versionPrefix$currentVersion$versionSuffix</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nv">$plistBuddy</span> -c <span class="s2">&quot;Set :CFBundleVersion $versionString&quot;</span> <span class="nv">$infoPlist</span>
 </span><span class='line'>
@@ -306,10 +306,10 @@
 
 <ul>
 <li>Configurationが<code>Debug</code>のときだけ実行する</li>
-<li><code>PlistBuddy</code>でエンドユーザ向けのバージョン番号（<code>CFBundleShortVersionString</code>）を取得</li>
+<li><code>PlistBuddy</code>で現在のビルド番号（<code>CFBundleVersion</code>）を取得</li>
 <li>バージョンのPrefixとして<code>dev-</code>を設定</li>
 <li>gitの最後のcommitの日付を抽出してそれをバージョンのSuffixとする</li>
-<li>最終的に <code>dev-</code> + バージョン番号 + <code>最後のcommit日付</code> をビルド番号（<code>CFBundleVersion</code>）に設定する</li>
+<li>最終的に <code>dev-</code> + ビルド番号 + 最後のcommit日付 を新しいビルド番号（<code>CFBundleVersion</code>）として設定する</li>
 </ul>
 
 
@@ -327,15 +327,45 @@
 
 <p>と表示されるようになり、開発中のアプリにのみどのcommitまでが入っているかを自動的に埋め込むことができるようになります。</p>
 
+<h2>2014/05/19 追記</h2>
+
+<p>なお、Info.plistをスクリプトでいじるときに、上記のように<code>CFBundleVersion</code>を読み込んでそれを使って同じ<code>CFBundleVersion</code>を上書きするケースだと、前に作ったInfo.plistの値がインプットとして使われてしまい、</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/versioning_sample_failed.png"></p>
+
+<p>こんなかんじでビルド番号が壊れてしまうことがあります。必ずCleanしてからビルドすればこの問題は発生しないのですが、せっかく自動でバージョニングしているのに制約が付いてしまうのも不格好です。</p>
+
+<p>これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を削除してしまうという方法が考えられます。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">infoPlist</span><span class="o">=</span><span class="k">${</span><span class="nv">TEMP_DIR</span><span class="k">}</span><span class="s2">&quot;/Preprocessed-Info.plist&quot;</span>
+</span><span class='line'>rm <span class="nv">$infoPlist</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こうすることで自分でCleanしなくても自動で毎回新しいPreprocessed-Info.plistが作られるようになるため、こういった問題はなくなります。</p>
+
+<p>このようにビルド後に気軽に削除できてしまうのはtempファイル扱いの<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を使うメリットと言えそうです。</p>
+
 <h2>まとめ</h2>
 
 <ul>
 <li><code>Preprocess Info.plist file</code>に<code>YES</code>を設定する</li>
-<li>Run Scriptで<code>${TEMP_DIR}"/Preprocessed-Info.plist</code>を編集する</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
 </ul>
 
 
 <p>の２ステップでこういったバージョニングが安定して実現できるようになります。バージョニング以外でもInfo.plistを可変にしたい場合には等しくこの方法が有効かと思います。</p>
+
+<p>必要に応じて、</p>
+
+<ul>
+<li>Build Phasesの最後で<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を削除する</li>
+</ul>
+
+
+<p>というステップも加えるとより安定します。</p>
 
 <p>教えていただいた <a href="https://twitter.com/k_katsumi">きしかわさん</a> さんと <a href="https://twitter.com/es_kumagai">熊谷さん</a> のご両名に感謝です！</p>
 
