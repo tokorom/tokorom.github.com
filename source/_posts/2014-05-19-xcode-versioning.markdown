@@ -20,7 +20,7 @@ categories: [xcode,ios]
 ### 必要な設定
 
 - `Preprocess Info.plist file` でInfo.plistをビルド前に確定させる
-- Run Scriptで`${TEMP_DIR}"/Preprocessed-Info.plist`を編集する
+- Run Scriptで`${TEMP_DIR}/Preprocessed-Info.plist`を編集する
 
 以下、具体的な話をします。
 
@@ -84,13 +84,13 @@ if [ ${CONFIGURATION} = "Debug" ]; then
 
   plistBuddy="/usr/libexec/PlistBuddy"
   infoPlist=${TEMP_DIR}"/Preprocessed-Info.plist"
-  marketVersion=$($plistBuddy -c "Print CFBundleShortVersionString" $infoPlist)
+  currentVersion=$($plistBuddy -c "Print CFBundleVersion" $infoPlist)
 
   versionPrefix="dev-"
   lastCommitDate=$(git log -1 --format='%ci')
   versionSuffix=" ($lastCommitDate)"
 
-  versionString=$versionPrefix$marketVersion$versionSuffix
+  versionString=$versionPrefix$currentVersion$versionSuffix
 
   $plistBuddy -c "Set :CFBundleVersion $versionString" $infoPlist
 
@@ -100,10 +100,10 @@ fi
 スクリプトの中身は、
 
 - Configurationが`Debug`のときだけ実行する
-- `PlistBuddy`でエンドユーザ向けのバージョン番号（`CFBundleShortVersionString`）を取得
+- `PlistBuddy`で現在のビルド番号（`CFBundleVersion`）を取得
 - バージョンのPrefixとして`dev-`を設定
 - gitの最後のcommitの日付を抽出してそれをバージョンのSuffixとする
-- 最終的に `dev-` + バージョン番号 + `最後のcommit日付` をビルド番号（`CFBundleVersion`）に設定する
+- 最終的に `dev-` + ビルド番号 + 最後のcommit日付 を新しいビルド番号（`CFBundleVersion`）として設定する
 
 となっています。
 
@@ -119,13 +119,39 @@ fi
 
 と表示されるようになり、開発中のアプリにのみどのcommitまでが入っているかを自動的に埋め込むことができるようになります。
 
+## 2014/05/19 追記
+
+なお、Info.plistをスクリプトでいじるときに、上記のように`CFBundleVersion`を読み込んでそれを使って同じ`CFBundleVersion`を上書きするケースだと、前に作ったInfo.plistの値がインプットとして使われてしまい、
+
+{% img center http://dl.dropbox.com/u/10351676/images/versioning_sample_failed.png %}
+
+こんなかんじでビルド番号が壊れてしまうことがあります。必ずCleanしてからビルドすればこの問題は発生しないのですが、せっかく自動でバージョニングしているのに制約が付いてしまうのも不格好です。
+
+これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで`${TEMP_DIR}/Preprocessed-Info.plist`を削除してしまうという方法が考えられます。
+
+```sh
+infoPlist=${TEMP_DIR}"/Preprocessed-Info.plist"
+rm $infoPlist
+```
+
+こうすることで自分でCleanしなくても自動で毎回新しいPreprocessed-Info.plistが作られるようになるため、こういった問題はなくなります。
+
+このようにビルド後に気軽に削除できてしまうのはtempファイル扱いの`${TEMP_DIR}/Preprocessed-Info.plist`を使うメリットと言えそうです。
+
 ## まとめ
 
 - `Preprocess Info.plist file`に`YES`を設定する
-- Run Scriptで`${TEMP_DIR}"/Preprocessed-Info.plist`を編集する
+- Run Scriptで`${TEMP_DIR}/Preprocessed-Info.plist`を編集する
 
 の２ステップでこういったバージョニングが安定して実現できるようになります。バージョニング以外でもInfo.plistを可変にしたい場合には等しくこの方法が有効かと思います。
+
+必要に応じて、
+
+- Build Phasesの最後で`${TEMP_DIR}/Preprocessed-Info.plist`を削除する
+
+というステップも加えるとより安定します。
 
 教えていただいた [きしかわさん](https://twitter.com/k_katsumi) さんと [熊谷さん](https://twitter.com/es_kumagai) のご両名に感謝です！
 
 この設定を埋め込んだサンプルは [ここ](https://github.com/tokorom/XcodeVersioningSample) に置いてあります。
+
