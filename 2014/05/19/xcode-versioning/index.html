@@ -291,7 +291,7 @@
 </span><span class='line'>  <span class="nv">marketVersion</span><span class="o">=</span><span class="k">$(</span><span class="nv">$plistBuddy</span> -c <span class="s2">&quot;Print CFBundleShortVersionString&quot;</span> <span class="nv">$infoPlist</span><span class="k">)</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nv">versionPrefix</span><span class="o">=</span><span class="s2">&quot;dev-&quot;</span>
-</span><span class='line'>  <span class="nv">lastCommitDate</span><span class="o">=</span><span class="sb">`</span>xcrun git log -1 --format<span class="o">=</span><span class="s1">&#39;%ci&#39;</span><span class="sb">`</span>
+</span><span class='line'>  <span class="nv">lastCommitDate</span><span class="o">=</span><span class="k">$(</span>git log -1 --format<span class="o">=</span><span class="s1">&#39;%ci&#39;</span><span class="k">)</span>
 </span><span class='line'>  <span class="nv">versionSuffix</span><span class="o">=</span><span class="s2">&quot; ($lastCommitDate)&quot;</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nv">versionString</span><span class="o">=</span><span class="nv">$versionPrefix$marketVersion$versionSuffix</span>
