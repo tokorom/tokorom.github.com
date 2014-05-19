@@ -106,6 +106,113 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/11/05/ios-dev-accounts/">会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/11/05/ios-dev-accounts/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/11/05/ios-dev-accounts/" alt="はてなブックマーク - 会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？" title="はてなブックマーク - 会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-05T19:21:00+09:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/11/05/ios-dev-accounts/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>2013年11月18日 追記</h2>
+
+<p>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、</p>
+
+<ul>
+<li><code>Member Centerのほうにアカウント追加</code> -> <code>iTunes Connectに同じアカウント追加</code>という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能</li>
+<li><code>iTunes Connectにアカウント追加</code> -> <code>Member Centerに同じ追加</code>という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能</li>
+</ul>
+
+
+<p>失礼しました。<br/>
+追加情報などあれば是非おねがいします！</p>
+
+<h2>概要</h2>
+
+<p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br/>
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
+
+<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br/>
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。</p>
+
+<h2>iOS Dev Center の構成</h2>
+
+<p>まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/iOSDevCenterStruct.png"></p>
+
+<p>大きくは、</p>
+
+<ul>
+<li>iOS Developer Program</li>
+<li>Member Center</li>
+<li>iTunes Connect</li>
+</ul>
+
+
+<p>に分かれます。</p>
+
+<h2>メンバーを追加する方法が２つある？？</h2>
+
+<p>今回、私が混乱してしまった部分がここでした。<br/>
+iOSアプリ開発/公開のために必要なアカウントは、</p>
+
+<ul>
+<li><code>Member Center</code>の<code>People</code></li>
+<li><code>iTunes Connect</code>の<code>Manage Users</code></li>
+</ul>
+
+
+<p>の2カ所で管理されています。<br/>
+また、この２つのアカウントはそれぞれ別々の用途になります。</p>
+
+<p>個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/11/05/ios-dev-accounts/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/11/04/objective-c-haskell/">Objective-Cでカリー化とか部分適用してみる</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/11/04/objective-c-haskell/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/11/04/objective-c-haskell/" alt="はてなブックマーク - Objective-Cでカリー化とか部分適用してみる" title="はてなブックマーク - Objective-Cでカリー化とか部分適用してみる"></a>
@@ -371,188 +478,6 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
     
     
     <p><a rel="full-article" href="/2013/06/17/ios7-ui-design/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/06/15/objc-reduce/">Objective-Cのコードを削れるだけ削る7のTips</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/15/objc-reduce/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/15/objc-reduce/" alt="はてなブックマーク - Objective-Cのコードを削れるだけ削る7のTips" title="はてなブックマーク - Objective-Cのコードを削れるだけ削る7のTips"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-15T16:04:00+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/06/15/objc-reduce/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。</p>
-
-<h2>Tipsを適用する前のコード</h2>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Private Category</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Sample</span> <span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">dictionary</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">Sample</span><span class="o">*</span> <span class="n">child</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">UIColor</span><span class="o">*</span> <span class="n">color</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="n">NSUInteger</span> <span class="n">index</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="n">CGRect</span> <span class="n">rect</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod1</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod2</span><span class="p">;</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod3</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">#pragma mark - Main Implementation</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">Sample</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">array</span> <span class="o">=</span> <span class="n">array_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">child</span> <span class="o">=</span> <span class="n">child_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index_</span><span class="p">;</span>
-</span><span class='line'><span class="k">@synthesize</span> <span class="n">rect</span> <span class="o">=</span> <span class="n">rect_</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod1</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethod2</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethod3</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod2</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">100</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithChar:</span><span class="sc">&#39;a&#39;</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.14f</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod3</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="s">@&quot;1&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool:</span><span class="n">YES</span><span class="p">],</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span><span class="s">@&quot;val1&quot;</span><span class="p">,</span> <span class="s">@&quot;key1&quot;</span><span class="p">,</span> <span class="s">@&quot;val2&quot;</span><span class="p">,</span> <span class="s">@&quot;key2&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">child</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Sample</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これを以下の7のTipsで削れるだけ削っていきます。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/06/15/objc-reduce/">続きを読む &rarr;</a></p>
     
   </footer>
 

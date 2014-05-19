@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-04-21T19:10:22+09:00</updated>
+  <updated>2014-05-19T16:24:44+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[これがXcodeでのバージョニングの決定版になるかも]]></title>
+<link href="http://www.tokoro.me/2014/05/19/xcode-versioning/"/>
+<updated>2014-05-19T14:16:00+09:00</updated>
+<id>http://www.tokoro.me/2014/05/19/xcode-versioning</id>
+
+      <content type="html"><![CDATA[<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/xcode_versioning.png"></p>
+
+<h2>概要</h2>
+
+<h3>この記事でできるようになること</h3>
+
+<ul>
+<li>安定してInfo.plistの内容（ここではBuild番号）を変更できる</li>
+<li>ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される</li>
+<li>Info.plistに差分がでないのでcommitのときに邪魔にならない</li>
+</ul>
+
+
+<h3>必要な設定</h3>
+
+<ul>
+<li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
+<li>Run Scriptで<code>${TEMP_DIR}"/Preprocessed-Info.plist</code>を編集する</li>
+</ul>
+
+
+<p>以下、具体的な話をします。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/05/19/xcode-versioning/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -904,49 +941,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 このオプションの中の、</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/01/14/easy-objc-complement/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Objective-Cで最近お気に入りのマクロ４つ]]></title>
-<link href="http://www.tokoro.me/2013/01/09/objc-macro/"/>
-<updated>2013-01-09T00:17:00+09:00</updated>
-<id>http://www.tokoro.me/2013/01/09/objc-macro</id>
-
-      <content type="html"><![CDATA[<h2>マクロ</h2>
-
-<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
-
-<p><strong> ※2013/1/9 追記 </strong></p>
-
-<p>上記のとおり独自のマクロを使うこと自体に賛否両論あります。<br/>
-例えば独自のマクロを定義して利用することで、</p>
-
-<ul>
-<li>他の人がコードを見たときに分かりづらくなる</li>
-<li>思わぬ不具合が出るケースがある</li>
-<li>名前の衝突リスクがある（マクロは名前空間が使えない）</li>
-</ul>
-
-
-<p>などのデメリットがあります。
-特にチームや会社でのご利用の際にはよくよくご留意をお願いします。</p>
-
-<h2>1. [NSString stringWithFormat:] を簡単に</h2>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span><span class="o">*</span> <span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;HELLO %3.1d&quot;</span><span class="p">,</span> <span class="mf">333.333</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&#8230;とよく思ってしまう。<br/>
-ということで、</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/09/objc-macro/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>
