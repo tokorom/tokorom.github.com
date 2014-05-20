@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-05-19T22:43:23+09:00</updated>
+  <updated>2014-05-20T10:34:03+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -35,6 +35,8 @@
 <li>Info.plistに差分がでないのでcommitのときに邪魔にならない</li>
 </ul>
 
+
+<p>なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感が<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">こちら</a>に詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">熊谷さんの記事</a>をご一読ください！</p>
 
 <h3>必要な設定</h3>
 
