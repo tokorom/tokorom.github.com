@@ -17,6 +17,8 @@ categories: [xcode,ios]
 - ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される
 - Info.plistに差分がでないのでcommitのときに邪魔にならない
 
+なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感が[こちら](http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp)に詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、[熊谷さんの記事](http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp)をご一読ください！
+
 ### 必要な設定
 
 - `Preprocess Info.plist file` でInfo.plistをビルド前に確定させる
@@ -71,7 +73,7 @@ categories: [xcode,ios]
 
 ## ${TEMP_DIR}/Preprocessed-Info.plist
 
-そして、`Preprocess Info.plist file`を`YES`にした場合、通常のInfo.plistと別に `${TEMP_DIR}/Preprocessed-Info.plist` という名前で別のInfo.plistが作成されるようになります。あとは、Run Scriptでその`Preprocessed-Info.plist`のほうを編集してあげれば、それがアプリに即反映される形になります。
+そして、`Preprocess Info.plist file`を`YES`にした場合、通常のInfo.plistと別に `${TEMP_DIR}/Preprocessed-Info.plist` という名前で別のInfo.plistが作成されるようになります。あとは、Run Scriptでその`Preprocessed-Info.plist`のほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。
 
 素晴らしいのは、この後、元のInfo.plistが変更されることはなく、しかも、`${TEMP_DIR}/Preprocessed-Info.plist`が別のディレクトリにあるためInfo.plistに差分が出ることはありません（もし、Preprocessed-Info.plistがプロジェクトディレクトリ内にできてしまう場合にはそれを.gitignoreに入れれば良い）。
 
@@ -83,7 +85,7 @@ Run Scriptのサンプルを以下に示します。
 if [ ${CONFIGURATION} = "Debug" ]; then
 
   plistBuddy="/usr/libexec/PlistBuddy"
-  infoPlist=${TEMP_DIR}"/Preprocessed-Info.plist"
+  infoPlist="${TEMP_DIR}/Preprocessed-Info.plist"
   currentVersion=$($plistBuddy -c "Print CFBundleVersion" $infoPlist)
 
   versionPrefix="dev-"
@@ -127,16 +129,35 @@ fi
 
 こんなかんじでビルド番号が壊れてしまうことがあります。必ずCleanしてからビルドすればこの問題は発生しないのですが、せっかく自動でバージョニングしているのに制約が付いてしまうのも不格好です。
 
-これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで`${TEMP_DIR}/Preprocessed-Info.plist`を削除してしまうという方法が考えられます。
+<s>これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで`${TEMP_DIR}/Preprocessed-Info.plist`を削除してしまうという方法が考えられます。</s>
+
+<b>2014/5/20 熊谷さんにより良い方法をご提案いただいたので修正</b>
+
+これを避けるためには、[熊谷さんの記事](http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp)のとおり、インプットとなるInfo.plistを`${TEMP_DIR}/Preprocessed-Info.plist`でなく元のInfo.plistそのもの（`${SRCROOT}/${INFOPLIST_FILE}`）にするのが良さそうです。
 
 ```sh
-infoPlist=${TEMP_DIR}"/Preprocessed-Info.plist"
-rm $infoPlist
+if [ ${CONFIGURATION} = "Debug" ]; then
+
+  plistBuddy="/usr/libexec/PlistBuddy"
+  infoPlistFileSource="${SRCROOT}/${INFOPLIST_FILE}"
+  infoPlistFileDestination="${TEMP_DIR}/Preprocessed-Info.plist"
+
+  currentVersion=$($plistBuddy -c "Print CFBundleVersion" $infoPlistFileSource)
+
+  versionPrefix="dev-"
+  lastCommitDate=$(git log -1 --format='%ci')
+  versionSuffix=" ($lastCommitDate)"
+
+  versionString=$versionPrefix$currentVersion$versionSuffix
+
+  $plistBuddy -c "Set :CFBundleVersion $versionString" $infoPlistFileDestination
+
+fi
 ```
 
-こうすることで自分でCleanしなくても自動で毎回新しいPreprocessed-Info.plistが作られるようになるため、こういった問題はなくなります。
+これにより、常にオリジナルのInfo.plistの内容がインプットとして使われ、書き出しは一時ファイルのPreprocessed-Info.plistのほうになり、綺麗なインプットを利用できそのインプットを汚さない最強の組み合わせと言えそうです。
 
-このようにビルド後に気軽に削除できてしまうのはtempファイル扱いの`${TEMP_DIR}/Preprocessed-Info.plist`を使うメリットと言えそうです。
+なお、他にもビルド後にバンドルされたInfo.plist（`${TARGET_BUILD_DIR}/${INFOPLIST_PATH}`）を直接編集する案などをTwitterやはてブコメントでいただきましたが、今のところ安全性が不明（そのあたりも[熊谷さんの記事](http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp)に詳しく書かれています）です。`Preprocess Info.plist file`に`YES`にするというワンステップ増えてしまいますが逆に言えばそれだけですので、少なくとも安全性がはっきりするまではPreprocess-Info.plistを使う方が安心だと思います。
 
 ## まとめ
 
@@ -144,12 +165,6 @@ rm $infoPlist
 - Run Scriptで`${TEMP_DIR}/Preprocessed-Info.plist`を編集する
 
 の２ステップでこういったバージョニングが安定して実現できるようになります。バージョニング以外でもInfo.plistを可変にしたい場合には等しくこの方法が有効かと思います。
-
-必要に応じて、
-
-- Build Phasesの最後で`${TEMP_DIR}/Preprocessed-Info.plist`を削除する
-
-というステップも加えるとより安定します。
 
 教えていただいた [きしかわさん](https://twitter.com/k_katsumi) さんと [熊谷さん](https://twitter.com/es_kumagai) のご両名に感謝です！
 
