@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>さくらVPSにJenkinsさんをインストールする - TOKOROM BLOG</title>
+  <title>Swiftで部分適用（カリー化） - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">
+  <link rel="canonical" href="http://www.tokoro.me/2014/07/30/swift-partial-application/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
@@ -105,25 +105,25 @@
     <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2014/07/30/swift-partial-application/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2014/07/30/swift-partial-application/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2014/07/30/swift-partial-application/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" data-via="tokorom" data-counturl="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2014/07/30/swift-partial-application/" data-via="tokorom" data-counturl="http://www.tokoro.me/2014/07/30/swift-partial-application/" target="_blank" >Tweet</a>
   
 </div>
 
@@ -132,9 +132,9 @@
   <header>
     <h1 class="entry-title">
 
-さくらVPSにJenkinsさんをインストールする<a class="entry-title-link" href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" style="display:none">-</a>
+Swiftで部分適用（カリー化）<a class="entry-title-link" href="http://www.tokoro.me/2014/07/30/swift-partial-application/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" alt="はてなブックマーク - さくらVPSにJenkinsさんをインストールする" title="はてなブックマーク - さくらVPSにJenkinsさんをインストールする"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/07/30/swift-partial-application/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/07/30/swift-partial-application/" alt="はてなブックマーク - Swiftで部分適用（カリー化）" title="はてなブックマーク - Swiftで部分適用（カリー化）"></a>
 </h1>
 
     
@@ -151,30 +151,60 @@
   
 
 
-<time datetime="2012-07-24T02:57:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/07/24/install-jenkins-to-sakura/">Permalink</a>
+<time datetime="2014-07-30T21:52:00+09:00" pubdate data-updated="true">Jul 30<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/07/30/swift-partial-application/">Permalink</a>
       </p>
     
   </header>
 
-<div class="entry-content"><h2>JDKのインストール</h2>
+<div class="entry-content"><h2>Swiftオフィシャルの部分適用</h2>
 
-<p>Javaが未インストールならこちらから。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Jenkinsのインストール</h2>
-
-<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
+<p>まず、Swiftオフィシャルな構文として</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-</span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-</span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func addTwoNumbers(a: Int)(b: Int) -> Int {
+</span><span class='line'>  return a + b
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add1 = addTwoNumbers(1)
+</span><span class='line'>add1(b: 2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というかんじに、</p>
+
+<ul>
+<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
+<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
+</ul>
+
+
+<p>というのができる。</p>
+
+<h2>専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+
+<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
+
+<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
+
+<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
+
+<h2>実装</h2>
+
+<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func partial&lt;A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
+</span><span class='line'>    return { function(a(), $0) }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -182,46 +212,7 @@
 <!-- more -->
 
 
-<h2>Jenkinsの起動</h2>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo service jenkins start</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストールと起動が完了。簡単すぎる！</p>
-
-<p>試しに</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ curl http://localhost:8080/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>とすると、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span><span class="nt">&lt;html&gt;&lt;head&gt;</span> <span class="nt">&lt;title&gt;</span>Dashboard [Jenkins]<span class="nt">&lt;/title&gt;</span>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。</p>
-
-<p>ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo chkconfig jenkins on </span></code></pre></td></tr></table></div></figure>
-
-
-<h2>nginxの設定</h2>
-
-<p>まず、nginxが未インストールなら</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install nginx</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でインストールしておく。</p>
-
-<p>Jenkinsにnginx経由でアクセスするために、自分の場合は <strong>/etc/nginx/conf.d/virtual.conf</strong> に以下リバースプロキシの設定を加えた。</p>
+<h2>利用サンプル</h2>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -229,50 +220,48 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
-</span><span class='line'>    listen 80;
-</span><span class='line'>    server_name jenkins.自分の.ドメイン
-</span><span class='line'>    location / {
-</span><span class='line'>        proxy_pass http://localhost:8080;
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func add(a: Int, b: Int) -> Int {
+</span><span class='line'>    return a + b
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>let add1 = partial(add, 1)
+</span><span class='line'>add1(2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
 
 
-<p>ここでは、 <em>http://jenkins.自分の.ドメイン/</em> でアクセスされたら、 <em>http://localhost:8080/</em> に内部的に転送するよう設定している。
-もし、独自ドメインを使えない場合には、</p>
+<p>とこんなかんじで普通の <code>add()</code> というfunctionに <code>partial(add, 1)</code> といった形で部分適用できるようになります。</p>
+
+<p><code>add()</code>自体は普通のfunctionなので、もちろん<code>add(1, 2)</code>という普通の呼び方もそのままできます。</p>
+
+<h2>遅延評価</h2>
+
+<p>ミソは <code>@auto_closure</code> を使った遅延評価です。これをやらないと</p>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>server {
-</span><span class='line'>    listen 80;
-</span><span class='line'>    server_name 自分のVPSのドメイン
-</span><span class='line'>    location /jenkins {
-</span><span class='line'>        proxy_pass http://localhost:8080;
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add100 = partial(add, someting(100)) //&lt; この時点で someting(100) が実行されちゃう
+</span><span class='line'>
+</span><span class='line'>add100(10) //&lt; ここでは実行済みの someting(100) の結果が使われる</span></code></pre></td></tr></table></div></figure>
 
 
-<p>のように設定して、 <em>http://自分のVPSのドメイン/jenkins/</em> でアクセスされたときにJenkinsさんに繋がるようにしたりするよう。</p>
+<p>といったかんじで、<code>partial</code> で部分適用した時点で適用した引数の内容が評価されちゃいます。しかし <code>@auto_closure</code> を活用することで、</p>
 
-<p>設定し終わり、nginxを再起動してブラウザで <em>*http://jenkins.自分の.ドメイン/</em> を表示すれば、晴れて</p>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add100 = partial(add, someting(100)) //&lt; この時点で someting(100) は実行されない！
+</span><span class='line'>
+</span><span class='line'>add100(10) //&lt; ここではじめて someting(100) が実行されてその結果が使われる</span></code></pre></td></tr></table></div></figure>
 
-<p><img src="http://dl.dropbox.com/u/10351676/images/install-jenkins.jpg" alt="install-jenkins" /></p>
 
-<p>のようにJenkinsさんが使えるようになっているはず。</p>
+<p>というように、本当に必要になるまで部分適用した引数の内容が評価されない形になりました。</p>
 
-<h2>Jenkinsへのアクセス制限</h2>
+<h2>参考</h2>
 
-<p>ちなみにこのままだと誰からでもジョブなどが作成できてしまう状態のため、</p>
+<p>ちなみに、既に他の人もやってるかもなと思いGoogleで <code>swift partial</code> で検索したらこんな<a href="https://gist.github.com/kristopherjohnson/4ee565cfcdf912deacf6">Gists</a>が&#8230;</p>
 
-<p><a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">Standard Securiy Setup</a></p>
-
-<p>を参照してアクセス制限をかけておくことを推奨。</p>
+<p>ぼくがイメージしてたのと同じような実装で、かつ、こっちのGistsのほうが良さそうなところもあったので上の実装はそれを取り込んだものです。<br/>
+結果としては、このGistsに遅延評価の機能を加えたものが上の実装というかんじになりました。</p>
 </div>
 
 
@@ -295,12 +284,12 @@
   
 
 
-<time datetime="2012-07-24T02:57:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
+<time datetime="2014-07-30T21:52:00+09:00" pubdate data-updated="true">Jul 30<span>th</span>, 2014</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/jenkins/'>jenkins</a>, <a class='category' href='/blog/categories/sakura/'>sakura</a>
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/swift/'>swift</a>
   
 </span>
 
@@ -313,35 +302,33 @@
       <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2014/07/30/swift-partial-application/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2014/07/30/swift-partial-application/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2014/07/30/swift-partial-application/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" data-via="tokorom" data-counturl="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2014/07/30/swift-partial-application/" data-via="tokorom" data-counturl="http://www.tokoro.me/2014/07/30/swift-partial-application/" target="_blank" >Tweet</a>
   
 </div>
 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/07/15/octopress-part-of-codes/" title="Previous Post: Octopressでソースコードの一部分だけを参照する">&laquo; Octopressでソースコードの一部分だけを参照する</a>
+        <a class="basic-alignment left" href="/2014/05/19/xcode-versioning/" title="Previous Post: これがXcodeでのバージョニングの決定版になるかも">&laquo; これがXcodeでのバージョニングの決定版になるかも</a>
       
-      
-        <a class="basic-alignment right" href="/2012/07/29/jenkins-octopress/" title="Next Post: Jenkins@さくらVPSにOctopressのデプロイを任せてみる">Jenkins@さくらVPSにOctopressのデプロイを任せてみる &raquo;</a>
       
     </p>
   </footer>
@@ -466,8 +453,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/';
-        var disqus_url = 'http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/';
+        var disqus_identifier = 'http://www.tokoro.me/2014/07/30/swift-partial-application/';
+        var disqus_url = 'http://www.tokoro.me/2014/07/30/swift-partial-application/';
         var disqus_script = 'embed.js';
       
     (function () {

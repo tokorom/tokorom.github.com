@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-05-20T10:34:03+09:00</updated>
+  <updated>2014-07-30T22:28:41+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Swiftで部分適用（カリー化）]]></title>
+<link href="http://www.tokoro.me/2014/07/30/swift-partial-application/"/>
+<updated>2014-07-30T21:52:00+09:00</updated>
+<id>http://www.tokoro.me/2014/07/30/swift-partial-application</id>
+
+      <content type="html"><![CDATA[<h2>Swiftオフィシャルの部分適用</h2>
+
+<p>まず、Swiftオフィシャルな構文として</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func addTwoNumbers(a: Int)(b: Int) -> Int {
+</span><span class='line'>  return a + b
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add1 = addTwoNumbers(1)
+</span><span class='line'>add1(b: 2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というかんじに、</p>
+
+<ul>
+<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
+<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
+</ul>
+
+
+<p>というのができる。</p>
+
+<h2>専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+
+<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
+
+<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
+
+<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
+
+<h2>実装</h2>
+
+<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func partial&lt;A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
+</span><span class='line'>    return { function(a(), $0) }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/07/30/swift-partial-application/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -909,40 +975,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/01/15/ctrlp-docset/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[もっと簡単にVimでObjective-Cのコード補完を実行する]]></title>
-<link href="http://www.tokoro.me/2013/01/14/easy-objc-complement/"/>
-<updated>2013-01-14T05:23:00+09:00</updated>
-<id>http://www.tokoro.me/2013/01/14/easy-objc-complement</id>
-
-      <content type="html"><![CDATA[<h2>概要</h2>
-
-<p>先日、 <a href="http://www.tokoro.me/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。</p>
-
-<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これにより<code>clang_complete</code>本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。<br/>
-具体的には、<code>clang_complete</code>ともう１つ、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールいただき、</p>
-
-<ul>
-<li>after/ftplugin/objc.vim</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">let </span>g:clang_auto_user_options <span class="o">=</span> <span class="s1">&#39;path, .clang_complete, ios&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
-このオプションの中の、</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/14/easy-objc-complement/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

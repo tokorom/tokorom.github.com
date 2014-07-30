@@ -106,6 +106,111 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2014/07/30/swift-partial-application/">Swiftで部分適用（カリー化）</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/07/30/swift-partial-application/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/07/30/swift-partial-application/" alt="はてなブックマーク - Swiftで部分適用（カリー化）" title="はてなブックマーク - Swiftで部分適用（カリー化）"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-30T21:52:00+09:00" pubdate data-updated="true">Jul 30<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/07/30/swift-partial-application/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>Swiftオフィシャルの部分適用</h2>
+
+<p>まず、Swiftオフィシャルな構文として</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func addTwoNumbers(a: Int)(b: Int) -> Int {
+</span><span class='line'>  return a + b
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add1 = addTwoNumbers(1)
+</span><span class='line'>add1(b: 2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というかんじに、</p>
+
+<ul>
+<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
+<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
+</ul>
+
+
+<p>というのができる。</p>
+
+<h2>専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+
+<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
+
+<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
+
+<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
+
+<h2>実装</h2>
+
+<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func partial&lt;A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
+</span><span class='line'>    return { function(a(), $0) }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/07/30/swift-partial-application/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2014/05/19/xcode-versioning/">これがXcodeでのバージョニングの決定版になるかも</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/05/19/xcode-versioning/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/05/19/xcode-versioning/" alt="はてなブックマーク - これがXcodeでのバージョニングの決定版になるかも" title="はてなブックマーク - これがXcodeでのバージョニングの決定版になるかも"></a>
@@ -415,73 +520,6 @@
     
     
     <p><a rel="full-article" href="/2014/02/06/pbxproj-merge/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2014/01/23/super-viewcontroller-for-a-library/">提供するXXXViewControllerの親クラスを差し替え可能にしたい!</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library/" alt="はてなブックマーク - 提供するXXXViewControllerの親クラスを差し替え可能にしたい!" title="はてなブックマーク - 提供するXXXViewControllerの親クラスを差し替え可能にしたい!"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-23T11:20:00+09:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2014</time>
-         &bull; <a rel="bookmark" href="/2014/01/23/super-viewcontroller-for-a-library/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>XXXViewControllerの親クラスを差し替えたいときありますよね？</h2>
-
-<p>UIKit内で言えば<code>UITableViewController</code>とかはその代表格。<br/>
-外部ライブラリで言うと、Google Analytics SDKの<code>GAITrackedViewController</code>とか。</p>
-
-<p>要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。</p>
-
-<p>で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。</p>
-
-<h2>runtime使う?</h2>
-
-<p>いちおう <code>class_setSuperclass</code>という関数があるのですがDeprecated&#8230;
-なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2014/01/23/super-viewcontroller-for-a-library/">続きを読む &rarr;</a></p>
     
   </footer>
 

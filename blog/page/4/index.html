@@ -106,6 +106,103 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/05/23/uikit-images/">UIKitで使われている画像パーツをまとめて取得する</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/23/uikit-images/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/23/uikit-images/" alt="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する" title="はてなブックマーク - UIKitで使われている画像パーツをまとめて取得する"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-23T10:11:00+09:00" pubdate data-updated="true">May 23<span>rd</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/05/23/uikit-images/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>UIKitで使われている画像はどこにある？</h2>
+
+<p>例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。</p>
+
+<p>プログラマというか特にはデザイナさんにとって有用だと思います。</p>
+
+<p>その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。<br/>
+具体的には（これはiOS6.1の場合）、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>が画像パーツを含むファイルになります。</p>
+
+<p>他にも、同じディレクトリに</p>
+
+<ul>
+<li>Shared.artwork</li>
+<li>Shared@2x~ipad.artwork</li>
+<li>Shared@2x~iphone.artwork</li>
+<li>Shared~ipad.artwork</li>
+<li>Shared~iphone.artwork</li>
+</ul>
+
+
+<p>がありますので取りたいものに応じてお好みで。</p>
+
+<p>ひとまず、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などでこのファイルをデスクトップにでもコピーしておきましょう。</p>
+
+<h2>artworkから画像ファイルを抽出</h2>
+
+<p>で、artworkから肝心の画像ファイルを抽出するのに、 <a href="git://github.com/davepeck/iOS-artwork.git">iOS-artwork</a> というやつを使わせてもらいます。</p>
+
+<p>まずは、これを</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/05/23/uikit-images/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/04/01/blockinjection2/">BlockInjectionをバージョンアップしました</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/04/01/blockinjection2/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/04/01/blockinjection2/" alt="はてなブックマーク - BlockInjectionをバージョンアップしました" title="はてなブックマーク - BlockInjectionをバージョンアップしました"></a>
@@ -440,79 +537,6 @@
     
     
     <p><a rel="full-article" href="/2013/01/15/ctrlp-docset/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/01/14/easy-objc-complement/">もっと簡単にVimでObjective-Cのコード補完を実行する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/14/easy-objc-complement/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/14/easy-objc-complement/" alt="はてなブックマーク - もっと簡単にVimでObjective-Cのコード補完を実行する" title="はてなブックマーク - もっと簡単にVimでObjective-Cのコード補完を実行する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-14T05:23:00+09:00" pubdate data-updated="true">Jan 14<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/01/14/easy-objc-complement/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>概要</h2>
-
-<p>先日、 <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。</p>
-
-<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これにより<code>clang_complete</code>本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。<br/>
-具体的には、<code>clang_complete</code>ともう１つ、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールいただき、</p>
-
-<ul>
-<li>after/ftplugin/objc.vim</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">let </span>g:clang_auto_user_options <span class="o">=</span> <span class="s1">&#39;path, .clang_complete, ios&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
-このオプションの中の、</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/01/14/easy-objc-complement/">続きを読む &rarr;</a></p>
     
   </footer>
 
