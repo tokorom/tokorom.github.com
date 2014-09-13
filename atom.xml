@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-07-30T22:28:41+09:00</updated>
+  <updated>2014-09-13T13:21:16+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う]]></title>
+<link href="http://www.tokoro.me/2014/09/13/swift-simulator/"/>
+<updated>2014-09-13T13:14:00+09:00</updated>
+<id>http://www.tokoro.me/2014/09/13/swift-simulator</id>
+
+      <content type="html"><![CDATA[<p>だいぶ小ネタ。</p>
+
+<h2>コード</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>#if (arch(i386) || arch(x86_64)) && os(iOS)
+</span><span class='line'>    AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug
+</span><span class='line'>    AFNetworkActivityLogger.sharedLogger().startLogging()
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>UIDevice</code>を使う方法もあるが、そちらは実際に動いたときに判別することになる。<br/>
+こちらだとそもそもiPhone用のアプリからはこのコード自体省かれる形になる。</p>
+
+<h2>意味</h2>
+
+<ul>
+<li><code>arc(i386)</code>
+
+<ul>
+<li>32bitのMac（シミュレータ）用のビルド</li>
+</ul>
+</li>
+<li><code>arc(x86_64)</code>
+
+<ul>
+<li>64bitのMac（シミュレータ）用のビルド</li>
+</ul>
+</li>
+<li><code>os(iOS)</code>
+
+<ul>
+<li>ターゲットがMacじゃなくてiOS</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>オマケ</h2>
+
+<p>ぼくの手元では、デバッグ実行時に</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>#if DEBUG
+</span><span class='line'>    println("DEBUG")
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で <code>DEBUG</code> が出力されない。普通は出力されるはず？？</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/09/13/swift-simulator/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -920,61 +988,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/01/17/tmux-toggle/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました]]></title>
-<link href="http://www.tokoro.me/2013/01/15/ctrlp-docset/"/>
-<updated>2013-01-15T00:40:00+09:00</updated>
-<id>http://www.tokoro.me/2013/01/15/ctrlp-docset</id>
-
-      <content type="html"><![CDATA[<h2>Vimでリファレンス読む必要ありますか？</h2>
-
-<p>正直微妙なところでしょうか。<br/>
-自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
-
-<p>ただ、せっかく<a href="http://www.tokoro.me/2013/01/15/ctrlp-docset/">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
-
-<ul>
-<li>Vimでさらっと検索してリファレンスから関数をコピー</li>
-<li>そのままプログラミングにペースト</li>
-</ul>
-
-
-<p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
-
-<p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
-
-<h2>Docsetを検索するCtrlPのエクステンションを作りました</h2>
-
-<p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br/>
-オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br/>
-なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
-
-<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
-
-<p>CtrlPについては、</p>
-
-<ul>
-<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
-<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
-</ul>
-
-
-<p>あたりがわかりやすかったです。</p>
-
-<p>インストールして動かすと、</p>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg" /></p>
-
-<p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/15/ctrlp-docset/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

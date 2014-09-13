@@ -106,6 +106,69 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/07/09/objc-travis-coveralls/">iOSのライブラリだってTravis CIとかCoverallsとか使うべき</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/07/09/objc-travis-coveralls/" alt="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき" title="はてなブックマーク - iOSのライブラリだってTravis CIとかCoverallsとか使うべき"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T07:00:00+09:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/07/09/objc-travis-coveralls/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png"></p>
+
+<p>今日はGithubに公開したiOS用のライブラリを <strong>Travis CI</strong> と <strong>Coveralls</strong> に対応した手順を紹介したいと思います。</p>
+
+<p>なお、実際にこれらを適用して運用しているリポジトリのサンプルは、</p>
+
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a></p>
+
+<p>になります。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/07/09/objc-travis-coveralls/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/06/17/ios7-ui-design/">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/06/17/ios7-ui-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/06/17/ios7-ui-design/" alt="はてなブックマーク - 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント" title="はてなブックマーク - 【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント"></a>
@@ -449,95 +512,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
     
     
     <p><a rel="full-article" href="/2013/06/12/xcode5-preview/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2013/05/27/ssgentlealertview/">UIAlertViewよりもおとなしいメッセージダイアログを利用する</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/05/27/ssgentlealertview/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/05/27/ssgentlealertview/" alt="はてなブックマーク - UIAlertViewよりもおとなしいメッセージダイアログを利用する" title="はてなブックマーク - UIAlertViewよりもおとなしいメッセージダイアログを利用する"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-27T23:30:00+09:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
-         &bull; <a rel="bookmark" href="/2013/05/27/ssgentlealertview/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>UIAlertViewは警告目的のダイアログ</h2>
-
-<p>そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>一般にアラートは、次のような場合には不要です。
-</span><span class='line'>* なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。
-</span><span class='line'>  代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と記載されています。</p>
-
-<p>その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。<br/>
-それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。</p>
-
-<p>警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。</p>
-
-<h2>警告目的ではない普通のメッセージダイアログ</h2>
-
-<p>それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。</p>
-
-<p><a href="https://github.com/tokorom/SSGentleAlertView">https://github.com/tokorom/SSGentleAlertView</a></p>
-
-<p>このSSGentleAlertViewは、</p>
-
-<ul>
-<li>UIAlertViewと同じコードで利用できる</li>
-<li>UIAlertViewとは違い、外観を変更できる</li>
-<li>デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる</li>
-</ul>
-
-
-<p>という３点に留意して作っています。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2013/05/27/ssgentlealertview/">続きを読む &rarr;</a></p>
     
   </footer>
 

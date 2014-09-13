@@ -106,6 +106,111 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2014/09/13/swift-simulator/">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/09/13/swift-simulator/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/09/13/swift-simulator/" alt="はてなブックマーク - SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う" title="はてなブックマーク - SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-13T13:14:00+09:00" pubdate data-updated="true">Sep 13<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/09/13/swift-simulator/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>だいぶ小ネタ。</p>
+
+<h2>コード</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>#if (arch(i386) || arch(x86_64)) && os(iOS)
+</span><span class='line'>    AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug
+</span><span class='line'>    AFNetworkActivityLogger.sharedLogger().startLogging()
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>UIDevice</code>を使う方法もあるが、そちらは実際に動いたときに判別することになる。<br/>
+こちらだとそもそもiPhone用のアプリからはこのコード自体省かれる形になる。</p>
+
+<h2>意味</h2>
+
+<ul>
+<li><code>arc(i386)</code>
+
+<ul>
+<li>32bitのMac（シミュレータ）用のビルド</li>
+</ul>
+</li>
+<li><code>arc(x86_64)</code>
+
+<ul>
+<li>64bitのMac（シミュレータ）用のビルド</li>
+</ul>
+</li>
+<li><code>os(iOS)</code>
+
+<ul>
+<li>ターゲットがMacじゃなくてiOS</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>オマケ</h2>
+
+<p>ぼくの手元では、デバッグ実行時に</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>#if DEBUG
+</span><span class='line'>    println("DEBUG")
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で <code>DEBUG</code> が出力されない。普通は出力されるはず？？</p>
+</div>
+
+  <footer>
+    
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2014/07/30/swift-partial-application/">Swiftで部分適用（カリー化）</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/07/30/swift-partial-application/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/07/30/swift-partial-application/" alt="はてなブックマーク - Swiftで部分適用（カリー化）" title="はてなブックマーク - Swiftで部分適用（カリー化）"></a>
@@ -446,80 +551,6 @@
     
     
     <p><a rel="full-article" href="/2014/04/12/improve-storyboard-segue/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2014/02/06/pbxproj-merge/">Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/02/06/pbxproj-merge/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/02/06/pbxproj-merge/" alt="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！" title="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-06T14:02:00+09:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
-         &bull; <a rel="bookmark" href="/2014/02/06/pbxproj-merge/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><strong>2014/02/09 追記</strong><br/>
-コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！<br/>
-今現在は <code>merge=mergepbx</code> がいい感じになってきているのでそっちがオススメです。</p>
-
-<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
-
-<p>例えば、</p>
-
-<ul>
-<li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
-<li>Bさんが <code>BBLabel.m</code> をプロジェクトに追加して</li>
-</ul>
-
-
-<p>とただそれだけなのにマージのときにコンフリクトする<code>pbxproj</code>さん。。。</p>
-
-<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/pbxproj_status.png"></p>
-
-<p>ただそれぞれファイルを追加だけのことでコンフリクトするなんて&#8230;<br/>
-どうにかならんもんかいとTwitterでつぶやいたところ、 <a href="https://twitter.com/azu_re">@azu_re</a> さんから有り難い教えが！</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2014/02/06/pbxproj-merge/">続きを読む &rarr;</a></p>
     
   </footer>
 
