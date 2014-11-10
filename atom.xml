@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-09-13T13:21:16+09:00</updated>
+  <updated>2014-11-10T10:46:16+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,175 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[NSTimeZoneから取得できる表示用文字列のサンプル]]></title>
+<link href="http://www.tokoro.me/2014/11/10/nstimezone-sample/"/>
+<updated>2014-11-10T10:22:00+09:00</updated>
+<id>http://www.tokoro.me/2014/11/10/nstimezone-sample</id>
+
+      <content type="html"><![CDATA[<p>さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。</p>
+
+<h2>abbreviation</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>GMT+9</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>name</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Asia/Tokyo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>description</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Asia/Tokyo (GMT+9) offset 32400</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>localizedName(_:locale:)</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> NSLocale </th>
+<th align="left"> NSTimeZoneNameStyle  </th>
+<th align="left"> 出力結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> Standard  </td>
+<td align="left"> <strong>Japan Standard Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortStandard  </td>
+<td align="left"> <strong>GMT+9</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> DaylightSaving  </td>
+<td align="left"> <strong>Japan Daylight Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortDaylightSaving  </td>
+<td align="left"> <strong>GMT+9</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> Generic  </td>
+<td align="left"> <strong>Japan Standard Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortGeneric  </td>
+<td align="left"> <strong>Japan Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> Standard  </td>
+<td align="left"> <strong>日本標準時</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortStandard  </td>
+<td align="left"> <strong>JST</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> DaylightSaving  </td>
+<td align="left"> <strong>日本夏時間</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortDaylightSaving  </td>
+<td align="left"> <strong>JDT</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> Generic  </td>
+<td align="left"> <strong>日本標準時</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortGeneric  </td>
+<td align="left"> <strong>JST</strong></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>上記を試したコード</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let timeZone = NSTimeZone.systemTimeZone()
+</span><span class='line'>
+</span><span class='line'>println("#### abbreviation, \(timeZone.abbreviation)")
+</span><span class='line'>println("#### name, \(timeZone.name)")
+</span><span class='line'>println("#### description, \(timeZone.description)")
+</span><span class='line'>
+</span><span class='line'>let en = NSLocale(localeIdentifier: "en_US")
+</span><span class='line'>println("#### Standard, \(timeZone.localizedName(.Standard, locale: en))")
+</span><span class='line'>println("#### ShortStandard, \(timeZone.localizedName(.ShortStandard, locale: en))")
+</span><span class='line'>println("#### DaylightSaving, \(timeZone.localizedName(.DaylightSaving, locale: en))")
+</span><span class='line'>println("#### ShortDaylightSaving, \(timeZone.localizedName(.ShortDaylightSaving, locale: en))")
+</span><span class='line'>println("#### Generic, \(timeZone.localizedName(.Generic, locale: en))")
+</span><span class='line'>println("#### ShortGeneric, \(timeZone.localizedName(.ShortGeneric, locale: en))")
+</span><span class='line'>
+</span><span class='line'>let ja = NSLocale(localeIdentifier: "ja_JP")
+</span><span class='line'>println("#### Standard, \(timeZone.localizedName(.Standard, locale: ja))")
+</span><span class='line'>println("#### ShortStandard, \(timeZone.localizedName(.ShortStandard, locale: ja))")
+</span><span class='line'>println("#### DaylightSaving, \(timeZone.localizedName(.DaylightSaving, locale: ja))")
+</span><span class='line'>println("#### ShortDaylightSaving, \(timeZone.localizedName(.ShortDaylightSaving, locale: ja))")
+</span><span class='line'>println("#### Generic, \(timeZone.localizedName(.Generic, locale: ja))")
+</span><span class='line'>println("#### ShortGeneric, \(timeZone.localizedName(.ShortGeneric, locale: ja))")</span></code></pre></td></tr></table></div></figure>
+
+
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/11/10/nstimezone-sample/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -939,55 +1108,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/03/07/block-injection/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた]]></title>
-<link href="http://www.tokoro.me/2013/01/17/tmux-toggle/"/>
-<updated>2013-01-17T01:55:00+09:00</updated>
-<id>http://www.tokoro.me/2013/01/17/tmux-toggle</id>
-
-      <content type="html"><![CDATA[<p><strong> ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします </strong></p>
-
-<h2>導入</h2>
-
-<p><a href="http://d.hatena.ne.jp/naoya/20130108/1357630895">近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について</a> を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。</p>
-
-<p>設定は以下のとおり。</p>
-
-<ul>
-<li>.tmux.conf</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">bind </span>C-t last-pane
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。</p>
-
-<p>ただ、じつはこの真似をする前には C-t C-t には <code>last-window</code> を割り当てており、paneを使っていないケースではそれはそれで便利だった。</p>
-
-<p>例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。</p>
-
-<h2>改善</h2>
-
-<p>ということで、</p>
-
-<ul>
-<li>paneがあれば <code>last-pane</code></li>
-<li>paneがなければ <code>last-window</code></li>
-<li>ついでにwindowさえもなければ新しいwindowを作って移動</li>
-</ul>
-
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/01/17/tmux-toggle/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

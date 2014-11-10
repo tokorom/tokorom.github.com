@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい - TOKOROM BLOG</title>
+  <title>NSTimeZoneから取得できる表示用文字列のサンプル - TOKOROM BLOG</title>
   <meta name="author" content="Yuta ToKoRo">
   <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
 
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.tokoro.me/2012/09/12/objc-private-test/">
+  <link rel="canonical" href="http://www.tokoro.me/2014/11/10/nstimezone-sample/">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
 
@@ -107,25 +107,25 @@
     <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2014/11/10/nstimezone-sample/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2014/11/10/nstimezone-sample/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/09/12/objc-private-test/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2014/11/10/nstimezone-sample/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2012/09/12/objc-private-test/" data-via="tokorom" data-counturl="http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2014/11/10/nstimezone-sample/" data-via="tokorom" data-counturl="http://www.tokoro.me/2014/11/10/nstimezone-sample/" target="_blank" >Tweet</a>
   
 </div>
 
@@ -134,9 +134,9 @@
   <header>
     <h1 class="entry-title">
 
-Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい<a class="entry-title-link" href="http://www.tokoro.me/2012/09/12/objc-private-test/" style="display:none">-</a>
+NSTimeZoneから取得できる表示用文字列のサンプル<a class="entry-title-link" href="http://www.tokoro.me/2014/11/10/nstimezone-sample/" style="display:none">-</a>
 
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/09/12/objc-private-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/09/12/objc-private-test/" alt="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい" title="はてなブックマーク - Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい"></a>
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/11/10/nstimezone-sample/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/11/10/nstimezone-sample/" alt="はてなブックマーク - NSTimeZoneから取得できる表示用文字列のサンプル" title="はてなブックマーク - NSTimeZoneから取得できる表示用文字列のサンプル"></a>
 </h1>
 
     
@@ -153,61 +153,121 @@ Objective-Cのテストクラスからプライベートメソッド/プロパ�
   
 
 
-<time datetime="2012-09-12T14:10:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/09/12/objc-private-test/">Permalink</a>
+<time datetime="2014-11-10T10:22:00+09:00" pubdate data-updated="true">Nov 10<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/11/10/nstimezone-sample/">Permalink</a>
       </p>
     
   </header>
 
-<div class="entry-content"><p>dkfjさんが <a href="http://d.hatena.ne.jp/dkfj/20120909/1347176787">Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法</a> という記事を書かれていました。</p>
+<div class="entry-content"><p>さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。</p>
 
-<p>せっかくなので私がやっている方法も書かせていただきます。</p>
-
-<h2>テスト対象のクラス</h2>
-
-<p>以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。</p>
+<h2>abbreviation</h2>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;ExampleClass.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ExampleClass</span><span class="p">()</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">privateMethod</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">ExampleClass</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">privateMethod</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>GMT+9</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>テストクラス</h2>
+<h2>name</h2>
 
-<p>自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。</p>
-
-<!-- more -->
-
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Asia/Tokyo</span></code></pre></td></tr></table></div></figure>
 
 
+<h2>description</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Asia/Tokyo (GMT+9) offset 32400</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>localizedName(_:locale:)</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> NSLocale </th>
+<th align="left"> NSTimeZoneNameStyle  </th>
+<th align="left"> 出力結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> Standard  </td>
+<td align="left"> <strong>Japan Standard Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortStandard  </td>
+<td align="left"> <strong>GMT+9</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> DaylightSaving  </td>
+<td align="left"> <strong>Japan Daylight Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortDaylightSaving  </td>
+<td align="left"> <strong>GMT+9</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> Generic  </td>
+<td align="left"> <strong>Japan Standard Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortGeneric  </td>
+<td align="left"> <strong>Japan Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> Standard  </td>
+<td align="left"> <strong>日本標準時</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortStandard  </td>
+<td align="left"> <strong>JST</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> DaylightSaving  </td>
+<td align="left"> <strong>日本夏時間</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortDaylightSaving  </td>
+<td align="left"> <strong>JDT</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> Generic  </td>
+<td align="left"> <strong>日本標準時</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortGeneric  </td>
+<td align="left"> <strong>JST</strong></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>上記を試したコード</h2>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -230,46 +290,29 @@ Objective-Cのテストクラスからプライベートメソッド/プロパ�
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &lt;GHUnitIOS/GHUnit.h&gt; </span>
-</span><span class='line'><span class="cp">#import &quot;ExampleClass.h&quot;</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let timeZone = NSTimeZone.systemTimeZone()
 </span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ExampleClass</span> <span class="nl">(Private)</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">privateMethod</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>println("#### abbreviation, \(timeZone.abbreviation)")
+</span><span class='line'>println("#### name, \(timeZone.name)")
+</span><span class='line'>println("#### description, \(timeZone.description)")
 </span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">ExsampleClassTest</span> : <span class="nc">GHTestCase</span>
-</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>let en = NSLocale(localeIdentifier: "en_US")
+</span><span class='line'>println("#### Standard, \(timeZone.localizedName(.Standard, locale: en))")
+</span><span class='line'>println("#### ShortStandard, \(timeZone.localizedName(.ShortStandard, locale: en))")
+</span><span class='line'>println("#### DaylightSaving, \(timeZone.localizedName(.DaylightSaving, locale: en))")
+</span><span class='line'>println("#### ShortDaylightSaving, \(timeZone.localizedName(.ShortDaylightSaving, locale: en))")
+</span><span class='line'>println("#### Generic, \(timeZone.localizedName(.Generic, locale: en))")
+</span><span class='line'>println("#### ShortGeneric, \(timeZone.localizedName(.ShortGeneric, locale: en))")
 </span><span class='line'>
-</span><span class='line'><span class="k">@implementation</span> <span class="nc">ExsampleClassTest</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testPrivateMethod</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">ExampleClass</span><span class="o">*</span> <span class="n">example</span> <span class="o">=</span> <span class="p">[</span><span class="n">ExampleClass</span> <span class="n">new</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">GHAssertFalse</span><span class="p">([</span><span class="n">example</span> <span class="n">privateMethod</span><span class="p">],</span> <span class="nb">nil</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">example</span><span class="p">.</span><span class="n">flag</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">GHAssertTrue</span><span class="p">([</span><span class="n">example</span> <span class="n">privateMethod</span><span class="p">],</span> <span class="nb">nil</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>let ja = NSLocale(localeIdentifier: "ja_JP")
+</span><span class='line'>println("#### Standard, \(timeZone.localizedName(.Standard, locale: ja))")
+</span><span class='line'>println("#### ShortStandard, \(timeZone.localizedName(.ShortStandard, locale: ja))")
+</span><span class='line'>println("#### DaylightSaving, \(timeZone.localizedName(.DaylightSaving, locale: ja))")
+</span><span class='line'>println("#### ShortDaylightSaving, \(timeZone.localizedName(.ShortDaylightSaving, locale: ja))")
+</span><span class='line'>println("#### Generic, \(timeZone.localizedName(.Generic, locale: ja))")
+</span><span class='line'>println("#### ShortGeneric, \(timeZone.localizedName(.ShortGeneric, locale: ja))")</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>メリットとデメリット</h2>
-
-<h3>メリット</h3>
-
-<ul>
-<li>プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる</li>
-</ul>
-
-
-<h3>デメリット</h3>
-
-<ul>
-<li>本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある</li>
-</ul>
 
 </div>
 
@@ -293,12 +336,12 @@ Objective-Cのテストクラスからプライベートメソッド/プロパ�
   
 
 
-<time datetime="2012-09-12T14:10:00+09:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+<time datetime="2014-11-10T10:22:00+09:00" pubdate data-updated="true">Nov 10<span>th</span>, 2014</time>
 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/objc/'>objc</a>
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/swift/'>swift</a>
   
 </span>
 
@@ -311,35 +354,33 @@ Objective-Cのテストクラスからプライベートメソッド/プロパ�
       <div class="sharing">
   
     
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">+1</a>
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2014/11/10/nstimezone-sample/" target="_blank">+1</a>
     
   
   
     
-    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank">Share</a>
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2014/11/10/nstimezone-sample/" target="_blank">Share</a>
     
   
   
 <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
   data-hatena-bookmark-layout="standard"
-  data-hatena-bookmark-url="http://www.tokoro.me/2012/09/12/objc-private-test/">
+  data-hatena-bookmark-url="http://www.tokoro.me/2014/11/10/nstimezone-sample/">
   <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
     alt="このエントリーをはてなブックマークに追加" width="20" height="20"
     style="border: none">
 </a>
 
   
-    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2012/09/12/objc-private-test/" data-via="tokorom" data-counturl="http://www.tokoro.me/2012/09/12/objc-private-test/" target="_blank" >Tweet</a>
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2014/11/10/nstimezone-sample/" data-via="tokorom" data-counturl="http://www.tokoro.me/2014/11/10/nstimezone-sample/" target="_blank" >Tweet</a>
   
 </div>
 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/02/ghunit-jenkins-coverage/" title="Previous Post: GHUnitのテストカバレッジをJenkinsで表示する">&laquo; GHUnitのテストカバレッジをJenkinsで表示する</a>
+        <a class="basic-alignment left" href="/2014/09/13/swift-simulator/" title="Previous Post: SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う">&laquo; SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</a>
       
-      
-        <a class="basic-alignment right" href="/2012/12/31/mac-terminal-japanese/" title="Next Post: Mac + Terminal + tmux + vim でクリップボードを快適に使う">Mac + Terminal + tmux + vim でクリップボードを快適に使う &raquo;</a>
       
     </p>
   </footer>
@@ -464,8 +505,8 @@ Objective-Cのテストクラスからプライベートメソッド/プロパ�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.tokoro.me/2012/09/12/objc-private-test/';
-        var disqus_url = 'http://www.tokoro.me/2012/09/12/objc-private-test/';
+        var disqus_identifier = 'http://www.tokoro.me/2014/11/10/nstimezone-sample/';
+        var disqus_url = 'http://www.tokoro.me/2014/11/10/nstimezone-sample/';
         var disqus_script = 'embed.js';
       
     (function () {
