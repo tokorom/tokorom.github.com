@@ -108,6 +108,81 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" alt="はてなブックマーク - さくらVPSにJenkinsさんをインストールする" title="はてなブックマーク - さくらVPSにJenkinsさんをインストールする"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-24T02:57:00+09:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/07/24/install-jenkins-to-sakura/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>JDKのインストール</h2>
+
+<p>Javaが未インストールならこちらから。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Jenkinsのインストール</h2>
+
+<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+</span><span class='line'>$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+</span><span class='line'>$ sudo yum install jenkins</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2012/07/24/install-jenkins-to-sakura/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/07/15/octopress-part-of-codes/">Octopressでソースコードの一部分だけを参照する</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/15/octopress-part-of-codes/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/15/octopress-part-of-codes/" alt="はてなブックマーク - Octopressでソースコードの一部分だけを参照する" title="はてなブックマーク - Octopressでソースコードの一部分だけを参照する"></a>
@@ -304,7 +379,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Yuta ToKoRo -
+  Copyright &copy; 2015 - Yuta ToKoRo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

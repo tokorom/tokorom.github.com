@@ -108,6 +108,74 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2013/01/05/objc-dynamic/">Objective-Cで&#8221;@dynamic&#8221;の使いどころを考える</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/05/objc-dynamic/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/05/objc-dynamic/" alt="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える" title="はてなブックマーク - Objective-Cで"@dynamic"の使いどころを考える"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-05T15:07:00+09:00" pubdate data-updated="true">Jan 5<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/05/objc-dynamic/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>Objective-Cの @dynamic はお好きですか？</h2>
+
+<p>ぼくはけっこう好きです。</p>
+
+<p><code>@synthesize</code>のほうは昔はほぼ必須で書かないといけなかったり <a href="/2012/08/12/objc-new-statements/">Xcode4.4で省略できるようになった</a> ことで有名ですが、いっぽうで<code>@dynamic</code>のほうはあまり日の目を浴びていない気がします。</p>
+
+<p>そこで、今日は<code>@dynamic</code>について再考してみることにしました。<br/>
+以下、ぼくが思い返してみて<code>@dynamic</code>がこんなときに便利だったと感じたところを２点挙げさせていただきます。<br/>
+みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。</p>
+
+<h2>クラスの内部実装が適当なのを隠すときに</h2>
+
+<p>そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。<br/>
+例えば、ゲームスコアを管理する<code>GameScore</code>クラスを作ったとして、その中で <strong>ハイスコア</strong> とかいくつかのスコアを管理する際、<code>scores</code>というNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2013/01/05/objc-dynamic/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/02/clang-complete-for-vim/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/02/clang-complete-for-vim/" alt="はてなブックマーク - VimでObjective-Cのコード補完を実行する with clang" title="はてなブックマーク - VimでObjective-Cのコード補完を実行する with clang"></a>
@@ -412,95 +480,6 @@
 
     </article>
   
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2012/08/17/safe-objc/">Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/08/17/safe-objc/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/08/17/safe-objc/" alt="はてなブックマーク - Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント" title="はてなブックマーク - Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-17T07:36:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
-         &bull; <a rel="bookmark" href="/2012/08/17/safe-objc/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
-
-<p>例えば、こんなコードを書いていませんか？</p>
-
-<figure class='code'><figcaption><span>Library.hのもしかしたら改善できるかもしれない例</span></figcaption><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;OtherLibrary1.h&quot;</span>
-</span><span class='line'><span class="cp">#import &quot;OtherLibrary2.h&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@interface</span> <span class="nc">Library</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">OtherLibrary1</span><span class="o">*</span> <span class="n">otherLibrary1</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">OtherLibrary2</span><span class="o">*</span> <span class="n">otherLibrary2</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？<br/>
-そうしてしまうと、この <em>Library.h</em> をimportする全てのクラスに、<em>OtherLibrary1.h</em>と<em>OtherLibrary2.h</em>も芋づる式にimportすることを強要することになってしまいます。<br/>
-実際にこの <em>Library</em> を使うクラスでは、<em>otherLibrary1</em>も<em>otherLibrary2</em>も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。<br/>
-具体的にはこの状態だと、 <strong>OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る</strong> 状態になってしまっています。</p>
-
-<p>以下、これを解消するための変更例です。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2012/08/17/safe-objc/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -579,7 +558,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Yuta ToKoRo -
+  Copyright &copy; 2015 - Yuta ToKoRo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

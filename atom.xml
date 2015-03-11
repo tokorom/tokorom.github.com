@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2014-11-10T10:46:16+09:00</updated>
+  <updated>2015-03-11T17:10:11+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[AlamofireでGenericにModelオブジェクトを取得する]]></title>
+<link href="http://www.tokoro.me/2015/03/11/almofire/"/>
+<updated>2015-03-11T15:59:00+09:00</updated>
+<id>http://www.tokoro.me/2015/03/11/almofire</id>
+
+      <content type="html"><![CDATA[<p>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています</p>
+
+<p>Swiftいいですね！</p>
+
+<p>これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。
+例えば、<a href="https://github.com/Alamofire/Alamofire">Alamofire</a> のInitial Commitも2014/7/31だったりと。。。</p>
+
+<p>今となっては（2015年3月）Swift公開から早９ヶ月が経過しており、ライブラリの選択肢もだいぶ広がりました。
+また、まだSwiftのライブラリを管理する環境もだいぶ整ってきました（ちょうど本日3/11にCocoaPodsのDynamic Framework対応版が公開されました！）。</p>
+
+<p>ということで、３月からはじめる新案件では<code>Alamofire</code>の採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。
+やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！</p>
+
+<p>※基本的にはAlamofireのREADMEに書かれている話です</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2015/03/11/almofire/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -1049,65 +1078,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <h2>UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/04/01/blockinjection2/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[BlockInjectionで元のソースコードを汚さないで振る舞い追加]]></title>
-<link href="http://www.tokoro.me/2013/03/07/block-injection/"/>
-<updated>2013-03-07T12:05:00+09:00</updated>
-<id>http://www.tokoro.me/2013/03/07/block-injection</id>
-
-      <content type="html"><![CDATA[<h2>例えばこんなコードに違和感はありませんか？</h2>
-
-<p>自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">sendButtonDidPush:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">// トラッキングのためのコード</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">tracker</span> <span class="nl">sendEventWithCategory:</span><span class="s">@&quot;uiAction&quot;</span>
-</span><span class='line'>                      <span class="nl">withAction:</span><span class="s">@&quot;sendButtonDidPush&quot;</span>
-</span><span class='line'>                       <span class="nl">withLabel:</span><span class="nb">nil</span>
-</span><span class='line'>                       <span class="nl">withValue:</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// ...</span>
-</span><span class='line'>  <span class="c1">// 以降、送信ボタンを押したときの処理</span>
-</span><span class='line'>  <span class="c1">// ...</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。</p>
-
-<p>これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。</p>
-
-<p>どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？<br/>
-いわゆるアスペクト指向的なかんじで。</p>
-
-<h2>そんなときに BlockInjection</h2>
-
-<p>ということで本題に入りますが、それを解決するために <a href="https://github.com/tokorom/BlockInjection">BlockInjection</a> というライブラリを作りました。<br/>
-古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。</p>
-
-<p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/03/07/block-injection/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

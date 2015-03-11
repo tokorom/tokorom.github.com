@@ -108,6 +108,74 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/03/11/almofire/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/03/11/almofire/" alt="はてなブックマーク - AlamofireでGenericにModelオブジェクトを取得する" title="はてなブックマーク - AlamofireでGenericにModelオブジェクトを取得する"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-11T15:59:00+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+         &bull; <a rel="bookmark" href="/2015/03/11/almofire/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています</p>
+
+<p>Swiftいいですね！</p>
+
+<p>これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。
+例えば、<a href="https://github.com/Alamofire/Alamofire">Alamofire</a> のInitial Commitも2014/7/31だったりと。。。</p>
+
+<p>今となっては（2015年3月）Swift公開から早９ヶ月が経過しており、ライブラリの選択肢もだいぶ広がりました。
+また、まだSwiftのライブラリを管理する環境もだいぶ整ってきました（ちょうど本日3/11にCocoaPodsのDynamic Framework対応版が公開されました！）。</p>
+
+<p>ということで、３月からはじめる新案件では<code>Alamofire</code>の採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。
+やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！</p>
+
+<p>※基本的にはAlamofireのREADMEに書かれている話です</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2015/03/11/almofire/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2014/11/10/nstimezone-sample/">NSTimeZoneから取得できる表示用文字列のサンプル</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/11/10/nstimezone-sample/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/11/10/nstimezone-sample/" alt="はてなブックマーク - NSTimeZoneから取得できる表示用文字列のサンプル" title="はてなブックマーク - NSTimeZoneから取得できる表示用文字列のサンプル"></a>
@@ -586,95 +654,6 @@
 
     </article>
   
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2014/04/21/objc-async-test/">Objective-Cで非同期処理のテストをシンプルに書く方法</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/04/21/objc-async-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/04/21/objc-async-test/" alt="はてなブックマーク - Objective-Cで非同期処理のテストをシンプルに書く方法" title="はてなブックマーク - Objective-Cで非同期処理のテストをシンプルに書く方法"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-21T17:03:00+09:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
-         &bull; <a rel="bookmark" href="/2014/04/21/objc-async-test/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png"></p>
-
-<h2>非同期処理のテストってどう書いてますか？</h2>
-
-<p>標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、</p>
-
-<ul>
-<li>GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する</li>
-<li>GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？）</li>
-<li>expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う</li>
-</ul>
-
-
-<p>となるかと思います。
-ただ、私が調べた時点だとどれもしっくりきませんでした。</p>
-
-<p>まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。</p>
-
-<p>また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えば<code>GHAsyncTestCase</code>を継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前に<code>prepare</code>とかを呼ばないといけないのがちょっと鬱陶しい。</p>
-
-<p>そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。</p>
-
-<h2>こうしたい！</h2>
-
-<p>ぼくとしては理想的にはこういうライブラリを使いたいと思いました。</p>
-
-<ol>
-<li>テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの</li>
-<li>TestCaseの親クラスが限定されないほうがよい</li>
-<li>余分なコードを書かずにシンプルに書きたい</li>
-<li>それを利用することでテストの実行が遅くなったりしない</li>
-</ol>
-
-
-<p>しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2014/04/21/objc-async-test/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -751,7 +730,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Yuta ToKoRo -
+  Copyright &copy; 2015 - Yuta ToKoRo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
