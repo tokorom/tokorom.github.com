@@ -238,7 +238,7 @@ AlamofireでGenericにModelオブジェクトを取得する<a class="entry-titl
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>Alamofire.request(.GET, "https://api.github.com/users").
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Alamofire.request(.GET, "https://api.github.com/users")
 </span><span class='line'>    .validate()
 </span><span class='line'>    .responseCollection { [unowned self] (_, _, users: [User]?, error) in
 </span><span class='line'>        if let error = error {
