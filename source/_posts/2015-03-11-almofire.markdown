@@ -59,7 +59,7 @@ Alamofire.request(.GET, "https://api.github.com/users")
 例えば、こんなかんじで。
 
 ```
-Alamofire.request(.GET, "https://api.github.com/users").
+Alamofire.request(.GET, "https://api.github.com/users")
     .validate()
     .responseCollection { [unowned self] (_, _, users: [User]?, error) in
         if let error = error {
