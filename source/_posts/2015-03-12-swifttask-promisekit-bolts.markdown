@@ -82,6 +82,7 @@ request(Alamofire.Method.GET, urlString, User.self).continueWithBlock { (task: B
 - すっきり直感的に書けます
 - Swift専用のインターフェースがないため、Genericsを使うには工夫が必要になります
     - 上の例だと引数にModelクラスのTypeを指定するようにしていますが、素直にGenericsを使えないのはちょっと残念です
+    - TaskのResultは`AnyObject`になってしまうので個別にダウンキャストなどが必要です
 
 ## Taskを作るほうのコード
 
