@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2015-03-11T17:15:34+09:00</updated>
+  <updated>2015-03-12T17:53:50+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）]]></title>
+<link href="http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/"/>
+<updated>2015-03-12T17:01:00+09:00</updated>
+<id>http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts</id>
+
+      <content type="html"><![CDATA[<ul>
+<li>※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます</li>
+<li>※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです</li>
+</ul>
+
+
+<p>次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の</p>
+
+<ul>
+<li><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a></li>
+<li><a href="https://github.com/mxcl/PromiseKit">PromiseKit</a></li>
+<li><a href="https://github.com/BoltsFramework/Bolts-iOS">Bolts-iOS</a></li>
+</ul>
+
+
+<p>を（表面だけ）使って比較してみました。</p>
+
+<p>なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。</p>
+
+<p>その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。</p>
+
+<p>以下にそれぞれ使ってみた結果を紹介させていただきます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -1041,43 +1078,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>まずは、これを</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/05/23/uikit-images/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[BlockInjectionをバージョンアップしました]]></title>
-<link href="http://www.tokoro.me/2013/04/01/blockinjection2/"/>
-<updated>2013-04-01T23:12:00+09:00</updated>
-<id>http://www.tokoro.me/2013/04/01/blockinjection2</id>
-
-      <content type="html"><![CDATA[<h2>BlockInjectionとはなんぞや</h2>
-
-<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br/>
-クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
-
-<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
-
-<h2>バージョンアップ内容</h2>
-
-<p><a href="http://www.tokoro.me/2013/03/07/block-injection/">前記事</a> からのバージョンアップ内容は以下です。</p>
-
-<ul>
-<li>リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます）</li>
-<li>クラスメソッドにも対応しました</li>
-<li>複数のクラスやメソッドを一度に追加できるようになりました</li>
-<li>正規表現で指定できるようになりました(※1)</li>
-<li>注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2)</li>
-<li>オマケで単純なメソッド実装置き換え機能も追加しました</li>
-</ul>
-
-
-<h2>UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/04/01/blockinjection2/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>

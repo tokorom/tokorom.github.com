@@ -108,6 +108,75 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2012/07/29/jenkins-octopress/">Jenkins@さくらVPSにOctopressのデプロイを任せてみる</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/29/jenkins-octopress/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/29/jenkins-octopress/" alt="はてなブックマーク - Jenkins@さくらVPSにOctopressのデプロイを任せてみる" title="はてなブックマーク - Jenkins@さくらVPSにOctopressのデプロイを任せてみる"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-29T15:50:00+09:00" pubdate data-updated="true">Jul 29<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/2012/07/29/jenkins-octopress/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>目的</h2>
+
+<p>Octopressで記事を書いたあと、 <strong>Bitbucket</strong> に <code>git push origin source</code> とするだけで <strong>Github Pages</strong> に勝手にデプロイされるようにする。</p>
+
+<h2>イメージ</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/octopress_deploy.png"></p>
+
+<ol>
+<li>自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく</li>
+<li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
+<li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
+<li>Jenkinsは作成した記事をGithub Pagesにデプロイする</li>
+</ol>
+
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2012/07/29/jenkins-octopress/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" alt="はてなブックマーク - さくらVPSにJenkinsさんをインストールする" title="はてなブックマーク - さくらVPSにJenkinsさんをインストールする"></a>

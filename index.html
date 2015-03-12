@@ -108,6 +108,82 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2015/03/12/swifttask-promisekit-bolts/">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/" alt="はてなブックマーク - SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）" title="はてなブックマーク - SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-12T17:01:00+09:00" pubdate data-updated="true">Mar 12<span>th</span>, 2015</time>
+         &bull; <a rel="bookmark" href="/2015/03/12/swifttask-promisekit-bolts/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><ul>
+<li>※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます</li>
+<li>※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです</li>
+</ul>
+
+
+<p>次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の</p>
+
+<ul>
+<li><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a></li>
+<li><a href="https://github.com/mxcl/PromiseKit">PromiseKit</a></li>
+<li><a href="https://github.com/BoltsFramework/Bolts-iOS">Bolts-iOS</a></li>
+</ul>
+
+
+<p>を（表面だけ）使って比較してみました。</p>
+
+<p>なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。</p>
+
+<p>その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。</p>
+
+<p>以下にそれぞれ使ってみた結果を紹介させていただきます。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2015/03/12/swifttask-promisekit-bolts/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/03/11/almofire/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/03/11/almofire/" alt="はてなブックマーク - AlamofireでGenericにModelオブジェクトを取得する" title="はてなブックマーク - AlamofireでGenericにModelオブジェクトを取得する"></a>
@@ -570,84 +646,6 @@
     
     
     <p><a rel="full-article" href="/2014/07/30/swift-partial-application/">続きを読む &rarr;</a></p>
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2014/05/19/xcode-versioning/">これがXcodeでのバージョニングの決定版になるかも</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/05/19/xcode-versioning/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/05/19/xcode-versioning/" alt="はてなブックマーク - これがXcodeでのバージョニングの決定版になるかも" title="はてなブックマーク - これがXcodeでのバージョニングの決定版になるかも"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-19T14:16:00+09:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
-         &bull; <a rel="bookmark" href="/2014/05/19/xcode-versioning/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/xcode_versioning.png"></p>
-
-<h2>概要</h2>
-
-<h3>この記事でできるようになること</h3>
-
-<ul>
-<li>安定してInfo.plistの内容（ここではBuild番号）を変更できる</li>
-<li>ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される</li>
-<li>Info.plistに差分がでないのでcommitのときに邪魔にならない</li>
-</ul>
-
-
-<p>なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感が<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">こちら</a>に詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">熊谷さんの記事</a>をご一読ください！</p>
-
-<h3>必要な設定</h3>
-
-<ul>
-<li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
-<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
-</ul>
-
-
-<p>以下、具体的な話をします。</p>
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2014/05/19/xcode-versioning/">続きを読む &rarr;</a></p>
     
   </footer>
 
