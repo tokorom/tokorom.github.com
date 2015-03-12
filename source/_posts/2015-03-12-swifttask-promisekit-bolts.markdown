@@ -170,7 +170,9 @@ public func request<T: ResponseCollectionSerializable>(method: Alamofire.Method,
 | PromiseKit | ⚪︎ |   | 
 | Bolts      |   |   | ⚪︎
 
-この表はぼくが気にした点を書いただけですので、この他 [inamiyさんのこちらの記事](http://qiita.com/inamiy/items/0756339aee35849384c3) などにも機能差分がまとめられてます。
+この表はぼくが気にした点を抽出して書いたものですのでちょっと贔屓目に見えてしまうかも。。。
+
+この他 [inamiyさんのこちらの記事](http://qiita.com/inamiy/items/0756339aee35849384c3) などにも機能差分がまとめられてます。
 
 ## まとめ
 
