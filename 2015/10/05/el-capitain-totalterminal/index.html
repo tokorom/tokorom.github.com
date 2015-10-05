@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない? - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" data-via="tokorom" data-counturl="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" target="_blank" >Tweet</a>
+  
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?<a class="entry-title-link" href="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" alt="はてなブックマーク - El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?" title="はてなブックマーク - El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-05T12:27:00+09:00" pubdate data-updated="true">Oct 5<span>th</span>, 2015</time>
+         &bull; <a rel="bookmark" href="/2015/10/05/el-capitain-totalterminal/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>El CapitanにしたらTotalTerminalが動かない！</h2>
+
+<p>Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。</p>
+
+<p>しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！</p>
+
+<p>もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。
+（実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）</p>
+
+<p>であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！
+と思いたって試してみました。
+（実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）</p>
+
+<p>以下、試したことをまとめます。</p>
+
+<!-- more -->
+
+
+<h2>ぼくの最強なトグル用AppleScript</h2>
+
+<p>ひとまずこのスクリプトを実行することで、</p>
+
+<ul>
+<li>Terminalが動いていなければ起動して最前面に</li>
+<li>Terminalが裏にいるなら最前面に</li>
+<li>Terminalが最前面にいるなら裏に回す</li>
+</ul>
+
+
+<p>ことはできるようになった。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>tell application "System Events"
+</span><span class='line'>    set activeApp to first process where it is frontmost
+</span><span class='line'>    if activeApp's name = "Terminal" then
+</span><span class='line'>        # Command-Tab
+</span><span class='line'>        tell application "System Events"
+</span><span class='line'>            key down command
+</span><span class='line'>            keystroke tab
+</span><span class='line'>            key up command
+</span><span class='line'>        end tell
+</span><span class='line'>    else
+</span><span class='line'>        # Open Terminal
+</span><span class='line'>        tell application "Terminal" to activate
+</span><span class='line'>    end if
+</span><span class='line'>end tell</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今のぼくにはこれが精一杯でした。
+こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。</p>
+
+<p><a href="https://github.com/tokorom/ToggleTerminalScript">https://github.com/tokorom/ToggleTerminalScript</a></p>
+
+<p>現在の課題としましては、</p>
+
+<ul>
+<li>Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート）</li>
+<li>かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い）</li>
+<li>プロセスの名前が常に <code>Terminal</code> でよいのかがよくわからん</li>
+<li>Terminalが既にカレントのときにCommand+Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？</li>
+</ul>
+
+
+<p>などがありそうです。</p>
+
+<h2>Automatorでこのスクリプトをサービスとして登録</h2>
+
+<p>次に、このスクリプトを利用するためにAutomatorでサービスとして新規登録する。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/toggle_terminal_script1.png"></p>
+
+<ul>
+<li>Automatorで<code>サービス</code>を新規作成</li>
+<li>左ペインの<code>ライブラリ</code>-><code>AppleScriptを実行</code>を右ペインにドラッグ＆ドロップ</li>
+<li>右上の設定は <code>入力なし</code> と <code>すべてのアプリケーション</code> とする</li>
+</ul>
+
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/toggle_terminal_script2.png"></p>
+
+<ul>
+<li><code>{* Your script goes here *}</code> のところに上のスクリプトを挿入</li>
+<li>適当な名前で保存</li>
+</ul>
+
+
+<h2>キーボードショートカットの設定</h2>
+
+<p>次に、登録したサービスをお好みのショートカットキーで実行できるようにする。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/toggle_terminal_keysetting.png"></p>
+
+<ul>
+<li><code>システム環境設定</code> -> <code>キーボード</code> -> <code>ショートカット</code> -> <code>サービス</code> の下の方に登録したサービスがある</li>
+<li>他と被らなそうな適当なショートカットキーを設定する</li>
+</ul>
+
+
+<p>で、設定したショートカットキーでTerminalの表示をトグルできるようになったはず！</p>
+
+<p>ただ、TotalTerminalの時に <code>Ctrl, Ctrl</code> とかいったショートカットキーを使っていると、それがここで設定できずに、うーーーんという感じになるかも。
+僕も <code>Ctrl + Tab</code> を愛用していたため、もれなく、うーーーんとなりました。</p>
+
+<h2>Karabinerで特殊なショートカットキーを解決する</h2>
+
+<p>そんな時は、みんな大好き <a href="https://pqrs.org/osx/karabiner/index.html.ja">Karabiner</a> 様で解決すれば良し。</p>
+
+<p>ぼくの場合は、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;item&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;name&gt;</span>Change Control_+Tab to Shift_Option_Command_T Keys<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;identifier&gt;</span>remap.tokorom.control_tab<span class="nt">&lt;/identifier&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;not&gt;</span>VIRTUALMACHINE, REMOTEDESKTOPCONNECTION<span class="nt">&lt;/not&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;autogen&gt;</span>--KeyToKey-- KeyCode::TAB, VK_CONTROL,    KeyCode::T, VK_SHIFT | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND | ModifierFlag::OPTION_L<span class="nt">&lt;/autogen&gt;</span>
+</span><span class='line'><span class="nt">&lt;/item&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この設定を追加して<code>Ctrl + Tab</code>で先ほど設定したショートカットキーを押したことにする設定を加えました。</p>
+
+<p>以上で、ひとまずこれまでと同じショートカットキーでTerminalの表示をToggleすることはできるようになりました。
+せっかくなのでしばらく使ってみます。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-05T12:27:00+09:00" pubdate data-updated="true">Oct 5<span>th</span>, 2015</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cui/'>cui</a>, <a class='category' href='/blog/categories/mac/'>mac</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" data-via="tokorom" data-counturl="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" target="_blank" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/03/12/swifttask-promisekit-bolts/" title="Previous Post: SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）">&laquo; SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>On GitHub</h1>
+  
+  <a class="github-follow" href="https://github.com/tokorom">Follow @tokorom</a>
+  
+</section>
+
+
+
+<section>
+  <h1>On Twitter</h1>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+<section>
+  <h1>My Face</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 10;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/05/el-capitain-totalterminal/">El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/12/swifttask-promisekit-bolts/">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/10/nstimezone-sample/">NSTimeZoneから取得できる表示用文字列のサンプル</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/09/13/swift-simulator/">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/';
+        var disqus_url = 'http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>

@@ -108,6 +108,74 @@
   <header>
     <h1 class="entry-title">
 
+<a href="/2015/10/05/el-capitain-totalterminal/">El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/" alt="はてなブックマーク - El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?" title="はてなブックマーク - El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-05T12:27:00+09:00" pubdate data-updated="true">Oct 5<span>th</span>, 2015</time>
+         &bull; <a rel="bookmark" href="/2015/10/05/el-capitain-totalterminal/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>El CapitanにしたらTotalTerminalが動かない！</h2>
+
+<p>Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。</p>
+
+<p>しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！</p>
+
+<p>もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。
+（実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）</p>
+
+<p>であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！
+と思いたって試してみました。
+（実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）</p>
+
+<p>以下、試したことをまとめます。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2015/10/05/el-capitain-totalterminal/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
 <a href="/2015/03/12/swifttask-promisekit-bolts/">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
 
 <a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/" alt="はてなブックマーク - SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）" title="はてなブックマーク - SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）"></a>
@@ -541,111 +609,6 @@
 
   <footer>
     
-    
-  </footer>
-
-
-    </article>
-  
-    
-
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2014/07/30/swift-partial-application/">Swiftで部分適用（カリー化）</a>
-
-<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/07/30/swift-partial-application/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/07/30/swift-partial-application/" alt="はてなブックマーク - Swiftで部分適用（カリー化）" title="はてなブックマーク - Swiftで部分適用（カリー化）"></a>
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-30T21:52:00+09:00" pubdate data-updated="true">Jul 30<span>th</span>, 2014</time>
-         &bull; <a rel="bookmark" href="/2014/07/30/swift-partial-application/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><h2>Swiftオフィシャルの部分適用</h2>
-
-<p>まず、Swiftオフィシャルな構文として</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>func addTwoNumbers(a: Int)(b: Int) -> Int {
-</span><span class='line'>  return a + b
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add1 = addTwoNumbers(1)
-</span><span class='line'>add1(b: 2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
-
-
-<p>というかんじに、</p>
-
-<ul>
-<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
-<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
-</ul>
-
-
-<p>というのができる。</p>
-
-<h2>専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
-
-<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
-
-<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
-
-<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
-
-<h2>実装</h2>
-
-<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>func partial&lt;A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
-</span><span class='line'>    return { function(a(), $0) }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-
-  <footer>
-    
-    
-    <p><a rel="full-article" href="/2014/07/30/swift-partial-application/">続きを読む &rarr;</a></p>
     
   </footer>
 

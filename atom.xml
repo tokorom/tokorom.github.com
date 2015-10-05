@@ -3,7 +3,7 @@
   <title><![CDATA[TOKOROM BLOG]]></title>
   <link href="http://www.tokoro.me/atom.xml" rel="self"/>
   <link href="http://www.tokoro.me/"/>
-  <updated>2015-03-12T18:01:28+09:00</updated>
+  <updated>2015-10-05T13:57:14+09:00</updated>
   <id>http://www.tokoro.me/</id>
   <author>
     <name><![CDATA[Yuta ToKoRo]]></name>
@@ -11,6 +11,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?]]></title>
+<link href="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/"/>
+<updated>2015-10-05T12:27:00+09:00</updated>
+<id>http://www.tokoro.me/2015/10/05/el-capitain-totalterminal</id>
+
+      <content type="html"><![CDATA[<h2>El CapitanにしたらTotalTerminalが動かない！</h2>
+
+<p>Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。</p>
+
+<p>しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！</p>
+
+<p>もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。
+（実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）</p>
+
+<p>であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！
+と思いたって試してみました。
+（実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）</p>
+
+<p>以下、試したことをまとめます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -1020,64 +1049,6 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 <p>という３点に留意して作っています。</p>
 
 <p><a rel="bookmark" href="http://www.tokoro.me/2013/05/27/ssgentlealertview/">続きを読む &rarr;</a></p>]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[UIKitで使われている画像パーツをまとめて取得する]]></title>
-<link href="http://www.tokoro.me/2013/05/23/uikit-images/"/>
-<updated>2013-05-23T10:11:00+09:00</updated>
-<id>http://www.tokoro.me/2013/05/23/uikit-images</id>
-
-      <content type="html"><![CDATA[<h2>UIKitで使われている画像はどこにある？</h2>
-
-<p>例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。</p>
-
-<p>プログラマというか特にはデザイナさんにとって有用だと思います。</p>
-
-<p>その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。<br/>
-具体的には（これはiOS6.1の場合）、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>が画像パーツを含むファイルになります。</p>
-
-<p>他にも、同じディレクトリに</p>
-
-<ul>
-<li>Shared.artwork</li>
-<li>Shared@2x~ipad.artwork</li>
-<li>Shared@2x~iphone.artwork</li>
-<li>Shared~ipad.artwork</li>
-<li>Shared~iphone.artwork</li>
-</ul>
-
-
-<p>がありますので取りたいものに応じてお好みで。</p>
-
-<p>ひとまず、</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>などでこのファイルをデスクトップにでもコピーしておきましょう。</p>
-
-<h2>artworkから画像ファイルを抽出</h2>
-
-<p>で、artworkから肝心の画像ファイルを抽出するのに、 <a href="git://github.com/davepeck/iOS-artwork.git">iOS-artwork</a> というやつを使わせてもらいます。</p>
-
-<p>まずは、これを</p>
-
-<p><a rel="bookmark" href="http://www.tokoro.me/2013/05/23/uikit-images/">続きを読む &rarr;</a></p>]]></content>
     </entry>
   
 </feed>
