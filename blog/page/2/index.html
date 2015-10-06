@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/blog/page/2/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2014/07/30/swift-partial-application/">Swiftで部分適用（カリー化）</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/07/30/swift-partial-application/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/07/30/swift-partial-application/" alt="はてなブックマーク - Swiftで部分適用（カリー化）" title="はてなブックマーク - Swiftで部分適用（カリー化）"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-30T21:52:00+09:00" pubdate data-updated="true">Jul 30<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/07/30/swift-partial-application/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>Swiftオフィシャルの部分適用</h2>
+
+<p>まず、Swiftオフィシャルな構文として</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func addTwoNumbers(a: Int)(b: Int) -> Int {
+</span><span class='line'>  return a + b
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add1 = addTwoNumbers(1)
+</span><span class='line'>add1(b: 2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というかんじに、</p>
+
+<ul>
+<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
+<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
+</ul>
+
+
+<p>というのができる。</p>
+
+<h2>専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+
+<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
+
+<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
+
+<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
+
+<h2>実装</h2>
+
+<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func partial&lt;A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
+</span><span class='line'>    return { function(a(), $0) }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/07/30/swift-partial-application/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2014/05/19/xcode-versioning/">これがXcodeでのバージョニングの決定版になるかも</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/05/19/xcode-versioning/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/05/19/xcode-versioning/" alt="はてなブックマーク - これがXcodeでのバージョニングの決定版になるかも" title="はてなブックマーク - これがXcodeでのバージョニングの決定版になるかも"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-19T14:16:00+09:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/05/19/xcode-versioning/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/xcode_versioning.png"></p>
+
+<h2>概要</h2>
+
+<h3>この記事でできるようになること</h3>
+
+<ul>
+<li>安定してInfo.plistの内容（ここではBuild番号）を変更できる</li>
+<li>ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される</li>
+<li>Info.plistに差分がでないのでcommitのときに邪魔にならない</li>
+</ul>
+
+
+<p>なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感が<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">こちら</a>に詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">熊谷さんの記事</a>をご一読ください！</p>
+
+<h3>必要な設定</h3>
+
+<ul>
+<li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
+</ul>
+
+
+<p>以下、具体的な話をします。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/05/19/xcode-versioning/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2014/04/21/objc-async-test/">Objective-Cで非同期処理のテストをシンプルに書く方法</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/04/21/objc-async-test/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/04/21/objc-async-test/" alt="はてなブックマーク - Objective-Cで非同期処理のテストをシンプルに書く方法" title="はてなブックマーク - Objective-Cで非同期処理のテストをシンプルに書く方法"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T17:03:00+09:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/04/21/objc-async-test/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><img class="center" src="http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png"></p>
+
+<h2>非同期処理のテストってどう書いてますか？</h2>
+
+<p>標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、</p>
+
+<ul>
+<li>GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する</li>
+<li>GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？）</li>
+<li>expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う</li>
+</ul>
+
+
+<p>となるかと思います。
+ただ、私が調べた時点だとどれもしっくりきませんでした。</p>
+
+<p>まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。</p>
+
+<p>また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えば<code>GHAsyncTestCase</code>を継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前に<code>prepare</code>とかを呼ばないといけないのがちょっと鬱陶しい。</p>
+
+<p>そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。</p>
+
+<h2>こうしたい！</h2>
+
+<p>ぼくとしては理想的にはこういうライブラリを使いたいと思いました。</p>
+
+<ol>
+<li>テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの</li>
+<li>TestCaseの親クラスが限定されないほうがよい</li>
+<li>余分なコードを書かずにシンプルに書きたい</li>
+<li>それを利用することでテストの実行が遅くなったりしない</li>
+</ol>
+
+
+<p>しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/04/21/objc-async-test/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2014/04/12/improve-storyboard-segue/">Storyboardでの画面遷移をスマートにやる方法</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/04/12/improve-storyboard-segue/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/04/12/improve-storyboard-segue/" alt="はてなブックマーク - Storyboardでの画面遷移をスマートにやる方法" title="はてなブックマーク - Storyboardでの画面遷移をスマートにやる方法"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-12T17:58:00+09:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/04/12/improve-storyboard-segue/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>これは <a href="http://connpass.com/event/5803/">potatotips第６回め</a> で発表した <a href="https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka">この話</a> のまとめと後書きです。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/storyboard_sample.png"></p>
+
+<h2>Storyboardいいですよね！</h2>
+
+<p>Storyboardを使うことで、</p>
+
+<ul>
+<li>画面と画面が疎結合になる</li>
+<li>簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない</li>
+</ul>
+
+
+<p>といったメリットがあります。</p>
+
+<p>Storyboard登場以前だと、次の画面に遷移させるだけでも</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;NextViewController.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NextViewController</span> <span class="o">*</span><span class="n">nextViewController</span> <span class="o">=</span> <span class="p">[</span><span class="n">NextViewController</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">pushViewController:</span><span class="n">nextViewController</span> <span class="nl">animated:</span><span class="n">YES</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（<code>import</code>しないといけない）形でした。</p>
+
+<p>しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。</p>
+
+<h2>ただしStoryboardを使って今まで以上に悪くなるパターンがある</h2>
+
+<p>とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/04/12/improve-storyboard-segue/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+    
+
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2014/02/06/pbxproj-merge/">Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2014/02/06/pbxproj-merge/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2014/02/06/pbxproj-merge/" alt="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！" title="はてなブックマーク - Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-06T14:02:00+09:00" pubdate data-updated="true">Feb 6<span>th</span>, 2014</time>
+         &bull; <a rel="bookmark" href="/2014/02/06/pbxproj-merge/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><strong>2014/02/09 追記</strong><br/>
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！<br/>
+今現在は <code>merge=mergepbx</code> がいい感じになってきているのでそっちがオススメです。</p>
+
+<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+
+<p>例えば、</p>
+
+<ul>
+<li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
+<li>Bさんが <code>BBLabel.m</code> をプロジェクトに追加して</li>
+</ul>
+
+
+<p>とただそれだけなのにマージのときにコンフリクトする<code>pbxproj</code>さん。。。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/pbxproj_status.png"></p>
+
+<p>ただそれぞれファイルを追加だけのことでコンフリクトするなんて&#8230;<br/>
+どうにかならんもんかいとTwitterでつぶやいたところ、 <a href="https://twitter.com/azu_re">@azu_re</a> さんから有り難い教えが！</p>
+
+</div>
+
+  <footer>
+    
+    
+    <p><a rel="full-article" href="/2014/02/06/pbxproj-merge/">続きを読む &rarr;</a></p>
+    
+  </footer>
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>On GitHub</h1>
+  
+  <a class="github-follow" href="https://github.com/tokorom">Follow @tokorom</a>
+  
+</section>
+
+
+
+<section>
+  <h1>On Twitter</h1>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+<section>
+  <h1>My Face</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 10;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>

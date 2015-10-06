@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS 7はもっさりか？比較検証してみた - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2013/09/23/ios7-design/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/09/23/ios7-design/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/09/23/ios7-design/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/09/23/ios7-design/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/09/23/ios7-design/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/09/23/ios7-design/" target="_blank" >Tweet</a>
+  
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+iOS 7はもっさりか？比較検証してみた<a class="entry-title-link" href="http://www.tokoro.me/2013/09/23/ios7-design/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/09/23/ios7-design/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/09/23/ios7-design/" alt="はてなブックマーク - iOS 7はもっさりか？比較検証してみた" title="はてなブックマーク - iOS 7はもっさりか？比較検証してみた"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-23T17:45:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/09/23/ios7-design/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p><strong>今回の記事はUIデザイナの Morino氏 からの寄稿です。</strong></p>
+
+<p>iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。</p>
+
+<p>特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。
+今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。</p>
+
+<p>頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。</p>
+
+<ul>
+<li>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</li>
+<li>アプリアイコンをタップしてから開くまでの時間</li>
+<li>フォルダをタップしてから開くまでの時間</li>
+<li>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</li>
+</ul>
+
+
+<p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
+
+<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。</p>
+
+<!-- more -->
+
+
+<h2>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/1_unlock.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.5s</li>
+<li>iOS 7（右） : 1.0s</li>
+</ul>
+
+
+<h2>アプリアイコンをタップしてから開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/2_app.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.4s</li>
+<li>iOS 7（右） : 0.7s</li>
+</ul>
+
+
+<h2>フォルダをタップしてから開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/3_folder.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+
+
+<h2>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</h2>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/20130922/4_multi.gif"></p>
+
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+
+
+<p>検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。
+ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。</p>
+
+<p>ではアップルはなぜあえて動きを長くする必要があったのでしょうか？</p>
+
+<p>iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。
+ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。</p>
+
+<p>もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。
+また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。</p>
+
+<p>いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Atsushi Morino</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-23T17:45:00+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2013</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/design/'>design</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/ui/'>ui</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/09/23/ios7-design/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/09/23/ios7-design/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/09/23/ios7-design/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/09/23/ios7-design/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/09/23/ios7-design/" target="_blank" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/07/09/objc-travis-coveralls/" title="Previous Post: iOSのライブラリだってTravis CIとかCoverallsとか使うべき">&laquo; iOSのライブラリだってTravis CIとかCoverallsとか使うべき</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/11/04/objective-c-haskell/" title="Next Post: Objective-Cでカリー化とか部分適用してみる">Objective-Cでカリー化とか部分適用してみる &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>On GitHub</h1>
+  
+  <a class="github-follow" href="https://github.com/tokorom">Follow @tokorom</a>
+  
+</section>
+
+
+
+<section>
+  <h1>On Twitter</h1>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+<section>
+  <h1>My Face</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 10;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/05/el-capitain-totalterminal/">El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/12/swifttask-promisekit-bolts/">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/10/nstimezone-sample/">NSTimeZoneから取得できる表示用文字列のサンプル</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/09/13/swift-simulator/">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2013/09/23/ios7-design/';
+        var disqus_url = 'http://www.tokoro.me/2013/09/23/ios7-design/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>

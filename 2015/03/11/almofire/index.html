@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AlamofireでGenericにModelオブジェクトを取得する - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2015/03/11/almofire/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2015/03/11/almofire/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2015/03/11/almofire/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2015/03/11/almofire/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2015/03/11/almofire/" data-via="tokorom" data-counturl="http://www.tokoro.me/2015/03/11/almofire/" target="_blank" >Tweet</a>
+  
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+AlamofireでGenericにModelオブジェクトを取得する<a class="entry-title-link" href="http://www.tokoro.me/2015/03/11/almofire/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2015/03/11/almofire/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2015/03/11/almofire/" alt="はてなブックマーク - AlamofireでGenericにModelオブジェクトを取得する" title="はてなブックマーク - AlamofireでGenericにModelオブジェクトを取得する"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-11T15:59:00+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+         &bull; <a rel="bookmark" href="/2015/03/11/almofire/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています</p>
+
+<p>Swiftいいですね！</p>
+
+<p>これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。
+例えば、<a href="https://github.com/Alamofire/Alamofire">Alamofire</a> のInitial Commitも2014/7/31だったりと。。。</p>
+
+<p>今となっては（2015年3月）Swift公開から早９ヶ月が経過しており、ライブラリの選択肢もだいぶ広がりました。
+また、まだSwiftのライブラリを管理する環境もだいぶ整ってきました（ちょうど本日3/11にCocoaPodsのDynamic Framework対応版が公開されました！）。</p>
+
+<p>ということで、３月からはじめる新案件では<code>Alamofire</code>の採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。
+やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！</p>
+
+<p>※基本的にはAlamofireのREADMEに書かれている話です</p>
+
+<!-- more -->
+
+
+<h2>ふつうにJSONを取得するインターフェース</h2>
+
+<p>まず、普通にJSONを取得するインターフェースですが、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Alamofire.request(.GET, "https://api.github.com/users")
+</span><span class='line'>    .validate()
+</span><span class='line'>    .responseJSON { [unowned self] (_, _, JSON, error) in
+</span><span class='line'>        if let error = error {
+</span><span class='line'>            self.textView?.text = "\(error)"
+</span><span class='line'>        } else if let JSON = JSON {
+</span><span class='line'>            // ここでJSONをパースしてModelに変換する
+</span><span class='line'>            // これは擬似的なコードです
+</span><span class='line'>            if let dicts = JSON as? NSArray {
+</span><span class='line'>                var users = [User]()
+</span><span class='line'>                for dict = dicts {
+</span><span class='line'>                    if let user = User(dict: dict) {
+</span><span class='line'>                        users.append(user)
+</span><span class='line'>                    }
+</span><span class='line'>                }
+</span><span class='line'>                self.textView?.text = "\(users)"
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といったかんじで<code>responseJSON</code>で<code>NSArray</code> or <code>NSDictionary</code>にシリアライズ後の情報をModelオブジェクトに変換して利用するというのがよくある使い方ではないかと思います。</p>
+
+<h2>Genericなインターフェース</h2>
+
+<p>ただ、せっかくSwiftを使っているので（正確にはObjective-Cでもこうしたいですが&#8230;）Modelオブジェクトへの変換までを裏（APIクライアント側）でやってしまいたいところです。</p>
+
+<p>例えば、こんなかんじで。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Alamofire.request(.GET, "https://api.github.com/users")
+</span><span class='line'>    .validate()
+</span><span class='line'>    .responseCollection { [unowned self] (_, _, users: [User]?, error) in
+</span><span class='line'>        if let error = error {
+</span><span class='line'>            self.textView?.text = "\(error)"
+</span><span class='line'>        } else if let users = users {
+</span><span class='line'>            self.textView?.text = "\(users)"
+</span><span class='line'>        }
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あら素敵！</p>
+
+<p>Objective-C時代にもAPIクライアントにParserを渡してModelオブジェクトの状態で返してもらうようなことはやっていましたが、ここまですっきりしたインターフェースでこれが実現できるのはSwiftならではですね！</p>
+
+<h2>Alamofireの拡張部分</h2>
+
+<p>（AlamofireのREADMEどおりですが）Alamofireを拡張して<code>responseCollection</code>というModelオブジェクトへの変換までやってくれる用のメソッドの実装はこんなかんじです。</p>
+
+<p>新しく作る<code>ResponseCollectionSerializable</code>というJSON->Modelオブジェクトのシリアライズ用のprotocolに対応したクラスであれば、全てこのインターフェースで取得できるようになります。Generics偉い！</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>import SwiftyJSON
+</span><span class='line'>
+</span><span class='line'>extension Alamofire.Request {
+</span><span class='line'>    public func responseCollection&lt;T: ResponseCollectionSerializable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, NSError?) -> Void) -> Self {
+</span><span class='line'>        let serializer: Serializer = { (request, response, data) in
+</span><span class='line'>            if let response = response, data = data {
+</span><span class='line'>                let json = JSON(data: data)
+</span><span class='line'>                if let objects: [T] = T.collection(response: response, json: json) {
+</span><span class='line'>                    return (objects as? AnyObject, nil)
+</span><span class='line'>                }
+</span><span class='line'>            }
+</span><span class='line'>            return (nil, NSError()) //&lt; TODO: 期待されないレスポンスだった場合のエラーをここで返す
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        return response(serializer: serializer, completionHandler: { (request, response, object, error) in
+</span><span class='line'>            completionHandler(request, response, object as? [T], error)
+</span><span class='line'>        })
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>Serializer</code>はAlamofireが具備しているシリアライズ部分のカスタマイズ用の型です。これを<code>response</code>メソッドに渡すことでシリアライズ部分を柔軟に拡張可能です。</p>
+
+<h2>Model側の実装</h2>
+
+<p>（これもほぼREADMEどおりですが）最後に、JSONからのシリアライズにModelを対応させるための実装(<code>ResponseCollectionSerializable</code>)です。</p>
+
+<p>※ <a href="https://github.com/SwiftyJSON/SwiftyJSON">SwifthJSON</a> を使ってます</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>import SwiftyJSON
+</span><span class='line'>
+</span><span class='line'>public protocol ResponseCollectionSerializable {
+</span><span class='line'>    init?(json: JSON)
+</span><span class='line'>    static func collection&lt;T: ResponseCollectionSerializable>(#response: NSHTTPURLResponse, json: JSON) -> [T]?
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class Model: ResponseCollectionSerializable {
+</span><span class='line'>    var identifier: String!
+</span><span class='line'>
+</span><span class='line'>    required init?(json: JSON) {
+</span><span class='line'>        if let identifier = json["id"].int {
+</span><span class='line'>            self.identifier = String(identifier)
+</span><span class='line'>        } else {
+</span><span class='line'>            return nil
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    class func collection&lt;T: ResponseCollectionSerializable>(#response: NSHTTPURLResponse, json: JSON) -> [T]? {
+</span><span class='line'>        var items = [T]()
+</span><span class='line'>        for (k, j) in json {
+</span><span class='line'>            if let item = T(json: j) {
+</span><span class='line'>                items.append(item)
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>        return items
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class User: Model {
+</span><span class='line'>    var name: String!
+</span><span class='line'>
+</span><span class='line'>    required init?(json: JSON) {
+</span><span class='line'>        super.init(json: json)
+</span><span class='line'>        if let name = json["login"].string {
+</span><span class='line'>            self.name = name
+</span><span class='line'>        } else {
+</span><span class='line'>            return nil
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>このあと</h2>
+
+<p><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a>も使いつつ、このあたりの実装をAPIクライアントとしてまとめておきたい。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-11T15:59:00+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/swift/'>swift</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2015/03/11/almofire/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2015/03/11/almofire/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2015/03/11/almofire/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2015/03/11/almofire/" data-via="tokorom" data-counturl="http://www.tokoro.me/2015/03/11/almofire/" target="_blank" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/11/10/nstimezone-sample/" title="Previous Post: NSTimeZoneから取得できる表示用文字列のサンプル">&laquo; NSTimeZoneから取得できる表示用文字列のサンプル</a>
+      
+      
+        <a class="basic-alignment right" href="/2015/03/12/swifttask-promisekit-bolts/" title="Next Post: SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>On GitHub</h1>
+  
+  <a class="github-follow" href="https://github.com/tokorom">Follow @tokorom</a>
+  
+</section>
+
+
+
+<section>
+  <h1>On Twitter</h1>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+<section>
+  <h1>My Face</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 10;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/05/el-capitain-totalterminal/">El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/12/swifttask-promisekit-bolts/">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/10/nstimezone-sample/">NSTimeZoneから取得できる表示用文字列のサンプル</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/09/13/swift-simulator/">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2015/03/11/almofire/';
+        var disqus_url = 'http://www.tokoro.me/2015/03/11/almofire/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>
