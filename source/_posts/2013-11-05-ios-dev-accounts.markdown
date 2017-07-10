@@ -29,7 +29,7 @@ categories: [ios,publish]
 
 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
 
-{% img center http://dl.dropbox.com/u/10351676/images/iOSDevCenterStruct.png %}
+{% img center https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iOSDevCenterStruct.png %}
 
 大きくは、
 
