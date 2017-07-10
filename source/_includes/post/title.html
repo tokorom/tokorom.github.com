@@ -1,6 +1,0 @@
-<h1 class="entry-title">
-{% if linklog and site.linklog_marker and site.linklog_marker_position == 'before' %}{{ linklog_marker }}{% endif %}
-{% if index or linklog %}<a href="{{ title_url }}">{% endif %}{% if site.titlecase %}{{ article_title | titlecase }}{% else %}{{ article_title }}{% endif %}{% if index or linklog %}</a>{% else %}<a class="entry-title-link" href="{{ site.url }}{{ title_url }}" style="display:none">-</a>{% endif %}
-{% if linklog and site.linklog_marker and site.linklog_marker_position == 'after' %}{{ linklog_marker }}{% endif %}
-<a href="http://b.hatena.ne.jp/entry/{{ site.url }}{{ title_url }}"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/{{ site.url }}{{ title_url }}" alt="はてなブックマーク - {{ article_title }}" title="はてなブックマーク - {{ article_title }}"></a>
-</h1>
