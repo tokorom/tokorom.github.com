@@ -7,6 +7,8 @@ external-url:
 categories: [swift,ios]
 ---
 
+{% img center https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg %}
+
 ## extensionでstored propertyを追加したくなることありますか？
 
 少なくともSwift 2.1時点ではextensionでstored propertyを追加することはできず、computed propertyのみに限られます。
