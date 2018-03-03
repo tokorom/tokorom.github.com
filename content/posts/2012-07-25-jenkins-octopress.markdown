@@ -5,6 +5,7 @@ date: 2012-07-29
 comments: true
 external-url: 
 categories: [sakura, octopress, jenkins]
+aliases: [/2012/07/25/jenkins-octopress/]
 ---
 
 ## 目的

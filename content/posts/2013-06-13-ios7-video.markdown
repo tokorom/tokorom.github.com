@@ -6,6 +6,7 @@ comments: true
 external-url: 
 categories: [ios,ui,design]
 author: Atsushi Morino
+aliases: [/2013/06/13/ios7-video/]
 ---
 
 ## 今回の記事はUIデザイナの [Morino@WWDC2013参加中](https://twitter.com/limonomori) に寄稿いただきました！

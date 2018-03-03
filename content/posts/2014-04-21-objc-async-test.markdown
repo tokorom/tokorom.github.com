@@ -5,6 +5,7 @@ date: 2014-04-21
 comments: true
 external-url: 
 categories: [objc,ios,tdd]
+aliases: [/2014/04/21/objc-async-test/]
 ---
 
 {% img center http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png %}

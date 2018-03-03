@@ -5,6 +5,7 @@ date: 2013-01-15
 comments: true
 external-url: 
 categories: [vim, ios, objc]
+aliases: [/2013/01/15/ctrlp-docset/]
 ---
 
 ## Vimでリファレンス読む必要ありますか？

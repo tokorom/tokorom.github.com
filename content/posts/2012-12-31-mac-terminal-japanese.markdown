@@ -5,6 +5,7 @@ date: 2012-12-31
 comments: true
 external-url: 
 categories: [mac, vim, cui]
+aliases: [/2012/12/31/mac-terminal-japanese/]
 ---
 
 Macの初期設定のたびに混乱してるので再整理しておきます。

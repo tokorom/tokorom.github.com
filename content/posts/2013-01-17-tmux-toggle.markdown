@@ -5,6 +5,7 @@ date: 2013-01-17
 comments: true
 external-url: 
 categories: [cui, mac]
+aliases: [/2013/01/17/tmux-toggle/]
 ---
 
 ** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **

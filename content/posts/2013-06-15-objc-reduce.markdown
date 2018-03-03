@@ -5,6 +5,7 @@ date: 2013-06-15
 comments: true
 external-url: 
 categories: [objc,ios]
+aliases: [/2013/06/15/objc-reduce/]
 ---
 
 既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。

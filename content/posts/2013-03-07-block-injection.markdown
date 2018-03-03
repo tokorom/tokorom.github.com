@@ -5,6 +5,7 @@ date: 2013-03-07
 comments: true
 external-url: 
 categories: [ios, objc]
+aliases: [/2013/03/07/block-injection/]
 ---
 
 ## 例えばこんなコードに違和感はありませんか？

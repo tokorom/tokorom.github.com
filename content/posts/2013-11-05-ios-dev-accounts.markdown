@@ -5,6 +5,7 @@ date: 2013-11-05
 comments: true
 external-url: 
 categories: [ios,publish]
+aliases: [/2013/11/05/ios-dev-accounts/]
 ---
 
 ## 2013年11月18日 追記

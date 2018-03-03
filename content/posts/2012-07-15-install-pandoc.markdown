@@ -4,6 +4,7 @@ title: "Macにpandocをインストール中にhs-httpで引っかかったの�
 date: 2012-07-15
 comments: true
 categories: [mac]
+aliases: [/2012/07/15/install-pandoc/]
 ---
 
 ## hs-httpがインストールできない!
@@ -81,4 +82,3 @@ $ sudo port install pandoc
 ```
 
 で普通にインストールできましたとさ。
-

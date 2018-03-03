@@ -5,6 +5,7 @@ date: 2014-02-06
 comments: true
 external-url: 
 categories: [xcode,ios]
+aliases: [/2014/02/06/pbxproj-merge/]
 ---
 
 **2014/02/09 追記**  

@@ -5,6 +5,7 @@ date: 2012-09-12
 comments: true
 external-url: 
 categories: ios objc
+aliases: [/2012/09/12/objc-private-test/]
 ---
 
 dkfjさんが [Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法](http://d.hatena.ne.jp/dkfj/20120909/1347176787) という記事を書かれていました。

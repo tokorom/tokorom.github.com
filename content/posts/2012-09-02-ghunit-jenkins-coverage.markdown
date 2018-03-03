@@ -5,6 +5,7 @@ date: 2012-09-02
 comments: true
 external-url: 
 categories: ios jenkins
+aliases: [/2012/09/02/ghunit-jenkins-coverage/]
 ---
 
 ## 概要

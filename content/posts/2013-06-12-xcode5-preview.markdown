@@ -5,6 +5,7 @@ date: 2013-06-12
 comments: true
 external-url: 
 categories: [xcode,ios,objc]
+aliases: [/2013/06/12/xcode5-preview/]
 ---
 
 [tokorom@WWDC2013参加中](https://twitter.com/tokorom)です。  

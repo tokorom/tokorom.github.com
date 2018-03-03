@@ -5,6 +5,7 @@ date: 2013-01-02
 comments: true
 external-url: 
 categories: [objc,vim,ios]
+aliases: [/2013/01/02/clang-complete-for-vim/]
 ---
 
 ## 概要

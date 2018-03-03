@@ -5,6 +5,7 @@ date: 2012-08-17
 comments: true
 external-url: 
 categories: objc
+aliases: [/2012/08/17/safe-objc/]
 ---
 
 ## チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？

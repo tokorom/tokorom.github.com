@@ -5,6 +5,7 @@ date: 2013-01-05
 comments: true
 external-url: 
 categories: [objc,ios]
+aliases: [/2013/01/05/objc-dynamic/]
 ---
 
 ## Objective-Cの @dynamic はお好きですか？

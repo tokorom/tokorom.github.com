@@ -5,6 +5,7 @@ date: 2014-09-13
 comments: true
 external-url: 
 categories: [swift, ios]
+aliases: [/2014/09/13/swift-simulator/]
 ---
 
 だいぶ小ネタ。

@@ -5,6 +5,7 @@ date: 2015-10-26
 comments: true
 external-url: 
 categories: [swift,ios]
+aliases: [/2015/10/26/defer-to-deinit/]
 ---
 
 ## deferしてますか？

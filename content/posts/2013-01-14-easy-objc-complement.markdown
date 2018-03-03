@@ -5,6 +5,7 @@ date: 2013-01-14
 comments: true
 external-url: 
 categories: [ios,vim,objc]
+aliases: [/2013/01/14/easy-objc-complement/]
 ---
 
 ## 概要

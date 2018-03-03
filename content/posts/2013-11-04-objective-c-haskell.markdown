@@ -5,6 +5,7 @@ date: 2013-11-04
 comments: true
 external-url: 
 categories: [objc,ios,haskell]
+aliases: [/2013/11/04/objective-c-haskell/]
 ---
 
 ## 導入

@@ -5,6 +5,7 @@ date: 2015-10-05
 comments: true
 external-url: 
 categories: [mac,cui]
+aliases: [/2015/10/05/el-capitain-totalterminal/]
 ---
 
 ## El CapitanにしたらTotalTerminalが動かない！

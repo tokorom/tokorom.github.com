@@ -5,6 +5,7 @@ date: 2012-08-12
 comments: true
 external-url: 
 categories: ios objc xcode
+aliases: [/2012/08/12/objc-new-statements/]
 ---
 
 もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。  

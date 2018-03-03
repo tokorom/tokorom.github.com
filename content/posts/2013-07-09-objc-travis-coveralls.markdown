@@ -5,6 +5,7 @@ date: 2013-07-09
 comments: true
 external-url: 
 categories: [objc, ci]
+aliases: [/2013/07/09/objc-travis-coveralls/]
 ---
 
 {% img center http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png %}

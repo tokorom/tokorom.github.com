@@ -6,6 +6,7 @@ comments: true
 external-url: 
 categories: [ios,ui,design]
 author: Atsushi Morino
+aliases: [/2013/09/23/ios7-design/]
 ---
 
 **今回の記事はUIデザイナの Morino氏 からの寄稿です。**

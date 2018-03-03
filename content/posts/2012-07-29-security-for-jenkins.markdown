@@ -5,6 +5,7 @@ date: 2012-07-29
 comments: true
 external-url: 
 categories: [sakura, octopress, jenkins]
+aliases: [/2012/07/29/security-for-jenkins/]
 ---
 
 [前の記事](/2012/07/29/jenkins-octopress/)でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。  

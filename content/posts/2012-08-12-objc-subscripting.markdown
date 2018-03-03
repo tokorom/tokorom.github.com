@@ -5,6 +5,7 @@ date: 2012-08-12
 comments: true
 external-url: 
 categories: ios objc xcode
+aliases: [/2012/08/12/objc-subscripting/]
 ---
 
 まず、Xcode4.4から使えるObjective-Cの新しい書き方については [前の記事](/2012/08/12/objc-new-statements/) をご参照ください。

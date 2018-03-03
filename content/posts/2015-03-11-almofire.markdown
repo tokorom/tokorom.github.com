@@ -5,6 +5,7 @@ date: 2015-03-11
 comments: true
 external-url: 
 categories: [ios,swift]
+aliases: [/2015/03/11/almofire/]
 ---
 
 ※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています

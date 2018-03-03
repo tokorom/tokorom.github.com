@@ -5,6 +5,7 @@ date: 2012-07-15
 comments: true
 external-url: 
 categories: [mac, octopress]
+aliases: [/2012/07/15/octopress-part-of-codes/]
 ---
 
 ## おさらい：Octopressでソースコードを表示する

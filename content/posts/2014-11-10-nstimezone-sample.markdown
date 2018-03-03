@@ -5,6 +5,7 @@ date: 2014-11-10
 comments: true
 external-url: 
 categories: [ios,swift]
+aliases: [/2014/11/10/nstimezone-sample/]
 ---
 
 さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。
