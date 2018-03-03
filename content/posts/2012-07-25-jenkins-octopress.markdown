@@ -4,7 +4,7 @@ title: "Jenkins@さくらVPSにOctopressのデプロイを任せてみる"
 date: 2012-07-29
 comments: true
 external-url: 
-categories: [sakura, octopress, jenkins]
+tags: [sakura, octopress, jenkins]
 aliases: [/2012/07/25/jenkins-octopress/]
 ---
 

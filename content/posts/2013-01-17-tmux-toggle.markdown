@@ -4,7 +4,7 @@ title: "tmuxでC-t C-tでのサイクルをより便利にする : 同じキー�
 date: 2013-01-17
 comments: true
 external-url: 
-categories: [cui, mac]
+tags: [cui, mac]
 aliases: [/2013/01/17/tmux-toggle/]
 ---
 

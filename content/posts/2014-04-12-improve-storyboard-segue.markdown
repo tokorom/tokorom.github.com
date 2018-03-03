@@ -4,7 +4,7 @@ title: "Storyboardでの画面遷移をスマートにやる方法"
 date: 2014-04-12
 comments: true
 external-url: 
-categories: [ios, objc]
+tags: [ios, objc]
 aliases: [/2014/04/12/improve-storyboard-segue/]
 ---
 

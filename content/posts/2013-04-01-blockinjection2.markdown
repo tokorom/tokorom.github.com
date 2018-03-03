@@ -4,7 +4,7 @@ title: "BlockInjectionをバージョンアップしました"
 date: 2013-04-01
 comments: true
 external-url: 
-categories: [ios, objc]
+tags: [ios, objc]
 aliases: [/2013/04/01/blockinjection2/]
 ---
 

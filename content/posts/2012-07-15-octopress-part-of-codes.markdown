@@ -4,7 +4,7 @@ title: "Octopressでソースコードの一部分だけを参照する"
 date: 2012-07-15
 comments: true
 external-url: 
-categories: [mac, octopress]
+tags: [mac, octopress]
 aliases: [/2012/07/15/octopress-part-of-codes/]
 ---
 

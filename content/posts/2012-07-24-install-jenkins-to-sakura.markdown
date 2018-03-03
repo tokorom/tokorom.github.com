@@ -4,7 +4,7 @@ title: "さくらVPSにJenkinsさんをインストールする"
 date: 2012-07-24
 comments: true
 external-url: 
-categories: [sakura, jenkins]
+tags: [sakura, jenkins]
 aliases: [/2012/07/24/install-jenkins-to-sakura/]
 ---
 

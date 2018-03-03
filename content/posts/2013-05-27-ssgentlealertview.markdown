@@ -4,7 +4,7 @@ title: "UIAlertViewよりもおとなしいメッセージダイアログを利�
 date: 2013-05-27
 comments: true
 external-url: 
-categories: [ios, objc]
+tags: [ios, objc]
 aliases: [/2013/05/27/ssgentlealertview/]
 ---
 

@@ -4,7 +4,7 @@ title: "Objective-Cで非同期処理のテストをシンプルに書く方法"
 date: 2014-04-21
 comments: true
 external-url: 
-categories: [objc,ios,tdd]
+tags: [objc,ios,tdd]
 aliases: [/2014/04/21/objc-async-test/]
 ---
 

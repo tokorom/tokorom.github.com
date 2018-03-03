@@ -4,7 +4,7 @@ title: "Swiftのextensionでstored propertyを追加する？（黒魔術は閉�
 date: 2015-11-08
 comments: true
 external-url: 
-categories: [swift,ios]
+tags: [swift,ios]
 aliases: [/2015/11/08/has-associated-objects/]
 ---
 

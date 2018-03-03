@@ -4,7 +4,7 @@ title: "提供するXXXViewControllerの親クラスを差し替え可能にし�
 date: 2014-01-23
 comments: true
 external-url: 
-categories: [objc,ios]
+tags: [objc,ios]
 aliases: [/2014/01/23/super-viewcontroller-for-a-library/]
 ---
 

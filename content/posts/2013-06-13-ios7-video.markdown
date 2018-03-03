@@ -4,7 +4,7 @@ title: "iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザ
 date: 2013-06-13
 comments: true
 external-url: 
-categories: [ios,ui,design]
+tags: [ios,ui,design]
 author: Atsushi Morino
 aliases: [/2013/06/13/ios7-video/]
 ---

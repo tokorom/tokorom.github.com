@@ -4,7 +4,7 @@ title: "会社でiOSアプリを扱うときのアカウント管理はこうす
 date: 2013-11-05
 comments: true
 external-url: 
-categories: [ios,publish]
+tags: [ios,publish]
 aliases: [/2013/11/05/ios-dev-accounts/]
 ---
 

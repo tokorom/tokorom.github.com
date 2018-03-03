@@ -4,7 +4,7 @@ title: "Objective-Cで\"@dynamic\"の使いどころを考える"
 date: 2013-01-05
 comments: true
 external-url: 
-categories: [objc,ios]
+tags: [objc,ios]
 aliases: [/2013/01/05/objc-dynamic/]
 ---
 

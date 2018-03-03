@@ -4,7 +4,7 @@ title: "Objective-Cのコードを削れるだけ削る7のTips"
 date: 2013-06-15
 comments: true
 external-url: 
-categories: [objc,ios]
+tags: [objc,ios]
 aliases: [/2013/06/15/objc-reduce/]
 ---
 

@@ -4,7 +4,7 @@ title: "GHUnitのテストカバレッジをJenkinsで表示する"
 date: 2012-09-02
 comments: true
 external-url: 
-categories: ios jenkins
+tags: [ios, jenkins]
 aliases: [/2012/09/02/ghunit-jenkins-coverage/]
 ---
 

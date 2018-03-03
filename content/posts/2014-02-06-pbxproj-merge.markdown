@@ -4,7 +4,7 @@ title: "Xcodeのプロジェクトファイル（pbxproj）がコンフリクト
 date: 2014-02-06
 comments: true
 external-url: 
-categories: [xcode,ios]
+tags: [xcode,ios]
 aliases: [/2014/02/06/pbxproj-merge/]
 ---
 

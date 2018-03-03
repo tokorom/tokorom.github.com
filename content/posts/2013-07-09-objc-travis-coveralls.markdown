@@ -4,7 +4,7 @@ title: "iOSのライブラリだってTravis CIとかCoverallsとか使うべき
 date: 2013-07-09
 comments: true
 external-url: 
-categories: [objc, ci]
+tags: [objc, ci]
 aliases: [/2013/07/09/objc-travis-coveralls/]
 ---
 

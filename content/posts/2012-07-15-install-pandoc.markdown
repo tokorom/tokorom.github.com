@@ -3,7 +3,7 @@ layout: post
 title: "Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順"
 date: 2012-07-15
 comments: true
-categories: [mac]
+tags: [mac]
 aliases: [/2012/07/15/install-pandoc/]
 ---
 

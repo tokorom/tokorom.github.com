@@ -4,7 +4,7 @@ title: "VimでiOSのリファレンスを直接参照したい → CtrlPの拡�
 date: 2013-01-15
 comments: true
 external-url: 
-categories: [vim, ios, objc]
+tags: [vim, ios, objc]
 aliases: [/2013/01/15/ctrlp-docset/]
 ---
 

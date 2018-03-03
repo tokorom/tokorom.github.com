@@ -4,7 +4,7 @@ title: "VimでObjective-Cのコード補完を実行する with clang"
 date: 2013-01-02
 comments: true
 external-url: 
-categories: [objc,vim,ios]
+tags: [objc,vim,ios]
 aliases: [/2013/01/02/clang-complete-for-vim/]
 ---
 

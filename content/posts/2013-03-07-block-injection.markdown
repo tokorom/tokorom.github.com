@@ -4,7 +4,7 @@ title: "BlockInjectionで元のソースコードを汚さないで振る舞い�
 date: 2013-03-07
 comments: true
 external-url: 
-categories: [ios, objc]
+tags: [ios, objc]
 aliases: [/2013/03/07/block-injection/]
 ---
 

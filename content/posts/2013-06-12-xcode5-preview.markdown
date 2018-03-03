@@ -4,7 +4,7 @@ title: "Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイト
 date: 2013-06-12
 comments: true
 external-url: 
-categories: [xcode,ios,objc]
+tags: [xcode,ios,objc]
 aliases: [/2013/06/12/xcode5-preview/]
 ---
 

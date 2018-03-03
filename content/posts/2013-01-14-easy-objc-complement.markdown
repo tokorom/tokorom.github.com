@@ -4,7 +4,7 @@ title: "もっと簡単にVimでObjective-Cのコード補完を実行する"
 date: 2013-01-14
 comments: true
 external-url: 
-categories: [ios,vim,objc]
+tags: [ios,vim,objc]
 aliases: [/2013/01/14/easy-objc-complement/]
 ---
 

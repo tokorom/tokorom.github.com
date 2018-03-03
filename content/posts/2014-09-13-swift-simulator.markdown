@@ -4,7 +4,7 @@ title: "SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを�
 date: 2014-09-13
 comments: true
 external-url: 
-categories: [swift, ios]
+tags: [swift, ios]
 aliases: [/2014/09/13/swift-simulator/]
 ---
 

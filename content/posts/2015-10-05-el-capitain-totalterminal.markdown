@@ -4,7 +4,7 @@ title: "El CapitanでTotalTerminalが動かないならAppleScriptで代用す�
 date: 2015-10-05
 comments: true
 external-url: 
-categories: [mac,cui]
+tags: [mac,cui]
 aliases: [/2015/10/05/el-capitain-totalterminal/]
 ---
 

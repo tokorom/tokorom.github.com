@@ -4,7 +4,7 @@ title: "Objective-Cのテストクラスからプライベートメソッド/プ
 date: 2012-09-12
 comments: true
 external-url: 
-categories: ios objc
+tags: [ios, objc]
 aliases: [/2012/09/12/objc-private-test/]
 ---
 

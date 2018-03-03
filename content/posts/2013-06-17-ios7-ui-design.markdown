@@ -4,7 +4,7 @@ title: "【アプリ開発のお手本に】iOS 7の設計においてアップ�
 date: 2013-06-17
 comments: true
 external-url: 
-categories: [ios,ui,design]
+tags: [ios,ui,design]
 author: Atsushi Morino
 aliases: [/2013/06/17/ios7-ui-design/]
 ---

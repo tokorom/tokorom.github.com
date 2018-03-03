@@ -4,7 +4,7 @@ title: "Mac + Terminal + tmux + vim でクリップボードを快適に使う"
 date: 2012-12-31
 comments: true
 external-url: 
-categories: [mac, vim, cui]
+tags: [mac, vim, cui]
 aliases: [/2012/12/31/mac-terminal-japanese/]
 ---
 

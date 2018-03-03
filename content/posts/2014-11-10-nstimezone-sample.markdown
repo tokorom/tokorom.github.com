@@ -4,7 +4,7 @@ title: "NSTimeZoneから取得できる表示用文字列のサンプル"
 date: 2014-11-10
 comments: true
 external-url: 
-categories: [ios,swift]
+tags: [ios,swift]
 aliases: [/2014/11/10/nstimezone-sample/]
 ---
 

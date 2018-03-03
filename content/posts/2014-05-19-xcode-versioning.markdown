@@ -4,7 +4,7 @@ title: "これがXcodeでのバージョニングの決定版になるかも"
 date: 2014-05-19
 comments: true
 external-url: 
-categories: [xcode,ios]
+tags: [xcode,ios]
 aliases: [/2014/05/19/xcode-versioning/]
 ---
 

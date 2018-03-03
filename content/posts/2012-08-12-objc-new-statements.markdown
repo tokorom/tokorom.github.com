@@ -4,7 +4,7 @@ title: "いまさらですがXcode4.4からiOS開発で使えるようになっ�
 date: 2012-08-12
 comments: true
 external-url: 
-categories: ios objc xcode
+tags: [ios, objc, xcode]
 aliases: [/2012/08/12/objc-new-statements/]
 ---
 
