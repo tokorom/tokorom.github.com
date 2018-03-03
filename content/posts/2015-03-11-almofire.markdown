@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AlamofireでGenericにModelオブジェクトを取得する"
-date: 2015-03-11 15:59
+date: 2015-03-11
 comments: true
 external-url: 
 categories: [ios,swift]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする"
-date: 2012-07-29 16:00
+date: 2012-07-29
 comments: true
 external-url: 
 categories: [sakura, octopress, jenkins]

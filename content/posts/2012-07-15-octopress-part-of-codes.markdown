@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopressでソースコードの一部分だけを参照する"
-date: 2012-07-15 16:55
+date: 2012-07-15
 comments: true
 external-url: 
 categories: [mac, octopress]

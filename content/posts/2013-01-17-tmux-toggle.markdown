@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた"
-date: 2013-01-17 01:55
+date: 2013-01-17
 comments: true
 external-url: 
 categories: [cui, mac]

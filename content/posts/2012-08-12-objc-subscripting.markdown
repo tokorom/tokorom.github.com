@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cで独自クラスに[]でアクセスする"
-date: 2012-08-12 22:34
+date: 2012-08-12
 comments: true
 external-url: 
 categories: ios objc xcode

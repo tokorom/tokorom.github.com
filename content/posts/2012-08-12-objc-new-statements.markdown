@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます"
-date: 2012-08-12 12:50
+date: 2012-08-12
 comments: true
 external-url: 
 categories: ios objc xcode

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました"
-date: 2013-01-15 00:40
+date: 2013-01-15
 comments: true
 external-url: 
 categories: [vim, ios, objc]

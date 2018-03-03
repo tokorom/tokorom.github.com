@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "UIAlertViewよりもおとなしいメッセージダイアログを利用する"
-date: 2013-05-27 23:30
+date: 2013-05-27
 comments: true
 external-url: 
 categories: [ios, objc]

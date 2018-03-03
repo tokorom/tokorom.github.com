@@ -5,8 +5,6 @@ copyright = "tokorom"
 
 theme = "minimo"
 
-rssuri = "atom.xml"
-
 disqusShortname = ""
 googleAnalytics = ""
 
@@ -22,6 +20,9 @@ enableEmoji = true
 
 # Missing translations will default to this content language
 defaultContentLanguage = "ja"
+
+[outputFormats.RSS]
+baseName = "atom"
 
 [params.info]
 description = "iOSアプリ開発者"

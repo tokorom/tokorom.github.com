@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "UIKitで使われている画像パーツをまとめて取得する"
-date: 2013-05-23 10:11
+date: 2013-05-23
 comments: true
 external-url: 
 categories: [ios, objc]

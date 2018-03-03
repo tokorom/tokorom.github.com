@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）"
-date: 2015-03-12 17:01
+date: 2015-03-12
 comments: true
 external-url: 
 categories: [ios,swift]

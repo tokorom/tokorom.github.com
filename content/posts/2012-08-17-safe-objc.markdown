@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント"
-date: 2012-08-17 07:36
+date: 2012-08-17
 comments: true
 external-url: 
 categories: objc

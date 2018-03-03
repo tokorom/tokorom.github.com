@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cで非同期処理のテストをシンプルに書く方法"
-date: 2014-04-21 17:03
+date: 2014-04-21
 comments: true
 external-url: 
 categories: [objc,ios,tdd]

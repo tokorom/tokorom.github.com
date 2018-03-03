@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい"
-date: 2012-09-12 14:10
+date: 2012-09-12
 comments: true
 external-url: 
 categories: ios objc

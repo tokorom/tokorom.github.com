@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Swiftで部分適用（カリー化）"
-date: 2014-07-30 21:52
+date: 2014-07-30
 comments: true
 external-url: 
 categories: [swift, ios]

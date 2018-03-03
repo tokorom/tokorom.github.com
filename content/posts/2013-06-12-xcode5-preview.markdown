@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)"
-date: 2013-06-12 01:09
+date: 2013-06-12
 comments: true
 external-url: 
 categories: [xcode,ios,objc]

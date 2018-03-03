@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "BlockInjectionで元のソースコードを汚さないで振る舞い追加"
-date: 2013-03-07 12:05
+date: 2013-03-07
 comments: true
 external-url: 
 categories: [ios, objc]

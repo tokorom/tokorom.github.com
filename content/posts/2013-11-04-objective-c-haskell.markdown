@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cでカリー化とか部分適用してみる"
-date: 2013-11-04 16:09
+date: 2013-11-04
 comments: true
 external-url: 
 categories: [objc,ios,haskell]

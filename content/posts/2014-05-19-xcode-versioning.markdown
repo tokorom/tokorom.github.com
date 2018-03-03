@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "これがXcodeでのバージョニングの決定版になるかも"
-date: 2014-05-19 14:16
+date: 2014-05-19
 comments: true
 external-url: 
 categories: [xcode,ios]

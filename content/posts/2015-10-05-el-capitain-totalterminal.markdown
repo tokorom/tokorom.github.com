@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?"
-date: 2015-10-05 12:27
+date: 2015-10-05
 comments: true
 external-url: 
 categories: [mac,cui]

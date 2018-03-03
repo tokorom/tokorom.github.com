@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cのコードを削れるだけ削る7のTips"
-date: 2013-06-15 16:04
+date: 2013-06-15
 comments: true
 external-url: 
 categories: [objc,ios]

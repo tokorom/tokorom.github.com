@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "GHUnitのテストカバレッジをJenkinsで表示する"
-date: 2012-09-02 22:54
+date: 2012-09-02
 comments: true
 external-url: 
 categories: ios jenkins

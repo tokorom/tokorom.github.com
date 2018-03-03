@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）"
-date: 2015-11-08 11:45
+date: 2015-11-08
 comments: true
 external-url: 
 categories: [swift,ios]

@@ -1,0 +1,4 @@
+[recent_posts]
+title = "最近の投稿"
+length = 20
+excludeTypes = ["page"]   

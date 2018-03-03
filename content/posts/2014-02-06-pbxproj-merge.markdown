@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！"
-date: 2014-02-06 14:02
+date: 2014-02-06
 comments: true
 external-url: 
 categories: [xcode,ios]

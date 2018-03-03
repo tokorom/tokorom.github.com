@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント"
-date: 2013-06-17 13:29
+date: 2013-06-17
 comments: true
 external-url: 
 categories: [ios,ui,design]

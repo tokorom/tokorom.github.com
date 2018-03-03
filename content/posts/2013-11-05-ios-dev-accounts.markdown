@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？"
-date: 2013-11-05 19:21
+date: 2013-11-05
 comments: true
 external-url: 
 categories: [ios,publish]

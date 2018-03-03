@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)"
-date: 2013-06-13 01:49
+date: 2013-06-13
 comments: true
 external-url: 
 categories: [ios,ui,design]

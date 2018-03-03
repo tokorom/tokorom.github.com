@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う"
-date: 2014-09-13 13:14
+date: 2014-09-13
 comments: true
 external-url: 
 categories: [swift, ios]

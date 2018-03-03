@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "iOS 7はもっさりか？比較検証してみた"
-date: 2013-09-23 17:45
+date: 2013-09-23
 comments: true
 external-url: 
 categories: [ios,ui,design]

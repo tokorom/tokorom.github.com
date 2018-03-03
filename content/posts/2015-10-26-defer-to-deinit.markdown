@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Swiftでdeinitまで処理をdeferする"
-date: 2015-10-26 12:04
+date: 2015-10-26
 comments: true
 external-url: 
 categories: [swift,ios]

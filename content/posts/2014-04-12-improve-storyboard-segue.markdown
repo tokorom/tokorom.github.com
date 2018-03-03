@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Storyboardでの画面遷移をスマートにやる方法"
-date: 2014-04-12 17:58
+date: 2014-04-12
 comments: true
 external-url: 
 categories: [ios, objc]

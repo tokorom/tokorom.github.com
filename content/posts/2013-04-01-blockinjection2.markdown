@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "BlockInjectionをバージョンアップしました"
-date: 2013-04-01 23:12
+date: 2013-04-01
 comments: true
 external-url: 
 categories: [ios, objc]

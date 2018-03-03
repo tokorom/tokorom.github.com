@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Objective-Cで最近お気に入りのマクロ４つ"
-date: 2013-01-09 00:17
+date: 2013-01-09
 comments: true
 external-url: 
 categories: [objc,ios]

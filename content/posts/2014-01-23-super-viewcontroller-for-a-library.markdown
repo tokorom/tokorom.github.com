@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "提供するXXXViewControllerの親クラスを差し替え可能にしたい!"
-date: 2014-01-23 11:20
+date: 2014-01-23
 comments: true
 external-url: 
 categories: [objc,ios]
