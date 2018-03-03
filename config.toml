@@ -90,7 +90,7 @@ category = "categories"
 tag = "tags"
 
 [permalinks]
-page = "/:slug/"
+page = "/blog/:year/:month/:day/:slug/"
 
 [[menu.main]]
 name = "Blog"
