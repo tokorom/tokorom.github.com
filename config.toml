@@ -19,7 +19,7 @@ pygmentsCodefences = true
 enableEmoji = true
 
 # Missing translations will default to this content language
-defaultContentLanguage = "en"
+defaultContentLanguage = "ja"
 
 [params.info]
 description = "iOSアプリ開発者"
@@ -91,10 +91,20 @@ tag = "tags"
 page = "/:slug/"
 
 [[menu.main]]
+name = "Blog"
+weight = -10
+identifier = "blog"
+url = "/"
+[[menu.main]]
 name = "GitHub"
 weight = -10
 identifier = "repository"
 url = "https://github.com/tokorom/"
+[[menu.main]]
+name = "Twitter"
+weight = -10
+identifier = "twitter"
+url = "https://twitter.com/tokorom/"
 
 [blackfriday]
 hrefTargetBlank = true
@@ -104,4 +114,8 @@ hrefTargetBlank = true
 [languages.en]
 lang = "en"
 languageName = "English"
+weight = 1
+[languages.ja]
+lang = "ja"
+languageName = "Japanese"
 weight = 1
