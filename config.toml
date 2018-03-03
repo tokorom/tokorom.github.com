@@ -47,7 +47,7 @@ listDateFormat = "2006-01-02"
 archiveDateFormat = "2006-01-02"
 hideEntryNavigation = ["page"] # boolean / array of sections
 hideSocialMenu = false
-showReadingTime = true
+showReadingTime = false
 taxonomyCloudShuffle = true
 
 [params.sidebar]
