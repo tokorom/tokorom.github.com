@@ -5,6 +5,8 @@ copyright = "tokorom"
 
 theme = "minimo"
 
+rssuri = "atom.xml"
+
 disqusShortname = ""
 googleAnalytics = ""
 
@@ -105,6 +107,11 @@ name = "Twitter"
 weight = -10
 identifier = "twitter"
 url = "https://twitter.com/tokorom/"
+[[menu.main]]
+name = "所属"
+weight = -10
+identifier = "company"
+url = "http://www.spinners.work/"
 
 [blackfriday]
 hrefTargetBlank = true
