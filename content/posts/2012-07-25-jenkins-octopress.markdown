@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [sakura, octopress, jenkins]
 aliases: [/2012/07/25/jenkins-octopress/]
+authors: [tokorom]
 ---
 
 ## 目的

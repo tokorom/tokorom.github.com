@@ -1,0 +1,13 @@
+id = "tokorom"
+
+[name]
+display = "Yuta Tokoro"
+
+[email]
+username = "tokorom"
+host = "gmail.com"
+
+[social]
+email = "tokorom@gmail.com"
+facebook  = "MunifTanjim"
+twitter = "tokorom"

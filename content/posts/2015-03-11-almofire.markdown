@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios,swift]
 aliases: [/2015/03/11/almofire/]
+authors: [tokorom]
 ---
 
 ※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています

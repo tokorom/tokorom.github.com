@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, objc]
 aliases: [/2013/05/27/ssgentlealertview/]
+authors: [tokorom]
 ---
 
 ## UIAlertViewは警告目的のダイアログ

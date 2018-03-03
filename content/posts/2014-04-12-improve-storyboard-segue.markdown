@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, objc]
 aliases: [/2014/04/12/improve-storyboard-segue/]
+authors: [tokorom]
 ---
 
 これは [potatotips第６回め](http://connpass.com/event/5803/) で発表した [この話](https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka) のまとめと後書きです。

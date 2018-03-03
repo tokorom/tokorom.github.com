@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [sakura, jenkins]
 aliases: [/2012/07/24/install-jenkins-to-sakura/]
+authors: [tokorom]
 ---
 
 ## JDKのインストール

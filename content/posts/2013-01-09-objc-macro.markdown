@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,ios]
 aliases: [/2013/01/09/objc-macro/]
+authors: [tokorom]
 ---
 
 ## マクロ

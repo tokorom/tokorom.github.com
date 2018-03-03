@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc]
 aliases: [/2012/08/17/safe-objc/]
+authors: [tokorom]
 ---
 
 ## チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？

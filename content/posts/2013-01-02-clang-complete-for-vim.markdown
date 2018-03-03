@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,vim,ios]
 aliases: [/2013/01/02/clang-complete-for-vim/]
+authors: [tokorom]
 ---
 
 ## 概要

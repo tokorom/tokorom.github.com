@@ -8,7 +8,7 @@ theme = "minimo"
 disqusShortname = ""
 googleAnalytics = ""
 
-Paginate = 5
+Paginate = 20
 preserveTaxonomyNames = true
 
 enableRobotsTXT = true # generate robots.txt
@@ -26,7 +26,7 @@ baseName = "atom"
 
 [params.info]
 description = "iOSアプリ開発者"
-title404 = "Nothing's here!"
+title404 = "ページが見つかりません"
 
 [params.assets]
 favicon = "favicon.ico"
@@ -91,7 +91,7 @@ category = "categories"
 tag = "tags"
 
 [permalinks]
-page = "/blog/:year/:month/:day/:slug/"
+page = "/:slug/"
 
 [[menu.main]]
 name = "Blog"

@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, objc]
 aliases: [/2013/05/23/uikit-images/]
+authors: [tokorom]
 ---
 
 ## UIKitで使われている画像はどこにある？

@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios,vim,objc]
 aliases: [/2013/01/14/easy-objc-complement/]
+authors: [tokorom]
 ---
 
 ## 概要

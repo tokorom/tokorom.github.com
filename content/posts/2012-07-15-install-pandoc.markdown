@@ -5,6 +5,7 @@ date: 2012-07-15
 comments: true
 tags: [mac]
 aliases: [/2012/07/15/install-pandoc/]
+authors: [tokorom]
 ---
 
 ## hs-httpがインストールできない!

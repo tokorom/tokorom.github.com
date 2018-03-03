@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, objc]
 aliases: [/2013/03/07/block-injection/]
+authors: [tokorom]
 ---
 
 ## 例えばこんなコードに違和感はありませんか？

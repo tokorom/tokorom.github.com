@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, jenkins]
 aliases: [/2012/09/02/ghunit-jenkins-coverage/]
+authors: [tokorom]
 ---
 
 ## 概要

@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [mac, vim, cui]
 aliases: [/2012/12/31/mac-terminal-japanese/]
+authors: [tokorom]
 ---
 
 Macの初期設定のたびに混乱してるので再整理しておきます。

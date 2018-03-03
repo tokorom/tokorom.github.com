@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,ios,tdd]
 aliases: [/2014/04/21/objc-async-test/]
+authors: [tokorom]
 ---
 
 {% img center http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png %}

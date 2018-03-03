@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [swift, ios]
 aliases: [/2014/09/13/swift-simulator/]
+authors: [tokorom]
 ---
 
 だいぶ小ネタ。

@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [swift,ios]
 aliases: [/2015/11/08/has-associated-objects/]
+authors: [tokorom]
 ---
 
 {% img center https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg %}

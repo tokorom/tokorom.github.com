@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [xcode,ios]
 aliases: [/2014/02/06/pbxproj-merge/]
+authors: [tokorom]
 ---
 
 **2014/02/09 追記**  

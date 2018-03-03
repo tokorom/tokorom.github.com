@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, objc, xcode]
 aliases: [/2012/08/12/objc-new-statements/]
+authors: [tokorom]
 ---
 
 もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。  

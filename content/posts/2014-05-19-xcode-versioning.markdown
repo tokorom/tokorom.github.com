@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [xcode,ios]
 aliases: [/2014/05/19/xcode-versioning/]
+authors: [tokorom]
 ---
 
 {% img center http://dl.dropbox.com/u/10351676/images/xcode_versioning.png %}

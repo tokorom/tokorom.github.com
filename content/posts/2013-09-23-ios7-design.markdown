@@ -5,7 +5,7 @@ date: 2013-09-23
 comments: true
 external-url: 
 tags: [ios,ui,design]
-author: Atsushi Morino
+authors: [amorino]
 aliases: [/2013/09/23/ios7-design/]
 ---
 

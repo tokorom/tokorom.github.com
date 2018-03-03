@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,ios,haskell]
 aliases: [/2013/11/04/objective-c-haskell/]
+authors: [tokorom]
 ---
 
 ## 導入

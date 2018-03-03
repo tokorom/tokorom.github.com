@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,ios]
 aliases: [/2013/06/15/objc-reduce/]
+authors: [tokorom]
 ---
 
 既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。

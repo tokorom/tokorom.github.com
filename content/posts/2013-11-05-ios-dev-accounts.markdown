@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios,publish]
 aliases: [/2013/11/05/ios-dev-accounts/]
+authors: [tokorom]
 ---
 
 ## 2013年11月18日 追記

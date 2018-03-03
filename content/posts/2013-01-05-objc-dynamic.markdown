@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,ios]
 aliases: [/2013/01/05/objc-dynamic/]
+authors: [tokorom]
 ---
 
 ## Objective-Cの @dynamic はお好きですか？

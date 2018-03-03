@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios,swift]
 aliases: [/2015/03/12/swifttask-promisekit-bolts/]
+authors: [tokorom]
 ---
 
 - ※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます

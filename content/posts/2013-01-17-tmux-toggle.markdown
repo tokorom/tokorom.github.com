@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [cui, mac]
 aliases: [/2013/01/17/tmux-toggle/]
+authors: [tokorom]
 ---
 
 ** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **

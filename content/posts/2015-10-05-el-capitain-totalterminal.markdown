@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [mac,cui]
 aliases: [/2015/10/05/el-capitain-totalterminal/]
+authors: [tokorom]
 ---
 
 ## El CapitanにしたらTotalTerminalが動かない！

@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [mac, octopress]
 aliases: [/2012/07/15/octopress-part-of-codes/]
+authors: [tokorom]
 ---
 
 ## おさらい：Octopressでソースコードを表示する

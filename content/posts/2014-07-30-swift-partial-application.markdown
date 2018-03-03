@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [swift, ios]
 aliases: [/2014/07/30/swift-partial-application/]
+authors: [tokorom]
 ---
 
 ## Swiftオフィシャルの部分適用

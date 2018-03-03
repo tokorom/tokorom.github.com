@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [swift,ios]
 aliases: [/2015/10/26/defer-to-deinit/]
+authors: [tokorom]
 ---
 
 ## deferしてますか？

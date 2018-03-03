@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [ios, objc]
 aliases: [/2013/04/01/blockinjection2/]
+authors: [tokorom]
 ---
 
 ## BlockInjectionとはなんぞや

@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [vim, ios, objc]
 aliases: [/2013/01/15/ctrlp-docset/]
+authors: [tokorom]
 ---
 
 ## Vimでリファレンス読む必要ありますか？

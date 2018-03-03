@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc, ci]
 aliases: [/2013/07/09/objc-travis-coveralls/]
+authors: [tokorom]
 ---
 
 {% img center http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png %}

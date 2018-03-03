@@ -6,6 +6,7 @@ comments: true
 external-url: 
 tags: [objc,ios]
 aliases: [/2014/01/23/super-viewcontroller-for-a-library/]
+authors: [tokorom]
 ---
 
 ## XXXViewControllerの親クラスを差し替えたいときありますよね？
