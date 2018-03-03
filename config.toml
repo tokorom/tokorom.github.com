@@ -94,24 +94,29 @@ page = "/:slug/"
 
 [[menu.main]]
 name = "Blog"
-weight = -10
+weight = 10
 identifier = "blog"
 url = "/"
 [[menu.main]]
-name = "GitHub"
-weight = -10
-identifier = "repository"
-url = "https://github.com/tokorom/"
-[[menu.main]]
 name = "Twitter"
-weight = -10
+weight = 20
 identifier = "twitter"
 url = "https://twitter.com/tokorom/"
 [[menu.main]]
-name = "所属"
-weight = -10
+name = "GitHub"
+weight = 30
+identifier = "repository"
+url = "https://github.com/tokorom/"
+[[menu.main]]
+name = "Company"
+weight = 40
 identifier = "company"
 url = "http://www.spinners.work/"
+[[menu.main]]
+name = "RSS"
+weight = 50
+identifier = "rss"
+url = "/atom.xml"
 
 [blackfriday]
 hrefTargetBlank = true
