@@ -13,7 +13,7 @@ authors: [tokorom]
 
 まず、Swiftオフィシャルな構文として
 
-```
+```swift
 func addTwoNumbers(a: Int)(b: Int) -> Int {
   return a + b
 }
@@ -21,7 +21,7 @@ func addTwoNumbers(a: Int)(b: Int) -> Int {
 
 というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
 
-```
+```swift
 let add1 = addTwoNumbers(1)
 add1(b: 2) //< 3
 ```
@@ -45,7 +45,7 @@ add1(b: 2) //< 3
 
 [https://github.com/tokorom/partial-swift](https://github.com/tokorom/partial-swift)
 
-```
+```swift
 func partial<A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
     return { function(a(), $0) }
 }
@@ -55,7 +55,7 @@ func partial<A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) ->
 
 ## 利用サンプル
 
-```
+```swift
 func add(a: Int, b: Int) -> Int {
     return a + b
 }
@@ -72,7 +72,7 @@ add1(2) //< 3
 
 ミソは `@auto_closure` を使った遅延評価です。これをやらないと
 
-```
+```swift
 let add100 = partial(add, someting(100)) //< この時点で someting(100) が実行されちゃう
 
 add100(10) //< ここでは実行済みの someting(100) の結果が使われる
@@ -80,7 +80,7 @@ add100(10) //< ここでは実行済みの someting(100) の結果が使われ�
 
 といったかんじで、`partial` で部分適用した時点で適用した引数の内容が評価されちゃいます。しかし `@auto_closure` を活用することで、
 
-```
+```swift
 let add100 = partial(add, someting(100)) //< この時点で someting(100) は実行されない！
 
 add100(10) //< ここではじめて someting(100) が実行されてその結果が使われる

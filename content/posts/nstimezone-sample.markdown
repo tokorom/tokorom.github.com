@@ -13,19 +13,19 @@ authors: [tokorom]
 
 ## abbreviation
 
-```
+```swift
 GMT+9
 ```
 
 ## name
 
-```
+```swift
 Asia/Tokyo
 ```
 
 ## description
 
-```
+```swift
 Asia/Tokyo (GMT+9) offset 32400
 ```
 
@@ -48,7 +48,7 @@ Asia/Tokyo (GMT+9) offset 32400
 
 ## 上記を試したコード
 
-```
+```swift
 let timeZone = NSTimeZone.systemTimeZone()
 
 println("#### abbreviation, \(timeZone.abbreviation)")

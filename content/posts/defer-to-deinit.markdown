@@ -19,7 +19,7 @@ Swift2でみんな大好き`defer`さんが導入されましたね！
 
 そんなコードを書く場合、`defer`大好きっ子ならCustom Loggerを登録した後にこんな感じで解除したくなりますよね（実際は僕はこのとき初めて実験でないところで`defer`を使ったので、本当の`defer`大好きっ子はこんな間違いはしないだろう）。
 
-```
+```swift
 let logger = TextViewLogger(textView: textView)
 DDLog.addLogger(logger)
 
@@ -35,7 +35,7 @@ defer {
 とお馬鹿な前置きは置いておいても、上のような雰囲気で終処理書けたら便利な気はする。
 普通に`deinit`でやれば済む話なんだけど、今回のケースだとpropertyに`logger`をもたせて、`deinit`で`logger`があれば`removeLogger`する的なことを書かないといけない。まあ普通のことではあるんだけど、できたら、
 
-```
+```swift
 let logger = TextViewLogger(textView: textView)
 DDLog.addLogger(logger)
 
@@ -52,7 +52,7 @@ deferToDeinit {
 
 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
 
-```
+```swift
 typealias DeferredClosure = () -> Void
 
 class BaseViewController: UIViewController {
@@ -83,7 +83,7 @@ class BaseViewController: UIViewController {
 
 Stored Propertyがダメなら、Computed Property + Associated Objectsでなんとかなるかも？と試してみました。
 
-```
+```swift
 typealias DeferredClosure = () -> Void
 
 protocol Deferrable {

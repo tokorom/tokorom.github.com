@@ -40,7 +40,7 @@ authors: [tokorom]
 
 ### SwiftTask
 
-```
+```swift
 request(.GET, urlString).success { [unowned self] (users: [User]) in
     self.textView?.text = "\(users)"
 }.failure { [unowned self] error, _ in
@@ -53,7 +53,7 @@ request(.GET, urlString).success { [unowned self] (users: [User]) in
 
 ### PromiseKit
 
-```
+```swift
 request(.GET, urlString).then { [unowned self] (users: [User]) -> Void in
     self.textView?.text = "\(users)"
     return
@@ -70,7 +70,7 @@ request(.GET, urlString).then { [unowned self] (users: [User]) -> Void in
 
 ### Bolts
 
-```
+```swift
 request(Alamofire.Method.GET, urlString, User.self).continueWithBlock { (task: BFTask!) -> AnyObject! in
     if let error = task.error {
         self.textView?.text = "\(error)"
@@ -95,7 +95,7 @@ request(Alamofire.Method.GET, urlString, User.self).continueWithBlock { (task: B
 
 ### SwiftTask
 
-```
+```swift
 // SwiftTaskのみprogress取得に対応したサンプルになっています
 public func request<T: ResponseCollectionSerializable>(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL) -> Task<Progress, [T], NSError> {
     let task = Task<Progress, [T], NSError> { progress, fulfill, reject, configure in
@@ -122,7 +122,7 @@ public func request<T: ResponseCollectionSerializable>(method: Alamofire.Method,
 
 ### PromiseKit
 
-```
+```swift
 public func request<T: ResponseCollectionSerializable>(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL) -> Promise<[T]> {
     let promise = Promise<[T]>({ fulfiller, rejecter in
         Alamofire.request(method, URLString, parameters: parameters, encoding: encoding)
@@ -145,7 +145,7 @@ public func request<T: ResponseCollectionSerializable>(method: Alamofire.Method,
 
 ### Bolts
 
-```
+```swift
 public func request<T: ResponseCollectionSerializable>(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, type: T.Type, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL) -> BFTask {
     var task = BFTaskCompletionSource()
     Alamofire.request(method, URLString, parameters: parameters, encoding: encoding)

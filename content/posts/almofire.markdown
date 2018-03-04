@@ -30,7 +30,7 @@ Swiftいいですね！
 
 まず、普通にJSONを取得するインターフェースですが、
 
-```
+```swift
 Alamofire.request(.GET, "https://api.github.com/users")
     .validate()
     .responseJSON { [unowned self] (_, _, JSON, error) in
@@ -60,7 +60,7 @@ Alamofire.request(.GET, "https://api.github.com/users")
 
 例えば、こんなかんじで。
 
-```
+```swift
 Alamofire.request(.GET, "https://api.github.com/users")
     .validate()
     .responseCollection { [unowned self] (_, _, users: [User]?, error) in
@@ -82,7 +82,7 @@ Objective-C時代にもAPIクライアントにParserを渡してModelオブジ�
 
 新しく作る`ResponseCollectionSerializable`というJSON->Modelオブジェクトのシリアライズ用のprotocolに対応したクラスであれば、全てこのインターフェースで取得できるようになります。Generics偉い！
 
-```
+```swift
 import SwiftyJSON
 
 extension Alamofire.Request {
@@ -112,7 +112,7 @@ extension Alamofire.Request {
 
 ※ [SwifthJSON](https://github.com/SwiftyJSON/SwiftyJSON) を使ってます
 
-```
+```swift
 import SwiftyJSON
 
 public protocol ResponseCollectionSerializable {

@@ -31,7 +31,7 @@ authors: [tokorom]
 
 以下、サンプルコードです。
 
-```
+```swift
 var StoredPropertyKey: UInt8 = 0
 
 extension UIViewController {
@@ -58,7 +58,7 @@ extension UIViewController {
 
 例えば、こんな感じで気軽にextendできるように。
 
-```
+```swift
 // UIViewControllerにstoredPropertyを追加！
 extension UIViewController: HasAssociatedObjects {
     var storedProperty: String? {
@@ -76,7 +76,7 @@ extension UIViewController: HasAssociatedObjects {
 
 それ、Protocol Extensionでできるよ！ということで、やってみました。
 
-```
+```swift
 protocol HasAssociatedObjects {
     var associatedObjects: AssociatedObjects { get }
 }

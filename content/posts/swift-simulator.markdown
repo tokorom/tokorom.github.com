@@ -13,7 +13,7 @@ authors: [tokorom]
 
 ## コード
 
-```
+```swift
 #if (arch(i386) || arch(x86_64)) && os(iOS)
     AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug
     AFNetworkActivityLogger.sharedLogger().startLogging()
@@ -36,7 +36,7 @@ authors: [tokorom]
 
 ぼくの手元では、デバッグ実行時に
 
-```
+```swift
 #if DEBUG
     println("DEBUG")
 #endif

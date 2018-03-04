@@ -24,14 +24,14 @@ authors: [tokorom]
 
 カリー化して部分適用ができる状態までということで、Haskellの`map`が実現できるところまでを目標にしました。
 
-```
+```haskell
 map (+3) [1, 2, 3]
 ```
 
 これです。  
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
 
-```
+```objective-c
 map (+3) ([1, 2, 3])
 ```
 
@@ -39,7 +39,7 @@ map (+3) ([1, 2, 3])
 
 しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
 
-```
+```objective-c
 map (OP('+') (@3)) (@[@1, @2, @3])
 ```
 
@@ -53,7 +53,7 @@ map (OP('+') (@3)) (@[@1, @2, @3])
 
 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す `add` の実装です。  
 
-```
+```objective-c
 #define add [ObjcHaskell hsAdd]
 
 + (curryingBlock)hsAdd
@@ -67,7 +67,7 @@ map (OP('+') (@3)) (@[@1, @2, @3])
 
 `CURRYING2`という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
 
-```
+```objective-c
 #define add [ObjcHaskell hsAdd]
 
 + (curryingBlock)hsAdd
@@ -90,13 +90,13 @@ Blockを返すBlockを返す関数というかんじになってます。
 
 例えば、
 
-```
+```objective-c
 curryingBlock add3 = add (@3);
 ```
 
 とすれば、`add`に対して`@3`を部分適用した関数（正確にはBlock）が取得でき、
 
-```
+```objective-c
 id result = add3 (@4);
 ```
 
@@ -109,14 +109,14 @@ id result = add3 (@4);
 Objective-Cでは`+`とか`-`といった演算子は関数ではないのでそのままでは使えません。
 ということで `OP('+')` みたいにマクロでなんとかすると説明したのですが、そのマクロはこんなかんじになってます。
 
-```
+```objective-c
 #define OP(op) ([ObjcHaskell hsSectionWithOperator:op])
 ```
 
 単に、charをObjective-Cのメソッドに渡してその演算子に適した関数を得ているだけです。  
 このメソッドの実装は、
 
-```
+```objective-c
 + (curryingBlock)hsSectionWithOperator:(int)op
 {
     switch (op) {
@@ -138,7 +138,7 @@ Objective-Cでは`+`とか`-`といった演算子は関数ではないのでそ
 
 ではこの仕組みを使って畳み込み関数 `foldr` を作ってみましょう。
 
-```
+```objective-c
 #define foldr [ObjcHaskell hsFoldr]
 
 + (curryingBlock)hsFoldr
@@ -160,7 +160,7 @@ Objective-Cでは`+`とか`-`といった演算子は関数ではないのでそ
 `foldr`の１つめの引数は２つの引数を持つ関数です。ここでは`binary`がそれに相当します。  
 最終的には`binary`にリストの要素を１つずつ渡して計算していくわけで、
 
-```
+```objective-c
 id acc = ini;
 curryingBlock fnc = binary;
 for (id elem in [list reverseObjectEnumerator]) {
@@ -178,7 +178,7 @@ for (id elem in [list reverseObjectEnumerator]) {
 では、この畳み込みを使ってさらに新しい関数 `sum` を作ってみましょう。
 `sum` は引数に渡したリストの要素を足し合わせたものを返す関数です。
 
-```
+```objective-c
 #define sum [ObjcHaskell hsSum]
 
 + (curryingBlock)hsSum
@@ -196,7 +196,7 @@ for (id elem in [list reverseObjectEnumerator]) {
 `map`ですが本来は畳み込みで実現したかったのですが、今のところはラムダ式に対応していないためできませんでした。
 今回はベタに普通のObjective-C的に中身を実装してます。
 
-```
+```objective-c
 + (curryingBlock)hsMap
 {
     CURRYING2(
@@ -217,7 +217,7 @@ for (id elem in [list reverseObjectEnumerator]) {
 
 ということで、
 
-```
+```objective-c
 map (OP('+') (@3)) (@[@1, @2, @3])
 ```
 
@@ -225,7 +225,7 @@ map (OP('+') (@3)) (@[@1, @2, @3])
 
 早速テストを実行してみると...
 
-```
+```objective-c
 - (void)testMap
 {
     id result = map (OP('+') (@3)) (@[@1, @2, @3]);
