@@ -9,7 +9,7 @@ aliases: [/2013/07/09/objc-travis-coveralls/]
 authors: [tokorom]
 ---
 
-{% img center http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png %}
+![ci_coverage_badges](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ci_coverage_badges.png)
 
 今日はGithubに公開したiOS用のライブラリを **Travis CI** と **Coveralls** に対応した手順を紹介したいと思います。  
 
@@ -41,7 +41,7 @@ iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的
 
 ### Travis CI上で該当のリポジトリをONにする
 
-{% img center http://dl.dropbox.com/u/10351676/images/travis_on.png %}
+![travis_on](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/travis_on.png)
 
 Travis CI に行って、このスクリーンショットのように該当リポジトリを `ON` にするだけです。簡単！
 
@@ -100,7 +100,7 @@ script:
 
 ### 確認
 
-{% img center http://dl.dropbox.com/u/10351676/images/travis_success.png %}
+![travis_success](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/travis_success.png)
 
 うまくいけば、 [こんなかんじ](https://travis-ci.org/tokorom/BlockInjection) でビルド/テスト結果が確認できるはずです。
 
@@ -112,7 +112,7 @@ https://travis-ci.org/[YOUR_ACCOUNT]/[YOUR_REPOSITORY].png?branch=master
 
 を画像として表示することで、こんなかんじのバッヂも表示できます。せっかくなのでこいつをReadmeに埋め込みましょう。
 
-{% img center https://travis-ci.org/tokorom/BlockInjection.png?branch=master %}
+![BlockInjection](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/BlockInjection.png?branch=master)
 
 ## Coveralls
 
@@ -137,7 +137,7 @@ https://travis-ci.org/[YOUR_ACCOUNT]/[YOUR_REPOSITORY].png?branch=master
 
 ### Coveralls上で該当のリポジトリをONにする
 
-{% img center http://dl.dropbox.com/u/10351676/images/coveralls_on.png %}
+![coveralls_on](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_on.png)
 
 やりかたもUIもTravis CI と同じです。CoverallsのADD REPOページに入って該当リポジトリを `ON` にするだけです。
 
@@ -200,11 +200,11 @@ after_success:
 
 うまく動いていれば、Coverallsで
 
-{% img center http://dl.dropbox.com/u/10351676/images/coveralls_list.png %}
+![coveralls_list](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_list.png)
 
 こんなかんじでカバレッジの確認ができるはずです。
 
-{% img center http://dl.dropbox.com/u/10351676/images/coveralls_source.png %}
+![coveralls_source](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_source.png)
 
 また、こんなかんじでソースコードのどの行がカバーされていないかなども確認できます。
 
@@ -216,7 +216,7 @@ https://coveralls.io/repos/[YOUR_ACCOUNT]/[YOUR_REPOSITORY]/badge.png
 
 でバッヂの表示ができます。
 
-{% img center https://coveralls.io/repos/tokorom/BlockInjection/badge.png %}
+![badge](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/badge.png)
 
 ### カバレッジ計測対象から除外する指定
 

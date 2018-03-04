@@ -13,7 +13,7 @@ authors: [tokorom]
 
 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
 
-{% img center http://dl.dropbox.com/u/10351676/images/ghunit-coverage.png %}
+![ghunit-coverage](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ghunit-coverage.png)
 
 設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
 
@@ -41,7 +41,7 @@ GHUnitのiOS用frameworkをビルドするのが面倒な場合は、[Github](ht
 GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。  
 具体的には、以下のように
 
-{% img center http://dl.dropbox.com/u/10351676/images/test-coverage-setting.png %}
+![test-coverage-setting](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/test-coverage-setting.png)
 
 * *Generate Test Coverage Files*
 * *Instrument Program Flow*
@@ -133,7 +133,7 @@ build/coverage.xml
 
 テストカバレッジが複数回取られると、Jenkins上で
 
-{% img center http://dl.dropbox.com/u/10351676/images/coverage-graph.png %}
+![coverage-graph](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coverage-graph.png)
 
 のようにカバレッジの変化をグラフで確認することもできるようになります。
 

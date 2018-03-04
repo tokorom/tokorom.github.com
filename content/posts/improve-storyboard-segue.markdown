@@ -11,7 +11,7 @@ authors: [tokorom]
 
 これは [potatotips第６回め](http://connpass.com/event/5803/) で発表した [この話](https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka) のまとめと後書きです。
 
-{% img center http://dl.dropbox.com/u/10351676/images/storyboard_sample.png %}
+![storyboard_sample](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_sample.png)
 
 ## Storyboardいいですよね！
 
@@ -135,7 +135,7 @@ NSLog(@"number: %@, string: %@", option.number, option.string);
 
 また、ふつうにやると遷移先がナビゲーションコントローラだったりタブバーコントローラだったりすると、その子要素に値を渡すのが意外と面倒だったりしませんか？
 
-{% img center http://dl.dropbox.com/u/10351676/images/storyboard_navigation.png %}
+![storyboard_navigation](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_navigation.png)
 
 遷移先がナビゲーションバーコントローラかどうか調べて、そうならその配下のViewControllerを取得して、それが想定するViewControllerならこの値を渡す、といった面倒な手順があります。
 
@@ -151,7 +151,7 @@ NSLog(@"number: %@, string: %@", option.number, option.string);
 
 なお、ここまでは `performSegue` をするときに一緒に値を渡すやりかただけ紹介しましたので、performSegueが使えないパターン、例えばContainer Viewを使ってViewControllerに子ViewControllerを埋め込むときはどうするの？という疑問がでてきます。
 
-{% img center http://dl.dropbox.com/u/10351676/images/storyboard_embed.png %}
+![storyboard_embed](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_embed.png)
 
 じつは `TKRSegueOptions` はperformSegue方式の他に「事前設定方式」を備えています。
 

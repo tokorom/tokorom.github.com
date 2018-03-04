@@ -4,7 +4,7 @@ title: "UIKitで使われている画像パーツをまとめて取得する"
 date: 2013-05-23
 comments: true
 external-url: 
-tags: [ios, objc]
+tags: [ios, objc, design, uikit]
 aliases: [/2013/05/23/uikit-images/]
 authors: [tokorom]
 ---
@@ -98,7 +98,7 @@ export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages
 
 ぼくの手元では、
 
-{% img center http://dl.dropbox.com/u/10351676/images/UIKitParts.png %}
+![UIKitParts](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/UIKitParts.png)
 
 こんなかんじで取得できました。
 

@@ -94,7 +94,7 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
 
 これらのオプションを指定してclangを実行してみると、
 
-```
+```sh
 clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include 
 ```
 
@@ -173,7 +173,7 @@ clangのオプションは `.vimrc` でも指定できるのですが、こい�
 の `[numbers o` の直後で補完を実行してみます。  
 上記と全く同じ設定をしているならInsertモード時に `Ctrl+x Ctrl+o` or `Ctrl+x Ctrl+u` で実行できるはずです。
 
-{% img center http://dl.dropbox.com/u/10351676/images/clang_completion.png %}
+![clang_completion](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/clang_completion.png)
 
 ぼくの手元では、きっちり「oからはじまるNSArrayのインスタンスメソッドが一覧表示」されました！  
 

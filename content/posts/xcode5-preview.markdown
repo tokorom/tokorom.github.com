@@ -21,7 +21,7 @@ WWDC2013で膨大なアップデートを学習中でしゃべりたいことが
 
 ## ついにXcodeから任意のテストだけを簡単に実行できるようになる
 
-{% img center http://dl.dropbox.com/u/10351676/images/icon-test-navigator.png %}
+![icon-test-navigator](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/icon-test-navigator.png)
 
 ついに、ついに...というかやっとかという話。
 
@@ -33,7 +33,7 @@ Xcode 5 で **Test Navigator** というやつが加わり、テスト駆動で�
 
 ## CIの機能も入ります / その名は "Bots"
 
-{% img center http://dl.dropbox.com/u/10351676/images/icon-bots.png %}
+![icon-bots](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/icon-bots.png)
 
 公表されている概要だけ並べてみると、
 

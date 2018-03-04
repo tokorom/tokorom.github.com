@@ -9,7 +9,7 @@ aliases: [/2014/04/21/objc-async-test/]
 authors: [tokorom]
 ---
 
-{% img center http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png %}
+![TKRGuard_image](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/TKRGuard_image.png)
 
 ## 非同期処理のテストってどう書いてますか？
 
@@ -95,7 +95,7 @@ XCTAssertEqualObjects(response, @"OK!");
 
 [TKRGuard](https://github.com/tokorom/TKRGuard) ではきちんとどの `WAIT` の部分でタイムアウトが発生したかを、Xcode上でもCUI上でも確認できるようにしてあります。
 
-{% img center http://dl.dropbox.com/u/10351676/images/TKRGuard_timeout.png %}
+![TKRGuard_timeout](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/TKRGuard_timeout.png)
 
 ## GHUnitみたいにSuccessとかFailedを通知したい
 

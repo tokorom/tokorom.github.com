@@ -37,7 +37,7 @@ Appleの公式サイトに **iOS 7** を紹介するビデオが公開されま�
 <b>Ultimately of course, design defines so much of our experience.</b>  
 最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-video-01.png %}
+![ios7-video-01](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-video-01.png)
 
 <b>I think there is a profound and enduring beauty in simplicity, in clarity, in efficiency.</b>  
 シンプルであること、明瞭であること、効果的であることには深い、持続的な美しさがあると考えています。
@@ -57,7 +57,7 @@ iOS 7は、これらのゴールの明確な回答となります。
 <b>We’ve considered the tiniest details, like refining the typography.</b>  
 タイポグラフィを洗練させたように、本当に小さな細かいディテールにまで配慮しました。
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-video-02.png %}
+![ios7-video-02](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-video-02.png)
 
 <b>To much larger ones, like redesigning all the icons, and developing a grid system allowed us to acheive a much more hamornious relationship between individual elements.</b>  
 大きなもので言うと、アイコンのリデザインがあります。グリッドシステムを作りあげることで、個々のエレメントに調和の取れた関係性を生み出すことを可能にしました。
@@ -71,7 +71,7 @@ iOS 7は、これらのゴールの明確な回答となります。
 <b>And a use of translucency gives you a sense of your context.</b>  
 そして半透明の効果は、状況や文脈の察知を手助けします。
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-video-03.png %}
+![ios7-video-03](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-video-03.png)
 
 <b>These planes combined with new approaches to animation and motion, create a sense of depth and vitality.</b>  
 アニメーションとモーションに対する新しいアプローチも含んだこれらの表現により、奥行きと活気を感じられるようになります。
@@ -88,7 +88,7 @@ iPhoneがあなたの動きに応答する形で、視差効果を用いた全�
 <b>Even the simple act of changing your wallpaper has a very noticeable effect on the way your iPhone looks and feels across the entire system.</b>  
 壁紙を変えるようなほんの簡単な変更も、iPhoneのシステム全体を通して、そのルック＆フィールに目を引く変化を及ぼすのです。
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-video-04.png %}
+![ios7-video-04](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-video-04.png)
 
 <b>While iOS 7 is completely new, it was important to us to make it instantly familiar.</b>  
 iOS 7が完全に新しいものであっても、瞬時に慣れ親しんだものに見えることが重要でした。

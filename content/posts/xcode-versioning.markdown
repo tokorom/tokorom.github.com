@@ -9,7 +9,7 @@ aliases: [/2014/05/19/xcode-versioning/]
 authors: [tokorom]
 ---
 
-{% img center http://dl.dropbox.com/u/10351676/images/xcode_versioning.png %}
+![xcode_versioning](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/xcode_versioning.png)
 
 ## 概要
 
@@ -67,7 +67,7 @@ authors: [tokorom]
 
 ## Preprocess Info.plist file
 
-{% img center http://dl.dropbox.com/u/10351676/images/preprocess_info_plist.png %}
+![preprocess_info_plist](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/preprocess_info_plist.png)
 
 ぼくは今回初めて知ったのですが、`Builde Settings` -> `Packaging` の中に `Preprocess Info.plist file` という設定項目があり、これに`YES`を設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
 
@@ -115,11 +115,11 @@ fi
 
 これらの設定をすることで、例えばアプリ内でビルド番号を表示したときに、`Debug`モードであれば、
 
-{% img center http://dl.dropbox.com/u/10351676/images/versioning_sample_debug.png %}
+![versioning_sample_debug](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_debug.png)
 
 と表示され、`Release`モードであれば、
 
-{% img center http://dl.dropbox.com/u/10351676/images/versioning_sample_release.png %}
+![versioning_sample_release](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_release.png)
 
 と表示されるようになり、開発中のアプリにのみどのcommitまでが入っているかを自動的に埋め込むことができるようになります。
 
@@ -127,7 +127,7 @@ fi
 
 なお、Info.plistをスクリプトでいじるときに、上記のように`CFBundleVersion`を読み込んでそれを使って同じ`CFBundleVersion`を上書きするケースだと、前に作ったInfo.plistの値がインプットとして使われてしまい、
 
-{% img center http://dl.dropbox.com/u/10351676/images/versioning_sample_failed.png %}
+![versioning_sample_failed](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_failed.png)
 
 こんなかんじでビルド番号が壊れてしまうことがあります。必ずCleanしてからビルドすればこの問題は発生しないのですが、せっかく自動でバージョニングしているのに制約が付いてしまうのも不格好です。
 

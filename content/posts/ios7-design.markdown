@@ -30,28 +30,28 @@ iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
 <!-- more -->
 
 ##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間
-{% img center http://dl.dropbox.com/u/10351676/images/20130922/1_unlock.gif %}
+![1_unlock](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/1_unlock.gif)
 
 * iOS 6（左） : 0.5s
 * iOS 7（右） : 1.0s
 
 
 ##アプリアイコンをタップしてから開くまでの時間
-{% img center http://dl.dropbox.com/u/10351676/images/20130922/2_app.gif %}
+![2_app](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/2_app.gif)
 
 * iOS 6（左） : 0.4s
 * iOS 7（右） : 0.7s
 
 
 ##フォルダをタップしてから開くまでの時間
-{% img center http://dl.dropbox.com/u/10351676/images/20130922/3_folder.gif %}
+![3_folder](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/3_folder.gif)
 
 * iOS 6（左） : 0.3s
 * iOS 7（右） : 0.6s
 
 
 ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間
-{% img center http://dl.dropbox.com/u/10351676/images/20130922/4_multi.gif %}
+![4_multi](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/4_multi.gif)
 
 * iOS 6（左） : 0.3s
 * iOS 7（右） : 0.6s

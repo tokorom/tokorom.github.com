@@ -71,13 +71,13 @@ end tell
 
 次に、このスクリプトを利用するためにAutomatorでサービスとして新規登録する。
 
-{% img center http://dl.dropbox.com/u/10351676/images/toggle_terminal_script1.png %}
+![toggle_terminal_script1](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_script1.png)
 
 - Automatorで`サービス`を新規作成
 - 左ペインの`ライブラリ`->`AppleScriptを実行`を右ペインにドラッグ＆ドロップ
 - 右上の設定は `入力なし` と `すべてのアプリケーション` とする
 
-{% img center http://dl.dropbox.com/u/10351676/images/toggle_terminal_script2.png %}
+![toggle_terminal_script2](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_script2.png)
 
 - `{* Your script goes here *}` のところに上のスクリプトを挿入
 - 適当な名前で保存
@@ -86,7 +86,7 @@ end tell
 
 次に、登録したサービスをお好みのショートカットキーで実行できるようにする。
 
-{% img center http://dl.dropbox.com/u/10351676/images/toggle_terminal_keysetting.png %}
+![toggle_terminal_keysetting](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_keysetting.png)
 
 - `システム環境設定` -> `キーボード` -> `ショートカット` -> `サービス` の下の方に登録したサービスがある
 - 他と被らなそうな適当なショートカットキーを設定する

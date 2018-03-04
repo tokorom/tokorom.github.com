@@ -9,7 +9,7 @@ aliases: [/2015/11/08/has-associated-objects/]
 authors: [tokorom]
 ---
 
-{% img center https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg %}
+![blackbook](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg)
 
 ## extensionでstored propertyを追加したくなることありますか？
 

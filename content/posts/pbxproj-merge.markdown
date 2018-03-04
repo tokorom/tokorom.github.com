@@ -23,7 +23,7 @@ authors: [tokorom]
 
 とただそれだけなのにマージのときにコンフリクトする`pbxproj`さん。。。
 
-{% img center http://dl.dropbox.com/u/10351676/images/pbxproj_status.png %}
+![pbxproj_status](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/pbxproj_status.png)
 
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて...  
 どうにかならんもんかいとTwitterでつぶやいたところ、 [@azu_re](https://twitter.com/azu_re) さんから有り難い教えが！

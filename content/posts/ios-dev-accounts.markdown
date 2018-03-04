@@ -31,7 +31,7 @@ authors: [tokorom]
 
 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
 
-{% img center https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iOSDevCenterStruct.png %}
+![iOSDevCenterStruct](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iOSDevCenterStruct.png)
 
 大きくは、
 

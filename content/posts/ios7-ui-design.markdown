@@ -23,7 +23,7 @@ iOS 7から話題の"フラットデザイン"が採用されて、画面デザ�
 使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。  
 iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。  
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-simplicity-01.png %}
+![ios7-simplicity-01](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-01.png)
 
 ただ、"Simplicity"という言葉は、単に外観を表すものとして使われているわけではありません。  
 「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。  
@@ -49,7 +49,7 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
 その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。  
 これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。  
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-simplicity-02.png %}
+![ios7-simplicity-02](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-02.png)
 
 私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。 
 通常テキストとボタンのテキストの2色だけを使うのが安全です。  
@@ -66,7 +66,7 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
 もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。  
 既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。  
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-simplicity-03.png %}
+![ios7-simplicity-03](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-03.png)
 
 ## 3. "use of translucency"
 
@@ -76,7 +76,7 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
 ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。  
 例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。  
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-simplicity-04.png %}
+![ios7-simplicity-04](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-04.png)
 
 ## 4. "parallax to create a whole new experience of depth."
 
@@ -88,7 +88,7 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
 この効果は、"translucency"と同様にフラットでシンプルなデザインを維持したまま、情報量を増やすことなく、非常にリッチで満足感を感じる表現を提供することに成功しそうです。  
 ただ視覚的な効果として利用するのではなく、操作を行うインタフェースそのものにも活用することで、もっと面白いこともできるようになるのではないでしょうか？  
 
-{% img center http://dl.dropbox.com/u/10351676/images/ios7-simplicity-05.png %}
+![ios7-simplicity-05](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-05.png)
 
 さて、iOS 7が今回目指したのは装飾を徹底して削ぎ落とすことによりシンプルでフラットなUIを実現することですが、これはタイポグラフィーが本来持つ美しさを最大限に引き出すと共に、コンテンツに対して敬意を払い、可能な限りコンテンツの邪魔をしないでその内容がユーザーに少しでも伝わりやすい形にする、という狙いがあります。  
 一方で、シンプル・フラットな仮想空間を画面の中に用意しつつも、現実世界を模倣した物理法則・挙動や視覚効果を強く反映させることで、UIに親しみやすさと理解のしやすさ、そして何よりもこれまでになかったようなリッチで満足度の高い体験をもたらしていると、私は考えています。  
