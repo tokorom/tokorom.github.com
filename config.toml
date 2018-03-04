@@ -6,7 +6,7 @@ copyright = "tokorom"
 theme = "minimo"
 
 disqusShortname = ""
-googleAnalytics = ""
+googleAnalytics = "UA-2451574-4"
 
 Paginate = 20
 preserveTaxonomyNames = true
