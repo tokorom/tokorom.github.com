@@ -115,7 +115,7 @@ url = "https://github.com/tokorom/"
 name = "RSS"
 weight = 100
 identifier = "rss"
-url = "/atom.xml"
+url = "http://feeds.feedburner.com/tokorom"
 
 [blackfriday]
 hrefTargetBlank = true
