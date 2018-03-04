@@ -24,6 +24,9 @@ defaultContentLanguage = "ja"
 [outputFormats.RSS]
 baseName = "atom"
 
+[params.hatena]
+bookmarkBaseURL = "http://b.hatena.ne.jp/entry/www.tokoro.me"
+
 [params.info]
 description = "iOSアプリ開発者"
 title404 = "ページが見つかりません"
