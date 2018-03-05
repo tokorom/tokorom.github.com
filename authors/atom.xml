@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/authors/</link>
+    <description>Recent content in Authors on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Sep 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/authors/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Amorino</title>
+      <link>http://www.tokoro.me/authors/amorino/</link>
+      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/authors/amorino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tokorom</title>
+      <link>http://www.tokoro.me/authors/tokorom/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/authors/tokorom/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

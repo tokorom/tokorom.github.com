@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haskell on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/haskell/</link>
+    <description>Recent content in Haskell on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 04 Nov 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/haskell/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Objective-Cでカリー化とか部分適用してみる</title>
+      <link>http://www.tokoro.me/posts/objective-c-haskell/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objective-c-haskell/</guid>
+      <description>導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
+もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
+実際やってみたソースコードは こちら に置いてあります。
+ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
+map (+3) [1, 2, 3] これです。
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
+map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
+map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
+カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
+#define add [ObjcHaskell hsAdd]  + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd]  + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
+    </item>
+    
+  </channel>
+</rss>

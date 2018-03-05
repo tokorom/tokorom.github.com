@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tdd on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/tdd/</link>
+    <description>Recent content in Tdd on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 21 Apr 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/tdd/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Objective-Cで非同期処理のテストをシンプルに書く方法</title>
+      <link>http://www.tokoro.me/posts/objc-async-test/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-async-test/</guid>
+      <description>非同期処理のテストってどう書いてますか？ 標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、
+ GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？） expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う  となるかと思います。 ただ、私が調べた時点だとどれもしっくりきませんでした。
+まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。
+また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えばGHAsyncTestCaseを継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前にprepareとかを呼ばないといけないのがちょっと鬱陶しい。
+そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。
+こうしたい！ ぼくとしては理想的にはこういうライブラリを使いたいと思いました。
+ テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの TestCaseの親クラスが限定されないほうがよい 余分なコードを書かずにシンプルに書きたい それを利用することでテストの実行が遅くなったりしない  しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。
+他言語ではどういう書き方をしている？ なお、他言語ではどういう書き方が一般的なんだろうと調べてはみたのですが、なかなかしっくりくるものが見つからず、Objective-Cでこう書けたらいいなあと思ったのは RubyMotionで使われている書き方 でした。
+http://mobiletou.ch/2013/10/第五回-rubymotionでhttpや非同期処理を含むユニットテスト
+some_method_with_block {|some_data| @data = some_data resume } wait_max 1.0 do @data.should.equal foo end  待たせたい場所で wait 待たせている処理が終わったら resume  という本当にシンプルで分かりやすい書き方です。
+ということで、Objective-Cで同じようにWait &amp;amp; Resume方式で親クラスを限定せずに使えるシンプルなライブラリを作ることにしました。
+TKRGuard そして作ったのが TKRGuard です。
+TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方ができます。
+// #import &amp;#34;TKRGuard.h&amp;#34;  __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&amp;#34;OK!</description>
+    </item>
+    
+  </channel>
+</rss>

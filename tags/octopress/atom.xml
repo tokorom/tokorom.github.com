@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Octopress on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/octopress/</link>
+    <description>Recent content in Octopress on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 29 Jul 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/octopress/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる</title>
+      <link>http://www.tokoro.me/posts/jenkins-octopress/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/jenkins-octopress/</guid>
+      <description>目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&amp;gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&amp;gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&amp;gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &amp;quot;jenkins@your.domain&amp;quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.</description>
+    </item>
+    
+    <item>
+      <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>
+      <link>http://www.tokoro.me/posts/security-for-jenkins/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/security-for-jenkins/</guid>
+      <description>前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
+JenkinsにBitbucketからアクセスするためのユーザを追加 まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。
+※ ユーザの追加方法については このあたり を参照
+今回は、bitbucket というユーザを追加した。
+また、 Manage Jenkins -&amp;gt; Configure System で、
+ Access Control  Authorization Matrix-based security  bitbucketユーザに Job の Read だけチェック    としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
+このとき、Anonymousユーザの Job の Read にチェックがついていれば外しておく。
+Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
+nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } }  XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。</description>
+    </item>
+    
+    <item>
+      <title>Octopressでソースコードの一部分だけを参照する</title>
+      <link>http://www.tokoro.me/posts/octopress-part-of-codes/</link>
+      <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/octopress-part-of-codes/</guid>
+      <description>おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
+1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
+例えば、ここに sample/test.rb というファイルを置いておく。
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/  2. include_code でそのファイルを指定する {% include_code sample/test.rb %}  これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
+じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
+ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
+この経緯については、 OctopressのPull request に記録がある。
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style  以上で取り込み完了です。
+masterでなく 2.</description>
+    </item>
+    
+  </channel>
+</rss>

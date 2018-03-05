@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
+設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
+実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
+うまく動かない場合の設定の比較などにご参照ください。
+なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
+事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
+具体的には、以下のように
+ Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
+本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.  というエラーが出ることになります。
+この対処として、 main.'>
+
+<meta property='og:title' content='GHUnitのテストカバレッジをJenkinsで表示する • Yuta Tokoro'>
+<meta property='og:description' content='概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
+設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
+実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
+うまく動かない場合の設定の比較などにご参照ください。
+なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
+事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
+具体的には、以下のように
+ Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
+本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.  というエラーが出ることになります。
+この対処として、 main.'>
+<meta property='og:url' content='http://www.tokoro.me/posts/ghunit-jenkins-coverage/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='jenkins'><meta property='article:published_time' content='2012-09-02T00:00:00Z'/><meta property='article:modified_time' content='2012-09-02T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.34" />
+
+  <title>GHUnitのテストカバレッジをJenkinsで表示する • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/ghunit-jenkins-coverage/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.6a02ae68.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-2451574-4', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'></a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    TOKOROM BLOG
+    </h2>
+    <div class='desc'>
+    iOSアプリ開発者
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+      </li><li>
+        <a href='/tags/cui' style='font-size:1.064516129032258em'>Cui</a>
+      </li><li>
+        <a href='/tags/design' style='font-size:1.096774193548387em'>Design</a>
+      </li><li>
+        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+      </li><li>
+        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+      </li><li>
+        <a href='/tags/jenkins' style='font-size:1.096774193548387em'>Jenkins</a>
+      </li><li>
+        <a href='/tags/mac' style='font-size:1.129032258064516em'>Mac</a>
+      </li><li>
+        <a href='/tags/objc' style='font-size:1.6129032258064515em'>Objc</a>
+      </li><li>
+        <a href='/tags/octopress' style='font-size:1.064516129032258em'>Octopress</a>
+      </li><li>
+        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+      </li><li>
+        <a href='/tags/sakura' style='font-size:1.064516129032258em'>Sakura</a>
+      </li><li>
+        <a href='/tags/swift' style='font-size:1.1935483870967742em'>Swift</a>
+      </li><li>
+        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+      </li><li>
+        <a href='/tags/ui' style='font-size:1.064516129032258em'>Ui</a>
+      </li><li>
+        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+      </li><li>
+        <a href='/tags/vim' style='font-size:1.096774193548387em'>Vim</a>
+      </li><li>
+        <a href='/tags/xcode' style='font-size:1.129032258064516em'>Xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'></span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>iOSアプリ開発者</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>GHUnitのテストカバレッジをJenkinsで表示する</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2012-09-02T00:00:00Z'>2012-09-02</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="概要">概要</h2>
+
+<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ghunit-coverage.png" alt="ghunit-coverage" /></p>
+
+<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
+
+<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit" target="_blank">Github</a> に置いてあります。<br />
+うまく動かない場合の設定の比較などにご参照ください。</p>
+
+<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
+
+<!-- more -->
+
+<h2 id="事前準備">事前準備</h2>
+
+<h3 id="jenkinsの導入">Jenkinsの導入</h3>
+
+<ul>
+<li><a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a></li>
+</ul>
+
+<h3 id="ghunitの導入">GHUnitの導入</h3>
+
+<ul>
+<li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html" target="_blank">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
+</ul>
+
+<p>GHUnitのiOS用frameworkをビルドするのが面倒な場合は、<a href="https://github.com/tokorom/ghunit-ios-framework" target="_blank">Github</a> にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。</p>
+
+<h2 id="テストカバレッジを出力するためのプロジェクトの設定を変更する">テストカバレッジを出力するためのプロジェクトの設定を変更する</h2>
+
+<p>GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。<br />
+具体的には、以下のように</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/test-coverage-setting.png" alt="test-coverage-setting" /></p>
+
+<ul>
+<li><em>Generate Test Coverage Files</em></li>
+<li><em>Instrument Program Flow</em></li>
+</ul>
+
+<p>の２つに <strong>YES</strong> を設定します。</p>
+
+<p>本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に</p>
+
+<pre><code>Detected an attempt to call a symbol in system libraries that is not present on the iPhone:
+fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.
+</code></pre>
+
+<p>というエラーが出ることになります。</p>
+
+<p>この対処として、 <strong>main.m</strong> に以下コードを追記しておく必要があります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc">FILE <span style="color:#f92672">*</span>fopen<span style="color:#960050;background-color:#1e0010">$</span>UNIX2003(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>filename, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>mode)
+{
+  <span style="color:#66d9ef">return</span> fopen(filename, mode);
+}
+ 
+size_t fwrite<span style="color:#960050;background-color:#1e0010">$</span>UNIX2003(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>ptr, size_t size, size_t nitems, FILE <span style="color:#f92672">*</span>stream)
+{
+  <span style="color:#66d9ef">return</span> fwrite(ptr, size, nitems, stream);
+}</code></pre></div>
+<p>最後に、テスト用のターゲットの <strong>info.plist</strong> に <em>Application does not run in background</em> を加え、ここに <strong>YES</strong> を設定します。</p>
+
+<p>ここまででXcode側の設定は完了なので、GHUnitのテストを実行するとbuildディレクトリ以下（自分の場合は *build/CodeCoverageWithGHUnit.build/Debug-iphonesimulator/Tests.build/Objects-normal/i386*）に</p>
+
+<ul>
+<li>*.gcda</li>
+<li>*.gcno</li>
+</ul>
+
+<p>といったテストカバレッジの結果を出力したファイルが確認できるはずです。<br />
+Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a href="http://code.google.com/p/coverstory/" target="_blank">CoverStory</a> などでこれらのファイルを開けばローカルで確認することも可能です。</p>
+
+<h2 id="gcovrの設置">gcovrの設置</h2>
+
+<p>上記で出力したテストカバレッジの結果をJenkinsのCobertura pluginで読める形式に変換するために、 <a href="https://software.sandia.gov/trac/fast/wiki/gcovr" target="_blank">gcovr</a> というPythonスクリプトを利用します。<br />
+具体的には、<a href="https://software.sandia.gov/svn/public/fast/gcovr/trunk/scripts/gcovr" target="_blank">ココ</a> からダウンロードしてPathの通った場所にこれを設置します。</p>
+
+<h2 id="jenkinsのジョブの設定">Jenkinsのジョブの設定</h2>
+
+<h3 id="必要なplugin">必要なPlugin</h3>
+
+<ul>
+<li>Git plugin</li>
+<li>Cobertura plugin</li>
+</ul>
+
+<p>をJenkinsにインストールしてください。</p>
+
+<h3 id="ジョブの設定">ジョブの設定</h3>
+
+<ul>
+<li>Source Code Management
+
+<ul>
+<li>Repositories: 対象となるGitリポジトリのURL</li>
+</ul></li>
+</ul>
+
+<p>※ サンプルをそのまま利用したい場合は <code>git://github.com/tokorom/CodeCoverageWithGHUnit.git</code> をご利用ください</p>
+
+<ul>
+<li>BuildにGHUnit実行用の Execute Shell を追加</li>
+</ul>
+
+<pre><code>GHUNIT_CLI=1 WRITE_JUNIT_XML=YES xcodebuild -target Tests -configuration Debug -sdk iphonesimulator clean build
+</code></pre>
+
+<ul>
+<li>Buildeにgcovr実行用の Excute Shell を追加</li>
+</ul>
+
+<pre><code>gcovr -r . --object-directory build/CodeCoverageWithGHUnit.build/Debug-iphonesimulator/Tests.build/Objects-normal/i386 --exclude '.*Tests.*' --exclude '.*ExternalFrameworks.*' --xml &gt; build/coverage.xml
+</code></pre>
+
+<p>※ テストターゲットやプロジェクト名は適宜変更してください</p>
+
+<ul>
+<li>Post-build Actionsに Publish JUnit test result report を追加</li>
+</ul>
+
+<pre><code>build/test-results/*.xml
+</code></pre>
+
+<ul>
+<li>Post-build Actionsに Publish Cobertura Coverage Report を追加
+
+<ul>
+<li>Consider only stable builds: <strong>On</strong></li>
+<li>Source Encoding: <strong>UTF-8</strong></li>
+<li>Cobertura xlm report pattern
+<code>
+build/coverage.xml
+</code>
+※ この他、Coverage Metrics Targets で特定のカバレッジを下回った場合にはジョブ失敗とみなすなどの設定ができるようです。</li>
+</ul></li>
+</ul>
+
+<p>以上で設定は完了です。</p>
+
+<p>あとは実行するだけ！</p>
+
+<p>テストカバレッジが複数回取られると、Jenkins上で</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coverage-graph.png" alt="coverage-graph" /></p>
+
+<p>のようにカバレッジの変化をグラフで確認することもできるようになります。</p>
+
+<h2 id="参照させていただいたブログ記事へのリンク">参照させていただいたブログ記事へのリンク</h2>
+
+<ul>
+<li><a href="http://blog.octo.com/en/jenkins-quality-dashboard-ios-development/" target="_blank">iOS dev: How to setup quality metrics on your Jenkins job?</a></li>
+<li><a href="http://safx-dev.blogspot.jp/2012/03/jenkins.html" target="_blank">Jenkinsでテストとカバレッジの結果をグラフ表示できるようにする</a></li>
+<li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html" target="_blank">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
+</ul>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  
+  
+
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fghunit-jenkins-coverage%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/ios'>Ios</a>, <a class='tag' href='/tags/jenkins'>Jenkins</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/safe-objc/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/posts/objc-private-test/'>
+        <span class='screen-reader-text'>: </span>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+  </div>
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
+    <ul><li>
+        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2012-2018 Yuta Tokoro </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.409c76b5.js'></script><script src='/js/custom.js'></script>
+</body>
+
+</html>
+

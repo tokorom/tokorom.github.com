@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Swift on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/swift/</link>
+    <description>Recent content in Swift on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 08 Nov 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/swift/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
+      <link>http://www.tokoro.me/posts/has-associated-objects/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/has-associated-objects/</guid>
+      <description>extensionでstored propertyを追加したくなることありますか？ 少なくともSwift 2.1時点ではextensionでstored propertyを追加することはできず、computed propertyのみに限られます。
+でも、ヤダヤダ！ぼくは絶対stored property追加したいんだい！ってことありますか？
+そう思っちゃうあなた、他に解決方法ありますよね？なんでそのやりかたにこだわるんですか？そういう思考になっちゃう時点でまだSwift脳に至ってはいないのではないでしょうか（建前）。
+なお、ぼくはどうしても追加したんだい！ってことがあります（本音）。
+対象がAnyObjectならAssociated Objectsで代用できるよ で、そんな時は この記事 でやっているように Associated Objects で代用できることがあります。
+対象にきちんとretainさせることも可能ですし、安心ですね！
+以下、サンプルコードです。
+var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } } でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
+黒魔術（臭いもの）にフタを なので、この objc_xxxAssociatedObject を二度と書かなくて良いようにライブラリ化できないものでしょうか？
+例えば、こんな感じで気軽にextendできるように。
+// UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?</description>
+    </item>
+    
+    <item>
+      <title>Swiftでdeinitまで処理をdeferする</title>
+      <link>http://www.tokoro.me/posts/defer-to-deinit/</link>
+      <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/defer-to-deinit/</guid>
+      <description>deferしてますか？ Swift2でみんな大好きdeferさんが導入されましたね！
+guardと違いそんなに使う機会は訪れていないのですが、昨日、こんな感じで使いたい！という場面に遭遇しました。
+CocoaLumberjackを使ってデバッグ用にUITextViewにログを吐くCustom Loggerを設定していたのですが、とあるViewControllerだけでそれを使いたく、ViewControllerがdeinitされたらそのCustom Loggerも当然外したい。
+そんなコードを書く場合、defer大好きっ子ならCustom Loggerを登録した後にこんな感じで解除したくなりますよね（実際は僕はこのとき初めて実験でないところでdeferを使ったので、本当のdefer大好きっ子はこんな間違いはしないだろう）。
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) defer { DDLog.removeLogger(logger) } defer使って、必要なくなったら漏れなくCustom Loggerを解放する俺様は超カッコいいぜ！と言いたかったのだが、当然のごとくこのコードは間違っていて、これを実行し終わるときにはdeferした処理も実行されて登録したCustom Loggerが即解除されるというお馬鹿な状況になるわけです。
+でもdeferしたいよね？ とお馬鹿な前置きは置いておいても、上のような雰囲気で終処理書けたら便利な気はする。 普通にdeinitでやれば済む話なんだけど、今回のケースだとpropertyにloggerをもたせて、deinitでloggerがあればremoveLoggerする的なことを書かないといけない。まあ普通のことではあるんだけど、できたら、
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToDeinit { DDLog.removeLogger(logger) } と、deinitまで処理を遅延させる的な書き方できたら面白いよね、ということで&amp;hellip;
+deinitまでdeferさせてみよう！その1 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
+typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } } てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。</description>
+    </item>
+    
+    <item>
+      <title>SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</title>
+      <link>http://www.tokoro.me/posts/swifttask-promisekit-bolts/</link>
+      <pubDate>Thu, 12 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swifttask-promisekit-bolts/</guid>
+      <description>※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです  次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
+ SwiftTask PromiseKit Bolts-iOS  を（表面だけ）使って比較してみました。
+なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。
+その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。
+以下にそれぞれ使ってみた結果を紹介させていただきます。
+更新頻度 この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。
+試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
+Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &amp;#34;\(users)&amp;#34; }.failure { [unowned self] error, _ in self.textView?.text = &amp;#34;\(error)&amp;#34; }  すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます  PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&amp;gt; Void in self.textView?.text = &amp;#34;\(users)&amp;#34; return }.catch { [unowned self] error -&amp;gt; Void in self.</description>
+    </item>
+    
+    <item>
+      <title>AlamofireでGenericにModelオブジェクトを取得する</title>
+      <link>http://www.tokoro.me/posts/almofire/</link>
+      <pubDate>Wed, 11 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/almofire/</guid>
+      <description>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています
+Swiftいいですね！
+これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。 例えば、Alamofire のInitial Commitも2014/7/31だったりと。。。
+今となっては（2015年3月）Swift公開から早９ヶ月が経過しており、ライブラリの選択肢もだいぶ広がりました。 また、まだSwiftのライブラリを管理する環境もだいぶ整ってきました（ちょうど本日3/11にCocoaPodsのDynamic Framework対応版が公開されました！）。
+ということで、３月からはじめる新案件ではAlamofireの採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。 やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！
+※基本的にはAlamofireのREADMEに書かれている話です
+ふつうにJSONを取得するインターフェース まず、普通にJSONを取得するインターフェースですが、
+Alamofire.request(.GET, &amp;#34;https://api.github.com/users&amp;#34;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &amp;#34;\(error)&amp;#34; } else if let JSON = JSON { // ここでJSONをパースしてModelに変換する // これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.</description>
+    </item>
+    
+    <item>
+      <title>NSTimeZoneから取得できる表示用文字列のサンプル</title>
+      <link>http://www.tokoro.me/posts/nstimezone-sample/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nstimezone-sample/</guid>
+      <description>さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。
+abbreviation GMT+9 name Asia/Tokyo description Asia/Tokyo (GMT+9) offset 32400 localizedName(_:locale:) | NSLocale | NSTimeZoneNameStyle | 出力結果 |:-|:-|:-| | en_US | Standard | Japan Standard Time | en_US | ShortStandard | GMT+9 | en_US | DaylightSaving | Japan Daylight Time | en_US | ShortDaylightSaving | GMT+9 | en_US | Generic | Japan Standard Time | en_US | ShortGeneric | Japan Time | ja_JP | Standard | 日本標準時 | ja_JP | ShortStandard | JST | ja_JP | DaylightSaving | 日本夏時間 | ja_JP | ShortDaylightSaving | JDT | ja_JP | Generic | 日本標準時 | ja_JP | ShortGeneric | JST</description>
+    </item>
+    
+    <item>
+      <title>SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</title>
+      <link>http://www.tokoro.me/posts/swift-simulator/</link>
+      <pubDate>Sat, 13 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swift-simulator/</guid>
+      <description>だいぶ小ネタ。
+コード #if (arch(i386) || arch(x86_64)) &amp;amp;&amp;amp; os(iOS) AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug AFNetworkActivityLogger.sharedLogger().startLogging() #endif UIDeviceを使う方法もあるが、そちらは実際に動いたときに判別することになる。
+こちらだとそもそもiPhone用のアプリからはこのコード自体省かれる形になる。
+意味  arc(i386)  32bitのMac（シミュレータ）用のビルド  arc(x86_64)  64bitのMac（シミュレータ）用のビルド  os(iOS)  ターゲットがMacじゃなくてiOS   オマケ ぼくの手元では、デバッグ実行時に
+#if DEBUG println(&amp;#34;DEBUG&amp;#34;) #endif で DEBUG が出力されない。普通は出力されるはず？？</description>
+    </item>
+    
+    <item>
+      <title>Swiftで部分適用（カリー化）</title>
+      <link>http://www.tokoro.me/posts/swift-partial-application/</link>
+      <pubDate>Wed, 30 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swift-partial-application/</guid>
+      <description>Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
+func addTwoNumbers(a: Int)(b: Int) -&amp;gt; Int { return a + b } というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
+let add1 = addTwoNumbers(1) add1(b: 2) //&amp;lt; 3 というかんじに、
+ まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b）  というのができる。
+専用の書き方じゃなくてふつうのfunctionに部分適用できないの？ 使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。
+また、上のような専用の定義にしちゃうと addTwoNumbers(1, 2) みたいな普通の呼び方ができなくなっちゃうし。
+そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
+実装 https://github.com/tokorom/partial-swift
+func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closure () -&amp;gt; A) -&amp;gt; (B) -&amp;gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&amp;gt; Int { return a + b } let add1 = partial(add, 1) add1(2) //&amp;lt; 3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。</description>
+    </item>
+    
+  </channel>
+</rss>

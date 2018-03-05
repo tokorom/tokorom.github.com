@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/</link>
+    <description>Recent content in Tags on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ci</title>
+      <link>http://www.tokoro.me/tags/ci/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cui</title>
+      <link>http://www.tokoro.me/tags/cui/</link>
+      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/cui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design</title>
+      <link>http://www.tokoro.me/tags/design/</link>
+      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Haskell</title>
+      <link>http://www.tokoro.me/tags/haskell/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ios</title>
+      <link>http://www.tokoro.me/tags/ios/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/ios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins</title>
+      <link>http://www.tokoro.me/tags/jenkins/</link>
+      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>http://www.tokoro.me/tags/mac/</link>
+      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Objc</title>
+      <link>http://www.tokoro.me/tags/objc/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/objc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Octopress</title>
+      <link>http://www.tokoro.me/tags/octopress/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Publish</title>
+      <link>http://www.tokoro.me/tags/publish/</link>
+      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/publish/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sakura</title>
+      <link>http://www.tokoro.me/tags/sakura/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/sakura/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swift</title>
+      <link>http://www.tokoro.me/tags/swift/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/swift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tdd</title>
+      <link>http://www.tokoro.me/tags/tdd/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/tdd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ui</title>
+      <link>http://www.tokoro.me/tags/ui/</link>
+      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/ui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Uikit</title>
+      <link>http://www.tokoro.me/tags/uikit/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/uikit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>http://www.tokoro.me/tags/vim/</link>
+      <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xcode</title>
+      <link>http://www.tokoro.me/tags/xcode/</link>
+      <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/xcode/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

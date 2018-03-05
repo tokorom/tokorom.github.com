@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='概要 この記事でできるようになること  安定してInfo.plistの内容（ここではBuild番号）を変更できる ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される Info.plistに差分がでないのでcommitのときに邪魔にならない  なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感がこちらに詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、熊谷さんの記事をご一読ください！
+必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
+経緯 これまで、
+ デバッグ用やArchive用のアプリのバージョンにだけgitのcommit番号とか最終更新日付を付ける  といったことをする場合に、Run ScriptでInfo.plistを（PlistBuddyなどで）編集してやるのが常だったと思うのですが、その場合、
+ Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&hellip;  変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒   といった課題があったりしました（少なくともぼくの手元では）。
+そういったことを踏まえて、
+potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&mdash; kishikawa katsumi (@k_katsumi) May 15, 2014 
+@k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて'>
+
+<meta property='og:title' content='これがXcodeでのバージョニングの決定版になるかも • Yuta Tokoro'>
+<meta property='og:description' content='概要 この記事でできるようになること  安定してInfo.plistの内容（ここではBuild番号）を変更できる ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される Info.plistに差分がでないのでcommitのときに邪魔にならない  なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感がこちらに詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、熊谷さんの記事をご一読ください！
+必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
+経緯 これまで、
+ デバッグ用やArchive用のアプリのバージョンにだけgitのcommit番号とか最終更新日付を付ける  といったことをする場合に、Run ScriptでInfo.plistを（PlistBuddyなどで）編集してやるのが常だったと思うのですが、その場合、
+ Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&hellip;  変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒   といった課題があったりしました（少なくともぼくの手元では）。
+そういったことを踏まえて、
+potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&mdash; kishikawa katsumi (@k_katsumi) May 15, 2014 
+@k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて'>
+<meta property='og:url' content='http://www.tokoro.me/posts/xcode-versioning/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='xcode'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2014-05-19T00:00:00Z'/><meta property='article:modified_time' content='2014-05-19T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.34" />
+
+  <title>これがXcodeでのバージョニングの決定版になるかも • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/xcode-versioning/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.6a02ae68.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-2451574-4', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'></a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    TOKOROM BLOG
+    </h2>
+    <div class='desc'>
+    iOSアプリ開発者
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+      </li><li>
+        <a href='/tags/cui' style='font-size:1.064516129032258em'>Cui</a>
+      </li><li>
+        <a href='/tags/design' style='font-size:1.096774193548387em'>Design</a>
+      </li><li>
+        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+      </li><li>
+        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+      </li><li>
+        <a href='/tags/jenkins' style='font-size:1.096774193548387em'>Jenkins</a>
+      </li><li>
+        <a href='/tags/mac' style='font-size:1.129032258064516em'>Mac</a>
+      </li><li>
+        <a href='/tags/objc' style='font-size:1.6129032258064515em'>Objc</a>
+      </li><li>
+        <a href='/tags/octopress' style='font-size:1.064516129032258em'>Octopress</a>
+      </li><li>
+        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+      </li><li>
+        <a href='/tags/sakura' style='font-size:1.064516129032258em'>Sakura</a>
+      </li><li>
+        <a href='/tags/swift' style='font-size:1.1935483870967742em'>Swift</a>
+      </li><li>
+        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+      </li><li>
+        <a href='/tags/ui' style='font-size:1.064516129032258em'>Ui</a>
+      </li><li>
+        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+      </li><li>
+        <a href='/tags/vim' style='font-size:1.096774193548387em'>Vim</a>
+      </li><li>
+        <a href='/tags/xcode' style='font-size:1.129032258064516em'>Xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'></span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>iOSアプリ開発者</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>これがXcodeでのバージョニングの決定版になるかも</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2014-05-19T00:00:00Z'>2014-05-19</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/xcode_versioning.png" alt="xcode_versioning" /></p>
+
+<h2 id="概要">概要</h2>
+
+<h3 id="この記事でできるようになること">この記事でできるようになること</h3>
+
+<ul>
+<li>安定してInfo.plistの内容（ここではBuild番号）を変更できる</li>
+<li>ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される</li>
+<li>Info.plistに差分がでないのでcommitのときに邪魔にならない</li>
+</ul>
+
+<p>なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感が<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp" target="_blank">こちら</a>に詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp" target="_blank">熊谷さんの記事</a>をご一読ください！</p>
+
+<h3 id="必要な設定">必要な設定</h3>
+
+<ul>
+<li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
+</ul>
+
+<p>以下、具体的な話をします。</p>
+
+<!-- more -->
+
+<h2 id="経緯">経緯</h2>
+
+<p>これまで、</p>
+
+<ul>
+<li>デバッグ用やArchive用のアプリのバージョンにだけgitのcommit番号とか最終更新日付を付ける</li>
+</ul>
+
+<p>といったことをする場合に、Run ScriptでInfo.plistを（PlistBuddyなどで）編集してやるのが常だったと思うのですが、その場合、</p>
+
+<ul>
+<li>Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある
+
+<ul>
+<li>そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&hellip;</li>
+</ul></li>
+<li>変更したInfo.plistに差分が出てソース管理上差分が出てしまう
+
+<ul>
+<li>差分を元に戻せばいいのだけど、毎回それをやるのが面倒</li>
+</ul></li>
+</ul>
+
+<p>といった課題があったりしました（少なくともぼくの手元では）。</p>
+
+<p>そういったことを踏まえて、</p>
+
+<p><a href="http://connpass.com/event/6199/" target="_blank">potatotips 第７回</a> で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、</p>
+
+<script async class="speakerdeck-embed" data-id="af691300be580131ba2f16b66683ddab" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p>その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。</p>
+
+<p><blockquote class="twitter-tweet" data-conversation="none" data-cards="hidden" lang="en"><p><a href="https://twitter.com/tokorom">@tokorom</a> ちょっと準備がややこしいですが、こういう手もあるということで <a href="https://t.co/EQYS2gVrwm">https://t.co/EQYS2gVrwm</a> こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。</p>&mdash; kishikawa katsumi (@k_katsumi) <a href="https://twitter.com/k_katsumi/statuses/466987671080804352">May 15, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/k_katsumi">@k_katsumi</a> <a href="https://twitter.com/tokorom">@tokorom</a> おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて</p>&mdash; 熊谷 友宏 (@es_kumagai) <a href="https://twitter.com/es_kumagai/statuses/467134816194789376">May 16, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/k_katsumi">@k_katsumi</a> <a href="https://twitter.com/tokorom">@tokorom</a> 元の Info.plist と同じ ${TEMP_DIR}/Preprocessed-Info.plist が出来上がるみたいでした。これ自体も PlistBuddy で編集できたので「Info.plist に差分が出る」という点については</p>&mdash; 熊谷 友宏 (@es_kumagai) <a href="https://twitter.com/es_kumagai/statuses/467135329401438208">May 16, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/k_katsumi">@k_katsumi</a> <a href="https://twitter.com/tokorom">@tokorom</a> これでも回避できるかもしれません。Copy Bundle Resources より前に Run Script を実行すれば Preprocessed-Info.plist が更新されるからなのか、最新のものがバンドルに含まれる様子でした。</p>&mdash; 熊谷 友宏 (@es_kumagai) <a href="https://twitter.com/es_kumagai/statuses/467135680657633281">May 16, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<h2 id="preprocess-info-plist-file">Preprocess Info.plist file</h2>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/preprocess_info_plist.png" alt="preprocess_info_plist" /></p>
+
+<p>ぼくは今回初めて知ったのですが、<code>Builde Settings</code> -&gt; <code>Packaging</code> の中に <code>Preprocess Info.plist file</code> という設定項目があり、これに<code>YES</code>を設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。</p>
+
+<p>そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。</p>
+
+<h2 id="temp-dir-preprocessed-info-plist">${TEMP_DIR}/Preprocessed-Info.plist</h2>
+
+<p>そして、<code>Preprocess Info.plist file</code>を<code>YES</code>にした場合、通常のInfo.plistと別に <code>${TEMP_DIR}/Preprocessed-Info.plist</code> という名前で別のInfo.plistが作成されるようになります。あとは、Run Scriptでその<code>Preprocessed-Info.plist</code>のほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。</p>
+
+<p>素晴らしいのは、この後、元のInfo.plistが変更されることはなく、しかも、<code>${TEMP_DIR}/Preprocessed-Info.plist</code>が別のディレクトリにあるためInfo.plistに差分が出ることはありません（もし、Preprocessed-Info.plistがプロジェクトディレクトリ内にできてしまう場合にはそれを.gitignoreに入れれば良い）。</p>
+
+<p>また、良い副作用として、編集するInfo.plist名が<code>${TEMP_DIR}/Preprocessed-Info.plist</code>に固定できるというのもあります。ふつうにInfo.plistを編集する場合には、プロジェクトによってInfo.plistのファイル名が変わるため、プロジェクトごとにRun Scriptを変更する必要がありました。しかし、このファイル名が固定になるため、同じ挙動をさせるのでよければRun Scriptを変更することなくどのプロジェクトでも流用できるようになります。</p>
+
+<p>Run Scriptのサンプルを以下に示します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">${</span>CONFIGURATION<span style="color:#e6db74">}</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Debug&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+
+  plistBuddy<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/libexec/PlistBuddy&#34;</span>
+  infoPlist<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TEMP_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/Preprocessed-Info.plist&#34;</span>
+  currentVersion<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>$plistBuddy -c <span style="color:#e6db74">&#34;Print CFBundleVersion&#34;</span> $infoPlist<span style="color:#66d9ef">)</span>
+
+  versionPrefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-&#34;</span>
+  lastCommitDate<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git log -1 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%ci&#39;</span><span style="color:#66d9ef">)</span>
+  versionSuffix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34; (</span>$lastCommitDate<span style="color:#e6db74">)&#34;</span>
+
+  versionString<span style="color:#f92672">=</span>$versionPrefix$currentVersion$versionSuffix
+
+  $plistBuddy -c <span style="color:#e6db74">&#34;Set :CFBundleVersion </span>$versionString<span style="color:#e6db74">&#34;</span> $infoPlist
+
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>スクリプトの中身は、</p>
+
+<ul>
+<li>Configurationが<code>Debug</code>のときだけ実行する</li>
+<li><code>PlistBuddy</code>で現在のビルド番号（<code>CFBundleVersion</code>）を取得</li>
+<li>バージョンのPrefixとして<code>dev-</code>を設定</li>
+<li>gitの最後のcommitの日付を抽出してそれをバージョンのSuffixとする</li>
+<li>最終的に <code>dev-</code> + ビルド番号 + 最後のcommit日付 を新しいビルド番号（<code>CFBundleVersion</code>）として設定する</li>
+</ul>
+
+<p>となっています。</p>
+
+<h2 id="実行結果">実行結果</h2>
+
+<p>これらの設定をすることで、例えばアプリ内でビルド番号を表示したときに、<code>Debug</code>モードであれば、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_debug.png" alt="versioning_sample_debug" /></p>
+
+<p>と表示され、<code>Release</code>モードであれば、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_release.png" alt="versioning_sample_release" /></p>
+
+<p>と表示されるようになり、開発中のアプリにのみどのcommitまでが入っているかを自動的に埋め込むことができるようになります。</p>
+
+<h2 id="2014-05-19-追記">2014/05/19 追記</h2>
+
+<p>なお、Info.plistをスクリプトでいじるときに、上記のように<code>CFBundleVersion</code>を読み込んでそれを使って同じ<code>CFBundleVersion</code>を上書きするケースだと、前に作ったInfo.plistの値がインプットとして使われてしまい、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_failed.png" alt="versioning_sample_failed" /></p>
+
+<p>こんなかんじでビルド番号が壊れてしまうことがあります。必ずCleanしてからビルドすればこの問題は発生しないのですが、せっかく自動でバージョニングしているのに制約が付いてしまうのも不格好です。</p>
+
+<p><s>これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を削除してしまうという方法が考えられます。</s></p>
+
+<p><b>2014/5/20 熊谷さんにより良い方法をご提案いただいたので修正</b></p>
+
+<p>これを避けるためには、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp" target="_blank">熊谷さんの記事</a>のとおり、インプットとなるInfo.plistを<code>${TEMP_DIR}/Preprocessed-Info.plist</code>でなく元のInfo.plistそのもの（<code>${SRCROOT}/${INFOPLIST_FILE}</code>）にするのが良さそうです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">${</span>CONFIGURATION<span style="color:#e6db74">}</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Debug&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+
+  plistBuddy<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/libexec/PlistBuddy&#34;</span>
+  infoPlistFileSource<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SRCROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>INFOPLIST_FILE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+  infoPlistFileDestination<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TEMP_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/Preprocessed-Info.plist&#34;</span>
+
+  currentVersion<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>$plistBuddy -c <span style="color:#e6db74">&#34;Print CFBundleVersion&#34;</span> $infoPlistFileSource<span style="color:#66d9ef">)</span>
+
+  versionPrefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-&#34;</span>
+  lastCommitDate<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git log -1 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%ci&#39;</span><span style="color:#66d9ef">)</span>
+  versionSuffix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34; (</span>$lastCommitDate<span style="color:#e6db74">)&#34;</span>
+
+  versionString<span style="color:#f92672">=</span>$versionPrefix$currentVersion$versionSuffix
+
+  $plistBuddy -c <span style="color:#e6db74">&#34;Set :CFBundleVersion </span>$versionString<span style="color:#e6db74">&#34;</span> $infoPlistFileDestination
+
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>これにより、常にオリジナルのInfo.plistの内容がインプットとして使われ、書き出しは一時ファイルのPreprocessed-Info.plistのほうになり、綺麗なインプットを利用できそのインプットを汚さない最強の組み合わせと言えそうです。</p>
+
+<p>なお、他にもビルド後にバンドルされたInfo.plist（<code>${TARGET_BUILD_DIR}/${INFOPLIST_PATH}</code>）を直接編集する案などをTwitterやはてブコメントでいただきましたが、今のところ安全性が不明（そのあたりも<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp" target="_blank">熊谷さんの記事</a>に詳しく書かれています）です。<code>Preprocess Info.plist file</code>に<code>YES</code>にするというワンステップ増えてしまいますが逆に言えばそれだけですので、少なくとも安全性がはっきりするまではPreprocess-Info.plistを使う方が安心だと思います。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<ul>
+<li><code>Preprocess Info.plist file</code>に<code>YES</code>を設定する</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
+</ul>
+
+<p>の２ステップでこういったバージョニングが安定して実現できるようになります。バージョニング以外でもInfo.plistを可変にしたい場合には等しくこの方法が有効かと思います。</p>
+
+<p>教えていただいた <a href="https://twitter.com/k_katsumi" target="_blank">きしかわさん</a> さんと <a href="https://twitter.com/es_kumagai" target="_blank">熊谷さん</a> のご両名に感謝です！</p>
+
+<p>この設定を埋め込んだサンプルは <a href="https://github.com/tokorom/XcodeVersioningSample" target="_blank">ここ</a> に置いてあります。</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  
+  
+
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2014/05/19/xcode-versioning/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fxcode-versioning%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/xcode'>Xcode</a>, <a class='tag' href='/tags/ios'>Ios</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/objc-async-test/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>Objective-Cで非同期処理のテストをシンプルに書く方法</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/posts/swift-partial-application/'>
+        <span class='screen-reader-text'>: </span>Swiftで部分適用（カリー化）<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+  </div>
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
+    <ul><li>
+        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2012-2018 Yuta Tokoro </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.409c76b5.js'></script><script src='/js/custom.js'></script>
+</body>
+
+</html>
+

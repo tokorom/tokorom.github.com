@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/vim/</link>
+    <description>Recent content in Vim on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 15 Jan 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/vim/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</title>
+      <link>http://www.tokoro.me/posts/ctrlp-docset/</link>
+      <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ctrlp-docset/</guid>
+      <description>Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
+自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
+ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
+ Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト  というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
+Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
+vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
+CtrlPについては、
+ 意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう  あたりがわかりやすかったです。
+インストールして動かすと、
+といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
+参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
+自分はVim内で完結したいので w3m.vim を使ってVim内で表示するように設定しました。
+インストール まずはDocsetがインストールされているか確認 これがないとはじまりません。
+あるかどうか心配なかたは、Xcodeを起動し、 Preferences&amp;hellip; の Downloads を確認してみてください。
+ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
+なければここからインストールをしてみてください。
+なお、ここでインストールしたDocsetは、たぶん
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
+CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
+ .vimrc  Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39; で、その他のかたは各自の環境に合わせて読み替えてください。</description>
+    </item>
+    
+    <item>
+      <title>もっと簡単にVimでObjective-Cのコード補完を実行する</title>
+      <link>http://www.tokoro.me/posts/easy-objc-complement/</link>
+      <pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/easy-objc-complement/</guid>
+      <description>概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
+というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
+具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
+ after/ftplugin/objc.vim  let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+ path .clang_complete clang  ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
+の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
+ ios  が今回作成したpluginにより追加できるオプションです。
+clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
+これを入れることで、clang_completeでのコード補完実行の際に、
+ &#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する  という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目+αのことを自動でやってくれるようになります。
+インストール方法  pluginをVundleなどでインストール  # Vundleをご利用の場合 Bundle &amp;#39;git://github.</description>
+    </item>
+    
+    <item>
+      <title>VimでObjective-Cのコード補完を実行する with clang</title>
+      <link>http://www.tokoro.me/posts/clang-complete-for-vim/</link>
+      <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/clang-complete-for-vim/</guid>
+      <description>概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
+そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
+具体的には、
+ clangコマンドでのコード補完を試してみる その結果をもってVimの clang_complete プラグインを導入する  という手順で実施しました。
+結果として満足いく補完環境が整いましたので紹介させていただきます。
+clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
+じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
+具体的には、
+// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
+例えば、
+ Classes/Controllers/MainViewController.m  #import &amp;#34;MainViewController.h&amp;#34;  @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m  というコマンドを実行してみます。
+すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。</description>
+    </item>
+    
+    <item>
+      <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
+      <link>http://www.tokoro.me/posts/mac-terminal-japanese/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/mac-terminal-japanese/</guid>
+      <description>Macの初期設定のたびに混乱してるので再整理しておきます。
+ Mac Terminal tmux vim  で開発をする人向けです。
+まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
+日本語を扱う上で便利な設定がデフォルトで入ってます。
+当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; alias vim=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+ こせきの技術日記  に従って対処しておきます。
+この中の、
+date | pbcopy までが成功すればOKです。
+.vimrc にクリップボード利用の設定追加 .vimrc に
+set clipboard=unnamed を追加しておきます。</description>
+    </item>
+    
+  </channel>
+</rss>
