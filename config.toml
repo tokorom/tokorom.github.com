@@ -28,7 +28,7 @@ baseName = "atom"
 bookmarkBaseURL = "http://b.hatena.ne.jp/entry/www.tokoro.me"
 
 [params.info]
-description = "iOSアプリ開発者"
+description = "所 友太 / Yuta Tokoro"
 title404 = "ページが見つかりません"
 
 [params.assets]
