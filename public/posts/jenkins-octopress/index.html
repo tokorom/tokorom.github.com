@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.'>
+
+<meta property='og:title' content='Jenkins@さくらVPSにOctopressのデプロイを任せてみる • Yuta Tokoro'>
+<meta property='og:description' content='目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.'>
+<meta property='og:url' content='http://www.tokoro.me/posts/jenkins-octopress/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='sakura'><meta property='article:tag' content='octopress'><meta property='article:tag' content='jenkins'><meta property='article:published_time' content='2012-07-29T00:00:00Z'/><meta property='article:modified_time' content='2012-07-29T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.34" />
+
+  <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/jenkins-octopress/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.6a02ae68.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-2451574-4', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'></a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    TOKOROM BLOG
+    </h2>
+    <div class='desc'>
+    iOSアプリ開発者
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+      </li><li>
+        <a href='/tags/cui' style='font-size:1.064516129032258em'>Cui</a>
+      </li><li>
+        <a href='/tags/design' style='font-size:1.096774193548387em'>Design</a>
+      </li><li>
+        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+      </li><li>
+        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+      </li><li>
+        <a href='/tags/jenkins' style='font-size:1.096774193548387em'>Jenkins</a>
+      </li><li>
+        <a href='/tags/mac' style='font-size:1.129032258064516em'>Mac</a>
+      </li><li>
+        <a href='/tags/objc' style='font-size:1.6129032258064515em'>Objc</a>
+      </li><li>
+        <a href='/tags/octopress' style='font-size:1.064516129032258em'>Octopress</a>
+      </li><li>
+        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+      </li><li>
+        <a href='/tags/sakura' style='font-size:1.064516129032258em'>Sakura</a>
+      </li><li>
+        <a href='/tags/swift' style='font-size:1.1935483870967742em'>Swift</a>
+      </li><li>
+        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+      </li><li>
+        <a href='/tags/ui' style='font-size:1.064516129032258em'>Ui</a>
+      </li><li>
+        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+      </li><li>
+        <a href='/tags/vim' style='font-size:1.096774193548387em'>Vim</a>
+      </li><li>
+        <a href='/tags/xcode' style='font-size:1.129032258064516em'>Xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'></span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>iOSアプリ開発者</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Jenkins@さくらVPSにOctopressのデプロイを任せてみる</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2012-07-29T00:00:00Z'>2012-07-29</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="目的">目的</h2>
+
+<p>Octopressで記事を書いたあと、 <strong>Bitbucket</strong> に <code>git push origin source</code> とするだけで <strong>Github Pages</strong> に勝手にデプロイされるようにする。</p>
+
+<h2 id="イメージ">イメージ</h2>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/octopress_deploy.png" alt="octopress_deploy" /></p>
+
+<ol>
+<li>自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく</li>
+<li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
+<li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
+<li>Jenkinsは作成した記事をGithub Pagesにデプロイする</li>
+</ol>
+
+<!-- more -->
+
+<h2 id="事前準備">事前準備</h2>
+
+<ul>
+<li>Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら <a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/" target="_blank">このあたりを参照</a></li>
+<li>さくらVPSを使えるようにしておく</li>
+<li>さくらVPSにJenkinsをインストールしておく =&gt; まだなら <a href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/" target="_blank">こちらを参照</a></li>
+<li>さくらVPSでGitを使えるようにしておく =&gt; まだなら <a href="http://blog.araishi.com/sakura-vps-git-yum-install/" target="_blank">こちらを参照</a></li>
+<li>Githubを使えるようにしておく</li>
+<li>Bitbucketを使えるようにしておく</li>
+</ul>
+
+<h2 id="jenkinsに入れておく必要のあるplugin">Jenkinsに入れておく必要のあるPlugin</h2>
+
+<ul>
+<li>RVM Plugin</li>
+</ul>
+
+<h2 id="jenkinsからbitbucketとgithubにアクセスできるようにする">JenkinsからBitbucketとGithubにアクセスできるようにする</h2>
+
+<pre><code>$ cd /var/lib/jenkins
+$ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot;
+$ sudo -u jenkins -H /usr/local/bin/git config --global user.name &quot;jenkins&quot;
+$ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.domain
+</code></pre>
+
+<p>でJenkins用の秘密鍵と公開鍵を作る。
+このとき、パスフレーズを設定しないように注意。</p>
+
+<p>これで <em>/var/lib/jenkins/.ssh/id_rsa.pub</em> という公開鍵ができているはずなので、この公開鍵を <strong>Github</strong> と <strong>Bitbucket</strong> に登録しておく。</p>
+
+<p>ちなみに公開鍵の中身を</p>
+
+<pre><code>$ sudo -u jenkins -H more .ssh/id_rsa.pub
+</code></pre>
+
+<p>などで表示し、表示された文字列をそのまま <strong>Github</strong> や <strong>Bitbucket</strong> にコピペすればOK。</p>
+
+<pre><code>$ sudo -u jenkins mkdir tmp 
+$ cd tmp
+$ sudo -u jenkins /usr/local/bin/git clone git@bitbucket.org:yourname/yourname.github.com.git
+$ sudo -u jenkins /usr/local/bin/git clone git@github.com:yourname/yourname.github.com.git
+</code></pre>
+
+<p>で実際に <strong>Bitbucket</strong> と <strong>Github</strong> からcloneをすると、それぞれ一度目に限り yes/no が問われるのでそこでyesとしておく必要がある（そうしないとJenkinsから使えない）。</p>
+
+<h2 id="jenkinsからrvmを使えるようにする">JenkinsからRVMを使えるようにする</h2>
+
+<pre><code>$ cd /var/lib/jenkins
+$ sudo -u jenkins -H -s bash -c 'bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )'
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl' 
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm install 1.9.2 -C --with-openssl-dir=~/.rvm/usr --with-readline-dir=~/.rvm/usr --with-zlib-dir=~/.rvm/usr'
+</code></pre>
+
+<p>で、jenkinsユーザでRVMでインストールしたRubyが使えるようになる。</p>
+
+<p>実際にRubyが使えるかどうかは</p>
+
+<pre><code>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; ruby -v'
+</code></pre>
+
+<p>などで確認できる。</p>
+
+<h2 id="gemsetを作成して必要なgemのインストール">gemsetを作成して必要なgemのインストール</h2>
+
+<pre><code>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm gemset create octopress'
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm use 1.9.2@octopress; gem install bundle'
+</code></pre>
+
+<p>octopress用のoctopressというgemsetを作って、そこに <strong>bundle</strong> をインストールしておく。</p>
+
+<h2 id="jenkinsのjobの設定">JenkinsのJobの設定</h2>
+
+<p><em>Build a free-style software project</em> をベースに設定した項目は以下のとおり。</p>
+
+<ul>
+<li>Project name
+
+<ul>
+<li><strong>deploy-octopress</strong> (お好みのジョブ名を設定)</li>
+</ul></li>
+<li>Source Code Management
+
+<ul>
+<li><strong>None</strong> (Gitからソースを取得するところを含めてコマンドでやってしまうため)</li>
+</ul></li>
+<li>Build Triggers
+
+<ul>
+<li><strong>Trigger builds remotely</strong></li>
+<li>Authentication Token: <strong>a-word-you-like</strong> (適当なワードを指定する)</li>
+</ul></li>
+<li>Build Environment
+
+<ul>
+<li>Run the build in a RVM-managed environment</li>
+<li>Implementation: <strong>1.9.2@octopress</strong> (利用するRubyバージョンとgemset名を設定)</li>
+</ul></li>
+<li>Executable shell
+
+<ul>
+<li>Command
+```
+export PATH=$PATH:/usr/local/bin</li>
+</ul></li>
+</ul>
+
+<p>rm -rf octopress
+mkdir octopress
+cd octopress</p>
+
+<p>git init
+git remote add -t source origin git@bitbucket.org:yourname/yourname.github.com.git
+git fetch
+git checkout source</p>
+
+<p>bundle install</p>
+
+<p>rake setup_github_pages[git@github.com:yourname/yourname.github.com.git]
+rake generate
+rake deploy</p>
+
+<pre><code>最後の *Command* のところでは、
+
+* 作業ディレクトリを作り直す
+* Bitbucketのリポジトリからsourceブランチを取得
+* bundleで必要なgemなどをインストール
+* generate &amp; デプロイ!
+
+をしている。
+
+## BitbucketからJobの実行ができるように権限の設定を変更をする
+
+BitbucketからJenkinsにアクセスする際に、 *http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like* といったURLを叩いてJobを実行することになるので、それが可能なように権限の設定を変更しておく（**この方法は簡易的なものでセキュリティの面では良くないので、これを解消するには[次の記事](/2012/07/29/security-for-jenkins/)を参照して別の設定とするのが良い**）。
+
+また、 **Manage Jenkins** -&gt; *Configure System* で、
+
+* Access Control
+  * Authorization
+    * Matrix-based security
+      * Anonymousユーザの **Job** の **Read** だけチェック
+
+## Bitbucketのほうの設定
+
+作成したリポジトリの **Admin** タブの **Services** を選択。
+
+*Select a service...* の中に *Jenkins* があるのでそれを選択して、 **Add service**。
+
+設定項目には、
+</code></pre>
+
+<p><a href="http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like" target="_blank">http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</a></p>
+
+<pre><code>と叩くべきURLをそのまま設定する (※ yourdomainなどは各自の環境に合わせて変更すること)。
+
+## 完成!
+
+これでひととおりの設定は完了。  
+うまくいっていればいつもどおり記事を書いてコミットした後に `git push origin source` とBitbucketにpushするだけで、あとは勝手にデプロイしてくれる。  
+このとき、Bitbucketのプライベートリポジトリにファイル一式がバックアップされることにもなる。
+
+なお、sourceブランチがデプロイの対象となっているので、書き途中の記事をBitbucketに保存しておきたい場合には、 **draft** など別のブランチにコミットしておけば書き途中のものが勝手にデプロイされる心配はない。
+
+## 課題
+
+このままだと、認証なしで全てのJobが参照できる形になってしまっている。  
+[次の記事](/2012/07/29/security-for-jenkins/)ではこれを解消することにトライしたい。
+
+## じつは途中ではいろいろと引っかかった
+
+以上、うまくいった手順をまとめたが実際にはいろいろとひっかかったところがあったので、そこも言及しておく。
+
+### .rvmrc の実行許可の確認が越えられない
+
+はじめて *.rvmrc* が設置されたディレクトリに入る際、 *.rvmrc* の内容を実行して良いか? といった問い合わせが入り、自分で操作しているときは単純に **yes** と応えるだけなのですが、それをJenkinsさんにやってもらう方法がわからなかった。  
+`rvmrc trust ディレクトリ名`とすれば以降その確認がいらなくなるというのは既知なのだが、Git Plugin を使ってソースを取得すると、その時点でcloneしたディレクトリに入ってしまうのでタイミング的にそれも無理。  
+けっきょくGit Pluginを使うのをあきらめ、ソースのcloneからブランチの切り替えまでコマンドで直接やることとした。
+
+### RVMがうまく扱えない
+
+ビルド時のコマンドの中で **rvm** を使っているわけですが、やたらとこのコマンドがないといったエラーが出まくり「うぎゃー」となった。
+これは **RVM Plugin** を使えば簡単に解決できた。
+
+### gemがインストールできない
+
+**bundler** を使うため、`gem install bundle`をビルド時のコマンド中に入れたのだが、
+</code></pre>
+
+<p>ERROR:  Loading command: install (LoadError)
+    no such file to load &ndash; zlib</p>
+
+<pre><code>というエラーで先に進めない。
+
+これはRubyのほうの話で、
+</code></pre>
+
+<p>$ sudo -u jenkins -H -s bash -c &lsquo;source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl&rsquo;
+$ sudo -u jenkins -H -s bash -c &lsquo;source ~/.rvm/scripts/rvm; rvm reinstall 1.9.2&rsquo;</p>
+
+<pre><code>とzlibなどをRVMでインストールした後に、Rubyをreinstallすることで解決。  
+本記事のほうの手順ではきちんと先に `rvm pkg install` を済ませておくようにしてある。
+
+### rake installに失敗する
+
+Jenkinsでの`rake install`時に
+</code></pre>
+
+<p>A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]</p>
+
+<pre><code>という確認が出てきたそこでこけていた模様。  
+よくよく考えてみると、`rake install`はこのリポジトリには適用済みの状態でpushしてあるので不要だった。
+
+### rake generateでエラー
+
+`rake generate`時に
+</code></pre>
+
+<p>Building site: source -&gt; public
+/var/lib/jenkins/.rvm/gems/ruby-1.9.2-p320@octopress/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `block in ffi_lib&rsquo;: Could not open library &lsquo;lib.so&rsquo;: lib.so: cannot open shared object file: No such file or directory (LoadError)</p>
+
+<pre><code>といったエラーが発生。
+これは **python-devel** が入っていない場合のエラーということだったので、さくらVPSのほうで `sudo yum install python-devel` しておくことで解消。
+
+### rake deployでエラー
+
+`rake deploy`時に
+</code></pre>
+
+<h2 id="pushing-generated-deploy-website">Pushing generated _deploy website</h2>
+
+<p>Host key verification failed.
+fatal: The remote end hung up unexpectedly</p>
+
+<pre><code>といったエラーが発生。
+
+公開鍵はきっちり登録してあるはずなのにおかしいなと思ったら、一度めのアクセスの際にアクセス確認の問い合わせが入り、ここでyesとしないと先に進まないという状態で止まっていたというオチ。  
+これはあらかじめさくらVPSのほうで、
+</code></pre>
+
+<p>$ sudo -u jenkins /usr/local/bin/git clone git@github.com:yourname/yourname.github.com.git
+```
+と一度Githubにアクセスしておけば解消される。</p>
+
+<h3 id="おしまい">おしまい</h3>
+
+<p>じつにJenkinsで自動デプロイするまでにかかったビルド試行回数は25回。</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  
+  
+
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2012/07/25/jenkins-octopress/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fjenkins-octopress%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/sakura'>Sakura</a>, <a class='tag' href='/tags/octopress'>Octopress</a>, <a class='tag' href='/tags/jenkins'>Jenkins</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/security-for-jenkins/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/posts/objc-new-statements/'>
+        <span class='screen-reader-text'>: </span>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+  </div>
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
+    <ul><li>
+        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2012-2018 Yuta Tokoro </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.409c76b5.js'></script><script src='/js/custom.js'></script>
+</body>
+
+</html>
+

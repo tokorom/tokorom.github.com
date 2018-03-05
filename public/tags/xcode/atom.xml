@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xcode on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/xcode/</link>
+    <description>Recent content in Xcode on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 19 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/xcode/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>これがXcodeでのバージョニングの決定版になるかも</title>
+      <link>http://www.tokoro.me/posts/xcode-versioning/</link>
+      <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/xcode-versioning/</guid>
+      <description>概要 この記事でできるようになること  安定してInfo.plistの内容（ここではBuild番号）を変更できる ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される Info.plistに差分がでないのでcommitのときに邪魔にならない  なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感がこちらに詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、熊谷さんの記事をご一読ください！
+必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
+経緯 これまで、
+ デバッグ用やArchive用のアプリのバージョンにだけgitのcommit番号とか最終更新日付を付ける  といったことをする場合に、Run ScriptでInfo.plistを（PlistBuddyなどで）編集してやるのが常だったと思うのですが、その場合、
+ Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;  変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒   といった課題があったりしました（少なくともぼくの手元では）。
+そういったことを踏まえて、
+potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&amp;mdash; kishikawa katsumi (@k_katsumi) May 15, 2014 
+@k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて</description>
+    </item>
+    
+    <item>
+      <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
+      <link>http://www.tokoro.me/posts/pbxproj-merge/</link>
+      <pubDate>Thu, 06 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/pbxproj-merge/</guid>
+      <description>2014/02/09 追記
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
+今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
+複数人でプログラミングしているとpbxprojがやたらとコンフリクトする 例えば、
+ Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
+ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
+どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
+@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
+&amp;mdash; azu (@azu_re) February 4, 2014 
+mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+https://github.com/simonwagner/mergepbx
+のREADMEどおりにインストール＆設定するだけ。
+cloneして
+$ ./build.py  すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+2014/02/09 追記
+（もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
+~/.gitconfig に以下の設定を追加する
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B  なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+2014/02/09 追記</description>
+    </item>
+    
+    <item>
+      <title>Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</title>
+      <link>http://www.tokoro.me/posts/xcode5-preview/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/xcode5-preview/</guid>
+      <description>tokorom@WWDC2013参加中です。
+WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。
+で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。
+概要レベルでありますが、なかでも TDD とか CI まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。
+あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。
+ついにXcodeから任意のテストだけを簡単に実行できるようになる ついに、ついに&amp;hellip;というかやっとかという話。
+Xcode 5 で Test Navigator というやつが加わり、テスト駆動での開発を助けてくれますとのこと。具体的に、 シングルクリックで特定の１つのテスト、もしくは選択した複数のテストを実行できる という記載があります。
+また、 テストとソースコードを side by side で自動的に配置する という記載もあります。
+これでObjective-Cな人たちもまともにTDDできる日がやってくるかもしれないですね。
+CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表されている概要だけ並べてみると、
+ ２、３回のクリックで新しいbotを作ることができる ネットワーク上のどのMacでも直ちにbotをスタートできる 別のMacでCIを回している間も、自分のMacでビルド結果やテストの結果を確認できる  とのこと。
+Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
+その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
+参照元 What&amp;rsquo;s New in Xcode 5</description>
+    </item>
+    
+    <item>
+      <title>Objective-Cで独自クラスに[]でアクセスする</title>
+      <link>http://www.tokoro.me/posts/objc-subscripting/</link>
+      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-subscripting/</guid>
+      <description>まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
+Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
+ array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
+※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
+でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+これらの変換自体はiOSがターゲットの場合でも行われているようです。
+例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
+``` objc Wrapper.h @interface Wrapper : NSObject
+ (id)objectAtIndexedSubscript:(NSUInteger)index; (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
+ (id)objectForKeyedSubscript:(id)key;</description>
+    </item>
+    
+    <item>
+      <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</title>
+      <link>http://www.tokoro.me/posts/objc-new-statements/</link>
+      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-new-statements/</guid>
+      <description>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
+これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
+Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
+#pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.</description>
+    </item>
+    
+  </channel>
+</rss>

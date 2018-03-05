@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
+@synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。
+そこで、今日は@dynamicについて再考してみることにしました。
+以下、ぼくが思い返してみて@dynamicがこんなときに便利だったと感じたところを２点挙げさせていただきます。
+みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
+クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
+例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
+ GameScore.m  #import &#34;GameScore.h&#34;  @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&#34;highScore&#34;: @1000, @&#34;currentScore&#34;: @530, @&#34;friendScore&#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。'>
+
+<meta property='og:title' content='Objective-Cで&#34;@dynamic&#34;の使いどころを考える • Yuta Tokoro'>
+<meta property='og:description' content='Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
+@synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。
+そこで、今日は@dynamicについて再考してみることにしました。
+以下、ぼくが思い返してみて@dynamicがこんなときに便利だったと感じたところを２点挙げさせていただきます。
+みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
+クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
+例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
+ GameScore.m  #import &#34;GameScore.h&#34;  @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&#34;highScore&#34;: @1000, @&#34;currentScore&#34;: @530, @&#34;friendScore&#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。'>
+<meta property='og:url' content='http://www.tokoro.me/posts/objc-dynamic/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='objc'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2013-01-05T00:00:00Z'/><meta property='article:modified_time' content='2013-01-05T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.34" />
+
+  <title>Objective-Cで&#34;@dynamic&#34;の使いどころを考える • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/objc-dynamic/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.6a02ae68.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-2451574-4', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'></a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    TOKOROM BLOG
+    </h2>
+    <div class='desc'>
+    iOSアプリ開発者
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+      </li><li>
+        <a href='/tags/cui' style='font-size:1.064516129032258em'>Cui</a>
+      </li><li>
+        <a href='/tags/design' style='font-size:1.096774193548387em'>Design</a>
+      </li><li>
+        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+      </li><li>
+        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+      </li><li>
+        <a href='/tags/jenkins' style='font-size:1.096774193548387em'>Jenkins</a>
+      </li><li>
+        <a href='/tags/mac' style='font-size:1.129032258064516em'>Mac</a>
+      </li><li>
+        <a href='/tags/objc' style='font-size:1.6129032258064515em'>Objc</a>
+      </li><li>
+        <a href='/tags/octopress' style='font-size:1.064516129032258em'>Octopress</a>
+      </li><li>
+        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+      </li><li>
+        <a href='/tags/sakura' style='font-size:1.064516129032258em'>Sakura</a>
+      </li><li>
+        <a href='/tags/swift' style='font-size:1.1935483870967742em'>Swift</a>
+      </li><li>
+        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+      </li><li>
+        <a href='/tags/ui' style='font-size:1.064516129032258em'>Ui</a>
+      </li><li>
+        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+      </li><li>
+        <a href='/tags/vim' style='font-size:1.096774193548387em'>Vim</a>
+      </li><li>
+        <a href='/tags/xcode' style='font-size:1.129032258064516em'>Xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'></span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>iOSアプリ開発者</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Objective-Cで&#34;@dynamic&#34;の使いどころを考える</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2013-01-05T00:00:00Z'>2013-01-05</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="objective-cの-dynamic-はお好きですか">Objective-Cの @dynamic はお好きですか？</h2>
+
+<p>ぼくはけっこう好きです。</p>
+
+<p><code>@synthesize</code>のほうは昔はほぼ必須で書かないといけなかったり <a href="/2012/08/12/objc-new-statements/">Xcode4.4で省略できるようになった</a> ことで有名ですが、いっぽうで<code>@dynamic</code>のほうはあまり日の目を浴びていない気がします。</p>
+
+<p>そこで、今日は<code>@dynamic</code>について再考してみることにしました。<br />
+以下、ぼくが思い返してみて<code>@dynamic</code>がこんなときに便利だったと感じたところを２点挙げさせていただきます。<br />
+みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。</p>
+
+<h2 id="クラスの内部実装が適当なのを隠すときに">クラスの内部実装が適当なのを隠すときに</h2>
+
+<p>そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。<br />
+例えば、ゲームスコアを管理する<code>GameScore</code>クラスを作ったとして、その中で <strong>ハイスコア</strong> とかいくつかのスコアを管理する際、<code>scores</code>というNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。</p>
+
+<!-- more -->
+
+<ul>
+<li>GameScore.m</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#import &#34;GameScore.h&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">GameScore</span> ()
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) NSMutableDictionary<span style="color:#f92672">*</span> scores;
+<span style="color:#66d9ef">@end</span> 
+
+<span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">GameScore</span>
+
+- (<span style="color:#66d9ef">id</span>)<span style="color:#a6e22e">init</span>
+{
+  <span style="color:#66d9ef">if</span> ((self <span style="color:#f92672">=</span> [super init])) {
+    self.scores <span style="color:#f92672">=</span> [<span style="color:#ae81ff">@{</span>
+      <span style="color:#e6db74">@&#34;highScore&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">@1000</span>,
+      <span style="color:#e6db74">@&#34;currentScore&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">@530</span>,
+      <span style="color:#e6db74">@&#34;friendScore&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">@890</span>,
+    <span style="color:#ae81ff">}</span> mutableCopy];
+  }
+  <span style="color:#66d9ef">return</span> self;
+}</code></pre></div>
+<p>この <strong>ハイスコア</strong> を外（他のクラス）から参照させたい場合、どう実装しますか？</p>
+
+<h3 id="ダメそうな例-nsdictionaryのインスタンスをそのまま公開してしまう">ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう</h3>
+
+<ul>
+<li>GameScore.h</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">GameScore</span> : <span style="color:#a6e22e">NSObject</span>
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) NSMutableDictionary<span style="color:#f92672">*</span> scores;
+<span style="color:#66d9ef">@end</span></code></pre></div>
+<p>手っ取り早いのは<code>scores</code>プロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。<br />
+たしかに簡単ですが、外部から内部データ（NSDictionary）を好きなようにいじられたり見られたりするのは避けたいところです。このままだとかなり密結合なかんじです。<br />
+Privateな範囲だったらまだ雑でも（後からリファクタリングすれば）良いかもしれませんが、外部から使われる部分はきちんとして疎結合にしておきたいところです。</p>
+
+<h3 id="本当に必要な部分だけ公開する">本当に必要な部分だけ公開する</h3>
+
+<p>だったら本当に必要な部分だけ公開すべきということで、こういうのはどうでしょう？</p>
+
+<ul>
+<li>GameScore.h</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">GameScore</span> : <span style="color:#a6e22e">NSObject</span>
+- (NSUInteger)<span style="color:#a6e22e">highScore</span>;
+<span style="color:#66d9ef">@end</span></code></pre></div>
+<ul>
+<li>GameScore.m</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc">- (NSUInteger)<span style="color:#a6e22e">highScore</span>
+{
+  <span style="color:#66d9ef">return</span> [self.scores[<span style="color:#e6db74">@&#34;highScore&#34;</span>] unsignedIntegerValue];
+}</code></pre></div>
+<p><code>highScore</code>というハイスコアだけを参照するPublicメソッドを追加してみました。<br />
+こっちのほうが筋が良さそうです。<br />
+これでNSDictionaryで管理している適当な実装を後から修正しても外のクラスには影響しない形になりました。</p>
+
+<h3 id="さらに-dynamic-がお好きな人向けに">さらに @dynamic がお好きな人向けに</h3>
+
+<p>ただ、ぼくは<code>@dynamic</code>を愛しているのでここに<code>@dynamic</code>を突っ込んでいきます。</p>
+
+<ul>
+<li>GameScore.h</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">GameScore</span> : <span style="color:#a6e22e">NSObject</span>
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">assign</span>, <span style="color:#66d9ef">readonly</span>) NSUInteger highScore;
+<span style="color:#66d9ef">@end</span></code></pre></div>
+<ul>
+<li>GameScore.m</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@dynamic</span> highScore;
+- (NSUInteger)<span style="color:#a6e22e">highScore</span>
+{
+  <span style="color:#66d9ef">return</span> [self.scores[<span style="color:#e6db74">@&#34;highScore&#34;</span>] unsignedIntegerValue];
+}</code></pre></div>
+<p>やってることは１個前のサンプルと全く同じですが、<code>@property</code>で公開したほうがなんかかっこいい（自己満足）気がします。<br />
+強いて言うなら、こっちの場合、ハイスコアを<code>@property (assign) NSUInteger highScore;</code>というPrivateプロパティで管理するようにリファクタリングした後もPublicな<code>@property (assign, readonly) NSUInteger highScore;</code>とそのまま連携できるというメリットはあります（本当に強いて言うならですが）。</p>
+
+<h2 id="重いクラスの初期化を簡便に書きたいときに">重いクラスの初期化を簡便に書きたいときに</h2>
+
+<p>例えば、先ほどの<code>GameScore</code>クラス内で<code>HeavyFunction</code>というとっても重い（初期化に時間がかかるとかメモリをたくさん消費するとか）クラスを使う必要があったとします。<br />
+とっても重いので、</p>
+
+<ul>
+<li>実際に使うことが確定してから<code>new</code>をしたい</li>
+<li>一度newしたらプロパティに持たせて再利用したい</li>
+</ul>
+
+<p>ところです。<br />
+ということで、以下のように実装してみました。</p>
+
+<h3 id="普通に実装してみた例">普通に実装してみた例</h3>
+
+<ul>
+<li>GameScore.m</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">GameScore</span> ()
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) HeavyFunction<span style="color:#f92672">*</span> heavyFunction;
+<span style="color:#66d9ef">@end</span> 
+
+<span style="color:#f92672">-</span> (<span style="color:#66d9ef">void</span>)doSomething1
+{
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>self.heavyFunction) {
+    self.heavyFunction <span style="color:#f92672">=</span> [HeavyFunction new];
+  }
+  [self.heavyFunction execute];
+}
+
+<span style="color:#f92672">-</span> (<span style="color:#66d9ef">void</span>)doSomething2
+{
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>self.heavyFunction) {
+    self.heavyFunction <span style="color:#f92672">=</span> [HeavyFunction new];
+  }
+  [self.heavyFunction execute];
+}</code></pre></div>
+<p>まず、<code>HeavyFunction</code>のインスタンスをPrivateなプロパティとして保持するようにしています。<br />
+<code>doSomething1</code>と<code>doSomething2</code>が<code>HeavyFunction</code>を利用したメソッドとすると、それが呼ばれたタイミングではじめて<code>HeavyFunciton</code>が<code>new</code>されるよう留意してあります。具体的には、各メソッド内で<code>self.heavyFunction</code>が<code>nil</code>かどうかをチェックして、<code>nil</code>なら<code>HeavyFunction</code>を<code>new</code>するという実装にしています。<br />
+どうやらこれで事足りそうです。</p>
+
+<h3 id="さらに-dynamic-がお好きな人向けに-1">さらに @dynamic がお好きな人向けに</h3>
+
+<p>ただ、ぼくは<code>@dynamic</code>を愛しているのでここに<code>@dynamic</code>を突っ込んでいきます。</p>
+
+<ul>
+<li>GameScore.m</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">GameScore</span> ()
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) HeavyFunction<span style="color:#f92672">*</span> heavyFunctionInstance;
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">readonly</span>) HeavyFunction<span style="color:#f92672">*</span> heavyFunction;
+<span style="color:#66d9ef">@end</span> 
+
+<span style="color:#66d9ef">@dynamic</span> heavyFunction;
+- (HeavyFunction<span style="color:#f92672">*</span>)<span style="color:#a6e22e">heavyFunction</span>
+{
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>self.heavyFunctionInstance) {
+    self.heavyFunctionInstance <span style="color:#f92672">=</span> [HeavyFunction new];
+  }
+  <span style="color:#66d9ef">return</span> self.heavyFunctionInstance;
+}
+
+- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">doSomething1</span>
+{
+  [self.heavyFunction execute];
+}
+
+- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">doSomething2</span>
+{
+  [self.heavyFunction execute];
+}</code></pre></div>
+<p>まず、<code>heavyFunction</code>プロパティとは別に<code>heavyFunctionInstance</code>というプロパティを設け、インスタンスはそのプロパティに持たせるようにしてしまいました。<br />
+そして<code>heavyFunction</code>プロパティのほうは<code>readonly</code>にし、かつ、<code>@dynamic</code>でgetterを自分で書きます。<br />
+そのgetterの中で<code>heavyFunctionInstance</code>プロパティの<code>nil</code>チェック &amp; インスタンス作成をするようにしています。</p>
+
+<p>こうすることで、実際にHeavyFunctionを使う<code>doSomething1</code>と<code>doSomething2</code>の中では、インスタンスが既に存在するかどうかを気にせずに<code>heavyFunction</code>プロパティを使うだけですむようになりました。<br />
+<code>heavyFunciton</code>を使う箇所が増えれば増えるほどこのメリットは大きくなると思います。</p>
+
+<h2 id="dynamic-は省略できます">@dynamic は省略できます&hellip;</h2>
+
+<p>最後になりますが、じつは上記２つのサンプルのどちらでも<code>@dynamic</code>の行が省略可能です。<br />
+ぼくは<code>@dynamic</code>を愛していますが、実際のところこの<code>@dynamic</code>を省略してしまっています。<br />
+それでもぼくは<code>@dynamic</code>を愛しています。  目に見える愛だけが全てではないということなのだと思います。。。</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  
+  
+
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2013/01/05/objc-dynamic/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fobjc-dynamic%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/objc'>Objc</a>, <a class='tag' href='/tags/ios'>Ios</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/clang-complete-for-vim/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>VimでObjective-Cのコード補完を実行する with clang</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/posts/objc-macro/'>
+        <span class='screen-reader-text'>: </span>Objective-Cで最近お気に入りのマクロ４つ<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+  </div>
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
+    <ul><li>
+        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2012-2018 Yuta Tokoro </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.409c76b5.js'></script><script src='/js/custom.js'></script>
+</body>
+
+</html>
+

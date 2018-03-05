@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='El CapitanにしたらTotalTerminalが動かない！ Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。
+しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！
+もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。 （実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）
+であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！ と思いたって試してみました。 （実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）
+以下、試したことをまとめます。
+ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
+ Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
+tell application &quot;System Events&quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &quot;Terminal&quot; then # Command-Tab tell application &quot;System Events&quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &quot;Terminal&quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。'>
+
+<meta property='og:title' content='El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない? • Yuta Tokoro'>
+<meta property='og:description' content='El CapitanにしたらTotalTerminalが動かない！ Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。
+しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！
+もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。 （実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）
+であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！ と思いたって試してみました。 （実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）
+以下、試したことをまとめます。
+ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
+ Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
+tell application &quot;System Events&quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &quot;Terminal&quot; then # Command-Tab tell application &quot;System Events&quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &quot;Terminal&quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。'>
+<meta property='og:url' content='http://www.tokoro.me/posts/el-capitain-totalterminal/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='mac'><meta property='article:tag' content='cui'><meta property='article:published_time' content='2015-10-05T00:00:00Z'/><meta property='article:modified_time' content='2015-10-05T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.34" />
+
+  <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない? • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/el-capitain-totalterminal/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.6a02ae68.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-2451574-4', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'></a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    TOKOROM BLOG
+    </h2>
+    <div class='desc'>
+    iOSアプリ開発者
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+      </li><li>
+        <a href='/tags/cui' style='font-size:1.064516129032258em'>Cui</a>
+      </li><li>
+        <a href='/tags/design' style='font-size:1.096774193548387em'>Design</a>
+      </li><li>
+        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+      </li><li>
+        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+      </li><li>
+        <a href='/tags/jenkins' style='font-size:1.096774193548387em'>Jenkins</a>
+      </li><li>
+        <a href='/tags/mac' style='font-size:1.129032258064516em'>Mac</a>
+      </li><li>
+        <a href='/tags/objc' style='font-size:1.6129032258064515em'>Objc</a>
+      </li><li>
+        <a href='/tags/octopress' style='font-size:1.064516129032258em'>Octopress</a>
+      </li><li>
+        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+      </li><li>
+        <a href='/tags/sakura' style='font-size:1.064516129032258em'>Sakura</a>
+      </li><li>
+        <a href='/tags/swift' style='font-size:1.1935483870967742em'>Swift</a>
+      </li><li>
+        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+      </li><li>
+        <a href='/tags/ui' style='font-size:1.064516129032258em'>Ui</a>
+      </li><li>
+        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+      </li><li>
+        <a href='/tags/vim' style='font-size:1.096774193548387em'>Vim</a>
+      </li><li>
+        <a href='/tags/xcode' style='font-size:1.129032258064516em'>Xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'></span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>iOSアプリ開発者</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2015-10-05T00:00:00Z'>2015-10-05</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="el-capitanにしたらtotalterminalが動かない">El CapitanにしたらTotalTerminalが動かない！</h2>
+
+<p>Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。</p>
+
+<p>しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！</p>
+
+<p>もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。
+（実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）</p>
+
+<p>であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！
+と思いたって試してみました。
+（実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）</p>
+
+<p>以下、試したことをまとめます。</p>
+
+<!-- more -->
+
+<h2 id="ぼくの最強なトグル用applescript">ぼくの最強なトグル用AppleScript</h2>
+
+<p>ひとまずこのスクリプトを実行することで、</p>
+
+<ul>
+<li>Terminalが動いていなければ起動して最前面に</li>
+<li>Terminalが裏にいるなら最前面に</li>
+<li>Terminalが最前面にいるなら裏に回す</li>
+</ul>
+
+<p>ことはできるようになった。</p>
+
+<pre><code>tell application &quot;System Events&quot;
+    set activeApp to first process where it is frontmost
+    if activeApp's name = &quot;Terminal&quot; then
+        # Command-Tab
+        tell application &quot;System Events&quot;
+            key down command
+            keystroke tab
+            key up command
+        end tell
+    else
+        # Open Terminal
+        tell application &quot;Terminal&quot; to activate
+    end if
+end tell
+</code></pre>
+
+<p>今のぼくにはこれが精一杯でした。
+こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。</p>
+
+<p><a href="https://github.com/tokorom/ToggleTerminalScript" target="_blank">https://github.com/tokorom/ToggleTerminalScript</a></p>
+
+<p>現在の課題としましては、</p>
+
+<ul>
+<li>Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート）</li>
+<li>かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い）</li>
+<li>プロセスの名前が常に <code>Terminal</code> でよいのかがよくわからん</li>
+<li>Terminalが既にカレントのときにCommand+Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？</li>
+</ul>
+
+<p>などがありそうです。</p>
+
+<h2 id="automatorでこのスクリプトをサービスとして登録">Automatorでこのスクリプトをサービスとして登録</h2>
+
+<p>次に、このスクリプトを利用するためにAutomatorでサービスとして新規登録する。</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_script1.png" alt="toggle_terminal_script1" /></p>
+
+<ul>
+<li>Automatorで<code>サービス</code>を新規作成</li>
+<li>左ペインの<code>ライブラリ</code>-&gt;<code>AppleScriptを実行</code>を右ペインにドラッグ＆ドロップ</li>
+<li>右上の設定は <code>入力なし</code> と <code>すべてのアプリケーション</code> とする</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_script2.png" alt="toggle_terminal_script2" /></p>
+
+<ul>
+<li><code>{* Your script goes here *}</code> のところに上のスクリプトを挿入</li>
+<li>適当な名前で保存</li>
+</ul>
+
+<h2 id="キーボードショートカットの設定">キーボードショートカットの設定</h2>
+
+<p>次に、登録したサービスをお好みのショートカットキーで実行できるようにする。</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_keysetting.png" alt="toggle_terminal_keysetting" /></p>
+
+<ul>
+<li><code>システム環境設定</code> -&gt; <code>キーボード</code> -&gt; <code>ショートカット</code> -&gt; <code>サービス</code> の下の方に登録したサービスがある</li>
+<li>他と被らなそうな適当なショートカットキーを設定する</li>
+</ul>
+
+<p>で、設定したショートカットキーでTerminalの表示をトグルできるようになったはず！</p>
+
+<p>ただ、TotalTerminalの時に <code>Ctrl, Ctrl</code> とかいったショートカットキーを使っていると、それがここで設定できずに、うーーーんという感じになるかも。
+僕も <code>Ctrl + Tab</code> を愛用していたため、もれなく、うーーーんとなりました。</p>
+
+<h2 id="karabinerで特殊なショートカットキーを解決する">Karabinerで特殊なショートカットキーを解決する</h2>
+
+<p>そんな時は、みんな大好き <a href="https://pqrs.org/osx/karabiner/index.html.ja" target="_blank">Karabiner</a> 様で解決すれば良し。</p>
+
+<p>ぼくの場合は、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;item&gt;</span>
+  <span style="color:#f92672">&lt;name&gt;</span>Change Control_+Tab to Shift_Option_Command_T Keys<span style="color:#f92672">&lt;/name&gt;</span>
+  <span style="color:#f92672">&lt;identifier&gt;</span>remap.tokorom.control_tab<span style="color:#f92672">&lt;/identifier&gt;</span>
+  <span style="color:#f92672">&lt;not&gt;</span>VIRTUALMACHINE, REMOTEDESKTOPCONNECTION<span style="color:#f92672">&lt;/not&gt;</span>
+  <span style="color:#f92672">&lt;autogen&gt;</span>--KeyToKey-- KeyCode::TAB, VK_CONTROL,    KeyCode::T, VK_SHIFT | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND | ModifierFlag::OPTION_L<span style="color:#f92672">&lt;/autogen&gt;</span>
+<span style="color:#f92672">&lt;/item&gt;</span></code></pre></div>
+<p>この設定を追加して<code>Ctrl + Tab</code>で先ほど設定したショートカットキーを押したことにする設定を加えました。</p>
+
+<p>以上で、ひとまずこれまでと同じショートカットキーでTerminalの表示をToggleすることはできるようになりました。
+せっかくなのでしばらく使ってみます。</p>
+
+<h2 id="2015-10-6-追記-alfred">2015/10/6 追記： Alfred!!!</h2>
+
+<p>と、しばらく使ってみますと書いた翌日に早速選手交代することになりました。</p>
+
+<p>下のコメントで、r.izumitaさんからAflredのWorkflowを使う方法をご教示いただき、試してみたところ、上記でごちゃごちゃやったことが本当に一発で解決できて感涙ものでした。
+AlfredのWorkflowの利用には有償のライセンス（17ユーロ、現在だと2300円くらい）が必要になりますが、超簡単便利なのでオススメです。</p>
+
+<p>（ぼくもTerminalのトグルにはこれを使うことにしました）</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  
+  
+
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2015/10/05/el-capitain-totalterminal/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fel-capitain-totalterminal%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/mac'>Mac</a>, <a class='tag' href='/tags/cui'>Cui</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/swifttask-promisekit-bolts/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/posts/defer-to-deinit/'>
+        <span class='screen-reader-text'>: </span>Swiftでdeinitまで処理をdeferする<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+  </div>
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
+    <ul><li>
+        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2012-2018 Yuta Tokoro </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.409c76b5.js'></script><script src='/js/custom.js'></script>
+</body>
+
+</html>
+
