@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# rebulding site
+
+hugo
+
+# move to public dir
+
+cd public
+
+# publish
+
+msg="rebuilding site `date`"
+
+git add .
+git commit -m "$msg"
+git push origin master
+
+# back to current dir
+
+cd ..
+
+# commit to hugo branch
+
+git add .
+git commit -m "$msg"
+git push origin hugo
