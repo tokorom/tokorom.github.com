@@ -3,9 +3,8 @@ title: "[HomeKit対応仕様] Philips Hue モーションセンサー"
 date: 2018-02-01
 tags: [ios,homekit]
 authors: [tokorom]
+cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png"
 ---
-
-<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png" height=300 />
 
 <a target="_blank" href="https://www.amazon.co.jp/gp/product/B076ZFF1KR/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B076ZFF1KR&linkCode=as2&tag=tokorom-22&linkId=d39e14ef523d34df26d1c8357919e03f">Philips Hue モーションセンサー</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B076ZFF1KR" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 

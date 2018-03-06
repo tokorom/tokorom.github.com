@@ -3,9 +3,8 @@ title: "[HomeKit対応仕様] Philips Hue Dimmer スイッチ"
 date: 2017-12-01
 tags: [ios,homekit]
 authors: [tokorom]
+cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png"
 ---
-
-<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png" height=300 />
 
 <a target="_blank" href="https://www.amazon.co.jp/gp/product/B01N3L04OW/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01N3L04OW&linkCode=as2&tag=tokorom-22&linkId=df2cceb28ec6b63bef5e55831de49fe0">[Amazon] Philips Hue(ヒュー) Dimmer スイッチ</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01N3L04OW" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
