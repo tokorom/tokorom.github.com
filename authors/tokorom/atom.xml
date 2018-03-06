@@ -5,10 +5,153 @@
     <link>http://www.tokoro.me/authors/tokorom/</link>
     <description>Recent content in Tokorom on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 08 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/authors/tokorom/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
+      <link>http://www.tokoro.me/posts/homekit_delongi_heater/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_delongi_heater/</guid>
+      <description>De&amp;rsquo;Longhi Multi Dynamic Heater WiFi Model
+主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_sensor/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_sensor/</guid>
+      <description>Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
+      <link>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</guid>
+      <description>Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
+Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。</description>
+    </item>
+    
+    <item>
+      <title>テレビのリモコンのことも忘れないで！</title>
+      <link>http://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
+      <description>AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
+テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
+AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
+ゲームコントローラ/ゲームパッド Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。
+テレビのリモコンでどこまで操作できる？ Apple純正のアプリ 全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。
+サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
+自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
+テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
+   REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。</description>
+    </item>
+    
+    <item>
+      <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
+      <link>http://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
+      <description>[問題]コンテンツのスワイプ まずは、tvOSの特定の画面にて「右スワイプ」をした時に、コンテンツが左右どちらに動くでしょう？というクイズを３つ出させていただきます。 クイズの問題を３つ出した後に、それらの答えを実際の動きを撮影したGIFアニメとともに並べてありますので、答えのGIFアニメをできるだけ見ないように考えてみてください！
+いずれもApple純正アプリ（ホーム画面含む）からの問題です。
+Q1. ホーム画面のTop Shelfでの左右スワイプ 最初の問題はホーム画面からです。 このtvOSのホーム画面のTop Shelfで「右スワイプ」をした場合、Top Shelfは左に動いて右隣のコンテンツが表示されるでしょうか？それとも右に動いて左隣のコンテンツが表示されるでしょうか？
+Q2. 写真アプリのフルスクリーン画面での左右スワイプ 次の問題は写真アプリの写真をフルスクリーン表示した画面からです。 この 2 という画像が表示されている画面で「右スワイプ」した場合、画像が左に動いて右隣の 3 が表示されるでしょうか？それとも画像が右に動いて左隣の 1 が表示されるでしょうか？
+Q3. Appスイッチャーでの左右スワイプ 次の問題はホーム画面のAppスイッチャー（TV/ホームボタンの2度押しで表示される画面）です。 この ミュージック がセンターに表示されているAppスイッチャーで「右スワイプ」した場合、 ミュージック は左に動くでしょうか？それとも右に動くでしょうか？
+[答え]コンテンツのスワイプ A1. ホーム画面のTop Shelfでの左右スワイプ まず、Top Shelfで「右スワイプ」した時の挙動ですが、
+ Top Shelfが左に動き 右隣のコンテンツが表示される  というのが答えです。
+tvOSには「フォーカス」の存在があり、「フォーカスが右スワイプにより右に移動する」わけなので右隣のものが表示されて当然ですよね。 そして右隣のコンテンツがセンターに表示されるようTop Shelfは左にスクロールします。
+A2. 写真アプリのフルスクリーン画面での左右スワイプ さて、Q1の答えは「左に動いて右隣のものが表示される」という挙動でしたが、次の写真アプリの挙動はどうでしょう？
+実際にこの写真アプリのフルスクリーン画面で「右スワイプ」を試した結果の挙動は、
+ 表示されていた 2 が右に動き 左隣の 1 が表示される  でした！
+あれ？Q1の答えと逆の動きだ&amp;hellip;
+A3. Appスイッチャーでの左右スワイプ 続いてQ3のAppスイッチャーでの挙動はどうでしょう？
+Appスイッチャーで「右スワイプ」したときの挙動は、
+ 表示されていた ミュージック が右に動き 左隣のアプリが表示される  こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。</description>
+    </item>
+    
+    <item>
+      <title>クリスマスツリーをHomeKitに対応させよう</title>
+      <link>http://www.tokoro.me/posts/homekit_christmastree/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_christmastree/</guid>
+      <description> やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
+今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&amp;hellip;ということで。
+実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
+これを利用することでHomeKitの設定により、
+ 日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming  でも詳細に紹介しています。
+オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
+このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
+防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
+はじめは 防雨型コンセントボックスなど専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
+さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。
+プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。
+あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。
+実際、普通の雨ならこれで十分な感じです。
+（なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
+まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
+ 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
+ </description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
+      <description>[Amazon] Philips Hue(ヒュー) Dimmer スイッチ主なサービス    HMServiceType〜 説明     StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ   Battery バッテリー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     InputEvent プログラマブル・スイッチ・イベント uint8 -   BatteryLevel 電池残量 uint8 -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
+Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
+なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
+この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
+      <description>[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
+なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
+もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
+ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。</description>
+    </item>
+    
+    <item>
+      <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
+      <link>http://www.tokoro.me/posts/user_notification/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/user_notification/</guid>
+      <description>概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
+コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
+http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
+iOS 8&amp;frasl;9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
+しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
+（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&amp;hellip;）
+iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
+コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
+   タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&amp;rsquo;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&amp;rsquo;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.</description>
+    </item>
     
     <item>
       <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>

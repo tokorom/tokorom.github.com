@@ -47,9 +47,18 @@
     </item>
     
     <item>
+      <title>Homekit</title>
+      <link>http://www.tokoro.me/tags/homekit/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/homekit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ios</title>
       <link>http://www.tokoro.me/tags/ios/</link>
-      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/tags/ios/</guid>
       <description></description>
@@ -112,7 +121,7 @@
     <item>
       <title>Swift</title>
       <link>http://www.tokoro.me/tags/swift/</link>
-      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/tags/swift/</guid>
       <description></description>
@@ -128,9 +137,18 @@
     </item>
     
     <item>
+      <title>Tvos</title>
+      <link>http://www.tokoro.me/tags/tvos/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/tvos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ui</title>
       <link>http://www.tokoro.me/tags/ui/</link>
-      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/tags/ui/</guid>
       <description></description>
@@ -151,6 +169,15 @@
       <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wwdc</title>
+      <link>http://www.tokoro.me/tags/wwdc/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/wwdc/</guid>
       <description></description>
     </item>
     
