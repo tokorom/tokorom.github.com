@@ -3,9 +3,9 @@ title: "[HomeKit対応仕様] デロンギ マルチダイナミックヒータ�
 date: 2018-02-08
 tags: [ios,homekit]
 authors: [tokorom]
+representativeImage: "https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png"
+cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png"
 ---
-
-<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png" height=300 />
 
 <a target="_blank" href="https://www.apple.com/jp/shop/product/HKQ82J/A?fnode=372449abf93d5d1d346f209827d9b3c1af755ac16305ed17d2753e881428bf9d2aba527efa4d11b2dbc6377f455dd2159410e6afb94fd7b77284f2c5eb712c38802e1b54bf4486f5c21b1b77b6cd8f00db52e458cdec8304131e3f7108cf4133bce4b23b33c10cc6de33d0c46152a51f">De'Longhi Multi Dynamic Heater WiFi Model</a>
 
