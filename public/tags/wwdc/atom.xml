@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wwdc on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/wwdc/</link>
+    <description>Recent content in Wwdc on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 28 Jun 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/wwdc/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
+      <link>http://www.tokoro.me/posts/user_notification/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/user_notification/</guid>
+      <description>概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
+コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
+http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
+iOS 8&amp;frasl;9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
+しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
+（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&amp;hellip;）
+iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
+コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
+   タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&amp;rsquo;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&amp;rsquo;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.</description>
+    </item>
+    
+  </channel>
+</rss>
