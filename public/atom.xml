@@ -41,6 +41,8 @@
         Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。
       </description>
       
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png</coverImage>
+      
     </item>
     
     <item>
@@ -53,6 +55,8 @@
         Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
 Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。
       </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg</coverImage>
       
     </item>
     
@@ -74,6 +78,8 @@ AppleTVを利用しているということは当然テレビを利用してい�
    REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
 UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
       </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg</coverImage>
       
     </item>
     
@@ -100,6 +106,8 @@ A3. Appスイッチャーでの左右スワイプ 続いてQ3のAppスイッチ�
 Appスイッチャーで「右スワイプ」したときの挙動は、
  表示されていた ミュージック が右に動き 左隣のアプリが表示される  こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。
       </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/c911b99d-9d09-08ea-8555-cb07e2d1ab21.jpeg</coverImage>
       
     </item>
     
@@ -130,6 +138,8 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
  
       </description>
       
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg</coverImage>
+      
     </item>
     
     <item>
@@ -144,6 +154,8 @@ Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品�
 なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
 この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。
       </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png</coverImage>
       
     </item>
     
@@ -160,6 +172,8 @@ Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品�
 もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
 ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
       </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png</coverImage>
       
     </item>
     
@@ -206,6 +220,8 @@ var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty
 例えば、こんな感じで気軽にextendできるように。
 // UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?
       </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg</coverImage>
       
     </item>
     
