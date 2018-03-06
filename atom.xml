@@ -16,7 +16,7 @@
     
     
     <item>
-      <title>Posts: [HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
+      <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
       <link>http://www.tokoro.me/posts/homekit_delongi_heater/</link>
       <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
@@ -32,7 +32,7 @@
     </item>
     
     <item>
-      <title>Posts: [HomeKit対応仕様] Philips Hue モーションセンサー</title>
+      <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
       <link>http://www.tokoro.me/posts/homekit_hue_sensor/</link>
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
@@ -46,7 +46,7 @@
     </item>
     
     <item>
-      <title>Posts: [HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
+      <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
       <link>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
       <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
       
@@ -61,7 +61,7 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
     </item>
     
     <item>
-      <title>Posts: テレビのリモコンのことも忘れないで！</title>
+      <title>テレビのリモコンのことも忘れないで！</title>
       <link>http://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -84,7 +84,7 @@ UITableView/UICollectionView UITableViewやUICollectionViewを使った画面も
     </item>
     
     <item>
-      <title>Posts: tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
+      <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
       <link>http://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -112,7 +112,7 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
     </item>
     
     <item>
-      <title>Posts: クリスマスツリーをHomeKitに対応させよう</title>
+      <title>クリスマスツリーをHomeKitに対応させよう</title>
       <link>http://www.tokoro.me/posts/homekit_christmastree/</link>
       <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -143,7 +143,7 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
     </item>
     
     <item>
-      <title>Posts: [HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
+      <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
       <link>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
       <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -160,7 +160,7 @@ Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品�
     </item>
     
     <item>
-      <title>Posts: [HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
+      <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
       <link>http://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
       <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
       
@@ -178,7 +178,7 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
     </item>
     
     <item>
-      <title>Posts: iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
+      <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
       <link>http://www.tokoro.me/posts/user_notification/</link>
       <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
       
@@ -202,7 +202,7 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
     </item>
     
     <item>
-      <title>Posts: Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
+      <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
       <link>http://www.tokoro.me/posts/has-associated-objects/</link>
       <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
       
@@ -226,7 +226,7 @@ var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty
     </item>
     
     <item>
-      <title>Posts: Swiftでdeinitまで処理をdeferする</title>
+      <title>Swiftでdeinitまで処理をdeferする</title>
       <link>http://www.tokoro.me/posts/defer-to-deinit/</link>
       <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
       
@@ -246,7 +246,7 @@ typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewCo
     </item>
     
     <item>
-      <title>Posts: El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
+      <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
       <link>http://www.tokoro.me/posts/el-capitain-totalterminal/</link>
       <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
       
@@ -265,7 +265,7 @@ tell application &amp;quot;System Events&amp;quot; set activeApp to first proces
     </item>
     
     <item>
-      <title>Posts: SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</title>
+      <title>SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</title>
       <link>http://www.tokoro.me/posts/swifttask-promisekit-bolts/</link>
       <pubDate>Thu, 12 Mar 2015 00:00:00 +0000</pubDate>
       
@@ -284,7 +284,7 @@ Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [un
     </item>
     
     <item>
-      <title>Posts: AlamofireでGenericにModelオブジェクトを取得する</title>
+      <title>AlamofireでGenericにModelオブジェクトを取得する</title>
       <link>http://www.tokoro.me/posts/almofire/</link>
       <pubDate>Wed, 11 Mar 2015 00:00:00 +0000</pubDate>
       
@@ -303,7 +303,7 @@ Alamofire.request(.GET, &amp;#34;https://api.github.com/users&amp;#34;) .validat
     </item>
     
     <item>
-      <title>Posts: NSTimeZoneから取得できる表示用文字列のサンプル</title>
+      <title>NSTimeZoneから取得できる表示用文字列のサンプル</title>
       <link>http://www.tokoro.me/posts/nstimezone-sample/</link>
       <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
       
@@ -316,7 +316,7 @@ abbreviation GMT+9 name Asia/Tokyo description Asia/Tokyo (GMT+9) offset 32400 l
     </item>
     
     <item>
-      <title>Posts: SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</title>
+      <title>SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</title>
       <link>http://www.tokoro.me/posts/swift-simulator/</link>
       <pubDate>Sat, 13 Sep 2014 00:00:00 +0000</pubDate>
       
@@ -332,7 +332,7 @@ abbreviation GMT+9 name Asia/Tokyo description Asia/Tokyo (GMT+9) offset 32400 l
     </item>
     
     <item>
-      <title>Posts: Swiftで部分適用（カリー化）</title>
+      <title>Swiftで部分適用（カリー化）</title>
       <link>http://www.tokoro.me/posts/swift-partial-application/</link>
       <pubDate>Wed, 30 Jul 2014 00:00:00 +0000</pubDate>
       
@@ -352,7 +352,7 @@ func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closu
     </item>
     
     <item>
-      <title>Posts: これがXcodeでのバージョニングの決定版になるかも</title>
+      <title>これがXcodeでのバージョニングの決定版になるかも</title>
       <link>http://www.tokoro.me/posts/xcode-versioning/</link>
       <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
       
@@ -374,7 +374,7 @@ potatotips 第７回 で「agvtoolで超かっこよくバージョニングで�
     </item>
     
     <item>
-      <title>Posts: Objective-Cで非同期処理のテストをシンプルに書く方法</title>
+      <title>Objective-Cで非同期処理のテストをシンプルに書く方法</title>
       <link>http://www.tokoro.me/posts/objc-async-test/</link>
       <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
       
@@ -399,7 +399,7 @@ TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方がで�
     </item>
     
     <item>
-      <title>Posts: Storyboardでの画面遷移をスマートにやる方法</title>
+      <title>Storyboardでの画面遷移をスマートにやる方法</title>
       <link>http://www.tokoro.me/posts/improve-storyboard-segue/</link>
       <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
       
