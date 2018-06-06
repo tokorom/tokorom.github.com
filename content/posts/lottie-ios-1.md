@@ -333,7 +333,31 @@ let keypath = LOTKeypath(string: "**.Fill 1.Color")
 
 ## アニメーション内に動的に画像を当てる
 
-例えば、ユーザーのプロフィールアイコンをアニメーション内で使うなども可能です。
+アプリが取得したユーザーのプロフィールアイコンをアニメーション内で使うなども可能です。
+
+例えば、
+
+![call-no](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-no.gif)
+
+この「誰かに電話をかけている...」ときのアニメーションに、実際に電話をかける相手のアイコンを表示する、といったことができます。
+
+これも以下のように簡単なコードで実現できます。
+
+```swift
+let image: UIImage = //< 選択されたユーザーのプロフィールアイコン
+let iconView = UIImageView(image: image)
+
+let keypath = LOTKeypath(string: "avatarLayer")
+animationView.addSubview(iconView, toKeypathLayer: keypath)
+```
+
+![call-tokorom](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-tokorom.gif)
+
+このコードを見ていただければ分かるように、実際には画像を当てるというよりは任意のUIViewサブクラスをアニメーション内に埋め込むことができます。
+
+この例では、ユーザーのプロフィールアイコンの`UIImage`を持った`UIImageView`を作り、それを貼り付ける先のアニメーションのLayerのKeypathを指定して`addSubview`しています。
+
+デザイナーさんがこういった構造のアニメーションを作成することに慣れてさえいれば、こういったアニメーションを驚くほど簡単に実現できます。
 
 ## サンプルコード
 
