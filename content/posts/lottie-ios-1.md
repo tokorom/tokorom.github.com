@@ -32,19 +32,19 @@ iOS用のライブラリは、
 - 動的にアニメーション内の要素の色や位置を変更することができます
 - UIViewControllerのトランジッションでも利用できます
 
-### iOSのコードで作るよりもいいの？
+### iOSアプリでプログラムで作るよりもいいの？
 
-もちろん、同じことをiOSアプリ内でプログラムでやっても良いとは思います。しかし、
+もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
 
-- これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せできるという選択肢ができる
+- これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる
 - Androidや他のプラットフォーム上での同じアニメーションが利用できる
 - プログラム内のアニメーション（View）のための複雑なコードを省略できる
 
-ことは、多くの場合でメリットになりそうです。
+ことは、多くのチームでメリットとなり得るでしょう。
 
 ## 事前準備
 
-CarthageやCocoPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
+CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 
 ## アニメーションを表示してみる
 
@@ -68,7 +68,7 @@ view.addSubview(animationView)
 animationView.play()
 ```
 
-再生するのは本当に簡単で、Lottieをimprotし、`LOTAnimationView`をJSONファイル名指定で作成し、`addSubview`して`play()`するだけです。
+再生するのは本当に簡単で、Lottieをimportし、`LOTAnimationView`をJSONファイル名指定で作成し、`addSubview`して`play()`するだけです。
 
 なお、`LOTAnimationView`の`frame`は適切な大きさに設定する必要があり、デフォルトでは設定した`frame`の大きさでアニメーションが拡縮されて再生されます。これはこれで便利で、アニメーションの大きさを変えたい場合には利用できます。
 
@@ -99,7 +99,7 @@ animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds
 必要なら、アプリに埋め込まずにインターネット上のアニメーションJSONを参照し、後からアプリのバージョンアップなしでアニメーションを変更することもできます。
 
 ```swift
-let animationJSON = "https://raw.githubusercontent.com/tokorom/lottie-ios-sample/master/app/resource/animations/yes.json"
+let animationJSON = "https://example.com/example.json"
 
 guard let url = URL(string: animationJSON) else {
     return
@@ -142,14 +142,15 @@ private func setupAnimation(with filePath: String) {
 
 こちらも特に難しいことはなく、`URLSession`の`downloadTask`などでダウンロードしたファイルを利用するだけです。
 
-ダウンロードした後は、`LOTAnimationView`に`LOTAnimationView(filePath:)`というinitializerがあるのでそこにダウンロードしたJSONファイルのfilePathを渡してあげれば、あとはアプリに組み込まれたファイルを利用するのと同じです。
+ダウンロードした後は、`LOTAnimationView(filePath:)`というinitializerにダウンロードしたJSONファイルのfilePathを渡してあげます。あとはアプリに組み込まれたファイルを利用するのと同じです。
 
 ## Asset CatalogにJSONを入れる
 
 なお、普段からAsset Catalog（xcassets）を使われているかたは、このアニメーションJSONをAsset Catalogで管理したいと感じるかと思います。
 
-version 2.5.0時点では、今のところ`LOTAnimationView`はAsset CatalogのJSONファイルを楽に読み込むインターフェースを持っていません。
-以下のコードにて無理やり読み込ませることはできるのですが、lottie-iosのコードを読む限り、これだとキャッシュの機構が使われないなどしますし、なにより無駄に複雑になるのであまりお勧めしません。
+version 2.5.0時点では、今のところ`LOTAnimationView`にはAsset CatalogのJSONファイルを楽に読み込むインターフェースがありません。
+
+以下のコードにて無理やりAsset Catalogから読み込ませることはできるのですが、無駄に複雑になるのでおすすめしません。[^nocache]
 
 ```swift
 guard let data = NSDataAsset(name: "assetName")?.data else {
@@ -229,17 +230,114 @@ animationView?.completionBlock = { finished in
 }
 ```
 
-と`completionBlock`にclosureを設定するとアニメーションの終了をハンドリングできます。
+と、`completionBlock`にclosureを設定することでアニメーションの終了をハンドリングできます。
 
-`loopAnimation`でループさせている場合にはアニメーションは終了しないとみなされて終了は通知されません。
+`loopAnimation`でループさせている場合には、アニメーションは終了しないとみなされて終了は通知されません。
 
 また、lottie-ios 2.5.0 の時点では`completionBlock`は一度通知されると解除されるようで、必要なら`play()`するごとにこれを設定する必要があります。
 
 ## アニメーションの色を動的に変更する
 
+ここまでは用意されたアニメーションを再生するだけでしたが、プログラムでアニメーションをカスタマイズすることもできます。
+
+今年（2018年）の1月末にリリースされた lottie-ios 2.5.0 で
+
+> Adds a new API for dynamically changing animation properties at run time
+
+*実行時にアニメーションプロパティを動的に変更するための新しいAPIが追加されました*
+
+とアナウンスされ、まだ日本語での紹介記事はあまりないですが、アニメーションの色の変更などが簡単にできるようになっています。
+
+例えば、
+
+![lottie-heart-pink](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/lottie-heart-pink.gif)
+
+と全体的にピンク色のアニメーションを、
+
+```swift
+let color: UIColor = //< 任意のUIColorを指定
+
+let keypath = LOTKeypath(string: "**.Fill 1.Color")
+let tintColorValue = LOTColorValueCallback(color: color.cgColor)
+lottie.setValueDelegate(tintColorValue, for: keypath)
+```
+
+と数行のコードで、
+
+![lottie-heart-blue](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/lottie-heart-blue.gif)
+
+簡単に他の色に変えることが可能です。[^old]
+
+この変更はアニメーション途中でも反映されます。
+
+### LOTKeypath
+
+具体的には、`LOTAnimationView`の`setValueDelegate`メソッドで`LOTColorValueCallback`と`LOTKeypath`を渡すだけでこれが実現できます。
+
+`LOTColorValueCallback`は`CGColor`を指定するだけのシンプルなものですが、`LOTKeypath`のKeypathにはなにを指定したら良いでしょうか？
+
+LottieでいうKeypathとはアニメーションを構成する要素の階層を辿るもので、この階層は、
+
+```swift
+animationView.logHierarchyKeypaths()
+
+```
+
+でデバッグ出力できます。
+上のアニメーションの`logHierarchyKeypaths()`の出力結果は、
+
+```
+heart 2 Outlines
+mini heart 3 Outlines.Group 1.Path 1
+heart 2 Outlines.Group 1.Path 1
+man Outlines.Group 1
+man Outlines.Group 3
+man Outlines.Group 5
+circle 4 Outlines.Group 1
+circle 4 Outlines
+woman Outlines
+mini heart 2 Outlines.Group 1.Fill 1
+circle 1 Outlines.Group 1.Fill 1
+woman Outlines.Group 4.Path 1
+circle 2 Outlines.Group 1.Path 1
+circle 4 Outlines.Group 1.Fill 1
+woman Outlines.Group 4.Fill 1
+//...（以下省略）
+```
+
+といったものでした。
+
+例えば、この中の1つの要素 `mini heart 2 Outlines.Group 1.Fill 1` を使って、
+
+```swift
+let keypath = LOTKeypath(string: "mini heart 2 Outlines.Group 1.Fill 1.Color")
+```
+
+とすれば対象となる要素の色を変更するKeypathができます。
+
+KeypathはAfter Effectsで作成したアニメーションの構造をそのまま辿るものでもありますので、特定の要素のKeypathについてはアニメーションを作成したデザイナーさんに聞くほうが手っ取り早いかもしれません。
+
+### ワイルドカード
+
+Keypathの指定にはワイルドカードも利用できます。上のサンプルでは、
+
+```swift
+let keypath = LOTKeypath(string: "**.Fill 1.Color")
+```
+
+とすべての要素のFill Colorを変更するためのKeypathを作成して使っています。
+
+実際に利用する際にはこのようにワイルドカードを指定するのが現実的かと思います。
+
+アニメーションの色を動的に変更する要件がある場合、アニメーションを作成するデザイナーさんに「ワイルドカードでKeypathを指定したい」旨をあらかじめ伝え、これをやりやすい構造でアニメーションを作ってもらうことをおすすめします。
+
 ## アニメーション内に動的に画像を当てる
 
 例えば、ユーザーのプロフィールアイコンをアニメーション内で使うなども可能です。
+
+## サンプルコード
+
+今回この記事を書くにあたって作ったサンプルコードは、 [GitHub](https://github.com/tokorom/lottie-ios-sample) からダウンロードいただけます。
 
 ## その他
 
@@ -247,3 +345,5 @@ UIViewControllerのトランジッションでもLottieが使えるようです�
 また、機会があればその辺りも試して記事にしたいと思います。
 
 [^xcassets]: Asset Catalogを利用する方法は後述します
+[^nocache]: lottie-iosのコードを読む限り、これだとキャッシュの機構が使われないなどもありそうです（2018年6月6日時点）
+[^old]: 2018年6月6日時点でlottie-iosのREADMEには`setValue:forKeypath:atFrame`を使ったサンプルが記載されていますが、このメソッドは既にDeprecatedになっています
