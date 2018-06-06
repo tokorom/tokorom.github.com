@@ -94,20 +94,6 @@ animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds
 `LOTAnimationView`には`sceneModel`プロパティがあり、このプロパティからアニメーションに関する情報を取得できます。
 サイズに関しては`compBounds`プロパティで`CGRect`形式で参照できます。
 
-## Asset CatalogにJSONを入れる
-
-なお、普段からAsset Catalog（xcassets）を使われているかたは、このアニメーションJSONをAsset Catalogで管理したいと感じるかと思います。`LOTAnimationView`はfilePathでのアニメーション指定もサポートしていますので、
-
-```swift
-guard let path = Bundle.main.path(forResource: "yes", ofType: "json") else {
-    return
-}
-
-let animationView = LOTAnimationView(filePath: path)
-```
-
-などでAsset Catalogに追加したアニメーションJSONを読み込むことができます。
-
 ## インターネット上にJSONを設置する
 
 必要なら、アプリに埋め込まずにインターネット上のアニメーションJSONを参照し、後からアプリのバージョンアップなしでアニメーションを変更することもできます。
@@ -154,7 +140,40 @@ private func setupAnimation(with filePath: String) {
 }
 ```
 
-こちらも特に難しいことはなく、`URLSession`の`downloadTask`などでダウンロードしたファイルを`LOTAnimationView(filePath: foo)`で利用するだけです。
+こちらも特に難しいことはなく、`URLSession`の`downloadTask`などでダウンロードしたファイルを利用するだけです。
+
+ダウンロードした後は、`LOTAnimationView`に`LOTAnimationView(filePath:)`というinitializerがあるのでそこにダウンロードしたJSONファイルのfilePathを渡してあげれば、あとはアプリに組み込まれたファイルを利用するのと同じです。
+
+## Asset CatalogにJSONを入れる
+
+なお、普段からAsset Catalog（xcassets）を使われているかたは、このアニメーションJSONをAsset Catalogで管理したいと感じるかと思います。
+
+version 2.5.0時点では、今のところ`LOTAnimationView`はAsset CatalogのJSONファイルを楽に読み込むインターフェースを持っていません。
+以下のコードにて無理やり読み込ませることはできるのですが、lottie-iosのコードを読む限り、これだとキャッシュの機構が使われないなどしますし、なにより無駄に複雑になるのであまりお勧めしません。
+
+```swift
+guard let data = NSDataAsset(name: "assetName")?.data else {
+    assertionFailure("Invalid data asset")
+    return
+}
+
+let jsonObject: Any
+
+do {
+    jsonObject = try JSONSerialization.jsonObject(with: data)
+} catch let error {
+    assertionFailure(error.localizedDescription)
+    return
+}
+
+guard let validJSON = jsonObject as? [AnyHashable: Any] else {
+    assertionFailure("Invalid json object")
+    return
+}
+
+let model = LOTComposition(json: validJSON)
+let animationView = LOTAnimationView(model: model, in: nil)
+```
 
 ## 再生コントロール
 
