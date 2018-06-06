@@ -27,7 +27,7 @@ iOS用のライブラリは、
 
 - 作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができます
 - インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできます
-- アニメーションはリピート再生のほか、リバース再生やアニメーションスピードの調整もできます
+- アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできます
 - プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできます
 - 動的にアニメーション内の要素の色や位置を変更することができます
 - UIViewControllerのトランジッションでも利用できます
@@ -154,7 +154,77 @@ private func setupAnimation(with filePath: String) {
 }
 ```
 
-こちらも特に難しいことはなく、`URLSession`の`downloadTask`などでダウンローどしたファイルを`LOTAnimationView(filePath: foo)`で利用するだけです。
+こちらも特に難しいことはなく、`URLSession`の`downloadTask`などでダウンロードしたファイルを`LOTAnimationView(filePath: foo)`で利用するだけです。
 
+## 再生コントロール
+
+```swift
+animationView.play()
+```
+
+でアニメーションを開始できるのは前述の通りですが、この他、
+
+```swift
+animationView.pause()
+```
+
+で停止、
+
+```swift
+animationView.stop()
+```
+
+で終了（アニメーション開始時の状態で止まる）もできます。
+
+## ループ
+
+```swift
+animationView.loopAnimation = true
+```
+
+と`loopAnimation`に`true`を設定することでアニメーション終了後に自動的に最初から繰り返し再生されるようになります。
+
+## 逆転再生
+
+```swift
+animationView.autoReverseAnimation = true
+```
+
+と`autoReverseAnimation`に`true`を設定することでアニメーション終了後に自動的に逆転再生されるようになります。
+
+`loopAnimation`とセットで利用すると、再生 => 逆転再生 => 再生 => 逆転再生... とループされます。
+
+## アニメーションスピードの変更
+
+```swift
+animationView.animationSpeed = 0.5
+```
+
+と`animationSpeed`に`0.5`を設定するとアニメーションスピードは50%になります。また、`2.0`を設定すれば２倍の速度で再生されます。
+
+## アニメーションの終了をハンドリング
+
+```swift
+animationView?.completionBlock = { finished in
+    print("### finished: \(finished)")
+}
+```
+
+と`completionBlock`にclosureを設定するとアニメーションの終了をハンドリングできます。
+
+`loopAnimation`でループさせている場合にはアニメーションは終了しないとみなされて終了は通知されません。
+
+また、lottie-ios 2.5.0 の時点では`completionBlock`は一度通知されると解除されるようで、必要なら`play()`するごとにこれを設定する必要があります。
+
+## アニメーションの色を動的に変更する
+
+## アニメーション内に動的に画像を当てる
+
+例えば、ユーザーのプロフィールアイコンをアニメーション内で使うなども可能です。
+
+## その他
+
+UIViewControllerのトランジッションでもLottieが使えるようですが、今のところ使う予定がなく未確認です。
+また、機会があればその辺りも試して記事にしたいと思います。
 
 [^xcassets]: Asset Catalogを利用する方法は後述します
