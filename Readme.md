@@ -16,3 +16,10 @@ vim content/posts/foo.md
 ```
 ./deploy
 ```
+
+## scssの更新を反映する
+
+```
+cd themes/minimo
+npm run-script build 
+```
