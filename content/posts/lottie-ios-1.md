@@ -39,7 +39,7 @@ iOS用のライブラリは、
 もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
 
 - これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる
-- Androidや他のプラットフォーム上での同じアニメーションが利用できる
+- Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる
 - プログラム内のアニメーション（View）のための複雑なコードを省略できる
 
 ことは、多くのチームでメリットとなり得るでしょう。
@@ -72,7 +72,7 @@ animationView.play()
 
 再生するのは本当に簡単で、Lottieをimportし、`LOTAnimationView`をJSONファイル名指定で作成し、`addSubview`して`play()`するだけです。
 
-なお、`LOTAnimationView`の`frame`は適切な大きさに設定する必要があり、デフォルトでは設定した`frame`の大きさでアニメーションが拡縮されて再生されます。これはこれで便利で、アニメーションの大きさを変えたい場合には利用できます。
+なお、`LOTAnimationView`の`frame`は適切な大きさに設定する必要があり、デフォルトでは設定した`frame`の大きさでアニメーションが拡縮されて再生されてしまいます。[^bounds]
 
 上のサンプルはサイズを考えずに`addSubview`しており、
 
@@ -93,8 +93,8 @@ animationView.play()
 animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds
 ```
 
-`LOTAnimationView`には`sceneModel`プロパティがあり、このプロパティからアニメーションに関する情報を取得できます。
-サイズに関しては`compBounds`プロパティで`CGRect`形式で参照できます。
+`LOTAnimationView`には`sceneModel`プロパティがあり、このプロパティからアニメーションに関する情報を参照できます。
+サイズに関しては`compBounds`プロパティを見ればOKです。
 
 ## インターネット上にJSONを設置する
 
@@ -150,7 +150,7 @@ private func setupAnimation(with filePath: String) {
 
 なお、普段からAsset Catalog（xcassets）を使われているかたは、このアニメーションJSONをAsset Catalogで管理したいと感じるかと思います。
 
-version 2.5.0時点では、今のところ`LOTAnimationView`にはAsset CatalogのJSONファイルを楽に読み込むインターフェースがありません。
+version 2.5.0時点では、`LOTAnimationView`にはAsset CatalogのJSONファイルを楽に読み込むインターフェースがありません。
 
 以下のコードにて無理やりAsset Catalogから読み込ませることはできるのですが、無駄に複雑になるのでおすすめしません。[^nocache]
 
@@ -270,11 +270,11 @@ lottie.setValueDelegate(tintColorValue, for: keypath)
 
 簡単に他の色に変えることが可能です。[^old]
 
-この変更はアニメーション途中でも反映されます。
+この変更はアニメーション再生中でも反映されます。
 
 ### LOTKeypath
 
-具体的には、`LOTAnimationView`の`setValueDelegate`メソッドで`LOTColorValueCallback`と`LOTKeypath`を渡すだけでこれが実現できます。
+具体的には、`LOTAnimationView`の`setValueDelegate`メソッドに`LOTColorValueCallback`と`LOTKeypath`を渡すだけでこれが実現できます。
 
 `LOTColorValueCallback`は`CGColor`を指定するだけのシンプルなものですが、`LOTKeypath`のKeypathにはなにを指定したら良いでしょうか？
 
@@ -333,7 +333,7 @@ let keypath = LOTKeypath(string: "**.Fill 1.Color")
 
 アニメーションの色を動的に変更する要件がある場合、アニメーションを作成するデザイナーさんに「ワイルドカードでKeypathを指定したい」旨をあらかじめ伝え、これをやりやすい構造でアニメーションを作ってもらうことをおすすめします。
 
-## アニメーション内に動的に画像を当てる
+## アニメーション内に動的に画像を当てはめる
 
 アプリが取得したユーザーのプロフィールアイコンをアニメーション内で使うなども可能です。
 
@@ -341,7 +341,7 @@ let keypath = LOTKeypath(string: "**.Fill 1.Color")
 
 ![call-no](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-no.gif)
 
-この「誰かに電話をかけている...」ときのアニメーションに、実際に電話をかける相手のアイコンを表示する、といったことができます。
+この「誰かに電話をかけている...」ときのアニメーションに、実際に電話をかける相手のアイコンを当てはめる、といったことができます。
 
 これも以下のように簡単なコードで実現できます。
 
@@ -355,11 +355,11 @@ animationView.addSubview(iconView, toKeypathLayer: keypath)
 
 ![call-tokorom](https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-tokorom.gif)
 
-このコードを見ていただければ分かるように、実際には画像を当てるというよりは任意のUIViewサブクラスをアニメーション内に埋め込むことができます。
+このコードを見ていただければ分かるように、実際には画像を当てるというよりは任意のUIViewサブクラスをアニメーション内に埋め込むことをします。
 
 この例では、ユーザーのプロフィールアイコンの`UIImage`を持った`UIImageView`を作り、それを貼り付ける先のアニメーションのLayerのKeypathを指定して`addSubview`しています。
 
-デザイナーさんがこういった構造のアニメーションを作成することに慣れてさえいれば、こういったアニメーションを驚くほど簡単に実現できます。
+デザイナーさんがこういった構造のアニメーションを作成することに慣れてさえいれば、このように動的に変更可能なアニメーションを驚くほど簡単に作れます。
 
 ## サンプルコード
 
@@ -371,5 +371,6 @@ UIViewControllerのトランジッションでもLottieが使えるようです�
 また、機会があればその辺りも試して記事にしたいと思います。
 
 [^xcassets]: Asset Catalogを利用する方法は後述します
+[^bounds]: この挙動は場合によっては有用で、アニメーションの大きさを変えて再生することが簡単にできます
 [^nocache]: lottie-iosのコードを読む限り、これだとキャッシュの機構が使われないなどもありそうです（2018年6月6日時点）
 [^old]: 2018年6月6日時点でlottie-iosのREADMEには`setValue:forKeypath:atFrame`を使ったサンプルが記載されていますが、このメソッドは既にDeprecatedになっています
