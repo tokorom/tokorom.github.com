@@ -10,16 +10,16 @@ iOS用のライブラリは、
 https://github.com/airbnb/lottie-ios
 です。
 なにができるの？  作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗  iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
- これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上での同じアニメーションが利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
+ これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
 再生するコード import Lottielet animationView = LOTAnimationView(name: &#34;yes&#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
-なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されます。これはこれで便利で、アニメーションの大きさを変えたい場合には利用できます。
+なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を取得できます。 サイズに関してはcompBoundsプロパティでCGRect形式で参照できます。'>
+animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。'>
 
 <meta property='og:title' content='Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編） • Yuta Tokoro'>
 <meta property='og:description' content='この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
@@ -28,16 +28,16 @@ iOS用のライブラリは、
 https://github.com/airbnb/lottie-ios
 です。
 なにができるの？  作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗  iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
- これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上での同じアニメーションが利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
+ これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
 再生するコード import Lottielet animationView = LOTAnimationView(name: &#34;yes&#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
-なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されます。これはこれで便利で、アニメーションの大きさを変えたい場合には利用できます。
+なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を取得できます。 サイズに関してはcompBoundsプロパティでCGRect形式で参照できます。'>
+animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/lottie-ios-1/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='lottie'><meta property='article:tag' content='ui'><meta property='article:published_time' content='2018-06-06T14:09:34&#43;09:00'/><meta property='article:modified_time' content='2018-06-06T14:09:34&#43;09:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@tokorom'><meta property='twitter:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png'>
@@ -275,7 +275,7 @@ iOSやAndroidのネイティブアプリの他、React Nativeでも利用でき�
 
 <ul>
 <li>これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる</li>
-<li>Androidや他のプラットフォーム上での同じアニメーションが利用できる</li>
+<li>Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる</li>
 <li>プログラム内のアニメーション（View）のための複雑なコードを省略できる</li>
 </ul>
 
@@ -301,7 +301,7 @@ view.addSubview(animationView)
 animationView.play()</code></pre></div>
 <p>再生するのは本当に簡単で、Lottieをimportし、<code>LOTAnimationView</code>をJSONファイル名指定で作成し、<code>addSubview</code>して<code>play()</code>するだけです。</p>
 
-<p>なお、<code>LOTAnimationView</code>の<code>frame</code>は適切な大きさに設定する必要があり、デフォルトでは設定した<code>frame</code>の大きさでアニメーションが拡縮されて再生されます。これはこれで便利で、アニメーションの大きさを変えたい場合には利用できます。</p>
+<p>なお、<code>LOTAnimationView</code>の<code>frame</code>は適切な大きさに設定する必要があり、デフォルトでは設定した<code>frame</code>の大きさでアニメーションが拡縮されて再生されてしまいます。<sup class="footnote-ref" id="fnref:bounds"><a rel="footnote" href="#fn:bounds">2</a></sup></p>
 
 <p>上のサンプルはサイズを考えずに<code>addSubview</code>しており、</p>
 
@@ -320,8 +320,8 @@ animationView.play()</code></pre></div>
 
 <p>他、プログラムで取得することもできます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds</code></pre></div>
-<p><code>LOTAnimationView</code>には<code>sceneModel</code>プロパティがあり、このプロパティからアニメーションに関する情報を取得できます。
-サイズに関しては<code>compBounds</code>プロパティで<code>CGRect</code>形式で参照できます。</p>
+<p><code>LOTAnimationView</code>には<code>sceneModel</code>プロパティがあり、このプロパティからアニメーションに関する情報を参照できます。
+サイズに関しては<code>compBounds</code>プロパティを見ればOKです。</p>
 
 <h2 id="インターネット上にjsonを設置する">インターネット上にJSONを設置する</h2>
 
@@ -369,9 +369,9 @@ downloadAnimationJSON(from: url) { [<span style="color:#66d9ef">weak</span> <spa
 
 <p>なお、普段からAsset Catalog（xcassets）を使われているかたは、このアニメーションJSONをAsset Catalogで管理したいと感じるかと思います。</p>
 
-<p>version 2.5.0時点では、今のところ<code>LOTAnimationView</code>にはAsset CatalogのJSONファイルを楽に読み込むインターフェースがありません。</p>
+<p>version 2.5.0時点では、<code>LOTAnimationView</code>にはAsset CatalogのJSONファイルを楽に読み込むインターフェースがありません。</p>
 
-<p>以下のコードにて無理やりAsset Catalogから読み込ませることはできるのですが、無駄に複雑になるのでおすすめしません。<sup class="footnote-ref" id="fnref:nocache"><a rel="footnote" href="#fn:nocache">2</a></sup></p>
+<p>以下のコードにて無理やりAsset Catalogから読み込ませることはできるのですが、無駄に複雑になるのでおすすめしません。<sup class="footnote-ref" id="fnref:nocache"><a rel="footnote" href="#fn:nocache">3</a></sup></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> data = NSDataAsset(name: <span style="color:#e6db74">&#34;assetName&#34;</span>)?.data <span style="color:#66d9ef">else</span> {
     assertionFailure(<span style="color:#e6db74">&#34;Invalid data asset&#34;</span>)
     <span style="color:#66d9ef">return</span>
@@ -453,13 +453,13 @@ lottie.setValueDelegate(tintColorValue, <span style="color:#66d9ef">for</span>: 
 
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/lottie-heart-blue.gif" alt="lottie-heart-blue" /></p>
 
-<p>簡単に他の色に変えることが可能です。<sup class="footnote-ref" id="fnref:old"><a rel="footnote" href="#fn:old">3</a></sup></p>
+<p>簡単に他の色に変えることが可能です。<sup class="footnote-ref" id="fnref:old"><a rel="footnote" href="#fn:old">4</a></sup></p>
 
-<p>この変更はアニメーション途中でも反映されます。</p>
+<p>この変更はアニメーション再生中でも反映されます。</p>
 
 <h3 id="lotkeypath">LOTKeypath</h3>
 
-<p>具体的には、<code>LOTAnimationView</code>の<code>setValueDelegate</code>メソッドで<code>LOTColorValueCallback</code>と<code>LOTKeypath</code>を渡すだけでこれが実現できます。</p>
+<p>具体的には、<code>LOTAnimationView</code>の<code>setValueDelegate</code>メソッドに<code>LOTColorValueCallback</code>と<code>LOTKeypath</code>を渡すだけでこれが実現できます。</p>
 
 <p><code>LOTColorValueCallback</code>は<code>CGColor</code>を指定するだけのシンプルなものですが、<code>LOTKeypath</code>のKeypathにはなにを指定したら良いでしょうか？</p>
 
@@ -504,7 +504,7 @@ woman Outlines.Group 4.Fill 1
 
 <p>アニメーションの色を動的に変更する要件がある場合、アニメーションを作成するデザイナーさんに「ワイルドカードでKeypathを指定したい」旨をあらかじめ伝え、これをやりやすい構造でアニメーションを作ってもらうことをおすすめします。</p>
 
-<h2 id="アニメーション内に動的に画像を当てる">アニメーション内に動的に画像を当てる</h2>
+<h2 id="アニメーション内に動的に画像を当てはめる">アニメーション内に動的に画像を当てはめる</h2>
 
 <p>アプリが取得したユーザーのプロフィールアイコンをアニメーション内で使うなども可能です。</p>
 
@@ -512,7 +512,7 @@ woman Outlines.Group 4.Fill 1
 
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-no.gif" alt="call-no" /></p>
 
-<p>この「誰かに電話をかけている&hellip;」ときのアニメーションに、実際に電話をかける相手のアイコンを表示する、といったことができます。</p>
+<p>この「誰かに電話をかけている&hellip;」ときのアニメーションに、実際に電話をかける相手のアイコンを当てはめる、といったことができます。</p>
 
 <p>これも以下のように簡単なコードで実現できます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> image: UIImage = <span style="color:#75715e">//&lt; 選択されたユーザーのプロフィールアイコン</span>
@@ -522,11 +522,11 @@ woman Outlines.Group 4.Fill 1
 animationView.addSubview(iconView, toKeypathLayer: keypath)</code></pre></div>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-tokorom.gif" alt="call-tokorom" /></p>
 
-<p>このコードを見ていただければ分かるように、実際には画像を当てるというよりは任意のUIViewサブクラスをアニメーション内に埋め込むことができます。</p>
+<p>このコードを見ていただければ分かるように、実際には画像を当てるというよりは任意のUIViewサブクラスをアニメーション内に埋め込むことをします。</p>
 
 <p>この例では、ユーザーのプロフィールアイコンの<code>UIImage</code>を持った<code>UIImageView</code>を作り、それを貼り付ける先のアニメーションのLayerのKeypathを指定して<code>addSubview</code>しています。</p>
 
-<p>デザイナーさんがこういった構造のアニメーションを作成することに慣れてさえいれば、こういったアニメーションを驚くほど簡単に実現できます。</p>
+<p>デザイナーさんがこういった構造のアニメーションを作成することに慣れてさえいれば、このように動的に変更可能なアニメーションを驚くほど簡単に作れます。</p>
 
 <h2 id="サンプルコード">サンプルコード</h2>
 
@@ -543,6 +543,8 @@ animationView.addSubview(iconView, toKeypathLayer: keypath)</code></pre></div>
 <ol>
 <li id="fn:xcassets">Asset Catalogを利用する方法は後述します
  <a class="footnote-return" href="#fnref:xcassets"><sup>[return]</sup></a></li>
+<li id="fn:bounds">この挙動は場合によっては有用で、アニメーションの大きさを変えて再生することが簡単にできます
+ <a class="footnote-return" href="#fnref:bounds"><sup>[return]</sup></a></li>
 <li id="fn:nocache">lottie-iosのコードを読む限り、これだとキャッシュの機構が使われないなどもありそうです（2018年6月6日時点）
  <a class="footnote-return" href="#fnref:nocache"><sup>[return]</sup></a></li>
 <li id="fn:old">2018年6月6日時点でlottie-iosのREADMEには<code>setValue:forKeypath:atFrame</code>を使ったサンプルが記載されていますが、このメソッドは既にDeprecatedになっています
