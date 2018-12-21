@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='本記事は Vim その2 アドベントカレンダー 21日目の記事です。
+経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
+現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
+以下、
+ シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット  の順に整理いたします。
+シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
+そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
+ https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&#39;swift&#39;] と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
+これが発火する条件は、
+ Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
+リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
+ fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+ fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.'>
+
+<meta property='og:title' content='Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh • Yuta Tokoro'>
+<meta property='og:description' content='本記事は Vim その2 アドベントカレンダー 21日目の記事です。
+経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
+現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
+以下、
+ シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット  の順に整理いたします。
+シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
+そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
+ https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&#39;swift&#39;] と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
+これが発火する条件は、
+ Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
+リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
+ fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+ fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.'>
+<meta property='og:url' content='http://www.tokoro.me/posts/vim-review/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='vim'><meta property='article:tag' content='review'><meta property='article:published_time' content='2018-12-21T10:14:52&#43;09:00'/><meta property='article:modified_time' content='2018-12-21T10:14:52&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.34" />
+
+  <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/vim-review/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.6b175cfc.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-2451574-4', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'></a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    TOKOROM BLOG
+    </h2>
+    <div class='desc'>
+    所 友太 / Yuta Tokoro
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+      </li><li>
+        <a href='/tags/cui' style='font-size:1.0512820512820513em'>Cui</a>
+      </li><li>
+        <a href='/tags/design' style='font-size:1.0769230769230769em'>Design</a>
+      </li><li>
+        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+      </li><li>
+        <a href='/tags/homekit' style='font-size:1.1282051282051282em'>Homekit</a>
+      </li><li>
+        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+      </li><li>
+        <a href='/tags/jenkins' style='font-size:1.0769230769230769em'>Jenkins</a>
+      </li><li>
+        <a href='/tags/lottie' style='font-size:1em'>Lottie</a>
+      </li><li>
+        <a href='/tags/mac' style='font-size:1.1025641025641026em'>Mac</a>
+      </li><li>
+        <a href='/tags/objc' style='font-size:1.4871794871794872em'>Objc</a>
+      </li><li>
+        <a href='/tags/octopress' style='font-size:1.0512820512820513em'>Octopress</a>
+      </li><li>
+        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+      </li><li>
+        <a href='/tags/review' style='font-size:1em'>Review</a>
+      </li><li>
+        <a href='/tags/sakura' style='font-size:1.0512820512820513em'>Sakura</a>
+      </li><li>
+        <a href='/tags/swift' style='font-size:1.1794871794871795em'>Swift</a>
+      </li><li>
+        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+      </li><li>
+        <a href='/tags/tvos' style='font-size:1.0256410256410255em'>Tvos</a>
+      </li><li>
+        <a href='/tags/ui' style='font-size:1.1282051282051282em'>Ui</a>
+      </li><li>
+        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+      </li><li>
+        <a href='/tags/vim' style='font-size:1.1025641025641026em'>Vim</a>
+      </li><li>
+        <a href='/tags/wwdc' style='font-size:1em'>Wwdc</a>
+      </li><li>
+        <a href='/tags/xcode' style='font-size:1.1025641025641026em'>Xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'></span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2018-12-21T10:14:52&#43;09:00'>2018-12-21</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+  
+
+<p>本記事は <a href="https://qiita.com/advent-calendar/2018/vim2" target="_blank">Vim その2 アドベントカレンダー</a> 21日目の記事です。</p>
+
+<h2 id="経緯">経緯</h2>
+
+<p>今年の8月頃から <a href="https://peaks.cc/" target="_blank">PEAKS</a> の <a href="https://peaks.cc/tokorom/iOS12" target="_blank">iOS 12 Programming</a> という技術書の執筆に参加しました。
+このとき初めて <a href="https://github.com/kmuto/review" target="_blank">Re:VIEW</a> による執筆をしました。</p>
+
+<p>現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。
+一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず<sup class="footnote-ref" id="fnref:old"><a rel="footnote" href="#fn:old">1</a></sup>、2018年時点の情報を整理させていただきます。</p>
+
+<p>以下、</p>
+
+<ul>
+<li><strong>シンタックス・ハイライト</strong></li>
+<li><strong>リアルタイムプレビュー</strong></li>
+<li><strong>校正サポート</strong></li>
+<li><strong>コード・スニペット</strong></li>
+</ul>
+
+<p>の順に整理いたします。</p>
+
+<h2 id="シンタックス-ハイライト">シンタックス・ハイライト</h2>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" alt="syntax-highlight-sample" /></p>
+
+<p>Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。
+Re:VIEW 2.0のフォーマットガイドはこちらです &gt; <a href="https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md" target="_blank">https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md</a></p>
+
+<p>そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。</p>
+
+<ul>
+<li><a href="https://github.com/tokorom/vim-review" target="_blank">https://github.com/tokorom/vim-review</a></li>
+</ul>
+
+<p>このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。
+例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_review</span>#<span style="color:#a6e22e">include_filetypes</span> = [<span style="color:#e6db74">&#39;swift&#39;</span>]</code></pre></div>
+<p>と、既存のfiletypeである<strong>swift</strong>を<strong>g:vim_review#include_filetypes</strong>に指定してあげるだけです。
+これで、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/inline-highlight.png" alt="inline-highlight" /></p>
+
+<p>と、文章内に埋め込まれたソースコードもきっちりハイライトされます。</p>
+
+<p>これが発火する条件は、</p>
+
+<ul>
+<li>Re:VIEWのブロック命令として<code>list</code>、<code>listnum</code>、<code>emlist</code>、<code>emlistnum</code>のいずれかを利用し、言語指定として設定済みの<strong>filetype</strong>を指定していること</li>
+</ul>
+
+<p>です。</p>
+
+<h2 id="リアリタイムプレビュー">リアリタイムプレビュー</h2>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/livereload.png" alt="livereload" /></p>
+
+<p><a href="http://kazuph.hateblo.jp/entry/2016/05/15/142352" target="_blank">Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる</a> を真似させていただきました。</p>
+
+<ul>
+<li><strong>fswatch</strong></li>
+<li><strong>browser-sync</strong></li>
+</ul>
+
+<p>を利用します。
+こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。</p>
+
+<ul>
+<li>fswatchでreファイルの変更を監視して変更があればhtmlを出力</li>
+<li>そのhtmlをbrowser-syncでブラウザでライブリロード</li>
+</ul>
+
+<p>という手順です。</p>
+
+<h3 id="事前準備">事前準備</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install fswatch
+npm install -g browser-sync</code></pre></div>
+<h3 id="browser-syncの起動">browser-syncの起動</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd articles
+browser-sync start --server --files *.html </code></pre></div>
+<p>で、Chromeなどデフォルトのブラウザが起動します。
+起動したらブラウザのURLに <code>http://localhost:3000/10.html</code> などプレビューしたいhtmlのURLを入力して開きます。</p>
+
+<h3 id="変更監視の開始">変更監視の開始</h3>
+
+<p>以下は、PEAKSでの執筆環境におけるものです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd articles
+fswatch <span style="color:#ae81ff">10</span>.re | xargs -n1 -I<span style="color:#f92672">{}</span> bundle exec review-compile --target<span style="color:#f92672">=</span>html <span style="color:#f92672">&amp;&amp;</span> browser-sync reload</code></pre></div>
+<p>執筆環境ごとにRe:VIEWのreファイルからhtmlを出力するコマンドがあると思いますので、reの変更を検知したらそのコマンドを叩き、最後に<code>browser-sync reload</code>を呼びます。</p>
+
+<p>これで、リアリタイムプレビュー完成です！</p>
+
+<h2 id="校正サポート">校正サポート</h2>
+
+<p>執筆時に校正用のサポートツールを使うことも多くあるかと思います。
+たとえばPEAKSのiOS 12 Programmingの執筆では、</p>
+
+<ul>
+<li><a href="https://github.com/redpen-cc/redpen" target="_blank">RedPen</a></li>
+<li><a href="https://github.com/prh/prh" target="_blank">prh</a></li>
+</ul>
+
+<p>の２つが使われていました。
+以下、その２つをVimで利用するための情報を整理します。</p>
+
+<h3 id="redpen">RedPen</h3>
+
+<p>RedPenは元よりRe:VIEWフォーマットを考慮して校正をかけてくれるツールです。
+そのためなにも考えずにそのまま利用できます。</p>
+
+<p>具体的には、非同期にツールを走らせてくれる</p>
+
+<ul>
+<li><a href="https://github.com/w0rp/ale" target="_blank">ale</a></li>
+</ul>
+
+<p>pluginを入れれば、デフォルトでRedPenによる検査が走ります。</p>
+
+<p>なお、2018年12月21日時点では、RedPenのリリース版に一部含まれていない修正があります。
+具体的には <a href="https://github.com/redpen-cc/redpen/pull/844" target="_blank">このPull Request</a> で、ラベル付きの見出しを使う場合の修正が入っています<sup class="footnote-ref" id="fnref:redpen-pull-req"><a rel="footnote" href="#fn:redpen-pull-req">2</a></sup>。ラベル付きの見出しを利用する場合はこれがマージ済みのmasterなどを利用するほうが良さそうです。</p>
+
+<h3 id="prh">prh</h3>
+
+<p>prhはそのままでも検査は走らせられるものの、Re:VIEWフォーマットをふまえずに検査が走ってしまうため少し対処が必要でした。</p>
+
+<p>具体的には、prhでのチェックが本文中だけでなく、コメントアウトした文中やソースコードブロック内にも及んでしまうため、それを回避する必要があります。</p>
+
+<p>これに対処するための方法が見つからなかったため、aleで利用できるRe:VIEWフォーマットを考慮してprhを実行してくれるpluginを作成しました。</p>
+
+<ul>
+<li><a href="https://github.com/tokorom/ale-prh-review" target="_blank">ale-prh-review</a></li>
+</ul>
+
+<p>なお、現在、ale-prh-reviewで加味しているのは、</p>
+
+<ul>
+<li><code>#@#</code> から始まるコメント行は無視</li>
+<li>以下のブロック命令の中身を無視
+
+<ul>
+<li><code>list</code></li>
+<li><code>listnum</code></li>
+<li><code>emlist</code></li>
+<li><code>emlistnum</code></li>
+<li><code>image</code></li>
+<li><code>cmd</code></li>
+</ul></li>
+<li>以下のインライン命令の中身を無視
+
+<ul>
+<li><code>@&lt;code&gt;</code></li>
+<li><code>@&lt;fn&gt;</code></li>
+<li><code>@&lt;img&gt;</code></li>
+<li><code>@&lt;list&gt;</code></li>
+</ul></li>
+</ul>
+
+<p>という部分です。</p>
+
+<h3 id="両方とも利用する設定">両方とも利用する設定</h3>
+
+<p>aleでRedPenとprhを両方とも走らせたい場合は、</p>
+
+<ul>
+<li>ale</li>
+<li>ale-prh-review</li>
+</ul>
+
+<p>を入れたうえで、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">ale_fixers</span> = {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>\   <span style="color:#e6db74">&#39;review&#39;</span>: [<span style="color:#e6db74">&#39;redpen&#39;</span>, <span style="color:#e6db74">&#39;prhreview&#39;</span>],<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>\}</code></pre></div>
+<p>と、設定します。</p>
+
+<p>これにより、執筆中にRedPenとprhによる検査が入り、例えば、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/prh.png" alt="prh" /></p>
+
+<p>のように指摘してくれます。この例では「良い」を「よい」と平仮名表記にすることを示唆してくれています。</p>
+
+<h2 id="コード-スニペット">コード・スニペット</h2>
+
+<p>これはなくてもよいと思いますが、お好みのコード・スニペットpluginをRe:VIEWにも対応させておくと便利です。
+例えば、<code>emlist</code>によりソースコードを埋め込みたいときに、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/snippet1.png" alt="snippet1" /></p>
+
+<p>と入力して展開すれば、</p>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/snippet2.png" alt="snippet2" /></p>
+
+<p>と<code>emlist</code>ブロック命令が展開される、など便利に利用できます。</p>
+
+<p>多くの場合、これらのスニペットがコード補完pluginにも連携できるため、Re:VIEWのフォーマットや命令文を漠然としか覚えていなくても、これらのスニペット名が補完されることによって利用できるというメリットもあります。</p>
+
+<p>コード・スニペット用pluginですが、私は</p>
+
+<ul>
+<li><a href="https://github.com/SirVer/ultisnips" target="_blank">UltiSnips</a></li>
+</ul>
+
+<p>を使っています。</p>
+
+<p>ほとんどのRe:VIEW 2.0の命令をサポートしたUltiSnips用のsnippetsファイルを</p>
+
+<ul>
+<li><a href="https://github.com/tokorom/dotfiles/blob/master/.vim/snippets/usnippets/review.snippets" target="_blank">https://github.com/tokorom/dotfiles/blob/master/.vim/snippets/usnippets/review.snippets</a></li>
+</ul>
+
+<p>に置いてありますので、UltiSnipsをご利用のかたは是非ご流用ください。</p>
+
+<p>なおRe:VIEWで日本語文章を書いている時のsnippetsの展開は、</p>
+
+<pre><code>日本語を書いている途中tt&lt;here!!&gt;
+</code></pre>
+
+<p>と日本語文中で展開する必要があります。</p>
+
+<p>UltiSnipsはsnippetを定義するときに <code>w</code> （word boundary）というオプション指定ができるため、これを付加して定義したsnippetなら問題なく展開できます（上のsnippetsファイルは対処済み）。</p>
+
+<p>neosnippetはそのままだとこれに対処できませんので少し改造が必要です<sup class="footnote-ref" id="fnref:neosnippet"><a rel="footnote" href="#fn:neosnippet">3</a></sup>。</p>
+
+<h2 id="成果物">成果物</h2>
+
+<p>実際にこれらを利用してVimで執筆した技術書が、</p>
+
+<div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project007_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
+<li style="font-size:90%; list-style:none;"><span>著者：</span>
+<span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
+<li style="font-size:90%; list-style:none;">製本版,電子版</li>
+<li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
+
+<p>です。私はこの中の10章「tvOS 12の新機能」の執筆を担当しました。</p>
+
+<p>Vim + Re:VIEWで執筆をしている皆様、ぜひ、<a href="https://twitter.com/tokorom" target="_blank">Twitter</a> などで情報交換お願い致します。</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:old">見つかったのは4年前くらいの情報やpluginでした
+ <a class="footnote-return" href="#fnref:old"><sup>[return]</sup></a></li>
+<li id="fn:redpen-pull-req">私が執筆中に困り、Pull Requestしました
+ <a class="footnote-return" href="#fnref:redpen-pull-req"><sup>[return]</sup></a></li>
+<li id="fn:neosnippet">改造の例がこちらです <a href="https://github.com/tokorom/neosnippet.vim/tree/improve-cur-word" target="_blank">https://github.com/tokorom/neosnippet.vim/tree/improve-cur-word</a>
+ <a class="footnote-return" href="#fnref:neosnippet"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/vim-review/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fvim-review%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/vim'>Vim</a>, <a class='tag' href='/tags/review'>Review</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/lottie-ios-1/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</a>
+    </div></div>
+</nav>
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+    <h4>所の執筆・監修した書籍</h4>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+  </div>
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
+    <ul><li>
+        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2012-2018 Yuta Tokoro </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.409c76b5.js'></script><script src='/js/custom.js'></script>
+</body>
+
+</html>
+
