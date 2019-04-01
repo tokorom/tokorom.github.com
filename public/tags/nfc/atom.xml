@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nfc on TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/tags/nfc/</link>
+    <description>Recent content in Nfc on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 01 Apr 2019 12:43:04 +0900</lastBuildDate>
+    
+	<atom:link href="http://www.tokoro.me/tags/nfc/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
+      <link>http://www.tokoro.me/posts/nfc-iphone-1/</link>
+      <pubDate>Mon, 01 Apr 2019 12:43:04 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nfc-iphone-1/</guid>
+      <description>この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン より実用的にしていくために  導入 我が家にスマートロックのSesameを採用しました。
+私一人ならSesameだけでものすごく便利になったわけですが、我が家には小さい子供が３人います。子供たちにスマホを持たせるにはまだ早く、このままではスマートロックの恩恵を十分に受けることができません。
+なお、Sesameは個人が触れる便利なAPIを公開してくれています。NFC＋Sesame APIでこの状況を改善できるものではないか、と思い立ったのがこの記事を書くきっかけです。まだ現在進行形で実験中ですが、実験した結果を随時記事にしていければと考えています。
+この記事でやること 私がNFCタグを取り扱ったことがないところからスタートしましたので、まずこの記事では「NFCタグに情報を書き込む」ところまでだけが範囲になります。
+実際にSesameをアンロックするところなどは次の記事で書かせていただきます。
+準備した機器 スマートロック 導入に書いたとおりですが、Sesameを購入しました。
+ APIでのロックやアンロックが可能で自由度が高そうだったのがSesameを選んだ理由です。
+利用するNFCタグ サンワサプライ NFCタグ(10枚入り)をAmazonで購入しました。
+ NFCリーダー/ライター NFCリーダー/ライターとしてはPaSoRiを購入しました。
+ これも使えればどれでも良いと思いますが、ネット上で利用実績が多く安全そうなものを選んだだけです。
+nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続してNFCタグから情報を読み取るところからはじめます。
+調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
+このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
+情報の読み取り NFCタグに書き込まれた情報を読み取るにはexsamplesの中のtagtool.pyを使って
+python tagtool.py show  とするだけです。
+フォーマット NFCタグをフォーマットしたいときもtagtool.pyを使って
+python tagtool.py format  とするだけです。
+URI書き込み NFCタグにURIを書き込みたい場合のみ少し工夫が必要でした。 とはいえ、exsamplesの中にあるものだけで改造なしで可能です。
+例えばhttps://tag.exsample.com/lockというURIを書き込むこととします。
+まず、うまくいくパターンからですが、
+echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load -  でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。</description>
+    </item>
+    
+  </channel>
+</rss>
