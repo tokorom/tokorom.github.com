@@ -5,7 +5,7 @@
     <link>http://www.tokoro.me/</link>
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 21 Dec 2018 10:14:52 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Apr 2019 12:43:04 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,41 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
+      <link>http://www.tokoro.me/posts/nfc-iphone-1/</link>
+      <pubDate>Mon, 01 Apr 2019 12:43:04 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nfc-iphone-1/</guid>
+      <description>
+        この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン より実用的にしていくために  導入 我が家にスマートロックのSesameを採用しました。
+私一人ならSesameだけでものすごく便利になったわけですが、我が家には小さい子供が３人います。子供たちにスマホを持たせるにはまだ早く、このままではスマートロックの恩恵を十分に受けることができません。
+なお、Sesameは個人が触れる便利なAPIを公開してくれています。NFC＋Sesame APIでこの状況を改善できるものではないか、と思い立ったのがこの記事を書くきっかけです。まだ現在進行形で実験中ですが、実験した結果を随時記事にしていければと考えています。
+この記事でやること 私がNFCタグを取り扱ったことがないところからスタートしましたので、まずこの記事では「NFCタグに情報を書き込む」ところまでだけが範囲になります。
+実際にSesameをアンロックするところなどは次の記事で書かせていただきます。
+準備した機器 スマートロック 導入に書いたとおりですが、Sesameを購入しました。
+ APIでのロックやアンロックが可能で自由度が高そうだったのがSesameを選んだ理由です。
+利用するNFCタグ サンワサプライ NFCタグ(10枚入り)をAmazonで購入しました。
+ NFCリーダー/ライター NFCリーダー/ライターとしてはPaSoRiを購入しました。
+ これも使えればどれでも良いと思いますが、ネット上で利用実績が多く安全そうなものを選んだだけです。
+nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続してNFCタグから情報を読み取るところからはじめます。
+調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
+このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
+情報の読み取り NFCタグに書き込まれた情報を読み取るにはexsamplesの中のtagtool.pyを使って
+python tagtool.py show  とするだけです。
+フォーマット NFCタグをフォーマットしたいときもtagtool.pyを使って
+python tagtool.py format  とするだけです。
+URI書き込み NFCタグにURIを書き込みたい場合のみ少し工夫が必要でした。 とはいえ、exsamplesの中にあるものだけで改造なしで可能です。
+例えばhttps://tag.exsample.com/lockというURIを書き込むこととします。
+まず、うまくいくパターンからですが、
+echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load -  でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
+      
+    </item>
     
     <item>
       <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</title>
@@ -403,28 +438,6 @@ let add1 = addTwoNumbers(1) add1(b: 2) //&amp;lt; 3 というかんじに、
 そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
 実装 https://github.com/tokorom/partial-swift
 func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closure () -&amp;gt; A) -&amp;gt; (B) -&amp;gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&amp;gt; Int { return a + b } let add1 = partial(add, 1) add1(2) //&amp;lt; 3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>これがXcodeでのバージョニングの決定版になるかも</title>
-      <link>http://www.tokoro.me/posts/xcode-versioning/</link>
-      <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/xcode-versioning/</guid>
-      <description>
-        概要 この記事でできるようになること  安定してInfo.plistの内容（ここではBuild番号）を変更できる ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される Info.plistに差分がでないのでcommitのときに邪魔にならない  なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感がこちらに詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、熊谷さんの記事をご一読ください！
-必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
-経緯 これまで、
- デバッグ用やArchive用のアプリのバージョンにだけgitのcommit番号とか最終更新日付を付ける  といったことをする場合に、Run ScriptでInfo.plistを（PlistBuddyなどで）編集してやるのが常だったと思うのですが、その場合、
- Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;  変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒   といった課題があったりしました（少なくともぼくの手元では）。
-そういったことを踏まえて、
-potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
- その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
-@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
-&amp;mdash; kishikawa katsumi (@k_katsumi) May 15, 2014 
-@k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて
       </description>
       
     </item>
