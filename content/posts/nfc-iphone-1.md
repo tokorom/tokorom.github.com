@@ -2,7 +2,7 @@
 title: "NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む"
 date: 2019-04-01T12:43:04+09:00
 draft: false
-tags: [nfc,ios]
+tags: [nfc,sesame,ios]
 authors: [tokorom]
 cover: "https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png"
 ---
@@ -10,11 +10,11 @@ cover: "https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/imag
 この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。
 以下、5つの記事に分けて投稿していく予定です。
 
-1. NFCタグにURIを書き込む
-2. iPhoneを鍵とし、ドアにNFCタグを設置するパターン
-3. iOSアプリを経由してセキュリティレベルをあげる
-4. NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン
-5. より実用的にしていくために
+1. NFCタグにURIを書き込む（この記事）
+2. iPhoneを鍵とし、ドアにNFCタグを設置するパターン（まだ書いてません）
+3. iOSアプリを経由してセキュリティレベルをあげる（まだ書いてません）
+4. NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてません）
+5. より実用的にしていくために（まだ書いてません）
 
 ## 導入
 
