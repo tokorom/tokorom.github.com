@@ -5,10 +5,29 @@
     <link>http://www.tokoro.me/tags/ios/</link>
     <description>Recent content in Ios on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 01 Apr 2019 12:43:04 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Apr 2019 15:11:25 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/ios/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</title>
+      <link>http://www.tokoro.me/posts/nfc-iphone-2/</link>
+      <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nfc-iphone-2/</guid>
+      <description>この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる（まだ書いてません） NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてません） より実用的にしていくために（まだ書いてません）  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
+今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
+それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
+ この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+https://ameblo.jp/candyhouse-inc/entry-12416936959.html
+をご参照ください。
+API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
+curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+ レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
+curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.</description>
+    </item>
     
     <item>
       <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
@@ -17,7 +36,7 @@
       
       <guid>http://www.tokoro.me/posts/nfc-iphone-1/</guid>
       <description>この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
- NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン より実用的にしていくために  導入 我が家にスマートロックのSesameを採用しました。
+ NFCタグにURIを書き込む（この記事） iPhoneを鍵とし、ドアにNFCタグを設置するパターン（まだ書いてません） iOSアプリを経由してセキュリティレベルをあげる（まだ書いてません） NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてません） より実用的にしていくために（まだ書いてません）  導入 我が家にスマートロックのSesameを採用しました。
 私一人ならSesameだけでものすごく便利になったわけですが、我が家には小さい子供が３人います。子供たちにスマホを持たせるにはまだ早く、このままではスマートロックの恩恵を十分に受けることができません。
 なお、Sesameは個人が触れる便利なAPIを公開してくれています。NFC＋Sesame APIでこの状況を改善できるものではないか、と思い立ったのがこの記事を書くきっかけです。まだ現在進行形で実験中ですが、実験した結果を随時記事にしていければと考えています。
 この記事でやること 私がNFCタグを取り扱ったことがないところからスタートしましたので、まずこの記事では「NFCタグに情報を書き込む」ところまでだけが範囲になります。

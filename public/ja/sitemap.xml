@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.tokoro.me/posts/nfc-iphone-2/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/nfc-iphone-1/</loc>
     <lastmod>2019-04-01T12:43:04+09:00</lastmod>
   </url>
@@ -341,7 +346,7 @@
   
   <url>
     <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2019-04-01T12:43:04+09:00</lastmod>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -365,7 +370,7 @@
   
   <url>
     <loc>http://www.tokoro.me/tags/nfc/</loc>
-    <lastmod>2019-04-01T12:43:04+09:00</lastmod>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -383,7 +388,7 @@
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2019-04-01T12:43:04+09:00</lastmod>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -406,6 +411,12 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/sesame/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/tags/swift/</loc>
     <lastmod>2016-06-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -413,7 +424,7 @@
   
   <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2019-04-01T12:43:04+09:00</lastmod>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -451,7 +462,7 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2019-04-01T12:43:04+09:00</lastmod>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
