@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mac on TOKOROM BLOG</title>
+    <title>mac on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/mac/</link>
-    <description>Recent content in Mac on TOKOROM BLOG</description>
+    <description>Recent content in mac on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Mon, 05 Oct 2015 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/mac/atom.xml" rel="self" type="application/rss+xml" />
@@ -35,14 +36,16 @@ tell application &amp;quot;System Events&amp;quot; set activeApp to first proces
       <description>** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
 導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
 設定は以下のとおり。
- .tmux.conf  bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+ .tmux.conf
+bind C-t last-pane  これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
 ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
 例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
 改善 ということで、
  paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
 そんなんできるんかいな？と思ったけどごくごく普通にできた。
 設定は以下のとおり。
- .tmux.conf  bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+ .tmux.conf
+bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34;  runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
 これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
 便利便利！</description>
     </item>

@@ -3,8 +3,83 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.tokoro.me/authors/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/authors/"
+                />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/iosdc_2019_pre/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/authors/tokorom/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/"
+                />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/ios/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/nfc/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/nfc-iphone-2/</loc>
     <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/sesame/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/tags/"
+                />
   </url>
   
   <url>
@@ -13,8 +88,23 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/review/</loc>
+    <lastmod>2018-12-21T10:14:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/vim/</loc>
+    <lastmod>2018-12-21T10:14:52+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/vim-review/</loc>
     <lastmod>2018-12-21T10:14:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/lottie/</loc>
+    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
   </url>
   
   <url>
@@ -23,7 +113,17 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/ui/</loc>
+    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/homekit_delongi_heater/</loc>
+    <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/homekit/</loc>
     <lastmod>2018-02-08T00:00:00+00:00</lastmod>
   </url>
   
@@ -35,6 +135,11 @@
   <url>
     <loc>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</loc>
     <lastmod>2018-01-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/tvos/</loc>
+    <lastmod>2017-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -68,6 +173,16 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/swift/</loc>
+    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/wwdc/</loc>
+    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/has-associated-objects/</loc>
     <lastmod>2015-11-08T00:00:00+00:00</lastmod>
   </url>
@@ -78,7 +193,17 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/cui/</loc>
+    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/el-capitain-totalterminal/</loc>
+    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/mac/</loc>
     <lastmod>2015-10-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -108,12 +233,27 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/xcode/</loc>
+    <lastmod>2014-05-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/xcode-versioning/</loc>
     <lastmod>2014-05-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/objc/</loc>
+    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/objc-async-test/</loc>
+    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/tdd/</loc>
     <lastmod>2014-04-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -133,8 +273,18 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/publish/</loc>
+    <lastmod>2013-11-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/ios-dev-accounts/</loc>
     <lastmod>2013-11-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/haskell/</loc>
+    <lastmod>2013-11-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -143,8 +293,23 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/authors/amorino/</loc>
+    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/design/</loc>
+    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/ios7-design/</loc>
     <lastmod>2013-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/ci/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -175,6 +340,11 @@
   <url>
     <loc>http://www.tokoro.me/posts/ssgentlealertview/</loc>
     <lastmod>2013-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/uikit/</loc>
+    <lastmod>2013-05-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -238,6 +408,11 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/jenkins/</loc>
+    <lastmod>2012-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/safe-objc/</loc>
     <lastmod>2012-08-17T00:00:00+00:00</lastmod>
   </url>
@@ -263,6 +438,16 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/octopress/</loc>
+    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/sakura/</loc>
+    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/posts/install-jenkins-to-sakura/</loc>
     <lastmod>2012-07-24T00:00:00+00:00</lastmod>
   </url>
@@ -278,30 +463,7 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/authors/amorino/</loc>
-    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/authors/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/authors/"
-                />
-  </url>
-  
-  <url>
     <loc>http://www.tokoro.me/categories/</loc>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -312,194 +474,6 @@
                 hreflang="ja"
                 href="http://www.tokoro.me/categories/"
                 />
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/ci/</loc>
-    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/cui/</loc>
-    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/design/</loc>
-    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/haskell/</loc>
-    <lastmod>2013-11-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/homekit/</loc>
-    <lastmod>2018-02-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/jenkins/</loc>
-    <lastmod>2012-09-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/lottie/</loc>
-    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/mac/</loc>
-    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/nfc/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/objc/</loc>
-    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/octopress/</loc>
-    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/publish/</loc>
-    <lastmod>2013-11-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/review/</loc>
-    <lastmod>2018-12-21T10:14:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/sakura/</loc>
-    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/sesame/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/swift/</loc>
-    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/"
-                />
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/tdd/</loc>
-    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/tvos/</loc>
-    <lastmod>2017-12-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/ui/</loc>
-    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/uikit/</loc>
-    <lastmod>2013-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/vim/</loc>
-    <lastmod>2018-12-21T10:14:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/wwdc/</loc>
-    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/xcode/</loc>
-    <lastmod>2014-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sesame on TOKOROM BLOG</title>
+    <title>sesame on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/sesame/</link>
-    <description>Recent content in Sesame on TOKOROM BLOG</description>
+    <description>Recent content in sesame on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Mon, 01 Apr 2019 15:11:25 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/sesame/atom.xml" rel="self" type="application/rss+xml" />
@@ -25,7 +26,8 @@ https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
 curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
+ レスポンス例
+[{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]   鍵をロック 上で取得したdevice_idを利用し、
 curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.</description>
     </item>
     

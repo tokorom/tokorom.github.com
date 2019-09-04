@@ -1,45 +1,49 @@
 <!DOCTYPE html>
-<html lang='ja'>
-
-<head>
+<html lang='ja'><head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
 イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.'>
+<meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='Jenkins@さくらVPSにOctopressのデプロイを任せてみる • Yuta Tokoro'>
 <meta property='og:description' content='目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
 イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.'>
 <meta property='og:url' content='http://www.tokoro.me/posts/jenkins-octopress/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='sakura'><meta property='article:tag' content='octopress'><meta property='article:tag' content='jenkins'><meta property='article:published_time' content='2012-07-29T00:00:00Z'/><meta property='article:modified_time' content='2012-07-29T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='sakura'><meta property='article:tag' content='octopress'><meta property='article:tag' content='jenkins'><meta property='article:published_time' content='2012-07-29T00:00:00Z'/><meta property='article:modified_time' content='2012-07-29T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.34" />
+<meta name="generator" content="Hugo 0.57.2" />
 
   <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/jenkins-octopress/'>
   
   
   <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.81519497.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-2451574-4', 'auto');
-ga('send', 'pageview');
+<link rel='stylesheet' href='/assets/css/main.e995827f.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
 
 </head>
+<body class='page type-posts layout-post has-sidebar'>
 
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'></a>
 
-<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
-
-  <div class='site'>
-
-    <a class='screen-reader-text' href='#main-menu'></a>
-
-<div id='sidebar' class='sidebar'>
   <div class='container'><section class='widget widget-about sep-after'>
   <header>
     
@@ -50,7 +54,9 @@ ga('send', 'pageview');
     </div>
     
     <h2 class='title site-title '>
-    TOKOROM BLOG
+      <a href='/'>
+      TOKOROM BLOG
+      </a>
     </h2>
     <div class='desc'>
     所 友太 / Yuta Tokoro
@@ -78,72 +84,82 @@ ga('send', 'pageview');
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+        <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui' style='font-size:1.048780487804878em'>Cui</a>
+        <a href='/tags/cui/' style='font-size:1.048780487804878em'>cui</a>
       </li><li>
-        <a href='/tags/design' style='font-size:1.0731707317073171em'>Design</a>
+        <a href='/tags/design/' style='font-size:1.0731707317073171em'>design</a>
       </li><li>
-        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit' style='font-size:1.1219512195121952em'>Homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1219512195121952em'>homekit</a>
       </li><li>
-        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+        <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins' style='font-size:1.0731707317073171em'>Jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0731707317073171em'>jenkins</a>
       </li><li>
-        <a href='/tags/lottie' style='font-size:1em'>Lottie</a>
+        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac' style='font-size:1.0975609756097562em'>Mac</a>
+        <a href='/tags/mac/' style='font-size:1.0975609756097562em'>mac</a>
       </li><li>
-        <a href='/tags/nfc' style='font-size:1.024390243902439em'>Nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.024390243902439em'>nfc</a>
       </li><li>
-        <a href='/tags/objc' style='font-size:1.4634146341463414em'>Objc</a>
+        <a href='/tags/objc/' style='font-size:1.4634146341463414em'>objc</a>
       </li><li>
-        <a href='/tags/octopress' style='font-size:1.048780487804878em'>Octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.048780487804878em'>octopress</a>
       </li><li>
-        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+        <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
-        <a href='/tags/review' style='font-size:1em'>Review</a>
+        <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura' style='font-size:1.048780487804878em'>Sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.048780487804878em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame' style='font-size:1.024390243902439em'>Sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.024390243902439em'>sesame</a>
       </li><li>
-        <a href='/tags/swift' style='font-size:1.170731707317073em'>Swift</a>
+        <a href='/tags/swift/' style='font-size:1.170731707317073em'>swift</a>
       </li><li>
-        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos' style='font-size:1.024390243902439em'>Tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.024390243902439em'>tvos</a>
       </li><li>
-        <a href='/tags/ui' style='font-size:1.1219512195121952em'>Ui</a>
+        <a href='/tags/ui/' style='font-size:1.1219512195121952em'>ui</a>
       </li><li>
-        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim' style='font-size:1.0975609756097562em'>Vim</a>
+        <a href='/tags/vim/' style='font-size:1.0975609756097562em'>vim</a>
       </li><li>
-        <a href='/tags/wwdc' style='font-size:1em'>Wwdc</a>
+        <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode' style='font-size:1.0975609756097562em'>Xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0975609756097562em'>xcode</a>
       </li></ul>
 </div>
 
 
 </section>
 </div>
-</div>
 
-    <div class='main'>
-
-      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
   <div class='container'>
     <a class='screen-reader-text' href='#content'></a>
 
-<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
   <span class='screen-reader-text'></span>
-  <span class="hamburger-box">
-    <span class="hamburger-inner"></span>
-  </span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
 </button>
     <ul><li class='item'>
         <a href='/'>Blog</a>
@@ -155,8 +171,9 @@ ga('send', 'pageview');
         <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
       </li></ul>
   </div>
-</nav>
-
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
 
       <header id='header' class='header site-header'>
         <div class='container sep-after'>
@@ -176,8 +193,7 @@ ga('send', 'pageview');
       
 
     </div>
-    
-<div class='entry-meta'>
+    <div class='entry-meta'>
   <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -329,150 +345,162 @@ $ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm use 1.9.2@octopr
 <li>Run the build in a RVM-managed environment</li>
 <li>Implementation: <strong>1.9.2@octopress</strong> (利用するRubyバージョンとgemset名を設定)</li>
 </ul></li>
-<li>Executable shell
+
+<li><p>Executable shell</p>
 
 <ul>
-<li>Command
-```
-export PATH=$PATH:/usr/local/bin</li>
+<li><p>Command</p>
+
+<pre><code>export PATH=$PATH:/usr/local/bin
+
+rm -rf octopress
+mkdir octopress
+cd octopress
+
+git init
+git remote add -t source origin git@bitbucket.org:yourname/yourname.github.com.git
+git fetch
+git checkout source
+
+bundle install
+
+rake setup_github_pages\[git@github.com:yourname/yourname.github.com.git\]
+rake generate
+rake deploy
+</code></pre></li>
 </ul></li>
 </ul>
 
-<p>rm -rf octopress
-mkdir octopress
-cd octopress</p>
+<p>最後の <em>Command</em> のところでは、</p>
 
-<p>git init
-git remote add -t source origin git@bitbucket.org:yourname/yourname.github.com.git
-git fetch
-git checkout source</p>
+<ul>
+<li>作業ディレクトリを作り直す</li>
+<li>Bitbucketのリポジトリからsourceブランチを取得</li>
+<li>bundleで必要なgemなどをインストール</li>
+<li>generate &amp; デプロイ!</li>
+</ul>
 
-<p>bundle install</p>
+<p>をしている。</p>
 
-<p>rake setup_github_pages[git@github.com:yourname/yourname.github.com.git]
-rake generate
-rake deploy</p>
+<h2 id="bitbucketからjobの実行ができるように権限の設定を変更をする">BitbucketからJobの実行ができるように権限の設定を変更をする</h2>
 
-<pre><code>最後の *Command* のところでは、
+<p>BitbucketからJenkinsにアクセスする際に、 <em><a href="http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like" target="_blank">http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</a></em> といったURLを叩いてJobを実行することになるので、それが可能なように権限の設定を変更しておく（<strong>この方法は簡易的なものでセキュリティの面では良くないので、これを解消するには<a href="/2012/07/29/security-for-jenkins/">次の記事</a>を参照して別の設定とするのが良い</strong>）。</p>
 
-* 作業ディレクトリを作り直す
-* Bitbucketのリポジトリからsourceブランチを取得
-* bundleで必要なgemなどをインストール
-* generate &amp; デプロイ!
+<p>また、 <strong>Manage Jenkins</strong> -&gt; <em>Configure System</em> で、</p>
 
-をしている。
+<ul>
+<li>Access Control
 
-## BitbucketからJobの実行ができるように権限の設定を変更をする
+<ul>
+<li>Authorization</li>
+<li>Matrix-based security
 
-BitbucketからJenkinsにアクセスする際に、 *http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like* といったURLを叩いてJobを実行することになるので、それが可能なように権限の設定を変更しておく（**この方法は簡易的なものでセキュリティの面では良くないので、これを解消するには[次の記事](/2012/07/29/security-for-jenkins/)を参照して別の設定とするのが良い**）。
+<ul>
+<li>Anonymousユーザの <strong>Job</strong> の <strong>Read</strong> だけチェック</li>
+</ul></li>
+</ul></li>
+</ul>
 
-また、 **Manage Jenkins** -&gt; *Configure System* で、
+<h2 id="bitbucketのほうの設定">Bitbucketのほうの設定</h2>
 
-* Access Control
-  * Authorization
-    * Matrix-based security
-      * Anonymousユーザの **Job** の **Read** だけチェック
+<p>作成したリポジトリの <strong>Admin</strong> タブの <strong>Services</strong> を選択。</p>
 
-## Bitbucketのほうの設定
+<p><em>Select a service&hellip;</em> の中に <em>Jenkins</em> があるのでそれを選択して、 <strong>Add service</strong>。</p>
 
-作成したリポジトリの **Admin** タブの **Services** を選択。
+<p>設定項目には、</p>
 
-*Select a service...* の中に *Jenkins* があるのでそれを選択して、 **Add service**。
-
-設定項目には、
+<pre><code>http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like
 </code></pre>
 
-<p><a href="http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like" target="_blank">http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</a></p>
+<p>と叩くべきURLをそのまま設定する (※ yourdomainなどは各自の環境に合わせて変更すること)。</p>
 
-<pre><code>と叩くべきURLをそのまま設定する (※ yourdomainなどは各自の環境に合わせて変更すること)。
+<h2 id="完成">完成!</h2>
 
-## 完成!
+<p>これでひととおりの設定は完了。<br />
+うまくいっていればいつもどおり記事を書いてコミットした後に <code>git push origin source</code> とBitbucketにpushするだけで、あとは勝手にデプロイしてくれる。<br />
+このとき、Bitbucketのプライベートリポジトリにファイル一式がバックアップされることにもなる。</p>
 
-これでひととおりの設定は完了。  
-うまくいっていればいつもどおり記事を書いてコミットした後に `git push origin source` とBitbucketにpushするだけで、あとは勝手にデプロイしてくれる。  
-このとき、Bitbucketのプライベートリポジトリにファイル一式がバックアップされることにもなる。
+<p>なお、sourceブランチがデプロイの対象となっているので、書き途中の記事をBitbucketに保存しておきたい場合には、 <strong>draft</strong> など別のブランチにコミットしておけば書き途中のものが勝手にデプロイされる心配はない。</p>
 
-なお、sourceブランチがデプロイの対象となっているので、書き途中の記事をBitbucketに保存しておきたい場合には、 **draft** など別のブランチにコミットしておけば書き途中のものが勝手にデプロイされる心配はない。
+<h2 id="課題">課題</h2>
 
-## 課題
+<p>このままだと、認証なしで全てのJobが参照できる形になってしまっている。<br />
+<a href="/2012/07/29/security-for-jenkins/">次の記事</a>ではこれを解消することにトライしたい。</p>
 
-このままだと、認証なしで全てのJobが参照できる形になってしまっている。  
-[次の記事](/2012/07/29/security-for-jenkins/)ではこれを解消することにトライしたい。
+<h2 id="じつは途中ではいろいろと引っかかった">じつは途中ではいろいろと引っかかった</h2>
 
-## じつは途中ではいろいろと引っかかった
+<p>以上、うまくいった手順をまとめたが実際にはいろいろとひっかかったところがあったので、そこも言及しておく。</p>
 
-以上、うまくいった手順をまとめたが実際にはいろいろとひっかかったところがあったので、そこも言及しておく。
+<h3 id="rvmrc-の実行許可の確認が越えられない">.rvmrc の実行許可の確認が越えられない</h3>
 
-### .rvmrc の実行許可の確認が越えられない
+<p>はじめて <em>.rvmrc</em> が設置されたディレクトリに入る際、 <em>.rvmrc</em> の内容を実行して良いか? といった問い合わせが入り、自分で操作しているときは単純に <strong>yes</strong> と応えるだけなのですが、それをJenkinsさんにやってもらう方法がわからなかった。<br />
+<code>rvmrc trust ディレクトリ名</code>とすれば以降その確認がいらなくなるというのは既知なのだが、Git Plugin を使ってソースを取得すると、その時点でcloneしたディレクトリに入ってしまうのでタイミング的にそれも無理。<br />
+けっきょくGit Pluginを使うのをあきらめ、ソースのcloneからブランチの切り替えまでコマンドで直接やることとした。</p>
 
-はじめて *.rvmrc* が設置されたディレクトリに入る際、 *.rvmrc* の内容を実行して良いか? といった問い合わせが入り、自分で操作しているときは単純に **yes** と応えるだけなのですが、それをJenkinsさんにやってもらう方法がわからなかった。  
-`rvmrc trust ディレクトリ名`とすれば以降その確認がいらなくなるというのは既知なのだが、Git Plugin を使ってソースを取得すると、その時点でcloneしたディレクトリに入ってしまうのでタイミング的にそれも無理。  
-けっきょくGit Pluginを使うのをあきらめ、ソースのcloneからブランチの切り替えまでコマンドで直接やることとした。
+<h3 id="rvmがうまく扱えない">RVMがうまく扱えない</h3>
 
-### RVMがうまく扱えない
+<p>ビルド時のコマンドの中で <strong>rvm</strong> を使っているわけですが、やたらとこのコマンドがないといったエラーが出まくり「うぎゃー」となった。
+これは <strong>RVM Plugin</strong> を使えば簡単に解決できた。</p>
 
-ビルド時のコマンドの中で **rvm** を使っているわけですが、やたらとこのコマンドがないといったエラーが出まくり「うぎゃー」となった。
-これは **RVM Plugin** を使えば簡単に解決できた。
+<h3 id="gemがインストールできない">gemがインストールできない</h3>
 
-### gemがインストールできない
+<p><strong>bundler</strong> を使うため、<code>gem install bundle</code>をビルド時のコマンド中に入れたのだが、</p>
 
-**bundler** を使うため、`gem install bundle`をビルド時のコマンド中に入れたのだが、
+<pre><code>ERROR:  Loading command: install (LoadError)
+    no such file to load -- zlib
 </code></pre>
 
-<p>ERROR:  Loading command: install (LoadError)
-    no such file to load &ndash; zlib</p>
+<p>というエラーで先に進めない。</p>
 
-<pre><code>というエラーで先に進めない。
+<p>これはRubyのほうの話で、</p>
 
-これはRubyのほうの話で、
+<pre><code>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl' 
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm reinstall 1.9.2'
 </code></pre>
 
-<p>$ sudo -u jenkins -H -s bash -c &lsquo;source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl&rsquo;
-$ sudo -u jenkins -H -s bash -c &lsquo;source ~/.rvm/scripts/rvm; rvm reinstall 1.9.2&rsquo;</p>
+<p>とzlibなどをRVMでインストールした後に、Rubyをreinstallすることで解決。<br />
+本記事のほうの手順ではきちんと先に <code>rvm pkg install</code> を済ませておくようにしてある。</p>
 
-<pre><code>とzlibなどをRVMでインストールした後に、Rubyをreinstallすることで解決。  
-本記事のほうの手順ではきちんと先に `rvm pkg install` を済ませておくようにしてある。
+<h3 id="rake-installに失敗する">rake installに失敗する</h3>
 
-### rake installに失敗する
+<p>Jenkinsでの<code>rake install</code>時に</p>
 
-Jenkinsでの`rake install`時に
+<pre><code>A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]
 </code></pre>
 
-<p>A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]</p>
+<p>という確認が出てきたそこでこけていた模様。<br />
+よくよく考えてみると、<code>rake install</code>はこのリポジトリには適用済みの状態でpushしてあるので不要だった。</p>
 
-<pre><code>という確認が出てきたそこでこけていた模様。  
-よくよく考えてみると、`rake install`はこのリポジトリには適用済みの状態でpushしてあるので不要だった。
+<h3 id="rake-generateでエラー">rake generateでエラー</h3>
 
-### rake generateでエラー
+<p><code>rake generate</code>時に</p>
 
-`rake generate`時に
+<pre><code>Building site: source -&gt; public
+/var/lib/jenkins/.rvm/gems/ruby-1.9.2-p320@octopress/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `block in ffi_lib': Could not open library 'lib.so': lib.so: cannot open shared object file: No such file or directory (LoadError)
 </code></pre>
 
-<p>Building site: source -&gt; public
-/var/lib/jenkins/.rvm/gems/ruby-1.9.2-p320@octopress/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `block in ffi_lib&rsquo;: Could not open library &lsquo;lib.so&rsquo;: lib.so: cannot open shared object file: No such file or directory (LoadError)</p>
+<p>といったエラーが発生。
+これは <strong>python-devel</strong> が入っていない場合のエラーということだったので、さくらVPSのほうで <code>sudo yum install python-devel</code> しておくことで解消。</p>
 
-<pre><code>といったエラーが発生。
-これは **python-devel** が入っていない場合のエラーということだったので、さくらVPSのほうで `sudo yum install python-devel` しておくことで解消。
+<h3 id="rake-deployでエラー">rake deployでエラー</h3>
 
-### rake deployでエラー
+<p><code>rake deploy</code>時に</p>
 
-`rake deploy`時に
+<pre><code>## Pushing generated _deploy website
+
+Host key verification failed.
+fatal: The remote end hung up unexpectedly
 </code></pre>
 
-<h2 id="pushing-generated-deploy-website">Pushing generated _deploy website</h2>
+<p>といったエラーが発生。</p>
 
-<p>Host key verification failed.
-fatal: The remote end hung up unexpectedly</p>
+<p>公開鍵はきっちり登録してあるはずなのにおかしいなと思ったら、一度めのアクセスの際にアクセス確認の問い合わせが入り、ここでyesとしないと先に進まないという状態で止まっていたというオチ。<br />
+これはあらかじめさくらVPSのほうで、</p>
 
-<pre><code>といったエラーが発生。
-
-公開鍵はきっちり登録してあるはずなのにおかしいなと思ったら、一度めのアクセスの際にアクセス確認の問い合わせが入り、ここでyesとしないと先に進まないという状態で止まっていたというオチ。  
-これはあらかじめさくらVPSのほうで、
+<pre><code>$ sudo -u jenkins /usr/local/bin/git clone git@github.com:yourname/yourname.github.com.git
 </code></pre>
 
-<p>$ sudo -u jenkins /usr/local/bin/git clone git@github.com:yourname/yourname.github.com.git
-```
-と一度Githubにアクセスしておけば解消される。</p>
+<p>と一度Githubにアクセスしておけば解消される。</p>
 
 <h3 id="おしまい">おしまい</h3>
 
@@ -510,16 +538,13 @@ fatal: The remote end hung up unexpectedly</p>
 
   
 <footer class='entry-footer'>
-  <div class='container sep-before'>
-  <div class='tags'>
-  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-</span>
-  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/sakura'>Sakura</a>, <a class='tag' href='/tags/octopress'>Octopress</a>, <a class='tag' href='/tags/jenkins'>Jenkins</a></div>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/sakura/'>sakura</a>, <a class='tag' href='/tags/octopress/'>octopress</a>, <a class='tag' href='/tags/jenkins/'>jenkins</a></div>
 
   </div>
 </footer>
@@ -553,6 +578,7 @@ fatal: The remote end hung up unexpectedly</p>
 
 
 
+
 <footer class='entry-works'>
   <div class='container sep-before'>
     <h4>所の執筆・監修した書籍</h4>
@@ -583,56 +609,18 @@ fatal: The remote end hung up unexpectedly</p>
       </main>
 
       <footer id='footer' class='footer'>
-        <div class='container sep-before'>
-          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
-    <ul><li>
-        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-  
-</svg>
-</a>
-      </li><li>
-        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  
-</svg>
-</a>
-      </li><li>
-        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-  
-</svg>
-</a>
-      </li><li>
-        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-  <polyline points="22,6 12,13 2,6"/>
-  
-</svg>
-</a>
-      </li></ul>
-  </nav>
-</section>
-
-          <div class='copyright'>
-  <p> &copy; 2012-2019 Yuta Tokoro </p>
+        <div class='container sep-before'><div class='copyright'>
+  <p>tokorom</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
 
-<script src='/assets/js/main.409c76b5.js'></script>
+<script src='/assets/js/main.f18da963.js'></script>
+
 </body>
 
 </html>

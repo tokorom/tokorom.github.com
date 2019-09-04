@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Octopress on TOKOROM BLOG</title>
+    <title>octopress on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/octopress/</link>
-    <description>Recent content in Octopress on TOKOROM BLOG</description>
+    <description>Recent content in octopress on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Sun, 29 Jul 2012 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/octopress/atom.xml" rel="self" type="application/rss+xml" />

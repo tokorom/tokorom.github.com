@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TOKOROM BLOG</title>
     <link>http://www.tokoro.me/</link>
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 01 Apr 2019 15:11:25 +0900</lastBuildDate>
+    <copyright>tokorom</copyright>
+    <lastBuildDate>Wed, 04 Sep 2019 18:09:20 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,28 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇します</title>
+      <link>http://www.tokoro.me/posts/iosdc_2019_pre/</link>
+      <pubDate>Wed, 04 Sep 2019 18:09:20 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/iosdc_2019_pre/</guid>
+      <description>
+        明日、2019年9月5日（木）から開催される iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇予定です。
+スケジュール  2019/09/05（木） 18:40〜  Track B レギュラートーク（30分） Proposal   概要 Proposalからの抜粋です。
+ Segueでできること、できないこと、とにかくSegue（UIStoryboardSegue）について凝縮して紹介します。 通常の使い方からUnwindSegueを使うメリット、Xcode 11から利用できるようになったIBSegueActionまで。 Segueを愛して7年の私が、これまでSegueを避けてきた皆さんにもSegueの魅力を知っていただけるようなトークができればと考えています。
+ 見ていただきたいかた  同じくSegueを愛する同士 Segueを使ってはいるがもう少しどうにかならないかと思っているかた 敢えてSegueを使っていないかた  Segueを愛するかたはもちろんですが、敢えてSegueを使っていないかたにこそ価値のあるセッションになるかもしれません。 なお、このセッションを聞いて絶対Segueを使ってくれ！とは考えていないです。 普段Segueを使っていないかたにとっては、３０分でSegueについてキャッチアップしていただき「SegueのProsはもちろん知ってるけど、やはり敢えて使ってないんだよ」と自信を持って言える状態になっていただければ幸いです。
+具体的な内容  Basic Segue iOS 13 New Features! Advanced Tips  というAgendaの予定です。
+Basic Segue  SegueはViewControllerを開くためだけにあるのではないですよ Segueには大きく４種がありますよ  という基本部分と、
+ Segueを使うPros Segueを使うCons  について簡単に復習をさせていただきます。
+ prepareForSegue  についてもここに含みます。
+iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心にお話します。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iosdc_2019.png</coverImage>
+      
+    </item>
     
     <item>
       <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</title>
@@ -31,7 +53,8 @@ https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
 curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
+ レスポンス例
+[{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]   鍵をロック 上で取得したdevice_idを利用し、
 curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.
       </description>
       
@@ -426,22 +449,6 @@ Alamofire.request(.GET, &amp;#34;https://api.github.com/users&amp;#34;) .validat
       <description>
         さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。
 abbreviation GMT+9 name Asia/Tokyo description Asia/Tokyo (GMT+9) offset 32400 localizedName(_:locale:) | NSLocale | NSTimeZoneNameStyle | 出力結果 |:-|:-|:-| | en_US | Standard | Japan Standard Time | en_US | ShortStandard | GMT+9 | en_US | DaylightSaving | Japan Daylight Time | en_US | ShortDaylightSaving | GMT+9 | en_US | Generic | Japan Standard Time | en_US | ShortGeneric | Japan Time | ja_JP | Standard | 日本標準時 | ja_JP | ShortStandard | JST | ja_JP | DaylightSaving | 日本夏時間 | ja_JP | ShortDaylightSaving | JDT | ja_JP | Generic | 日本標準時 | ja_JP | ShortGeneric | JST
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</title>
-      <link>http://www.tokoro.me/posts/swift-simulator/</link>
-      <pubDate>Sat, 13 Sep 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/swift-simulator/</guid>
-      <description>
-        だいぶ小ネタ。
-コード #if (arch(i386) || arch(x86_64)) &amp;amp;&amp;amp; os(iOS) AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug AFNetworkActivityLogger.sharedLogger().startLogging() #endif UIDeviceを使う方法もあるが、そちらは実際に動いたときに判別することになる。
-こちらだとそもそもiPhone用のアプリからはこのコード自体省かれる形になる。
-意味  arc(i386)  32bitのMac（シミュレータ）用のビルド  arc(x86_64)  64bitのMac（シミュレータ）用のビルド  os(iOS)  ターゲットがMacじゃなくてiOS   オマケ ぼくの手元では、デバッグ実行時に
-#if DEBUG println(&amp;#34;DEBUG&amp;#34;) #endif で DEBUG が出力されない。普通は出力されるはず？？
       </description>
       
     </item>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Xcode on TOKOROM BLOG</title>
+    <title>xcode on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/xcode/</link>
-    <description>Recent content in Xcode on TOKOROM BLOG</description>
+    <description>Recent content in xcode on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Mon, 19 May 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/xcode/atom.xml" rel="self" type="application/rss+xml" />
@@ -93,9 +94,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 // id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-``` objc Wrapper.h @interface Wrapper : NSObject
- (id)objectAtIndexedSubscript:(NSUInteger)index; (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
- (id)objectForKeyedSubscript:(id)key;</description>
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end#import &amp;#34;Wrapper.</description>
     </item>
     
     <item>
