@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Objc on TOKOROM BLOG</title>
+    <title>objc on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/objc/</link>
-    <description>Recent content in Objc on TOKOROM BLOG</description>
+    <description>Recent content in objc on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Mon, 21 Apr 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/objc/atom.xml" rel="self" type="application/rss+xml" />
@@ -263,7 +264,8 @@ CtrlPについては、
 なお、ここでインストールしたDocsetは、たぶん
 ~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc  Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39; で、その他のかたは各自の環境に合わせて読み替えてください。</description>
+ .vimrc
+Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39;  で、その他のかたは各自の環境に合わせて読み替えてください。</description>
     </item>
     
     <item>
@@ -275,14 +277,16 @@ CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃる�
       <description>概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
 というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
 具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
- after/ftplugin/objc.vim  let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+ after/ftplugin/objc.vim
+let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39;  という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
  path .clang_complete clang  ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
 の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
  ios  が今回作成したpluginにより追加できるオプションです。
 clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
 これを入れることで、clang_completeでのコード補完実行の際に、
  &#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する  という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目+αのことを自動でやってくれるようになります。
-インストール方法  pluginをVundleなどでインストール  # Vundleをご利用の場合 Bundle &amp;#39;git://github.</description>
+インストール方法  pluginをVundleなどでインストール
+# Vundleをご利用の場合 Bundle &amp;#39;git://github.</description>
     </item>
     
     <item>
@@ -322,8 +326,10 @@ NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっ
 みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
 クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
 例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
- GameScore.m  #import &amp;#34;GameScore.h&amp;#34;  @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
-ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。</description>
+ GameScore.m
+#import &amp;#34;GameScore.h&amp;#34;  @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; }  この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h
+@interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end  手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。</description>
     </item>
     
     <item>
@@ -342,7 +348,8 @@ clangコマンドでのコード補完を試してみる clangコマンドはXco
 具体的には、
 // clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
 例えば、
- Classes/Controllers/MainViewController.m  #import &amp;#34;MainViewController.h&amp;#34;  @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+ Classes/Controllers/MainViewController.m
+#import &amp;#34;MainViewController.h&amp;#34;  @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end  の [numbers o のところで補完をしたいとして、
 clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m  というコマンドを実行してみます。
 すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
 同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。</description>
@@ -367,12 +374,13 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
       <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/posts/safe-objc/</guid>
-      <description>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？ ```objc Library.hのもしかしたら改善できるかもしれない例 #import &amp;ldquo;OtherLibrary1.h&amp;rdquo; #import &amp;ldquo;OtherLibrary2.h&amp;rdquo;
-@interface Library
-@property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2;
-@property (assign) BOOL flag;
-@end
-Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？ そうしてしまうと、この *Library.h* をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。 実際にこの *Library* を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。 具体的にはこの状態だと、 **OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る** 状態になってしまっています。 以下、これを解消するための変更例です。 &amp;lt;!-- more --&amp;gt; ## クラスの前方宣言を使い、ヘッダーファイルではimportしない ```objc Library.hの改善例 @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  ```objc Library.m #import &amp;ldquo;OtherLibrary1.</description>
+      <description>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
+#import &amp;#34;OtherLibrary1.h&amp;#34; #import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
+以下、これを解消するための変更例です。
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end#import &amp;#34;OtherLibrary1.h&amp;#34; #import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。</description>
     </item>
     
     <item>
@@ -390,9 +398,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 // id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-``` objc Wrapper.h @interface Wrapper : NSObject
- (id)objectAtIndexedSubscript:(NSUInteger)index; (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
- (id)objectForKeyedSubscript:(id)key;</description>
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end#import &amp;#34;Wrapper.</description>
     </item>
     
     <item>

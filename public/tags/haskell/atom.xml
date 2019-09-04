@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Haskell on TOKOROM BLOG</title>
+    <title>haskell on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/haskell/</link>
-    <description>Recent content in Haskell on TOKOROM BLOG</description>
+    <description>Recent content in haskell on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Mon, 04 Nov 2013 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/haskell/atom.xml" rel="self" type="application/rss+xml" />

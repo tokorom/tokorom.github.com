@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Homekit on TOKOROM BLOG</title>
+    <title>homekit on TOKOROM BLOG</title>
     <link>http://www.tokoro.me/tags/homekit/</link>
-    <description>Recent content in Homekit on TOKOROM BLOG</description>
+    <description>Recent content in homekit on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
     <lastBuildDate>Thu, 08 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/homekit/atom.xml" rel="self" type="application/rss+xml" />

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang='ja'>
-
-<head>
+<html lang='ja'><head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
 これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
 Xcode4.4適用前 Xcode4.3までのこのコードを&hellip;
 #pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.'>
+<meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます • Yuta Tokoro'>
 <meta property='og:description' content='もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
@@ -16,34 +15,39 @@ Xcode4.4適用前 Xcode4.3までのこのコードを&hellip;
 #pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.'>
 <meta property='og:url' content='http://www.tokoro.me/posts/objc-new-statements/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='Posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='objc'><meta property='article:tag' content='xcode'><meta property='article:published_time' content='2012-08-12T00:00:00Z'/><meta property='article:modified_time' content='2012-08-12T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='objc'><meta property='article:tag' content='xcode'><meta property='article:published_time' content='2012-08-12T00:00:00Z'/><meta property='article:modified_time' content='2012-08-12T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.34" />
+<meta name="generator" content="Hugo 0.57.2" />
 
   <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/objc-new-statements/'>
   
   
   <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.81519497.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-2451574-4', 'auto');
-ga('send', 'pageview');
+<link rel='stylesheet' href='/assets/css/main.e995827f.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
 
 </head>
+<body class='page type-posts layout-post has-sidebar'>
 
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'></a>
 
-<body class='page type-posts layout-post has-sidebar sidebar-sticky'>
-
-  <div class='site'>
-
-    <a class='screen-reader-text' href='#main-menu'></a>
-
-<div id='sidebar' class='sidebar'>
   <div class='container'><section class='widget widget-about sep-after'>
   <header>
     
@@ -54,7 +58,9 @@ ga('send', 'pageview');
     </div>
     
     <h2 class='title site-title '>
-    TOKOROM BLOG
+      <a href='/'>
+      TOKOROM BLOG
+      </a>
     </h2>
     <div class='desc'>
     所 友太 / Yuta Tokoro
@@ -82,72 +88,82 @@ ga('send', 'pageview');
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/ci' style='font-size:1em'>Ci</a>
+        <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui' style='font-size:1.048780487804878em'>Cui</a>
+        <a href='/tags/cui/' style='font-size:1.048780487804878em'>cui</a>
       </li><li>
-        <a href='/tags/design' style='font-size:1.0731707317073171em'>Design</a>
+        <a href='/tags/design/' style='font-size:1.0731707317073171em'>design</a>
       </li><li>
-        <a href='/tags/haskell' style='font-size:1em'>Haskell</a>
+        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit' style='font-size:1.1219512195121952em'>Homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1219512195121952em'>homekit</a>
       </li><li>
-        <a href='/tags/ios' style='font-size:2em'>Ios</a>
+        <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins' style='font-size:1.0731707317073171em'>Jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0731707317073171em'>jenkins</a>
       </li><li>
-        <a href='/tags/lottie' style='font-size:1em'>Lottie</a>
+        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac' style='font-size:1.0975609756097562em'>Mac</a>
+        <a href='/tags/mac/' style='font-size:1.0975609756097562em'>mac</a>
       </li><li>
-        <a href='/tags/nfc' style='font-size:1.024390243902439em'>Nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.024390243902439em'>nfc</a>
       </li><li>
-        <a href='/tags/objc' style='font-size:1.4634146341463414em'>Objc</a>
+        <a href='/tags/objc/' style='font-size:1.4634146341463414em'>objc</a>
       </li><li>
-        <a href='/tags/octopress' style='font-size:1.048780487804878em'>Octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.048780487804878em'>octopress</a>
       </li><li>
-        <a href='/tags/publish' style='font-size:1em'>Publish</a>
+        <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
-        <a href='/tags/review' style='font-size:1em'>Review</a>
+        <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura' style='font-size:1.048780487804878em'>Sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.048780487804878em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame' style='font-size:1.024390243902439em'>Sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.024390243902439em'>sesame</a>
       </li><li>
-        <a href='/tags/swift' style='font-size:1.170731707317073em'>Swift</a>
+        <a href='/tags/swift/' style='font-size:1.170731707317073em'>swift</a>
       </li><li>
-        <a href='/tags/tdd' style='font-size:1em'>Tdd</a>
+        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos' style='font-size:1.024390243902439em'>Tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.024390243902439em'>tvos</a>
       </li><li>
-        <a href='/tags/ui' style='font-size:1.1219512195121952em'>Ui</a>
+        <a href='/tags/ui/' style='font-size:1.1219512195121952em'>ui</a>
       </li><li>
-        <a href='/tags/uikit' style='font-size:1em'>Uikit</a>
+        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim' style='font-size:1.0975609756097562em'>Vim</a>
+        <a href='/tags/vim/' style='font-size:1.0975609756097562em'>vim</a>
       </li><li>
-        <a href='/tags/wwdc' style='font-size:1em'>Wwdc</a>
+        <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode' style='font-size:1.0975609756097562em'>Xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0975609756097562em'>xcode</a>
       </li></ul>
 </div>
 
 
 </section>
 </div>
-</div>
 
-    <div class='main'>
-
-      <nav id='main-menu' class='main-menu' aria-label=''>
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
   <div class='container'>
     <a class='screen-reader-text' href='#content'></a>
 
-<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
   <span class='screen-reader-text'></span>
-  <span class="hamburger-box">
-    <span class="hamburger-inner"></span>
-  </span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
 </button>
     <ul><li class='item'>
         <a href='/'>Blog</a>
@@ -159,8 +175,9 @@ ga('send', 'pageview');
         <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
       </li></ul>
   </div>
-</nav>
-
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
 
       <header id='header' class='header site-header'>
         <div class='container sep-after'>
@@ -180,8 +197,7 @@ ga('send', 'pageview');
       
 
     </div>
-    
-<div class='entry-meta'>
+    <div class='entry-meta'>
   <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -260,7 +276,7 @@ ga('send', 'pageview');
 - (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">privateMethods2</span>
 {
   self.i <span style="color:#f92672">=</span> [NSNumber numberWithInt:<span style="color:#ae81ff">100</span>];
-  self.c <span style="color:#f92672">=</span> [NSNumber numberWithChar:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;a&#39;</span>];
+  self.c <span style="color:#f92672">=</span> [NSNumber numberWithChar:<span style="color:#e6db74">&#39;a&#39;</span>];
   self.f <span style="color:#f92672">=</span> [NSNumber numberWithFloat:<span style="color:#ae81ff">3.14f</span>];
 }
 
@@ -315,41 +331,33 @@ ga('send', 'pageview');
 <!-- more -->
 
 <h2 id="synthesizeを省略できます">@synthesizeを省略できます</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff 上記コードにおけるdiff" data-lang="diff 上記コードにおけるdiff">-@synthesize i = i_;
+-@synthesize c = c_;
+-@synthesize f = f_;
+-@synthesize array = array_;
+-@synthesize dictionary = dictionary_;</code></pre></div>
+<p>これまでは、<code>@property</code>を定義した場合には、<code>@synthesize</code>で自動でgetter/setterを付加するか、<code>@dynamic</code>で自分で実装するかのどちらかが必須でした。</p>
 
-<p>``` diff 上記コードにおけるdiff
--@synthesize i = i<em>;
--@synthesize c = c</em>;
--@synthesize f = f<em>;
--@synthesize array = array</em>;
--@synthesize dictionary = dictionary_;</p>
+<p>Xcode4.4からは <strong>@synthesizeも@dynamicも書かなかった場合には@synthesizeを付けたのと同じ扱いとなる</strong> ようになりました。</p>
 
-<pre><code>
-これまでは、`@property`を定義した場合には、`@synthesize`で自動でgetter/setterを付加するか、`@dynamic`で自分で実装するかのどちらかが必須でした。
-
-Xcode4.4からは **@synthesizeも@dynamicも書かなかった場合には@synthesizeを付けたのと同じ扱いとなる** ようになりました。
-
-## NSNumber, NSArray, NSDictionary も短いコードで作れます
-
-``` diff 上記コードにおけるdiff
- - (void)privateMethods2
+<h2 id="nsnumber-nsarray-nsdictionary-も短いコードで作れます">NSNumber, NSArray, NSDictionary も短いコードで作れます</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff 上記コードにおけるdiff" data-lang="diff 上記コードにおけるdiff"> - (void)privateMethods2
  {
 -  self.i = [NSNumber numberWithInt:100];
--  self.c = [NSNumber numberWithChar:'a'];
+-  self.c = [NSNumber numberWithChar:&#39;a&#39;];
 -  self.f = [NSNumber numberWithFloat:3.14f];
 +  self.i = @100;
-+  self.c = @'a';
++  self.c = @&#39;a&#39;;
 +  self.f = @3.14f;
  }
  
  - (void)privateMethods3
  {
--  self.array = [NSArray arrayWithObjects:@&quot;1&quot;, @&quot;2&quot;, [NSNumber numberWithBool:YES], nil];
--  self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;val1&quot;, @&quot;key1&quot;, @&quot;val2&quot;, @&quot;key2&quot;, nil];
-+  self.array = @[@&quot;1&quot;, @&quot;2&quot;, @(YES)];
-+  self.dictionary = @{@&quot;key1&quot;: @&quot;val1&quot;, @&quot;key2&quot;: @&quot;val2&quot;};
- }
-</code></pre>
-
+-  self.array = [NSArray arrayWithObjects:@&#34;1&#34;, @&#34;2&#34;, [NSNumber numberWithBool:YES], nil];
+-  self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&#34;val1&#34;, @&#34;key1&#34;, @&#34;val2&#34;, @&#34;key2&#34;, nil];
++  self.array = @[@&#34;1&#34;, @&#34;2&#34;, @(YES)];
++  self.dictionary = @{@&#34;key1&#34;: @&#34;val1&#34;, @&#34;key2&#34;: @&#34;val2&#34;};
+ }</code></pre></div>
 <p>NSStringについては <strong>@&ldquo;hoge&rdquo;</strong> と <strong>@</strong> を文字列の前に付けることでNSStringのインスタンスを作れるというのが周知の事実です。<br />
 Xcode4.4ではさらに、</p>
 
@@ -376,13 +384,9 @@ Xcode4.4ではさらに、</p>
 <p>上記のとおり、Xcode4.4からは <strong>NSNumber, NSArray, NSDictionaryでも @ を使った省略形が使える</strong> ようになりました。</p>
 
 <h2 id="privateメソッドの定義を省略できます">privateメソッドの定義を省略できます</h2>
-
-<p><code>diff 上記コードにおけるdiff
--- (void)privateMethods1;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff 上記コードにおけるdiff" data-lang="diff 上記コードにおけるdiff">-- (void)privateMethods1;
 -- (void)privateMethods2;
--- (void)privateMethods3;
-</code></p>
-
+-- (void)privateMethods3;</code></pre></div>
 <p>これまではprivateメソッドについては無名カテゴリで宣言しておく必要がありました（正確にはそのメソッドを利用するコードの前に宣言しておく必要がありました）。</p>
 
 <p>Xcode4.4からは <strong>あらかじめ宣言されていないメソッドでも同じコード内に実装されていれば使える</strong> ようになりました。</p>
@@ -423,16 +427,13 @@ Xcode4.4ではさらに、</p>
 
   
 <footer class='entry-footer'>
-  <div class='container sep-before'>
-  <div class='tags'>
-  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-</span>
-  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/ios'>Ios</a>, <a class='tag' href='/tags/objc'>Objc</a>, <a class='tag' href='/tags/xcode'>Xcode</a></div>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/objc/'>objc</a>, <a class='tag' href='/tags/xcode/'>xcode</a></div>
 
   </div>
 </footer>
@@ -466,6 +467,7 @@ Xcode4.4ではさらに、</p>
 
 
 
+
 <footer class='entry-works'>
   <div class='container sep-before'>
     <h4>所の執筆・監修した書籍</h4>
@@ -496,56 +498,18 @@ Xcode4.4ではさらに、</p>
       </main>
 
       <footer id='footer' class='footer'>
-        <div class='container sep-before'>
-          <section class='widget widget-social_menu sep-after'><nav aria-label=''>
-    <ul><li>
-        <a href='https://github.com/tokorom' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-  
-</svg>
-</a>
-      </li><li>
-        <a href='https://facebook.com/yuta.tokoro.7' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  
-</svg>
-</a>
-      </li><li>
-        <a href='https://twitter.com/tokorom' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-  
-</svg>
-</a>
-      </li><li>
-        <a href='mailto:tokorom@gmail.com' target='_blank' rel='noopener'>
-          <span class='screen-reader-text'></span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-  <polyline points="22,6 12,13 2,6"/>
-  
-</svg>
-</a>
-      </li></ul>
-  </nav>
-</section>
-
-          <div class='copyright'>
-  <p> &copy; 2012-2019 Yuta Tokoro </p>
+        <div class='container sep-before'><div class='copyright'>
+  <p>tokorom</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><div class='sidebar-overlay'></div><script>window.__public_path__='\/assets\/js\/'</script>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
 
-<script src='/assets/js/main.409c76b5.js'></script>
+<script src='/assets/js/main.f18da963.js'></script>
+
 </body>
 
 </html>

@@ -5,58 +5,14 @@
     <link>http://www.tokoro.me/tags/</link>
     <description>Recent content in Tags on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate>
+    <copyright>tokorom</copyright>
+    <lastBuildDate>Mon, 01 Apr 2019 15:11:25 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Ci</title>
-      <link>http://www.tokoro.me/tags/ci/</link>
-      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/ci/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cui</title>
-      <link>http://www.tokoro.me/tags/cui/</link>
-      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/cui/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Design</title>
-      <link>http://www.tokoro.me/tags/design/</link>
-      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/design/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Haskell</title>
-      <link>http://www.tokoro.me/tags/haskell/</link>
-      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/haskell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Homekit</title>
-      <link>http://www.tokoro.me/tags/homekit/</link>
-      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/homekit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ios</title>
+      <title>ios</title>
       <link>http://www.tokoro.me/tags/ios/</link>
       <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
       
@@ -65,34 +21,7 @@
     </item>
     
     <item>
-      <title>Jenkins</title>
-      <link>http://www.tokoro.me/tags/jenkins/</link>
-      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/jenkins/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Lottie</title>
-      <link>http://www.tokoro.me/tags/lottie/</link>
-      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/lottie/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mac</title>
-      <link>http://www.tokoro.me/tags/mac/</link>
-      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/mac/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nfc</title>
+      <title>nfc</title>
       <link>http://www.tokoro.me/tags/nfc/</link>
       <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
       
@@ -101,52 +30,7 @@
     </item>
     
     <item>
-      <title>Objc</title>
-      <link>http://www.tokoro.me/tags/objc/</link>
-      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/objc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Octopress</title>
-      <link>http://www.tokoro.me/tags/octopress/</link>
-      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/octopress/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Publish</title>
-      <link>http://www.tokoro.me/tags/publish/</link>
-      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/publish/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Review</title>
-      <link>http://www.tokoro.me/tags/review/</link>
-      <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/review/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sakura</title>
-      <link>http://www.tokoro.me/tags/sakura/</link>
-      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/sakura/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sesame</title>
+      <title>sesame</title>
       <link>http://www.tokoro.me/tags/sesame/</link>
       <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
       
@@ -155,52 +39,16 @@
     </item>
     
     <item>
-      <title>Swift</title>
-      <link>http://www.tokoro.me/tags/swift/</link>
-      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      <title>review</title>
+      <link>http://www.tokoro.me/tags/review/</link>
+      <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/tags/swift/</guid>
+      <guid>http://www.tokoro.me/tags/review/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Tdd</title>
-      <link>http://www.tokoro.me/tags/tdd/</link>
-      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/tdd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tvos</title>
-      <link>http://www.tokoro.me/tags/tvos/</link>
-      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/tvos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ui</title>
-      <link>http://www.tokoro.me/tags/ui/</link>
-      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/ui/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Uikit</title>
-      <link>http://www.tokoro.me/tags/uikit/</link>
-      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/uikit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vim</title>
+      <title>vim</title>
       <link>http://www.tokoro.me/tags/vim/</link>
       <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
       
@@ -209,7 +57,52 @@
     </item>
     
     <item>
-      <title>Wwdc</title>
+      <title>lottie</title>
+      <link>http://www.tokoro.me/tags/lottie/</link>
+      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/lottie/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ui</title>
+      <link>http://www.tokoro.me/tags/ui/</link>
+      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/ui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>homekit</title>
+      <link>http://www.tokoro.me/tags/homekit/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/homekit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tvos</title>
+      <link>http://www.tokoro.me/tags/tvos/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/tvos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swift</title>
+      <link>http://www.tokoro.me/tags/swift/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/swift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wwdc</title>
       <link>http://www.tokoro.me/tags/wwdc/</link>
       <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
       
@@ -218,11 +111,119 @@
     </item>
     
     <item>
-      <title>Xcode</title>
+      <title>cui</title>
+      <link>http://www.tokoro.me/tags/cui/</link>
+      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/cui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mac</title>
+      <link>http://www.tokoro.me/tags/mac/</link>
+      <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xcode</title>
       <link>http://www.tokoro.me/tags/xcode/</link>
       <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/tags/xcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>objc</title>
+      <link>http://www.tokoro.me/tags/objc/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/objc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tdd</title>
+      <link>http://www.tokoro.me/tags/tdd/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/tdd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>publish</title>
+      <link>http://www.tokoro.me/tags/publish/</link>
+      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/publish/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haskell</title>
+      <link>http://www.tokoro.me/tags/haskell/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>design</title>
+      <link>http://www.tokoro.me/tags/design/</link>
+      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ci</title>
+      <link>http://www.tokoro.me/tags/ci/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>uikit</title>
+      <link>http://www.tokoro.me/tags/uikit/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/uikit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jenkins</title>
+      <link>http://www.tokoro.me/tags/jenkins/</link>
+      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>octopress</title>
+      <link>http://www.tokoro.me/tags/octopress/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sakura</title>
+      <link>http://www.tokoro.me/tags/sakura/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/sakura/</guid>
       <description></description>
     </item>
     
