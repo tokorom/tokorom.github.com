@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang='ja'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。 これで最後の予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形（この記事）  3〜5についてはiOS13の機能を使った最終形で、もうこれでいいじゃん！となったのでスキップします。（NFCタグを鍵にするパターンはまだ必要なケースあるかも）
+なにができる？ iOS 13でNFCタグをトリガーとしてアプリを叩けるようになった iOS 13（正確にはiOS 13.1）で、純正アプリの ショートカット にオートメーションという機能が追加されました。 このオートメーションのトリガーの１つに、なんと NFCタグ があるのです。
+そして、それをトリガーとしてサードパーティ製アプリの Siri Shortcut を呼び出せます。 つまり、アプリがSiri Shortcutに対応していれば、そのアプリをNFCタグタッチだけで動作させられるようになったということです。 そして、我らがSesameもこれに対応しています。
+１行でまとめると、
+iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる  ということです。
+対応デバイス 正確には、iOS 13であっても Background Tag Reading に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、
+ iPhone XR iPhone XS iPhone XS Max iPhone 11 iPhone 11 Pro iPhone 11 Pro Max  の６機種です。
+実際にやってみよう NFCタグの準備 NFCタグには何も情報を書き込む必要はありません。
+ など適当なNFCタグを買ってきたままそのまま使えます。
+オートメーションの作成 次に、ショートカットアプリでオートメーションを設定します。
+解錠をマイショートカットとして追加 Sesameを普段から使っていれば、ギャラリータブの中に 「xxx」を解錠 というSesame用のショートカットが含まれているはずです。それに適当な音声コマンドをあてて Siriに追加 をしておきます。Siriに追加されたショートカットをオートメーションのアクションとして指定できるようになります。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='NFCタグ で鍵を開けよう（6） iOS13時代の最終形 • Yuta Tokoro'>
+<meta property='og:description' content='この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。 これで最後の予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形（この記事）  3〜5についてはiOS13の機能を使った最終形で、もうこれでいいじゃん！となったのでスキップします。（NFCタグを鍵にするパターンはまだ必要なケースあるかも）
+なにができる？ iOS 13でNFCタグをトリガーとしてアプリを叩けるようになった iOS 13（正確にはiOS 13.1）で、純正アプリの ショートカット にオートメーションという機能が追加されました。 このオートメーションのトリガーの１つに、なんと NFCタグ があるのです。
+そして、それをトリガーとしてサードパーティ製アプリの Siri Shortcut を呼び出せます。 つまり、アプリがSiri Shortcutに対応していれば、そのアプリをNFCタグタッチだけで動作させられるようになったということです。 そして、我らがSesameもこれに対応しています。
+１行でまとめると、
+iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる  ということです。
+対応デバイス 正確には、iOS 13であっても Background Tag Reading に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、
+ iPhone XR iPhone XS iPhone XS Max iPhone 11 iPhone 11 Pro iPhone 11 Pro Max  の６機種です。
+実際にやってみよう NFCタグの準備 NFCタグには何も情報を書き込む必要はありません。
+ など適当なNFCタグを買ってきたままそのまま使えます。
+オートメーションの作成 次に、ショートカットアプリでオートメーションを設定します。
+解錠をマイショートカットとして追加 Sesameを普段から使っていれば、ギャラリータブの中に 「xxx」を解錠 というSesame用のショートカットが含まれているはずです。それに適当な音声コマンドをあてて Siriに追加 をしておきます。Siriに追加されたショートカットをオートメーションのアクションとして指定できるようになります。'>
+<meta property='og:url' content='http://www.tokoro.me/posts/nfc-iphone-6/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='nfc'><meta property='article:tag' content='sesame'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2019-10-30T13:57:46&#43;09:00'/><meta property='article:modified_time' content='2019-10-30T13:57:46&#43;09:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@tokorom'><meta property='twitter:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png'>
+
+<meta name="generator" content="Hugo 0.57.2" />
+
+  <title>NFCタグ で鍵を開けよう（6） iOS13時代の最終形 • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/nfc-iphone-6/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.e995827f.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-posts has-cover has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'></a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      TOKOROM BLOG
+      </a>
+    </h2>
+    <div class='desc'>
+    所 友太 / Yuta Tokoro
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci/' style='font-size:1em'>ci</a>
+      </li><li>
+        <a href='/tags/cui/' style='font-size:1.0476190476190477em'>cui</a>
+      </li><li>
+        <a href='/tags/design/' style='font-size:1.0714285714285714em'>design</a>
+      </li><li>
+        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
+      </li><li>
+        <a href='/tags/homekit/' style='font-size:1.119047619047619em'>homekit</a>
+      </li><li>
+        <a href='/tags/ios/' style='font-size:2em'>ios</a>
+      </li><li>
+        <a href='/tags/jenkins/' style='font-size:1.0714285714285714em'>jenkins</a>
+      </li><li>
+        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
+      </li><li>
+        <a href='/tags/mac/' style='font-size:1.0952380952380953em'>mac</a>
+      </li><li>
+        <a href='/tags/nfc/' style='font-size:1.0476190476190477em'>nfc</a>
+      </li><li>
+        <a href='/tags/objc/' style='font-size:1.4523809523809523em'>objc</a>
+      </li><li>
+        <a href='/tags/octopress/' style='font-size:1.0476190476190477em'>octopress</a>
+      </li><li>
+        <a href='/tags/publish/' style='font-size:1em'>publish</a>
+      </li><li>
+        <a href='/tags/review/' style='font-size:1em'>review</a>
+      </li><li>
+        <a href='/tags/sakura/' style='font-size:1.0476190476190477em'>sakura</a>
+      </li><li>
+        <a href='/tags/sesame/' style='font-size:1.0476190476190477em'>sesame</a>
+      </li><li>
+        <a href='/tags/swift/' style='font-size:1.1666666666666667em'>swift</a>
+      </li><li>
+        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
+      </li><li>
+        <a href='/tags/tvos/' style='font-size:1.0238095238095237em'>tvos</a>
+      </li><li>
+        <a href='/tags/ui/' style='font-size:1.119047619047619em'>ui</a>
+      </li><li>
+        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
+      </li><li>
+        <a href='/tags/vim/' style='font-size:1.0952380952380953em'>vim</a>
+      </li><li>
+        <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
+      </li><li>
+        <a href='/tags/xcode/' style='font-size:1.0952380952380953em'>xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'></span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>NFCタグ で鍵を開けよう（6） iOS13時代の最終形</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2019-10-30T13:57:46&#43;09:00'>2019-10-30</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png'/>
+    
+  </figure>
+</div>
+  
+
+  <div class='container entry-content'>
+  
+
+  
+
+<p>この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。
+これで最後の予定です。</p>
+
+<ol>
+<li><a href="https://www.tokoro.me/posts/nfc-iphone-1/" target="_blank">NFCタグにURIを書き込む</a></li>
+<li><a href="http://www.tokoro.me/posts/nfc-iphone-2/" target="_blank">iPhoneを鍵とし、ドアにNFCタグを設置するパターン</a></li>
+<li><s>iOSアプリを経由してセキュリティレベルをあげる</s></li>
+<li><s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）</li>
+<li><s>より実用的にしていくために</s></li>
+<li>iOS13時代の最終形（この記事）</li>
+</ol>
+
+<p>3〜5についてはiOS13の機能を使った最終形で、もうこれでいいじゃん！となったのでスキップします。（NFCタグを鍵にするパターンはまだ必要なケースあるかも）</p>
+
+<h2 id="なにができる">なにができる？</h2>
+
+<h3 id="ios-13でnfcタグをトリガーとしてアプリを叩けるようになった">iOS 13でNFCタグをトリガーとしてアプリを叩けるようになった</h3>
+
+<p>iOS 13（正確にはiOS 13.1）で、純正アプリの <strong>ショートカット</strong> にオートメーションという機能が追加されました。
+このオートメーションのトリガーの１つに、なんと <strong>NFCタグ</strong> があるのです。</p>
+
+<p>そして、それをトリガーとしてサードパーティ製アプリの <strong>Siri Shortcut</strong> を呼び出せます。
+つまり、アプリがSiri Shortcutに対応していれば、そのアプリをNFCタグタッチだけで動作させられるようになったということです。
+そして、我らがSesameもこれに対応しています。</p>
+
+<p>１行でまとめると、</p>
+
+<pre><code>iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる
+</code></pre>
+
+<p>ということです。</p>
+
+<h3 id="対応デバイス">対応デバイス</h3>
+
+<p>正確には、iOS 13であっても <strong>Background Tag Reading</strong> に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、</p>
+
+<ul>
+<li>iPhone XR</li>
+<li>iPhone XS</li>
+<li>iPhone XS Max</li>
+<li>iPhone 11</li>
+<li>iPhone 11 Pro</li>
+<li>iPhone 11 Pro Max</li>
+</ul>
+
+<p>の６機種です。</p>
+
+<h2 id="実際にやってみよう">実際にやってみよう</h2>
+
+<h3 id="nfcタグの準備">NFCタグの準備</h3>
+
+<p>NFCタグには何も情報を書き込む必要はありません。</p>
+
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00GXSGL5G&linkId=e34d60fe2a09548458913c1b2027e8b0&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+<p>など適当なNFCタグを買ってきたままそのまま使えます。</p>
+
+<h3 id="オートメーションの作成">オートメーションの作成</h3>
+
+<p>次に、ショートカットアプリでオートメーションを設定します。</p>
+
+<h4 id="解錠をマイショートカットとして追加">解錠をマイショートカットとして追加</h4>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sirishortcut1.jpeg" alt="マイショートカット追加" /></p>
+
+<p>Sesameを普段から使っていれば、ギャラリータブの中に <em>「xxx」を解錠</em> というSesame用のショートカットが含まれているはずです。それに適当な音声コマンドをあてて <strong>Siriに追加</strong> をしておきます。Siriに追加されたショートカットをオートメーションのアクションとして指定できるようになります。</p>
+
+<h3 id="オートメーションを追加">オートメーションを追加</h3>
+
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sirishortcut2.jpeg" alt="マイショートカット追加" /></p>
+
+<p>それでは、実際にNFCタグタッチによるオートメーションを追加してみましょう。</p>
+
+<p>まず、オートメーションタブから <strong>個人用オートメーション</strong> を作成開始します。</p>
+
+<p><strong>設定</strong> セクションにある <strong>NFC</strong> を選択し、 <strong>スキャン</strong> でNFCタグをスキャンします。タグの名称は適当で大丈夫です。</p>
+
+<p>その後、 <strong>アクションを追加</strong> で <strong>ショートカット</strong> を検索し、 <strong>ショートカットを実行</strong> を選択します。次の画面で青い <strong>ショートカット</strong> という文字部分をタップすると、マイショートカットの一覧が表示されますので先ほど追加した解錠用のショートカットを選択します。</p>
+
+<p>最後に、 <strong>次へ</strong> を押した後の画面で <strong>実行の前に尋ねる</strong> のスイッチをOffにした状態で <strong>完了</strong> してください。こうすることでNFCタグタッチの後、ユーザー操作なしに解錠が実行できるようになります。</p>
+
+<h2 id="セキュリティ大丈夫">セキュリティ大丈夫？</h2>
+
+<p><a href="http://www.tokoro.me/posts/nfc-iphone-2/" target="_blank">iPhoneを鍵とし、ドアにNFCタグを設置するパターン</a> の段階では、NFCタグにURLを書き込み、そのURLを叩くことで解錠APIを実行していました。そのため、NFCタグをタッチすれば、誰のどのiPhoneでも解錠できてしまうという大変危険な状態でした。</p>
+
+<p>一方、今回のパターンでは、NFCタグをタッチすると自分のiPhoneの中にインストールしてあるSesameが動いて解錠をしてくれます。つまり、解錠用のNFCタグを玄関の外側に貼り付けたままでも、自分以外のiPhoneで解錠をすることは不可能です。</p>
+
+<h2 id="ちょっとした注意点とテクニック">ちょっとした注意点とテクニック</h2>
+
+<p>これで、玄関ドアに貼り付けたNFCタグをiPhoneでタッチするだけで解錠ができるようになりました。以下、これを実用するにあたってのちょっとした注意点とテクニックを。</p>
+
+<h3 id="金属に貼り付けたnfcタグは読み取れない">金属に貼り付けたNFCタグは読み取れない</h3>
+
+<p>玄関ドアの材質によりますが、金属に貼り付けたNFCタグはiPhoneで読み取ることができません。その場合、他の場所にNFCタグを貼るか、他の材質のものを介在させる必要があります。</p>
+
+<h3 id="nfcタグの貼り付け場所はiphoneは自分の肩くらいの高さがよい">NFCタグの貼り付け場所はiPhoneは自分の肩くらいの高さがよい？</h3>
+
+<p>NFCタグの読み取りはiPhoneをロックした状態からでも可能ですが、 <strong>iPhoneの画面が消灯している状態では発火しない</strong> という条件があります。</p>
+
+<p>しかしiPhoneのデフォルト設定ではiPhoneを持ち上げて少し傾けると自動で点灯するようになっています。つまり、玄関ドアの自分の肩くらいの高さにNFCタグがあると、そこにiPhoneでタッチしようとする動作の途中で画面が自動的に点灯します。こうすることで、実質iPhoneを無操作でタッチするだけで解錠することができるようになります。</p>
+
+<h2 id="ショートカット便利すぎ">ショートカット便利すぎ</h2>
+
+<p>ショートカットアプリを使ったオートメーションの良いところの１つとして、利用者ごとにオートメーションをカスタマイズできるというのがあります。</p>
+
+<p>NFCタグをタッチしたあと、解錠だけでなく出勤記録を自動で付けるとか、ロボットにおかえり！を言わせるとか作り込みさえすればなんでも一緒にできそうです。そのあたりはお好みで。</p>
+
+<p>ショートカットのこれからが楽しみです！</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/nfc-iphone-6/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fnfc-iphone-6%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/nfc/'>nfc</a>, <a class='tag' href='/tags/sesame/'>sesame</a>, <a class='tag' href='/tags/ios/'>ios</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/iosdc_2019_pre/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇します</a>
+    </div></div>
+</nav>
+
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+    <h4>所の執筆・監修した書籍</h4>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project007_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
+    <li style="font-size:90%; list-style:none;"><span>著者：</span>
+    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
+    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
+    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
+
+  </div>
+
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>tokorom</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.f18da963.js'></script>
+
+</body>
+
+</html>
+

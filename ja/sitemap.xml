@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,23 +18,53 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/posts/iosdc_2019_pre/</loc>
-    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <loc>http://www.tokoro.me/tags/ios/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/nfc/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/nfc-iphone-6/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/sesame/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/tags/"
+                />
   </url>
   
   <url>
     <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -48,38 +78,13 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/nfc/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+    <loc>http://www.tokoro.me/posts/iosdc_2019_pre/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/nfc-iphone-2/</loc>
     <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/sesame/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/tags/"
-                />
   </url>
   
   <url>
