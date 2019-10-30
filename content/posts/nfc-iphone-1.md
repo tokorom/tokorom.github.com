@@ -12,9 +12,10 @@ cover: "https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/imag
 
 1. NFCタグにURIを書き込む（この記事）
 2. [iPhoneを鍵とし、ドアにNFCタグを設置するパターン](https://www.tokoro.me/posts/nfc-iphone-2/)
-3. iOSアプリを経由してセキュリティレベルをあげる（まだ書いてません）
-4. NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてません）
-5. より実用的にしていくために（まだ書いてません）
+3. <s>iOSアプリを経由してセキュリティレベルをあげる</s>
+4. <s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）
+5. <s>より実用的にしていくために</s>
+6. [iOS13時代の最終形](https://www.tokoro.me/posts/nfc-iphone-6/)
 
 ## 導入
 
@@ -156,9 +157,10 @@ iPhone XR/XSであればBackground Tag Readingをサポートしますのでア�
 
 1. NFCタグにURIを書き込む（この記事）
 2. [iPhoneを鍵とし、ドアにNFCタグを設置するパターン](https://www.tokoro.me/posts/nfc-iphone-2/)
-3. iOSアプリを経由してセキュリティレベルをあげる（まだ書いてません）
-4. NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてません）
-5. より実用的にしていくために（まだ書いてません）
+3. <s>iOSアプリを経由してセキュリティレベルをあげる</s>
+4. <s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）
+5. <s>より実用的にしていくために</s>
+6. [iOS13時代の最終形](https://www.tokoro.me/posts/nfc-iphone-6/)
 
 ## 参考にさせていただいた記事
 
