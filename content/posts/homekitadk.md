@@ -32,7 +32,9 @@ https://github.com/apple/HomeKitADK
 Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL
 ```
 
-を実行したらなにやら動きます。
+を実行したらなにやら動きます[^environment]。
+
+[^environment]: Darwin-x86_64-apple-darwin19.0.0部分は環境に合わせて変更してください
 
 こちらですが、
 
