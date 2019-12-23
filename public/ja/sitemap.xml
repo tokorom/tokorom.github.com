@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,33 +18,28 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/tags/homekit/</loc>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/homekitadk/</loc>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/nfc/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/posts/nfc-iphone-6/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/sesame/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -59,12 +54,12 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -75,6 +70,21 @@
                 hreflang="ja"
                 href="http://www.tokoro.me/"
                 />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/nfc/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/nfc-iphone-6/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/sesame/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
   </url>
   
   <url>
@@ -124,11 +134,6 @@
   
   <url>
     <loc>http://www.tokoro.me/posts/homekit_delongi_heater/</loc>
-    <lastmod>2018-02-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/homekit/</loc>
     <lastmod>2018-02-08T00:00:00+00:00</lastmod>
   </url>
   
