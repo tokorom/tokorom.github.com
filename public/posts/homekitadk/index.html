@@ -10,7 +10,7 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
 こちらですが、
  まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
@@ -37,7 +37,7 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
 こちらですが、
  まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
@@ -302,7 +302,7 @@ if (!doNotTrack) {
 <pre><code>Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL
 </code></pre>
 
-<p>を実行したらなにやら動きます。</p>
+<p>を実行したらなにやら動きます<sup class="footnote-ref" id="fnref:environment"><a href="#fn:environment">1</a></sup>。</p>
 
 <p>こちらですが、</p>
 
@@ -388,7 +388,7 @@ task.resume()
 semaphore.wait()</code></pre></div>
 <h2 id="実験成功">実験成功！</h2>
 
-<p>これをビルドし直して<sup class="footnote-ref" id="fnref:rebuild"><a href="#fn:rebuild">1</a></sup>Homeアプリに追加して、点灯命令を出したら、</p>
+<p>これをビルドし直して<sup class="footnote-ref" id="fnref:rebuild"><a href="#fn:rebuild">2</a></sup>Homeアプリに追加して、点灯命令を出したら、</p>
 
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/incoming_webhook.png" alt="foo" /></p>
 
@@ -400,6 +400,8 @@ semaphore.wait()</code></pre></div>
 <hr />
 
 <ol>
+<li id="fn:environment">Darwin-x86_64-apple-darwin19.0.0部分は環境に合わせて変更してください
+ <a class="footnote-return" href="#fnref:environment"><sup>[return]</sup></a></li>
 <li id="fn:rebuild">Shellスクリプト部分をいじるだけならAccessory自体のリビルドの必要はありません
  <a class="footnote-return" href="#fnref:rebuild"><sup>[return]</sup></a></li>
 </ol>

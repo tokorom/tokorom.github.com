@@ -25,7 +25,7 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
 こちらですが、
  まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
