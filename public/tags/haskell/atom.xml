@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>haskell on TOKOROM BLOG</title>
@@ -29,8 +29,8 @@ map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果と
 map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd]  + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd]  + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
     </item>
     
   </channel>

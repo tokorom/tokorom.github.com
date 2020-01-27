@@ -11,7 +11,8 @@ AppleTVを利用しているということは当然テレビを利用してい�
 自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
 テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
    REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
-UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。'>
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='テレビのリモコンのことも忘れないで！ • Yuta Tokoro'>
@@ -24,12 +25,13 @@ AppleTVを利用しているということは当然テレビを利用してい�
 自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
 テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
    REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
-UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。'>
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/tvos_advent_calendar_2/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='tvos'><meta property='article:tag' content='ui'><meta property='article:published_time' content='2017-12-24T00:00:00Z'/><meta property='article:modified_time' content='2017-12-24T00:00:00Z'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@tokorom'><meta property='twitter:image' content='https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>テレビのリモコンのことも忘れないで！ • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/tvos_advent_calendar_2/'>
@@ -102,51 +104,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -250,48 +254,28 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="appletvで使えるリモコンって">AppleTVで使えるリモコンって？</h2>
-
-<h3 id="siriリモート">Siriリモート</h3>
-
+  <h2 id="appletv">AppleTVで使えるリモコンって？</h2>
+<h3 id="siri">Siriリモート</h3>
 <p>tvOS/AppleTVのリモコンといえばSiriリモートですよね。
 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。</p>
-
-<h3 id="テレビのリモコン">テレビのリモコン</h3>
-
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/7883/dfe71005-eb5e-bc17-b112-1e0ffdd150ad.jpeg" height=200></p>
-
+<h3 id="heading">テレビのリモコン</h3>
+<!-- raw HTML omitted -->
 <p>そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！</p>
-
 <p>AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。
 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。</p>
-
-<h3 id="ゲームコントローラ-ゲームパッド">ゲームコントローラ/ゲームパッド</h3>
-
+<h3 id="heading-1">ゲームコントローラ/ゲームパッド</h3>
 <p>Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。</p>
-
-<h2 id="テレビのリモコンでどこまで操作できる">テレビのリモコンでどこまで操作できる？</h2>
-
-<h3 id="apple純正のアプリ">Apple純正のアプリ</h3>
-
+<h2 id="heading-2">テレビのリモコンでどこまで操作できる？</h2>
+<h3 id="apple">Apple純正のアプリ</h3>
 <p>全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。</p>
-
-<h3 id="サードパーティのアプリ">サードパーティのアプリ</h3>
-
+<h3 id="heading-3">サードパーティのアプリ</h3>
 <p>ゲームアプリ以外なら操作できることが多いようです。
 ただしTouchサーフェス前提で組まれているアプリは操作不能です。</p>
-
-<h3 id="自分が開発するアプリはどうすべき">自分が開発するアプリはどうすべき？</h3>
-
+<h3 id="heading-4">自分が開発するアプリはどうすべき？</h3>
 <p>タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。
 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。</p>
-
-<h2 id="テレビのリモコンのボタンに対応するuipresstype">テレビのリモコンのボタンに対応するUIPressType</h2>
-
+<h2 id="uipresstype">テレビのリモコンのボタンに対応するUIPressType</h2>
 <p>うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。</p>
-
 <table>
 <thead>
 <tr>
@@ -299,81 +283,57 @@ if (!doNotTrack) {
 <th>UIPressType</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>決定</td>
 <td>.select</td>
 </tr>
-
 <tr>
 <td>戻る</td>
 <td>.menu</td>
 </tr>
-
 <tr>
 <td>再生</td>
 <td>.playPause</td>
 </tr>
-
 <tr>
 <td>停止</td>
 <td>-</td>
 </tr>
-
 <tr>
 <td>上</td>
 <td>.upArrow</td>
 </tr>
-
 <tr>
 <td>下</td>
 <td>.downArrow</td>
 </tr>
-
 <tr>
 <td>左</td>
 <td>.leftArrow</td>
 </tr>
-
 <tr>
 <td>右</td>
 <td>.rightArrow</td>
 </tr>
 </tbody>
 </table>
-
-<h2 id="uikitの各コントロールの挙動">UIKitの各コントロールの挙動</h2>
-
-<h3 id="フォーカス移動">フォーカス移動</h3>
-
+<h2 id="uikit">UIKitの各コントロールの挙動</h2>
+<h3 id="heading-5">フォーカス移動</h3>
 <p>テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。</p>
-
-<h3 id="uitableview-uicollectionview">UITableView/UICollectionView</h3>
-
+<h3 id="uitableviewuicollectionview">UITableView/UICollectionView</h3>
 <p>UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。
 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。</p>
-
 <h3 id="uipageviewcontroller">UIPageViewController</h3>
-
 <p>これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。</p>
-
 <p>ただし条件があり、transitionStyleプロパティに<code>UIPageViewControllerTransitionStyle.scroll</code>を設定している場合のみ操作可能です。<code>.pageCurl</code>だと（デフォルトでは）操作不能でした。</p>
-
 <p><code>.scroll</code>の場合には、<code>navigationOrientation</code>プロパティが<code>.horizontal</code>なら左右ボタンで、<code>.vertical</code>なら上下ボタンでそれぞれページ移動が可能です。</p>
-
 <h3 id="uiscrollview">UIScrollView</h3>
-
 <p>UIScrollViewも特に意識しないでも操作可能になっています。</p>
-
 <p>上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。</p>
-
 <h3 id="uitextview">UITextView</h3>
-
 <p>UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。</p>
-
-<h2 id="テレビのリモコンで操作できない画面をなんとかする">テレビのリモコンで操作できない画面をなんとかする</h2>
-
+<h2 id="heading-6">テレビのリモコンで操作できない画面をなんとかする</h2>
 <p>一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、<code>UITapGestureRecognizer</code>を使って対処するのが簡単そうです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> leftTap = UITapGestureRecognizer(target: <span style="color:#66d9ef">self</span>, action: <span style="color:#66d9ef">#selector</span>(<span style="color:#66d9ef">self</span>.leftArrowDidPress(sender:)))
 leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)]
@@ -383,13 +343,10 @@ view.addGestureRecognizer(leftTap)
 rightTap.allowedPressTypes = [NSNumber(value: UIPressType.rightArrow.rawValue)]
 view.addGestureRecognizer(rightTap)
 
-<span style="color:#75715e">// func leftArrowDidPress(sender:) と func rightArrowDidPress(sender:) にそれぞれ左右への移動のための実装をする</span></code></pre></div>
-<p>単にUIGestureRecognizerの<code>allowedPressTypes</code>プロパティでハンドリングしたいUIPressTypeを指定してそれに応じたコードを書くだけです！</p>
-
+<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">f</span><span style="color:#75715e">u</span><span style="color:#75715e">n</span><span style="color:#75715e">c</span><span style="color:#75715e"> </span><span style="color:#75715e">l</span><span style="color:#75715e">e</span><span style="color:#75715e">f</span><span style="color:#75715e">t</span><span style="color:#75715e">A</span><span style="color:#75715e">r</span><span style="color:#75715e">r</span><span style="color:#75715e">o</span><span style="color:#75715e">w</span><span style="color:#75715e">D</span><span style="color:#75715e">i</span><span style="color:#75715e">d</span><span style="color:#75715e">P</span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span><span style="color:#75715e">s</span><span style="color:#75715e">(</span><span style="color:#75715e">s</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e">:</span><span style="color:#75715e">)</span><span style="color:#75715e"> </span><span style="color:#75715e">と</span><span style="color:#75715e"> </span><span style="color:#75715e">f</span><span style="color:#75715e">u</span><span style="color:#75715e">n</span><span style="color:#75715e">c</span><span style="color:#75715e"> </span><span style="color:#75715e">r</span><span style="color:#75715e">i</span><span style="color:#75715e">g</span><span style="color:#75715e">h</span><span style="color:#75715e">t</span><span style="color:#75715e">A</span><span style="color:#75715e">r</span><span style="color:#75715e">r</span><span style="color:#75715e">o</span><span style="color:#75715e">w</span><span style="color:#75715e">D</span><span style="color:#75715e">i</span><span style="color:#75715e">d</span><span style="color:#75715e">P</span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span><span style="color:#75715e">s</span><span style="color:#75715e">(</span><span style="color:#75715e">s</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e">:</span><span style="color:#75715e">)</span><span style="color:#75715e"> </span><span style="color:#75715e">に</span><span style="color:#75715e">そ</span><span style="color:#75715e">れ</span><span style="color:#75715e">ぞ</span><span style="color:#75715e">れ</span><span style="color:#75715e">左</span><span style="color:#75715e">右</span><span style="color:#75715e">へ</span><span style="color:#75715e">の</span><span style="color:#75715e">移</span><span style="color:#75715e">動</span><span style="color:#75715e">の</span><span style="color:#75715e">た</span><span style="color:#75715e">め</span><span style="color:#75715e">の</span><span style="color:#75715e">実</span><span style="color:#75715e">装</span><span style="color:#75715e">を</span><span style="color:#75715e">す</span><span style="color:#75715e">る</span>
+</code></pre></div><p>単にUIGestureRecognizerの<code>allowedPressTypes</code>プロパティでハンドリングしたいUIPressTypeを指定してそれに応じたコードを書くだけです！</p>
 <p>※ブログ用にコードで例示しましたが、普段UITapGestureRegognizerの追加はInterface Builderでやってます</p>
-
-<h2 id="まとめ">まとめ</h2>
-
+<h2 id="heading-7">まとめ</h2>
 <ul>
 <li>シンプルに作ればtvOSアプリはテレビのリモコンで操作できるようになっている</li>
 <li>利用できるボタンは決定、戻る、再生、上下左右</li>

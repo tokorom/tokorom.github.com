@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,28 +18,33 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/tags/homekit/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/posts/homekitadk/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/swift/</loc>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/swiftui/</loc>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/swiftui-hackathon/</loc>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -54,12 +59,12 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -70,6 +75,16 @@
                 hreflang="ja"
                 href="http://www.tokoro.me/"
                 />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/homekit/</loc>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/homekitadk/</loc>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
   </url>
   
   <url>
@@ -179,11 +194,6 @@
   
   <url>
     <loc>http://www.tokoro.me/posts/user_notification/</loc>
-    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/swift/</loc>
     <lastmod>2016-06-28T00:00:00+00:00</lastmod>
   </url>
   

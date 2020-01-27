@@ -3,7 +3,7 @@
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
-一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。  と記載されています。
+一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
 その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
 それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
 警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
@@ -19,7 +19,7 @@ Default Black Native サンプルコード UIAlertViewを使うときのコー�
 
 <meta property='og:title' content='UIAlertViewよりもおとなしいメッセージダイアログを利用する • Yuta Tokoro'>
 <meta property='og:description' content='UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
-一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。  と記載されています。
+一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
 その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
 それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
 警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
@@ -35,7 +35,7 @@ Default Black Native サンプルコード UIAlertViewを使うときのコー�
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='objc'><meta property='article:published_time' content='2013-05-27T00:00:00Z'/><meta property='article:modified_time' content='2013-05-27T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>UIAlertViewよりもおとなしいメッセージダイアログを利用する • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/ssgentlealertview/'>
@@ -108,51 +108,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -251,83 +253,55 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="uialertviewは警告目的のダイアログ">UIAlertViewは警告目的のダイアログ</h2>
-
+  <h2 id="uialertview">UIAlertViewは警告目的のダイアログ</h2>
 <p>そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、</p>
-
 <pre><code>一般にアラートは、次のような場合には不要です。
 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。
   代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。
-</code></pre>
-
-<p>と記載されています。</p>
-
-<p>その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。<br />
+</code></pre><p>と記載されています。</p>
+<p>その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。<br>
 それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。</p>
-
 <p>警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。</p>
-
-<h2 id="警告目的ではない普通のメッセージダイアログ">警告目的ではない普通のメッセージダイアログ</h2>
-
+<h2 id="heading">警告目的ではない普通のメッセージダイアログ</h2>
 <p>それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。</p>
-
-<p><a href="https://github.com/tokorom/SSGentleAlertView" target="_blank">https://github.com/tokorom/SSGentleAlertView</a></p>
-
+<p><a href="https://github.com/tokorom/SSGentleAlertView">https://github.com/tokorom/SSGentleAlertView</a></p>
 <p>このSSGentleAlertViewは、</p>
-
 <ul>
 <li>UIAlertViewと同じコードで利用できる</li>
 <li>UIAlertViewとは違い、外観を変更できる</li>
 <li>デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる</li>
 </ul>
-
 <p>という３点に留意して作っています。</p>
-
-<!-- more -->
-
-<p>画像パーツやカラーリングなどはUIデザイナの <a href="https://twitter.com/limonomori" target="_blank">Atsushi Morino</a> さんに作ってもらってるのでちゃんとしてます。</p>
-
-<h2 id="外観">外観</h2>
-
+<!-- raw HTML omitted -->
+<p>画像パーツやカラーリングなどはUIデザイナの <a href="https://twitter.com/limonomori">Atsushi Morino</a> さんに作ってもらってるのでちゃんとしてます。</p>
+<h2 id="heading-1">外観</h2>
 <p>自分でカスタマイズしない場合でも、次の3種のスタイルが選べます。</p>
-
 <h3 id="default">Default</h3>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewDefault.png" alt="SSGentleAlertViewDefault" /></p>
-
+<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewDefault.png" alt="SSGentleAlertViewDefault"></p>
 <h3 id="black">Black</h3>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewBlack.png" alt="SSGentleAlertViewBlack" /></p>
-
+<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewBlack.png" alt="SSGentleAlertViewBlack"></p>
 <h3 id="native">Native</h3>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewNative.png" alt="SSGentleAlertViewNative" /></p>
-
-<h2 id="サンプルコード">サンプルコード</h2>
-
+<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewNative.png" alt="SSGentleAlertViewNative"></p>
+<h2 id="heading-2">サンプルコード</h2>
 <p>UIAlertViewを使うときのコードのUIAlertViewの部分をSSGentleAlertViewに変更するだけです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">// #import &#34;SSGentleAlertView.h&#34;
 </span><span style="color:#75715e"></span>
 SSGentleAlertView<span style="color:#f92672">*</span> alert <span style="color:#f92672">=</span> [SSGentleAlertView new];
 alert.delegate <span style="color:#f92672">=</span> self;
-alert.title <span style="color:#f92672">=</span> <span style="color:#e6db74">@&#34;SSGentleAlertView&#34;</span>;
-alert.message <span style="color:#f92672">=</span> <span style="color:#e6db74">@&#34;This is GentleAlertView!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">UIAlertView is too strong to use for ordinary messages.&#34;</span>;
-[alert addButtonWithTitle:<span style="color:#e6db74">@&#34;Cancel&#34;</span>];
-[alert addButtonWithTitle:<span style="color:#e6db74">@&#34;OK&#34;</span>];
+alert.title <span style="color:#f92672">=</span> <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">SSGentleAlertView</span><span style="color:#e6db74">&#34;</span>;
+alert.message <span style="color:#f92672">=</span> <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">This is GentleAlertView!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">UIAlertView is too strong to use for ordinary messages.</span><span style="color:#e6db74">&#34;</span>;
+[alert addButtonWithTitle:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">Cancel</span><span style="color:#e6db74">&#34;</span>];
+[alert addButtonWithTitle:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">OK</span><span style="color:#e6db74">&#34;</span>];
 alert.cancelButtonIndex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-[alert show];</code></pre></div>
-<p>なお、インスタンスを作る際に<code>[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack]</code> のようにすることで、３種のスタイルを選択できます。</p>
-
-<h2 id="外観の変更">外観の変更</h2>
-
+[alert show];
+</code></pre></div><p>なお、インスタンスを作る際に<code>[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack]</code> のようにすることで、３種のスタイルを選択できます。</p>
+<h2 id="heading-3">外観の変更</h2>
 <p>また、外観を変更することも簡単にできます。例えば、</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">// #import &#34;SSGentleAlertView.h&#34;
-</span><span style="color:#75715e">// #import &#34;SSDialogView.h&#34;
+</span><span style="color:#75715e"></span><span style="color:#75715e">// #import &#34;SSDialogView.h&#34;
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// 背景画像を別のものに差し替え
-</span><span style="color:#75715e"></span>alert.backgroundImageView.image <span style="color:#f92672">=</span> [UIImage imageNamed:<span style="color:#e6db74">@&#34;dialog_bg&#34;</span>];
+</span><span style="color:#75715e"></span>alert.backgroundImageView.image <span style="color:#f92672">=</span> [UIImage imageNamed:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">dialog_bg</span><span style="color:#e6db74">&#34;</span>];
 <span style="color:#75715e">// ダイアログ部分の画像はなしにする
 </span><span style="color:#75715e"></span>alert.dialogImageView.image <span style="color:#f92672">=</span> nil;
 
@@ -339,38 +313,25 @@ alert.messageLabel.shadowColor <span style="color:#f92672">=</span> UIColor.clea
 
 <span style="color:#75715e">// ボタンの背景画像とフォント色を変更
 </span><span style="color:#75715e"></span>UIButton<span style="color:#f92672">*</span> button <span style="color:#f92672">=</span> [alert buttonBase];
-[button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;dialog_btn_normal&#34;</span>]] forState:UIControlStateNormal];
-[button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;dialog_btn_pressed&#34;</span>]] forState:UIControlStateHighlighted];
+[button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">dialog_btn_normal</span><span style="color:#e6db74">&#34;</span>]] forState:UIControlStateNormal];
+[button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">dialog_btn_pressed</span><span style="color:#e6db74">&#34;</span>]] forState:UIControlStateHighlighted];
 [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
 [button setTitleColor:UIColor.whiteColor forState:UIControlStateHighlighted];
 [alert setButtonBase:button];
-[alert setDefaultButtonBase:button];</code></pre></div>
-<p>のようにすると、いつものUIAlertViewとは全く別もののダイアログに変更することも可能です。</p>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewCustomize.png" alt="SSGentleAlertViewCustomize" /></p>
-
-<h2 id="インストール方法">インストール方法</h2>
-
-<h3 id="cocoapodsを使う場合">CocoaPodsを使う場合</h3>
-
+[alert setDefaultButtonBase:button];
+</code></pre></div><p>のようにすると、いつものUIAlertViewとは全く別もののダイアログに変更することも可能です。</p>
+<p><img src="http://dl.dropbox.com/u/10351676/images/SSGentleAlertViewCustomize.png" alt="SSGentleAlertViewCustomize"></p>
+<h2 id="heading-4">インストール方法</h2>
+<h3 id="cocoapods">CocoaPodsを使う場合</h3>
 <pre><code>// Podfile
 pod 'SSGentleAlertView'
-</code></pre>
-
-<p>Podファイルに上記を追記して</p>
-
+</code></pre><p>Podファイルに上記を追記して</p>
 <pre><code>pod install
-</code></pre>
-
-<p>を実行するだけです。</p>
-
-<h3 id="gitやその他の方法でインストールする場合">Gitやその他の方法でインストールする場合</h3>
-
+</code></pre><p>を実行するだけです。</p>
+<h3 id="git">Gitやその他の方法でインストールする場合</h3>
 <pre><code>git clone git://github.com/tokorom/SSGentleAlertView.git
 // git submodule add git://github.com/tokorom/SSGentleAlertView.git Externals/SSGentleAlertView
-</code></pre>
-
-<p>や、その他の方法でSSGentleAlertViewをダウンロードしてください。
+</code></pre><p>や、その他の方法でSSGentleAlertViewをダウンロードしてください。
 ダウンロードしたら、SSGentleAlertViewというサブディレクトリをXcodeのプロジェクトに追加してください。</p>
 
 </div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>uikit on TOKOROM BLOG</title>
@@ -34,8 +34,9 @@ git clone git://github.com/davepeck/iOS-artwork.git などでダウンロード�
 brew install pil インストールし終わったら
 mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
 Traceback (most recent call last): File &amp;#34;./iOS-artwork.py&amp;#34;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
-export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages  としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
-気を取り直して、</description>
+export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
+気を取り直して、
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.</description>
     </item>
     
   </channel>

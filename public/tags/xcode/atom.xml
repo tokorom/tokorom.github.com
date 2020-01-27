@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>xcode on TOKOROM BLOG</title>
@@ -21,13 +21,13 @@
 必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
 経緯 これまで、
  デバッグ用やArchive用のアプリのバージョンにだけgitのcommit番号とか最終更新日付を付ける  といったことをする場合に、Run ScriptでInfo.plistを（PlistBuddyなどで）編集してやるのが常だったと思うのですが、その場合、
- Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;  変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒   といった課題があったりしました（少なくともぼくの手元では）。
+ Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;   変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒    といった課題があったりしました（少なくともぼくの手元では）。
 そういったことを踏まえて、
 potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
- その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
-@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
-&amp;mdash; kishikawa katsumi (@k_katsumi) May 15, 2014 
-@k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて</description>
+その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
+Preprocess Info.plist file ぼくは今回初めて知ったのですが、Builde Settings -&amp;gt; Packaging の中に Preprocess Info.plist file という設定項目があり、これにYESを設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
+そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。
+${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYESにした場合、通常のInfo.plistと別に ${TEMP_DIR}/Preprocessed-Info.plist という名前で別のInfo.plistが作成されるようになります。あとは、Run ScriptでそのPreprocessed-Info.plistのほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。</description>
     </item>
     
     <item>
@@ -43,18 +43,20 @@ potatotips 第７回 で「agvtoolで超かっこよくバージョニングで�
  Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
 どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
-@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
-&amp;mdash; azu (@azu_re) February 4, 2014 
 mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
-$ ./build.py  すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B  なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
-2014/02/09 追記</description>
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと&amp;hellip;と日本語まわりでfailedになったので加えました。2014/02/09 追記
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
+次に、.gitattributes で
+*.pbxproj merge=mergepbx と pbxprojのときはマージに mergepbx を使うように設定を追加という手順です。
+mergepbxの結果 ストーリーとしては、
+ test1ブランチで 適当なファイルを１つ追加してコミット test2ブランチで 別の適当なファイルを１つ追加してコミット test1ブランチでgit merge test2  として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、&amp;hellip;と残念ながらうまく自動マージされませんでした。。。どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。ただ、READMEの次の項に、 *.</description>
     </item>
     
     <item>
@@ -76,7 +78,7 @@ CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表さ�
  ２、３回のクリックで新しいbotを作ることができる ネットワーク上のどのMacでも直ちにbotをスタートできる 別のMacでCIを回している間も、自分のMacでビルド結果やテストの結果を確認できる  とのこと。
 Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
 その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
-参照元 What&amp;rsquo;s New in Xcode 5</description>
+参照元 What&#39;s New in Xcode 5</description>
     </item>
     
     <item>
@@ -94,7 +96,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 // id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end#import &amp;#34;Wrapper.</description>
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.</description>
     </item>
     
     <item>
@@ -106,7 +108,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
       <description>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
 これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
 Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
-#pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.</description>
+#pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.</description>
     </item>
     
   </channel>
