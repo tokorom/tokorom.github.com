@@ -19,7 +19,7 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='homekit'><meta property='article:published_time' content='2017-11-22T00:00:00Z'/><meta property='article:modified_time' content='2017-11-22T00:00:00Z'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@tokorom'><meta property='twitter:image' content='https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/homekit_hue_white_lamp/'>
@@ -92,51 +92,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -240,12 +242,8 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<p><a target="_blank" href="https://www.amazon.co.jp/gp/product/B01MSITPT1/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01MSITPT1&linkCode=as2&tag=tokorom-22&linkId=a335872d8b17c6b4c0ddb7cb4ce3c4c1">[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01MSITPT1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
-
-<h2 id="主なサービス">主なサービス</h2>
-
+  <p><!-- raw HTML omitted -->[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="heading">主なサービス</h2>
 <table>
 <thead>
 <tr>
@@ -253,7 +251,6 @@ if (!doNotTrack) {
 <th>説明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>Lightbulb</code></td>
@@ -261,9 +258,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-
-<h2 id="主なキャラクタ">主なキャラクタ</h2>
-
+<h2 id="heading-1">主なキャラクタ</h2>
 <table>
 <thead>
 <tr>
@@ -273,7 +268,6 @@ if (!doNotTrack) {
 <th>書き込み</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>PowerState</code></td>
@@ -281,14 +275,12 @@ if (!doNotTrack) {
 <td>bool</td>
 <td>可</td>
 </tr>
-
 <tr>
 <td><code>ColorTemperature</code></td>
 <td>色温度</td>
 <td>int</td>
 <td>可</td>
 </tr>
-
 <tr>
 <td><code>Brightness</code></td>
 <td>明るさ</td>
@@ -297,20 +289,13 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-
-<h2 id="概要">概要</h2>
-
+<h2 id="heading-2">概要</h2>
 <p>スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。
 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。</p>
-
 <p>カラー版では<code>Hue</code>、<code>Saturation</code>、<code>Brightness</code>の３つのキャラクタを変更することでランプの色を変えますが、この非カラー版では<code>ColorTemperature</code>という１つのキャラクタを変更することで色味を調整します。</p>
-
 <p>なお<code>HMCharacteristicTypeColorTemperature</code>はiOS 11で新規追加されたキャラクタです。</p>
-
 <p>もちろん<code>PowerState</code>キャラクタで点灯/消灯を操作することもできます。</p>
-
-<h2 id="colortemperatureのmetadata">ColorTemperatureのmetadata</h2>
-
+<h2 id="colortemperaturemetadata">ColorTemperatureのmetadata</h2>
 <table>
 <thead>
 <tr>
@@ -318,56 +303,45 @@ if (!doNotTrack) {
 <th>実際の値</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>format</code></td>
 <td>int</td>
 </tr>
-
 <tr>
 <td><code>units</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td><code>minimumValue</code></td>
 <td>153</td>
 </tr>
-
 <tr>
 <td><code>maximumValue</code></td>
 <td>454</td>
 </tr>
-
 <tr>
 <td><code>stepValue</code></td>
 <td>1</td>
 </tr>
-
 <tr>
 <td><code>validValues</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td><code>maxLength</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td><code>manufacturerDescription</code></td>
 <td>Color Temperature</td>
 </tr>
 </tbody>
 </table>
-
-<h2 id="colortemperatureのvalue">ColorTemperatureのvalue</h2>
-
+<h2 id="colortemperaturevalue">ColorTemperatureのvalue</h2>
 <p><code>value</code>プロパティは153から454の範囲で設定できます。
 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。</p>
-
-<h2 id="colortemperatureを更新するサンプルコード">ColorTemperatureを更新するサンプルコード</h2>
+<h2 id="colortemperature">ColorTemperatureを更新するサンプルコード</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first
 <span style="color:#66d9ef">let</span> candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature }
 
@@ -376,24 +350,16 @@ if (!doNotTrack) {
 }
 
 colorTemperature.writeValue(<span style="color:#ae81ff">454</span>) { error <span style="color:#66d9ef">in</span>
-}</code></pre></div>
-<h2 id="まとめ">まとめ</h2>
-
+}
+</code></pre></div><h2 id="heading-3">まとめ</h2>
 <p>キャラクタの<code>value</code>の更新が視覚的にわかりやすく、また、<code>true</code>/<code>false</code>だけでなく数値の<code>value</code>を書き込み可能な製品としてPhilips Hueをオススメしていますが、実用的にはカラー版でなくこちらのホワイトグラデーション シングルランプで必要十分ではないでしょうか。</p>
-
 <p>値段的にはカラー版の半額程度になりますので、すでにPhilips Hueのブリッジをお持ちのかたの追加ランプとしては順当かと思います。</p>
-
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B01MSITPT1&linkId=7c229f303ba71da4d599dfec54156115&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-</iframe>
-
-<h2 id="ios-11-programmingについて">iOS 11 Programmingについて</h2>
-
+<!-- raw HTML omitted -->
+<h2 id="ios-11-programming">iOS 11 Programmingについて</h2>
 <p>この記事は「iOS 11 Programming」の<strong>第12章 HomeKit入門とiOS 11における新機能</strong>の中の<strong>12.4.2 HomeKit 対応製品利用実例</strong>への追加コンテンツ的位置付けにもなっています。
-この製品がサポートするサービス（&rsquo;HMService&rsquo;）やキャラクタ（&rsquo;HMCharacteristic&rsquo;）の表など、全てこの書籍に合わせた形で掲載しております。</p>
-
+この製品がサポートするサービス（&lsquo;HMService&rsquo;）やキャラクタ（&lsquo;HMCharacteristic&rsquo;）の表など、全てこの書籍に合わせた形で掲載しております。</p>
 <p>「iOS 11 Programming」にご興味のあるかたは是非、以下リンクからご参照ください。</p>
-
-<div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+<!-- raw HTML omitted -->
 
 </div>
 

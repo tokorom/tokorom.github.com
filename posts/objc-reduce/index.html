@@ -3,17 +3,17 @@
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
-Tipsを適用する前のコード #pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.'>
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='Objective-Cのコードを削れるだけ削る7のTips • Yuta Tokoro'>
 <meta property='og:description' content='既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
-Tipsを適用する前のコード #pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.'>
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.'>
 <meta property='og:url' content='http://www.tokoro.me/posts/objc-reduce/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='objc'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2013-06-15T00:00:00Z'/><meta property='article:modified_time' content='2013-06-15T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>Objective-Cのコードを削れるだけ削る7のTips • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/objc-reduce/'>
@@ -86,51 +86,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -229,12 +231,9 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<p>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。</p>
-
-<h2 id="tipsを適用する前のコード">Tipsを適用する前のコード</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#pragma mark - Private Category
+  <p>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。</p>
+<h2 id="tips">Tipsを適用する前のコード</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">pragma mark - Private Category</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Sample</span> ()
 
@@ -254,7 +253,7 @@ if (!doNotTrack) {
 
 <span style="color:#66d9ef">@end</span> 
 
-<span style="color:#75715e">#pragma mark - Main Implementation
+<span style="color:#75715e">#</span><span style="color:#75715e">pragma mark - Main Implementation</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">Sample</span>
 
@@ -277,14 +276,14 @@ if (!doNotTrack) {
 - (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">privateMethod2</span>
 {
   self.i <span style="color:#f92672">=</span> [NSNumber numberWithInt:<span style="color:#ae81ff">100</span>];
-  self.c <span style="color:#f92672">=</span> [NSNumber numberWithChar:<span style="color:#e6db74">&#39;a&#39;</span>];
+  self.c <span style="color:#f92672">=</span> [NSNumber numberWithChar:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>];
   self.f <span style="color:#f92672">=</span> [NSNumber numberWithFloat:<span style="color:#ae81ff">3.14f</span>];
 }
 
 - (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">privateMethod3</span>
 {
-  self.array <span style="color:#f92672">=</span> [NSArray arrayWithObjects:<span style="color:#e6db74">@&#34;1&#34;</span>, [NSNumber numberWithInt:<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], [NSNumber numberWithBool:YES], nil];
-  self.dictionary <span style="color:#f92672">=</span> [NSDictionary dictionaryWithObjectsAndKeys:<span style="color:#e6db74">@&#34;val1&#34;</span>, <span style="color:#e6db74">@&#34;key1&#34;</span>, <span style="color:#e6db74">@&#34;val2&#34;</span>, <span style="color:#e6db74">@&#34;key2&#34;</span>, nil];
+  self.array <span style="color:#f92672">=</span> [NSArray arrayWithObjects:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">1</span><span style="color:#e6db74">&#34;</span>, [NSNumber numberWithInt:<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], [NSNumber numberWithBool:YES], nil];
+  self.dictionary <span style="color:#f92672">=</span> [NSDictionary dictionaryWithObjectsAndKeys:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">val1</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">key1</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">val2</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">key2</span><span style="color:#e6db74">&#34;</span>, nil];
 
   self.child <span style="color:#f92672">=</span> [[Sample alloc] init];
   self.color <span style="color:#f92672">=</span> [UIColor redColor];
@@ -293,135 +292,112 @@ if (!doNotTrack) {
   self.rect <span style="color:#f92672">=</span> CGRectMake(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">10.0</span>, self.bounds.size.width, self.bounds.size.height);
 }
 
-<span style="color:#66d9ef">@end</span></code></pre></div>
-<p>これを以下の7のTipsで削れるだけ削っていきます。</p>
-
-<!-- more -->
-
-<h2 id="tip-1-プライベートメソッドの宣言を削る">Tip 1: プライベートメソッドの宣言を削る</h2>
-
-<p>Xcode 4.4 以降ではプライベートメソッドの宣言を削ることができます。<br />
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><p>これを以下の7のTipsで削れるだけ削っていきます。</p>
+<!-- raw HTML omitted -->
+<h2 id="tip-1-">Tip 1: プライベートメソッドの宣言を削る</h2>
+<p>Xcode 4.4 以降ではプライベートメソッドの宣言を削ることができます。<br>
 そのため、上記の</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#75715e">@interface Sample ()
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">@property (strong) NSNumber* i;
-</span><span style="color:#75715e">@property (strong) NSNumber* c;
-</span><span style="color:#75715e">@property (strong) NSNumber* f;
-</span><span style="color:#75715e">@property (strong) NSArray* array;
-</span><span style="color:#75715e">@property (strong) NSDictionary* dictionary;
-</span><span style="color:#75715e">@property (strong) Sample* child;
-</span><span style="color:#75715e">@property (strong) UIColor* color;
-</span><span style="color:#75715e">@property (assign) NSUInteger index;
-</span><span style="color:#75715e">@property (assign) CGRect rect;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (strong) NSNumber* c;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (strong) NSNumber* f;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (strong) NSArray* array;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (strong) NSDictionary* dictionary;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (strong) Sample* child;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (strong) UIColor* color;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (assign) NSUInteger index;
+</span><span style="color:#75715e"></span><span style="color:#75715e">@property (assign) CGRect rect;
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">-- (void)privateMethod1;
-</span><span style="color:#f92672">-- (void)privateMethod2;
-</span><span style="color:#f92672">-- (void)privateMethod3;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-- (void)privateMethod2;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-- (void)privateMethod3;
 </span><span style="color:#f92672"></span>
 <span style="color:#75715e">@end 
-</span></code></pre></div>
-<p>の部分はごっそり削ることができます。</p>
-
-<h2 id="tip-2-synthesizeを削る">Tip 2: @synthesizeを削る</h2>
-
+</span></code></pre></div><p>の部分はごっそり削ることができます。</p>
+<h2 id="tip-2-synthesize">Tip 2: @synthesizeを削る</h2>
 <p>Xcode 4.4 以降では <code>@synthesize</code> を書かなくてもコンパイラが自動的にこれを補完してくれます。
 そのため、上記の</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">-@synthesize i = i_;
-</span><span style="color:#f92672">-@synthesize c = c_;
-</span><span style="color:#f92672">-@synthesize f = f_;
-</span><span style="color:#f92672">-@synthesize array = array_;
-</span><span style="color:#f92672">-@synthesize dictionary = dictionary_;
-</span><span style="color:#f92672">-@synthesize child = child_;
-</span><span style="color:#f92672">-@synthesize color = color_;
-</span><span style="color:#f92672">-@synthesize index = index_;
-</span><span style="color:#f92672">-@synthesize rect = rect_;
-</span></code></pre></div>
-<p>の部分もごっそり削ることができます。</p>
-
-<h2 id="tip-3-strong-assign-は省略できる">Tip 3: strong / assign は省略できる</h2>
-
-<p>propetyはオブジェクト型の場合は <code>strong</code> 、それ以外の場合は <code>assign</code> がデフォルトになっています。<br />
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize c = c_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize f = f_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize array = array_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize dictionary = dictionary_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize child = child_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize color = color_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize index = index_;
+</span><span style="color:#f92672"></span><span style="color:#f92672">-@synthesize rect = rect_;
+</span></code></pre></div><p>の部分もごっそり削ることができます。</p>
+<h2 id="tip-3-strong--assign-">Tip 3: strong / assign は省略できる</h2>
+<p>propetyはオブジェクト型の場合は <code>strong</code> 、それ以外の場合は <code>assign</code> がデフォルトになっています。<br>
 そのため、<code>strong</code> と <code>assign</code> については省略が可能です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#75715e">@interface Sample ()
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">- @property (strong) NSNumber* i;
-</span><span style="color:#f92672">- @property (strong) NSNumber* c;
-</span><span style="color:#f92672">- @property (strong) NSNumber* f;
-</span><span style="color:#f92672">- @property (strong) NSArray* array;
-</span><span style="color:#f92672">- @property (strong) NSDictionary* dictionary;
-</span><span style="color:#f92672">- @property (strong) Sample* child;
-</span><span style="color:#f92672">- @property (strong) UIColor* color;
-</span><span style="color:#f92672">- @property (assign) NSUInteger index;
-</span><span style="color:#f92672">- @property (assign) CGRect rect;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (strong) NSNumber* c;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (strong) NSNumber* f;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (strong) NSArray* array;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (strong) NSDictionary* dictionary;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (strong) Sample* child;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (strong) UIColor* color;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (assign) NSUInteger index;
+</span><span style="color:#f92672"></span><span style="color:#f92672">- @property (assign) CGRect rect;
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+ @property NSNumber* i;
-</span><span style="color:#a6e22e">+ @property NSNumber* c;
-</span><span style="color:#a6e22e">+ @property NSNumber* f;
-</span><span style="color:#a6e22e">+ @property NSArray* array;
-</span><span style="color:#a6e22e">+ @property NSDictionary* dictionary;
-</span><span style="color:#a6e22e">+ @property Sample* child;
-</span><span style="color:#a6e22e">+ @property UIColor* color;
-</span><span style="color:#a6e22e">+ @property NSUInteger index;
-</span><span style="color:#a6e22e">+ @property CGRect rect;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property NSNumber* c;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property NSNumber* f;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property NSArray* array;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property NSDictionary* dictionary;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property Sample* child;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property UIColor* color;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property NSUInteger index;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ @property CGRect rect;
 </span><span style="color:#a6e22e"></span>
 <span style="color:#75715e">@end 
-</span></code></pre></div>
-<p>※<code>nonatomic</code> にしたい場合は明示的に付加してください</p>
-
-<h2 id="tip-4-nsnumber-nsarray-nsdictionary-を新しい書き方に変える">Tip 4: NSNumber, NSArray, NSDictionary を新しい書き方に変える</h2>
-
+</span></code></pre></div><p>※<code>nonatomic</code> にしたい場合は明示的に付加してください</p>
+<h2 id="tip-4-nsnumber-nsarray-nsdictionary-">Tip 4: NSNumber, NSArray, NSDictionary を新しい書き方に変える</h2>
 <p>NSStringを <code>@&quot;hoge&quot;</code> で作れるように、Xcode 4.4からはNSNumber, NSArray, NSDictionaryについても@からはじまる短い書き方ができるようになりました。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">- (void)privateMethod2
 </span><span style="color:#f92672"></span>{
 <span style="color:#f92672">- self.i = [NSNumber numberWithInt:100];
-</span><span style="color:#f92672">- self.c = [NSNumber numberWithChar:&#39;a&#39;];
-</span><span style="color:#f92672">- self.f = [NSNumber numberWithFloat:3.14f];
+</span><span style="color:#f92672"></span><span style="color:#f92672">- self.c = [NSNumber numberWithChar:&#39;a&#39;];
+</span><span style="color:#f92672"></span><span style="color:#f92672">- self.f = [NSNumber numberWithFloat:3.14f];
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+ self.i = @100;
-</span><span style="color:#a6e22e">+ self.c = @&#39;a&#39;;
-</span><span style="color:#a6e22e">+ self.f = @3.14f;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ self.c = @&#39;a&#39;;
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ self.f = @3.14f;
 </span><span style="color:#a6e22e"></span>}
 
 <span style="color:#f92672">- (void)privateMethod3
 </span><span style="color:#f92672"></span>{
 <span style="color:#f92672">- self.array = [NSArray arrayWithObjects:@&#34;1&#34;, [NSNumber numberWithInt:1 + 2], [NSNumber numberWithBool:YES], nil];
-</span><span style="color:#f92672">- self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&#34;val1&#34;, @&#34;key1&#34;, @&#34;val2&#34;, @&#34;key2&#34;, nil];
+</span><span style="color:#f92672"></span><span style="color:#f92672">- self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&#34;val1&#34;, @&#34;key1&#34;, @&#34;val2&#34;, @&#34;key2&#34;, nil];
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+ self.array = @[@&#34;1&#34;, @(1 + 2), @YES];
-</span><span style="color:#a6e22e">+ self.dictionary = @{@&#34;key1&#34;: @&#34;val1&#34;, @&#34;key2&#34;: @&#34;val2&#34;};
-</span></code></pre></div>
-<h2 id="tip-5-alloc-init-は-new-に置き換える">Tip 5: alloc/init は new に置き換える</h2>
-
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ self.dictionary = @{@&#34;key1&#34;: @&#34;val1&#34;, @&#34;key2&#34;: @&#34;val2&#34;};
+</span></code></pre></div><h2 id="tip-5-allocinit--new-">Tip 5: alloc/init は new に置き換える</h2>
 <p><code>alloc</code> / <code>init</code> の組み合わせは <code>new</code> に置き換えることが可能です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">- self.child = [[Sample alloc] init];
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+ self.child = [Sample new];
-</span></code></pre></div>
-<h2 id="tip-6-一部のメソッドの呼び出しを-ドット-アクセスで行う">Tip 6: 一部のメソッドの呼び出しを .（ドット）アクセスで行う</h2>
-
+</span></code></pre></div><h2 id="tip-6--">Tip 6: 一部のメソッドの呼び出しを .（ドット）アクセスで行う</h2>
 <p>引数のないメソッドは <code>.</code> （ドット）によるアクセスに置き換えることが可能です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">- self.child = [Sample new];
-</span><span style="color:#f92672">- self.color = [UIColor redColor];
+</span><span style="color:#f92672"></span><span style="color:#f92672">- self.color = [UIColor redColor];
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+ self.child = Sample.new;
-</span><span style="color:#a6e22e">+ self.color = UIColor.redColor;
-</span></code></pre></div>
-<h2 id="tip-7-cgrectはc言語の構造体として作成することができる">Tip 7: CGRectはC言語の構造体として作成することができる</h2>
-
+</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+ self.color = UIColor.redColor;
+</span></code></pre></div><h2 id="tip-7-cgrectc">Tip 7: CGRectはC言語の構造体として作成することができる</h2>
 <p>CGRectは <code>CGRectMake</code> で作成するのが一般的ですが、CGRectの実態はC言語の構造体のため、構造体を作る書き方で代替することもできます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">- self.rect = CGRectMake(0.0, 10.0, self.bounds.size.width, self.bounds.size.height);
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+ self.rect = (CGRect){.origin.y = 10.0, .size = self.bounds.size};
-</span></code></pre></div>
-<h2 id="tips適用後のコード">Tips適用後のコード</h2>
-
+</span></code></pre></div><h2 id="tips-1">Tips適用後のコード</h2>
 <p>これらのTipsを適用することで、</p>
-
 <ul>
 <li>コード行数が <strong>62行</strong> -&gt; <strong>49行</strong></li>
 <li>バイト数が <strong>1,434 bytes</strong> -&gt; <strong>816 bytes</strong></li>
 </ul>
-
 <p>となりました。タイプ数も57%以下に削減されています。</p>
-
 <p>見た目もすっきりです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#import &#34;Sample.h&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;Sample.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#75715e">#pragma mark - Private Category
+<span style="color:#75715e">#</span><span style="color:#75715e">pragma mark - Private Category</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Sample</span> ()
 
@@ -437,7 +413,7 @@ if (!doNotTrack) {
 
 <span style="color:#66d9ef">@end</span> 
 
-<span style="color:#75715e">#pragma mark - Main Implementation
+<span style="color:#75715e">#</span><span style="color:#75715e">pragma mark - Main Implementation</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">Sample</span>
 
@@ -456,8 +432,8 @@ if (!doNotTrack) {
 
 - (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">privateMethod3</span>
 {
-  self.array <span style="color:#f92672">=</span> <span style="color:#ae81ff">@[</span><span style="color:#e6db74">@&#34;1&#34;</span>, <span style="color:#ae81ff">@(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#ae81ff">)</span>, <span style="color:#ae81ff">@YES</span><span style="color:#ae81ff">]</span>;
-  self.dictionary <span style="color:#f92672">=</span> <span style="color:#ae81ff">@{</span><span style="color:#e6db74">@&#34;key1&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">@&#34;val1&#34;</span>, <span style="color:#e6db74">@&#34;key2&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">@&#34;val2&#34;</span><span style="color:#ae81ff">}</span>;
+  self.array <span style="color:#f92672">=</span> <span style="color:#ae81ff">@[</span><span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">1</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">@(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#ae81ff">)</span>, <span style="color:#ae81ff">@YES</span><span style="color:#ae81ff">]</span>;
+  self.dictionary <span style="color:#f92672">=</span> <span style="color:#ae81ff">@{</span><span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">key1</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">val1</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">key2</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">val2</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">}</span>;
 
 
   self.child <span style="color:#f92672">=</span> Sample.new;
@@ -467,17 +443,14 @@ if (!doNotTrack) {
   self.rect <span style="color:#f92672">=</span> (CGRect){.origin.y <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>, .size <span style="color:#f92672">=</span> self.bounds.size};
 }
 
-<span style="color:#66d9ef">@end</span></code></pre></div>
-<h2 id="まとめ">まとめ</h2>
-
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><h2 id="heading">まとめ</h2>
 <p>もちろん、これら全てを適用するのが正しいというわけではありませんので、チームや個人でお好みのものを利用するのが良いのではと思います。</p>
-
-<h2 id="参照">参照</h2>
-
+<h2 id="heading-1">参照</h2>
 <ul>
-<li><a href="http://www.tokoro.me/2012/08/12/objc-new-statements/" target="_blank">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</a></li>
-<li><a href="http://cocoadays.blogspot.com/2013/04/objctips.html" target="_blank">ObjCがサクっと書けるコーディングTips</a></li>
-<li><a href="http://www.jacopretorius.net/2013/05/c99-initializer-syntax-in-objective-c.html" target="_blank">C99 Initializer Syntax in Objective C</a></li>
+<li><a href="http://www.tokoro.me/2012/08/12/objc-new-statements/">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</a></li>
+<li><a href="http://cocoadays.blogspot.com/2013/04/objctips.html">ObjCがサクっと書けるコーディングTips</a></li>
+<li><a href="http://www.jacopretorius.net/2013/05/c99-initializer-syntax-in-objective-c.html">C99 Initializer Syntax in Objective C</a></li>
 </ul>
 
 </div>

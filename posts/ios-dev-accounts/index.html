@@ -43,7 +43,7 @@ Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Prog
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='publish'><meta property='article:published_time' content='2013-11-05T00:00:00Z'/><meta property='article:modified_time' content='2013-11-05T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？ • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/ios-dev-accounts/'>
@@ -116,51 +116,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -259,138 +261,99 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="2013年11月18日-追記">2013年11月18日 追記</h2>
-
+  <h2 id="20131118-">2013年11月18日 追記</h2>
 <p>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、</p>
-
 <ul>
 <li><code>Member Centerのほうにアカウント追加</code> -&gt; <code>iTunes Connectに同じアカウント追加</code>という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能</li>
 <li><code>iTunes Connectにアカウント追加</code> -&gt; <code>Member Centerに同じ追加</code>という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能</li>
 </ul>
-
-<p>失礼しました。<br />
+<p>失礼しました。<br>
 追加情報などあれば是非おねがいします！</p>
-
-<h2 id="概要">概要</h2>
-
-<p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br />
+<h2 id="heading">概要</h2>
+<p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br>
 というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
-
-<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br />
+<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br>
 どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。</p>
-
-<h2 id="ios-dev-center-の構成">iOS Dev Center の構成</h2>
-
+<h2 id="ios-dev-center-">iOS Dev Center の構成</h2>
 <p>まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。</p>
-
-<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iOSDevCenterStruct.png" alt="iOSDevCenterStruct" /></p>
-
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iOSDevCenterStruct.png" alt="iOSDevCenterStruct"></p>
 <p>大きくは、</p>
-
 <ul>
 <li>iOS Developer Program</li>
 <li>Member Center</li>
 <li>iTunes Connect</li>
 </ul>
-
 <p>に分かれます。</p>
-
-<h2 id="メンバーを追加する方法が２つある">メンバーを追加する方法が２つある？？</h2>
-
-<p>今回、私が混乱してしまった部分がここでした。<br />
+<h2 id="heading-1">メンバーを追加する方法が２つある？？</h2>
+<p>今回、私が混乱してしまった部分がここでした。<br>
 iOSアプリ開発/公開のために必要なアカウントは、</p>
-
 <ul>
 <li><code>Member Center</code>の<code>People</code></li>
 <li><code>iTunes Connect</code>の<code>Manage Users</code></li>
 </ul>
-
-<p>の2カ所で管理されています。<br />
+<p>の2カ所で管理されています。<br>
 また、この２つのアカウントはそれぞれ別々の用途になります。</p>
-
 <p>個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。</p>
-
-<!-- more -->
-
-<h2 id="member-centerのpeopleに追加すべきユーザは">Member CenterのPeopleに追加すべきユーザは？</h2>
-
+<!-- raw HTML omitted -->
+<h2 id="member-centerpeople">Member CenterのPeopleに追加すべきユーザは？</h2>
 <p>主に<code>iOS Developer Program</code>のページを使うプログラマです。</p>
-
 <ul>
 <li>Certificate（証明書）の発行</li>
 <li>Device（開発機）の登録</li>
 <li>App ID の登録</li>
 <li>Provisioning Profile の発行</li>
 </ul>
-
 <p>が必要なユーザがこれに該当します。</p>
-
-<h2 id="itunes-connectのmanage-usersに追加すべきユーザは">iTunes ConnectのManage Usersに追加すべきユーザは？</h2>
-
+<h2 id="itunes-connectmanage-users">iTunes ConnectのManage Usersに追加すべきユーザは？</h2>
 <p>リリース担当、経理担当、法務担当などです。</p>
-
 <ul>
 <li>アプリのリリースと管理</li>
 <li>売り上げやダウンロード数の確認</li>
 <li>銀行、税金情報などの管理</li>
 </ul>
-
 <p>が必要なユーザがこれに該当します。</p>
-
-<h2 id="留意すべきこと">留意すべきこと</h2>
-
+<h2 id="heading-2">留意すべきこと</h2>
 <ul>
-<li><s>この2つに同じApple ID（メールアドレス）で登録することはできない</s></li>
+<li><!-- raw HTML omitted -->この2つに同じApple ID（メールアドレス）で登録することはできない<!-- raw HTML omitted --></li>
 <li>Member Centerだけに登録されたユーザでは<code>iOS Developer Program</code>に入れないため開発時に困ることがある</li>
 <li>iTunes Connectだけに登録されたユーザでは<code>iTunes Connect</code>に入れないためリリース作業ができない</li>
 </ul>
-
-<p><s>この２つで別々のアカウントを用意しなくてはならないというところがポイントになります。</s>
-<s>また、通常、社員一人に対して１つのメールアドレスしかないため工夫が必要になります。</s></p>
-
-<h2 id="会社での運用はこうするのが良いのでは">会社での運用はこうするのが良いのでは？</h2>
-
+<p><!-- raw HTML omitted -->この２つで別々のアカウントを用意しなくてはならないというところがポイントになります。<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->また、通常、社員一人に対して１つのメールアドレスしかないため工夫が必要になります。<!-- raw HTML omitted --></p>
+<h2 id="heading-3">会社での運用はこうするのが良いのでは？</h2>
 <ul>
 <li>社員一人ごとに適切な権限のアカウントを個別に発行する</li>
-<li><code>iOS Developer Program</code>にアクセスが必要な社員には<s> 社員名+dev@xxx.com をID＆メールアドレスとしてアカウントを発行する</s> そのアカウントだけを発行する
-
+<li><code>iOS Developer Program</code>にアクセスが必要な社員には<!-- raw HTML omitted --> 社員名+dev@xxx.com をID＆メールアドレスとしてアカウントを発行する<!-- raw HTML omitted --> そのアカウントだけを発行する
 <ul>
-<li><s>例：yuta-tokoro<b>+dev</b>@xxx.com</s></li>
-</ul></li>
-<li>&lsquo;iTunes Connect&rsquo;にアクセスが必要な社員には<s> 社員名+itunes@xxx.com をID＆メールアドレスとしてアカウントを発行する</s> そのアカウントだけを発行する
-
-<ul>
-<li><s>例：yuta-tokoro<b>+itunes</b>@xxx.com</s></li>
-</ul></li>
+<li><!-- raw HTML omitted -->例：yuta-tokoro<!-- raw HTML omitted -->+dev<!-- raw HTML omitted -->@xxx.com<!-- raw HTML omitted --></li>
 </ul>
-
-<h2 id="会社でやらないほうが良さそうなこと">会社でやらないほうが良さそうなこと</h2>
-
+</li>
+<li>&lsquo;iTunes Connect'にアクセスが必要な社員には<!-- raw HTML omitted --> 社員名+itunes@xxx.com をID＆メールアドレスとしてアカウントを発行する<!-- raw HTML omitted --> そのアカウントだけを発行する
+<ul>
+<li><!-- raw HTML omitted -->例：yuta-tokoro<!-- raw HTML omitted -->+itunes<!-- raw HTML omitted -->@xxx.com<!-- raw HTML omitted --></li>
+</ul>
+</li>
+</ul>
+<h2 id="heading-4">会社でやらないほうが良さそうなこと</h2>
 <ul>
 <li>代表アカウント（Agent）を多数のメンバーで使い回してはいけない
-
 <ul>
 <li>このIDは <code>iOS Developer Program</code>にも<code>iTunes Connect</code>にも入れる最強IDだが&hellip;</li>
 <li>最強IDを不特定多数の人に展開すると社員の出入りがあったときにその管理が煩雑になる
-
 <ul>
 <li>放置しておくと悪意のある退職者が公開中のアプリを削除するなどが可能</li>
-</ul></li>
-</ul></li>
-<li><s>アカウントを発行する際にメールアドレスをそのまま使ってしまわないほうが良さそう（前述のとおり +dev +itunes をつける）</s></li>
 </ul>
-
-<h2 id="まとめ">まとめ</h2>
-
+</li>
+</ul>
+</li>
+<li><!-- raw HTML omitted -->アカウントを発行する際にメールアドレスをそのまま使ってしまわないほうが良さそう（前述のとおり +dev +itunes をつける）<!-- raw HTML omitted --></li>
+</ul>
+<h2 id="heading-5">まとめ</h2>
 <p>ということで、会社でiOSアプリ開発/運用に必要なアカウントを作る場合には、</p>
-
 <ul>
-<li><s>１つのメールアドレスで２つのアカウントが作れるような運用をするのが良さそう</s></li>
+<li><!-- raw HTML omitted -->１つのメールアドレスで２つのアカウントが作れるような運用をするのが良さそう<!-- raw HTML omitted --></li>
 <li>代表アカウントをみんなで使い回さないように注意すべし</li>
 </ul>
-
 <p>といったところです。</p>
 
 </div>

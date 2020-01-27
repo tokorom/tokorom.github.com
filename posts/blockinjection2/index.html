@@ -10,12 +10,12 @@ https://github.com/tokorom/BlockInjection で公開しています。
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
 [BILib injectToClassWithNameRegex:BIRegex(@&#34;^UIView$&#34;) methodNameRegex:BIRegex(@&#34;^set.*$&#34;) preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
- -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay]  のように全てログ出力されます。
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
 &#43; (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
 ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
-NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^UIView$&#34; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^set.'>
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^UIView$&#34; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^set.*$&#34; options:0 error:&amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='BlockInjectionをバージョンアップしました • Yuta Tokoro'>
@@ -27,17 +27,17 @@ https://github.com/tokorom/BlockInjection で公開しています。
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
 [BILib injectToClassWithNameRegex:BIRegex(@&#34;^UIView$&#34;) methodNameRegex:BIRegex(@&#34;^set.*$&#34;) preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
- -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay]  のように全てログ出力されます。
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
 &#43; (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
 ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
-NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^UIView$&#34; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^set.'>
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^UIView$&#34; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^set.*$&#34; options:0 error:&amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/blockinjection2/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='objc'><meta property='article:published_time' content='2013-04-01T00:00:00Z'/><meta property='article:modified_time' content='2013-04-01T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>BlockInjectionをバージョンアップしました • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/blockinjection2/'>
@@ -110,51 +110,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -253,19 +255,12 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="blockinjectionとはなんぞや">BlockInjectionとはなんぞや</h2>
-
-<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br />
+  <h2 id="blockinjection">BlockInjectionとはなんぞや</h2>
+<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br>
 クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
-
-<p><a href="https://github.com/tokorom/BlockInjection" target="_blank">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
-
-<h2 id="バージョンアップ内容">バージョンアップ内容</h2>
-
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
+<h2 id="heading">バージョンアップ内容</h2>
 <p><a href="/2013/03/07/block-injection/">前記事</a> からのバージョンアップ内容は以下です。</p>
-
 <ul>
 <li>リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます）</li>
 <li>クラスメソッドにも対応しました</li>
@@ -274,40 +269,31 @@ if (!doNotTrack) {
 <li>注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2)</li>
 <li>オマケで単純なメソッド実装置き換え機能も追加しました</li>
 </ul>
-
-<h2 id="uiviewの勝手に呼ばれているsetterでまとめて全てログ出力させる">UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
-
-<!-- more -->
-
-<p>既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。<br />
-例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして <strong>UIViewのsetter全でまとめてログ出力をする</strong> ようにしてみます。<br />
+<h2 id="uiviewsetter">UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
+<!-- raw HTML omitted -->
+<p>既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。<br>
+例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして <strong>UIViewのsetter全でまとめてログ出力をする</strong> ようにしてみます。<br>
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">[BILib injectToClassWithNameRegex:BIRegex(<span style="color:#e6db74">@&#34;^UIView$&#34;</span>) methodNameRegex:BIRegex(<span style="color:#e6db74">@&#34;^set.*$&#34;</span>) preprocess:<span style="color:#f92672">^</span>{
-  NSLog(<span style="color:#e6db74">@&#34;%@&#34;</span>, [BILib prettyFunction]);
-}];</code></pre></div>
-<p>これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">[BILib injectToClassWithNameRegex:BIRegex(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^UIView$</span><span style="color:#e6db74">&#34;</span>) methodNameRegex:BIRegex(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^set.*$</span><span style="color:#e6db74">&#34;</span>) preprocess:<span style="color:#f92672">^</span>{
+  NSLog(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">%@</span><span style="color:#e6db74">&#34;</span>, [BILib prettyFunction]);
+}];
+</code></pre></div><p>これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が</p>
 <pre><code> -[UIView setContentScaleFactor:]
  -[UIView setFrame:]
  -[UIView setNeedsDisplay]
-</code></pre>
-
-<p>のように全てログ出力されます。</p>
-
-<p><code>+ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess;</code> が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。<br />
+</code></pre><p>のように全てログ出力されます。</p>
+<p><code>+ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess;</code> が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。<br>
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。</p>
-
 <p>また、<code>[BILib prettyFunction]</code> は注入先のメソッド名を<code>__PRETTY_FUNCTION__</code>と同じ形式で取得できる便利機能です。</p>
-
 <p>ちなみに、<code>BIRegex</code>というのはただ<code>NSRegularExpression</code>を簡易的に作るための関数ですので、↑のコードは以下と同義です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">NSError<span style="color:#f92672">*</span> error <span style="color:#f92672">=</span> nil;
-NSRegularExpression<span style="color:#f92672">*</span> classNameRegex <span style="color:#f92672">=</span> [NSRegularExpression regularExpressionWithPattern:<span style="color:#e6db74">@&#34;^UIView$&#34;</span> options:<span style="color:#ae81ff">0</span> error:<span style="color:#f92672">&amp;</span>error];
-NSRegularExpression<span style="color:#f92672">*</span> methodNameRegex <span style="color:#f92672">=</span> [NSRegularExpression regularExpressionWithPattern:<span style="color:#e6db74">@&#34;^set.*$&#34;</span> options:<span style="color:#ae81ff">0</span> error:<span style="color:#f92672">&amp;</span>error];
+NSRegularExpression<span style="color:#f92672">*</span> classNameRegex <span style="color:#f92672">=</span> [NSRegularExpression regularExpressionWithPattern:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^UIView$</span><span style="color:#e6db74">&#34;</span> options:<span style="color:#ae81ff">0</span> error:<span style="color:#f92672">&amp;</span>error];
+NSRegularExpression<span style="color:#f92672">*</span> methodNameRegex <span style="color:#f92672">=</span> [NSRegularExpression regularExpressionWithPattern:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^set.*$</span><span style="color:#e6db74">&#34;</span> options:<span style="color:#ae81ff">0</span> error:<span style="color:#f92672">&amp;</span>error];
 
 [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:<span style="color:#f92672">^</span>{
-  NSLog(<span style="color:#e6db74">@&#34;%@&#34;</span>, [BILib prettyFunction]);
-}];</code></pre></div>
-<p>※2013/04/05追記: ちなみに <strong>特定Prefixのメソッド全てにまとめて振るまいを追加する</strong> というのは <a href="https://twitter.com/7gano" target="_blank">@7gano</a> さんのアイデアです。</p>
+  NSLog(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">%@</span><span style="color:#e6db74">&#34;</span>, [BILib prettyFunction]);
+}];
+</code></pre></div><p>※2013/04/05追記: ちなみに <strong>特定Prefixのメソッド全てにまとめて振るまいを追加する</strong> というのは <a href="https://twitter.com/7gano">@7gano</a> さんのアイデアです。</p>
 
 </div>
 

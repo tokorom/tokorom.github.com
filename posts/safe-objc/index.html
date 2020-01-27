@@ -3,27 +3,27 @@
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &#34;OtherLibrary1.h&#34; #import &#34;OtherLibrary2.h&#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
-そうしてしまうと、この Library.h をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。
-実際にこの Library を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+#import &#34;OtherLibrary1.h&#34;#import &#34;OtherLibrary2.h&#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end#import &#34;OtherLibrary1.h&#34; #import &#34;OtherLibrary2.h&#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。'>
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &#34;OtherLibrary1.h&#34;#import &#34;OtherLibrary2.h&#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント • Yuta Tokoro'>
 <meta property='og:description' content='チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &#34;OtherLibrary1.h&#34; #import &#34;OtherLibrary2.h&#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
-そうしてしまうと、この Library.h をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。
-実際にこの Library を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+#import &#34;OtherLibrary1.h&#34;#import &#34;OtherLibrary2.h&#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end#import &#34;OtherLibrary1.h&#34; #import &#34;OtherLibrary2.h&#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。'>
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &#34;OtherLibrary1.h&#34;#import &#34;OtherLibrary2.h&#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/safe-objc/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='objc'><meta property='article:published_time' content='2012-08-17T00:00:00Z'/><meta property='article:modified_time' content='2012-08-17T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/safe-objc/'>
@@ -96,51 +96,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -239,94 +241,81 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="チェック1-なんでもかんでもヘッダーファイルでimportしていませんか">チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
-
+  <h2 id="1-import">チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
 <p>例えば、こんなコードを書いていませんか？</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc Library.hのもしかしたら改善できるかもしれない例" data-lang="objc Library.hのもしかしたら改善できるかもしれない例">#import &#34;OtherLibrary1.h&#34;
-#import &#34;OtherLibrary2.h&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;OtherLibrary1.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;OtherLibrary2.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Library</span>
 
-@interface Library
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) OtherLibrary1<span style="color:#f92672">*</span> otherLibrary1;
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) OtherLibrary2<span style="color:#f92672">*</span> otherLibrary2;
 
-@property (strong) OtherLibrary1* otherLibrary1;
-@property (strong) OtherLibrary2* otherLibrary2;
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">assign</span>) <span style="color:#66d9ef">BOOL</span> flag;
 
-@property (assign) BOOL flag;
-
-@end</code></pre></div>
-<p>Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？<br />
-そうしてしまうと、この <em>Library.h</em> をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。<br />
-実際にこの <em>Library</em> を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。<br />
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><p>Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？<br>
+そうしてしまうと、この <em>Library.h</em> をimportする全てのクラスに、<em>OtherLibrary1.h</em>と<em>OtherLibrary2.h</em>も芋づる式にimportすることを強要することになってしまいます。<br>
+実際にこの <em>Library</em> を使うクラスでは、<em>otherLibrary1</em>も<em>otherLibrary2</em>も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。<br>
 具体的にはこの状態だと、 <strong>OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る</strong> 状態になってしまっています。</p>
-
 <p>以下、これを解消するための変更例です。</p>
+<!-- raw HTML omitted -->
+<h2 id="import">クラスの前方宣言を使い、ヘッダーファイルではimportしない</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#66d9ef">@class</span> <span style="color:#a6e22e">OtherLibrary1</span>; <span style="color:#75715e">//&lt; ここではimportしない
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">@class</span> <span style="color:#a6e22e">OtherLibrary2</span>; <span style="color:#75715e">//&lt; ここではimportしない
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Library</span>
 
-<!-- more -->
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) OtherLibrary1<span style="color:#f92672">*</span> otherLibrary1;
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) OtherLibrary2<span style="color:#f92672">*</span> otherLibrary2;
 
-<h2 id="クラスの前方宣言を使い-ヘッダーファイルではimportしない">クラスの前方宣言を使い、ヘッダーファイルではimportしない</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc Library.hの改善例" data-lang="objc Library.hの改善例">@class OtherLibrary1; //&lt; ここではimportしない
-@class OtherLibrary2; //&lt; ここではimportしない
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">assign</span>) <span style="color:#66d9ef">BOOL</span> flag;
 
-@interface Library
-
-@property (strong) OtherLibrary1* otherLibrary1;
-@property (strong) OtherLibrary2* otherLibrary2;
-
-@property (assign) BOOL flag;
-
-@end</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc Library.m" data-lang="objc Library.m">#import &#34;OtherLibrary1.h&#34;
-#import &#34;OtherLibrary2.h&#34;
-
-@implementation Library
-<span style="color:#f92672">//</span> 略
-@<span style="color:#66d9ef">end</span></code></pre></div>
-<p>このように、 <strong>@class</strong> による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを <strong>Opaque pointer: (不透明ポインタ)</strong> と呼ぶそうです。<br />
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;OtherLibrary1.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;OtherLibrary2.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">Library</span>
+<span style="color:#75715e">// 略
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">@end</span>
+</code></pre></div><p>このように、 <strong>@class</strong> による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを <strong>Opaque pointer: (不透明ポインタ)</strong> と呼ぶそうです。<br>
 ヘッダーファイルの段階では前方宣言を使ってOpaque pointerに留めておき、実際にこのクラスを利用する実装側(Library.m)のほうでOtherLibrary1.hとOtherLibrary2.hをimportするというのがこの変更です。</p>
-
 <p>これにより、 <strong>Library.hをimportしても、otherLibrary1とotherLibrary2を実際に使わないクラスにはOtherLibrary1とOtherLibrary2の変更が影響しなくなる</strong> というメリットがあります。</p>
-
-<h2 id="チェック2-なんでもかんでもヘッダーファイルでdelegateの実装を宣言していませんか">チェック2. なんでもかんでもヘッダーファイルでDelegateの実装を宣言していませんか？</h2>
-
+<h2 id="2-delegate">チェック2. なんでもかんでもヘッダーファイルでDelegateの実装を宣言していませんか？</h2>
 <p>例えば、こんなコードを書いていませんか？</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc Library.hのもしかしたら改善できるかもしれない例" data-lang="objc Library.hのもしかしたら改善できるかもしれない例">#import &#34;XXX.h&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;XXX.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Library</span> <span style="color:#f92672">&lt;</span>XXXDelegate<span style="color:#f92672">&gt;</span>
 
-@interface Library &lt;XXXDelegate&gt;
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">assign</span>) <span style="color:#66d9ef">BOOL</span> flag;
 
-@property (assign) BOOL flag;
-
-@end</code></pre></div>
-<p>実際にこれが他のクラスに悪影響を与えるかどうかは、<em>XXX.h</em> の内容によって決まってくるのですが、前回の例同様にできればヘッダーファイルでのimportは最小限にしたいところです。<br />
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><p>実際にこれが他のクラスに悪影響を与えるかどうかは、<em>XXX.h</em> の内容によって決まってくるのですが、前回の例同様にできればヘッダーファイルでのimportは最小限にしたいところです。<br>
 それならXXXDelegateも前方宣言(protocolの前方宣言も<code>@protocol XXXDelegate;</code>で可能)で解決！としたいところですが、残念ながらプロトコルの実装を宣言する場合にはそのプロトコルの詳細を知る必要があるためその索は使えません。</p>
-
 <p>以下、これを解消するための例です。</p>
+<h2 id="protocol">プライベートカテゴリでProtocolの実装宣言をする</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">// ヘッダーファイルではimportもprotocolの実装宣言もしない
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Library</span>
 
-<h2 id="プライベートカテゴリでprotocolの実装宣言をする">プライベートカテゴリでProtocolの実装宣言をする</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc Library.hの改善例" data-lang="objc Library.hの改善例">// ヘッダーファイルではimportもprotocolの実装宣言もしない
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">assign</span>) <span style="color:#66d9ef">BOOL</span> flag;
 
-@interface Library
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;XXX.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">Library</span> () <span style="color:#f92672">&lt;</span>XXXDelegate<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">@property</span> (<span style="color:#66d9ef">strong</span>) XXX<span style="color:#f92672">*</span> xxx;
+<span style="color:#66d9ef">@end</span>
 
-@property (assign) BOOL flag;
-
-@end</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc Library.mの改善例" data-lang="objc Library.mの改善例">#import &#34;XXX.h&#34;
-
-@interface Library () &lt;XXXDelegate&gt;
-@property (strong) XXX* xxx;
-@end
-
-@implementation Library
-// 略
-@end</code></pre></div>
-<p>ここでは、ヘッダーファイルでのXXXDelegateの実装宣言自体を止めてしまい、Library.mのほうでプライベートカテゴリに対してXXXDelegateの実装宣言をするようにしています。<br />
+<span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">Library</span>
+<span style="color:#75715e">// 略
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">@end</span>
+</code></pre></div><p>ここでは、ヘッダーファイルでのXXXDelegateの実装宣言自体を止めてしまい、Library.mのほうでプライベートカテゴリに対してXXXDelegateの実装宣言をするようにしています。<br>
 これにより、ヘッダーファイルでXXX.hをimportすることを避けることができます。</p>
-
-<h2 id="ヘッダーファイルで実装宣言をするべきときとそうでないときの判断">ヘッダーファイルで実装宣言をするべきときとそうでないときの判断</h2>
-
-<p>注意しないといけないのは <strong>全てのケースでヘッダーファイルでProtocolの実装宣言をするのがダメというわけではない</strong> ということです。<br />
+<h2 id="heading">ヘッダーファイルで実装宣言をするべきときとそうでないときの判断</h2>
+<p>注意しないといけないのは <strong>全てのケースでヘッダーファイルでProtocolの実装宣言をするのがダメというわけではない</strong> ということです。<br>
 あくまでも <strong>なにも考えずに全てヘッダーファイルでやってしまうのを避けよう</strong> というのが今回言いたかったことです。</p>
-
 <p>例えば、 <strong>このクラスがXXXDelegateを実装しているということを他のクラスに対して知ってもらいたいケース</strong> では、ヘッダーファイルでXXXDelegateの実装を明示することは適切です。</p>
-
 <p>個人的には、 <strong>デフォルトではヘッダーファイルで実装宣言をしないで、本当に必要なときだけそうする</strong> というのが良いのではないかと考えています。</p>
 
 </div>

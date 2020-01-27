@@ -17,7 +17,7 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='mac'><meta property='article:published_time' content='2012-07-15T00:00:00Z'/><meta property='article:modified_time' content='2012-07-15T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順 • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/install-pandoc/'>
@@ -90,51 +90,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -233,17 +235,12 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="hs-httpがインストールできない">hs-httpがインストールできない!</h2>
-
+  <h2 id="hs-http">hs-httpがインストールできない!</h2>
 <p>Macにpandocを入れようと気軽にMacPortsで</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port install pandoc</code></pre></div>
-<p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&hellip;</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port install pandoc
+</code></pre></div><p>したところ <em>hs-http</em> のインストールのところでなにやらエラー&hellip;</p>
 <p>試しに <em>hs-http</em> だけインストールしてみたところ、</p>
-
-<!-- more -->
+<!-- raw HTML omitted -->
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port -d install hs-http
   ...
   Configuring HTTP-4000.1.1...
@@ -260,28 +257,25 @@ if (!doNotTrack) {
   Please see the log file <span style="color:#66d9ef">for</span> port hs-http <span style="color:#66d9ef">for</span> details:
       /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/main.log
   To report a bug, follow the instructions in the guide:    http://guide.macports.org/#project.tickets
-  Error: Processing of port hs-http failed</code></pre></div>
-<p>と、<em>gcc-4.2</em> が実行できないというエラーが発生している。</p>
-
-<h2 id="gcc-4-2-を用意する">gcc-4.2 を用意する</h2>
-
+  Error: Processing of port hs-http failed
+</code></pre></div><p>と、<em>gcc-4.2</em> が実行できないというエラーが発生している。</p>
+<h2 id="gcc-42-">gcc-4.2 を用意する</h2>
 <p>それではと gcc-4.2 が入っているか見てみたところ、</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ll /usr/bin/gcc*
-  lrwxr-xr-x  <span style="color:#ae81ff">1</span> root  wheel  <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">12</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">2011</span> /usr/bin/gcc -&gt; llvm-gcc-4.2</code></pre></div>
-<p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br />
+  lrwxr-xr-x  <span style="color:#ae81ff">1</span> root  wheel  <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">12</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">2011</span> /usr/bin/gcc -&gt; llvm-gcc-4.2
+</code></pre></div><p>と <em>llvm-gcc-4.2</em> はあるものの <em>gcc-4.2</em> はない模様。<br>
 それでは <em>gcc-4.2</em> を入れましょうと、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port install gcc42</code></pre></div>
-<p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port install gcc42
+</code></pre></div><p>としてみたものの、Snow Leopard以降にはインストールできないという冷たいお返事。
 それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2</code></pre></div>
-<h2 id="pandocのインストール">pandocのインストール</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
+</code></pre></div><h2 id="pandoc">pandocのインストール</h2>
 <p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port -d install hs-http</code></pre></div>
-<p>がばっちり成功しました!
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port -d install hs-http
+</code></pre></div><p>がばっちり成功しました!
 もちろんそもそものpandocも、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port install pandoc</code></pre></div>
-<p>で普通にインストールできましたとさ。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo port install pandoc
+</code></pre></div><p>で普通にインストールできましたとさ。</p>
 
 </div>
 

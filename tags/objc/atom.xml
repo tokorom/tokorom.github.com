@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>objc on TOKOROM BLOG</title>
@@ -43,13 +43,13 @@ TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方がで�
 Storyboardいいですよね！ Storyboardを使うことで、
  画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
 Storyboard登場以前だと、次の画面に遷移させるだけでも
-#import &amp;#34;NextViewController.h&amp;#34;  NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+#import &amp;#34;NextViewController.h&amp;#34; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
 しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
 ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
-#import &amp;#34;NextViewController.h&amp;#34;  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
+#import &amp;#34;NextViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
 そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
 もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
-#import &amp;#34;NextViewController.h&amp;#34; #import &amp;#34;ModalViewController.h&amp;#34;  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.</description>
+#import &amp;#34;NextViewController.h&amp;#34;#import &amp;#34;ModalViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&amp;#34;Modal&amp;#34; isEqualToString:segue.</description>
     </item>
     
     <item>
@@ -65,9 +65,9 @@ Storyboard登場以前だと、次の画面に遷移させるだけでも
 runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&amp;hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
 define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
 例えば、こんなかんじでどうでしょう？
-#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif  #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif  // ...  @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT#import XXXLIB_VIEW_CONTROLLER_IMPORT#endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS@interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else@interface TKRContainerTableViewController : UIViewController #endif // ...  @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
 もしsuperclass変えたいよ！って人は、
-#define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;#34;YourSuperViewController.h&amp;#34; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;#34;YourSuperViewController.h&amp;#34;#define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewControllerとどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
 ひとまずこれでなんとかなりそう。
 他に良い方法があればご教示を！</description>
     </item>
@@ -90,8 +90,8 @@ map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果と
 map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd]  + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd]  + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
     </item>
     
     <item>
@@ -120,7 +120,7 @@ PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests cl
       
       <guid>http://www.tokoro.me/posts/objc-reduce/</guid>
       <description>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
-Tipsを適用する前のコード #pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.</description>
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.</description>
     </item>
     
     <item>
@@ -142,7 +142,7 @@ CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表さ�
  ２、３回のクリックで新しいbotを作ることができる ネットワーク上のどのMacでも直ちにbotをスタートできる 別のMacでCIを回している間も、自分のMacでビルド結果やテストの結果を確認できる  とのこと。
 Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
 その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
-参照元 What&amp;rsquo;s New in Xcode 5</description>
+参照元 What&#39;s New in Xcode 5</description>
     </item>
     
     <item>
@@ -152,7 +152,7 @@ Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成で�
       
       <guid>http://www.tokoro.me/posts/ssgentlealertview/</guid>
       <description>UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
-一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。  と記載されています。
+一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
 その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
 それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
 警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
@@ -189,8 +189,9 @@ git clone git://github.com/davepeck/iOS-artwork.git などでダウンロード�
 brew install pil インストールし終わったら
 mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
 Traceback (most recent call last): File &amp;#34;./iOS-artwork.py&amp;#34;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
-export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages  としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
-気を取り直して、</description>
+export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
+気を取り直して、
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.</description>
     </item>
     
     <item>
@@ -207,12 +208,12 @@ https://github.com/tokorom/BlockInjection で公開しています。
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
 [BILib injectToClassWithNameRegex:BIRegex(@&amp;#34;^UIView$&amp;#34;) methodNameRegex:BIRegex(@&amp;#34;^set.*$&amp;#34;) preprocess:^{ NSLog(@&amp;#34;%@&amp;#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
- -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay]  のように全てログ出力されます。
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
 + (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
 ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
-NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^UIView$&amp;#34; options:0 error:&amp;amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^set.</description>
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^UIView$&amp;#34; options:0 error:&amp;amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^set.*$&amp;#34; options:0 error:&amp;amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&amp;#34;%@&amp;#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。</description>
     </item>
     
     <item>
@@ -229,11 +230,13 @@ NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression
 そんなときに BlockInjection ということで本題に入りますが、それを解決するために BlockInjection というライブラリを作りました。
 古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。
 例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。
-#import &amp;#34;BILib.h&amp;#34;  [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます  [tracker sendEventWithCategory:@&amp;#34;uiAction&amp;#34; withAction:@&amp;#34;sendButtonDidPush&amp;#34; withLabel:nil withValue:0]; }]; これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
+#import &amp;#34;BILib.h&amp;#34; [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます  [tracker sendEventWithCategory:@&amp;#34;uiAction&amp;#34; withAction:@&amp;#34;sendButtonDidPush&amp;#34; withLabel:nil withValue:0]; }]; これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
 以下、Q&amp;amp;A方式でライブラリの機能を簡単に紹介させていただきます。
 対象となるクラスをimportしないと使えないとかダサくない？ 確かに、トラッキングのコードをまとめたいときなど、各クラスに処理を埋め込むためにimportがずらっっと並ぶのも不恰好です。
 そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。
-[BILib injectToClassWithName:@&amp;#34;XXXViewController&amp;#34; methodName:@&amp;#34;sendButtonDidPush:&amp;#34; preprocess:^{ // 埋め込みたい処理 }]; 対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。</description>
+[BILib injectToClassWithName:@&amp;#34;XXXViewController&amp;#34; methodName:@&amp;#34;sendButtonDidPush:&amp;#34; preprocess:^{ // 埋め込みたい処理 }]; 対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。
+そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能  NSLog(@&amp;#34;State: %d&amp;#34;, vc.</description>
     </item>
     
     <item>
@@ -264,8 +267,7 @@ CtrlPについては、
 なお、ここでインストールしたDocsetは、たぶん
 ~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc
-Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39;  で、その他のかたは各自の環境に合わせて読み替えてください。</description>
+ .vimrc  Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39; で、その他のかたは各自の環境に合わせて読み替えてください。</description>
     </item>
     
     <item>
@@ -277,16 +279,14 @@ Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git
       <description>概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
 というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
 具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
- after/ftplugin/objc.vim
-let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39;  という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+ after/ftplugin/objc.vim  let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
  path .clang_complete clang  ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
 の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
  ios  が今回作成したpluginにより追加できるオプションです。
 clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
 これを入れることで、clang_completeでのコード補完実行の際に、
  &#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する  という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目+αのことを自動でやってくれるようになります。
-インストール方法  pluginをVundleなどでインストール
-# Vundleをご利用の場合 Bundle &amp;#39;git://github.</description>
+インストール方法  pluginをVundleなどでインストール  # Vundleをご利用の場合 Bundle &amp;#39;git://github.</description>
     </item>
     
     <item>
@@ -302,15 +302,16 @@ clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した cl
  他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない）  などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
 1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&amp;#34;HELLO %3.1d&amp;#34;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&amp;hellip;とよく思ってしまう。
 ということで、
-#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__] を定義して
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]を定義して
 NSString* message = NSPRINTF(@&amp;#34;HELLO %3.1d&amp;#34;, 333.333); としています。ちょっと楽！
 ** ※2013/1/9 追記 *
 NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
 元々のイメージはNSString+sprintfだったが再考すべし。
 2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&amp;#34;KEY&amp;#34;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&amp;hellip;とよく思ってしまう。
 ということで、
-#define LSTR(s) NSLocalizedString((s), nil) を定義して
-NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっと楽！</description>
+#define LSTR(s) NSLocalizedString((s), nil)を定義して
+NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっと楽！
+3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、</description>
     </item>
     
     <item>
@@ -326,10 +327,8 @@ NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっ
 みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
 クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
 例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
- GameScore.m
-#import &amp;#34;GameScore.h&amp;#34;  @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; }  この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
-ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h
-@interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end  手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。</description>
+ GameScore.m  #import &amp;#34;GameScore.h&amp;#34; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。</description>
     </item>
     
     <item>
@@ -348,11 +347,11 @@ clangコマンドでのコード補完を試してみる clangコマンドはXco
 具体的には、
 // clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
 例えば、
- Classes/Controllers/MainViewController.m
-#import &amp;#34;MainViewController.h&amp;#34;  @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end  の [numbers o のところで補完をしたいとして、
-clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m  というコマンドを実行してみます。
+ Classes/Controllers/MainViewController.m  #import &amp;#34;MainViewController.h&amp;#34; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
 すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
-同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。</description>
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</description>
     </item>
     
     <item>
@@ -361,11 +360,11 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
       <pubDate>Wed, 12 Sep 2012 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/posts/objc-private-test/</guid>
-      <description> dkfjさんが Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法 という記事を書かれていました。
+      <description>dkfjさんが Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法 という記事を書かれていました。
 せっかくなので私がやっている方法も書かせていただきます。
 テスト対象のクラス 以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。
-#import &amp;#34;ExampleClass.h&amp;#34;  @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
-#import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;#34;ExampleClass.h&amp;#34;  @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  </description>
+#import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
+#import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  </description>
     </item>
     
     <item>
@@ -375,12 +374,12 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
       
       <guid>http://www.tokoro.me/posts/safe-objc/</guid>
       <description>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &amp;#34;OtherLibrary1.h&amp;#34; #import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
-そうしてしまうと、この Library.h をimportする全てのクラスに、*OtherLibrary1.h*と*OtherLibrary2.h*も芋づる式にimportすることを強要することになってしまいます。
-実際にこの Library を使うクラスでは、*otherLibrary1*も*otherLibrary2*も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+#import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end#import &amp;#34;OtherLibrary1.h&amp;#34; #import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。</description>
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。</description>
     </item>
     
     <item>
@@ -398,7 +397,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 // id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end#import &amp;#34;Wrapper.</description>
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.</description>
     </item>
     
     <item>
@@ -410,7 +409,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
       <description>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
 これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
 Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
-#pragma mark - Private Category  @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation  @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.</description>
+#pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.</description>
     </item>
     
   </channel>

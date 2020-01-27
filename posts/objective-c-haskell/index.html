@@ -14,8 +14,8 @@ map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結�
 map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd]  &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd]  &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。'>
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='Objective-Cでカリー化とか部分適用してみる • Yuta Tokoro'>
@@ -31,13 +31,13 @@ map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結�
 map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd]  &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd]  &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。'>
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/objective-c-haskell/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='objc'><meta property='article:tag' content='ios'><meta property='article:tag' content='haskell'><meta property='article:published_time' content='2013-11-04T00:00:00Z'/><meta property='article:modified_time' content='2013-11-04T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>Objective-Cでカリー化とか部分適用してみる • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/objective-c-haskell/'>
@@ -110,51 +110,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -253,40 +255,27 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="導入">導入</h2>
-
-<p><a href="https://info.cookpad.com/" target="_blank">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
+  <h2 id="heading">導入</h2>
+<p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
-
 <p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
-
 <p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
-
-<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell" target="_blank">こちら</a> に置いてあります。</p>
-
-<h2 id="ひとまずのゴール">ひとまずのゴール</h2>
-
+<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
+<h2 id="heading-1">ひとまずのゴール</h2>
 <p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">map</span> (<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]</code></pre></div>
-<p>これです。<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">map</span> (<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</code></pre></div><p>これです。<br>
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) ([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>])</code></pre></div>
-<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) ([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>])
+</code></pre></div><p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
 <p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (OP(<span style="color:#e6db74">&#39;+&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>)</code></pre></div>
-<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>)
+</code></pre></div><p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
 <p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
-
-<!-- more -->
-
-<h2 id="カリー化の実現方法">カリー化の実現方法</h2>
-
+<!-- raw HTML omitted -->
+<h2 id="heading-2">カリー化の実現方法</h2>
 <p>実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す <code>add</code> の実装です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#define add [ObjcHaskell hsAdd]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define add [ObjcHaskell hsAdd]</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 + (curryingBlock)<span style="color:#a6e22e">hsAdd</span>
 {
@@ -294,9 +283,9 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
         x, y,
         <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">@(</span>[x intValue] <span style="color:#f92672">+</span> [y intValue]<span style="color:#ae81ff">)</span>;
     );
-}</code></pre></div>
-<p><code>CURRYING2</code>という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#define add [ObjcHaskell hsAdd]
+}
+</code></pre></div><p><code>CURRYING2</code>という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define add [ObjcHaskell hsAdd]</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 + (curryingBlock)<span style="color:#a6e22e">hsAdd</span>
 {
@@ -305,49 +294,42 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
           <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">@(</span>[x intValue] <span style="color:#f92672">+</span> [y intValue]<span style="color:#ae81ff">)</span>;
         }
     }<span style="color:#f92672">:</span>
-}</code></pre></div>
-<p>Blockを返すBlockを返す関数というかんじになってます。
+}
+</code></pre></div><p>Blockを返すBlockを返す関数というかんじになってます。
 外側のBlockは<code>x</code>という引数を取り、中側のBlockを返す。
-中側のBlockは<code>y</code>という引数を取り、外側のBlockでキャプチャされた<code>x</code>と自分でキャプチャした<code>y</code>を加算した結果を返す。<br />
+中側のBlockは<code>y</code>という引数を取り、外側のBlockでキャプチャされた<code>x</code>と自分でキャプチャした<code>y</code>を加算した結果を返す。<br>
 という実装です。</p>
-
 <p>この関数の戻り値に引数を1つ（<code>x</code>にあたるもの）渡すと、中側のBlockが返されてそのBlockは最後の引数（<code>y</code>にあたるもの）を期待し、<code>x</code>はBlockの仕組みできちんとキャプチャ（保存）された状態になります。
 これで部分適用もばっちりということです！</p>
-
 <p>例えば、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">curryingBlock add3 <span style="color:#f92672">=</span> add (<span style="color:#ae81ff">@3</span>);</code></pre></div>
-<p>とすれば、<code>add</code>に対して<code>@3</code>を部分適用した関数（正確にはBlock）が取得でき、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#66d9ef">id</span> result <span style="color:#f92672">=</span> add3 (<span style="color:#ae81ff">@4</span>);</code></pre></div>
-<p>で、<code>3 + 4</code> の結果、<code>7</code> を計算できます。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">curryingBlock add3 <span style="color:#f92672">=</span> add (<span style="color:#ae81ff">@3</span>);
+</code></pre></div><p>とすれば、<code>add</code>に対して<code>@3</code>を部分適用した関数（正確にはBlock）が取得でき、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#66d9ef">id</span> result <span style="color:#f92672">=</span> add3 (<span style="color:#ae81ff">@4</span>);
+</code></pre></div><p>で、<code>3 + 4</code> の結果、<code>7</code> を計算できます。</p>
 <p>論理的には引数の数だけBlockを入れ子にしていくことで引数がいくつであっても対応可能なはず。</p>
-
-<h2 id="演算子の関数化">演算子の関数化</h2>
-
+<h2 id="heading-3">演算子の関数化</h2>
 <p>Objective-Cでは<code>+</code>とか<code>-</code>といった演算子は関数ではないのでそのままでは使えません。
 ということで <code>OP('+')</code> みたいにマクロでなんとかすると説明したのですが、そのマクロはこんなかんじになってます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#define OP(op) ([ObjcHaskell hsSectionWithOperator:op])</span></code></pre></div>
-<p>単に、charをObjective-Cのメソッドに渡してその演算子に適した関数を得ているだけです。<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define OP(op) ([ObjcHaskell hsSectionWithOperator:op])</span><span style="color:#75715e">
+</span></code></pre></div><p>単に、charをObjective-Cのメソッドに渡してその演算子に適した関数を得ているだけです。<br>
 このメソッドの実装は、</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">+ (curryingBlock)<span style="color:#a6e22e">hsSectionWithOperator:</span>(<span style="color:#66d9ef">int</span>)op
 {
     <span style="color:#66d9ef">switch</span> (op) {
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;+&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> add;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> sub;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;*&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> mul;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> div;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;:&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> cons;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;&lt;&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> lessThan;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;&gt;&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> greaterThan;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> add;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> sub;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> mul;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> div;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> cons;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&lt;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> lessThan;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> greaterThan;
         <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> [ObjcHaskell hsReturnNil];
     }
-}</code></pre></div>
-<p>こんなかんじで、演算子に対応するカリー化した関数をそのまま返しています。</p>
-
-<h2 id="畳み込み">畳み込み</h2>
-
+}
+</code></pre></div><p>こんなかんじで、演算子に対応するカリー化した関数をそのまま返しています。</p>
+<h2 id="heading-4">畳み込み</h2>
 <p>ではこの仕組みを使って畳み込み関数 <code>foldr</code> を作ってみましょう。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#define foldr [ObjcHaskell hsFoldr]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define foldr [ObjcHaskell hsFoldr]</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 + (curryingBlock)<span style="color:#a6e22e">hsFoldr</span>
 {
@@ -361,36 +343,31 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
         }
         <span style="color:#66d9ef">return</span> acc;
     );
-}</code></pre></div>
-<p><code>CURRYING2</code>が<code>CURRYING3</code>になっただけで、あとの考え方はさっきと同じです。
-<code>foldr</code>の１つめの引数は２つの引数を持つ関数です。ここでは<code>binary</code>がそれに相当します。<br />
+}
+</code></pre></div><p><code>CURRYING2</code>が<code>CURRYING3</code>になっただけで、あとの考え方はさっきと同じです。
+<code>foldr</code>の１つめの引数は２つの引数を持つ関数です。ここでは<code>binary</code>がそれに相当します。<br>
 最終的には<code>binary</code>にリストの要素を１つずつ渡して計算していくわけで、</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#66d9ef">id</span> acc <span style="color:#f92672">=</span> ini;
 curryingBlock fnc <span style="color:#f92672">=</span> binary;
 <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">id</span> elem <span style="color:#66d9ef">in</span> [list reverseObjectEnumerator]) {
     acc <span style="color:#f92672">=</span> fnc (elem) (acc);
-}</code></pre></div>
-<p>の部分がそれに相当します。<br />
+}
+</code></pre></div><p>の部分がそれに相当します。<br>
 リストの要素を１つずつ取り出して、初期値（もしくは前の計算結果）と一緒に <code>binary</code> に渡していくだけです。</p>
-
 <p>あとは最後の計算結果（<code>acc</code>）をreturnすれば<code>foldr</code>の完成です！</p>
-
-<h2 id="ちょっとhaskellっぽく関数実装">ちょっとHaskellっぽく関数実装</h2>
-
+<h2 id="haskell">ちょっとHaskellっぽく関数実装</h2>
 <p>では、この畳み込みを使ってさらに新しい関数 <code>sum</code> を作ってみましょう。
 <code>sum</code> は引数に渡したリストの要素を足し合わせたものを返す関数です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#define sum [ObjcHaskell hsSum]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define sum [ObjcHaskell hsSum]</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 + (curryingBlock)<span style="color:#a6e22e">hsSum</span>
 {
     <span style="color:#66d9ef">return</span> ((<span style="color:#66d9ef">id</span>)
-        foldr OP(<span style="color:#e6db74">&#39;+&#39;</span>) (<span style="color:#ae81ff">@0</span>)
+        foldr OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@0</span>)
     );
-}</code></pre></div>
-<p>こんなかんじで、さきほど作った<code>foldr</code>を使って簡単に実装できました。</p>
-
-<h2 id="最後にmapの実装">最後にmapの実装</h2>
-
+}
+</code></pre></div><p>こんなかんじで、さきほど作った<code>foldr</code>を使って簡単に実装できました。</p>
+<h2 id="map">最後にmapの実装</h2>
 <p><code>map</code>ですが本来は畳み込みで実現したかったのですが、今のところはラムダ式に対応していないためできませんでした。
 今回はベタに普通のObjective-C的に中身を実装してます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">+ (curryingBlock)<span style="color:#a6e22e">hsMap</span>
@@ -404,27 +381,21 @@ curryingBlock fnc <span style="color:#f92672">=</span> binary;
         }
         <span style="color:#66d9ef">return</span> ret;
     );
-}</code></pre></div>
-<p>引数を１つ持つ関数とリストの２つをもらって、そのリストの要素１つ１つにその関数を適用しているだけです。</p>
-
-<h2 id="mapを実行">mapを実行</h2>
-
+}
+</code></pre></div><p>引数を１つ持つ関数とリストの２つをもらって、そのリストの要素１つ１つにその関数を適用しているだけです。</p>
+<h2 id="map-1">mapを実行</h2>
 <p>ということで、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (OP(<span style="color:#e6db74">&#39;+&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>)</code></pre></div>
-<p>を実現する仕組みが出そろいました。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>)
+</code></pre></div><p>を実現する仕組みが出そろいました。</p>
 <p>早速テストを実行してみると&hellip;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">testMap</span>
 {
-    <span style="color:#66d9ef">id</span> result <span style="color:#f92672">=</span> map (OP(<span style="color:#e6db74">&#39;+&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>);
-    XCTAssertEqualObjects(result, (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@4</span>, <span style="color:#ae81ff">@5</span>, <span style="color:#ae81ff">@6</span><span style="color:#ae81ff">]</span>), <span style="color:#e6db74">@&#34;result is invalid&#34;</span>);
-}</code></pre></div>
-<p>無事に <code>@[@4, @5, @6]</code> が返るのを確認できました。</p>
-
+    <span style="color:#66d9ef">id</span> result <span style="color:#f92672">=</span> map (OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>);
+    XCTAssertEqualObjects(result, (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@4</span>, <span style="color:#ae81ff">@5</span>, <span style="color:#ae81ff">@6</span><span style="color:#ae81ff">]</span>), <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">result is invalid</span><span style="color:#e6db74">&#34;</span>);
+}
+</code></pre></div><p>無事に <code>@[@4, @5, @6]</code> が返るのを確認できました。</p>
 <p>やったー！</p>
-
 <p>まあこれをiOSアプリ開発で使うことはないでしょうが、楽しかった。。。</p>
-
 <p>　</p>
 
 </div>

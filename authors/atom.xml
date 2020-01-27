@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors on TOKOROM BLOG</title>
@@ -6,7 +6,7 @@
     <description>Recent content in Authors on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 23 Dec 2019 11:47:15 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jan 2020 14:32:55 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/authors/atom.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>tokorom</title>
       <link>http://www.tokoro.me/authors/tokorom/</link>
-      <pubDate>Mon, 23 Dec 2019 11:47:15 +0900</pubDate>
+      <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
       
       <guid>http://www.tokoro.me/authors/tokorom/</guid>
       <description></description>

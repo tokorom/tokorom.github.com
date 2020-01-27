@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cui on TOKOROM BLOG</title>
@@ -24,7 +24,9 @@
 以下、試したことをまとめます。
 ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
  Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
-tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。</description>
+tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript
+現在の課題としましては、</description>
     </item>
     
     <item>
@@ -36,16 +38,14 @@ tell application &amp;quot;System Events&amp;quot; set activeApp to first proces
       <description>** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
 導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
 設定は以下のとおり。
- .tmux.conf
-bind C-t last-pane  これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+ .tmux.conf  bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
 ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
 例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
 改善 ということで、
  paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
 そんなんできるんかいな？と思ったけどごくごく普通にできた。
 設定は以下のとおり。
- .tmux.conf
-bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34;  runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+ .tmux.conf  bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
 これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
 便利便利！</description>
     </item>

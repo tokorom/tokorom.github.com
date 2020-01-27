@@ -24,8 +24,7 @@ CtrlPについては、
 なお、ここでインストールしたDocsetは、たぶん
 ~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc
-Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39;  で、その他のかたは各自の環境に合わせて読み替えてください。'>
+ .vimrc  Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました • Yuta Tokoro'>
@@ -51,13 +50,12 @@ CtrlPについては、
 なお、ここでインストールしたDocsetは、たぶん
 ~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc
-Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39;  で、その他のかたは各自の環境に合わせて読み替えてください。'>
+ .vimrc  Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/ctrlp-docset/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='vim'><meta property='article:tag' content='ios'><meta property='article:tag' content='objc'><meta property='article:published_time' content='2013-01-15T00:00:00Z'/><meta property='article:modified_time' content='2013-01-15T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/ctrlp-docset/'>
@@ -130,51 +128,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -273,127 +273,87 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="vimでリファレンス読む必要ありますか">Vimでリファレンス読む必要ありますか？</h2>
-
-<p>正直微妙なところでしょうか。<br />
+  <h2 id="vim">Vimでリファレンス読む必要ありますか？</h2>
+<p>正直微妙なところでしょうか。<br>
 自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
-
 <p>ただ、せっかく<a href="/2013/01/15/ctrlp-docset/">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
-
 <ul>
 <li>Vimでさらっと検索してリファレンスから関数をコピー</li>
 <li>そのままプログラミングにペースト</li>
 </ul>
-
 <p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
-
 <p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
-
-<h2 id="docsetを検索するctrlpのエクステンションを作りました">Docsetを検索するCtrlPのエクステンションを作りました</h2>
-
-<p><a href="https://github.com/tokorom/ctrlp-docset" target="_blank">ctrlp-docset</a> というpluginを作りました。<br />
-オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br />
+<h2 id="docsetctrlp">Docsetを検索するCtrlPのエクステンションを作りました</h2>
+<p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br>
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br>
 なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
-
-<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim" target="_blank">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
-
+<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
 <p>CtrlPについては、</p>
-
 <ul>
-<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm" target="_blank">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
-<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012" target="_blank">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
+<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
+<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
 </ul>
-
 <p>あたりがわかりやすかったです。</p>
-
 <p>インストールして動かすと、</p>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg" /></p>
-
+<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg"></p>
 <p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。</p>
-
-<!-- more -->
-
-<p>参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。<br />
-自分はVim内で完結したいので <a href="https://github.com/yuratomo/w3m.vim" target="_blank">w3m.vim</a> を使ってVim内で表示するように設定しました。</p>
-
-<h2 id="インストール">インストール</h2>
-
-<h3 id="まずはdocsetがインストールされているか確認">まずはDocsetがインストールされているか確認</h3>
-
-<p>これがないとはじまりません。<br />
-あるかどうか心配なかたは、Xcodeを起動し、 <strong>Preferences&hellip;</strong> の <strong>Downloads</strong> を確認してみてください。<br />
-ここの <strong>Documentation</strong> タブのほうで <strong>iOS 6.0 Library</strong> かそれに相当するものが <strong>Installed</strong> とインストール済みになっていれば問題ありません。<br />
+<!-- raw HTML omitted -->
+<p>参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。<br>
+自分はVim内で完結したいので <a href="https://github.com/yuratomo/w3m.vim">w3m.vim</a> を使ってVim内で表示するように設定しました。</p>
+<h2 id="heading">インストール</h2>
+<h3 id="docset">まずはDocsetがインストールされているか確認</h3>
+<p>これがないとはじまりません。<br>
+あるかどうか心配なかたは、Xcodeを起動し、 <strong>Preferences&hellip;</strong> の <strong>Downloads</strong> を確認してみてください。<br>
+ここの <strong>Documentation</strong> タブのほうで <strong>iOS 6.0 Library</strong> かそれに相当するものが <strong>Installed</strong> とインストール済みになっていれば問題ありません。<br>
 なければここからインストールをしてみてください。</p>
-
-<p><img src="http://dl.dropbox.com/u/10351676/images/xcode_docset.jpg" alt="xcode_docset.jpg" /></p>
-
+<p><img src="http://dl.dropbox.com/u/10351676/images/xcode_docset.jpg" alt="xcode_docset.jpg"></p>
 <p>なお、ここでインストールしたDocsetは、たぶん</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset</code></pre></div>
-<p>に配置されると思います。</p>
-
-<h3 id="ctrlp-と-ctrlp-docset-をインストール">CtrlP と ctrlp-docset をインストール</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset
+</code></pre></div><p>に配置されると思います。</p>
+<h3 id="ctrlp--ctrlp-docset-">CtrlP と ctrlp-docset をインストール</h3>
 <p>Vundleを使ってらっしゃるなら、</p>
-
 <ul>
-<li><p>.vimrc</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Bundle <span style="color:#e6db74">&#39;git://github.com/kien/ctrlp.vim.git&#39;</span>
-Bundle <span style="color:#e6db74">&#39;git://github.com/tokorom/ctrlp-docset.git&#39;</span></code></pre></div></li>
+<li>.vimrc</li>
 </ul>
-
-<p>で、その他のかたは各自の環境に合わせて読み替えてください。</p>
-
-<h3 id="ctrlp-docset-の設定">ctrlp-docset の設定</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Bundle <span style="color:#e6db74">&#39;git://github.com/kien/ctrlp.vim.git&#39;</span>
+Bundle <span style="color:#e6db74">&#39;git://github.com/tokorom/ctrlp-docset.git&#39;</span>
+</code></pre></div><p>で、その他のかたは各自の環境に合わせて読み替えてください。</p>
+<h3 id="ctrlp-docset-">ctrlp-docset の設定</h3>
 <p>設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。</p>
-
 <ul>
-<li><p>.vimrc</p>
+<li>.vimrc</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし）</span>
 let g:ctrlp_docset_docsetutil_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil&#39;</span>
 
 <span style="color:#75715e"># iOS用のDocsetの場所を指定する（下記と同じ場所なら設定必要なし）</span>
 <span style="color:#75715e"># objc は filetype です / 他の filetype をご利用の場合はそれを設定してください</span>
-let g:ctrlp_docset_filepaths <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;objc&#39;</span>: <span style="color:#e6db74">&#39;~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset&#39;</span><span style="color:#f92672">}</span></code></pre></div></li>
-</ul>
-
-<h2 id="実行">実行!</h2>
-
+let g:ctrlp_docset_filepaths <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;objc&#39;</span>: <span style="color:#e6db74">&#39;~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset&#39;</span><span style="color:#f92672">}</span>
+</code></pre></div><h2 id="heading-1">実行!</h2>
 <p>これらの設定が全部終わったらVimでObjective-Cのファイルを開いた後に、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">:CtrlPDocset</code></pre></div>
-<p>を実行してみてください。<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">:CtrlPDocset
+</code></pre></div><p>を実行してみてください。<br>
 設定がうまくいっていればiOSのクラス/メソッドがインクリメンタル検索できるはずです。</p>
-
 <p>また、参照したいクラス/メソッドを選択（Enter）すればドキュメントがブラウザで開かれます。</p>
-
-<p>Vimを起動して１回目の実行はだいぶん遅いと思います。<br />
+<p>Vimを起動して１回目の実行はだいぶん遅いと思います。<br>
 ２回目以降はデータがキャッシュされているのでストレスなく利用できると思います。</p>
-
-<h2 id="キーバインドの変更">キーバインドの変更</h2>
-
+<h2 id="heading-2">キーバインドの変更</h2>
 <ul>
-<li><p>.vimrc</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nnoremap お好みのキー :&lt;C-u&gt;CtrlPDocset&lt;CR&gt;</code></pre></div></li>
+<li>.vimrc</li>
 </ul>
-
-<h2 id="ドキュメントをw3mで開きたい">ドキュメントをw3mで開きたい</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nnoremap お好みのキー :&lt;C-u&gt;CtrlPDocset&lt;CR&gt;
+</code></pre></div><h2 id="w3m">ドキュメントをw3mで開きたい</h2>
 <p>w3mコマンドが利用できる環境ならもちろん可能です。
 Macなら <code>brew install w3m</code> などであらかじめインストールしておいてください。</p>
-
 <ul>
-<li><p>.vimrc</p>
+<li>.vimrc</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># w3m.vim が必要です</span>
 Bundle <span style="color:#e6db74">&#39;git://github.com/yuratomo/w3m.vim.git&#39;</span>
 
 <span style="color:#75715e"># ドキュメントを開くときのコマンドを変える場合にはこのオプション（%sにURLが渡される）</span>
-let g:ctrlp_docset_accept_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;:W3mSplit local %s&#39;</span></code></pre></div></li>
-</ul>
-
-<p>これらの設定をしておけば、ブラウザで開く代わりにVim内でドキュメント参照が完結できるようになるはずです。</p>
+let g:ctrlp_docset_accept_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;:W3mSplit local %s&#39;</span>
+</code></pre></div><p>これらの設定をしておけば、ブラウザで開く代わりにVim内でドキュメント参照が完結できるようになるはずです。</p>
 
 </div>
 

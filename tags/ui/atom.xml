@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ui on TOKOROM BLOG</title>
@@ -26,7 +26,7 @@ https://github.com/airbnb/lottie-ios
  これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottielet animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
@@ -50,7 +50,8 @@ AppleTVを利用しているということは当然テレビを利用してい�
 自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
 テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
    REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
-UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。</description>
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。</description>
     </item>
     
     <item>
@@ -73,7 +74,8 @@ A2. 写真アプリのフルスクリーン画面での左右スワイプ さて
 あれ？Q1の答えと逆の動きだ&amp;hellip;
 A3. Appスイッチャーでの左右スワイプ 続いてQ3のAppスイッチャーでの挙動はどうでしょう？
 Appスイッチャーで「右スワイプ」したときの挙動は、
- 表示されていた ミュージック が右に動き 左隣のアプリが表示される  こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。</description>
+ 表示されていた ミュージック が右に動き 左隣のアプリが表示される  こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。
+フォーカスどこいった！？</description>
     </item>
     
     <item>
@@ -100,19 +102,19 @@ iOS 7が正式リリースされました。既にアップデートを行って
       <guid>http://www.tokoro.me/posts/ios7-ui-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
 今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
-&amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;rdquo;フラットデザイン&amp;rdquo;が採用されて、画面デザインは大分シンプルな外観になりました。
+&amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;quot;フラットデザイン&amp;quot;が採用されて、画面デザインは大分シンプルな外観になりました。
 使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。
 iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。
-ただ、&amp;rdquo;Simplicity&amp;rdquo;という言葉は、単に外観を表すものとして使われているわけではありません。
+ただ、&amp;ldquo;Simplicity&amp;quot;という言葉は、単に外観を表すものとして使われているわけではありません。
 「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。
 実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。
 なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。
 全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。
 これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。
-アップルは今回、外観的な&amp;rdquo;Simplicity&amp;rdquo;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。
+アップルは今回、外観的な&amp;quot;Simplicity&amp;quot;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。
 画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。
 これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。
-では、アップルの&amp;rdquo;Simplicity&amp;rdquo;を構成する要素にはどのようなものがあるでしょうか。
+では、アップルの&amp;quot;Simplicity&amp;quot;を構成する要素にはどのようなものがあるでしょうか。
 1. &amp;ldquo;refining the typography&amp;rdquo; タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。
 英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。
 一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。
@@ -148,12 +150,10 @@ http://www.apple.com/ios/ios7/
 これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。
 デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。
 iOS 7 Video - 書き起こし &amp;amp; 和訳 ※ 画像はすべて iOS 7 Video の中からの抜粋です
-We have always thought of design as being so much more than just the way something looks.
-私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
-It’s the whole thing the way something actually works on so many different levels.
-デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
-Ultimately of course, design defines so much of our experience.
-最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。</description>
+ We have always thought of design as being so much more than just the way something looks.私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
+It’s the whole thing the way something actually works on so many different levels.デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
+Ultimately of course, design defines so much of our experience.最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
+I think there is a profound and enduring beauty in simplicity, in clarity, in efficiency.</description>
     </item>
     
   </channel>

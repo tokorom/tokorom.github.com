@@ -12,11 +12,11 @@ clangコマンドでのコード補完を試してみる clangコマンドはXco
 具体的には、
 // clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
 例えば、
- Classes/Controllers/MainViewController.m
-#import &#34;MainViewController.h&#34;  @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end  の [numbers o のところで補完をしたいとして、
-clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m  というコマンドを実行してみます。
+ Classes/Controllers/MainViewController.m  #import &#34;MainViewController.h&#34; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
 すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
-同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。'>
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='VimでObjective-Cのコード補完を実行する with clang • Yuta Tokoro'>
@@ -30,16 +30,16 @@ clangコマンドでのコード補完を試してみる clangコマンドはXco
 具体的には、
 // clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
 例えば、
- Classes/Controllers/MainViewController.m
-#import &#34;MainViewController.h&#34;  @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end  の [numbers o のところで補完をしたいとして、
-clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m  というコマンドを実行してみます。
+ Classes/Controllers/MainViewController.m  #import &#34;MainViewController.h&#34; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
 すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
-同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。'>
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）'>
 <meta property='og:url' content='http://www.tokoro.me/posts/clang-complete-for-vim/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='objc'><meta property='article:tag' content='vim'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2013-01-02T00:00:00Z'/><meta property='article:modified_time' content='2013-01-02T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>VimでObjective-Cのコード補完を実行する with clang • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/clang-complete-for-vim/'>
@@ -112,51 +112,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -255,141 +257,29 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<h2 id="概要">概要</h2>
-
+  <h2 id="heading">概要</h2>
 <p>VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。</p>
-
 <p>そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。</p>
-
 <p>具体的には、</p>
-
 <ol>
 <li><strong>clangコマンドでのコード補完を試してみる</strong></li>
 <li><strong>その結果をもってVimの <code>clang_complete</code> プラグインを導入する</strong></li>
 </ol>
-
 <p>という手順で実施しました。</p>
-
 <p>結果として満足いく補完環境が整いましたので紹介させていただきます。</p>
-
-<!-- more -->
-
-<h2 id="clangコマンドでのコード補完を試してみる">clangコマンドでのコード補完を試してみる</h2>
-
-<p><code>clang</code>コマンドはXcodeを使っていればはじめっから入っているコマンドです。<br />
+<!-- raw HTML omitted -->
+<h2 id="clang">clangコマンドでのコード補完を試してみる</h2>
+<p><code>clang</code>コマンドはXcodeを使っていればはじめっから入っているコマンドです。<br>
 じつはこの<code>clang</code>コマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。</p>
-
 <p>具体的には、</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// clang -cc1 -code-completion-at<span style="color:#f92672">=</span>ソースコード.m:行数:列数 ソースコード.m
-clang -cc1 -code-completion-at<span style="color:#f92672">=</span>Sample.m:20:5 Sample.m</code></pre></div>
-<p>というコマンドになります。<br />
+clang -cc1 -code-completion-at<span style="color:#f92672">=</span>Sample.m:20:5 Sample.m
+</code></pre></div><p>というコマンドになります。<br>
 例えば、</p>
-
 <ul>
-<li><p>Classes/Controllers/MainViewController.m</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#import &#34;MainViewController.h&#34;
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">MainViewController</span>
-
-- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">viewDidLoad</span>
-{
-[super viewDidLoad];
-
-NSArray<span style="color:#f92672">*</span> numbers <span style="color:#f92672">=</span> <span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>;
-[numbers o
-}
-
-<span style="color:#66d9ef">@end</span></code></pre></div></li>
+<li>Classes/Controllers/MainViewController.m</li>
 </ul>
-
-<p>の <code>[numbers o</code> のところで補完をしたいとして、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">clang -cc1 -code-completion-at<span style="color:#f92672">=</span>Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m </code></pre></div>
-<p>というコマンドを実行してみます。<br />
-すると <code>COMPLETION:</code> ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。</p>
-
-<p>同時に、<code>xxx warnings and xxx errors generated.</code> とエラーが発生しているのも確認できるかと思います。</p>
-
-<h2 id="clangによる補完時のオプション">clangによる補完時のオプション</h2>
-
-<p>このエラーは、clangに対するオプションの不足によるものです。
-そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</p>
-
-<ul>
-<li><strong>-w</strong><br />
-=&gt; 全ての警告を無視する（コード補完では警告はいらない）</li>
-<li><strong>-fblocks</strong><br />
-=&gt; ブロック構文を利用している場合に指定するオプション</li>
-<li><strong>-fobjc-arc</strong><br />
-=&gt; ARCを使用している場合に指定するオプション<br /></li>
-<li><strong>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300</strong><br />
-=&gt; ターゲットがiOS 4.3 以上であることを示す<br /></li>
-<li><strong>-include ./**/*-Prefix.pch</strong><br />
-=&gt; プロジェクト内のpch（プリコンパイルヘッダ）のinclude<br /></li>
-<li><strong>-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks</strong><br />
-=&gt; iOS標準のフレームワークがあるディレクトリ指定<br /></li>
-<li><strong>-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include</strong><br />
-=&gt; iOS標準クラスのヘッダーがあるディレクトリ指定<br /></li>
-</ul>
-
-<p>この他、独自のヘッダーファイルがある場合は <code>-I</code> の設定を加える必要があります。</p>
-
-<p>これらのオプションを指定してclangを実行してみると、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">clang -cc1 -code-completion-at<span style="color:#f92672">=</span>Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED<span style="color:#f92672">=</span><span style="color:#ae81ff">40300</span> -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include </code></pre></div>
-<p>無事にerrorなしで補完候補を引き出すことが出来ました。</p>
-
-<h2 id="clang-completeプラグインの導入">clang_completeプラグインの導入</h2>
-
-<p>あとは <code>clang_complete</code>プラグイン を導入して、上記で試したオプションを設定してあげれば、無事にVim上でObjective-Cのコード補完が出来るようになります。</p>
-
-<p>なお、自分の場合は <code>neocomplcache</code> と共用する設定をしています。</p>
-
-<ul>
-<li><p>.vimrc (Vundleによるプラグインの設定)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/Shougo/neocomplcache.git&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/Rip-Rip/clang_complete.git&#39;</span></code></pre></div></li>
-
-<li><p>.vimrc (neocomplcacheのドキュメントからコピペしたneocomplcacheとclang_completeを共用するための設定)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">exists</span>(<span style="color:#e6db74">&#39;g:neocomplcache_force_omni_patterns&#39;</span>)<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span> = {}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_overwrite_completefunc</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">c</span> =<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>\ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">cpp</span> =<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>\ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">objc</span> =<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>\ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">objcpp</span> =<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>\ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">clang_complete_auto</span> = <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">clang_auto_select</span> = <span style="color:#ae81ff">0</span></code></pre></div></li>
-</ul>
-
-<p><strong>※2013/1/14 追記</strong><br />
-**ここから先の話は、 <a href="/2013/01/14/easy-objc-complement/">次の記事</a> でもっと簡単な方法も紹介しています</p>
-
-<ul>
-<li><p>.clang_complete (実行するディレクトリに配置するclang実行時の追加オプション指定用ファイル)</p>
-
-<pre><code>-w
--fblocks
--fobjc-arc
--D __IPHONE_OS_VERSION_MIN_REQUIRED=40300
--include ./**/*-Prefix.pch
--F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks
--I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include
-</code></pre></li>
-</ul>
-
-<p>特に最後の <code>.clang_complete</code> ファイルが重要です。<br />
-clangのオプションは <code>.vimrc</code> でも指定できるのですが、こいつを利用することでプロジェクトごとに違うオプションを設定できるようになります（実用時にかなり有用）。</p>
-
-<h2 id="実際にコード補完の実行">実際にコード補完の実行</h2>
-
-<p>すべての設定が完了したら、実際に先ほどの</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#import &#34;MainViewController.h&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;MainViewController.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">MainViewController</span>
 
@@ -401,43 +291,114 @@ clangのオプションは <code>.vimrc</code> でも指定できるのですが
   [numbers o
 }
 
-<span style="color:#66d9ef">@end</span></code></pre></div>
-<p>の <code>[numbers o</code> の直後で補完を実行してみます。<br />
-上記と全く同じ設定をしているならInsertモード時に <code>Ctrl+x Ctrl+o</code> or <code>Ctrl+x Ctrl+u</code> で実行できるはずです。</p>
-
-<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/clang_completion.png" alt="clang_completion" /></p>
-
-<p>ぼくの手元では、きっちり「oからはじまるNSArrayのインスタンスメソッドが一覧表示」されました！</p>
-
-<h2 id="より便利に使うためのオプションを追加">より便利に使うためのオプションを追加</h2>
-
-<p>なお、実際に使ってみると<code>.clang_complete</code>に全てのディレクトリを追加するのが面倒臭くなってきます。<br />
-例えば、<code>Classes/XXX/XXX/Views/</code>というディレクトリにあるヘッダーファイルを使っている場合、</p>
-
-<pre><code>-I Classes/XXX/XXX/Views
-</code></pre>
-
-<p>をわざわざ<code>.clang_complete</code>に加えなければいけません。<br />
-１つなら良いのですがこれがどんどん増えていくようなら<code>.clang_complete</code>のメンテナンスのせいでコーディングリズムが崩れることになりかねません。</p>
-
-<p>例えば、 <strong>カレントディレクトリ以下を再帰的に全て -I に追加してくれるオプション</strong> があればいいのに！<br />
-と思ったのですが少なくとも自分が調べて限りでは見つかりませんでした。</p>
-
-<p>ということで<code>clang_complete</code>をForkして自分で作りました。<br />
-ひとまず今は、 <a href="https://github.com/tokorom/clang_complete" target="_blank">tokorom/clang_complete</a> を使っていただければこのオプションが使えます。</p>
-
-<p>以下、具体的な設定値です。</p>
-
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><p>の <code>[numbers o</code> のところで補完をしたいとして、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">clang -cc1 -code-completion-at<span style="color:#f92672">=</span>Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m 
+</code></pre></div><p>というコマンドを実行してみます。<br>
+すると <code>COMPLETION:</code> ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。</p>
+<p>同時に、<code>xxx warnings and xxx errors generated.</code> とエラーが発生しているのも確認できるかと思います。</p>
+<h2 id="clang-1">clangによる補完時のオプション</h2>
+<p>このエラーは、clangに対するオプションの不足によるものです。
+そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</p>
 <ul>
-<li><p>.vimrc (Vundleによるプラグインの設定)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">#<span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/Rip-Rip/clang_complete.git&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/tokorom/clang_complete.git&#39;</span></code></pre></div></li>
-
-<li><p>.vimrc (カレントディレクトリ以下を再帰的に -I で加える)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">clang_complete_include_current_directory_recursively</span> = <span style="color:#ae81ff">1</span></code></pre></div></li>
+<li><strong>-w</strong><br>
+=&gt; 全ての警告を無視する（コード補完では警告はいらない）</li>
+<li><strong>-fblocks</strong><br>
+=&gt; ブロック構文を利用している場合に指定するオプション</li>
+<li><strong>-fobjc-arc</strong><br>
+=&gt; ARCを使用している場合に指定するオプション</li>
+<li><strong>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300</strong><br>
+=&gt; ターゲットがiOS 4.3 以上であることを示す</li>
+<li><strong>-include ./**/*-Prefix.pch</strong><br>
+=&gt; プロジェクト内のpch（プリコンパイルヘッダ）のinclude</li>
+<li><strong>-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks</strong><br>
+=&gt; iOS標準のフレームワークがあるディレクトリ指定</li>
+<li><strong>-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include</strong><br>
+=&gt; iOS標準クラスのヘッダーがあるディレクトリ指定</li>
 </ul>
+<p>この他、独自のヘッダーファイルがある場合は <code>-I</code> の設定を加える必要があります。</p>
+<p>これらのオプションを指定してclangを実行してみると、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">clang -cc1 -code-completion-at<span style="color:#f92672">=</span>Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED<span style="color:#f92672">=</span><span style="color:#ae81ff">40300</span> -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include 
+</code></pre></div><p>無事にerrorなしで補完候補を引き出すことが出来ました。</p>
+<h2 id="clang-complete">clang_completeプラグインの導入</h2>
+<p>あとは <code>clang_complete</code>プラグイン を導入して、上記で試したオプションを設定してあげれば、無事にVim上でObjective-Cのコード補完が出来るようになります。</p>
+<p>なお、自分の場合は <code>neocomplcache</code> と共用する設定をしています。</p>
+<ul>
+<li>.vimrc (Vundleによるプラグインの設定)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/Shougo/neocomplcache.git&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/Rip-Rip/clang_complete.git&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><ul>
+<li>.vimrc (neocomplcacheのドキュメントからコピペしたneocomplcacheとclang_completeを共用するための設定)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">exists</span>(<span style="color:#e6db74">&#39;g:neocomplcache_force_omni_patterns&#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span> = {}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_overwrite_completefunc</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">c</span> =<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  \ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">cpp</span> =<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  \ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">objc</span> =<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  \ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neocomplcache_force_omni_patterns</span>.<span style="color:#a6e22e">objcpp</span> =<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  \ <span style="color:#e6db74">&#39;[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">clang_complete_auto</span> = <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">clang_auto_select</span> = <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p><strong>※2013/1/14 追記</strong><br>
+**ここから先の話は、 <a href="/2013/01/14/easy-objc-complement/">次の記事</a> でもっと簡単な方法も紹介しています</p>
+<ul>
+<li>.clang_complete (実行するディレクトリに配置するclang実行時の追加オプション指定用ファイル)</li>
+</ul>
+<pre><code>-w
+-fblocks
+-fobjc-arc
+-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300
+-include ./**/*-Prefix.pch
+-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks
+-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include
+</code></pre><p>特に最後の <code>.clang_complete</code> ファイルが重要です。<br>
+clangのオプションは <code>.vimrc</code> でも指定できるのですが、こいつを利用することでプロジェクトごとに違うオプションを設定できるようになります（実用時にかなり有用）。</p>
+<h2 id="heading-1">実際にコード補完の実行</h2>
+<p>すべての設定が完了したら、実際に先ほどの</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc"><span style="color:#75715e">#</span><span style="color:#75715e">import &#34;MainViewController.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">MainViewController</span>
 
-<p>これでカレントディレクトリ以下のヘッダーファイルであれば買ってにインクルードされるようになります！</p>
+- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">viewDidLoad</span>
+{
+  [super viewDidLoad];
+
+  NSArray<span style="color:#f92672">*</span> numbers <span style="color:#f92672">=</span> <span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>;
+  [numbers o
+}
+
+<span style="color:#66d9ef">@end</span>
+</code></pre></div><p>の <code>[numbers o</code> の直後で補完を実行してみます。<br>
+上記と全く同じ設定をしているならInsertモード時に <code>Ctrl+x Ctrl+o</code> or <code>Ctrl+x Ctrl+u</code> で実行できるはずです。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/clang_completion.png" alt="clang_completion"></p>
+<p>ぼくの手元では、きっちり「oからはじまるNSArrayのインスタンスメソッドが一覧表示」されました！</p>
+<h2 id="heading-2">より便利に使うためのオプションを追加</h2>
+<p>なお、実際に使ってみると<code>.clang_complete</code>に全てのディレクトリを追加するのが面倒臭くなってきます。<br>
+例えば、<code>Classes/XXX/XXX/Views/</code>というディレクトリにあるヘッダーファイルを使っている場合、</p>
+<pre><code>-I Classes/XXX/XXX/Views
+</code></pre><p>をわざわざ<code>.clang_complete</code>に加えなければいけません。<br>
+１つなら良いのですがこれがどんどん増えていくようなら<code>.clang_complete</code>のメンテナンスのせいでコーディングリズムが崩れることになりかねません。</p>
+<p>例えば、 <strong>カレントディレクトリ以下を再帰的に全て -I に追加してくれるオプション</strong> があればいいのに！<br>
+と思ったのですが少なくとも自分が調べて限りでは見つかりませんでした。</p>
+<p>ということで<code>clang_complete</code>をForkして自分で作りました。<br>
+ひとまず今は、 <a href="https://github.com/tokorom/clang_complete">tokorom/clang_complete</a> を使っていただければこのオプションが使えます。</p>
+<p>以下、具体的な設定値です。</p>
+<ul>
+<li>.vimrc (Vundleによるプラグインの設定)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">#<span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/Rip-Rip/clang_complete.git&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git://github.com/tokorom/clang_complete.git&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><ul>
+<li>.vimrc (カレントディレクトリ以下を再帰的に -I で加える)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">clang_complete_include_current_directory_recursively</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>これでカレントディレクトリ以下のヘッダーファイルであれば買ってにインクルードされるようになります！</p>
 
 </div>
 

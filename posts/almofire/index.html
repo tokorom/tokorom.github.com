@@ -9,7 +9,7 @@ Swiftいいですね！
 ということで、３月からはじめる新案件ではAlamofireの採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。 やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！
 ※基本的にはAlamofireのREADMEに書かれている話です
 ふつうにJSONを取得するインターフェース まず、普通にJSONを取得するインターフェースですが、
-Alamofire.request(.GET, &#34;https://api.github.com/users&#34;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &#34;\(error)&#34; } else if let JSON = JSON { // ここでJSONをパースしてModelに変換する // これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.'>
+Alamofire.request(.GET, &#34;https://api.github.com/users&#34;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &#34;\(error)&#34; } else if let JSON = JSON { //ここでJSONをパースしてModelに変換する //これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='AlamofireでGenericにModelオブジェクトを取得する • Yuta Tokoro'>
@@ -20,12 +20,12 @@ Swiftいいですね！
 ということで、３月からはじめる新案件ではAlamofireの採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。 やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！
 ※基本的にはAlamofireのREADMEに書かれている話です
 ふつうにJSONを取得するインターフェース まず、普通にJSONを取得するインターフェースですが、
-Alamofire.request(.GET, &#34;https://api.github.com/users&#34;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &#34;\(error)&#34; } else if let JSON = JSON { // ここでJSONをパースしてModelに変換する // これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.'>
+Alamofire.request(.GET, &#34;https://api.github.com/users&#34;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &#34;\(error)&#34; } else if let JSON = JSON { //ここでJSONをパースしてModelに変換する //これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.'>
 <meta property='og:url' content='http://www.tokoro.me/posts/almofire/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='swift'><meta property='article:published_time' content='2015-03-11T00:00:00Z'/><meta property='article:modified_time' content='2015-03-11T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
-<meta name="generator" content="Hugo 0.57.2" />
+<meta name="generator" content="Hugo 0.62.0" />
 
   <title>AlamofireでGenericにModelオブジェクトを取得する • Yuta Tokoro</title>
   <link rel='canonical' href='http://www.tokoro.me/posts/almofire/'>
@@ -98,51 +98,53 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0465116279069768em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0454545454545454em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.069767441860465em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0681818181818181em'>design</a>
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1395348837209303em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.1363636363636362em'>homekit</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.069767441860465em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0681818181818181em'>jenkins</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0930232558139534em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0909090909090908em'>mac</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0465116279069768em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0454545454545454em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.441860465116279em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.4318181818181819em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0465116279069768em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0454545454545454em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0465116279069768em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0454545454545454em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0465116279069768em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0454545454545454em'>sesame</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.1627906976744187em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.1818181818181819em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0232558139534884em'>tvos</a>
+        <a href='/tags/tvos/' style='font-size:1.0227272727272727em'>tvos</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1162790697674418em'>ui</a>
+        <a href='/tags/ui/' style='font-size:1.1136363636363638em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.0930232558139534em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.0909090909090908em'>vim</a>
       </li><li>
         <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0930232558139534em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0909090909090908em'>xcode</a>
       </li></ul>
 </div>
 
@@ -241,36 +243,26 @@ if (!doNotTrack) {
   <div class='alert alert-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
   
 
-  
-
-<p>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています</p>
-
+  <p>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています</p>
 <p>Swiftいいですね！</p>
-
 <p>これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。
-例えば、<a href="https://github.com/Alamofire/Alamofire" target="_blank">Alamofire</a> のInitial Commitも2014/7/31だったりと。。。</p>
-
+例えば、<a href="https://github.com/Alamofire/Alamofire">Alamofire</a> のInitial Commitも2014/7/31だったりと。。。</p>
 <p>今となっては（2015年3月）Swift公開から早９ヶ月が経過しており、ライブラリの選択肢もだいぶ広がりました。
 また、まだSwiftのライブラリを管理する環境もだいぶ整ってきました（ちょうど本日3/11にCocoaPodsのDynamic Framework対応版が公開されました！）。</p>
-
 <p>ということで、３月からはじめる新案件では<code>Alamofire</code>の採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。
 やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！</p>
-
 <p>※基本的にはAlamofireのREADMEに書かれている話です</p>
-
-<!-- more -->
-
-<h2 id="ふつうにjsonを取得するインターフェース">ふつうにJSONを取得するインターフェース</h2>
-
+<!-- raw HTML omitted -->
+<h2 id="json">ふつうにJSONを取得するインターフェース</h2>
 <p>まず、普通にJSONを取得するインターフェースですが、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">Alamofire.request(.GET, <span style="color:#e6db74">&#34;https://api.github.com/users&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">Alamofire.request(.GET, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://api.github.com/users</span><span style="color:#e6db74">&#34;</span>)
     .validate()
     .responseJSON { [<span style="color:#66d9ef">unowned</span> <span style="color:#66d9ef">self</span>] (<span style="color:#66d9ef">_</span>, <span style="color:#66d9ef">_</span>, JSON, error) <span style="color:#66d9ef">in</span>
         <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> error = error {
             <span style="color:#66d9ef">self</span>.textView?.text = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\(</span>error<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>
         } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> JSON = JSON {
-            <span style="color:#75715e">// ここでJSONをパースしてModelに変換する</span>
-            <span style="color:#75715e">// これは擬似的なコードです</span>
+            <span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">こ</span><span style="color:#75715e">こ</span><span style="color:#75715e">で</span><span style="color:#75715e">J</span><span style="color:#75715e">S</span><span style="color:#75715e">O</span><span style="color:#75715e">N</span><span style="color:#75715e">を</span><span style="color:#75715e">パ</span><span style="color:#75715e">ー</span><span style="color:#75715e">ス</span><span style="color:#75715e">し</span><span style="color:#75715e">て</span><span style="color:#75715e">M</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">l</span><span style="color:#75715e">に</span><span style="color:#75715e">変</span><span style="color:#75715e">換</span><span style="color:#75715e">す</span><span style="color:#75715e">る</span>
+            <span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">こ</span><span style="color:#75715e">れ</span><span style="color:#75715e">は</span><span style="color:#75715e">擬</span><span style="color:#75715e">似</span><span style="color:#75715e">的</span><span style="color:#75715e">な</span><span style="color:#75715e">コ</span><span style="color:#75715e">ー</span><span style="color:#75715e">ド</span><span style="color:#75715e">で</span><span style="color:#75715e">す</span>
             <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> dicts = JSON <span style="color:#66d9ef">as</span>? NSArray {
                 <span style="color:#66d9ef">var</span> users = [User]()
                 <span style="color:#66d9ef">for</span> dict = dicts {
@@ -281,15 +273,12 @@ if (!doNotTrack) {
                 <span style="color:#66d9ef">self</span>.textView?.text = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\(</span>users<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>
             }
         }
-    }</code></pre></div>
-<p>といったかんじで<code>responseJSON</code>で<code>NSArray</code> or <code>NSDictionary</code>にシリアライズ後の情報をModelオブジェクトに変換して利用するというのがよくある使い方ではないかと思います。</p>
-
-<h2 id="genericなインターフェース">Genericなインターフェース</h2>
-
+    }
+</code></pre></div><p>といったかんじで<code>responseJSON</code>で<code>NSArray</code> or <code>NSDictionary</code>にシリアライズ後の情報をModelオブジェクトに変換して利用するというのがよくある使い方ではないかと思います。</p>
+<h2 id="generic">Genericなインターフェース</h2>
 <p>ただ、せっかくSwiftを使っているので（正確にはObjective-Cでもこうしたいですが&hellip;）Modelオブジェクトへの変換までを裏（APIクライアント側）でやってしまいたいところです。</p>
-
 <p>例えば、こんなかんじで。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">Alamofire.request(.GET, <span style="color:#e6db74">&#34;https://api.github.com/users&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">Alamofire.request(.GET, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://api.github.com/users</span><span style="color:#e6db74">&#34;</span>)
     .validate()
     .responseCollection { [<span style="color:#66d9ef">unowned</span> <span style="color:#66d9ef">self</span>] (<span style="color:#66d9ef">_</span>, <span style="color:#66d9ef">_</span>, users: [User]?, error) <span style="color:#66d9ef">in</span>
         <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> error = error {
@@ -297,15 +286,11 @@ if (!doNotTrack) {
         } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> users = users {
             <span style="color:#66d9ef">self</span>.textView?.text = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\(</span>users<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>
         }
-    }</code></pre></div>
-<p>あら素敵！</p>
-
+    }
+</code></pre></div><p>あら素敵！</p>
 <p>Objective-C時代にもAPIクライアントにParserを渡してModelオブジェクトの状態で返してもらうようなことはやっていましたが、ここまですっきりしたインターフェースでこれが実現できるのはSwiftならではですね！</p>
-
-<h2 id="alamofireの拡張部分">Alamofireの拡張部分</h2>
-
+<h2 id="alamofire">Alamofireの拡張部分</h2>
 <p>（AlamofireのREADMEどおりですが）Alamofireを拡張して<code>responseCollection</code>というModelオブジェクトへの変換までやってくれる用のメソッドの実装はこんなかんじです。</p>
-
 <p>新しく作る<code>ResponseCollectionSerializable</code>というJSON-&gt;Modelオブジェクトのシリアライズ用のprotocolに対応したクラスであれば、全てこのインターフェースで取得できるようになります。Generics偉い！</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftyJSON</span>
 
@@ -318,21 +303,18 @@ if (!doNotTrack) {
                     <span style="color:#66d9ef">return</span> (objects <span style="color:#66d9ef">as</span>? AnyObject, <span style="color:#66d9ef">nil</span>)
                 }
             }
-            <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">nil</span>, NSError()) <span style="color:#75715e">//&lt; </span><span style="color:#75715e">TODO:</span><span style="color:#75715e"> 期待されないレスポンスだった場合のエラーをここで返す</span>
+            <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">nil</span>, NSError()) <span style="color:#75715e">//</span><span style="color:#75715e">&lt;</span><span style="color:#75715e"> </span><span style="color:#75715e">TODO:</span><span style="color:#75715e"> </span><span style="color:#75715e">期</span><span style="color:#75715e">待</span><span style="color:#75715e">さ</span><span style="color:#75715e">れ</span><span style="color:#75715e">な</span><span style="color:#75715e">い</span><span style="color:#75715e">レ</span><span style="color:#75715e">ス</span><span style="color:#75715e">ポ</span><span style="color:#75715e">ン</span><span style="color:#75715e">ス</span><span style="color:#75715e">だ</span><span style="color:#75715e">っ</span><span style="color:#75715e">た</span><span style="color:#75715e">場</span><span style="color:#75715e">合</span><span style="color:#75715e">の</span><span style="color:#75715e">エ</span><span style="color:#75715e">ラ</span><span style="color:#75715e">ー</span><span style="color:#75715e">を</span><span style="color:#75715e">こ</span><span style="color:#75715e">こ</span><span style="color:#75715e">で</span><span style="color:#75715e">返</span><span style="color:#75715e">す</span>
         }
 
         <span style="color:#66d9ef">return</span> response(serializer: serializer, completionHandler: { (request, response, object, error) <span style="color:#66d9ef">in</span>
             completionHandler(request, response, object <span style="color:#66d9ef">as</span>? [T], error)
         })
     }
-}</code></pre></div>
-<p><code>Serializer</code>はAlamofireが具備しているシリアライズ部分のカスタマイズ用の型です。これを<code>response</code>メソッドに渡すことでシリアライズ部分を柔軟に拡張可能です。</p>
-
-<h2 id="model側の実装">Model側の実装</h2>
-
+}
+</code></pre></div><p><code>Serializer</code>はAlamofireが具備しているシリアライズ部分のカスタマイズ用の型です。これを<code>response</code>メソッドに渡すことでシリアライズ部分を柔軟に拡張可能です。</p>
+<h2 id="model">Model側の実装</h2>
 <p>（これもほぼREADMEどおりですが）最後に、JSONからのシリアライズにModelを対応させるための実装(<code>ResponseCollectionSerializable</code>)です。</p>
-
-<p>※ <a href="https://github.com/SwiftyJSON/SwiftyJSON" target="_blank">SwifthJSON</a> を使ってます</p>
+<p>※ <a href="https://github.com/SwiftyJSON/SwiftyJSON">SwifthJSON</a> を使ってます</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftyJSON</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">protocol</span> <span style="color:#a6e22e">ResponseCollectionSerializable</span> {
@@ -344,7 +326,7 @@ if (!doNotTrack) {
     <span style="color:#66d9ef">var</span> identifier: String!
 
     <span style="color:#66d9ef">required</span> <span style="color:#66d9ef">init</span>?(json: JSON) {
-        <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> identifier = json[<span style="color:#e6db74">&#34;id&#34;</span>].int {
+        <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> identifier = json[<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">id</span><span style="color:#e6db74">&#34;</span>].int {
             <span style="color:#66d9ef">self</span>.identifier = String(identifier)
         } <span style="color:#66d9ef">else</span> {
             <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
@@ -367,16 +349,15 @@ if (!doNotTrack) {
 
     <span style="color:#66d9ef">required</span> <span style="color:#66d9ef">init</span>?(json: JSON) {
         <span style="color:#66d9ef">super</span>.<span style="color:#66d9ef">init</span>(json: json)
-        <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> name = json[<span style="color:#e6db74">&#34;login&#34;</span>].string {
+        <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> name = json[<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">login</span><span style="color:#e6db74">&#34;</span>].string {
             <span style="color:#66d9ef">self</span>.name = name
         } <span style="color:#66d9ef">else</span> {
             <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
         }
     }
-}</code></pre></div>
-<h2 id="このあと">このあと</h2>
-
-<p><a href="https://github.com/ReactKit/SwiftTask" target="_blank">SwiftTask</a>も使いつつ、このあたりの実装をAPIクライアントとしてまとめておきたい。</p>
+}
+</code></pre></div><h2 id="heading">このあと</h2>
+<p><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a>も使いつつ、このあたりの実装をAPIクライアントとしてまとめておきたい。</p>
 
 </div>
 

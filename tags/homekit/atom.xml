@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>homekit on TOKOROM BLOG</title>
@@ -25,7 +25,7 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
 こちらですが、
  まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
@@ -38,9 +38,11 @@ Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といっ�
 https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
 このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
 ただ、今回は実験なので（正直、C言語で書いてビルドし直して&amp;hellip;というのが面倒なので）、
-#include &amp;lt;stdlib.h&amp;gt; して、
+#include &amp;lt;stdlib.h&amp;gt;して、
 if (value) { system(&amp;#34;./handleLightBulbOn&amp;#34;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
-Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。</description>
+Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
+例えば、こんなかんじのものです。
+この例ではSlackのIncoming Webhooksを使っています。</description>
     </item>
     
     <item>
@@ -49,9 +51,10 @@ Slackにメッセージ送信するスクリプトの追加 ここからは慣�
       <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/posts/homekit_delongi_heater/</guid>
-      <description>De&amp;rsquo;Longhi Multi Dynamic Heater WiFi Model
-主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
-私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。</description>
+      <description>De&#39;Longhi Multi Dynamic Heater WiFi Model主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
+ 温度を一定に保つ能力が高い 静か 乾燥しない  といった特徴があります。 私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。</description>
     </item>
     
     <item>
@@ -79,12 +82,12 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
       <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/posts/homekit_christmastree/</guid>
-      <description> やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
+      <description>やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
 今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&amp;hellip;ということで。
 実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
 これを利用することでHomeKitの設定により、
  日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
-なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming  でも詳細に紹介しています。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
 オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
 このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
 防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
@@ -95,8 +98,7 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
 実際、普通の雨ならこれで十分な感じです。
 （なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
 まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
- 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
- </description>
+ 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！</description>
     </item>
     
     <item>
@@ -108,7 +110,8 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
       <description>[Amazon] Philips Hue(ヒュー) Dimmer スイッチ主なサービス    HMServiceType〜 説明     StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ   Battery バッテリー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     InputEvent プログラマブル・スイッチ・イベント uint8 -   BatteryLevel 電池残量 uint8 -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
 Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
 なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
-この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。</description>
+この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。
+InputEventをトリガーとするサンプルコード InputEventをトリガーとして特定のシーンを実行する、具体的には、ボタンを押したらランプを点灯/消灯するサンプルコードを紹介します。</description>
     </item>
     
     <item>
