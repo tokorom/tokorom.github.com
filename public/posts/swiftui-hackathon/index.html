@@ -360,12 +360,12 @@ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくS
 <p>ひとことで言えば「ぼくがなにも考えずに作っても勝手に良い感じの構成になってくれた」という印象です。</p>
 <p>今回、設計などほとんど考えずに手なりで１画面ずつ作っていきました。結果として、</p>
 <ul>
-<li>チュートリアルどおりにViewにState（プロパティ）をおいたら勝手にリアクティブに更新される画面になっていた</li>
-<li>PreviewありきでViewを作ったらデータが勝手に差し替え可能になっていた</li>
+<li>チュートリアルどおりにViewにState（プロパティ）をおいたら勝手にリアクティブに更新される画面</li>
+<li>PreviewありきでViewを作ったらデータが勝手に差し替え可能</li>
 </ul>
-<p>という印象です。</p>
+<p>になりました。</p>
 <p>前者はSwiftUIの売りの部分なので当然ですが、後者は意図せずそうなったので感心してしまいました。</p>
-<p>実際に今回のハッカソンではFirebaseにまったく触れない状態でローカルデータ（ただのメモリ上の配列です）だけで全画面を作りました。そしてそのあとFirebaseに繋ぎ込みをする、という順番でもまったく問題なくスムーズに開発できました。</p>
+<p>実際に今回のハッカソンでは、最初にFirebaseにまったく触れない状態でローカルデータ（ただのメモリ上の配列です）だけで全画面を作りました。そしてそのあとViewはいじらずに裏側だけFirebaseに繋ぎ込みをするよう作り替える、という順番で開発をしました。おおむねスムーズに作り替えができたと思います<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
 <h3 id="dynamic-type">ダークモードやDynamic Typeも勝手に対応</h3>
 <p>これも特に意識していたわけではないですが、WWDCでの発表どおりSwiftUIでプレーンにアプリを作ったら、</p>
 <ul>
@@ -389,7 +389,10 @@ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくS
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>ハッカソンでSwiftUIの知見が増えたので次はもう少し速くなると思います <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>ハッカソンでSwiftUIの知見が増えたので次はもう少し速くなると思います。 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>データ取得時のページネーション周りでView側にも変更が発生するなどありました。このあたりは慣れれば初めからそれを考慮して実装できそうです。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
