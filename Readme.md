@@ -1,9 +1,10 @@
 ## 新しい記事を作成する
 
 ```
-hugo new posts/foo.md
-vim content/posts/foo.md
+./new [entry_name]
 ```
+
+You can get a entry file path from clipboard.
 
 ## ローカルでPreviewする
 
