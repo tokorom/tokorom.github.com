@@ -6,10 +6,32 @@
     <description>Recent content in tokorom on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 27 Jan 2020 14:32:55 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2020 10:43:31 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/authors/tokorom/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>５分で終わるFirebsae App Distribution（プロジェクト作成からテスターへの配信まで）</title>
+      <link>http://www.tokoro.me/posts/firebsae-app-distribution/</link>
+      <pubDate>Mon, 10 Feb 2020 10:43:31 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/firebsae-app-distribution/</guid>
+      <description>Firebase App Distiribution 先日BETA公開されたFirebase App Distributionですが2020年3月終了のFabricからの移行先としてはもっとも有力ですよね1。
+先日「Firebaseを利用していない既存アプリを配信するためだけにFirebase App Distributionを使いたい！」と思い試してみたら、あまりにも簡単で「これは10分で設定から配信まで完了するんじゃない？」と思い、実際に、
+ Firebase未導入のビルド可能なプロジェクトがある状態 Firebaseのプロジェクトを作成するところから開始 配信用にアプリをビルドしてFirebase App Distributionでテスターに配信するところを終了  という条件で実際にストップウォッチで測ってやってみたところ、なんと「4分43秒」で終わりました！
+この記事用にスクショを撮影しながらでもこのタイムだったので、本気でタイムアタックしたら3分切れると思います。
+ということで「10分で終わるFirebase App Distribution」という記事を書く予定だったのを「5分で終わるFirebase App Distribution」に変更してお届けします。
+そもそも アプリにFirebaseを導入するには基本的にはfirebase-ios-sdkをアプリに組み込む必要があります。
+しかし、App Distributionだけを利用したい場合にはこのSDKの組み込みは不要です。この記事ではSDK組み込みをスキップしていますので、AnalyticsなどFirebaseの他機能を利用したい場合には他のチュートリアルをご利用ください。
+設定チュートリアル（実際の手順） Firebaseのプロジェクトを作成  まずはFirebaseのConsoleにをブラウザで開いてプロジェクトを作成します   今回はApp Distributionのみ利用するので「Googleアナリティクス」はOffにしておきます   プロジェクトを作成したらここにiOSアプリ（配信しようとしているもの）を追加します   設定が必要なのはバンドルIDだけです XcodeのプロジェクトからBundle Identifierをコピーしてペーストします   今回は「設定ファイルのダウンロード」「Firebase SDKの追加」「初期化コードの追加」はスキップしてしまいます そのまま「コンソールに進む」としてしまってOK  これでFirebaseのプロジェクトが作成され、配信するアプリを登録できました。
+実際に配信する それでは、実際にアプリをApp Distributionで配信してみましょう
+ まず、アプリをArchiveして適当な場所にエクスポートします エクスポートしたアプリのipaをApp Distributionのページにドラッグ＆ドロップします   アップロードが終わったらテスターのメールアドレスを追加します  これでテスターに配信完了です！
+おわり これだけで終わりです。
+あとはテスターにこんなメールが届いているはずですので、
+「Get setup」からインストールしてもらうだけです。
+この記事で書いていないこと  AdHoc or Enterprise?</description>
+    </item>
     
     <item>
       <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
