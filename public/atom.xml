@@ -16,13 +16,493 @@
     
     
     <item>
-      <title>Posts</title>
-      <link>http://www.tokoro.me/posts/</link>
+      <title>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</title>
+      <link>http://www.tokoro.me/posts/firebsae-app-distribution/</link>
       <pubDate>Mon, 10 Feb 2020 10:43:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/</guid>
+      <guid>http://www.tokoro.me/posts/firebsae-app-distribution/</guid>
       <description>
-        
+        Firebase App Distiribution 先日BETA公開されたFirebase App Distributionですが2020年3月終了のFabricからの移行先としてはもっとも有力ですよね1。
+先日「Firebaseを利用していない既存アプリを配信するためだけにFirebase App Distributionを使いたい！」と思い試してみたら、あまりにも簡単で「これは10分で設定から配信まで完了するんじゃない？」と思い、実際に、
+ Firebase未導入のビルド可能なプロジェクトがある状態 Firebaseのプロジェクトを作成するところから開始 配信用にアプリをビルドしてFirebase App Distributionでテスターに配信するところを終了  という条件で実際にストップウォッチで測ってやってみたところ、なんと「4分43秒」で終わりました！
+この記事用にスクショを撮影しながらでもこのタイムだったので、本気でタイムアタックしたら3分切れると思います。
+ということで「10分で終わるFirebase App Distribution」という記事を書く予定だったのを「5分で終わるFirebase App Distribution」に変更してお届けします。
+そもそも アプリにFirebaseを導入するには基本的にはfirebase-ios-sdkをアプリに組み込む必要があります。
+しかし、App Distributionだけを利用したい場合にはこのSDKの組み込みは不要です。この記事ではSDK組み込みをスキップしていますので、AnalyticsなどFirebaseの他機能を利用したい場合には他のチュートリアルをご利用ください。
+設定チュートリアル（実際の手順） Firebaseのプロジェクトを作成  まずはFirebaseのConsoleにをブラウザで開いてプロジェクトを作成します   今回はApp Distributionのみ利用するので「Googleアナリティクス」はOffにしておきます   プロジェクトを作成したらここにiOSアプリ（配信しようとしているもの）を追加します   設定が必要なのはバンドルIDだけです XcodeのプロジェクトからBundle Identifierをコピーしてペーストします   今回は「設定ファイルのダウンロード」「Firebase SDKの追加」「初期化コードの追加」はスキップしてしまいます そのまま「コンソールに進む」としてしまってOK  これでFirebaseのプロジェクトが作成され、配信するアプリを登録できました。
+実際に配信する それでは、実際にアプリをApp Distributionで配信してみましょう
+ まず、アプリをArchiveして適当な場所にエクスポートします エクスポートしたアプリのipaをApp Distributionのページにドラッグ＆ドロップします   アップロードが終わったらテスターのメールアドレスを追加します  これでテスターに配信完了です！
+おわり これだけで終わりです。
+あとはテスターにこんなメールが届いているはずですので、
+「Get setup」からインストールしてもらうだけです。
+この記事で書いていないこと  AdHoc or Enterprise?
+      </description>
+      
+      <coverImage>/images/posts/firebase-app-distribution/3-create-app.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
+      <link>http://www.tokoro.me/posts/swiftui-hackathon/</link>
+      <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swiftui-hackathon/</guid>
+      <description>
+        2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
+いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
+また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&amp;hellip;
+ということでハッカソン ということで、冬休みにひとりでハッカソンを実施して、
+ 24時間でSwiftUIでiOSアプリを開発して AppStoreでリリースする  ところまでやる！ということにしました。
+自分で勝手に企画して出すアプリですのでSwiftUIを使っても誰にも文句は言われません！
+必須利用技術 このハッカソン企画での必須利用技術は、
+ SwiftUI Firebase（Firestore） Sign in with Apple  の３つとしました。
+SwiftUI はもちろんですが、ローカルオンリーで動作するアプリだとSwiftUIの検証には弱いかなと思い、サーバにデータを保管するようにしバックエンドには Firebase(Firestore) を利用することにしました。 また、SwiftUIを採用する時点でターゲットOSがiOS 13以降になるので、ついでにiOS 13の新要素 Sign in with Apple でのSign inを実装することにしました。
+リリースの定義 今回はゴールであるリリースの定義を、
+ アプリを開発し終えて AppStore用のメタデータやスクリーンショットを作って投稿して 実際に審査に出す  ところまで、としました。
+作るアプリ 作るアプリはちょうど自分が欲しいと思っていた「こどもたちのお金を親が管理するアプリ」にしました。
+Photo by Michael Longmire on Unsplash
+解決したい課題 我が家ではこどもたちにお金の教育を兼ねて毎月おこづかいを渡しているのですが、
+ 先月のおこづかい渡したっけ？渡してなかったけ？とよくわからなくなる お年玉が高額で幼稚園児に管理させるのが不安（かといって子供の銀行口座を作るのは面倒） 弟が姉の貯金箱を漁る事件が発生！ お店でこどもが「おこづかいでこのおもちゃ買いたい！」という時におこづかいを持ってきていない ○○カメラでおこづかいでおもちゃを買わせたいが、ほんとは〇〇カメラのポイント使っちゃいたい！ ほんとは余っている〇〇Payで支払いたい！  など様々な悩みが出てきました。
+解決するための機能 これらを解決するためには、
+ こどもに現金を持たせないで親が残高だけ管理すれば十分 記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない 入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心 普段使いの少額の現金はその残高から出金してこどもに渡せばOK おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！  と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。
+      </description>
+      
+      <coverImage>/images/apple/swiftui.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>HomeKit ADKでSlackにメッセージ送信するアクセサリを作ってみる</title>
+      <link>http://www.tokoro.me/posts/homekitadk/</link>
+      <pubDate>Mon, 23 Dec 2019 11:47:15 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekitadk/</guid>
+      <description>
+        HomeKitADKのオープンソース化 つい先日（2019/12/18）、AppleがAmazon、Google、Zigbee Allianceと、スマートホームデバイスに関するワーキンググループを結成したとのビッグニュースが発表されましたね！
+https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/
+これに伴い、HomeKitに対応したアクセサリを開発するためのHomeKit ADKがオープンソース化されました。
+https://github.com/apple/HomeKitADK
+HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世界ではHomeKitに対応した機器のことをアクセサリと呼びます。
+ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
+と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
+ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
+こちらですが、
+ まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
+LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
+ アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する  なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
+これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
+といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
+Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といったログが確認できるかと思います。
+サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
+今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
+https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
+このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
+ただ、今回は実験なので（正直、C言語で書いてビルドし直して&amp;hellip;というのが面倒なので）、
+#include &amp;lt;stdlib.h&amp;gt;して、
+if (value) { system(&amp;#34;./handleLightBulbOn&amp;#34;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
+Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
+例えば、こんなかんじのものです。
+この例ではSlackのIncoming Webhooksを使っています。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>NFCタグ で鍵を開けよう（6） iOS13時代の最終形</title>
+      <link>http://www.tokoro.me/posts/nfc-iphone-6/</link>
+      <pubDate>Wed, 30 Oct 2019 13:57:46 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nfc-iphone-6/</guid>
+      <description>
+        この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。 これで最後の予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形（この記事）  3〜5についてはiOS13の機能を使った最終形で、もうこれでいいじゃん！となったのでスキップします。（NFCタグを鍵にするパターンはまだ必要なケースあるかも）
+なにができる？ iOS 13でNFCタグをトリガーとしてアプリを叩けるようになった iOS 13（正確にはiOS 13.1）で、純正アプリの ショートカット にオートメーションという機能が追加されました。 このオートメーションのトリガーの１つに、なんと NFCタグ があるのです。
+そして、それをトリガーとしてサードパーティ製アプリの Siri Shortcut を呼び出せます。 つまり、アプリがSiri Shortcutに対応していれば、そのアプリをNFCタグタッチだけで動作させられるようになったということです。 そして、我らがSesameもこれに対応しています。
+１行でまとめると、
+iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる ということです。
+対応デバイス 正確には、iOS 13であっても Background Tag Reading に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、
+ iPhone XR iPhone XS iPhone XS Max iPhone 11 iPhone 11 Pro iPhone 11 Pro Max  の６機種です。
+実際にやってみよう NFCタグの準備 NFCタグには何も情報を書き込む必要はありません。
+など適当なNFCタグを買ってきたままそのまま使えます。
+オートメーションの作成 次に、ショートカットアプリでオートメーションを設定します。
+解錠をマイショートカットとして追加 Sesameを普段から使っていれば、ギャラリータブの中に 「xxx」を解錠 というSesame用のショートカットが含まれているはずです。それに適当な音声コマンドをあてて Siriに追加 をしておきます。Siriに追加されたショートカットをオートメーションのアクションとして指定できるようになります。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇します</title>
+      <link>http://www.tokoro.me/posts/iosdc_2019_pre/</link>
+      <pubDate>Wed, 04 Sep 2019 18:09:20 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/iosdc_2019_pre/</guid>
+      <description>
+        明日、2019年9月5日（木）から開催される iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇予定です。
+スケジュール  2019/09/05（木） 18:40〜  Track B レギュラートーク（30分） Proposal    概要 Proposalからの抜粋です。
+ Segueでできること、できないこと、とにかくSegue（UIStoryboardSegue）について凝縮して紹介します。 通常の使い方からUnwindSegueを使うメリット、Xcode 11から利用できるようになったIBSegueActionまで。 Segueを愛して7年の私が、これまでSegueを避けてきた皆さんにもSegueの魅力を知っていただけるようなトークができればと考えています。
+ 見ていただきたいかた  同じくSegueを愛する同士 Segueを使ってはいるがもう少しどうにかならないかと思っているかた 敢えてSegueを使っていないかた  Segueを愛するかたはもちろんですが、敢えてSegueを使っていないかたにこそ価値のあるセッションになるかもしれません。 なお、このセッションを聞いて絶対Segueを使ってくれ！とは考えていないです。 普段Segueを使っていないかたにとっては、３０分でSegueについてキャッチアップしていただき「SegueのProsはもちろん知ってるけど、やはり敢えて使ってないんだよ」と自信を持って言える状態になっていただければ幸いです。
+具体的な内容  Basic Segue iOS 13 New Features! Advanced Tips  というAgendaの予定です。
+Basic Segue  SegueはViewControllerを開くためだけにあるのではないですよ Segueには大きく４種がありますよ  という基本部分と、
+ Segueを使うPros Segueを使うCons  について簡単に復習をさせていただきます。
+ prepareForSegue  についてもここに含みます。
+iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心にお話します。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iosdc_2019.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</title>
+      <link>http://www.tokoro.me/posts/nfc-iphone-2/</link>
+      <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nfc-iphone-2/</guid>
+      <description>
+        この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
+ NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
+今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
+それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
+Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+https://ameblo.jp/candyhouse-inc/entry-12416936959.html
+をご参照ください。
+API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
+curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+ レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}] 鍵をロック 上で取得したdevice_idを利用し、
+curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
+鍵をアンロック 同じく、
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
+      <link>http://www.tokoro.me/posts/nfc-iphone-1/</link>
+      <pubDate>Mon, 01 Apr 2019 12:43:04 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/nfc-iphone-1/</guid>
+      <description>
+        この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
+ NFCタグにURIを書き込む（この記事） iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  導入 我が家にスマートロックのSesameを採用しました。
+私一人ならSesameだけでものすごく便利になったわけですが、我が家には小さい子供が３人います。子供たちにスマホを持たせるにはまだ早く、このままではスマートロックの恩恵を十分に受けることができません。
+なお、Sesameは個人が触れる便利なAPIを公開してくれています。NFC＋Sesame APIでこの状況を改善できるものではないか、と思い立ったのがこの記事を書くきっかけです。まだ現在進行形で実験中ですが、実験した結果を随時記事にしていければと考えています。
+この記事でやること 私がNFCタグを取り扱ったことがないところからスタートしましたので、まずこの記事では「NFCタグに情報を書き込む」ところまでだけが範囲になります。
+実際にSesameをアンロックするところなどは次の記事で書かせていただきます。
+準備した機器 スマートロック 導入に書いたとおりですが、Sesameを購入しました。
+APIでのロックやアンロックが可能で自由度が高そうだったのがSesameを選んだ理由です。
+利用するNFCタグ サンワサプライ NFCタグ(10枚入り)をAmazonで購入しました。
+NFCリーダー/ライター NFCリーダー/ライターとしてはPaSoRiを購入しました。
+これも使えればどれでも良いと思いますが、ネット上で利用実績が多く安全そうなものを選んだだけです。
+nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続してNFCタグから情報を読み取るところからはじめます。
+調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
+このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
+情報の読み取り NFCタグに書き込まれた情報を読み取るにはexsamplesの中のtagtool.pyを使って
+python tagtool.py show とするだけです。
+フォーマット NFCタグをフォーマットしたいときもtagtool.pyを使って
+python tagtool.py format とするだけです。
+URI書き込み NFCタグにURIを書き込みたい場合のみ少し工夫が必要でした。 とはいえ、exsamplesの中にあるものだけで改造なしで可能です。
+例えばhttps://tag.exsample.com/lockというURIを書き込むこととします。
+まず、うまくいくパターンからですが、
+echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load - でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</title>
+      <link>http://www.tokoro.me/posts/vim-review/</link>
+      <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/vim-review/</guid>
+      <description>
+        本記事は Vim その2 アドベントカレンダー 21日目の記事です。
+経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
+現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
+以下、
+ シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット  の順に整理いたします。
+シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &amp;gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
+そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
+ https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&amp;#39;swift&amp;#39;]と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
+これが発火する条件は、
+ Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
+リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
+ fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+ fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</title>
+      <link>http://www.tokoro.me/posts/lottie-ios-1/</link>
+      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/lottie-ios-1/</guid>
+      <description>
+        この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
+Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
+iOS用のライブラリは、
+https://github.com/airbnb/lottie-ios
+です。
+なにができるの？  作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗  iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
+ これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
+事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
+アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
+再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
+上のサンプルはサイズを考えずにaddSubviewしており、
+のように意図しない大きさで再生されてしまいます。
+アニメーションのサイズを知る アニメーションのサイズを知るには、
+ 作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
+animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
+      <link>http://www.tokoro.me/posts/homekit_delongi_heater/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_delongi_heater/</guid>
+      <description>
+        De&#39;Longhi Multi Dynamic Heater WiFi Model主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
+ 温度を一定に保つ能力が高い 静か 乾燥しない  といった特徴があります。 私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_sensor/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_sensor/</guid>
+      <description>
+        Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
+      <link>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</guid>
+      <description>
+        Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
+Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>テレビのリモコンのことも忘れないで！</title>
+      <link>http://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
+      <description>
+        AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
+テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
+AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
+ゲームコントローラ/ゲームパッド Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。
+テレビのリモコンでどこまで操作できる？ Apple純正のアプリ 全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。
+サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
+自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
+テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
+   REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
+      <link>http://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
+      <description>
+        [問題]コンテンツのスワイプ まずは、tvOSの特定の画面にて「右スワイプ」をした時に、コンテンツが左右どちらに動くでしょう？というクイズを３つ出させていただきます。 クイズの問題を３つ出した後に、それらの答えを実際の動きを撮影したGIFアニメとともに並べてありますので、答えのGIFアニメをできるだけ見ないように考えてみてください！
+いずれもApple純正アプリ（ホーム画面含む）からの問題です。
+Q1. ホーム画面のTop Shelfでの左右スワイプ 最初の問題はホーム画面からです。 このtvOSのホーム画面のTop Shelfで「右スワイプ」をした場合、Top Shelfは左に動いて右隣のコンテンツが表示されるでしょうか？それとも右に動いて左隣のコンテンツが表示されるでしょうか？
+Q2. 写真アプリのフルスクリーン画面での左右スワイプ 次の問題は写真アプリの写真をフルスクリーン表示した画面からです。 この 2 という画像が表示されている画面で「右スワイプ」した場合、画像が左に動いて右隣の 3 が表示されるでしょうか？それとも画像が右に動いて左隣の 1 が表示されるでしょうか？
+Q3. Appスイッチャーでの左右スワイプ 次の問題はホーム画面のAppスイッチャー（TV/ホームボタンの2度押しで表示される画面）です。 この ミュージック がセンターに表示されているAppスイッチャーで「右スワイプ」した場合、 ミュージック は左に動くでしょうか？それとも右に動くでしょうか？
+[答え]コンテンツのスワイプ A1. ホーム画面のTop Shelfでの左右スワイプ まず、Top Shelfで「右スワイプ」した時の挙動ですが、
+ Top Shelfが左に動き 右隣のコンテンツが表示される  というのが答えです。
+tvOSには「フォーカス」の存在があり、「フォーカスが右スワイプにより右に移動する」わけなので右隣のものが表示されて当然ですよね。 そして右隣のコンテンツがセンターに表示されるようTop Shelfは左にスクロールします。
+A2. 写真アプリのフルスクリーン画面での左右スワイプ さて、Q1の答えは「左に動いて右隣のものが表示される」という挙動でしたが、次の写真アプリの挙動はどうでしょう？
+実際にこの写真アプリのフルスクリーン画面で「右スワイプ」を試した結果の挙動は、
+ 表示されていた 2 が右に動き 左隣の 1 が表示される  でした！
+あれ？Q1の答えと逆の動きだ&amp;hellip;
+A3. Appスイッチャーでの左右スワイプ 続いてQ3のAppスイッチャーでの挙動はどうでしょう？
+Appスイッチャーで「右スワイプ」したときの挙動は、
+ 表示されていた ミュージック が右に動き 左隣のアプリが表示される  こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。
+フォーカスどこいった！？
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/c911b99d-9d09-08ea-8555-cb07e2d1ab21.jpeg</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>クリスマスツリーをHomeKitに対応させよう</title>
+      <link>http://www.tokoro.me/posts/homekit_christmastree/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_christmastree/</guid>
+      <description>
+        やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
+今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&amp;hellip;ということで。
+実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
+これを利用することでHomeKitの設定により、
+ 日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
+オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
+このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
+防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
+はじめは 防雨型コンセントボックスなど専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
+さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。
+プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。
+あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。
+実際、普通の雨ならこれで十分な感じです。
+（なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
+まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
+ 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
+      <description>
+        [Amazon] Philips Hue(ヒュー) Dimmer スイッチ主なサービス    HMServiceType〜 説明     StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ   Battery バッテリー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     InputEvent プログラマブル・スイッチ・イベント uint8 -   BatteryLevel 電池残量 uint8 -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
+Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
+なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
+この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。
+InputEventをトリガーとするサンプルコード InputEventをトリガーとして特定のシーンを実行する、具体的には、ボタンを押したらランプを点灯/消灯するサンプルコードを紹介します。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
+      <description>
+        [Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
+なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
+もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
+ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
+      <link>http://www.tokoro.me/posts/user_notification/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/user_notification/</guid>
+      <description>
+        概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
+コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
+http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
+iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
+しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
+（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&amp;hellip;）
+iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in //gotgranted:) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
+コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
+   タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
+      <link>http://www.tokoro.me/posts/has-associated-objects/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/has-associated-objects/</guid>
+      <description>
+        extensionでstored propertyを追加したくなることありますか？ 少なくともSwift 2.1時点ではextensionでstored propertyを追加することはできず、computed propertyのみに限られます。
+でも、ヤダヤダ！ぼくは絶対stored property追加したいんだい！ってことありますか？
+そう思っちゃうあなた、他に解決方法ありますよね？なんでそのやりかたにこだわるんですか？そういう思考になっちゃう時点でまだSwift脳に至ってはいないのではないでしょうか（建前）。
+なお、ぼくはどうしても追加したんだい！ってことがあります（本音）。
+対象がAnyObjectならAssociated Objectsで代用できるよ で、そんな時は この記事 でやっているように Associated Objects で代用できることがあります。
+対象にきちんとretainさせることも可能ですし、安心ですね！
+以下、サンプルコードです。
+var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } } でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
+黒魔術（臭いもの）にフタを なので、この objc_xxxAssociatedObject を二度と書かなくて良いようにライブラリ化できないものでしょうか？
+例えば、こんな感じで気軽にextendできるように。
+//UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>Swiftでdeinitまで処理をdeferする</title>
+      <link>http://www.tokoro.me/posts/defer-to-deinit/</link>
+      <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/defer-to-deinit/</guid>
+      <description>
+        deferしてますか？ Swift2でみんな大好きdeferさんが導入されましたね！
+guardと違いそんなに使う機会は訪れていないのですが、昨日、こんな感じで使いたい！という場面に遭遇しました。
+CocoaLumberjackを使ってデバッグ用にUITextViewにログを吐くCustom Loggerを設定していたのですが、とあるViewControllerだけでそれを使いたく、ViewControllerがdeinitされたらそのCustom Loggerも当然外したい。
+そんなコードを書く場合、defer大好きっ子ならCustom Loggerを登録した後にこんな感じで解除したくなりますよね（実際は僕はこのとき初めて実験でないところでdeferを使ったので、本当のdefer大好きっ子はこんな間違いはしないだろう）。
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) defer { DDLog.removeLogger(logger) } defer使って、必要なくなったら漏れなくCustom Loggerを解放する俺様は超カッコいいぜ！と言いたかったのだが、当然のごとくこのコードは間違っていて、これを実行し終わるときにはdeferした処理も実行されて登録したCustom Loggerが即解除されるというお馬鹿な状況になるわけです。
+でもdeferしたいよね？ とお馬鹿な前置きは置いておいても、上のような雰囲気で終処理書けたら便利な気はする。 普通にdeinitでやれば済む話なんだけど、今回のケースだとpropertyにloggerをもたせて、deinitでloggerがあればremoveLoggerする的なことを書かないといけない。まあ普通のことではあるんだけど、できたら、
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToDeinit { DDLog.removeLogger(logger) } と、deinitまで処理を遅延させる的な書き方できたら面白いよね、ということで&amp;hellip;
+deinitまでdeferさせてみよう！その1 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
+typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } } てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。
       </description>
       
     </item>
