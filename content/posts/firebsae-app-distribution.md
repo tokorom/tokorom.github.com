@@ -1,5 +1,5 @@
 ---
-title: "５分で終わるFirebsae App Distribution（プロジェクト作成からテスターへの配信まで）"
+title: "５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）"
 date: 2020-02-10T10:43:31+09:00
 draft: false
 authors: [tokorom]
