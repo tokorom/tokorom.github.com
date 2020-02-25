@@ -28,7 +28,7 @@
         {{ .Summary | html }}
       </description>
       {{ if .Params.cover }}
-      <coverImage>{{ .Params.cover }}</coverImage>
+      <coverImage>{{ .Params.cover | absURL }}</coverImage>
       {{ end }}
     </item>
     {{ end }}
