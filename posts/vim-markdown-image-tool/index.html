@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang='ja'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Photo by Victor Grabarczyk on Unsplash
+ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
+最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
+記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
+特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
+手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
+ 各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化  をしていました。
+決して難しいことはありませんが地味に面倒でした。
+ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal &#43; Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
+ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
+具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result))endfunctionという３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+ 特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え  ということだけです。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法 • TOKOROM BLOG'>
+<meta property='og:description' content='Photo by Victor Grabarczyk on Unsplash
+ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
+最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
+記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
+特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
+手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
+ 各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化  をしていました。
+決して難しいことはありませんが地味に面倒でした。
+ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal &#43; Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
+ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
+具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result))endfunctionという３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+ 特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え  ということだけです。'>
+<meta property='og:url' content='http://www.tokoro.me/posts/vim-markdown-image-tool/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg'><meta property='article:section' content='posts'><meta property='article:tag' content='vim'><meta property='article:tag' content='markdown'><meta property='article:tag' content='hugo'><meta property='article:published_time' content='2020-03-31T16:38:32&#43;09:00'/><meta property='article:modified_time' content='2020-03-31T16:38:32&#43;09:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='http://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg'>
+
+<meta name="generator" content="Hugo 0.62.0" />
+
+  <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法 • TOKOROM BLOG</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/vim-markdown-image-tool/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.e995827f.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-posts has-cover has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'></a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      TOKOROM BLOG
+      </a>
+    </h2>
+    <div class='desc'>
+    所 友太 / Yuta Tokoro
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci/' style='font-size:1em'>ci</a>
+      </li><li>
+        <a href='/tags/cui/' style='font-size:1.0444444444444445em'>cui</a>
+      </li><li>
+        <a href='/tags/design/' style='font-size:1.0666666666666667em'>design</a>
+      </li><li>
+        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
+      </li><li>
+        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
+      </li><li>
+        <a href='/tags/homekit/' style='font-size:1.1333333333333333em'>homekit</a>
+      </li><li>
+        <a href='/tags/hugo/' style='font-size:1em'>hugo</a>
+      </li><li>
+        <a href='/tags/ios/' style='font-size:2em'>ios</a>
+      </li><li>
+        <a href='/tags/jenkins/' style='font-size:1.0666666666666667em'>jenkins</a>
+      </li><li>
+        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
+      </li><li>
+        <a href='/tags/mac/' style='font-size:1.0888888888888888em'>mac</a>
+      </li><li>
+        <a href='/tags/markdown/' style='font-size:1em'>markdown</a>
+      </li><li>
+        <a href='/tags/nfc/' style='font-size:1.0444444444444445em'>nfc</a>
+      </li><li>
+        <a href='/tags/objc/' style='font-size:1.4222222222222223em'>objc</a>
+      </li><li>
+        <a href='/tags/octopress/' style='font-size:1.0444444444444445em'>octopress</a>
+      </li><li>
+        <a href='/tags/publish/' style='font-size:1em'>publish</a>
+      </li><li>
+        <a href='/tags/review/' style='font-size:1em'>review</a>
+      </li><li>
+        <a href='/tags/sakura/' style='font-size:1.0444444444444445em'>sakura</a>
+      </li><li>
+        <a href='/tags/sesame/' style='font-size:1.0444444444444445em'>sesame</a>
+      </li><li>
+        <a href='/tags/swift/' style='font-size:1.1777777777777778em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
+      </li><li>
+        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
+      </li><li>
+        <a href='/tags/tvos/' style='font-size:1.0222222222222221em'>tvos</a>
+      </li><li>
+        <a href='/tags/ui/' style='font-size:1.1111111111111112em'>ui</a>
+      </li><li>
+        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
+      </li><li>
+        <a href='/tags/vim/' style='font-size:1.1111111111111112em'>vim</a>
+      </li><li>
+        <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
+      </li><li>
+        <a href='/tags/xcode/' style='font-size:1.0888888888888888em'>xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'></span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2020-03-31T16:38:32&#43;09:00'>2020-03-31</time>
+</span>
+
+  
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='/images/posts/vim-markdown-image-tool/dog.jpg'/>
+    
+  </figure>
+</div>
+  
+
+  <div class='container entry-content'>
+  
+
+  <p><em>Photo by Victor Grabarczyk on Unsplash</em></p>
+<h2 id="heading">ブログ記事書くとき画像を埋め込むのが面倒</h2>
+<p>こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？</p>
+<p>最近だと<strong>Hugoなどの静的サイトジェネレータ</strong>を利用することも多いのではないでしょうか。
+この記事もHugoで運用しています。</p>
+<p>記事を投稿するときは、いつも<strong>VimでさらっとMarkdown形式で</strong>書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、<strong>記事に画像を埋め込むのだけが面倒</strong>だと感じてます。</p>
+<p>特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。</p>
+<h2 id="heading-1">手動での画像埋め込み手順</h2>
+<p>これまで手動で画像を埋め込む際には、このブログ記事の場合だと、</p>
+<ul>
+<li>各記事用の画像ディレクトリとして <code>content/images/記事名</code> ディレクトリを作成</li>
+<li>埋め込みたい画像を <code>content/images/記事名</code> 以下にコピー</li>
+<li>記事内に <code>![image](/images/記事名/画像名)</code> を埋め込む</li>
+<li>必要に応じてImageOptimなどで画像の最適化</li>
+</ul>
+<p>をしていました。</p>
+<p>決して難しいことはありませんが地味に面倒でした。</p>
+<h2 id="heading-2">ドラッグ＆ドロップでなんとかならない？</h2>
+<p>結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。</p>
+<p>ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。</p>
+<p>具体的には、デスクトップ上の<code>dog.jpg</code>をドラッグ＆ドロップすると、Vim上に</p>
+<pre><code>/Users/tokorom/Desktop/dog.jpg 
+</code></pre><p>が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。</p>
+<h2 id="plugin">現在行のファイルパスに対してなにかをするplugin</h2>
+<p>このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">vim_replace_current_line</span>#<span style="color:#a6e22e">execute</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">line</span> = <span style="color:#a6e22e">getline</span>(<span style="color:#e6db74">&#39;.&#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> = <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_replace_current_line</span>#<span style="color:#a6e22e">command</span> . <span style="color:#e6db74">&#39; &#39;</span> . <span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#39;%&#39;</span>) . <span style="color:#e6db74">&#39; &#39;</span> . <span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#39;%:t:r&#39;</span>) . <span style="color:#e6db74">&#39; &#39;</span> . <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">line</span>))<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">setline</span>(<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">result</span>))<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>という３行のシンプルなfunction１つだけです。</p>
+<p>ここでやっているのは、</p>
+<ul>
+<li><strong>特定のコマンド</strong>を実行し</li>
+<li>その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す</li>
+<li>コマンドの実行結果で現在行を置き換え</li>
+</ul>
+<p>ということだけです。</p>
+<p>つまり、あとはその<strong>特定のコマンド</strong>で、執筆環境ごとに必要な処理を実行し、最終的に画像を埋め込むための文字列を出力してやるだけです。</p>
+<p>ごくごく簡単なpluginですが、必要でしたら<a href="https://github.com/tokorom/vim-replace-current-line">Githubに置いてあるもの</a>をご利用ください。</p>
+<h2 id="heading-3">コマンドの実装</h2>
+<p>今回の執筆環境で行いたいのは、</p>
+<ul>
+<li>各記事用の画像ディレクトリとして <code>content/images/記事名</code> ディレクトリを作成</li>
+<li>埋め込みたい画像を <code>content/images/記事名</code> 以下にコピー</li>
+<li>記事内に <code>![image](/images/記事名/画像名)</code> を埋め込む</li>
+</ul>
+<p>という手順なので、以下のコマンドを書きました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#! /bin/sh
+</span><span style="color:#75715e"></span>
+SOURCE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$3<span style="color:#e6db74">&#34;</span>
+IMAGEDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">content/images/</span>$2<span style="color:#e6db74">&#34;</span>
+IMAGEFILENAME<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>basename <span style="color:#e6db74">${</span>SOURCE<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+TARGET<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>IMAGEDIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>IMAGEFILENAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+IMAGETAG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">![image](/images/</span>$2<span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>IMAGEFILENAME<span style="color:#e6db74">}</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>
+
+mkdir -p <span style="color:#e6db74">${</span>IMAGEDIR<span style="color:#e6db74">}</span>
+cp <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SOURCE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TARGET<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>IMAGETAG<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>とても簡単なコマンドです。</p>
+<p>このコマンドが実行されることで、画像が決められたディレクトリにコピーされ、Vim上の画像パスの行が</p>
+<pre><code>![image](/images/vim-markdown-image-tool/dog.jpg)
+</code></pre><p>といったMarkdown用の画像埋め込み構文に自動的に変換されます。</p>
+<h2 id="heading-4">ついでに画像の最適化も</h2>
+<p>ImageOptimをご利用なら上のコマンドの最後に</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">IMAGEOPTIM<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;open -a ImageOptim&#34;</span>
+<span style="color:#e6db74">`</span><span style="color:#e6db74">${</span>IMAGEOPTIM<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>TARGET<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</code></pre></div><p>を加えるだけで、画像の最適化も非同期に行ってくれます。</p>
+<h2 id="heading-5">完成</h2>
+<p>この環境を一度作れば、あとは、</p>
+<ul>
+<li>Vim上に画像をドラッグ＆ドロップ</li>
+<li>コマンドを１つ実行</li>
+</ul>
+<p>という２ステップだけで、記事内への画像の埋め込みが簡単便利にできるようになります！</p>
+<h2 id="heading-6">次のステップ</h2>
+<p>これですでにある画像をドラッグ＆ドロップで埋め込むことは簡単になりました。</p>
+<p>あとは、例えばiPhoneでスクショを撮影し、MacのVim上で１コマンド打ったらそのスクショが埋め込まれる、といったこともできればなあ（やればできそう）。</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/vim-markdown-image-tool/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fvim-markdown-image-tool%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/vim/'>vim</a>, <a class='tag' href='/tags/markdown/'>markdown</a>, <a class='tag' href='/tags/hugo/'>hugo</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/firebsae-app-distribution/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</a>
+    </div></div>
+</nav>
+
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+    <h4>所の執筆・監修した書籍</h4>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project007_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
+    <li style="font-size:90%; list-style:none;"><span>著者：</span>
+    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
+    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
+    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
+
+  </div>
+
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>tokorom</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.f18da963.js'></script>
+
+</body>
+
+</html>
+

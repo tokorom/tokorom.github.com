@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 10 Feb 2020 10:43:31 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,30 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>UIAlertViewよりもおとなしいメッセージダイアログを利用する</title>
+      <link>http://www.tokoro.me/posts/ssgentlealertview/</link>
+      <pubDate>Mon, 27 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ssgentlealertview/</guid>
+      <description>
+        UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
+一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
+その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
+それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
+警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
+警告目的ではない普通のメッセージダイアログ それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。
+https://github.com/tokorom/SSGentleAlertView
+このSSGentleAlertViewは、
+ UIAlertViewと同じコードで利用できる UIAlertViewとは違い、外観を変更できる デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる  という３点に留意して作っています。
+画像パーツやカラーリングなどはUIデザイナの Atsushi Morino さんに作ってもらってるのでちゃんとしてます。
+外観 自分でカスタマイズしない場合でも、次の3種のスタイルが選べます。
+Default Black Native サンプルコード UIAlertViewを使うときのコードのUIAlertViewの部分をSSGentleAlertViewに変更するだけです。
+// #import &amp;#34;SSGentleAlertView.h&amp;#34;  SSGentleAlertView* alert = [SSGentleAlertView new]; alert.delegate = self; alert.title = @&amp;#34;SSGentleAlertView&amp;#34;; alert.message = @&amp;#34;This is GentleAlertView!\nUIAlertView is too strong to use for ordinary messages.&amp;#34;; [alert addButtonWithTitle:@&amp;#34;Cancel&amp;#34;]; [alert addButtonWithTitle:@&amp;#34;OK&amp;#34;]; alert.cancelButtonIndex = 0; [alert show]; なお、インスタンスを作る際に[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack] のようにすることで、３種のスタイルを選択できます。
+      </description>
+      
+    </item>
     
     <item>
       <title>UIKitで使われている画像パーツをまとめて取得する</title>
@@ -436,28 +460,6 @@ server { listen 80; server_name jenkins.自分の.ドメイン location / { prox
 $ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
 試しに hs-http だけインストールしてみたところ、
 $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;#34;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;#34; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;#34;$procedure$targetname&amp;#34; Warning: targets not executed for hs-http: org.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Octopressでソースコードの一部分だけを参照する</title>
-      <link>http://www.tokoro.me/posts/octopress-part-of-codes/</link>
-      <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/octopress-part-of-codes/</guid>
-      <description>
-        おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
-1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
-例えば、ここに sample/test.rb というファイルを置いておく。
-$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
-コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
-じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
-ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
-この経緯については、 OctopressのPull request に記録がある。
-2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
-masterでなく 2.1 からpullしていることに注意が必要。
-include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、
       </description>
       
     </item>

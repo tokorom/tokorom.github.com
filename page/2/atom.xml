@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 10 Feb 2020 10:43:31 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,26 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Swiftでdeinitまで処理をdeferする</title>
+      <link>http://www.tokoro.me/posts/defer-to-deinit/</link>
+      <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/defer-to-deinit/</guid>
+      <description>
+        deferしてますか？ Swift2でみんな大好きdeferさんが導入されましたね！
+guardと違いそんなに使う機会は訪れていないのですが、昨日、こんな感じで使いたい！という場面に遭遇しました。
+CocoaLumberjackを使ってデバッグ用にUITextViewにログを吐くCustom Loggerを設定していたのですが、とあるViewControllerだけでそれを使いたく、ViewControllerがdeinitされたらそのCustom Loggerも当然外したい。
+そんなコードを書く場合、defer大好きっ子ならCustom Loggerを登録した後にこんな感じで解除したくなりますよね（実際は僕はこのとき初めて実験でないところでdeferを使ったので、本当のdefer大好きっ子はこんな間違いはしないだろう）。
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) defer { DDLog.removeLogger(logger) } defer使って、必要なくなったら漏れなくCustom Loggerを解放する俺様は超カッコいいぜ！と言いたかったのだが、当然のごとくこのコードは間違っていて、これを実行し終わるときにはdeferした処理も実行されて登録したCustom Loggerが即解除されるというお馬鹿な状況になるわけです。
+でもdeferしたいよね？ とお馬鹿な前置きは置いておいても、上のような雰囲気で終処理書けたら便利な気はする。 普通にdeinitでやれば済む話なんだけど、今回のケースだとpropertyにloggerをもたせて、deinitでloggerがあればremoveLoggerする的なことを書かないといけない。まあ普通のことではあるんだけど、できたら、
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToDeinit { DDLog.removeLogger(logger) } と、deinitまで処理を遅延させる的な書き方できたら面白いよね、ということで&amp;hellip;
+deinitまでdeferさせてみよう！その1 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
+typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } } てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。
+      </description>
+      
+    </item>
     
     <item>
       <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
@@ -443,30 +463,6 @@ CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表さ�
 Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
 その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
 参照元 What&#39;s New in Xcode 5
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>UIAlertViewよりもおとなしいメッセージダイアログを利用する</title>
-      <link>http://www.tokoro.me/posts/ssgentlealertview/</link>
-      <pubDate>Mon, 27 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/ssgentlealertview/</guid>
-      <description>
-        UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
-一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
-その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
-それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
-警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
-警告目的ではない普通のメッセージダイアログ それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。
-https://github.com/tokorom/SSGentleAlertView
-このSSGentleAlertViewは、
- UIAlertViewと同じコードで利用できる UIAlertViewとは違い、外観を変更できる デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる  という３点に留意して作っています。
-画像パーツやカラーリングなどはUIデザイナの Atsushi Morino さんに作ってもらってるのでちゃんとしてます。
-外観 自分でカスタマイズしない場合でも、次の3種のスタイルが選べます。
-Default Black Native サンプルコード UIAlertViewを使うときのコードのUIAlertViewの部分をSSGentleAlertViewに変更するだけです。
-// #import &amp;#34;SSGentleAlertView.h&amp;#34;  SSGentleAlertView* alert = [SSGentleAlertView new]; alert.delegate = self; alert.title = @&amp;#34;SSGentleAlertView&amp;#34;; alert.message = @&amp;#34;This is GentleAlertView!\nUIAlertView is too strong to use for ordinary messages.&amp;#34;; [alert addButtonWithTitle:@&amp;#34;Cancel&amp;#34;]; [alert addButtonWithTitle:@&amp;#34;OK&amp;#34;]; alert.cancelButtonIndex = 0; [alert show]; なお、インスタンスを作る際に[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack] のようにすることで、３種のスタイルを選択できます。
       </description>
       
     </item>

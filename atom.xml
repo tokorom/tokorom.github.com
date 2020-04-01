@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 10 Feb 2020 10:43:31 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,35 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
+      <link>http://www.tokoro.me/posts/vim-markdown-image-tool/</link>
+      <pubDate>Tue, 31 Mar 2020 16:38:32 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
+      <description>
+        Photo by Victor Grabarczyk on Unsplash
+ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
+最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
+記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
+特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
+手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
+ 各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化  をしていました。
+決して難しいことはありませんが地味に面倒でした。
+ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
+ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
+具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
+function vim_replace_current_line#execute() let line = getline(&amp;#39;.&amp;#39;) let result = system(g:vim_replace_current_line#command . &amp;#39; &amp;#39; . expand(&amp;#39;%&amp;#39;) . &amp;#39; &amp;#39; . expand(&amp;#39;%:t:r&amp;#39;) . &amp;#39; &amp;#39; . trim(line)) call setline(&amp;#39;.&amp;#39;, trim(result))endfunctionという３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+ 特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え  ということだけです。
+      </description>
+      
+      <coverImage>http://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</title>
@@ -484,26 +513,6 @@ var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>Swiftでdeinitまで処理をdeferする</title>
-      <link>http://www.tokoro.me/posts/defer-to-deinit/</link>
-      <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/defer-to-deinit/</guid>
-      <description>
-        deferしてますか？ Swift2でみんな大好きdeferさんが導入されましたね！
-guardと違いそんなに使う機会は訪れていないのですが、昨日、こんな感じで使いたい！という場面に遭遇しました。
-CocoaLumberjackを使ってデバッグ用にUITextViewにログを吐くCustom Loggerを設定していたのですが、とあるViewControllerだけでそれを使いたく、ViewControllerがdeinitされたらそのCustom Loggerも当然外したい。
-そんなコードを書く場合、defer大好きっ子ならCustom Loggerを登録した後にこんな感じで解除したくなりますよね（実際は僕はこのとき初めて実験でないところでdeferを使ったので、本当のdefer大好きっ子はこんな間違いはしないだろう）。
-let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) defer { DDLog.removeLogger(logger) } defer使って、必要なくなったら漏れなくCustom Loggerを解放する俺様は超カッコいいぜ！と言いたかったのだが、当然のごとくこのコードは間違っていて、これを実行し終わるときにはdeferした処理も実行されて登録したCustom Loggerが即解除されるというお馬鹿な状況になるわけです。
-でもdeferしたいよね？ とお馬鹿な前置きは置いておいても、上のような雰囲気で終処理書けたら便利な気はする。 普通にdeinitでやれば済む話なんだけど、今回のケースだとpropertyにloggerをもたせて、deinitでloggerがあればremoveLoggerする的なことを書かないといけない。まあ普通のことではあるんだけど、できたら、
-let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToDeinit { DDLog.removeLogger(logger) } と、deinitまで処理を遅延させる的な書き方できたら面白いよね、ということで&amp;hellip;
-deinitまでdeferさせてみよう！その1 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
-typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } } てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。
-      </description>
       
     </item>
     
