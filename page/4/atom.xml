@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,21 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</title>
+      <link>http://www.tokoro.me/posts/install-pandoc/</link>
+      <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/install-pandoc/</guid>
+      <description>
+        hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
+$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
+試しに hs-http だけインストールしてみたところ、
+$ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;#34;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;#34; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;#34;$procedure$targetname&amp;#34; Warning: targets not executed for hs-http: org.
+      </description>
+      
+    </item>
     
     <item>
       <title>Octopressでソースコードの一部分だけを参照する</title>

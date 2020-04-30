@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,30 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
+      <link>http://www.tokoro.me/posts/has-associated-objects/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/has-associated-objects/</guid>
+      <description>
+        extensionでstored propertyを追加したくなることありますか？ 少なくともSwift 2.1時点ではextensionでstored propertyを追加することはできず、computed propertyのみに限られます。
+でも、ヤダヤダ！ぼくは絶対stored property追加したいんだい！ってことありますか？
+そう思っちゃうあなた、他に解決方法ありますよね？なんでそのやりかたにこだわるんですか？そういう思考になっちゃう時点でまだSwift脳に至ってはいないのではないでしょうか（建前）。
+なお、ぼくはどうしても追加したんだい！ってことがあります（本音）。
+対象がAnyObjectならAssociated Objectsで代用できるよ で、そんな時は この記事 でやっているように Associated Objects で代用できることがあります。
+対象にきちんとretainさせることも可能ですし、安心ですね！
+以下、サンプルコードです。
+var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } } でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
+黒魔術（臭いもの）にフタを なので、この objc_xxxAssociatedObject を二度と書かなくて良いようにライブラリ化できないものでしょうか？
+例えば、こんな感じで気軽にextendできるように。
+//UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>Swiftでdeinitまで処理をdeferする</title>
@@ -438,31 +462,6 @@ iOS 7 Video - 書き起こし &amp;amp; 和訳 ※ 画像はすべて iOS 7 Vide
 It’s the whole thing the way something actually works on so many different levels.デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
 Ultimately of course, design defines so much of our experience.最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
 I think there is a profound and enduring beauty in simplicity, in clarity, in efficiency.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</title>
-      <link>http://www.tokoro.me/posts/xcode5-preview/</link>
-      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/xcode5-preview/</guid>
-      <description>
-        tokorom@WWDC2013参加中です。
-WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。
-で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。
-概要レベルでありますが、なかでも TDD とか CI まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。
-あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。
-ついにXcodeから任意のテストだけを簡単に実行できるようになる ついに、ついに&amp;hellip;というかやっとかという話。
-Xcode 5 で Test Navigator というやつが加わり、テスト駆動での開発を助けてくれますとのこと。具体的に、 シングルクリックで特定の１つのテスト、もしくは選択した複数のテストを実行できる という記載があります。
-また、 テストとソースコードを side by side で自動的に配置する という記載もあります。
-これでObjective-Cな人たちもまともにTDDできる日がやってくるかもしれないですね。
-CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表されている概要だけ並べてみると、
- ２、３回のクリックで新しいbotを作ることができる ネットワーク上のどのMacでも直ちにbotをスタートできる 別のMacでCIを回している間も、自分のMacでビルド結果やテストの結果を確認できる  とのこと。
-Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
-その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
-参照元 What&#39;s New in Xcode 5
       </description>
       
     </item>

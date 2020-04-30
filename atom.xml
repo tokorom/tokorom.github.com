@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,36 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vimにスクショを直接Markdownで貼り付ける</title>
+      <link>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
+      <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
+      <description>
+        Photo by Jae Park on Unsplash
+前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
+ ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む  という便利環境を作りました。
+そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
+今回はそこを解決します！
+pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
+screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
+screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
+ 現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
+そのため、前回のpluginを少し拡張して、
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
+仕組み自体は前回と変わりません。
+このpluginは GitHub に置いてあります。
+スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
+#! /bin/sh  IMAGEDIR=&amp;#34;content/images/$2&amp;#34; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;#34;ss-${CURRENTTIME}.png&amp;#34; TARGET=&amp;#34;${IMAGEDIR}/${IMAGEFILENAME}&amp;#34; IMAGETAG=&amp;#34;![image](/images/$2/${IMAGEFILENAME})&amp;#34; mkdir -p ${IMAGEDIR} screencapture -i &amp;#34;${TARGET}&amp;#34; echo &amp;#34;${IMAGETAG}&amp;#34; IMAGEOPTIM=&amp;#34;open -a ImageOptim&amp;#34; `${IMAGEOPTIM} ${TARGET}` です。
+      </description>
+      
+      <coverImage>http://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png</coverImage>
+      
+    </item>
     
     <item>
       <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
@@ -489,30 +519,6 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
 コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
    タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.
       </description>
-      
-    </item>
-    
-    <item>
-      <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
-      <link>http://www.tokoro.me/posts/has-associated-objects/</link>
-      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/has-associated-objects/</guid>
-      <description>
-        extensionでstored propertyを追加したくなることありますか？ 少なくともSwift 2.1時点ではextensionでstored propertyを追加することはできず、computed propertyのみに限られます。
-でも、ヤダヤダ！ぼくは絶対stored property追加したいんだい！ってことありますか？
-そう思っちゃうあなた、他に解決方法ありますよね？なんでそのやりかたにこだわるんですか？そういう思考になっちゃう時点でまだSwift脳に至ってはいないのではないでしょうか（建前）。
-なお、ぼくはどうしても追加したんだい！ってことがあります（本音）。
-対象がAnyObjectならAssociated Objectsで代用できるよ で、そんな時は この記事 でやっているように Associated Objects で代用できることがあります。
-対象にきちんとretainさせることも可能ですし、安心ですね！
-以下、サンプルコードです。
-var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } } でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
-黒魔術（臭いもの）にフタを なので、この objc_xxxAssociatedObject を二度と書かなくて良いようにライブラリ化できないものでしょうか？
-例えば、こんな感じで気軽にextendできるように。
-//UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?
-      </description>
-      
-      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg</coverImage>
       
     </item>
     

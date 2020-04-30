@@ -3,23 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.tokoro.me/authors/</loc>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/authors/"
+                />
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/tags/hugo/</loc>
-    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/markdown/</loc>
-    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -33,8 +48,13 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/authors/tokorom/</loc>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -49,27 +69,17 @@
   
   <url>
     <loc>http://www.tokoro.me/tags/vim/</loc>
-    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</loc>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/vim-markdown-image-tool/</loc>
     <lastmod>2020-03-31T16:38:32+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2020-02-10T10:43:31+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/authors/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/authors/"
-                />
   </url>
   
   <url>
@@ -79,11 +89,6 @@
   
   <url>
     <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2020-02-10T10:43:31+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/authors/tokorom/</loc>
     <lastmod>2020-02-10T10:43:31+09:00</lastmod>
   </url>
   
