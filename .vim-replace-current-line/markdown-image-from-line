@@ -1,0 +1,15 @@
+#! /bin/sh
+
+SOURCE="$3"
+IMAGEDIR="content/images/$2"
+IMAGEFILENAME=`basename ${SOURCE}`
+TARGET="${IMAGEDIR}/${IMAGEFILENAME}"
+IMAGETAG="![image](/images/$2/${IMAGEFILENAME})"
+
+mkdir -p ${IMAGEDIR}
+cp "${SOURCE}" "${TARGET}"
+
+echo "${IMAGETAG}"
+
+IMAGEOPTIM="open -a ImageOptim"
+`${IMAGEOPTIM} ${TARGET}`
