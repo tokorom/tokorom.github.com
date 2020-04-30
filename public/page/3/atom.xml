@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 16:38:32 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,31 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</title>
+      <link>http://www.tokoro.me/posts/xcode5-preview/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/xcode5-preview/</guid>
+      <description>
+        tokorom@WWDC2013参加中です。
+WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。
+で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。
+概要レベルでありますが、なかでも TDD とか CI まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。
+あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。
+ついにXcodeから任意のテストだけを簡単に実行できるようになる ついに、ついに&amp;hellip;というかやっとかという話。
+Xcode 5 で Test Navigator というやつが加わり、テスト駆動での開発を助けてくれますとのこと。具体的に、 シングルクリックで特定の１つのテスト、もしくは選択した複数のテストを実行できる という記載があります。
+また、 テストとソースコードを side by side で自動的に配置する という記載もあります。
+これでObjective-Cな人たちもまともにTDDできる日がやってくるかもしれないですね。
+CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表されている概要だけ並べてみると、
+ ２、３回のクリックで新しいbotを作ることができる ネットワーク上のどのMacでも直ちにbotをスタートできる 別のMacでCIを回している間も、自分のMacでビルド結果やテストの結果を確認できる  とのこと。
+Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
+その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
+参照元 What&#39;s New in Xcode 5
+      </description>
+      
+    </item>
     
     <item>
       <title>UIAlertViewよりもおとなしいメッセージダイアログを利用する</title>
@@ -445,21 +470,6 @@ $ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストー�
 $ sudo yum install nginx でインストールしておく。
 Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
 server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</title>
-      <link>http://www.tokoro.me/posts/install-pandoc/</link>
-      <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/install-pandoc/</guid>
-      <description>
-        hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
-$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
-試しに hs-http だけインストールしてみたところ、
-$ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;#34;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;#34; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;#34;$procedure$targetname&amp;#34; Warning: targets not executed for hs-http: org.
       </description>
       
     </item>
