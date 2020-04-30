@@ -1,0 +1,14 @@
+#! /bin/sh
+
+if [ $# -ne 1 ];then
+    echo 'Usage: resize-image [image path]';
+    exit 1
+fi
+
+IMAGEPATH="$1"
+
+sips -Z 1200 "${IMAGEPATH}"
+sips -c 630 1200 "${IMAGEPATH}"
+
+IMAGEOPTIM="open -a ImageOptim"
+`${IMAGEOPTIM} ${IMAGEPATH}`
