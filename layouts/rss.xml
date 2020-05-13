@@ -29,6 +29,8 @@
       </description>
       {{ if .Params.cover }}
       <coverImage>{{ .Params.cover | absURL }}</coverImage>
+      {{ else if .Params.images }}
+      <coverImage>{{ index .Params.images 0 | absURL }}</coverImage>
       {{ end }}
     </item>
     {{ end }}
