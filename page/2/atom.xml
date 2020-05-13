@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,30 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
+      <link>http://www.tokoro.me/posts/user_notification/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/user_notification/</guid>
+      <description>
+        概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
+コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
+http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
+iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
+しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
+（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&amp;hellip;）
+iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in //gotgranted:) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
+コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
+   タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.
+      </description>
+      
+    </item>
     
     <item>
       <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
@@ -441,27 +465,6 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
       <description>
         既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
 Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</title>
-      <link>http://www.tokoro.me/posts/ios7-video/</link>
-      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/ios7-video/</guid>
-      <description>
-        今回の記事はUIデザイナの Morino@WWDC2013参加中 に寄稿いただきました！ Appleの公式サイトに iOS 7 を紹介するビデオが公開されましたね。
-http://www.apple.com/ios/ios7/
-特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。
-これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。
-デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。
-iOS 7 Video - 書き起こし &amp;amp; 和訳 ※ 画像はすべて iOS 7 Video の中からの抜粋です
- We have always thought of design as being so much more than just the way something looks.私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
-It’s the whole thing the way something actually works on so many different levels.デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
-Ultimately of course, design defines so much of our experience.最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
-I think there is a profound and enduring beauty in simplicity, in clarity, in efficiency.
       </description>
       
     </item>

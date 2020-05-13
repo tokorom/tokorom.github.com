@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,28 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>さくらVPSにJenkinsさんをインストールする</title>
+      <link>http://www.tokoro.me/posts/install-jenkins-to-sakura/</link>
+      <pubDate>Tue, 24 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/install-jenkins-to-sakura/</guid>
+      <description>
+        JDKのインストール Javaが未インストールならこちらから。
+$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins Jenkinsの起動 $ sudo service jenkins start これでインストールと起動が完了。簡単すぎる！
+試しに
+$ curl http://localhost:8080/ とすると、
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Dashboard [Jenkins]&amp;lt;/title&amp;gt;... みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
+ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。
+$ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストールなら
+$ sudo yum install nginx でインストールしておく。
+Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
+server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins.
+      </description>
+      
+    </item>
     
     <item>
       <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</title>

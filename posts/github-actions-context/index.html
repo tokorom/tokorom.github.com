@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang='ja'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
+概要 GitHub Actions、簡単便利で良いですね！
+ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
+Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
+ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
+ レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい  ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks   Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい  ref: https://api.slack.com/reference/messaging/payload   GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい  と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
+実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
+ Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+ 成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける  といろいろカスタムしてみます。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='Github ActionsからSlackへ通知するのを良い感じにしたい • Yuta Tokoro'>
+<meta property='og:description' content='この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
+概要 GitHub Actions、簡単便利で良いですね！
+ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
+Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
+ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
+ レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい  ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks   Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい  ref: https://api.slack.com/reference/messaging/payload   GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい  と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
+実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
+ Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+ 成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける  といろいろカスタムしてみます。'>
+<meta property='og:url' content='http://www.tokoro.me/posts/github-actions-context/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/github-actions-context/github-actions.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='GitHub'><meta property='article:tag' content='Slack'><meta property='article:published_time' content='2020-05-13T17:26:38&#43;09:00'/><meta property='article:modified_time' content='2020-05-13T17:26:38&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.62.0" />
+
+  <title>Github ActionsからSlackへ通知するのを良い感じにしたい • Yuta Tokoro</title>
+  <link rel='canonical' href='http://www.tokoro.me/posts/github-actions-context/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.e995827f.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-posts has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'></a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      TOKOROM BLOG
+      </a>
+    </h2>
+    <div class='desc'>
+    所 友太 / Yuta Tokoro
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ci/' style='font-size:1em'>ci</a>
+      </li><li>
+        <a href='/tags/cui/' style='font-size:1.0444444444444445em'>cui</a>
+      </li><li>
+        <a href='/tags/design/' style='font-size:1.0666666666666667em'>design</a>
+      </li><li>
+        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
+      </li><li>
+        <a href='/tags/github/' style='font-size:1em'>GitHub</a>
+      </li><li>
+        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
+      </li><li>
+        <a href='/tags/homekit/' style='font-size:1.1333333333333333em'>homekit</a>
+      </li><li>
+        <a href='/tags/hugo/' style='font-size:1.0222222222222221em'>hugo</a>
+      </li><li>
+        <a href='/tags/ios/' style='font-size:2em'>ios</a>
+      </li><li>
+        <a href='/tags/jenkins/' style='font-size:1.0666666666666667em'>jenkins</a>
+      </li><li>
+        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
+      </li><li>
+        <a href='/tags/mac/' style='font-size:1.0888888888888888em'>mac</a>
+      </li><li>
+        <a href='/tags/markdown/' style='font-size:1.0222222222222221em'>markdown</a>
+      </li><li>
+        <a href='/tags/nfc/' style='font-size:1.0444444444444445em'>nfc</a>
+      </li><li>
+        <a href='/tags/objc/' style='font-size:1.4222222222222223em'>objc</a>
+      </li><li>
+        <a href='/tags/octopress/' style='font-size:1.0444444444444445em'>octopress</a>
+      </li><li>
+        <a href='/tags/publish/' style='font-size:1em'>publish</a>
+      </li><li>
+        <a href='/tags/review/' style='font-size:1em'>review</a>
+      </li><li>
+        <a href='/tags/sakura/' style='font-size:1.0444444444444445em'>sakura</a>
+      </li><li>
+        <a href='/tags/sesame/' style='font-size:1.0444444444444445em'>sesame</a>
+      </li><li>
+        <a href='/tags/slack/' style='font-size:1em'>Slack</a>
+      </li><li>
+        <a href='/tags/swift/' style='font-size:1.1777777777777778em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
+      </li><li>
+        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
+      </li><li>
+        <a href='/tags/tvos/' style='font-size:1.0222222222222221em'>tvos</a>
+      </li><li>
+        <a href='/tags/ui/' style='font-size:1.1111111111111112em'>ui</a>
+      </li><li>
+        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
+      </li><li>
+        <a href='/tags/vim/' style='font-size:1.1333333333333333em'>vim</a>
+      </li><li>
+        <a href='/tags/wwdc/' style='font-size:1em'>wwdc</a>
+      </li><li>
+        <a href='/tags/xcode/' style='font-size:1.0888888888888888em'>xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'></span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Github ActionsからSlackへ通知するのを良い感じにしたい</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2020-05-13T17:26:38&#43;09:00'>2020-05-13</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+  <p><img src="/images/github-actions-context/github-actions.png" alt="image"></p>
+<p>この記事は<code>push</code>をトリガーとしたGitHub Actionsのワークフローを前提として書いています。</p>
+<h2 id="heading">概要</h2>
+<p>GitHub Actions、簡単便利で良いですね！</p>
+<p>ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。</p>
+<p>Slackへの通知も <a href="https://github.com/marketplace?type=actions&amp;query=slack">Marketplace</a> に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！</p>
+<h2 id="heading-1">ぼくはこんな感じにしたかった</h2>
+<p>とはいえ、贅沢を言えば、ぼくは</p>
+<ul>
+<li>レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい
+<ul>
+<li>ref: <a href="https://api.slack.com/legacy/custom-integrations#incoming-webhooks">https://api.slack.com/legacy/custom-integrations#incoming-webhooks</a></li>
+</ul>
+</li>
+<li>Action独自のパラメータでなくSlackが定義している<code>Message payloads</code>のフィールドをそのまま指定したい
+<ul>
+<li>ref: <a href="https://api.slack.com/reference/messaging/payload">https://api.slack.com/reference/messaging/payload</a></li>
+</ul>
+</li>
+<li>GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい</li>
+</ul>
+<p>と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。</p>
+<p>作ったActionは <a href="https://github.com/marketplace/actions/slack-incoming-webhook">https://github.com/marketplace/actions/slack-incoming-webhook</a> です。</p>
+<h2 id="heading-2">実際の通知</h2>
+<h3 id="heading-3">テキストメッセージ送るだけ</h3>
+<p>テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに</p>
+<ul>
+<li>Incoming WebhookのURLをenvに指定</li>
+<li><code>text</code>フィールドを指定
+<ul>
+<li>フィールド名を <a href="https://api.slack.com/reference/messaging/payload">SlackのPayloadの仕様</a> に合わせてます</li>
+</ul>
+</li>
+</ul>
+<p>の２つだけ設定すると、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- name: Slack Notification
+  uses: tokorom/action-slack-incoming-webhook@master
+  env:
+    INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  with:
+    text: Hello, Slack!
+</code></pre></div><p><img src="/images/github-actions-context/sample-simple.png" alt="image"></p>
+<p>こんな感じにSlackにメッセージを送れます。</p>
+<h3 id="heading-4">いろいろカスタム</h3>
+<p>次に、<code>text</code>だけでなく、<code>attachments</code>フィールドも指定して、</p>
+<ul>
+<li>成功ならgreenなど色をつける</li>
+<li>pushした人の名前やアイコンも表示する</li>
+<li>GitHub Actionsの該当のワークフローへのリンクをつける</li>
+<li>変更差分を見るためのCompareページへのリンクをつける</li>
+</ul>
+<p>といろいろカスタムしてみます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- name: Set COMMIT_MESSAGE
+  run: echo ::set-env name=COMMIT_MESSAGE::$(echo <span style="color:#e6db74">&#34;${{ github.event.head_commit.message }}&#34;</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>)
+- name: Slack Notification on SUCCESS
+  if: success()
+  uses: tokorom/action-slack-incoming-webhook@master
+  env:
+    INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  with:
+    text: Successfully automated deployment.
+    attachments: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">     </span><span style="color:#e6db74"> </span><span style="color:#e6db74">[</span>
+        {
+          <span style="color:#e6db74">&#34;color&#34;</span>: <span style="color:#e6db74">&#34;good&#34;</span>,
+          <span style="color:#e6db74">&#34;author_name&#34;</span>: <span style="color:#e6db74">&#34;${{ github.actor }}&#34;</span>,
+          <span style="color:#e6db74">&#34;author_icon&#34;</span>: <span style="color:#e6db74">&#34;${{ github.event.sender.avatar_url }}&#34;</span>,
+          <span style="color:#e6db74">&#34;fields&#34;</span>: [
+            {
+              <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Commit Message&#34;</span>,
+              <span style="color:#e6db74">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;${{ env.COMMIT_MESSAGE }}&#34;</span>
+            },
+            {
+              <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;GitHub Actions URL&#34;</span>,
+              <span style="color:#e6db74">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}&#34;</span>
+            },
+            {
+              <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Compare URL&#34;</span>,
+              <span style="color:#e6db74">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;${{ github.event.compare }}&#34;</span>
+            }
+          ]
+        }
+      ]
+</code></pre></div><p><img src="/images/github-actions-context/sample-advanced.png" alt="image"></p>
+<p>この設定を使うと、こんな感じにカスタムしたメッセージも送れます。</p>
+<h2 id="inputs">指定できるフィールド（Inputs）</h2>
+<p>指定できるフィールド（Inputs）は、現在、Slackが <a href="https://api.slack.com/reference/messaging/payload">Message payloads</a> に明記している</p>
+<ul>
+<li><code>text</code></li>
+<li><code>blocks</code></li>
+<li><code>attachments</code></li>
+<li><code>thread_ts</code></li>
+<li><code>mrkdwn</code></li>
+</ul>
+<p>の５つです。</p>
+<p><code>attachments</code>や<code>blocks</code>にJSONフォーマットでなんでも指定できますので、実質、どんなメッセージも表現できるはずです。</p>
+<h2 id="heading-5">ほんとは&hellip;</h2>
+<p>なお、<code>attachments</code>や<code>blocks</code>にJSONを指定するのは、ほんとはやりたくなくて、はじめは、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">with:
+  text: Successfully automated deployment.
+  attachments:
+    - color: good
+      author_name: ${{ github.actor }}
+      author_icon: ${{ github.event.sender.avatar_url }}
+      fields:
+        - title: Commit Message
+          value: ${{ env.COMMIT_MESSAGE }}
+</code></pre></div><p>とYamlのまま子要素も指定させるつもりでした。</p>
+<p>ただ、現状、GitHub ActionsのInputsには文字列しか指定できず、上の指定のしかたを受け入れてくれないため、しかたなくJSONの文字列を指定するようにしています。</p>
+<h2 id="github-actions">GitHub Actionsで利用できるコンテキスト</h2>
+<p>ところで、上のワークフローの設定例では、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">author_icon: ${{ github.event.sender.avatar_url }}
+</code></pre></div><p>で<code>push</code>した人のアイコンを表示したりしていますが、これは、GitHub Actionsで利用できる<code>github</code>コンテキストをdumpしてたまたま見つけたものです。</p>
+<p>これらコンテキストについての情報は <a href="https://help.github.com/ja/actions/reference/context-and-expression-syntax-for-github-actions">https://help.github.com/ja/actions/reference/context-and-expression-syntax-for-github-actions</a> にきちんと書かれているのですが、<code>github.event</code>の中身に具体的にどんな値が入っているか、など詳細については今のところ明記されていません。</p>
+<p>しかし、このドキュメントでは「各コンテキストをdumpして実際にどんな値が使えるか調べられるよ」と紹介されています。</p>
+<p>以下が実際に <code>push</code>をトリガーとした場合の<code>github</code>コンテキストの中身をdumpしたものです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
+  <span style="color:#e6db74">&#34;token&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;***&#34;</span>,
+  <span style="color:#e6db74">&#34;job&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;deploy&#34;</span>,
+  <span style="color:#e6db74">&#34;ref&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;refs/heads/master&#34;</span>,
+  <span style="color:#e6db74">&#34;sha&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&#34;</span>,
+  <span style="color:#e6db74">&#34;repository&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom/github-actions-sandbox&#34;</span>,
+  <span style="color:#e6db74">&#34;repository_owner&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+  <span style="color:#e6db74">&#34;repositoryUrl&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;git://github.com/tokorom/github-actions-sandbox.git&#34;</span>,
+  <span style="color:#e6db74">&#34;run_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;103131997&#34;</span>,
+  <span style="color:#e6db74">&#34;run_number&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;2&#34;</span>,
+  <span style="color:#e6db74">&#34;actor&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+  <span style="color:#e6db74">&#34;workflow&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;sandbox&#34;</span>,
+  <span style="color:#e6db74">&#34;head_ref&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#e6db74">&#34;base_ref&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#e6db74">&#34;event_name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;push&#34;</span>,
+  <span style="color:#e6db74">&#34;event&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#34;after&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&#34;</span>,
+    <span style="color:#e6db74">&#34;base_ref&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+    <span style="color:#e6db74">&#34;before&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;ea89168554cf912efd3bf2a08b6e2cbd95db2b66&#34;</span>,
+    <span style="color:#e6db74">&#34;commits&#34;</span><span style="color:#f92672">:</span> [
+      {
+        <span style="color:#e6db74">&#34;author&#34;</span><span style="color:#f92672">:</span> {
+          <span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom@gmail.com&#34;</span>,
+          <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+          <span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>
+        },
+        <span style="color:#e6db74">&#34;committer&#34;</span><span style="color:#f92672">:</span> {
+          <span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom@gmail.com&#34;</span>,
+          <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+          <span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>
+        },
+        <span style="color:#e6db74">&#34;distinct&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+        <span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&#34;</span>,
+        <span style="color:#e6db74">&#34;message&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;更新テスト&#34;</span>,
+        <span style="color:#e6db74">&#34;timestamp&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;2020-05-13T11:06:38+09:00&#34;</span>,
+        <span style="color:#e6db74">&#34;tree_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;36a30d1029ee63104706e57357a9db8de0ac535b&#34;</span>,
+        <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox/commit/8a58cb9b359c49b7f2ab604c53a6944dcc221dff&#34;</span>
+      }
+    ],
+    <span style="color:#e6db74">&#34;compare&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox/compare/ea89168554cf...8a58cb9b359c&#34;</span>,
+    <span style="color:#e6db74">&#34;created&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+    <span style="color:#e6db74">&#34;deleted&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+    <span style="color:#e6db74">&#34;forced&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+    <span style="color:#e6db74">&#34;head_commit&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;author&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom@gmail.com&#34;</span>,
+        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+        <span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>
+      },
+      <span style="color:#e6db74">&#34;committer&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom@gmail.com&#34;</span>,
+        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+        <span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>
+      },
+      <span style="color:#e6db74">&#34;distinct&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+      <span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&#34;</span>,
+      <span style="color:#e6db74">&#34;message&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;更新テスト&#34;</span>,
+      <span style="color:#e6db74">&#34;timestamp&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;2020-05-13T11:06:38+09:00&#34;</span>,
+      <span style="color:#e6db74">&#34;tree_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;36a30d1029ee63104706e57357a9db8de0ac535b&#34;</span>,
+      <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox/commit/8a58cb9b359c49b7f2ab604c53a6944dcc221dff&#34;</span>
+    },
+    <span style="color:#e6db74">&#34;pusher&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom@gmail.com&#34;</span>,
+      <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>
+    },
+    <span style="color:#e6db74">&#34;ref&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;refs/heads/master&#34;</span>,
+    <span style="color:#e6db74">&#34;repository&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;archive_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/{archive_format}{/ref}&#34;</span>,
+      <span style="color:#e6db74">&#34;archived&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+      <span style="color:#e6db74">&#34;assignees_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/assignees{/user}&#34;</span>,
+      <span style="color:#e6db74">&#34;blobs_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/git/blobs{/sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;branches_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/branches{/branch}&#34;</span>,
+      <span style="color:#e6db74">&#34;clone_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox.git&#34;</span>,
+      <span style="color:#e6db74">&#34;collaborators_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/collaborators{/collaborator}&#34;</span>,
+      <span style="color:#e6db74">&#34;comments_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/comments{/number}&#34;</span>,
+      <span style="color:#e6db74">&#34;commits_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/commits{/sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;compare_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/compare/{base}...{head}&#34;</span>,
+      <span style="color:#e6db74">&#34;contents_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/contents/{+path}&#34;</span>,
+      <span style="color:#e6db74">&#34;contributors_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/contributors&#34;</span>,
+      <span style="color:#e6db74">&#34;created_at&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1589333793</span>,
+      <span style="color:#e6db74">&#34;default_branch&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;master&#34;</span>,
+      <span style="color:#e6db74">&#34;deployments_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/deployments&#34;</span>,
+      <span style="color:#e6db74">&#34;description&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;所がGitHub Actionsを試すお砂場&#34;</span>,
+      <span style="color:#e6db74">&#34;disabled&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+      <span style="color:#e6db74">&#34;downloads_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/downloads&#34;</span>,
+      <span style="color:#e6db74">&#34;events_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/events&#34;</span>,
+      <span style="color:#e6db74">&#34;fork&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+      <span style="color:#e6db74">&#34;forks&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;forks_count&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;forks_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/forks&#34;</span>,
+      <span style="color:#e6db74">&#34;full_name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom/github-actions-sandbox&#34;</span>,
+      <span style="color:#e6db74">&#34;git_commits_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/git/commits{/sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;git_refs_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/git/refs{/sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;git_tags_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/git/tags{/sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;git_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;git://github.com/tokorom/github-actions-sandbox.git&#34;</span>,
+      <span style="color:#e6db74">&#34;has_downloads&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+      <span style="color:#e6db74">&#34;has_issues&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+      <span style="color:#e6db74">&#34;has_pages&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+      <span style="color:#e6db74">&#34;has_projects&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+      <span style="color:#e6db74">&#34;has_wiki&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+      <span style="color:#e6db74">&#34;homepage&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+      <span style="color:#e6db74">&#34;hooks_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/hooks&#34;</span>,
+      <span style="color:#e6db74">&#34;html_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox&#34;</span>,
+      <span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">263495697</span>,
+      <span style="color:#e6db74">&#34;issue_comment_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/issues/comments{/number}&#34;</span>,
+      <span style="color:#e6db74">&#34;issue_events_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/issues/events{/number}&#34;</span>,
+      <span style="color:#e6db74">&#34;issues_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/issues{/number}&#34;</span>,
+      <span style="color:#e6db74">&#34;keys_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/keys{/key_id}&#34;</span>,
+      <span style="color:#e6db74">&#34;labels_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/labels{/name}&#34;</span>,
+      <span style="color:#e6db74">&#34;language&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+      <span style="color:#e6db74">&#34;languages_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/languages&#34;</span>,
+      <span style="color:#e6db74">&#34;license&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+      <span style="color:#e6db74">&#34;master_branch&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;master&#34;</span>,
+      <span style="color:#e6db74">&#34;merges_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/merges&#34;</span>,
+      <span style="color:#e6db74">&#34;milestones_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/milestones{/number}&#34;</span>,
+      <span style="color:#e6db74">&#34;mirror_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+      <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;github-actions-sandbox&#34;</span>,
+      <span style="color:#e6db74">&#34;node_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MDEwOlJlcG9zaXRvcnkyNjM0OTU2OTc=&#34;</span>,
+      <span style="color:#e6db74">&#34;notifications_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/notifications{?since,all,participating}&#34;</span>,
+      <span style="color:#e6db74">&#34;open_issues&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;open_issues_count&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;owner&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;avatar_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://avatars2.githubusercontent.com/u/629993?v=4&#34;</span>,
+        <span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom@gmail.com&#34;</span>,
+        <span style="color:#e6db74">&#34;events_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/events{/privacy}&#34;</span>,
+        <span style="color:#e6db74">&#34;followers_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/followers&#34;</span>,
+        <span style="color:#e6db74">&#34;following_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/following{/other_user}&#34;</span>,
+        <span style="color:#e6db74">&#34;gists_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/gists{/gist_id}&#34;</span>,
+        <span style="color:#e6db74">&#34;gravatar_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+        <span style="color:#e6db74">&#34;html_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom&#34;</span>,
+        <span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">629993</span>,
+        <span style="color:#e6db74">&#34;login&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+        <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+        <span style="color:#e6db74">&#34;node_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MDQ6VXNlcjYyOTk5Mw==&#34;</span>,
+        <span style="color:#e6db74">&#34;organizations_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/orgs&#34;</span>,
+        <span style="color:#e6db74">&#34;received_events_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/received_events&#34;</span>,
+        <span style="color:#e6db74">&#34;repos_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/repos&#34;</span>,
+        <span style="color:#e6db74">&#34;site_admin&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+        <span style="color:#e6db74">&#34;starred_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/starred{/owner}{/repo}&#34;</span>,
+        <span style="color:#e6db74">&#34;subscriptions_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/subscriptions&#34;</span>,
+        <span style="color:#e6db74">&#34;type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;User&#34;</span>,
+        <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom&#34;</span>
+      },
+      <span style="color:#e6db74">&#34;private&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+      <span style="color:#e6db74">&#34;pulls_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/pulls{/number}&#34;</span>,
+      <span style="color:#e6db74">&#34;pushed_at&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1589335611</span>,
+      <span style="color:#e6db74">&#34;releases_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/releases{/id}&#34;</span>,
+      <span style="color:#e6db74">&#34;size&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;ssh_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;git@github.com:tokorom/github-actions-sandbox.git&#34;</span>,
+      <span style="color:#e6db74">&#34;stargazers&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;stargazers_count&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;stargazers_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/stargazers&#34;</span>,
+      <span style="color:#e6db74">&#34;statuses_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/statuses/{sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;subscribers_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/subscribers&#34;</span>,
+      <span style="color:#e6db74">&#34;subscription_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/subscription&#34;</span>,
+      <span style="color:#e6db74">&#34;svn_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox&#34;</span>,
+      <span style="color:#e6db74">&#34;tags_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/tags&#34;</span>,
+      <span style="color:#e6db74">&#34;teams_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/teams&#34;</span>,
+      <span style="color:#e6db74">&#34;trees_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/repos/tokorom/github-actions-sandbox/git/trees{/sha}&#34;</span>,
+      <span style="color:#e6db74">&#34;updated_at&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;2020-05-13T02:00:26Z&#34;</span>,
+      <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom/github-actions-sandbox&#34;</span>,
+      <span style="color:#e6db74">&#34;watchers&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+      <span style="color:#e6db74">&#34;watchers_count&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>
+    },
+    <span style="color:#e6db74">&#34;sender&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;avatar_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://avatars2.githubusercontent.com/u/629993?v=4&#34;</span>,
+      <span style="color:#e6db74">&#34;events_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/events{/privacy}&#34;</span>,
+      <span style="color:#e6db74">&#34;followers_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/followers&#34;</span>,
+      <span style="color:#e6db74">&#34;following_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/following{/other_user}&#34;</span>,
+      <span style="color:#e6db74">&#34;gists_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/gists{/gist_id}&#34;</span>,
+      <span style="color:#e6db74">&#34;gravatar_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#e6db74">&#34;html_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://github.com/tokorom&#34;</span>,
+      <span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">629993</span>,
+      <span style="color:#e6db74">&#34;login&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;tokorom&#34;</span>,
+      <span style="color:#e6db74">&#34;node_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MDQ6VXNlcjYyOTk5Mw==&#34;</span>,
+      <span style="color:#e6db74">&#34;organizations_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/orgs&#34;</span>,
+      <span style="color:#e6db74">&#34;received_events_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/received_events&#34;</span>,
+      <span style="color:#e6db74">&#34;repos_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/repos&#34;</span>,
+      <span style="color:#e6db74">&#34;site_admin&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+      <span style="color:#e6db74">&#34;starred_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/starred{/owner}{/repo}&#34;</span>,
+      <span style="color:#e6db74">&#34;subscriptions_url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom/subscriptions&#34;</span>,
+      <span style="color:#e6db74">&#34;type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;User&#34;</span>,
+      <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.github.com/users/tokorom&#34;</span>
+    }
+  },
+  <span style="color:#e6db74">&#34;workspace&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/home/runner/work/github-actions-sandbox/github-actions-sandbox&#34;</span>,
+  <span style="color:#e6db74">&#34;action&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;run1&#34;</span>,
+  <span style="color:#e6db74">&#34;event_path&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/home/runner/work/_temp/_github_workflow/event.json&#34;</span>
+}
+</code></pre></div><p>これを見ていると「最新のcommitメッセージは<code>github.event.head_commit.message</code>で参照できるぞ」など、楽しくなってきますね！</p>
+<p>それでは、ぜひ <a href="https://github.com/marketplace/actions/slack-incoming-webhook">https://github.com/marketplace/actions/slack-incoming-webhook</a> を使って、GitHub ActionsからのSlack通知をお好みにカスタマイズしてみてください！</p>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/github-actions-context/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fgithub-actions-context%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/github/'>GitHub</a>, <a class='tag' href='/tags/slack/'>Slack</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/vim-markdown-paste-from-clipboard/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>Vimにスクショを直接Markdownで貼り付ける</a>
+    </div></div>
+</nav>
+
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+    <h4>所の執筆・監修した書籍</h4>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project007_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
+    <li style="font-size:90%; list-style:none;"><span>著者：</span>
+    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
+    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
+    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
+
+  </div>
+
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>tokorom</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.f18da963.js'></script>
+
+</body>
+
+</html>
+
