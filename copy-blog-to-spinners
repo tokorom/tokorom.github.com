@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]; then
+  echo "Usage: copy-blog-to-spinners [entry_name]"
+  exit 1
+fi
+
+ENTRYNAME=$1
+SPINNERSDIR="${HOME}/develop/spinners/www.spinners.work"
+POSTDIR="content/posts"
+IMAGEDIR="content/images"
+
+SOURCEENTRY="./${POSTDIR}/${ENTRYNAME}.md"
+TARGETENTRY="${SPINNERSDIR}/${POSTDIR}/"
+SOURCEIMAGES="./${IMAGEDIR}/${ENTRYNAME}"
+TARGETIMAGES="${SPINNERSDIR}/${IMAGEDIR}/"
+
+cp "${SOURCEENTRY}" "${TARGETENTRY}"
+ret=$?
+if [ $ret -eq 0 ]; then
+  echo "Copied to ${TARGETENTRY}/${ENTRYNAME}.md"
+fi
+
+if [ -e "${SOURCEIMAGES}" ]; then
+  cp -r "${SOURCEIMAGES}" "${TARGETIMAGES}"
+  ret=$?
+  if [ $ret -eq 0 ]; then
+    echo "Copied to ${TARGETIMAGES}${ENTRYNAME}"
+    ls "${TARGETIMAGES}${ENTRYNAME}"
+  fi
+fi
