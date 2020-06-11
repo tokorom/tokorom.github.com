@@ -30,7 +30,7 @@ swift.orgの説明には、
   AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/swift-aws-lambda-runtime/top.jpg</coverImage>
+      <coverImage>http://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
       
     </item>
     
