@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,24 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
+      <description>
+        [Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
+なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
+もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
+ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png</coverImage>
+      
+    </item>
     
     <item>
       <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
@@ -452,19 +470,6 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
 ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。
 例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。
 4. &amp;ldquo;parallax to create a whole new experience of depth.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Objective-Cのコードを削れるだけ削る7のTips</title>
-      <link>http://www.tokoro.me/posts/objc-reduce/</link>
-      <pubDate>Sat, 15 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/objc-reduce/</guid>
-      <description>
-        既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
-Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.
       </description>
       
     </item>

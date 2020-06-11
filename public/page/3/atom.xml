@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,19 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cのコードを削れるだけ削る7のTips</title>
+      <link>http://www.tokoro.me/posts/objc-reduce/</link>
+      <pubDate>Sat, 15 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-reduce/</guid>
+      <description>
+        既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.
+      </description>
+      
+    </item>
     
     <item>
       <title>iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</title>
@@ -445,30 +458,6 @@ Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
       <description>
         目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
 イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&amp;gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&amp;gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&amp;gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &amp;quot;jenkins@your.domain&amp;quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &amp;quot;jenkins&amp;quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>
-      <link>http://www.tokoro.me/posts/security-for-jenkins/</link>
-      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/security-for-jenkins/</guid>
-      <description>
-        前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
-つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
-ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
-JenkinsにBitbucketからアクセスするためのユーザを追加 まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。
-※ ユーザの追加方法については このあたり を参照
-今回は、bitbucket というユーザを追加した。
-また、 Manage Jenkins -&amp;gt; Configure System で、
- Access Control  Authorization  Matrix-based security  bitbucketユーザに Job の Read だけチェック        としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
-このとき、Anonymousユーザの Job の Read にチェックがついていれば外しておく。
-Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
-これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
-nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
-server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。
       </description>
       
     </item>

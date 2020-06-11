@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,30 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>
+      <link>http://www.tokoro.me/posts/security-for-jenkins/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/security-for-jenkins/</guid>
+      <description>
+        前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
+JenkinsにBitbucketからアクセスするためのユーザを追加 まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。
+※ ユーザの追加方法については このあたり を参照
+今回は、bitbucket というユーザを追加した。
+また、 Manage Jenkins -&amp;gt; Configure System で、
+ Access Control  Authorization  Matrix-based security  bitbucketユーザに Job の Read だけチェック        としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
+このとき、Anonymousユーザの Job の Read にチェックがついていれば外しておく。
+Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
+nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。
+      </description>
+      
+    </item>
     
     <item>
       <title>さくらVPSにJenkinsさんをインストールする</title>

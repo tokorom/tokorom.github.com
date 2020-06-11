@@ -6,10 +6,24 @@
     <description>Recent content in Posts on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</title>
+      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
+      <pubDate>Thu, 11 Jun 2020 14:57:28 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
+      <description>導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
+https://swift.org/blog/aws-lambda-runtime/
+以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
+swift.orgの説明には、
+ The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
+  AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。</description>
+    </item>
     
     <item>
       <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
