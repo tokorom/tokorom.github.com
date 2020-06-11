@@ -4,7 +4,7 @@ date: 2020-06-11T14:57:28+09:00
 draft: false
 authors: [tokorom]
 tags: [Swift,AWS,Lambda]
-images: [/images/swift-aws-lambda-runtime/top.jpg]
+images: [/images/swift-aws-lambda-runtime/top.png]
 ---
 
 ![image](/images/swift-aws-lambda-runtime/top.png)
