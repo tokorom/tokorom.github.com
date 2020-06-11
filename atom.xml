@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,25 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</title>
+      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
+      <pubDate>Thu, 11 Jun 2020 14:57:28 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
+      <description>
+        導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
+https://swift.org/blog/aws-lambda-runtime/
+以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
+swift.orgの説明には、
+ The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
+  AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。
+      </description>
+      
+      <coverImage>http://www.tokoro.me/images/swift-aws-lambda-runtime/top.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
@@ -502,24 +521,6 @@ InputEventをトリガーとするサンプルコード InputEventをトリガ�
       </description>
       
       <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
-      <link>http://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
-      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
-      <description>
-        [Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
-カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
-なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
-もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
-ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
-      </description>
-      
-      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png</coverImage>
       
     </item>
     
