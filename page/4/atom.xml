@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2020 14:25:23 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,19 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる</title>
+      <link>http://www.tokoro.me/posts/jenkins-octopress/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/jenkins-octopress/</guid>
+      <description>
+        目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&amp;gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&amp;gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&amp;gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &amp;quot;jenkins@your.domain&amp;quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &amp;quot;jenkins&amp;quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.
+      </description>
+      
+    </item>
     
     <item>
       <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>

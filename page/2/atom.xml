@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2020 14:25:23 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,24 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
+      <description>
+        [Amazon] Philips Hue(ヒュー) Dimmer スイッチ主なサービス    HMServiceType〜 説明     StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ   Battery バッテリー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     InputEvent プログラマブル・スイッチ・イベント uint8 -   BatteryLevel 電池残量 uint8 -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
+Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
+なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
+この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。
+InputEventをトリガーとするサンプルコード InputEventをトリガーとして特定のシーンを実行する、具体的には、ボタンを押したらランプを点灯/消灯するサンプルコードを紹介します。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png</coverImage>
+      
+    </item>
     
     <item>
       <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
@@ -423,53 +441,6 @@ iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的
 Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
 自分の場合は、
 PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ 	-project $(PROJECT) \ 	clean test: xcodebuild \ 	-project $(PROJECT) \ 	-target $(TEST_TARGET) \ 	-sdk iphonesimulator \ 	-configuration Debug \ 	TEST_AFTER_BUILD=YES \ 	TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</title>
-      <link>http://www.tokoro.me/posts/ios7-ui-design/</link>
-      <pubDate>Mon, 17 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/ios7-ui-design/</guid>
-      <description>
-        今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
-今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
-&amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;quot;フラットデザイン&amp;quot;が採用されて、画面デザインは大分シンプルな外観になりました。
-使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。
-iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。
-ただ、&amp;ldquo;Simplicity&amp;quot;という言葉は、単に外観を表すものとして使われているわけではありません。
-「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。
-実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。
-なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。
-全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。
-これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。
-アップルは今回、外観的な&amp;quot;Simplicity&amp;quot;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。
-画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。
-これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。
-では、アップルの&amp;quot;Simplicity&amp;quot;を構成する要素にはどのようなものがあるでしょうか。
-1. &amp;ldquo;refining the typography&amp;rdquo; タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。
-英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。
-一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。
-ナビゲーションバーのボタンも、アイコンが廃され、テキストのみで簡潔に機能を伝えるものが多いようです。
-タイポの美しさを最大限に引き出したいという意図だと思われますが、画面のシンプルさを維持するためにボタンの境界線も排除されています。
-その代わりに、押せるボタンであることを明確に示すために、通常テキストとははっきりと違う色を割り当てて、アプリ全体で一貫して使われています。
-その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。
-これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。
-私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。 通常テキストとボタンのテキストの2色だけを使うのが安全です。
-複数のテキスト色が混ざり合ったインタフェースになってしまうと、どれがボタンなのか判断がつかなくなってしまいます。
-もう一つ懸念点があるとすれば、日本語のタイポグラフィーにおいても、英文と同じ可読性・美しさを確保できるかということです。
-場合によっては、余白を多めに取るなどの工夫を行ったほうがよいことも多そうです。
-2. &amp;ldquo;redesigning all the icons&amp;rdquo; 標準アプリのアイコンは全て共通の新しいグリッドシステムに基づいてデザインし直されています。
-このグリッドシステムに従うことで、アイコンごとのグラフィックのバランスに統一感・一貫性を持たせています。
-もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。
-既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。
-3. &amp;ldquo;use of translucency&amp;rdquo; 地味ながらも美しく、活用の余地が大きい機能追加だと思います。
-画面上部から引き下げるNotification Center、画面下部から引き上げるControl Center、キーボードやダイアログなど、様々なアイテムがすりガラス風の半透明な板で表現され、背景がぼんやりとボケて見えるだけですが、その存在を感じ取ることで「後ろに何かがある」ことを認識できるようになりました。
-ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。
-例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。
-4. &amp;ldquo;parallax to create a whole new experience of depth.
       </description>
       
     </item>
