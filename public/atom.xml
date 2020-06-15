@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 11 Jun 2020 14:57:28 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2020 14:25:23 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,33 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる</title>
+      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
+      <pubDate>Mon, 15 Jun 2020 14:25:23 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
+      <description>
+        導入 前回の Swift AWS Lambda Runtimeのサンプルをデプロイしてみた の続きです。
+特に犬の写真を毎朝送ってほしいというわけではないですが、Swift AWS Lambda Runtimeを試すにあたっての題材として、
+ AWS Lambdaのスケジュール式トリガーで毎朝自動で実行する 画像検索APIで犬の写真をランダムに取ってくる それをSlackに送る  というのをやってみます。
+画像検索API 画像検索APIは手っ取り早く使えそうなAzureの Image Search API を使ってみます。 Azureのアカウントさえ作れば、月1000回までは無料で叩けるようです。
+curlで叩くとすると、
+curl &amp;#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&amp;#39; \  -H &amp;#39;Ocp-Apim-Subscription-Key: YOUR_KEY&amp;#39; となります。
+ リクエストパラメータに q=検索ワード リクエストヘッダーに Ocp-Apim-Subscription-Key: YOUR_KEY  を渡します1。
+Slackへの通知 Slackの Incoming Webhook用のURLを取得します。
+URLを取得したら、curlで叩くとすると、
+curl -X POST -H &amp;#39;Content-type: application/json&amp;#39; \  --data &amp;#39;{&amp;#34;text&amp;#34;:&amp;#34;犬の画像のURL&amp;#34;}&amp;#39; \  https://hooks.slack.com/services/your/incoming/webhook とするだけです。
+ POSTデータで{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}  を送ってあげるだけですね。
+Lambda関数を作る これで画像検索APIとSlackへの通知部分は準備できたので、あとはメインディッシュのLambda関数を作るだけです。
+Packageの作成 まずは、
+swift package init --type executable --name DogImage とPackageを作り、 GitHub上のサンプル をベースにPackage.
+      </description>
+      
+      <coverImage>http://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</title>
@@ -503,24 +530,6 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
       </description>
       
       <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
-      <link>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
-      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
-      <description>
-        [Amazon] Philips Hue(ヒュー) Dimmer スイッチ主なサービス    HMServiceType〜 説明     StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ   Battery バッテリー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     InputEvent プログラマブル・スイッチ・イベント uint8 -   BatteryLevel 電池残量 uint8 -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
-Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
-なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
-この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。
-InputEventをトリガーとするサンプルコード InputEventをトリガーとして特定のシーンを実行する、具体的には、ボタンを押したらランプを点灯/消灯するサンプルコードを紹介します。
-      </description>
-      
-      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png</coverImage>
       
     </item>
     
