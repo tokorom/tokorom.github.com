@@ -569,7 +569,10 @@ Lambda.run { (<span style="color:#66d9ef">_</span>: Lambda.Context, <span style=
 <p><img src="/images/swift-aws-lambda-runtime2/trigger.png" alt="image"></p>
 <p>トリガーとして「CloudWatch Events」を選び、スケジュール式のところにcron形式で毎朝10時に発火する設定をしてみました。</p>
 <p><img src="/images/swift-aws-lambda-runtime2/cron.png" alt="image"></p>
-<p>（今回はこの設定がメインではないので動作確認してないですが）これで毎朝10時に犬の画像がSlackに投稿されるはず！</p>
+<p>これで毎朝10時に犬の画像がSlackに投稿されるはず！</p>
+<p>※2020/6/16 AM10:10 追記
+きちんと朝10時に可愛い犬の写真が投稿されることを確認できました。</p>
+<p><img src="/images/swift-aws-lambda-runtime2/ebi.png" alt="image"></p>
 <h3 id="heading-5">まとめ</h3>
 <p>使い慣れたSwiftで簡単にLambda関数が作れるようになり、とても快適になったと思います。</p>
 <p>ビルドスクリプトとかDockerfileあたりをテンプレート化しておけば、より手早く作れるようになるでしょう。</p>
