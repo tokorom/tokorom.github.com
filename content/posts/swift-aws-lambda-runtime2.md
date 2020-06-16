@@ -424,7 +424,12 @@ AWS Lambdaへのデプロイの方法は [前回の記事](/posts/swift-aws-lamb
 
 ![image](/images/swift-aws-lambda-runtime2/cron.png)
 
-（今回はこの設定がメインではないので動作確認してないですが）これで毎朝10時に犬の画像がSlackに投稿されるはず！
+これで毎朝10時に犬の画像がSlackに投稿されるはず！
+
+※2020/6/16 AM10:10 追記
+きちんと朝10時に可愛い犬の写真が投稿されることを確認できました。
+
+![image](/images/swift-aws-lambda-runtime2/ebi.png)
 
 ### まとめ
 
