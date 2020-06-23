@@ -5,6 +5,7 @@ draft: false
 authors: [tokorom]
 tags: [GitHub,Slack]
 images: [/images/github-actions-context/github-actions.png]
+canonical: https://spinners.work
 ---
 
 ![image](/images/github-actions-context/github-actions.png)

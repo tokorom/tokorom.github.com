@@ -5,6 +5,7 @@ draft: false
 authors: [tokorom]
 tags: [Swift,AWS,Lambda]
 images: [/images/swift-aws-lambda-runtime/top.png]
+canonical: https://spinners.work
 ---
 
 ![image](/images/swift-aws-lambda-runtime/top.png)
