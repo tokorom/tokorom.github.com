@@ -4,6 +4,7 @@ date: {{ .Date }}
 draft: false
 authors: [tokorom]
 tags: []
-images: [/images/{{ .Name }}/top.jpg]
+images: [/images/{{ .Name }}/top.png]
+canonical: https://spinners.work
 ---
 
