@@ -8,3 +8,5 @@ images: [/images/{{ .Name }}/top.png]
 canonical: https://spinners.work
 ---
 
+![image](/images/{{ .Name }}/top.png)
+
