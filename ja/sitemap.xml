@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,33 +18,38 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/tags/aws/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <loc>http://www.tokoro.me/tags/hig/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/tags/lambda/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <loc>http://www.tokoro.me/posts/hig-widgets/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/ios/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/ios14/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/swift/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -59,12 +64,12 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -75,6 +80,31 @@
                 hreflang="ja"
                 href="http://www.tokoro.me/"
                 />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/widgets/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/wwdc/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/aws/</loc>
+    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/tags/lambda/</loc>
+    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</loc>
+    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
   </url>
   
   <url>
@@ -124,11 +154,6 @@
   
   <url>
     <loc>http://www.tokoro.me/tags/firebase/</loc>
-    <lastmod>2020-02-10T10:43:31+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/ios/</loc>
     <lastmod>2020-02-10T10:43:31+09:00</lastmod>
   </url>
   
@@ -259,11 +284,6 @@
   
   <url>
     <loc>http://www.tokoro.me/posts/user_notification/</loc>
-    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/tags/wwdc/</loc>
     <lastmod>2016-06-28T00:00:00+00:00</lastmod>
   </url>
   
