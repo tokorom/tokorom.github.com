@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 15 Jun 2020 14:25:23 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2020 17:32:57 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,28 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき</title>
+      <link>http://www.tokoro.me/posts/objc-travis-coveralls/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-travis-coveralls/</guid>
+      <description>
+        今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
+なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
+https://github.com/tokorom/BlockInjection
+になります。
+前提条件  GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること  Travis CI https://travis-ci.org/
+目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
+iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
+事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
+自分の場合は、
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ 	-project $(PROJECT) \ 	clean test: xcodebuild \ 	-project $(PROJECT) \ 	-target $(TEST_TARGET) \ 	-sdk iphonesimulator \ 	-configuration Debug \ 	TEST_AFTER_BUILD=YES \ 	TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。
+      </description>
+      
+    </item>
     
     <item>
       <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</title>
@@ -477,21 +499,6 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
 @interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</title>
-      <link>http://www.tokoro.me/posts/objc-new-statements/</link>
-      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/objc-new-statements/</guid>
-      <description>
-        もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
-これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
-Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
-#pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.
       </description>
       
     </item>

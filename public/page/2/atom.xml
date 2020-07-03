@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 15 Jun 2020 14:25:23 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2020 17:32:57 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,36 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>クリスマスツリーをHomeKitに対応させよう</title>
+      <link>http://www.tokoro.me/posts/homekit_christmastree/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_christmastree/</guid>
+      <description>
+        やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
+今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&amp;hellip;ということで。
+実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
+これを利用することでHomeKitの設定により、
+ 日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
+オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
+このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
+防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
+はじめは 防雨型コンセントボックスなど専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
+さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。
+プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。
+あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。
+実際、普通の雨ならこれで十分な感じです。
+（なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
+まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
+ 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg</coverImage>
+      
+    </item>
     
     <item>
       <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
@@ -419,28 +449,6 @@ iOS 7が正式リリースされました。既にアップデートを行って
 ※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。
 ##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間  iOS 6（左） : 0.5s iOS 7（右） : 1.0s  ##アプリアイコンをタップしてから開くまでの時間  iOS 6（左） : 0.4s iOS 7（右） : 0.7s  ##フォルダをタップしてから開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
 ではアップルはなぜあえて動きを長くする必要があったのでしょうか？
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき</title>
-      <link>http://www.tokoro.me/posts/objc-travis-coveralls/</link>
-      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/objc-travis-coveralls/</guid>
-      <description>
-        今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
-なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
-https://github.com/tokorom/BlockInjection
-になります。
-前提条件  GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること  Travis CI https://travis-ci.org/
-目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
-iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
-事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
-Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
-自分の場合は、
-PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ 	-project $(PROJECT) \ 	clean test: xcodebuild \ 	-project $(PROJECT) \ 	-target $(TEST_TARGET) \ 	-sdk iphonesimulator \ 	-configuration Debug \ 	TEST_AFTER_BUILD=YES \ 	TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。
       </description>
       
     </item>
