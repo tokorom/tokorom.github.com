@@ -6,15 +6,24 @@
     <description>Recent content in Tags on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 17:32:57 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>AppClips</title>
+      <link>http://www.tokoro.me/tags/appclips/</link>
+      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/appclips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>HIG</title>
       <link>http://www.tokoro.me/tags/hig/</link>
-      <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
+      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
       <guid>http://www.tokoro.me/tags/hig/</guid>
       <description></description>
@@ -23,7 +32,7 @@
     <item>
       <title>ios</title>
       <link>http://www.tokoro.me/tags/ios/</link>
-      <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
+      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
       <guid>http://www.tokoro.me/tags/ios/</guid>
       <description></description>
@@ -32,18 +41,27 @@
     <item>
       <title>iOS14</title>
       <link>http://www.tokoro.me/tags/ios14/</link>
-      <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
+      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
       <guid>http://www.tokoro.me/tags/ios14/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Swift</title>
+      <title>swift</title>
       <link>http://www.tokoro.me/tags/swift/</link>
-      <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
+      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
       <guid>http://www.tokoro.me/tags/swift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wwdc</title>
+      <link>http://www.tokoro.me/tags/wwdc/</link>
+      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/wwdc/</guid>
       <description></description>
     </item>
     
@@ -53,15 +71,6 @@
       <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
       
       <guid>http://www.tokoro.me/tags/widgets/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>wwdc</title>
-      <link>http://www.tokoro.me/tags/wwdc/</link>
-      <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/wwdc/</guid>
       <description></description>
     </item>
     

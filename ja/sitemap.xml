@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.tokoro.me/tags/appclips/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,37 +24,37 @@
   
   <url>
     <loc>http://www.tokoro.me/tags/hig/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/posts/hig-widgets/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <loc>http://www.tokoro.me/posts/hig-app-clips/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/ios14/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/swift/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/tags/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -64,12 +69,12 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/</loc>
-    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -83,12 +88,17 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/tags/widgets/</loc>
+    <loc>http://www.tokoro.me/tags/wwdc/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/hig-widgets/</loc>
     <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/tags/wwdc/</loc>
+    <loc>http://www.tokoro.me/tags/widgets/</loc>
     <lastmod>2020-07-02T17:32:57+09:00</lastmod>
   </url>
   
