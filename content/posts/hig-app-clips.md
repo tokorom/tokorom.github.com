@@ -11,6 +11,8 @@ canonical: https://spinners.work
 前回、[HIGのWidgetsの章を日本語訳した記事](/posts/hig-widgets/)が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。
 Human Interface Guidelines (HIG) の [App Clips](https://developer.apple.com/design/human-interface-guidelines/app-clips/) がソースです。
 
+2020年7月8日時点のものを訳します。
+
 前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
 
 # App Clips
