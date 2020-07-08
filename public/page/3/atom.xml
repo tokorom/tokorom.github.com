@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 17:32:57 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,25 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOS 7はもっさりか？比較検証してみた</title>
+      <link>http://www.tokoro.me/posts/ios7-design/</link>
+      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios7-design/</guid>
+      <description>
+        今回の記事はUIデザイナの Morino氏 からの寄稿です。
+iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
+特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
+頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。
+ ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 アプリアイコンをタップしてから開くまでの時間 フォルダをタップしてから開くまでの時間 ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
+※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。
+##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間  iOS 6（左） : 0.5s iOS 7（右） : 1.0s  ##アプリアイコンをタップしてから開くまでの時間  iOS 6（左） : 0.4s iOS 7（右） : 0.7s  ##フォルダをタップしてから開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
+ではアップルはなぜあえて動きを長くする必要があったのでしょうか？
+      </description>
+      
+    </item>
     
     <item>
       <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき</title>
@@ -478,27 +497,6 @@ Detected an attempt to call a symbol in system libraries that is not present on 
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
 クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Objective-Cで独自クラスに[]でアクセスする</title>
-      <link>http://www.tokoro.me/posts/objc-subscripting/</link>
-      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/objc-subscripting/</guid>
-      <description>
-        まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
-Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
- array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
-こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
-※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
-でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
-// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
-これらの変換自体はiOSがターゲットの場合でも行われているようです。
-例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.
       </description>
       
     </item>

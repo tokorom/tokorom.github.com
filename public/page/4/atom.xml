@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 17:32:57 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,27 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cで独自クラスに[]でアクセスする</title>
+      <link>http://www.tokoro.me/posts/objc-subscripting/</link>
+      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-subscripting/</guid>
+      <description>
+        まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
+Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
+ array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
+※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
+でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+これらの変換自体はiOSがターゲットの場合でも行われているようです。
+例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.
+      </description>
+      
+    </item>
     
     <item>
       <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</title>
