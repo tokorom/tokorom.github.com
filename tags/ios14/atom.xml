@@ -18,6 +18,7 @@
       
       <guid>http://www.tokoro.me/posts/hig-app-clips/</guid>
       <description>前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
+2020年7月8日時点のものを訳します。
 前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
 App Clips App Clipはアプリの軽量版で、ユーザーにアプリをダウンロード・インストールさせずに、日常のタスクを素早く実行させることができます。 ユーザーは様々な状況や目的でApp Clipを見つけ、利用できます。 物理的な場所では、NFCタグや視覚的なコードをスキャンしてApp Clipを起動します。 デバイス上では、位置情報に基づくSiriからの提案、地図アプリ、ウェブサイトのSmart App Banners、メッセージアプリで友達が共有してくれたリンクをタップする、などからApp Clipsを起動します。
 あなたのアプリが、限られた時間の中でタスクを実行するのに役立つ体験（in-the-moment experience）を提供しているなら、App Clipを導入することを考えてみましょう。 例えば、
