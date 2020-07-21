@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,21 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
+      <link>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</guid>
+      <description>
+        Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
+Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg</coverImage>
+      
+    </item>
     
     <item>
       <title>テレビのリモコンのことも忘れないで！</title>
@@ -429,34 +444,6 @@ define! 後から動的に差し替えるってのは class_setSuperclass がDep
 #define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;#34;YourSuperViewController.h&amp;#34;#define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewControllerとどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
 ひとまずこれでなんとかなりそう。
 他に良い方法があればご教示を！
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</title>
-      <link>http://www.tokoro.me/posts/ios-dev-accounts/</link>
-      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/ios-dev-accounts/</guid>
-      <description>
-        2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
- Member Centerのほうにアカウント追加 -&amp;gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&amp;gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能  失礼しました。
-追加情報などあれば是非おねがいします！
-概要 私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。
-というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。
-おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。
-どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。
-iOS Dev Center の構成 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
-大きくは、
- iOS Developer Program Member Center iTunes Connect  に分かれます。
-メンバーを追加する方法が２つある？？ 今回、私が混乱してしまった部分がここでした。
-iOSアプリ開発/公開のために必要なアカウントは、
- Member CenterのPeople iTunes ConnectのManage Users  の2カ所で管理されています。
-また、この２つのアカウントはそれぞれ別々の用途になります。
-個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
-Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
- Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行  が必要なユーザがこれに該当します。
       </description>
       
     </item>

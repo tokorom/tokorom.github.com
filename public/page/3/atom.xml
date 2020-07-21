@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,34 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</title>
+      <link>http://www.tokoro.me/posts/ios-dev-accounts/</link>
+      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios-dev-accounts/</guid>
+      <description>
+        2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
+ Member Centerのほうにアカウント追加 -&amp;gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&amp;gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能  失礼しました。
+追加情報などあれば是非おねがいします！
+概要 私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。
+おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。
+iOS Dev Center の構成 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
+大きくは、
+ iOS Developer Program Member Center iTunes Connect  に分かれます。
+メンバーを追加する方法が２つある？？ 今回、私が混乱してしまった部分がここでした。
+iOSアプリ開発/公開のために必要なアカウントは、
+ Member CenterのPeople iTunes ConnectのManage Users  の2カ所で管理されています。
+また、この２つのアカウントはそれぞれ別々の用途になります。
+個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
+Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
+ Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行  が必要なユーザがこれに該当します。
+      </description>
+      
+    </item>
     
     <item>
       <title>Objective-Cでカリー化とか部分適用してみる</title>
@@ -483,29 +511,6 @@ set clipboard=unnamed を追加しておきます。
 テスト対象のクラス 以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。
 #import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
 #import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>GHUnitのテストカバレッジをJenkinsで表示する</title>
-      <link>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</link>
-      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</guid>
-      <description>
-        概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
-設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
-実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
-うまく動かない場合の設定の比較などにご参照ください。
-なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
-事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
-テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
-具体的には、以下のように
- Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
-本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
-Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
-この対処として、 main.m に以下コードを追記しておく必要があります。
       </description>
       
     </item>
