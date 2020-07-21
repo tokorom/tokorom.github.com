@@ -12,15 +12,14 @@
  App Storeに公開されるアプリと全く同じものをテスト  するためにも使われています。
 プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
  Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい  などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
+プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
+そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
+ アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する  という手順を踏む必要があります。
 プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
 Q. アカウントがないのでログインできません
 A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
  ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
-プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
-このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
-プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
-ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。
-数量を入力したら右上の コードを生成 ボタンを押します。'>
+プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル • Yuta Tokoro'>
@@ -34,15 +33,14 @@ A. 担当のかた or アプリの開発者に問い合わせてアカウント�
  App Storeに公開されるアプリと全く同じものをテスト  するためにも使われています。
 プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
  Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい  などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
+プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
+そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
+ アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する  という手順を踏む必要があります。
 プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
 Q. アカウントがないのでログインできません
 A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
  ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
-プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
-このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
-プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
-ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。
-数量を入力したら右上の コードを生成 ボタンを押します。'>
+プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/ios-promocode/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/ios-promocode/top.jpg'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:published_time' content='2020-07-21T11:48:23&#43;09:00'/><meta property='article:modified_time' content='2020-07-21T11:48:23&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
@@ -140,7 +138,7 @@ if (!doNotTrack) {
       </li><li>
         <a href='/tags/hugo/' style='font-size:1.0208333333333333em'>hugo</a>
       </li><li>
-        <a href='/tags/ios/' style='font-size:2em'>ios</a>
+        <a href='/tags/ios/' style='font-size:2em'>iOS</a>
       </li><li>
         <a href='/tags/ios14/' style='font-size:1.0208333333333333em'>iOS14</a>
       </li><li>
@@ -170,7 +168,7 @@ if (!doNotTrack) {
       </li><li>
         <a href='/tags/slack/' style='font-size:1em'>Slack</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.25em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.25em'>Swift</a>
       </li><li>
         <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
@@ -188,7 +186,7 @@ if (!doNotTrack) {
       </li><li>
         <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
       </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0416666666666667em'>wwdc</a>
+        <a href='/tags/wwdc/' style='font-size:1.0416666666666667em'>WWDC</a>
       </li><li>
         <a href='/tags/xcode/' style='font-size:1.0833333333333333em'>xcode</a>
       </li></ul>
@@ -311,7 +309,16 @@ if (!doNotTrack) {
 <li>Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい</li>
 </ul>
 <p>などの理由により <strong>アプリをApp Storeで公開する前の最終テスト</strong> として利用できます。</p>
-<h2 id="heading-3">プロモーションコードの発行手順</h2>
+<h2 id="heading-3">プロモーションコードを発行できる条件</h2>
+<p>プロモーションコードは <strong>審査が通って公開が可能な状態</strong> のアプリに対してのみ発行できます。</p>
+<p>そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、</p>
+<ul>
+<li>アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく</li>
+<li>審査に通ったらプロモーションコードを発行してテストする</li>
+<li>テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する</li>
+</ul>
+<p>という手順を踏む必要があります。</p>
+<h2 id="heading-4">プロモーションコードの発行手順</h2>
 <h3 id="app-store-connect">App Store Connectにログインする</h3>
 <p><a href="https://appstoreconnect.apple.com/">https://appstoreconnect.apple.com/</a> にログインします。</p>
 <div class='alert alert-info'>
@@ -319,11 +326,11 @@ if (!doNotTrack) {
 <p><b>A.</b> 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください</p>
 </div>
 <p>ログインしたら <strong>マイApp</strong> をクリックして <strong>プロモーションコードを発行する対象のアプリ</strong> を開きます。</p>
-<h3 id="heading-4">プロモーションコードのページを開く</h3>
+<h3 id="heading-5">プロモーションコードのページを開く</h3>
 <p><img src="/images/ios-promocode/step1.png" alt="image"></p>
 <p>アプリのページを開いたら画面上側の <strong>機能</strong> を選択し、画面左側の <strong>プロモーションコード</strong> を選択してプロモーションコードのページを開きます。</p>
 <p>このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。</p>
-<h3 id="heading-5">プロモーションコードを発行する</h3>
+<h3 id="heading-6">プロモーションコードを発行する</h3>
 <p><img src="/images/ios-promocode/step2.png" alt="image"></p>
 <p>プロモーションコードのページの <strong>Appプロモーションコード</strong> セクションがアプリのプロモーションコードを発行するためのセクションです。</p>
 <p>ここの一番右の数量のフィールドに <code>1</code> を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。</p>
@@ -332,19 +339,19 @@ if (!doNotTrack) {
 <p>確認ダイアログが表示されたら <strong>上記のルールを読み、理解しました。</strong> にチェックをつけ、 <strong>コードを生成</strong> ボタンを押します。</p>
 <p><img src="/images/ios-promocode/step4.png" alt="image"></p>
 <p>これでプロモーションコードの発行を完了です。</p>
-<h3 id="heading-6">プロモーションコードを確認してテスターに連絡する</h3>
+<h3 id="heading-7">プロモーションコードを確認してテスターに連絡する</h3>
 <p><img src="/images/ios-promocode/step5.png" alt="image"></p>
 <p>プロモーションコードの <strong>履歴</strong> タブから発行済みのプロモーションコードが確認できます。</p>
 <p>確認したいコードを探して <strong>コードを表示</strong> を押してください。</p>
 <p><img src="/images/ios-promocode/step6.png" alt="image"></p>
 <p>すると画面にプロモーションコード（ランダムな文字列）が表示されるのでこれをコピーするなどしてテスターさんにプロモーションコードを連絡します。</p>
-<h2 id="heading-7">プロモーションコードによるアプリのインストール</h2>
+<h2 id="heading-8">プロモーションコードによるアプリのインストール</h2>
 <h3 id="app-store">App Storeアプリを開く</h3>
 <p><img src="/images/ios-promocode/appstore.png" alt="image"></p>
 <p>アプリのインストールに使うのは <strong>App Storeアプリ</strong> です。</p>
 <p><img src="/images/ios-promocode/account.png" alt="image"></p>
 <p>App Storeアプリを開いたら右上の <strong>アカウントアイコンをタップ</strong> します。</p>
-<h3 id="heading-8">プロモーションコードを入力する</h3>
+<h3 id="heading-9">プロモーションコードを入力する</h3>
 <p><img src="/images/ios-promocode/usecode.png" alt="image"></p>
 <p>アカウント画面の中の <strong>ギフトカードまたはコードを使う</strong> をタップします。</p>
 <p><img src="/images/ios-promocode/input.png" alt="image"></p>
@@ -355,7 +362,7 @@ if (!doNotTrack) {
 <hr>
 <p>マニュアルは以上で終わりです。</p>
 <p>その他わからない部分が出てきましたら開発担当者にお問い合わせください。</p>
-<h2 id="heading-9">その他のマニュアル</h2>
+<h2 id="heading-10">その他のマニュアル</h2>
 <ul>
 <li><a href="/posts/ios-sandbox/">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</a></li>
 </ul>
