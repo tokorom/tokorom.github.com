@@ -130,3 +130,8 @@ weight = 1
 lang = "ja"
 languageName = "Japanese"
 weight = 1
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
