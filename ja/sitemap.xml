@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2020-07-08T15:41:47+09:00</lastmod>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,17 +18,42 @@
   </url>
   
   <url>
+    <loc>http://www.tokoro.me/posts/ios-promocode/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/authors/tokorom/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/"
+                />
+  </url>
+  
+  <url>
     <loc>http://www.tokoro.me/tags/ios/</loc>
     <lastmod>2020-07-08T15:41:47+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.tokoro.me/posts/ios-sandbox/</loc>
-    <lastmod>2020-07-08T15:41:47+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/posts/</loc>
     <lastmod>2020-07-08T15:41:47+09:00</lastmod>
   </url>
   
@@ -50,26 +75,6 @@
   <url>
     <loc>http://www.tokoro.me/tags/test/</loc>
     <lastmod>2020-07-08T15:41:47+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2020-07-08T15:41:47+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/</loc>
-    <lastmod>2020-07-08T15:41:47+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/"
-                />
   </url>
   
   <url>

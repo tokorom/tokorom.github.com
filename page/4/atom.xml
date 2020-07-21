@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,29 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GHUnitのテストカバレッジをJenkinsで表示する</title>
+      <link>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</link>
+      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</guid>
+      <description>
+        概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
+設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
+実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
+うまく動かない場合の設定の比較などにご参照ください。
+なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
+事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
+具体的には、以下のように
+ Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
+本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+この対処として、 main.m に以下コードを追記しておく必要があります。
+      </description>
+      
+    </item>
     
     <item>
       <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</title>
