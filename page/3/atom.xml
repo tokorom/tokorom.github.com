@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,31 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cでカリー化とか部分適用してみる</title>
+      <link>http://www.tokoro.me/posts/objective-c-haskell/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objective-c-haskell/</guid>
+      <description>
+        導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
+もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
+実際やってみたソースコードは こちら に置いてあります。
+ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
+map (+3) [1, 2, 3] これです。
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
+map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
+map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
+カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。
+      </description>
+      
+    </item>
     
     <item>
       <title>iOS 7はもっさりか？比較検証してみた</title>
@@ -129,10 +154,12 @@ http://www.apple.com/ios/ios7/
 これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。
 デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。
 iOS 7 Video - 書き起こし &amp;amp; 和訳 ※ 画像はすべて iOS 7 Video の中からの抜粋です
- We have always thought of design as being so much more than just the way something looks.私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
-It’s the whole thing the way something actually works on so many different levels.デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
-Ultimately of course, design defines so much of our experience.最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
-I think there is a profound and enduring beauty in simplicity, in clarity, in efficiency.
+ We have always thought of design as being so much more than just the way something looks.
+私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
+It’s the whole thing the way something actually works on so many different levels.
+デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
+Ultimately of course, design defines so much of our experience.
+最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
       </description>
       
     </item>
@@ -479,24 +506,6 @@ set clipboard=unnamed を追加しておきます。
 本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
 Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
 この対処として、 main.m に以下コードを追記しておく必要があります。
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</title>
-      <link>http://www.tokoro.me/posts/safe-objc/</link>
-      <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/safe-objc/</guid>
-      <description>
-        チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
-そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
-実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
-具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
-以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。
       </description>
       
     </item>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang='ja'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Photo by Markus Spiske on Unsplash
+ これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+1. App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください ログインしたら「ユーザとアクセス」をクリックして表示します。
+2. Sandboxアカウント追加する 左のサイドメニューから「Sandbox テスター」を選んだあと、(&#43;)マークの追加ボタンを押します。
+姓名やメールアドレスを適切に入力します。
+このときのポイントとして メールアドレスは実在するものでなくてもかまいません 1。 そのため、テスト用のアカウントはカジュアルに作成できます。 セキュリティ質問なども基本的には使いませんので適当でも大丈夫です2。
+入力し終わったら[招待]ボタンを押します。
+うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。
+Sandboxアカウントの作成はこれでおしまいです。
+Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。 A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。 3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
+以下、Appleのドキュメントからの引用です。
+ Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
+ プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
+Sandboxは調子が悪くなることが多々あります。
+Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。
+時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。 その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。
+このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。
+4. iPhone/iPadでSandboxアカウントを利用して購入テストをする ※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。
+iPhone/iPadの「設定」を開きます。
+その中の「iTunes StoreとApp Store」を選びます。
+その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。
+このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
+※この場所では絶対にSandboxアカウントを入れないでください'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル • Yuta Tokoro'>
+<meta property='og:description' content='Photo by Markus Spiske on Unsplash
+ これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+1. App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください ログインしたら「ユーザとアクセス」をクリックして表示します。
+2. Sandboxアカウント追加する 左のサイドメニューから「Sandbox テスター」を選んだあと、(&#43;)マークの追加ボタンを押します。
+姓名やメールアドレスを適切に入力します。
+このときのポイントとして メールアドレスは実在するものでなくてもかまいません 1。 そのため、テスト用のアカウントはカジュアルに作成できます。 セキュリティ質問なども基本的には使いませんので適当でも大丈夫です2。
+入力し終わったら[招待]ボタンを押します。
+うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。
+Sandboxアカウントの作成はこれでおしまいです。
+Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。 A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。 3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
+以下、Appleのドキュメントからの引用です。
+ Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
+ プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
+Sandboxは調子が悪くなることが多々あります。
+Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。
+時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。 その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。
+このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。
+4. iPhone/iPadでSandboxアカウントを利用して購入テストをする ※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。
+iPhone/iPadの「設定」を開きます。
+その中の「iTunes StoreとApp Store」を選びます。
+その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。
+このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
+※この場所では絶対にSandboxアカウントを入れないでください'>
+<meta property='og:url' content='http://www.tokoro.me/posts/ios-sandbox/'>
+<meta property='og:site_name' content='TOKOROM BLOG'>
+<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/ios-sandbox/top.jpg'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='iOS'><meta property='article:tag' content='Test'><meta property='article:published_time' content='2020-07-08T15:41:47&#43;09:00'/><meta property='article:modified_time' content='2020-07-08T15:41:47&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+
+<meta name="generator" content="Hugo 0.62.0" />
+
+  <title>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル • Yuta Tokoro</title>
+  <link rel='canonical' href='https://spinners.work/posts/ios-sandbox/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.e995827f.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-posts has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'></a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      TOKOROM BLOG
+      </a>
+    </h2>
+    <div class='desc'>
+    所 友太 / Yuta Tokoro
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-company sep-after'>
+  <header>
+    <h4 class='title widget-title'>
+      所属
+    </h4>
+
+    <div class='logo'>
+      <a href="http://www.spinners.work/">
+        <img src="http://www.spinners.work/images/top_logo.png">
+      </a>
+    </div>
+  </header>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'></h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
+      </li><li>
+        <a href='/tags/aws/' style='font-size:1.0208333333333333em'>AWS</a>
+      </li><li>
+        <a href='/tags/ci/' style='font-size:1em'>ci</a>
+      </li><li>
+        <a href='/tags/cui/' style='font-size:1.0416666666666667em'>cui</a>
+      </li><li>
+        <a href='/tags/design/' style='font-size:1.0625em'>design</a>
+      </li><li>
+        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
+      </li><li>
+        <a href='/tags/github/' style='font-size:1em'>GitHub</a>
+      </li><li>
+        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
+      </li><li>
+        <a href='/tags/hig/' style='font-size:1.0208333333333333em'>HIG</a>
+      </li><li>
+        <a href='/tags/homekit/' style='font-size:1.125em'>homekit</a>
+      </li><li>
+        <a href='/tags/hugo/' style='font-size:1.0208333333333333em'>hugo</a>
+      </li><li>
+        <a href='/tags/ios/' style='font-size:2em'>ios</a>
+      </li><li>
+        <a href='/tags/ios14/' style='font-size:1.0208333333333333em'>iOS14</a>
+      </li><li>
+        <a href='/tags/jenkins/' style='font-size:1.0625em'>jenkins</a>
+      </li><li>
+        <a href='/tags/lambda/' style='font-size:1.0208333333333333em'>Lambda</a>
+      </li><li>
+        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
+      </li><li>
+        <a href='/tags/mac/' style='font-size:1.0833333333333333em'>mac</a>
+      </li><li>
+        <a href='/tags/markdown/' style='font-size:1.0208333333333333em'>markdown</a>
+      </li><li>
+        <a href='/tags/nfc/' style='font-size:1.0416666666666667em'>nfc</a>
+      </li><li>
+        <a href='/tags/objc/' style='font-size:1.3958333333333333em'>objc</a>
+      </li><li>
+        <a href='/tags/octopress/' style='font-size:1.0416666666666667em'>octopress</a>
+      </li><li>
+        <a href='/tags/publish/' style='font-size:1em'>publish</a>
+      </li><li>
+        <a href='/tags/review/' style='font-size:1em'>review</a>
+      </li><li>
+        <a href='/tags/sakura/' style='font-size:1.0416666666666667em'>sakura</a>
+      </li><li>
+        <a href='/tags/sesame/' style='font-size:1.0416666666666667em'>sesame</a>
+      </li><li>
+        <a href='/tags/slack/' style='font-size:1em'>Slack</a>
+      </li><li>
+        <a href='/tags/swift/' style='font-size:1.25em'>swift</a>
+      </li><li>
+        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
+      </li><li>
+        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
+      </li><li>
+        <a href='/tags/test/' style='font-size:1em'>Test</a>
+      </li><li>
+        <a href='/tags/tvos/' style='font-size:1.0208333333333333em'>tvos</a>
+      </li><li>
+        <a href='/tags/ui/' style='font-size:1.1041666666666667em'>ui</a>
+      </li><li>
+        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
+      </li><li>
+        <a href='/tags/vim/' style='font-size:1.125em'>vim</a>
+      </li><li>
+        <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
+      </li><li>
+        <a href='/tags/wwdc/' style='font-size:1.0416666666666667em'>wwdc</a>
+      </li><li>
+        <a href='/tags/xcode/' style='font-size:1.0833333333333333em'>xcode</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'></a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'></span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/'>Blog</a>
+      </li><li class='item'>
+        <a href='https://twitter.com/tokorom/'>Twitter</a>
+      </li><li class='item'>
+        <a href='https://github.com/tokorom/'>GitHub</a>
+      </li><li class='item'>
+        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='ja' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'> </span>
+  <time class='entry-date' datetime='2020-07-08T15:41:47&#43;09:00'>2020-07-08</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+  <p><img src="/images/ios-sandbox/top.jpg" alt="image"></p>
+<blockquote>
+<p>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Markus Spiske</a> on <a href="https://unsplash.com/s/photos/sandbox?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+</blockquote>
+<p>これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。</p>
+<p>2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。</p>
+<h2 id="1-app-store-connect">1. App Store Connectにログインする</h2>
+<p><a href="https://appstoreconnect.apple.com/">https://appstoreconnect.apple.com/</a> にログインします。</p>
+<pre><code>Q. アカウントがないのでログインできません
+A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
+</code></pre><p>ログインしたら「ユーザとアクセス」をクリックして表示します。</p>
+<p><img src="/images/ios-sandbox/menu.png" alt="image"></p>
+<h2 id="2-sandbox">2. Sandboxアカウント追加する</h2>
+<p>左のサイドメニューから「Sandbox テスター」を選んだあと、(+)マークの追加ボタンを押します。</p>
+<p><img src="/images/ios-sandbox/new.png" alt="image"></p>
+<p>姓名やメールアドレスを適切に入力します。</p>
+<p>このときのポイントとして <strong>メールアドレスは実在するものでなくてもかまいません</strong> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。
+そのため、テスト用のアカウントはカジュアルに作成できます。
+セキュリティ質問なども基本的には使いませんので適当でも大丈夫です<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p><img src="/images/ios-sandbox/form.png" alt="image"></p>
+<p>入力し終わったら[招待]ボタンを押します。</p>
+<p>うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。</p>
+<p><img src="/images/ios-sandbox/confirm.png" alt="image"></p>
+<p>Sandboxアカウントの作成はこれでおしまいです。</p>
+<pre><code>Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。
+A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。
+</code></pre><h2 id="3-sandbox">3. Sandboxアカウントを利用するうえでの注意点</h2>
+<p><strong>Sandboxアカウントをプロダクション環境で使ってはいけません。</strong></p>
+<p>以下、Appleのドキュメントからの引用です。</p>
+<blockquote>
+<p>Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。</p>
+</blockquote>
+<p>プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。</p>
+<p><strong>Sandboxは調子が悪くなることが多々あります。</strong></p>
+<p>Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。</p>
+<p>時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。
+その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。</p>
+<p>このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。</p>
+<h2 id="4-iphoneipadsandbox">4. iPhone/iPadでSandboxアカウントを利用して購入テストをする</h2>
+<p>※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。</p>
+<p>iPhone/iPadの「設定」を開きます。</p>
+<p>その中の「iTunes StoreとApp Store」を選びます。</p>
+<p><img src="/images/ios-sandbox/setting.png" alt="image"></p>
+<p>その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。</p>
+<p>このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。</p>
+<p>※この場所では絶対にSandboxアカウントを入れないでください</p>
+<p><img src="/images/ios-sandbox/signout.png" alt="image"></p>
+<p>この画面の一番下に「SANDBOXアカウント」という項目があります。ここで「サインイン」を押し、作成したSandboxアカウントでログインしてください。</p>
+<p><img src="/images/ios-sandbox/sandboxaccount.png" alt="image"></p>
+<h2 id="5-">5. アプリで購入テストをする</h2>
+<p>ログインに成功したらテスト対象のアプリでの購入テストをお試しください。</p>
+<hr>
+<p>マニュアルは以上で終わりです。</p>
+<p>その他わからない部分が出てきましたら開発担当者にお問い合わせください。</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>2020年7月現在 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>自社内でなんらかルールを決めて入力するのが良いかもしれません <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+</div>
+
+  
+
+<footer class='entry-social'>
+  <div class="container">
+    <div class="social-buttons">
+      <ul class="widget-social_menu">
+        <li>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/ios-sandbox/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </li>
+
+        <li>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+
+        <li>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fios-sandbox%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </li>
+
+        <li>
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/test/'>Test</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/posts/hig-app-clips/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ </span>
+        <span class='screen-reader-text'>: </span>Human Interface GuidelinesのApp Clipsの章の日本語訳</a>
+    </div></div>
+</nav>
+
+
+
+
+<footer class='entry-works'>
+  <div class='container sep-before'>
+    <h4>所の執筆・監修した書籍</h4>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897978440&linkId=f122324a845d09be48ccc3c9d39a9415&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4865940324&linkId=23a4cf2f295ed6d137836072daf441d6&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4897976839&linkId=f98ff49e4d4608edbe8d75248414f3a1&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+
+    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project007_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
+    <li style="font-size:90%; list-style:none;"><span>著者：</span>
+    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
+    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
+    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
+
+  </div>
+
+</footer>
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>tokorom</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.f18da963.js'></script>
+
+</body>
+
+</html>
+

@@ -6,14 +6,13 @@
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
 今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
 それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
-Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+ この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
 curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
  レスポンス例  [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}] 鍵をロック 上で取得したdevice_idを利用し、
-curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
-鍵をアンロック 同じく、'>
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン • Yuta Tokoro'>
@@ -21,14 +20,13 @@ curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: appl
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
 今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
 それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
-Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+ この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
 curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
  レスポンス例  [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}] 鍵をロック 上で取得したdevice_idを利用し、
-curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
-鍵をアンロック 同じく、'>
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。'>
 <meta property='og:url' content='http://www.tokoro.me/posts/nfc-iphone-2/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='nfc'><meta property='article:tag' content='sesame'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2019-04-01T15:11:25&#43;09:00'/><meta property='article:modified_time' content='2019-04-01T15:11:25&#43;09:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@tokorom'><meta property='twitter:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png'>
@@ -106,13 +104,13 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
       </li><li>
-        <a href='/tags/aws/' style='font-size:1.0212765957446808em'>AWS</a>
+        <a href='/tags/aws/' style='font-size:1.0208333333333333em'>AWS</a>
       </li><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0425531914893618em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0416666666666667em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.0638297872340425em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0625em'>design</a>
       </li><li>
         <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
       </li><li>
@@ -120,61 +118,63 @@ if (!doNotTrack) {
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/hig/' style='font-size:1.0212765957446808em'>HIG</a>
+        <a href='/tags/hig/' style='font-size:1.0208333333333333em'>HIG</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.127659574468085em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.125em'>homekit</a>
       </li><li>
-        <a href='/tags/hugo/' style='font-size:1.0212765957446808em'>hugo</a>
+        <a href='/tags/hugo/' style='font-size:1.0208333333333333em'>hugo</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/ios14/' style='font-size:1.0212765957446808em'>iOS14</a>
+        <a href='/tags/ios14/' style='font-size:1.0208333333333333em'>iOS14</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.0638297872340425em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0625em'>jenkins</a>
       </li><li>
-        <a href='/tags/lambda/' style='font-size:1.0212765957446808em'>Lambda</a>
+        <a href='/tags/lambda/' style='font-size:1.0208333333333333em'>Lambda</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0851063829787233em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0833333333333333em'>mac</a>
       </li><li>
-        <a href='/tags/markdown/' style='font-size:1.0212765957446808em'>markdown</a>
+        <a href='/tags/markdown/' style='font-size:1.0208333333333333em'>markdown</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0425531914893618em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0416666666666667em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.4042553191489362em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.3958333333333333em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0425531914893618em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0416666666666667em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0425531914893618em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0416666666666667em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0425531914893618em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0416666666666667em'>sesame</a>
       </li><li>
         <a href='/tags/slack/' style='font-size:1em'>Slack</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.2553191489361701em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.25em'>swift</a>
       </li><li>
         <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0212765957446808em'>tvos</a>
+        <a href='/tags/test/' style='font-size:1em'>Test</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1063829787234043em'>ui</a>
+        <a href='/tags/tvos/' style='font-size:1.0208333333333333em'>tvos</a>
+      </li><li>
+        <a href='/tags/ui/' style='font-size:1.1041666666666667em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.127659574468085em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.125em'>vim</a>
       </li><li>
         <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
       </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0425531914893618em'>WWDC</a>
+        <a href='/tags/wwdc/' style='font-size:1.0416666666666667em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0851063829787233em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0833333333333333em'>xcode</a>
       </li></ul>
 </div>
 
@@ -283,16 +283,18 @@ if (!doNotTrack) {
 <ol>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-1/">NFCタグにURIを書き込む</a></li>
 <li>iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事）</li>
-<li><!-- raw HTML omitted -->iOSアプリを経由してセキュリティレベルをあげる<!-- raw HTML omitted --></li>
-<li><!-- raw HTML omitted -->NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン<!-- raw HTML omitted -->（まだ書いてないけど気が向いたら書くかも）</li>
-<li><!-- raw HTML omitted -->より実用的にしていくために<!-- raw HTML omitted --></li>
+<li><s>iOSアプリを経由してセキュリティレベルをあげる</s></li>
+<li><s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）</li>
+<li><s>より実用的にしていくために</s></li>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-6/">iOS13時代の最終形</a></li>
 </ol>
 <h2 id="heading">この記事でやること</h2>
 <p><a href="https://www.tokoro.me/posts/nfc-iphone-1/">前回</a>は、NFCタグに<code>https://tag.exsample.com/lock</code>というURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。</p>
 <p>今回は、このURIで動作するAPIをAWS Lambda<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。</p>
 <p>それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。</p>
-<!-- raw HTML omitted -->
+<div class='alert alert-danger'><span class="fa fa-warning"></span>
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
+</div>
 <h2 id="sesame-api">Sesame APIの利用</h2>
 <h3 id="api">APIキーの取得</h3>
 <p>Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ</p>
@@ -385,15 +387,17 @@ YOUR_AUTH_TOKENはAPIキーに置き換えてください。</p>
 <p>あとは実装したものをAWS Lambdaにデプロイし、NFCタグに書き込んだURIでこのLambdaが動作するようにするだけです。</p>
 <p>これで、iPhoneを鍵代わりにし、NFCタグをタッチして鍵をアンロックする仕組みができました。</p>
 <p>くどいようですが、</p>
-<!-- raw HTML omitted -->
+<div class='alert alert-danger'><span class="fa fa-warning"></span>
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
+</div>
 <p>こちらは絶対に守ってください。</p>
 <h2 id="heading-4">記事一覧</h2>
 <ol>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-1/">NFCタグにURIを書き込む</a></li>
 <li>iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事）</li>
-<li><!-- raw HTML omitted -->iOSアプリを経由してセキュリティレベルをあげる<!-- raw HTML omitted --></li>
-<li><!-- raw HTML omitted -->NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン<!-- raw HTML omitted -->（まだ書いてないけど気が向いたら書くかも）</li>
-<li><!-- raw HTML omitted -->より実用的にしていくために<!-- raw HTML omitted --></li>
+<li><s>iOSアプリを経由してセキュリティレベルをあげる</s></li>
+<li><s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）</li>
+<li><s>より実用的にしていくために</s></li>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-6/">iOS13時代の最終形</a></li>
 </ol>
 <section class="footnotes" role="doc-endnotes">

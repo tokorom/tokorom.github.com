@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,30 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>テレビのリモコンのことも忘れないで！</title>
+      <link>http://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
+      <description>
+        AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
+テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
+AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
+ゲームコントローラ/ゲームパッド Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。
+テレビのリモコンでどこまで操作できる？ Apple純正のアプリ 全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。
+サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
+自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
+テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
+   REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg</coverImage>
+      
+    </item>
     
     <item>
       <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
@@ -56,7 +80,7 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
 実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
 これを利用することでHomeKitの設定により、
  日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
-なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming  でも詳細に紹介しています。
 オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
 このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
 防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
@@ -68,6 +92,7 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
 （なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
 まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
  「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
+ 
       </description>
       
       <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg</coverImage>
@@ -300,10 +325,9 @@ func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closu
  Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;   変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒    といった課題があったりしました（少なくともぼくの手元では）。
 そういったことを踏まえて、
 potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
-その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
-Preprocess Info.plist file ぼくは今回初めて知ったのですが、Builde Settings -&amp;gt; Packaging の中に Preprocess Info.plist file という設定項目があり、これにYESを設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
-そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。
-${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYESにした場合、通常のInfo.plistと別に ${TEMP_DIR}/Preprocessed-Info.plist という名前で別のInfo.plistが作成されるようになります。あとは、Run ScriptでそのPreprocessed-Info.plistのほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&amp;mdash; kishikawa katsumi (@k_katsumi) May 15, 2014  @k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて
       </description>
       
     </item>
@@ -369,7 +393,8 @@ Storyboard登場以前だと、次の画面に遷移させるだけでも
  Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
 どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
-mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
+&amp;mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
@@ -377,12 +402,10 @@ $ ./build.py すると、同ディレクトリに mergepbx というファイル
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと&amp;hellip;と日本語まわりでfailedになったので加えました。2014/02/09 追記
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+2014/02/09 追記
 mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
 次に、.gitattributes で
-*.pbxproj merge=mergepbx と pbxprojのときはマージに mergepbx を使うように設定を追加という手順です。
-mergepbxの結果 ストーリーとしては、
- test1ブランチで 適当なファイルを１つ追加してコミット test2ブランチで 別の適当なファイルを１つ追加してコミット test1ブランチでgit merge test2  として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、&amp;hellip;と残念ながらうまく自動マージされませんでした。。。どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。ただ、READMEの次の項に、 *.
       </description>
       
     </item>
@@ -434,31 +457,6 @@ iOSアプリ開発/公開のために必要なアカウントは、
 個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
 Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
  Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行  が必要なユーザがこれに該当します。
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Objective-Cでカリー化とか部分適用してみる</title>
-      <link>http://www.tokoro.me/posts/objective-c-haskell/</link>
-      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/objective-c-haskell/</guid>
-      <description>
-        導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
-ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
-もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
-実際やってみたソースコードは こちら に置いてあります。
-ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
-map (+3) [1, 2, 3] これです。
-Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
-map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
-しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
-map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
-ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
-カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。
       </description>
       
     </item>
