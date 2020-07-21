@@ -22,7 +22,7 @@ canonical: https://spinners.work
 
 https://appstoreconnect.apple.com/ にログインします。
 
-<div class='alert alert-info'>
+<div class='box box-info'>
 <p><b>Q.</b> アカウントがないのでログインできません</p>
 <p><b>A.</b> 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください</p>
 </div>
@@ -57,7 +57,7 @@ https://appstoreconnect.apple.com/ にログインします。
 
 Sandboxアカウントの作成はこれでおしまいです。
 
-<div class='alert alert-info'>
+<div class='box box-info'>
 <p><b>Q.</b> 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。</p>
 <p><b>A.</b> メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。</p>
 </div>

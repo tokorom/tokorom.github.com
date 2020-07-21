@@ -61,7 +61,7 @@ canonical: https://spinners.work
 
 https://appstoreconnect.apple.com/ にログインします。
 
-<div class='alert alert-info'>
+<div class='box box-info'>
 <p><b>Q.</b> アカウントがないのでログインできません</p>
 <p><b>A.</b> 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください</p>
 </div>
