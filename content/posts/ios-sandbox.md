@@ -10,7 +10,9 @@ canonical: https://spinners.work
 
 ![image](/images/ios-sandbox/top.jpg)
 
-> Photo by [Markus Spiske](https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/sandbox?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
+<small>Photo by [Markus Spiske](https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/sandbox?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)</small>
+
+-----
 
 これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
 
@@ -20,10 +22,10 @@ canonical: https://spinners.work
 
 https://appstoreconnect.apple.com/ にログインします。
 
-```
-Q. アカウントがないのでログインできません
-A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
-```
+<div class='alert alert-info'>
+<p><b>Q.</b> アカウントがないのでログインできません</p>
+<p><b>A.</b> 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください</p>
+</div>
 
 ログインしたら「ユーザとアクセス」をクリックして表示します。
 
@@ -55,10 +57,10 @@ A. 担当のかた or アプリの開発者に問い合わせてアカウント�
 
 Sandboxアカウントの作成はこれでおしまいです。
 
-```
-Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。
-A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。
-```
+<div class='alert alert-info'>
+<p><b>Q.</b> 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。</p>
+<p><b>A.</b> メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。</p>
+</div>
 
 ## 3. Sandboxアカウントを利用するうえでの注意点
 
@@ -111,4 +113,6 @@ iPhone/iPadの「設定」を開きます。
 
 その他わからない部分が出てきましたら開発担当者にお問い合わせください。
 
+## その他のマニュアル
 
+- [iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル](/posts/ios-promocode/)
