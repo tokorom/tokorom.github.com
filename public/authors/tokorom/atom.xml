@@ -6,10 +6,43 @@
     <description>Recent content in tokorom on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/authors/tokorom/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</title>
+      <link>http://www.tokoro.me/posts/ios-sandbox/</link>
+      <pubDate>Wed, 08 Jul 2020 15:41:47 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios-sandbox/</guid>
+      <description>Photo by Markus Spiske on Unsplash
+ これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+1. App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください ログインしたら「ユーザとアクセス」をクリックして表示します。
+2. Sandboxアカウント追加する 左のサイドメニューから「Sandbox テスター」を選んだあと、(+)マークの追加ボタンを押します。
+姓名やメールアドレスを適切に入力します。
+このときのポイントとして メールアドレスは実在するものでなくてもかまいません 1。 そのため、テスト用のアカウントはカジュアルに作成できます。 セキュリティ質問なども基本的には使いませんので適当でも大丈夫です2。
+入力し終わったら[招待]ボタンを押します。
+うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。
+Sandboxアカウントの作成はこれでおしまいです。
+Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。 A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。 3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
+以下、Appleのドキュメントからの引用です。
+ Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
+ プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
+Sandboxは調子が悪くなることが多々あります。
+Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。
+時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。 その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。
+このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。
+4. iPhone/iPadでSandboxアカウントを利用して購入テストをする ※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。
+iPhone/iPadの「設定」を開きます。
+その中の「iTunes StoreとApp Store」を選びます。
+その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。
+このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
+※この場所では絶対にSandboxアカウントを入れないでください</description>
+    </item>
     
     <item>
       <title>Human Interface GuidelinesのApp Clipsの章の日本語訳</title>
@@ -236,7 +269,7 @@ iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠が�
 対応デバイス 正確には、iOS 13であっても Background Tag Reading に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、
  iPhone XR iPhone XS iPhone XS Max iPhone 11 iPhone 11 Pro iPhone 11 Pro Max  の６機種です。
 実際にやってみよう NFCタグの準備 NFCタグには何も情報を書き込む必要はありません。
-など適当なNFCタグを買ってきたままそのまま使えます。
+ など適当なNFCタグを買ってきたままそのまま使えます。
 オートメーションの作成 次に、ショートカットアプリでオートメーションを設定します。
 解錠をマイショートカットとして追加 Sesameを普段から使っていれば、ギャラリータブの中に 「xxx」を解錠 というSesame用のショートカットが含まれているはずです。それに適当な音声コマンドをあてて Siriに追加 をしておきます。Siriに追加されたショートカットをオートメーションのアクションとして指定できるようになります。</description>
     </item>
@@ -268,14 +301,13 @@ iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心に�
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
 今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
 それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
-Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+ この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
 curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
  レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}] 鍵をロック 上で取得したdevice_idを利用し、
-curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
-鍵をアンロック 同じく、</description>
+curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。</description>
     </item>
     
     <item>
@@ -291,10 +323,10 @@ curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Conten
 この記事でやること 私がNFCタグを取り扱ったことがないところからスタートしましたので、まずこの記事では「NFCタグに情報を書き込む」ところまでだけが範囲になります。
 実際にSesameをアンロックするところなどは次の記事で書かせていただきます。
 準備した機器 スマートロック 導入に書いたとおりですが、Sesameを購入しました。
-APIでのロックやアンロックが可能で自由度が高そうだったのがSesameを選んだ理由です。
+ APIでのロックやアンロックが可能で自由度が高そうだったのがSesameを選んだ理由です。
 利用するNFCタグ サンワサプライ NFCタグ(10枚入り)をAmazonで購入しました。
-NFCリーダー/ライター NFCリーダー/ライターとしてはPaSoRiを購入しました。
-これも使えればどれでも良いと思いますが、ネット上で利用実績が多く安全そうなものを選んだだけです。
+ NFCリーダー/ライター NFCリーダー/ライターとしてはPaSoRiを購入しました。
+ これも使えればどれでも良いと思いますが、ネット上で利用実績が多く安全そうなものを選んだだけです。
 nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続してNFCタグから情報を読み取るところからはじめます。
 調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
 このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
@@ -362,10 +394,10 @@ animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAni
       <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.tokoro.me/posts/homekit_delongi_heater/</guid>
-      <description>De&#39;Longhi Multi Dynamic Heater WiFi Model主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+      <description>De&#39;Longhi Multi Dynamic Heater WiFi Model
+主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
 私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
-公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
- 温度を一定に保つ能力が高い 静か 乾燥しない  といった特徴があります。 私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。</description>
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して</description>
     </item>
     
     <item>
@@ -441,7 +473,7 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
 実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
 これを利用することでHomeKitの設定により、
  日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
-なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming  でも詳細に紹介しています。
 オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
 このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
 防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
@@ -452,7 +484,8 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
 実際、普通の雨ならこれで十分な感じです。
 （なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
 まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
- 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！</description>
+ 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
+ </description>
     </item>
     
     <item>
@@ -641,10 +674,9 @@ func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closu
  Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;   変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒    といった課題があったりしました（少なくともぼくの手元では）。
 そういったことを踏まえて、
 potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
-その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
-Preprocess Info.plist file ぼくは今回初めて知ったのですが、Builde Settings -&amp;gt; Packaging の中に Preprocess Info.plist file という設定項目があり、これにYESを設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
-そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。
-${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYESにした場合、通常のInfo.plistと別に ${TEMP_DIR}/Preprocessed-Info.plist という名前で別のInfo.plistが作成されるようになります。あとは、Run ScriptでそのPreprocessed-Info.plistのほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。</description>
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&amp;mdash; kishikawa katsumi (@k_katsumi) May 15, 2014  @k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて</description>
     </item>
     
     <item>
@@ -701,7 +733,8 @@ Storyboard登場以前だと、次の画面に遷移させるだけでも
  Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
 どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
-mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
+&amp;mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
@@ -709,12 +742,10 @@ $ ./build.py すると、同ディレクトリに mergepbx というファイル
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと&amp;hellip;と日本語まわりでfailedになったので加えました。2014/02/09 追記
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+2014/02/09 追記
 mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
-次に、.gitattributes で
-*.pbxproj merge=mergepbx と pbxprojのときはマージに mergepbx を使うように設定を追加という手順です。
-mergepbxの結果 ストーリーとしては、
- test1ブランチで 適当なファイルを１つ追加してコミット test2ブランチで 別の適当なファイルを１つ追加してコミット test1ブランチでgit merge test2  として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、&amp;hellip;と残念ながらうまく自動マージされませんでした。。。どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。ただ、READMEの次の項に、 *.</description>
+次に、.gitattributes で</description>
     </item>
     
     <item>

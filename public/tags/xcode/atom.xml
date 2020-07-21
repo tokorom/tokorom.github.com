@@ -24,10 +24,9 @@
  Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&amp;hellip;   変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒    といった課題があったりしました（少なくともぼくの手元では）。
 そういったことを踏まえて、
 potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
-その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
-Preprocess Info.plist file ぼくは今回初めて知ったのですが、Builde Settings -&amp;gt; Packaging の中に Preprocess Info.plist file という設定項目があり、これにYESを設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
-そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。
-${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYESにした場合、通常のInfo.plistと別に ${TEMP_DIR}/Preprocessed-Info.plist という名前で別のInfo.plistが作成されるようになります。あとは、Run ScriptでそのPreprocessed-Info.plistのほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。</description>
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&amp;hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&amp;mdash; kishikawa katsumi (@k_katsumi) May 15, 2014  @k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて</description>
     </item>
     
     <item>
@@ -43,7 +42,8 @@ ${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYES
  Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
 どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
-mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
+&amp;mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
@@ -51,12 +51,10 @@ $ ./build.py すると、同ディレクトリに mergepbx というファイル
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと&amp;hellip;と日本語まわりでfailedになったので加えました。2014/02/09 追記
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+2014/02/09 追記
 mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
-次に、.gitattributes で
-*.pbxproj merge=mergepbx と pbxprojのときはマージに mergepbx を使うように設定を追加という手順です。
-mergepbxの結果 ストーリーとしては、
- test1ブランチで 適当なファイルを１つ追加してコミット test2ブランチで 別の適当なファイルを１つ追加してコミット test1ブランチでgit merge test2  として、pbxprojが自動マージされるかどうかという確認をしたのですが、その結果、&amp;hellip;と残念ながらうまく自動マージされませんでした。。。どういうパターンで成功するのかは分かりませんがまだ実用的ではないかんじです。ただ、READMEの次の項に、 *.</description>
+次に、.gitattributes で</description>
     </item>
     
     <item>

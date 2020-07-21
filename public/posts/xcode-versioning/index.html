@@ -9,10 +9,9 @@
  Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&hellip;   変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒    といった課題があったりしました（少なくともぼくの手元では）。
 そういったことを踏まえて、
 potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
-その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。
-Preprocess Info.plist file ぼくは今回初めて知ったのですが、Builde Settings -&gt; Packaging の中に Preprocess Info.plist file という設定項目があり、これにYESを設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
-そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。
-${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYESにした場合、通常のInfo.plistと別に ${TEMP_DIR}/Preprocessed-Info.plist という名前で別のInfo.plistが作成されるようになります。あとは、Run ScriptでそのPreprocessed-Info.plistのほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。'>
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&mdash; kishikawa katsumi (@k_katsumi) May 15, 2014  @k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='これがXcodeでのバージョニングの決定版になるかも • Yuta Tokoro'>
@@ -23,10 +22,9 @@ ${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYES
  Compile Sourcesより前にRun Scriptを設定してもScriptで編集した内容がアプリに反映されない場合がある  そのため、確実に内容を反映させるために２回ビルドを走らせたりとか&hellip;   変更したInfo.plistに差分が出てソース管理上差分が出てしまう  差分を元に戻せばいいのだけど、毎回それをやるのが面倒    といった課題があったりしました（少なくともぼくの手元では）。
 そういったことを踏まえて、
 potatotips 第７回 で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、
-その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。
-Preprocess Info.plist file ぼくは今回初めて知ったのですが、Builde Settings -&gt; Packaging の中に Preprocess Info.plist file という設定項目があり、これにYESを設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。
-そのため、これまで困っていた「変更したInfo.plistの内容が即反映されない場合がある」といった課題は、じつはこの設定で解消されるものでした。
-${TEMP_DIR}/Preprocessed-Info.plist そして、Preprocess Info.plist fileをYESにした場合、通常のInfo.plistと別に ${TEMP_DIR}/Preprocessed-Info.plist という名前で別のInfo.plistが作成されるようになります。あとは、Run ScriptでそのPreprocessed-Info.plistのほうを編集してあげれば、それがアプリに即反映される形になります（Run ScriptはCopy Bundle Resourcesより前に配置する）。'>
+ その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。
+@tokorom ちょっと準備がややこしいですが、こういう手もあるということで https://t.co/EQYS2gVrwm こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。
+&mdash; kishikawa katsumi (@k_katsumi) May 15, 2014  @k_katsumi @tokorom おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて'>
 <meta property='og:url' content='http://www.tokoro.me/posts/xcode-versioning/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='xcode'><meta property='article:tag' content='ios'><meta property='article:published_time' content='2014-05-19T00:00:00Z'/><meta property='article:modified_time' content='2014-05-19T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
@@ -104,13 +102,13 @@ if (!doNotTrack) {
   <ul class='list taxonomy-cloud'><li>
         <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
       </li><li>
-        <a href='/tags/aws/' style='font-size:1.0212765957446808em'>AWS</a>
+        <a href='/tags/aws/' style='font-size:1.0208333333333333em'>AWS</a>
       </li><li>
         <a href='/tags/ci/' style='font-size:1em'>ci</a>
       </li><li>
-        <a href='/tags/cui/' style='font-size:1.0425531914893618em'>cui</a>
+        <a href='/tags/cui/' style='font-size:1.0416666666666667em'>cui</a>
       </li><li>
-        <a href='/tags/design/' style='font-size:1.0638297872340425em'>design</a>
+        <a href='/tags/design/' style='font-size:1.0625em'>design</a>
       </li><li>
         <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
       </li><li>
@@ -118,61 +116,63 @@ if (!doNotTrack) {
       </li><li>
         <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
       </li><li>
-        <a href='/tags/hig/' style='font-size:1.0212765957446808em'>HIG</a>
+        <a href='/tags/hig/' style='font-size:1.0208333333333333em'>HIG</a>
       </li><li>
-        <a href='/tags/homekit/' style='font-size:1.127659574468085em'>homekit</a>
+        <a href='/tags/homekit/' style='font-size:1.125em'>homekit</a>
       </li><li>
-        <a href='/tags/hugo/' style='font-size:1.0212765957446808em'>hugo</a>
+        <a href='/tags/hugo/' style='font-size:1.0208333333333333em'>hugo</a>
       </li><li>
         <a href='/tags/ios/' style='font-size:2em'>ios</a>
       </li><li>
-        <a href='/tags/ios14/' style='font-size:1.0212765957446808em'>iOS14</a>
+        <a href='/tags/ios14/' style='font-size:1.0208333333333333em'>iOS14</a>
       </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.0638297872340425em'>jenkins</a>
+        <a href='/tags/jenkins/' style='font-size:1.0625em'>jenkins</a>
       </li><li>
-        <a href='/tags/lambda/' style='font-size:1.0212765957446808em'>Lambda</a>
+        <a href='/tags/lambda/' style='font-size:1.0208333333333333em'>Lambda</a>
       </li><li>
         <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
       </li><li>
-        <a href='/tags/mac/' style='font-size:1.0851063829787233em'>mac</a>
+        <a href='/tags/mac/' style='font-size:1.0833333333333333em'>mac</a>
       </li><li>
-        <a href='/tags/markdown/' style='font-size:1.0212765957446808em'>markdown</a>
+        <a href='/tags/markdown/' style='font-size:1.0208333333333333em'>markdown</a>
       </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0425531914893618em'>nfc</a>
+        <a href='/tags/nfc/' style='font-size:1.0416666666666667em'>nfc</a>
       </li><li>
-        <a href='/tags/objc/' style='font-size:1.4042553191489362em'>objc</a>
+        <a href='/tags/objc/' style='font-size:1.3958333333333333em'>objc</a>
       </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0425531914893618em'>octopress</a>
+        <a href='/tags/octopress/' style='font-size:1.0416666666666667em'>octopress</a>
       </li><li>
         <a href='/tags/publish/' style='font-size:1em'>publish</a>
       </li><li>
         <a href='/tags/review/' style='font-size:1em'>review</a>
       </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0425531914893618em'>sakura</a>
+        <a href='/tags/sakura/' style='font-size:1.0416666666666667em'>sakura</a>
       </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0425531914893618em'>sesame</a>
+        <a href='/tags/sesame/' style='font-size:1.0416666666666667em'>sesame</a>
       </li><li>
         <a href='/tags/slack/' style='font-size:1em'>Slack</a>
       </li><li>
-        <a href='/tags/swift/' style='font-size:1.2553191489361701em'>swift</a>
+        <a href='/tags/swift/' style='font-size:1.25em'>swift</a>
       </li><li>
         <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
       </li><li>
         <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
       </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0212765957446808em'>tvos</a>
+        <a href='/tags/test/' style='font-size:1em'>Test</a>
       </li><li>
-        <a href='/tags/ui/' style='font-size:1.1063829787234043em'>ui</a>
+        <a href='/tags/tvos/' style='font-size:1.0208333333333333em'>tvos</a>
+      </li><li>
+        <a href='/tags/ui/' style='font-size:1.1041666666666667em'>ui</a>
       </li><li>
         <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
       </li><li>
-        <a href='/tags/vim/' style='font-size:1.127659574468085em'>vim</a>
+        <a href='/tags/vim/' style='font-size:1.125em'>vim</a>
       </li><li>
         <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
       </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0425531914893618em'>WWDC</a>
+        <a href='/tags/wwdc/' style='font-size:1.0416666666666667em'>wwdc</a>
       </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0851063829787233em'>xcode</a>
+        <a href='/tags/xcode/' style='font-size:1.0833333333333333em'>xcode</a>
       </li></ul>
 </div>
 
@@ -286,7 +286,7 @@ if (!doNotTrack) {
 <li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
 </ul>
 <p>以下、具体的な話をします。</p>
-<!-- raw HTML omitted -->
+<!-- more -->
 <h2 id="heading-3">経緯</h2>
 <p>これまで、</p>
 <ul>
@@ -308,12 +308,16 @@ if (!doNotTrack) {
 <p>といった課題があったりしました（少なくともぼくの手元では）。</p>
 <p>そういったことを踏まえて、</p>
 <p><a href="http://connpass.com/event/6199/">potatotips 第７回</a> で「agvtoolで超かっこよくバージョニングできますか？」という発表をしたのですが、</p>
-<!-- raw HTML omitted -->
+<script async class="speakerdeck-embed" data-id="af691300be580131ba2f16b66683ddab" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 <p>その後のTwitterの議論（議論というかぼくは教えてもらっただけですが&hellip;）で、これぞというバージョニングの方法が生み出されました。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<blockquote class="twitter-tweet" data-conversation="none" data-cards="hidden" lang="en"><p><a href="https://twitter.com/tokorom">@tokorom</a> ちょっと準備がややこしいですが、こういう手もあるということで <a href="https://t.co/EQYS2gVrwm">https://t.co/EQYS2gVrwm</a> こんなのどうでしょうか。正直準備がめんどうなので僕はたぶん使わないですけど。</p>&mdash; kishikawa katsumi (@k_katsumi) <a href="https://twitter.com/k_katsumi/statuses/466987671080804352">May 15, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/k_katsumi">@k_katsumi</a> <a href="https://twitter.com/tokorom">@tokorom</a> おはようございます。Preprocess Info.plist という設定なんてあるんですね。感動しました。これを Yes にしたら、他の設定は触らなくても Build Phases の何より先に Info.plist がプリプロセスされて</p>&mdash; 熊谷 友宏 (@es_kumagai) <a href="https://twitter.com/es_kumagai/statuses/467134816194789376">May 16, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/k_katsumi">@k_katsumi</a> <a href="https://twitter.com/tokorom">@tokorom</a> 元の Info.plist と同じ ${TEMP_DIR}/Preprocessed-Info.plist が出来上がるみたいでした。これ自体も PlistBuddy で編集できたので「Info.plist に差分が出る」という点については</p>&mdash; 熊谷 友宏 (@es_kumagai) <a href="https://twitter.com/es_kumagai/statuses/467135329401438208">May 16, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/k_katsumi">@k_katsumi</a> <a href="https://twitter.com/tokorom">@tokorom</a> これでも回避できるかもしれません。Copy Bundle Resources より前に Run Script を実行すれば Preprocessed-Info.plist が更新されるからなのか、最新のものがバンドルに含まれる様子でした。</p>&mdash; 熊谷 友宏 (@es_kumagai) <a href="https://twitter.com/es_kumagai/statuses/467135680657633281">May 16, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <h2 id="preprocess-infoplist-file">Preprocess Info.plist file</h2>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/preprocess_info_plist.png" alt="preprocess_info_plist"></p>
 <p>ぼくは今回初めて知ったのですが、<code>Builde Settings</code> -&gt; <code>Packaging</code> の中に <code>Preprocess Info.plist file</code> という設定項目があり、これに<code>YES</code>を設定することでInfo.plistがBuild Phasesの他の何よりも先にInfo.plistが作成されることになります。</p>
@@ -357,8 +361,8 @@ if (!doNotTrack) {
 <p>なお、Info.plistをスクリプトでいじるときに、上記のように<code>CFBundleVersion</code>を読み込んでそれを使って同じ<code>CFBundleVersion</code>を上書きするケースだと、前に作ったInfo.plistの値がインプットとして使われてしまい、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/versioning_sample_failed.png" alt="versioning_sample_failed"></p>
 <p>こんなかんじでビルド番号が壊れてしまうことがあります。必ずCleanしてからビルドすればこの問題は発生しないのですが、せっかく自動でバージョニングしているのに制約が付いてしまうのも不格好です。</p>
-<p><!-- raw HTML omitted -->これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を削除してしまうという方法が考えられます。<!-- raw HTML omitted --></p>
-<p><!-- raw HTML omitted -->2014/5/20 熊谷さんにより良い方法をご提案いただいたので修正<!-- raw HTML omitted --></p>
+<p><s>これを避けるためのひとつの方法として、Build Phases の一番最後のRun Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を削除してしまうという方法が考えられます。</s></p>
+<p><b>2014/5/20 熊谷さんにより良い方法をご提案いただいたので修正</b></p>
 <p>これを避けるためには、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">熊谷さんの記事</a>のとおり、インプットとなるInfo.plistを<code>${TEMP_DIR}/Preprocessed-Info.plist</code>でなく元のInfo.plistそのもの（<code>${SRCROOT}/${INFOPLIST_FILE}</code>）にするのが良さそうです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">${</span>CONFIGURATION<span style="color:#e6db74">}</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Debug&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
 

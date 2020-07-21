@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,24 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</title>
+      <link>http://www.tokoro.me/posts/safe-objc/</link>
+      <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/safe-objc/</guid>
+      <description>
+        チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
+#import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
+以下、これを解消するための変更例です。
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。
+      </description>
+      
+    </item>
     
     <item>
       <title>Objective-Cで独自クラスに[]でアクセスする</title>
