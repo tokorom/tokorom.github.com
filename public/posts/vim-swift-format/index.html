@@ -2,29 +2,61 @@
 <html lang='ja'><head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
-https://swift.org/blog/aws-lambda-runtime/
-以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
-swift.orgの説明には、
- The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
-  AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。'>
+<meta name='description' content='皆々様におかれましては apple/swift-format を快適にご利用いただいていますでしょうか？1
+swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。
+私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。 iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。
+ということでVim&#43;SwiftでiOSアプリを開発して6年（2020年8月現在）の私がこの記事を書くこととしました。
+swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswift-formatを扱うVim Pluginは見つかりませんでした。これまで利用されていたSwiftLintやSwiftFormatのPluginは見つかるのですが、新しめなapple/swift-format用のものはないようです。
+そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
+https://github.com/tokorom/vim-swift-format
+事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
+which swift-format などで存在を確認してください2。
+なければ現在ならbrewでもインストール可能です。
+SwiftFormatというのは別のツールですので間違わないようご注意ください。
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
+非同期にLintをかけるためのPluginです。
+今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
+vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
+Plug &#39;tokorom/vim-swift-format&#39;です。
+必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
+let g:ale_linters = {\ &#39;swift&#39;: [&#39;swift-format&#39;],\}let g:vim_swift_format_use_ale = 1必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。
+使ってみる！ 設定が終わったら早速使ってみましょう。
+試しに、
+import Foundation final class Sample{ let hello : String } とわざと2つの間違いを含んだSwiftコードを書きました。'>
 <meta name='theme-color' content='#ffcd00'>
 
-<meta property='og:title' content='Swift AWS Lambda Runtimeのサンプルをデプロイしてみた • Yuta Tokoro'>
-<meta property='og:description' content='導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
-https://swift.org/blog/aws-lambda-runtime/
-以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
-swift.orgの説明には、
- The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
-  AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。'>
-<meta property='og:url' content='http://www.tokoro.me/posts/swift-aws-lambda-runtime/'>
+<meta property='og:title' content='apple/swift-formatをVimで使う • Yuta Tokoro'>
+<meta property='og:description' content='皆々様におかれましては apple/swift-format を快適にご利用いただいていますでしょうか？1
+swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。
+私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。 iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。
+ということでVim&#43;SwiftでiOSアプリを開発して6年（2020年8月現在）の私がこの記事を書くこととしました。
+swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswift-formatを扱うVim Pluginは見つかりませんでした。これまで利用されていたSwiftLintやSwiftFormatのPluginは見つかるのですが、新しめなapple/swift-format用のものはないようです。
+そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
+https://github.com/tokorom/vim-swift-format
+事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
+which swift-format などで存在を確認してください2。
+なければ現在ならbrewでもインストール可能です。
+SwiftFormatというのは別のツールですので間違わないようご注意ください。
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
+非同期にLintをかけるためのPluginです。
+今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
+vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
+Plug &#39;tokorom/vim-swift-format&#39;です。
+必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
+let g:ale_linters = {\ &#39;swift&#39;: [&#39;swift-format&#39;],\}let g:vim_swift_format_use_ale = 1必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。
+使ってみる！ 設定が終わったら早速使ってみましょう。
+試しに、
+import Foundation final class Sample{ let hello : String } とわざと2つの間違いを含んだSwiftコードを書きました。'>
+<meta property='og:url' content='http://www.tokoro.me/posts/vim-swift-format/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/swift-aws-lambda-runtime/top.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='Swift'><meta property='article:tag' content='AWS'><meta property='article:tag' content='Lambda'><meta property='article:published_time' content='2020-06-11T14:57:28&#43;09:00'/><meta property='article:modified_time' content='2020-06-11T14:57:28&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/vim-swift-format/top.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='Vim'><meta property='article:tag' content='Swift'><meta property='article:published_time' content='2020-08-17T18:11:06&#43;09:00'/><meta property='article:modified_time' content='2020-08-17T18:11:06&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
 <meta name="generator" content="Hugo 0.62.0" />
 
-  <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた • Yuta Tokoro</title>
-  <link rel='canonical' href='https://spinners.work/posts/swift-aws-lambda-runtime/'>
+  <title>apple/swift-formatをVimで使う • Yuta Tokoro</title>
+  <link rel='canonical' href='https://spinners.work/posts/vim-swift-format/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -223,7 +255,7 @@ if (!doNotTrack) {
   <header class='header entry-header'>
   <div class='container sep-after'>
     <div class='header-info'>
-      <h1 class='title'>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</h1>
+      <h1 class='title'>apple/swift-formatをVimで使う</h1>
       
 
     </div>
@@ -237,7 +269,7 @@ if (!doNotTrack) {
   
 </svg>
 <span class='screen-reader-text'> </span>
-  <time class='entry-date' datetime='2020-06-11T14:57:28&#43;09:00'>2020-06-11</time>
+  <time class='entry-date' datetime='2020-08-17T18:11:06&#43;09:00'>2020-08-17</time>
 </span>
 
   <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
@@ -261,70 +293,80 @@ if (!doNotTrack) {
   <div class='container entry-content'>
   
 
-  <p><img src="/images/swift-aws-lambda-runtime/top.png" alt="image"></p>
-<h2 id="heading">導入</h2>
-<p>先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！</p>
-<p><a href="https://swift.org/blog/aws-lambda-runtime/">https://swift.org/blog/aws-lambda-runtime/</a></p>
-<p>以前から <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html">Custom AWS Lambda runtimes</a> を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。</p>
-<p>swift.orgの説明には、</p>
-<blockquote>
-<p>The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.</p>
-</blockquote>
-<ul>
-<li>AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている</li>
-<li>さまざまな種類のLambda関数を作るのに便利なAPIを提供している</li>
-</ul>
-<p>とあります。</p>
-<p>それでは早速、Swift AWS Lambda Runtimeを使ったLambda関数をデプロイしてみましょう。</p>
-<h2 id="heading-1">事前準備</h2>
-<ul>
-<li>AWS Lambdaを作る権限のあるAWSアカウントが必要です</li>
-<li><a href="https://docs.docker.com/docker-for-mac/install/">Docker Desktop on Mac</a> などをインストールしdockerコマンドが使える環境が必要です</li>
-</ul>
-<h2 id="heading-2">サンプルを試す</h2>
-<p>今回は <a href="https://github.com/swift-server/swift-aws-lambda-runtime">Swift AWS Lambda Runtimeのリポジトリ</a> に含まれているサンプルの<code>HelloWorld</code>を試してみます。</p>
-<p>具体的には、 <a href="https://github.com/swift-server/swift-aws-lambda-runtime/tree/master/Examples/LambdaFunctions">https://github.com/swift-server/swift-aws-lambda-runtime/tree/master/Examples/LambdaFunctions</a> です。</p>
-<p>READMEでは<code>scripts/deploy.sh</code>を試すように指示されていますが、この記事ではAWS CLIやS3周りの説明を省略したいため、Swiftで書かれたLamda関数をビルドしてパッケージングするところまでをやってくれる<code>scripts/build-and-package.sh</code>を使います<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/swift-server/swift-aws-lambda-runtime.git
-cd swift-aws-lambda-runtime/Examples/LambdaFunctions
+  <p><img src="/images/vim-swift-format/top.png" alt="image"></p>
+<p>皆々様におかれましては <a href="https://github.com/apple/swift-format">apple/swift-format</a> を快適にご利用いただいていますでしょうか？<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。</p>
+<p>私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。
+iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。</p>
+<p>ということでVim+SwiftでiOSアプリを開発して6年（2020年8月現在）の私がこの記事を書くこととしました。</p>
+<h2 id="swift-formatvim-plugin">swift-formatを扱うVim Pluginの存在</h2>
+<p>2020年8月現在、残念ながらswift-formatを扱うVim Pluginは見つかりませんでした。これまで利用されていたSwiftLintやSwiftFormatのPluginは見つかるのですが、新しめなapple/swift-format用のものはないようです。</p>
+<p>そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。</p>
+<p><a href="https://github.com/tokorom/vim-swift-format">https://github.com/tokorom/vim-swift-format</a></p>
+<h2 id="heading">事前に必要なもの</h2>
+<h3 id="swift-format">swift-format</h3>
+<p>とうぜん事前にswift-formatが必要です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">which swift-format
+</code></pre></div><p>などで存在を確認してください<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p>なければ現在ならbrewでもインストール可能です。</p>
+<p><code>SwiftFormat</code>というのは別のツールですので間違わないようご注意ください。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install swift-format
+</code></pre></div><h3 id="alevimplugin">aleというVimのPlugin</h3>
+<p><a href="https://github.com/dense-analysis/ale">https://github.com/dense-analysis/ale</a></p>
+<p>非同期にLintをかけるためのPluginです。</p>
+<p>今回、swift-formatによるLintはこのaleを経由してかけるように作っています。</p>
+<h2 id="vim-swift-format">vim-swift-formatのセットアップ</h2>
+<h3 id="vim">Vimへのインストール</h3>
+<p>ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;tokorom/vim-swift-format&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>です。</p>
+<h3 id="heading-1">必須の設定</h3>
+<p>swift-formatによるLintをかけるにあたって以下の設定項目が必須です。<code>.vimrc</code>など任意の場所に設定してください。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">ale_linters</span> = {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>\   <span style="color:#e6db74">&#39;swift&#39;</span>: [<span style="color:#e6db74">&#39;swift-format&#39;</span>],<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>\}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_swift_format_use_ale</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h3 id="heading-2">必要なら可能な設定</h3>
+<p><code>swift-format</code>の場所をフルパスで指定したい場合などは必要に応じて、</p>
+<pre><code>let g:vim_swift_format_executable = 'swift-format'
+let g:vim_swift_format_lint_command = 'swift-format lint %s'
+let g:vim_swift_format_format_command = 'swift-format format --in-place %s'
+</code></pre><p>これらの設定が可能です。</p>
+<h2 id="heading-3">使ってみる！</h2>
+<p>設定が終わったら早速使ってみましょう。</p>
+<p>試しに、</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Foundation</span>
 
-./scripts/build-and-package.sh HelloWorld
-</code></pre></div><p>dockerコマンドが実行できる状態であれば、自動でSwiftで書いたLambda関数をビルドするためのDockerイメージが取得され、Lambda関数がビルドされ、成果物として</p>
-<pre><code>.build/lambda/HelloWorld/lambda.zip
-</code></pre><p>が得られます。</p>
-<h2 id="aws-lambda">AWS Lambdaにアップロードして実行</h2>
-<p>それでは、AWSのコンソールに入って作成したHelloWorldを動かしてみましょう。</p>
-<h3 id="aws-lambda-1">AWS Lambdaの作成</h3>
-<p>適当な名前で関数を作成します。</p>
-<p><img src="/images/swift-aws-lambda-runtime/create-lambda.png" alt="image"></p>
+<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span>{
+  <span style="color:#66d9ef">let</span> hello : String
+}
+</code></pre></div><p>とわざと2つの間違いを含んだSwiftコードを書きました。</p>
 <ul>
-<li>ラインタイムは <strong>ユーザー独自のブートストラップを提供する</strong> にします</li>
-<li>アクセス権限など他の項目はデフォルトのままでOKです</li>
+<li><code>Sample</code>と<code>{</code>の間に空白がない</li>
+<li><code>hello</code>と<code>:</code>の間に余分な空白がある</li>
 </ul>
-<h3 id="lamdazip">lamda.zipのアップロード</h3>
-<p>関数コードセクションで <strong>アクション</strong> の <strong>.zipファイルをアップロード</strong> を選びます。</p>
-<p><img src="/images/swift-aws-lambda-runtime/upload-zip.png" alt="image"></p>
-<p>ここで先ほどビルドした<code>lambda.zip</code>を選んでアップロードします。
-これだけでSwift製Lambda関数のデプロイは完了です！</p>
-<h3 id="heading-3">実行してみる</h3>
-<p>右上のメニューの中の <strong>テスト</strong> を選びます。</p>
-<p><img src="/images/swift-aws-lambda-runtime/create-test.png" alt="image"></p>
-<p>テストイベントの設定は、デフォルトのまま適当な名前で保存、でOKです。</p>
-<p>今回は特にインプットを使わないためです。今後インプットのあるLambda関数を作った場合は、ここでテスト用のインプットを指定できます。</p>
-<p>テストイベントの設定が終わったら、改めて <strong>テスト</strong> ボタンを押します。</p>
-<p>すると、スクショのように実行結果のログのところに</p>
-<pre><code>&quot;hello, world!&quot;
-</code></pre><p>と表示されるのが確認できるはずです。</p>
-<p><img src="/images/swift-aws-lambda-runtime/result.png" alt="image"></p>
-<p>これで初めてのSwift製Lambda関数の作成、デプロイ、実行まで終わりました！</p>
-<h2 id="heading-4">次の記事</h2>
-<p>これでSwift AWS Lambda Runtimeを使ったSwift製Lambda関数のビルドとデプロイの流れを確認できました。</p>
-<p>ただ、このままだと流れがわかっただけですので、次の記事ではなにか適当な関数を作ってAPI化し、curlなどで叩くところまでやってみたいと思います。</p>
+<p>という２点がswift-formatに直して欲しい箇所です。</p>
+<p>このコードをVimで書いたところ、</p>
+<p><img src="/images/vim-swift-format/ng.png" alt="image"></p>
+<p>と見事にスピーディに指摘してくれました。</p>
+<h2 id="heading-4">自動で直してもらう！</h2>
+<p>これらの指摘を自分で直しても良いですが、swift-formatには自動フォーマット機能もありますので使ってみます。</p>
+<p>Vim上で<code>:SwiftFormatFormat</code>というコマンドを打ちます。</p>
+<p>すると、</p>
+<p><img src="/images/vim-swift-format/fixed.png" alt="image"></p>
+<p>ときちんと自動的に修正してくれました！</p>
+<p>簡単便利！</p>
+<h2 id="heading-5">まとめ</h2>
+<p>（数少ない）VimでSwiftを書いている皆々様、ぜひご活用ください！</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>AWSに慣れていてスクリプト一発でAWS Lambdaのデプロイまでやってしまいたい人はdeploy.shをお試しください <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>swift-formatと書けば十分なのですが、過去にあったSwiftFormatなどと混同しないようappleというprefixをつけました <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>swift-formatがPATHの通った場所に設置されているほうが後が楽です <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -338,7 +380,7 @@ cd swift-aws-lambda-runtime/Examples/LambdaFunctions
     <div class="social-buttons">
       <ul class="widget-social_menu">
         <li>
-          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/swift-aws-lambda-runtime/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/vim-swift-format/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
         <li>
@@ -346,7 +388,7 @@ cd swift-aws-lambda-runtime/Examples/LambdaFunctions
         </li>
 
         <li>
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fswift-aws-lambda-runtime%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fvim-swift-format%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
         </li>
 
         <li>
@@ -367,7 +409,7 @@ cd swift-aws-lambda-runtime/Examples/LambdaFunctions
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/swift/'>swift</a>, <a class='tag' href='/tags/aws/'>AWS</a>, <a class='tag' href='/tags/lambda/'>Lambda</a></div>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/vim/'>vim</a>, <a class='tag' href='/tags/swift/'>swift</a></div>
 
   </div>
 </footer>
@@ -377,7 +419,7 @@ cd swift-aws-lambda-runtime/Examples/LambdaFunctions
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='/posts/github-actions-context/'>
+      <a href='/posts/ios-promocode/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -385,17 +427,7 @@ cd swift-aws-lambda-runtime/Examples/LambdaFunctions
   
 </svg>
  </span>
-        <span class='screen-reader-text'>: </span>Github ActionsからSlackへ通知するのを良い感じにしたい</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/posts/swift-aws-lambda-runtime2/'>
-        <span class='screen-reader-text'>: </span>Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
-  
-</svg>
-</span>
-      </a>
+        <span class='screen-reader-text'>: </span>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</a>
     </div></div>
 </nav>
 

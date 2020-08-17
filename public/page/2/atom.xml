@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,20 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
+      <link>http://www.tokoro.me/posts/homekit_hue_sensor/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_hue_sensor/</guid>
+      <description>
+        Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png</coverImage>
+      
+    </item>
     
     <item>
       <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
@@ -421,29 +435,6 @@ $ ./build.py すると、同ディレクトリに mergepbx というファイル
 2014/02/09 追記
 mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
 次に、.gitattributes で
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>提供するXXXViewControllerの親クラスを差し替え可能にしたい!</title>
-      <link>http://www.tokoro.me/posts/super-viewcontroller-for-a-library/</link>
-      <pubDate>Thu, 23 Jan 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/super-viewcontroller-for-a-library/</guid>
-      <description>
-        XXXViewControllerの親クラスを差し替えたいときありますよね？ UIKit内で言えばUITableViewControllerとかはその代表格。
-外部ライブラリで言うと、Google Analytics SDKのGAITrackedViewControllerとか。
-要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。
-で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。
-runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&amp;hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
-define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
-例えば、こんなかんじでどうでしょう？
-#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT#import XXXLIB_VIEW_CONTROLLER_IMPORT#endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS@interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else@interface TKRContainerTableViewController : UIViewController #endif // ...  @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
-もしsuperclass変えたいよ！って人は、
-#define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;#34;YourSuperViewController.h&amp;#34;#define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewControllerとどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
-ひとまずこれでなんとかなりそう。
-他に良い方法があればご教示を！
       </description>
       
     </item>

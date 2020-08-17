@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,22 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</title>
+      <link>http://www.tokoro.me/posts/objc-private-test/</link>
+      <pubDate>Wed, 12 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-private-test/</guid>
+      <description>
+        dkfjさんが Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法 という記事を書かれていました。
+せっかくなので私がやっている方法も書かせていただきます。
+テスト対象のクラス 以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。
+#import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
+#import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  
+      </description>
+      
+    </item>
     
     <item>
       <title>GHUnitのテストカバレッジをJenkinsで表示する</title>

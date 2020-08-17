@@ -6,10 +6,40 @@
     <description>Recent content in Posts on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>apple/swift-formatをVimで使う</title>
+      <link>http://www.tokoro.me/posts/vim-swift-format/</link>
+      <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/vim-swift-format/</guid>
+      <description>皆々様におかれましては apple/swift-format を快適にご利用いただいていますでしょうか？1
+swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。
+私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。 iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。
+ということでVim+SwiftでiOSアプリを開発して6年（2020年8月現在）の私がこの記事を書くこととしました。
+swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswift-formatを扱うVim Pluginは見つかりませんでした。これまで利用されていたSwiftLintやSwiftFormatのPluginは見つかるのですが、新しめなapple/swift-format用のものはないようです。
+そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
+https://github.com/tokorom/vim-swift-format
+事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
+which swift-format などで存在を確認してください2。
+なければ現在ならbrewでもインストール可能です。
+SwiftFormatというのは別のツールですので間違わないようご注意ください。
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
+非同期にLintをかけるためのPluginです。
+今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
+vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
+Plug &amp;#39;tokorom/vim-swift-format&amp;#39;です。
+必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
+let g:ale_linters = {\ &amp;#39;swift&amp;#39;: [&amp;#39;swift-format&amp;#39;],\}let g:vim_swift_format_use_ale = 1必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。
+使ってみる！ 設定が終わったら早速使ってみましょう。
+試しに、
+import Foundation final class Sample{ let hello : String } とわざと2つの間違いを含んだSwiftコードを書きました。</description>
+    </item>
     
     <item>
       <title>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</title>
