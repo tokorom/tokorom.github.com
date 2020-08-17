@@ -6,10 +6,28 @@
     <description>Recent content in Tags on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>swift</title>
+      <link>http://www.tokoro.me/tags/swift/</link>
+      <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/swift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>http://www.tokoro.me/tags/vim/</link>
+      <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/vim/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>ios</title>
@@ -57,16 +75,7 @@
     </item>
     
     <item>
-      <title>swift</title>
-      <link>http://www.tokoro.me/tags/swift/</link>
-      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/swift/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>WWDC</title>
+      <title>wwdc</title>
       <link>http://www.tokoro.me/tags/wwdc/</link>
       <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
@@ -134,15 +143,6 @@
       <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
       
       <guid>http://www.tokoro.me/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vim</title>
-      <link>http://www.tokoro.me/tags/vim/</link>
-      <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/tags/vim/</guid>
       <description></description>
     </item>
     
