@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,23 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
+      <link>http://www.tokoro.me/posts/homekit_delongi_heater/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/homekit_delongi_heater/</guid>
+      <description>
+        De&#39;Longhi Multi Dynamic Heater WiFi Model
+主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
+      </description>
+      
+      <coverImage>https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png</coverImage>
+      
+    </item>
     
     <item>
       <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
@@ -404,37 +421,6 @@ Storyboard登場以前だと、次の画面に遷移させるだけでも
 そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
 もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
 #import &amp;#34;NextViewController.h&amp;#34;#import &amp;#34;ModalViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&amp;#34;Modal&amp;#34; isEqualToString:segue.
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
-      <link>http://www.tokoro.me/posts/pbxproj-merge/</link>
-      <pubDate>Thu, 06 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/pbxproj-merge/</guid>
-      <description>
-        2014/02/09 追記
-コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
-今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
-複数人でプログラミングしているとpbxprojがやたらとコンフリクトする 例えば、
- Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
-ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
-どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
-@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
-&amp;mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
-https://github.com/simonwagner/mergepbx
-のREADMEどおりにインストール＆設定するだけ。
-cloneして
-$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
-2014/02/09 追記
-（もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
-~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
-2014/02/09 追記
-mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
-次に、.gitattributes で
       </description>
       
     </item>

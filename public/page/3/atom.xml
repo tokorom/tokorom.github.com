@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,37 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
+      <link>http://www.tokoro.me/posts/pbxproj-merge/</link>
+      <pubDate>Thu, 06 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/pbxproj-merge/</guid>
+      <description>
+        2014/02/09 追記
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
+今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
+複数人でプログラミングしているとpbxprojがやたらとコンフリクトする 例えば、
+ Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
+ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
+どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
+@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
+&amp;mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+https://github.com/simonwagner/mergepbx
+のREADMEどおりにインストール＆設定するだけ。
+cloneして
+$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+2014/02/09 追記
+（もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
+~/.gitconfig に以下の設定を追加する
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+2014/02/09 追記
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
+次に、.gitattributes で
+      </description>
+      
+    </item>
     
     <item>
       <title>提供するXXXViewControllerの親クラスを差し替え可能にしたい!</title>
@@ -496,28 +527,6 @@ clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Cl
 すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
 同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
 clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
-      <link>http://www.tokoro.me/posts/mac-terminal-japanese/</link>
-      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/mac-terminal-japanese/</guid>
-      <description>
-        Macの初期設定のたびに混乱してるので再整理しておきます。
- Mac Terminal tmux vim  で開発をする人向けです。
-まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
-日本語を扱う上で便利な設定がデフォルトで入ってます。
-当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; alias vim=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
- こせきの技術日記  に従って対処しておきます。
-この中の、
-date | pbcopy までが成功すればOKです。
-.vimrc にクリップボード利用の設定追加 .vimrc に
-set clipboard=unnamed を追加しておきます。
       </description>
       
     </item>
