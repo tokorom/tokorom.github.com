@@ -53,7 +53,10 @@ canonical: https://spinners.work
 
 せっかくなのでいっきに全部変えてしまうのでなく、１要素ずつ変更して速度計測することにしました。
 
-まず一発目に「これは効果はないだろうなあ」と思いつつも、LANケーブルだけ新しいものに変えて計測したところ...
+まず一発目に「これは効果はないだろうなあ」と思いつつも、LANケーブルだけ新調しました。
+光回線の終端装置（ONU）とWi-FiルーターをつなぐLANケーブルです。
+
+LANケーブルを新しいものに変えて計測したところ...
 
 いきなり最大 **130Mbps** まで速度が跳ね上がってしまいました。
 
@@ -83,7 +86,7 @@ canonical: https://spinners.work
 
 Amazonで適当に検索した UGREEN LANケーブル カテゴリー7... というやつです。
 
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B07C7PRCGY&linkId=b719f8a6b709b87bb40cd3e3ab13d8f0&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00QV1F0RU&linkId=e41b13b3ba22ffcb2886ad1781a0da12&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
     </iframe>
 
 ## Wi-Fiルーターを変更した後
