@@ -6,10 +6,28 @@
     <description>Recent content in Tags on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Internet</title>
+      <link>http://www.tokoro.me/tags/internet/</link>
+      <pubDate>Mon, 07 Sep 2020 16:56:36 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/internet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wi-Fi</title>
+      <link>http://www.tokoro.me/tags/wi-fi/</link>
+      <pubDate>Mon, 07 Sep 2020 16:56:36 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/tags/wi-fi/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>swift</title>

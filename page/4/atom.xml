@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,28 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
+      <link>http://www.tokoro.me/posts/mac-terminal-japanese/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/mac-terminal-japanese/</guid>
+      <description>
+        Macの初期設定のたびに混乱してるので再整理しておきます。
+ Mac Terminal tmux vim  で開発をする人向けです。
+まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
+日本語を扱う上で便利な設定がデフォルトで入ってます。
+当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; alias vim=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+ こせきの技術日記  に従って対処しておきます。
+この中の、
+date | pbcopy までが成功すればOKです。
+.vimrc にクリップボード利用の設定追加 .vimrc に
+set clipboard=unnamed を追加しておきます。
+      </description>
+      
+    </item>
     
     <item>
       <title>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</title>
