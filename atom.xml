@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,28 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</title>
+      <link>http://www.tokoro.me/posts/iosdc2020/</link>
+      <pubDate>Tue, 06 Oct 2020 14:57:02 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/iosdc2020/</guid>
+      <description>
+        2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
+私も HomeKit 2020 というセッションで発表者として参加しました。
+概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
+HomeKit Frameworkざっくり入門  HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例  時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない    HomeKitのBridgeについて  Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&amp;hellip; オープンソースのソフトウェアBridge「Homebridge」  HomebridgeでHomeKit未対応製品をHomeKit対応  ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　 プラグインの自作  HomeKit ADKで作る自作アクセサリ  HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！  セッションビデオ  スライド  HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
+そのため、かねてよりどこかで公開しようと思っていた『HomeKit入門』1 をZennで無料公開しました。
+https://zenn.dev/tokorom/books/homekit-framework
+ 　iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
+ご興味ありましたら是非ご参照ください！
+  iOS 11 Programmingの第12章に掲載したものです https://peaks.
+      </description>
+      
+      <coverImage>http://www.tokoro.me/images/iosdc2020/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</title>
@@ -557,35 +579,6 @@ let g:vim_review#include_filetypes = [&amp;#39;swift&amp;#39;]と、既存のfil
  fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
 事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.
       </description>
-      
-    </item>
-    
-    <item>
-      <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</title>
-      <link>http://www.tokoro.me/posts/lottie-ios-1/</link>
-      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/lottie-ios-1/</guid>
-      <description>
-        この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
-Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
-iOS用のライブラリは、
-https://github.com/airbnb/lottie-ios
-です。
-なにができるの？  作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗  iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
- これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
-事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
-アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
-なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
-上のサンプルはサイズを考えずにaddSubviewしており、
-のように意図しない大きさで再生されてしまいます。
-アニメーションのサイズを知る アニメーションのサイズを知るには、
- 作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。
-      </description>
-      
-      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png</coverImage>
       
     </item>
     

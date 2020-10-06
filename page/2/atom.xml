@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,35 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</title>
+      <link>http://www.tokoro.me/posts/lottie-ios-1/</link>
+      <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/lottie-ios-1/</guid>
+      <description>
+        この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
+Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
+iOS用のライブラリは、
+https://github.com/airbnb/lottie-ios
+です。
+なにができるの？  作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗  iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
+ これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
+事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
+アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
+再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
+上のサンプルはサイズを考えずにaddSubviewしており、
+のように意図しない大きさで再生されてしまいます。
+アニメーションのサイズを知る アニメーションのサイズを知るには、
+ 作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
+animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。
+      </description>
+      
+      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png</coverImage>
+      
+    </item>
     
     <item>
       <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
@@ -399,28 +428,6 @@ some_method_with_block {|some_data| @data = some_data resume } wait_max 1.0 do @
 TKRGuard そして作ったのが TKRGuard です。
 TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方ができます。
 // #import &amp;#34;TKRGuard.h&amp;#34;  __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&amp;#34;OK!
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Storyboardでの画面遷移をスマートにやる方法</title>
-      <link>http://www.tokoro.me/posts/improve-storyboard-segue/</link>
-      <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/improve-storyboard-segue/</guid>
-      <description>
-        これは potatotips第６回め で発表した この話 のまとめと後書きです。
-Storyboardいいですよね！ Storyboardを使うことで、
- 画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
-Storyboard登場以前だと、次の画面に遷移させるだけでも
-#import &amp;#34;NextViewController.h&amp;#34; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
-しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
-ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
-#import &amp;#34;NextViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
-そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
-もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
-#import &amp;#34;NextViewController.h&amp;#34;#import &amp;#34;ModalViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&amp;#34;Modal&amp;#34; isEqualToString:segue.
       </description>
       
     </item>

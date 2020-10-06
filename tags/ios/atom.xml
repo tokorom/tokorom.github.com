@@ -6,10 +6,27 @@
     <description>Recent content in ios on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 15:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
     
 	<atom:link href="http://www.tokoro.me/tags/ios/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</title>
+      <link>http://www.tokoro.me/posts/iosdc2020/</link>
+      <pubDate>Tue, 06 Oct 2020 14:57:02 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/iosdc2020/</guid>
+      <description>2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
+私も HomeKit 2020 というセッションで発表者として参加しました。
+概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
+HomeKit Frameworkざっくり入門  HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例  時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない    HomeKitのBridgeについて  Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&amp;hellip; オープンソースのソフトウェアBridge「Homebridge」  HomebridgeでHomeKit未対応製品をHomeKit対応  ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　 プラグインの自作  HomeKit ADKで作る自作アクセサリ  HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！  セッションビデオ  スライド  HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
+そのため、かねてよりどこかで公開しようと思っていた『HomeKit入門』1 をZennで無料公開しました。
+https://zenn.dev/tokorom/books/homekit-framework
+ 　iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
+ご興味ありましたら是非ご参照ください！
+  iOS 11 Programmingの第12章に掲載したものです https://peaks.</description>
+    </item>
     
     <item>
       <title>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</title>
