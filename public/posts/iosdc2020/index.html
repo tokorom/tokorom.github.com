@@ -2,41 +2,35 @@
 <html lang='ja'><head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
-設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
-実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
-うまく動かない場合の設定の比較などにご参照ください。
-なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
-事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
-テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
-具体的には、以下のように
- Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
-本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
-Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
-この対処として、 main.m に以下コードを追記しておく必要があります。'>
+<meta name='description' content='2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
+私も HomeKit 2020 というセッションで発表者として参加しました。
+概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
+HomeKit Frameworkざっくり入門  HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例  時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない    HomeKitのBridgeについて  Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&hellip; オープンソースのソフトウェアBridge「Homebridge」  HomebridgeでHomeKit未対応製品をHomeKit対応  ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　 プラグインの自作  HomeKit ADKで作る自作アクセサリ  HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！  セッションビデオ  スライド  HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
+そのため、かねてよりどこかで公開しようと思っていた『HomeKit入門』1 をZennで無料公開しました。
+https://zenn.dev/tokorom/books/homekit-framework
+ 　iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
+ご興味ありましたら是非ご参照ください！
+  iOS 11 Programmingの第12章に掲載したものです https://peaks.'>
 <meta name='theme-color' content='#ffcd00'>
 
-<meta property='og:title' content='GHUnitのテストカバレッジをJenkinsで表示する • Yuta Tokoro'>
-<meta property='og:description' content='概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
-設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
-実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
-うまく動かない場合の設定の比較などにご参照ください。
-なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
-事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
-テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
-具体的には、以下のように
- Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
-本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
-Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
-この対処として、 main.m に以下コードを追記しておく必要があります。'>
-<meta property='og:url' content='http://www.tokoro.me/posts/ghunit-jenkins-coverage/'>
+<meta property='og:title' content='iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog • Yuta Tokoro'>
+<meta property='og:description' content='2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
+私も HomeKit 2020 というセッションで発表者として参加しました。
+概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
+HomeKit Frameworkざっくり入門  HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例  時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない    HomeKitのBridgeについて  Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&hellip; オープンソースのソフトウェアBridge「Homebridge」  HomebridgeでHomeKit未対応製品をHomeKit対応  ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　 プラグインの自作  HomeKit ADKで作る自作アクセサリ  HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！  セッションビデオ  スライド  HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
+そのため、かねてよりどこかで公開しようと思っていた『HomeKit入門』1 をZennで無料公開しました。
+https://zenn.dev/tokorom/books/homekit-framework
+ 　iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
+ご興味ありましたら是非ご参照ください！
+  iOS 11 Programmingの第12章に掲載したものです https://peaks.'>
+<meta property='og:url' content='http://www.tokoro.me/posts/iosdc2020/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='jenkins'><meta property='article:published_time' content='2012-09-02T00:00:00Z'/><meta property='article:modified_time' content='2012-09-02T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/iosdc2020/top.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='iOS'><meta property='article:tag' content='HomeKit'><meta property='article:published_time' content='2020-10-06T14:57:02&#43;09:00'/><meta property='article:modified_time' content='2020-10-06T14:57:02&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
 
 <meta name="generator" content="Hugo 0.62.0" />
 
-  <title>GHUnitのテストカバレッジをJenkinsで表示する • Yuta Tokoro</title>
-  <link rel='canonical' href='http://www.tokoro.me/posts/ghunit-jenkins-coverage/'>
+  <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog • Yuta Tokoro</title>
+  <link rel='canonical' href='https://spinners.work/posts/iosdc2020/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -59,7 +53,7 @@ if (!doNotTrack) {
   
 
 </head>
-<body class='page type-posts layout-post has-sidebar'>
+<body class='page type-posts has-sidebar'>
 
   <div class='site'><div id='sidebar' class='sidebar'>
   <a class='screen-reader-text' href='#main-menu'></a>
@@ -239,7 +233,7 @@ if (!doNotTrack) {
   <header class='header entry-header'>
   <div class='container sep-after'>
     <div class='header-info'>
-      <h1 class='title'>GHUnitのテストカバレッジをJenkinsで表示する</h1>
+      <h1 class='title'>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</h1>
       
 
     </div>
@@ -253,7 +247,7 @@ if (!doNotTrack) {
   
 </svg>
 <span class='screen-reader-text'> </span>
-  <time class='entry-date' datetime='2012-09-02T00:00:00Z'>2012-09-02</time>
+  <time class='entry-date' datetime='2020-10-06T14:57:02&#43;09:00'>2020-10-06</time>
 </span>
 
   <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
@@ -276,112 +270,67 @@ if (!doNotTrack) {
 
   <div class='container entry-content'>
   
-  <div class='box box-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
-  
 
-  <h2 id="heading">概要</h2>
-<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
-<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ghunit-coverage.png" alt="ghunit-coverage"></p>
-<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
-<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br>
-うまく動かない場合の設定の比較などにご参照ください。</p>
-<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
-<!-- more -->
-<h2 id="heading-1">事前準備</h2>
-<h3 id="jenkins">Jenkinsの導入</h3>
+  <p><img src="/images/iosdc2020/top.png" alt="image"></p>
+<p>2020年9月に開催された <a href="https://iosdc.jp/2020/">iOSDC Japan 2020</a> 今年も盛り上がりましたね！
+2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。</p>
+<p>私も <a href="https://fortee.jp/iosdc-japan-2020/proposal/5c2600f9-b27b-4deb-abd4-85cb7062553e">HomeKit 2020</a> というセッションで発表者として参加しました。</p>
+<h2 id="heading">概要</h2>
+<p>セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！</p>
+<h3 id="homekit-framework">HomeKit Frameworkざっくり入門</h3>
 <ul>
-<li><a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a></li>
-</ul>
-<h3 id="ghunit">GHUnitの導入</h3>
+<li>HomeKit Frameworkでどんなことができるのか</li>
+<li>HomeKitの構成</li>
+<li>具体的に電球を点灯させるコードの紹介</li>
+<li>隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック</li>
+<li>HomeKitだからこそできる具体例
 <ul>
-<li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
-</ul>
-<p>GHUnitのiOS用frameworkをビルドするのが面倒な場合は、<a href="https://github.com/tokorom/ghunit-ios-framework">Github</a> にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。</p>
-<h2 id="heading-2">テストカバレッジを出力するためのプロジェクトの設定を変更する</h2>
-<p>GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。<br>
-具体的には、以下のように</p>
-<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/test-coverage-setting.png" alt="test-coverage-setting"></p>
-<ul>
-<li><em>Generate Test Coverage Files</em></li>
-<li><em>Instrument Program Flow</em></li>
-</ul>
-<p>の２つに <strong>YES</strong> を設定します。</p>
-<p>本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に</p>
-<pre><code>Detected an attempt to call a symbol in system libraries that is not present on the iPhone:
-fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.
-</code></pre><p>というエラーが出ることになります。</p>
-<p>この対処として、 <strong>main.m</strong> に以下コードを追記しておく必要があります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objc" data-lang="objc">FILE <span style="color:#f92672">*</span>fopen<span style="color:#960050;background-color:#1e0010">$</span>UNIX2003(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>filename, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>mode)
-{
-  <span style="color:#66d9ef">return</span> fopen(filename, mode);
-}
- 
-size_t fwrite<span style="color:#960050;background-color:#1e0010">$</span>UNIX2003(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>ptr, size_t size, size_t nitems, FILE <span style="color:#f92672">*</span>stream)
-{
-  <span style="color:#66d9ef">return</span> fwrite(ptr, size, nitems, stream);
-}
-</code></pre></div><p>最後に、テスト用のターゲットの <strong>info.plist</strong> に <em>Application does not run in background</em> を加え、ここに <strong>YES</strong> を設定します。</p>
-<p>ここまででXcode側の設定は完了なので、GHUnitのテストを実行するとbuildディレクトリ以下（自分の場合は <em>build/CodeCoverageWithGHUnit.build/Debug-iphonesimulator/Tests.build/Objects-normal/i386</em>）に</p>
-<ul>
-<li>*.gcda</li>
-<li>*.gcno</li>
-</ul>
-<p>といったテストカバレッジの結果を出力したファイルが確認できるはずです。<br>
-Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a href="http://code.google.com/p/coverstory/">CoverStory</a> などでこれらのファイルを開けばローカルで確認することも可能です。</p>
-<h2 id="gcovr">gcovrの設置</h2>
-<p>上記で出力したテストカバレッジの結果をJenkinsのCobertura pluginで読める形式に変換するために、 <a href="https://software.sandia.gov/trac/fast/wiki/gcovr">gcovr</a> というPythonスクリプトを利用します。<br>
-具体的には、<a href="https://software.sandia.gov/svn/public/fast/gcovr/trunk/scripts/gcovr">ココ</a> からダウンロードしてPathの通った場所にこれを設置します。</p>
-<h2 id="jenkins-1">Jenkinsのジョブの設定</h2>
-<h3 id="plugin">必要なPlugin</h3>
-<ul>
-<li>Git plugin</li>
-<li>Cobertura plugin</li>
-</ul>
-<p>をJenkinsにインストールしてください。</p>
-<h3 id="heading-3">ジョブの設定</h3>
-<ul>
-<li>Source Code Management
-<ul>
-<li>Repositories: 対象となるGitリポジトリのURL</li>
+<li>時間指定でなく「日の入」「日の出」をトリガーに</li>
+<li>家に「誰もいなくなったら」をトリガーに</li>
+<li>自動点灯したライトをN秒後に消灯する</li>
+<li>「部屋が明るければ」自動点灯させない</li>
 </ul>
 </li>
 </ul>
-<p>※ サンプルをそのまま利用したい場合は <code>git://github.com/tokorom/CodeCoverageWithGHUnit.git</code> をご利用ください</p>
+<h3 id="homekitbridge">HomeKitのBridgeについて</h3>
 <ul>
-<li>BuildにGHUnit実行用の Execute Shell を追加</li>
+<li>Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&hellip;</li>
+<li>オープンソースのソフトウェアBridge「Homebridge」</li>
 </ul>
-<pre><code>GHUNIT_CLI=1 WRITE_JUNIT_XML=YES xcodebuild -target Tests -configuration Debug -sdk iphonesimulator clean build
-</code></pre><ul>
-<li>Buildeにgcovr実行用の Excute Shell を追加</li>
-</ul>
-<pre><code>gcovr -r . --object-directory build/CodeCoverageWithGHUnit.build/Debug-iphonesimulator/Tests.build/Objects-normal/i386 --exclude '.*Tests.*' --exclude '.*ExternalFrameworks.*' --xml &gt; build/coverage.xml
-</code></pre><p>※ テストターゲットやプロジェクト名は適宜変更してください</p>
+<h3 id="homebridgehomekithomekit">HomebridgeでHomeKit未対応製品をHomeKit対応</h3>
 <ul>
-<li>Post-build Actionsに Publish JUnit test result report を追加</li>
+<li>ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！</li>
+<li>Homebridgeを利用する具体的な方法　</li>
+<li>プラグインの自作</li>
 </ul>
-<pre><code>build/test-results/*.xml
-</code></pre><ul>
-<li>Post-build Actionsに Publish Cobertura Coverage Report を追加
+<h3 id="homekit-adk">HomeKit ADKで作る自作アクセサリ</h3>
 <ul>
-<li>Consider only stable builds: <strong>On</strong></li>
-<li>Source Encoding: <strong>UTF-8</strong></li>
-<li>Cobertura xlm report pattern</li>
+<li>HomeKit ADK概要</li>
+<li>Homebridgeとの違い</li>
+<li>ソフトウェアでHomeKit対応アクセサリーを作る！</li>
 </ul>
+<h2 id="heading-1">セッションビデオ</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/h2agS2kMEwA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="heading-2">スライド</h2>
+<script async class="speakerdeck-embed" data-id="35d004e5b73341faab12559ce54791f1" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+<h2 id="homekit">HomeKit入門の無料公開</h2>
+<p>iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。</p>
+<p>そのため、かねてよりどこかで公開しようと思っていた『<a href="https://zenn.dev/tokorom/books/homekit-framework">HomeKit入門</a>』<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> をZennで無料公開しました。</p>
+<a href="https://zenn.dev/tokorom/books/homekit-framework">
+<img src="/images/books/homekit.png" width="200" />
+<p>https://zenn.dev/tokorom/books/homekit-framework</p>
+</a>
+<p>　</p>
+<p>iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。</p>
+<p>ご興味ありましたら是非ご参照ください！</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>iOS 11 Programmingの第12章に掲載したものです <a href="https://peaks.cc/books/iOS11">https://peaks.cc/books/iOS11</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-</ul>
-<pre><code>build/coverage.xml
-</code></pre><p>※ この他、Coverage Metrics Targets で特定のカバレッジを下回った場合にはジョブ失敗とみなすなどの設定ができるようです。</p>
-<p>以上で設定は完了です。</p>
-<p>あとは実行するだけ！</p>
-<p>テストカバレッジが複数回取られると、Jenkins上で</p>
-<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coverage-graph.png" alt="coverage-graph"></p>
-<p>のようにカバレッジの変化をグラフで確認することもできるようになります。</p>
-<h2 id="heading-4">参照させていただいたブログ記事へのリンク</h2>
-<ul>
-<li><a href="http://blog.octo.com/en/jenkins-quality-dashboard-ios-development/">iOS dev: How to setup quality metrics on your Jenkins job?</a></li>
-<li><a href="http://safx-dev.blogspot.jp/2012/03/jenkins.html">Jenkinsでテストとカバレッジの結果をグラフ表示できるようにする</a></li>
-<li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
-</ul>
+</ol>
+</section>
 
 </div>
 
@@ -392,7 +341,7 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
     <div class="social-buttons">
       <ul class="widget-social_menu">
         <li>
-          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2012/09/02/ghunit-jenkins-coverage/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/iosdc2020/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </li>
 
         <li>
@@ -400,7 +349,7 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
         </li>
 
         <li>
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fghunit-jenkins-coverage%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fiosdc2020%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
         </li>
 
         <li>
@@ -421,7 +370,7 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/jenkins/'>jenkins</a></div>
+<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/homekit/'>homekit</a></div>
 
   </div>
 </footer>
@@ -431,7 +380,7 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='/posts/safe-objc/'>
+      <a href='/posts/improve-my-internet-connection/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -439,17 +388,7 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
   
 </svg>
  </span>
-        <span class='screen-reader-text'>: </span>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/posts/objc-private-test/'>
-        <span class='screen-reader-text'>: </span>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
-  
-</svg>
-</span>
-      </a>
+        <span class='screen-reader-text'>: </span>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</a>
     </div></div>
 </nav>
 

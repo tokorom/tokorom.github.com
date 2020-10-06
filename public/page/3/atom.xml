@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,28 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Storyboardでの画面遷移をスマートにやる方法</title>
+      <link>http://www.tokoro.me/posts/improve-storyboard-segue/</link>
+      <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/improve-storyboard-segue/</guid>
+      <description>
+        これは potatotips第６回め で発表した この話 のまとめと後書きです。
+Storyboardいいですよね！ Storyboardを使うことで、
+ 画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
+Storyboard登場以前だと、次の画面に遷移させるだけでも
+#import &amp;#34;NextViewController.h&amp;#34; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
+ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
+#import &amp;#34;NextViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
+そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
+もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
+#import &amp;#34;NextViewController.h&amp;#34;#import &amp;#34;ModalViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&amp;#34;Modal&amp;#34; isEqualToString:segue.
+      </description>
+      
+    </item>
     
     <item>
       <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
@@ -501,32 +523,6 @@ NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっ
 例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
  GameScore.m  #import &amp;#34;GameScore.h&amp;#34; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
 ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>VimでObjective-Cのコード補完を実行する with clang</title>
-      <link>http://www.tokoro.me/posts/clang-complete-for-vim/</link>
-      <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/clang-complete-for-vim/</guid>
-      <description>
-        概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
-そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
-具体的には、
- clangコマンドでのコード補完を試してみる その結果をもってVimの clang_complete プラグインを導入する  という手順で実施しました。
-結果として満足いく補完環境が整いましたので紹介させていただきます。
-clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
-じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
-具体的には、
-// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
-例えば、
- Classes/Controllers/MainViewController.m  #import &amp;#34;MainViewController.h&amp;#34; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
-clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
-すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
-同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
-clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
       </description>
       
     </item>
