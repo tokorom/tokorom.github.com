@@ -1,7 +1,7 @@
 ## 新しい記事を作成する
 
 ```
-./new [entry_name]
+make post
 ```
 
 You can get a entry file path from clipboard.
@@ -9,13 +9,13 @@ You can get a entry file path from clipboard.
 ## ローカルでPreviewする
 
 ```
-./preview
+make preview
 ```
 
 ## 記事をデプロイする
 
 ```
-./deploy
+make deploy
 ```
 
 ## scssの更新を反映する
