@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,31 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cで非同期処理のテストをシンプルに書く方法</title>
+      <link>http://www.tokoro.me/posts/objc-async-test/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-async-test/</guid>
+      <description>
+        非同期処理のテストってどう書いてますか？ 標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、
+ GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？） expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う  となるかと思います。 ただ、私が調べた時点だとどれもしっくりきませんでした。
+まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。
+また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えばGHAsyncTestCaseを継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前にprepareとかを呼ばないといけないのがちょっと鬱陶しい。
+そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。
+こうしたい！ ぼくとしては理想的にはこういうライブラリを使いたいと思いました。
+ テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの TestCaseの親クラスが限定されないほうがよい 余分なコードを書かずにシンプルに書きたい それを利用することでテストの実行が遅くなったりしない  しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。
+他言語ではどういう書き方をしている？ なお、他言語ではどういう書き方が一般的なんだろうと調べてはみたのですが、なかなかしっくりくるものが見つからず、Objective-Cでこう書けたらいいなあと思ったのは RubyMotionで使われている書き方 でした。
+http://mobiletou.ch/2013/10/第五回-rubymotionでhttpや非同期処理を含むユニットテスト
+some_method_with_block {|some_data| @data = some_data resume } wait_max 1.0 do @data.should.equal foo end  待たせたい場所で wait 待たせている処理が終わったら resume  という本当にシンプルで分かりやすい書き方です。
+ということで、Objective-Cで同じようにWait &amp;amp; Resume方式で親クラスを限定せずに使えるシンプルなライブラリを作ることにしました。
+TKRGuard そして作ったのが TKRGuard です。
+TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方ができます。
+// #import &amp;#34;TKRGuard.h&amp;#34;  __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&amp;#34;OK!
+      </description>
+      
+    </item>
     
     <item>
       <title>Storyboardでの画面遷移をスマートにやる方法</title>
@@ -503,26 +528,6 @@ NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に
 #define LSTR(s) NSLocalizedString((s), nil)を定義して
 NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっと楽！
 3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、
-      </description>
-      
-    </item>
-    
-    <item>
-      <title>Objective-Cで&#34;@dynamic&#34;の使いどころを考える</title>
-      <link>http://www.tokoro.me/posts/objc-dynamic/</link>
-      <pubDate>Sat, 05 Jan 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/objc-dynamic/</guid>
-      <description>
-        Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
-@synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。
-そこで、今日は@dynamicについて再考してみることにしました。
-以下、ぼくが思い返してみて@dynamicがこんなときに便利だったと感じたところを２点挙げさせていただきます。
-みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
-クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
-例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
- GameScore.m  #import &amp;#34;GameScore.h&amp;#34; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
-ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。
       </description>
       
     </item>

@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,26 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Objective-Cで&#34;@dynamic&#34;の使いどころを考える</title>
+      <link>http://www.tokoro.me/posts/objc-dynamic/</link>
+      <pubDate>Sat, 05 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-dynamic/</guid>
+      <description>
+        Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
+@synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。
+そこで、今日は@dynamicについて再考してみることにしました。
+以下、ぼくが思い返してみて@dynamicがこんなときに便利だったと感じたところを２点挙げさせていただきます。
+みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
+クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
+例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
+ GameScore.m  #import &amp;#34;GameScore.h&amp;#34; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。
+      </description>
+      
+    </item>
     
     <item>
       <title>VimでObjective-Cのコード補完を実行する with clang</title>
