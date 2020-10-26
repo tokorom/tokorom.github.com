@@ -2,7 +2,7 @@
 <html lang='ja'><head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } でOK！
+<meta name='description' content='先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &#34;&#34; } でOK！
 概要 iOS14のアップデートの1つに、
  ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
@@ -16,15 +16,15 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &#34;&#34; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
 UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
-   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される   generic スペースがあれば「Back（戻る）」を表示、なければ空欄   minimal 常に空欄    例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。'>
+   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='iOS14で戻るボタンのタイトルを空欄にするきちんとした方法 • Yuta Tokoro'>
-<meta property='og:description' content='先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } でOK！
+<meta property='og:description' content='先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &#34;&#34; } でOK！
 概要 iOS14のアップデートの1つに、
  ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
@@ -38,11 +38,11 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &#34;&#34; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
 UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
-   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される   generic スペースがあれば「Back（戻る）」を表示、なければ空欄   minimal 常に空欄    例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。'>
+   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.'>
 <meta property='og:url' content='http://www.tokoro.me/posts/ios14_blank_back_button/'>
 <meta property='og:site_name' content='TOKOROM BLOG'>
 <meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/ios14_blank_back_button/top.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:published_time' content='2020-10-26T17:02:15&#43;09:00'/><meta property='article:modified_time' content='2020-10-26T17:02:15&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
@@ -294,6 +294,8 @@ if (!doNotTrack) {
   <h2 id="heading">先にまとめ</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">if</span> <span style="color:#75715e">#available</span>(<span style="color:#75715e">iOS</span> <span style="color:#ae81ff">14.0</span>, <span style="color:#f92672">*</span>) {
   navigationItem.backButtonDisplayMode = .minimal
+} <span style="color:#66d9ef">else</span> {
+  navigationItem.backButtonTitle = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span>
 }
 </code></pre></div><p>でOK！</p>
 <h2 id="heading-1">概要</h2>
@@ -321,6 +323,8 @@ if (!doNotTrack) {
 <p>戻り先の<code>UIViewController</code>で、</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">if</span> <span style="color:#75715e">#available</span>(<span style="color:#75715e">iOS</span> <span style="color:#ae81ff">14.0</span>, <span style="color:#f92672">*</span>) {
   navigationItem.backButtonDisplayMode = .minimal
+} <span style="color:#66d9ef">else</span> {
+  navigationItem.backButtonTitle = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span>
 }
 </code></pre></div><p>と <code>navigationItem.backButtonDisplayMode</code> に <code>.minimal</code> を設定することで、戻るボタンのタイトルが非表示になります。</p>
 <p><img src="/images/ios14_blank_back_button/ss-1603700885.png" alt="image"></p>

@@ -17,7 +17,7 @@
       <pubDate>Mon, 26 Oct 2020 17:02:15 +0900</pubDate>
       
       <guid>http://www.tokoro.me/posts/ios14_blank_back_button/</guid>
-      <description>先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } でOK！
+      <description>先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;#34;&amp;#34; } でOK！
 概要 iOS14のアップデートの1つに、
  ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
@@ -31,11 +31,11 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;#34;&amp;#34; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
 UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
-   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される   generic スペースがあれば「Back（戻る）」を表示、なければ空欄   minimal 常に空欄    例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。</description>
+   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.</description>
     </item>
     
     <item>
