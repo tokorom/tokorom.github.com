@@ -13,6 +13,8 @@ canonical: https://spinners.work
 ```swift
 if #available(iOS 14.0, *) {
   navigationItem.backButtonDisplayMode = .minimal
+} else {
+  navigationItem.backButtonTitle = " "
 }
 ```
 
@@ -65,6 +67,8 @@ https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbut
 ```swift
 if #available(iOS 14.0, *) {
   navigationItem.backButtonDisplayMode = .minimal
+} else {
+  navigationItem.backButtonTitle = " "
 }
 ```
 
