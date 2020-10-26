@@ -4,7 +4,7 @@
   
   <url>
     <loc>http://www.tokoro.me/authors/</loc>
-    <lastmod>2020-10-06T14:57:02+09:00</lastmod>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -14,6 +14,36 @@
                 rel="alternate"
                 hreflang="ja"
                 href="http://www.tokoro.me/authors/"
+                />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/ios14_blank_back_button/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/posts/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/authors/tokorom/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/"
                 />
   </url>
   
@@ -33,11 +63,6 @@
   </url>
   
   <url>
-    <loc>http://www.tokoro.me/posts/</loc>
-    <lastmod>2020-10-06T14:57:02+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.tokoro.me/tags/</loc>
     <lastmod>2020-10-06T14:57:02+09:00</lastmod>
     <xhtml:link
@@ -49,26 +74,6 @@
                 rel="alternate"
                 hreflang="ja"
                 href="http://www.tokoro.me/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/authors/tokorom/</loc>
-    <lastmod>2020-10-06T14:57:02+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.tokoro.me/</loc>
-    <lastmod>2020-10-06T14:57:02+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://www.tokoro.me/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://www.tokoro.me/"
                 />
   </url>
   

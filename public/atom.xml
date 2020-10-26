@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>tokorom</copyright>
-    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
     <image>
       <url>http://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,38 @@
     
 	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</title>
+      <link>http://www.tokoro.me/posts/ios14_blank_back_button/</link>
+      <pubDate>Mon, 26 Oct 2020 17:02:15 +0900</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios14_blank_back_button/</guid>
+      <description>
+        先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } でOK！
+概要 iOS14のアップデートの1つに、
+ ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
+ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
+と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
+iOS13以前の方法 iOS13以前では、例えば、
+Xcodeで該当画面（戻り先の画面）のNavigation ItemのBack Buttonに空白を1つ入れるなどして、戻るのタイトルを消すワークアラウンドがありました。
+しかし、これをすると、iOS 14以降では長押し時の戻り先リストがおかしくなってしまうわけです。
+iOS14でのきちんとした方法 そのため、まずiOS14ではBack Buttonの設定はいじらないようにしましょう1。
+そうすると当然、
+このように戻るボタンのところに画面名が表示されてしまいます。
+そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
+https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
+戻り先のUIViewControllerで、
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
+のようにきちんと表示されます。
+UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
+   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される   generic スペースがあれば「Back（戻る）」を表示、なければ空欄   minimal 常に空欄    例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。
+      </description>
+      
+      <coverImage>http://www.tokoro.me/images/ios14_blank_back_button/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</title>
@@ -552,33 +584,6 @@ echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U -
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</title>
-      <link>http://www.tokoro.me/posts/vim-review/</link>
-      <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
-      
-      <guid>http://www.tokoro.me/posts/vim-review/</guid>
-      <description>
-        本記事は Vim その2 アドベントカレンダー 21日目の記事です。
-経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
-現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
-以下、
- シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット  の順に整理いたします。
-シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &amp;gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
-そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
- https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
-let g:vim_review#include_filetypes = [&amp;#39;swift&amp;#39;]と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
-と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
-これが発火する条件は、
- Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
-リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
- fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
- fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
-事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.
-      </description>
       
     </item>
     
