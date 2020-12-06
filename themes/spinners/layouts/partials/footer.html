@@ -1,0 +1,80 @@
+<footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">TEAM</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/avatar_tokoro.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Engineer</div>
+        <div class="footer-contents-team-item-name">Yuta Tokoro</div>
+        <div class="footer-contents-team-item-bio">
+          静岡大学情報学部卒業後、UIEvolution株式会社、クックパッド株式会社での勤務を経てフリーのiOSアプリ開発者として活動。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="http://www.tokoro.me">www.tokoro.me</a>
+        </div>
+      </div>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/avatar_motoyama.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Designer</div>
+        <div class="footer-contents-team-item-name">Kazuyuki Motoyama</div>
+        <div class="footer-contents-team-item-bio">
+          名古屋市立大学芸術工学部卒業後、広告代理店の制作を経て株式会社はてな、クックパッド株式会社などでデザイナーとして勤務。<br />
+          iPhone/Android/Webなどを中心にアプリやサービスのUI/UXデザインやユーザー調査・ユーザーインタビュー、CI・ブランディングデザイン、商品パッケージやグラフィックデザインなども行う。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/kudakurage"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/kudakurage"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://kudakurage.com">kudakurage.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-contents-company">
+      <h2 class="footer-contents-title">ABOUT</h2>
+      <table>
+        <tr>
+          <th>商号</th>
+          <td>合同会社 Spinners</td>
+        </tr>
+        <tr>
+          <th>設立</th>
+          <td>2017年7月6日</td>
+        </tr>
+        <tr>
+          <th>事業内容</th>
+          <td>Webサービスやアプリの開発・運営</td>
+        </tr>
+        <tr>
+          <th>資本金</th>
+          <td>1,000,000円</td>
+        </tr>
+        <tr>
+          <th>主要取引先</th>
+          <td>
+            株式会社クックパッド<br />
+            株式会社ZIZAI<br />
+            株式会社デプロイゲート<br />
+            株式会社ニコン<br />
+            日本放送協会<br />
+            フォントワークス株式会社<br />
+            株式会社LiveMedia<br />
+            (50音順)
+          </td>
+        </tr>
+        <tr>
+          <th>お問い合わせ</th>
+          <td>contact@spinners.work</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="copyright">
+    {{ if .Site.Copyright }}
+        {{ .Site.Copyright | safeHTML }}
+    {{ else }}
+        Copyright &copy; {{ .Site.Title }} {{ now.Year }}
+    {{ end }}
+  </div>
+</footer>

@@ -1,0 +1,17 @@
+{{ define "main" }}
+<main class="wrapper">
+    <!-- Hero -->
+    {{- with .Site.Params.homepageImage -}}
+      <header class="header">
+        <img src="{{ . | relURL }}" alt="SPINNERS" width="180" />
+      </header>
+    {{- end -}}
+
+    <!-- Articles -->
+    <div class="entry-feed">
+        {{ range (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+          {{ .Render "card" }}
+        {{ end }}
+    </div>
+</main>
+{{ end }}

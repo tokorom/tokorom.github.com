@@ -1,0 +1,64 @@
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>{{ block "title" . }}{{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
+<!--
+  Spinners Inc.
+  何気なく毎日を暮らしている普段そのものにはいろいろなストーリーがあって、いろいろな人がそれを積み重ねて生活しています。
+  そんな物語を集めて紡いで、また新しい暮らしのタネになるようなお手伝いをします。
+-->
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+{{- if .Summary -}}
+  <meta name="description" content="{{ .Summary }}">
+{{- else if .Site.Params.description -}}
+  <meta name="description" content="{{ .Site.Params.description }}">
+{{- end -}}
+<meta name="author" content="{{ if .Params.authors }}{{ delimit .Params.authors ", " }}{{ else }}{{ .Site.Params.author }}{{ end }}">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@spinners_inc" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="{{ block "ogtitle" . }}{{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}" property="og:title">
+{{- if .Summary -}}
+  <meta content="{{ .Summary }}" property="og:description">
+{{- else if .Site.Params.description -}}
+  <meta content="{{ .Site.Params.description }}" property="og:description">
+{{- end -}}
+{{- if .Params.images -}}
+  {{- with index .Params.images 0 -}}
+    <meta content="{{ . | absURL }}" property="og:image">
+  {{- end -}}
+{{- else -}}
+  <meta content="{{ .Site.Params.ogImage }}" property="og:image">
+{{- end -}}
+{{- if .Page -}}
+  <meta content="{{ .Page.RelPermalink | absURL }}"  property="og:url">
+{{- else -}}
+  <meta content="{{ .Site.baseURL }}" property="og:url">
+{{- end -}}
+<meta content="{{ .Site.Title }}" property="og:site_name">
+<link href="{{ .Site.Params.favicon }}" rel="shortcut icon">
+
+{{ if .Site.Params.prismJS.enable }}
+    {{ if .Site.Params.prismJS.theme }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-{{ .Site.Params.prismJS.theme }}.min.css">
+    {{ else }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css">
+    {{ end }}
+{{ end }}
+
+{{ with index .Site.Data "spinners" }}
+    {{ range $vendor := .assets }}
+        {{ if $vendor.css }}
+            <link rel="stylesheet" href="{{ print "dist/" $vendor.css | relURL }}">
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ range .Site.Params.customCSS -}}
+    <link rel="stylesheet" href="{{ "css/" | relURL }}{{ . }}">
+{{ end }}
+
+  <link rel="canonical" href="{{ .Permalink }}">
+{{- with .OutputFormats.Get "RSS" }}
+  <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}">
+  <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}">
+{{- end -}}

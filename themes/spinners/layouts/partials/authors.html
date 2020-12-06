@@ -1,0 +1,16 @@
+{{- if .Params.authors -}}
+  {{- range .Params.authors -}}
+    {{- with $.Site.GetPage (printf "/authors/%s" (. | urlize)) -}}
+      {{- $term := . -}}
+      {{- if $term.Params.images -}}
+          <!-- <img src="{{ index $term.Params.images 0 }}" alt="{{ $term.Params.name }}"> -->
+      {{- end -}}
+
+      {{- .Scratch.Set "name" .Title -}}
+      {{- if $term.Params.name -}}
+          {{- .Scratch.Set "name" $term.Params.name -}}
+      {{- end -}}
+      <a href="https://twitter.com/{{ $term.Params.twitter }}" class="entry-data-author">{{ .Scratch.Get "name" }}</a>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

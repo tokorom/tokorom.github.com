@@ -1,0 +1,9 @@
+{{- $related := .Site.RegularPages.Related . | first 6 -}}
+  {{- with $related -}}
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed">
+  {{- range . -}}
+    {{ .Render "card" }}
+  {{- end -}}
+  </div>
+{{- end -}}
