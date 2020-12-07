@@ -3,19 +3,15 @@
   <a href="{{ $page.RelPermalink }}">
     <div class="feed-item-image-wrapper">
     {{- with $page.Params.images -}}
-        {{- $images := . -}}
-        {{- with $page.Site.GetPage "section" "images" -}}
-            {{- with .Resources.GetMatch (strings.TrimPrefix "/images/" (index $images 0)) -}}
-                {{- $image := . -}}
-                <img data-src="{{ $image.RelPermalink }}" class="feed-item-image" alt="{{ $page.Title }}" width="300">
-            {{- end -}}
-        {{- end -}}
+      {{- $image := index . 0 -}}
+      {{- if $image -}}
+        <img data-src="{{ $image }}" class="feed-item-image" alt="{{ $page.Title }}" width="300">
+      {{- end -}}
     {{- end -}}
     </div>
 
     <span class="feed-item-title">{{ $page.Title }}</span>
     <span class="feed-item-date">{{ $page.Date.Format "2006年1月2日" }}</span>
     <span class="feed-item-date">{{- with $page.Params.authors -}}{{- $authors := . -}}{{- with index $authors 0 -}}{{- $author := . -}}{{ $author }}{{- end -}}{{- end -}}</span>
-    <span class="feed-item-desc">{{ $page.Summary | plainify }}</span>
   </a>
 </div>
