@@ -3,9 +3,12 @@
   <a href="{{ $page.RelPermalink }}">
     <div class="feed-item-image-wrapper">
     {{- with $page.Params.images -}}
-      {{- $image := index . 0 -}}
-      {{- if $image -}}
-        <img data-src="{{ $image }}" class="feed-item-image" alt="{{ $page.Title }}" width="300">
+      {{- $images := . -}}
+      {{- with index $images 0 -}}
+        {{- $image := . -}}
+        {{- if $image -}}
+          <img data-src="{{ $image }}" class="feed-item-image" alt="{{ $page.Title }}" width="300">
+        {{- end -}}
       {{- end -}}
     {{- end -}}
     </div>

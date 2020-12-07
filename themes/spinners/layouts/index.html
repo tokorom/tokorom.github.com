@@ -1,17 +1,19 @@
 {{ define "main" }}
 <main class="wrapper">
     <!-- Hero -->
-    {{- with .Site.Params.homepageImage -}}
-      <header class="header">
-        <img src="{{ . | relURL }}" alt="SPINNERS" width="180" />
-      </header>
-    {{- end -}}
+    <header class="header">
+    </header>
+    {{ .Render "navbar" }}
 
     <!-- Articles -->
     <div class="entry-feed">
-        {{ range (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+        {{ range first 12 (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
           {{ .Render "card" }}
         {{ end }}
+    </div>
+
+    <div>
+      <a href="/posts/">Load All Articles...</a>
     </div>
 </main>
 {{ end }}
