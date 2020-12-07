@@ -1,9 +1,9 @@
-baseURL = "http://www.tokoro.me"
+baseURL = "https://www.tokoro.me"
 title = "TOKOROM BLOG"
 # for smart copyright line, leave this blank and check [params.copyright]
-copyright = "tokorom"
+copyright = "Copyright © tokorom. All Rights Reserved."
 
-theme = "minimo"
+theme = "spinners"
 
 disqusShortname = ""
 googleAnalytics = "UA-2451574-4"
@@ -24,114 +24,49 @@ defaultContentLanguage = "ja"
 [outputFormats.RSS]
 baseName = "atom"
 
-[params.hatena]
-bookmarkBaseURL = "http://b.hatena.ne.jp/entry/www.tokoro.me"
+[params]
+  author = "tokorom"
+  description = "Design & Technology"
+  homepageImage = "/images/top_logo.png"
+  share = true
+  ogImage = "/images/ogp_image.png"
+  favicon = "/images/favicon.ico"
 
-[params.info]
-description = "所 友太 / Yuta Tokoro"
-title404 = "ページが見つかりません"
+  [params.social]
+    rss = true
+    # email = "example@example.com"
+    # facebook = "https://facebook.com"
+    # twitter = "https://twitter.com"
+    # linkedin = "https://linkedin.com"
+    # stack-overflow = "https://stackoverflow.com"
+    # instagram = "https://stackoverflow.com"
+    # github = "https://github.com"
+    # weibo = "https://www.weibo.com"
+    # medium = "https://medium.com"
+    # pinterest = "https://pinterest.com"
+    # reddit = "https://reddit.com"
+    # gitlab = "https://gitlab.com"
+    # mastodon = "https://mastodon.social"
+    # keybase = "https://keybase.io/"
 
-[params.assets]
-favicon = "favicon.ico"
-customCSS = []
-customJS = []
-gopher = "" # used in 404 template ( Generator: https://gopherize.me )
+  [params.prismJS]
+    enable = true
+    theme = "okaidia"
 
-[params.copyright]
-prefix = ""
-holder = "Yuta Tokoro"
-startYear = "2012"
-suffix = ""
-
-[params.settings]
-# date & time format: https://golang.org/pkg/time/
-dateFormat = "2006-01-02"
-listDateFormat = "2006-01-02"
-archiveDateFormat = "2006-01-02"
-hideEntryNavigation = ["page"] # boolean / array of sections
-hideSocialMenu = false
-showReadingTime = false
-taxonomyCloudShuffle = true
-
-[params.sidebar]
-enable = true
-sticky = true
-
-[params.widgets]
-homepage = ["recent_posts"]
-sidebar = ["about", "company", "taxonomy_cloud"]
-
-[params.opengraph.facebook]
-admins = [] # array of Facebook IDs
-appID = ""
-pageID = ""
-
-[params.opengraph.twitter]
-page = "" # Twitter page username
-
-[params.seo]
-# Title Separator: - – — · • * ⋆ | ~ « » < >
-titleSeparator = "•"
-
-[params.social]
-codepen = ""
-email = "tokorom@gmail.com"
-facebook = "yuta.tokoro.7"
-github = "tokorom"
-gitlab = ""
-instagram = ""
-linkedin = ""
-twitter = "tokorom"
-telegram = ""
-google_scholar = ""
-
-[params.social.config]
-platforms = ["github","twitter","facebook","email"]
-
-[taxonomies]
-author = "authors"
-category = "categories"
-tag = "tags"
-
-[permalinks]
-page = "/:slug/"
-
-[[menu.main]]
-name = "Blog"
-weight = 10
-identifier = "blog"
-url = "/"
-[[menu.main]]
-name = "Twitter"
-weight = 20
-identifier = "twitter"
-url = "https://twitter.com/tokorom/"
-[[menu.main]]
-name = "GitHub"
-weight = 30
-identifier = "repository"
-url = "https://github.com/tokorom/"
-[[menu.main]]
-name = "RSS"
-weight = 100
-identifier = "rss"
-url = "http://feeds.feedburner.com/tokorom"
-
-[blackfriday]
-hrefTargetBlank = true
-
-[languages]
-# edit this block for your own language
-[languages.en]
-lang = "en"
-languageName = "English"
-weight = 1
-[languages.ja]
-lang = "ja"
-languageName = "Japanese"
-weight = 1
+  [params.commento]
+    enable = false
+    url = "https://commento.io"
 
 [markup]
+  [markup.highlight]
+    codeFences = false
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[services]
+  [services.instagram]
+    disableInlineCSS = false
+
+  [services.twitter]
+    disableInlineCSS = true
