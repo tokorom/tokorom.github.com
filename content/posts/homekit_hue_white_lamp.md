@@ -3,7 +3,7 @@ title: "[HomeKit対応仕様] Philips Hue ホワイトグラデーション シ�
 date: 2017-11-22
 tags: [ios,homekit]
 authors: [tokorom]
-cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png"
+images: [https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png]
 ---
 
 <a target="_blank" href="https://www.amazon.co.jp/gp/product/B01MSITPT1/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01MSITPT1&linkCode=as2&tag=tokorom-22&linkId=a335872d8b17c6b4c0ddb7cb4ce3c4c1">[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01MSITPT1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />

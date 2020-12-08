@@ -3,7 +3,7 @@ title: "[HomeKit対応仕様] Koogeek Wi-Fiスマート LED"
 date: 2018-01-02
 tags: [ios,homekit]
 authors: [tokorom]
-cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg"
+images: [https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg]
 ---
 
 <a target="_blank" href="https://www.amazon.co.jp/gp/product/B0721QN7YT/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B0721QN7YT&linkCode=as2&tag=tokorom-22&linkId=2d02e58e189b9fe7b31069cab2f5c71a">Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B0721QN7YT" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />

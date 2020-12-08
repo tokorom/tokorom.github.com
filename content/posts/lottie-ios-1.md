@@ -4,7 +4,7 @@ date: 2018-06-06T14:09:34+09:00
 draft: false
 authors: [tokorom]
 tags: [ios,lottie,ui]
-cover: "https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png"
+images: [https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png]
 ---
 
 ## この記事について

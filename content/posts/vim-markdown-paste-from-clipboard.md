@@ -4,9 +4,10 @@ date: 2020-04-30T18:01:01+09:00
 draft: false
 authors: [tokorom]
 tags: [vim,markdown,hugo]
-cover: "/images/vim-markdown-paste-from-clipboard/cover.png"
+images: [/images/vim-markdown-paste-from-clipboard/cover.png]
 ---
 
+![top](/images/vim-markdown-paste-from-clipboard/cover.png)
 *Photo by Jae Park on Unsplash*
 
 ## 前回

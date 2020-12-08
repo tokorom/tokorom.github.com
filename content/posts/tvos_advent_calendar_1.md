@@ -3,7 +3,7 @@ title: "tvOSフォーカスクイズ！ ここでスワイプしたらどちら�
 date: 2017-12-22
 tags: [tvos,ui]
 authors: [tokorom]
-cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/c911b99d-9d09-08ea-8555-cb07e2d1ab21.jpeg"
+images: [https://qiita-image-store.s3.amazonaws.com/0/7883/c911b99d-9d09-08ea-8555-cb07e2d1ab21.jpeg]
 ---
 
 ## [問題]コンテンツのスワイプ

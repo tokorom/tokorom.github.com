@@ -3,8 +3,8 @@ title: "５分で終わるFirebase App Distribution（プロジェクト作成�
 date: 2020-02-10T10:43:31+09:00
 draft: false
 authors: [tokorom]
-tags: [ios,firebase]
-cover: "/images/posts/firebase-app-distribution/3-create-app.png"
+tags: [iOS,Firebase]
+images: [/images/posts/firebase-app-distribution/3-create-app.png]
 ---
 
 ## Firebase App Distiribution

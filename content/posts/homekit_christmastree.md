@@ -3,7 +3,7 @@ title: "クリスマスツリーをHomeKitに対応させよう"
 date: 2017-12-14
 tags: [ios,homekit]
 authors: [tokorom]
-cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg"
+images: [https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg]
 ---
 
 ## やりたいこと

@@ -4,7 +4,7 @@ date: 2019-10-30T13:57:46+09:00
 draft: false
 tags: [nfc,sesame,ios]
 authors: [tokorom]
-cover: "https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png"
+images: [https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png]
 ---
 
 この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。

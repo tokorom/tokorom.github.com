@@ -3,8 +3,10 @@ title: "VimでMarkdown形式でブログ記事を書くときに簡単に画像�
 date: 2020-03-31T16:38:32+09:00
 draft: false
 tags: [vim,markdown,hugo]
-cover: "/images/posts/vim-markdown-image-tool/dog.jpg"
+images: [/images/posts/vim-markdown-image-tool/dog.jpg]
 ---
+
+![top](/images/posts/vim-markdown-image-tool/dog.jpg)
 
 *Photo by Victor Grabarczyk on Unsplash*
 

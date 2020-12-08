@@ -4,7 +4,7 @@ date: 2020-01-27T14:32:55+09:00
 draft: false
 authors: [tokorom]
 tags: [ios,swift,swiftui]
-cover: "/images/apple/swiftui.png"
+images: [/images/apple/swiftui.png]
 ---
 
 ## 2019年はSwiftUI誕生の年

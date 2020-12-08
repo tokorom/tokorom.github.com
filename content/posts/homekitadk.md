@@ -4,7 +4,7 @@ date: 2019-12-23T11:47:15+09:00
 draft: false
 tags: [ios,homekit]
 authors: [tokorom]
-cover: "https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png"
+images: [https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png]
 ---
 
 ## HomeKitADKのオープンソース化

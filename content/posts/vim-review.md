@@ -4,6 +4,7 @@ date: 2018-12-21T10:14:52+09:00
 draft: false
 tags: [vim,review]
 authors: [tokorom]
+images: [https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png]
 ---
 
 本記事は [Vim その2 アドベントカレンダー](https://qiita.com/advent-calendar/2018/vim2) 21日目の記事です。

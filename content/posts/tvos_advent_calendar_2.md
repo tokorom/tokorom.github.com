@@ -3,7 +3,7 @@ title: "テレビのリモコンのことも忘れないで！"
 date: 2017-12-24
 tags: [tvos,ui]
 authors: [tokorom]
-cover: "https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg"
+images: [https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg]
 ---
 
 ## AppleTVで使えるリモコンって？
