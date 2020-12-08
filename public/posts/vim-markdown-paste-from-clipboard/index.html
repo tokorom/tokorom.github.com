@@ -41,7 +41,7 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}`  です。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}`  です。" property="og:description"><meta content="https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -62,7 +62,7 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 
 
 
-  <link rel="canonical" href="https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/">
+  <link rel='canonical' href='https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/'>
 </head>
 <body>
     
@@ -92,7 +92,8 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
               hugo
           </a>
           /</div><div class="content">
-      <p><em>Photo by Jae Park on Unsplash</em></p>
+      <p><img src="/images/vim-markdown-paste-from-clipboard/cover.png" alt="top">
+<em>Photo by Jae Park on Unsplash</em></p>
 <h2 id="heading">前回</h2>
 <p><a href="/posts/vim-markdown-image-tool/">前回の記事</a>では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、</p>
 <ul>
@@ -175,7 +176,7 @@ IMAGEOPTIM=&quot;open -a ImageOptim&quot;
   <div class="entry-feed"><div class="feed-item">
   
   <a href="/posts/vim-markdown-image-tool/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/vim-markdown-image-tool/dog.jpg" class="feed-item-image" alt="VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法" width="300"></div>
 
     <span class="feed-item-title">VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</span>
     <span class="feed-item-date">2020年3月31日</span>
@@ -185,7 +186,7 @@ IMAGEOPTIM=&quot;open -a ImageOptim&quot;
 <div class="feed-item">
   
   <a href="/posts/vim-review/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" class="feed-item-image" alt="Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh" width="300"></div>
 
     <span class="feed-item-title">Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</span>
     <span class="feed-item-date">2018年12月21日</span>

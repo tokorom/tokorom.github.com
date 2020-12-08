@@ -29,7 +29,7 @@ https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
 curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
  レスポンス例  [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}]  鍵をロック 上で取得したdevice_idを利用し、
-curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/nfc-iphone-2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api." property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png" property="og:image"><meta content="https://www.tokoro.me/posts/nfc-iphone-2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -50,7 +50,7 @@ curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: appl
 
 
 
-  <link rel="canonical" href="https://www.tokoro.me/posts/nfc-iphone-2/">
+  <link rel='canonical' href='https://www.tokoro.me/posts/nfc-iphone-2/'>
 </head>
 <body>
     
@@ -94,7 +94,7 @@ curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: appl
 <p><a href="https://www.tokoro.me/posts/nfc-iphone-1/">前回</a>は、NFCタグに<code>https://tag.exsample.com/lock</code>というURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。</p>
 <p>今回は、このURIで動作するAPIをAWS Lambda<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。</p>
 <p>それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。</p>
-<div class='alert alert-danger'><span class="fa fa-warning"></span>
+<div class='box box-danger'><span class="fa fa-warning"></span>
 この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
 </div>
 <h2 id="sesame-api">Sesame APIの利用</h2>
@@ -194,7 +194,7 @@ async function requestUnlock() {
 <p>あとは実装したものをAWS Lambdaにデプロイし、NFCタグに書き込んだURIでこのLambdaが動作するようにするだけです。</p>
 <p>これで、iPhoneを鍵代わりにし、NFCタグをタッチして鍵をアンロックする仕組みができました。</p>
 <p>くどいようですが、</p>
-<div class='alert alert-danger'><span class="fa fa-warning"></span>
+<div class='box box-danger'><span class="fa fa-warning"></span>
 この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
 </div>
 <p>こちらは絶対に守ってください。</p>
@@ -225,7 +225,7 @@ async function requestUnlock() {
   <div class="entry-feed"><div class="feed-item">
   
   <a href="/posts/nfc-iphone-1/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png" class="feed-item-image" alt="NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む" width="300"></div>
 
     <span class="feed-item-title">NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</span>
     <span class="feed-item-date">2019年4月1日</span>
@@ -235,7 +235,7 @@ async function requestUnlock() {
 <div class="feed-item">
   
   <a href="/posts/lottie-ios-1/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png" class="feed-item-image" alt="Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）" width="300"></div>
 
     <span class="feed-item-title">Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</span>
     <span class="feed-item-date">2018年6月6日</span>
@@ -245,7 +245,7 @@ async function requestUnlock() {
 <div class="feed-item">
   
   <a href="/posts/homekit_delongi_heater/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png" class="feed-item-image" alt="[HomeKit対応仕様] デロンギ マルチダイナミックヒーター" width="300"></div>
 
     <span class="feed-item-title">[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</span>
     <span class="feed-item-date">2018年2月8日</span>
@@ -255,7 +255,7 @@ async function requestUnlock() {
 <div class="feed-item">
   
   <a href="/posts/homekit_hue_sensor/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png" class="feed-item-image" alt="[HomeKit対応仕様] Philips Hue モーションセンサー" width="300"></div>
 
     <span class="feed-item-title">[HomeKit対応仕様] Philips Hue モーションセンサー</span>
     <span class="feed-item-date">2018年2月1日</span>
@@ -265,7 +265,7 @@ async function requestUnlock() {
 <div class="feed-item">
   
   <a href="/posts/homekit_koogeek_lightbulb/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg" class="feed-item-image" alt="[HomeKit対応仕様] Koogeek Wi-Fiスマート LED" width="300"></div>
 
     <span class="feed-item-title">[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</span>
     <span class="feed-item-date">2018年1月2日</span>
@@ -275,7 +275,7 @@ async function requestUnlock() {
 <div class="feed-item">
   
   <a href="/posts/homekit_christmastree/">
-    <div class="feed-item-image-wrapper"></div>
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg" class="feed-item-image" alt="クリスマスツリーをHomeKitに対応させよう" width="300"></div>
 
     <span class="feed-item-title">クリスマスツリーをHomeKitに対応させよう</span>
     <span class="feed-item-date">2017年12月14日</span>

@@ -29,7 +29,7 @@ var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty
 var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } }  でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
 黒魔術（臭いもの）にフタを なので、この objc_xxxAssociatedObject を二度と書かなくて良いようにライブラリ化できないものでしょうか？
 例えば、こんな感じで気軽にextendできるように。
-// UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/has-associated-objects/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+// UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?" property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/has-associated-objects/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -50,7 +50,7 @@ var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty
 
 
 
-  <link rel="canonical" href="https://www.tokoro.me/posts/has-associated-objects/">
+  <link rel='canonical' href='https://www.tokoro.me/posts/has-associated-objects/'>
 </head>
 <body>
     
