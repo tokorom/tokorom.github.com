@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cui on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/cui/</link>
+    <link>https://www.tokoro.me/tags/cui/</link>
     <description>Recent content in cui on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 05 Oct 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/cui/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/cui/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
-      <link>http://www.tokoro.me/posts/el-capitain-totalterminal/</link>
+      <link>https://www.tokoro.me/posts/el-capitain-totalterminal/</link>
       <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/el-capitain-totalterminal/</guid>
+      <guid>https://www.tokoro.me/posts/el-capitain-totalterminal/</guid>
       <description>El CapitanにしたらTotalTerminalが動かない！ Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。
 しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！
 もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。 （実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）
@@ -24,49 +24,48 @@
 以下、試したことをまとめます。
 ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
  Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
-tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
-https://github.com/tokorom/ToggleTerminalScript
-現在の課題としましては、</description>
+tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript</description>
     </item>
     
     <item>
       <title>tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</title>
-      <link>http://www.tokoro.me/posts/tmux-toggle/</link>
+      <link>https://www.tokoro.me/posts/tmux-toggle/</link>
       <pubDate>Thu, 17 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/tmux-toggle/</guid>
+      <guid>https://www.tokoro.me/posts/tmux-toggle/</guid>
       <description>** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
 導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
 設定は以下のとおり。
- .tmux.conf  bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+ .tmux.conf  bind C-t last-pane  これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
 ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
 例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
 改善 ということで、
  paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
 そんなんできるんかいな？と思ったけどごくごく普通にできた。
 設定は以下のとおり。
- .tmux.conf  bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+ .tmux.conf  bind C-t run &amp;quot;tmux last-pane || tmux last-window || tmux new-window&amp;quot;  runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
 これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
 便利便利！</description>
     </item>
     
     <item>
       <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
-      <link>http://www.tokoro.me/posts/mac-terminal-japanese/</link>
+      <link>https://www.tokoro.me/posts/mac-terminal-japanese/</link>
       <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/mac-terminal-japanese/</guid>
+      <guid>https://www.tokoro.me/posts/mac-terminal-japanese/</guid>
       <description>Macの初期設定のたびに混乱してるので再整理しておきます。
  Mac Terminal tmux vim  で開発をする人向けです。
 まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
 日本語を扱う上で便利な設定がデフォルトで入ってます。
 当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; alias vim=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi  tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
  こせきの技術日記  に従って対処しておきます。
 この中の、
-date | pbcopy までが成功すればOKです。
+date | pbcopy  までが成功すればOKです。
 .vimrc にクリップボード利用の設定追加 .vimrc に
-set clipboard=unnamed を追加しておきます。</description>
+set clipboard=unnamed  を追加しておきます。</description>
     </item>
     
   </channel>

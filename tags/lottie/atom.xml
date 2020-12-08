@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>lottie on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/lottie/</link>
+    <link>https://www.tokoro.me/tags/lottie/</link>
     <description>Recent content in lottie on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 06 Jun 2018 14:09:34 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/lottie/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/lottie/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</title>
-      <link>http://www.tokoro.me/posts/lottie-ios-1/</link>
+      <link>https://www.tokoro.me/posts/lottie-ios-1/</link>
       <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/lottie-ios-1/</guid>
+      <guid>https://www.tokoro.me/posts/lottie-ios-1/</guid>
       <description>この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
 Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
 iOS用のライブラリは、
@@ -26,13 +26,13 @@ https://github.com/airbnb/lottie-ios
  これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie  let animationView = LOTAnimationView(name: &amp;quot;yes&amp;quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play()  再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。</description>
+animationView.frame = animationView.sceneModel?.compBounds ?? view.</description>
     </item>
     
   </channel>

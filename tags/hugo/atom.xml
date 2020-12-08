@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hugo on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/hugo/</link>
+    <link>https://www.tokoro.me/tags/hugo/</link>
     <description>Recent content in hugo on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Thu, 30 Apr 2020 18:01:01 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/hugo/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/hugo/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vimにスクショを直接Markdownで貼り付ける</title>
-      <link>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
+      <link>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
       <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
+      <guid>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
       <description>Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
  ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む  という便利環境を作りました。
@@ -24,24 +24,24 @@
 今回はそこを解決します！
 pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
 screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+screencapture -i 出力ファイル名  とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
 vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
  現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
 そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;)  とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
 今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh  IMAGEDIR=&amp;#34;content/images/$2&amp;#34; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;#34;ss-${CURRENTTIME}.png&amp;#34; TARGET=&amp;#34;${IMAGEDIR}/${IMAGEFILENAME}&amp;#34; IMAGETAG=&amp;#34;![image](/images/$2/${IMAGEFILENAME})&amp;#34; mkdir -p ${IMAGEDIR} screencapture -i &amp;#34;${TARGET}&amp;#34; echo &amp;#34;${IMAGETAG}&amp;#34; IMAGEOPTIM=&amp;#34;open -a ImageOptim&amp;#34; `${IMAGEOPTIM} ${TARGET}` です。</description>
+#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}`  です。</description>
     </item>
     
     <item>
       <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
-      <link>http://www.tokoro.me/posts/vim-markdown-image-tool/</link>
+      <link>https://www.tokoro.me/posts/vim-markdown-image-tool/</link>
       <pubDate>Tue, 31 Mar 2020 16:38:32 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
+      <guid>https://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
       <description>Photo by Victor Grabarczyk on Unsplash
 ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
 最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
@@ -53,11 +53,9 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
 ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
 具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+/Users/tokorom/Desktop/dog.jpg  が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
 現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&amp;#39;.&amp;#39;) let result = system(g:vim_replace_current_line#command . &amp;#39; &amp;#39; . expand(&amp;#39;%&amp;#39;) . &amp;#39; &amp;#39; . expand(&amp;#39;%:t:r&amp;#39;) . &amp;#39; &amp;#39; . trim(line)) call setline(&amp;#39;.&amp;#39;, trim(result))endfunctionという３行のシンプルなfunction１つだけです。
-ここでやっているのは、
- 特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え  ということだけです。</description>
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction  という３行のシンプルなfunction１つだけです。</description>
     </item>
     
   </channel>

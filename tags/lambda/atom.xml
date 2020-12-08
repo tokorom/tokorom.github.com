@@ -2,43 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lambda on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/lambda/</link>
+    <link>https://www.tokoro.me/tags/lambda/</link>
     <description>Recent content in Lambda on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 15 Jun 2020 14:25:23 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/lambda/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/lambda/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる</title>
-      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
+      <link>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
       <pubDate>Mon, 15 Jun 2020 14:25:23 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
+      <guid>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
       <description>導入 前回の Swift AWS Lambda Runtimeのサンプルをデプロイしてみた の続きです。
 特に犬の写真を毎朝送ってほしいというわけではないですが、Swift AWS Lambda Runtimeを試すにあたっての題材として、
  AWS Lambdaのスケジュール式トリガーで毎朝自動で実行する 画像検索APIで犬の写真をランダムに取ってくる それをSlackに送る  というのをやってみます。
 画像検索API 画像検索APIは手っ取り早く使えそうなAzureの Image Search API を使ってみます。 Azureのアカウントさえ作れば、月1000回までは無料で叩けるようです。
 curlで叩くとすると、
-curl &amp;#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&amp;#39; \  -H &amp;#39;Ocp-Apim-Subscription-Key: YOUR_KEY&amp;#39; となります。
+curl &#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&#39; \ -H &#39;Ocp-Apim-Subscription-Key: YOUR_KEY&#39;  となります。
  リクエストパラメータに q=検索ワード リクエストヘッダーに Ocp-Apim-Subscription-Key: YOUR_KEY  を渡します1。
 Slackへの通知 Slackの Incoming Webhook用のURLを取得します。
 URLを取得したら、curlで叩くとすると、
-curl -X POST -H &amp;#39;Content-type: application/json&amp;#39; \  --data &amp;#39;{&amp;#34;text&amp;#34;:&amp;#34;犬の画像のURL&amp;#34;}&amp;#39; \  https://hooks.slack.com/services/your/incoming/webhook とするだけです。
+curl -X POST -H &#39;Content-type: application/json&#39; \ --data &#39;{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}&#39; \ https://hooks.slack.com/services/your/incoming/webhook  とするだけです。
  POSTデータで{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}  を送ってあげるだけですね。
 Lambda関数を作る これで画像検索APIとSlackへの通知部分は準備できたので、あとはメインディッシュのLambda関数を作るだけです。
 Packageの作成 まずは、
-swift package init --type executable --name DogImage とPackageを作り、 GitHub上のサンプル をベースにPackage.</description>
+swift package init --type executable --name DogImage  とPackageを作り、 GitHub上のサンプル をベースにPackage.</description>
     </item>
     
     <item>
       <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</title>
-      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
+      <link>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
       <pubDate>Thu, 11 Jun 2020 14:57:28 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
+      <guid>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
       <description>導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
 https://swift.org/blog/aws-lambda-runtime/
 以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。

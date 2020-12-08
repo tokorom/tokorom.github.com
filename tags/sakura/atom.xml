@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>sakura on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/sakura/</link>
+    <link>https://www.tokoro.me/tags/sakura/</link>
     <description>Recent content in sakura on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Sun, 29 Jul 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/sakura/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/sakura/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる</title>
-      <link>http://www.tokoro.me/posts/jenkins-octopress/</link>
+      <link>https://www.tokoro.me/posts/jenkins-octopress/</link>
       <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/jenkins-octopress/</guid>
+      <guid>https://www.tokoro.me/posts/jenkins-octopress/</guid>
       <description>目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
 イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&amp;gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&amp;gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&amp;gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &amp;quot;jenkins@your.domain&amp;quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &amp;quot;jenkins&amp;quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.</description>
     </item>
     
     <item>
       <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>
-      <link>http://www.tokoro.me/posts/security-for-jenkins/</link>
+      <link>https://www.tokoro.me/posts/security-for-jenkins/</link>
       <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/security-for-jenkins/</guid>
+      <guid>https://www.tokoro.me/posts/security-for-jenkins/</guid>
       <description>前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
 つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
 ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
@@ -39,26 +39,26 @@ JenkinsにBitbucketからアクセスするためのユーザを追加 まずは
 Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
 これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
 nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
-server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。</description>
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } }  XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。</description>
     </item>
     
     <item>
       <title>さくらVPSにJenkinsさんをインストールする</title>
-      <link>http://www.tokoro.me/posts/install-jenkins-to-sakura/</link>
+      <link>https://www.tokoro.me/posts/install-jenkins-to-sakura/</link>
       <pubDate>Tue, 24 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/install-jenkins-to-sakura/</guid>
+      <guid>https://www.tokoro.me/posts/install-jenkins-to-sakura/</guid>
       <description>JDKのインストール Javaが未インストールならこちらから。
-$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
-$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins Jenkinsの起動 $ sudo service jenkins start これでインストールと起動が完了。簡単すぎる！
+$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel  Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins  Jenkinsの起動 $ sudo service jenkins start  これでインストールと起動が完了。簡単すぎる！
 試しに
-$ curl http://localhost:8080/ とすると、
-&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Dashboard [Jenkins]&amp;lt;/title&amp;gt;... みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
+$ curl http://localhost:8080/  とすると、
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Dashboard [Jenkins]&amp;lt;/title&amp;gt;...  みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
 ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。
-$ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストールなら
-$ sudo yum install nginx でインストールしておく。
+$ sudo chkconfig jenkins on  nginxの設定 まず、nginxが未インストールなら
+$ sudo yum install nginx  でインストールしておく。
 Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
-server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins.</description>
+server { listen 80; server_name jenkins.</description>
     </item>
     
   </channel>

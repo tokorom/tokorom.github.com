@@ -1,275 +1,77 @@
 <!DOCTYPE html>
-<html lang='ja'><head>
-  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='Photo by Franck V. on Unsplash
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by Franck V. on Unsplash
 改善のきっかけ 自宅のインターネット接続環境は、改善前は通信速度が 10Mbps〜40Mbps 程度でした。
 これで特に不満もなく使っていたのですが、同じプロバイダーを使っている同僚の @kudakurage が
 「IPv6にしてWi-Fiルーターをいいやつに変えたら500Mbps以上出るようになったよ」
 と教えてくれたので、 絶対に負けてられない！ せっかくなので自分も改善してみよう！ と思ったのがきっかけです。
 前置き 私はネットワークに関する専門的な知識を持ち合わせていないため、おかしなことを書いたりしているかもしれません。
 間違いなどありましたらよろしければ Twitter までご連絡ください。
- 以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。'>
-<meta name='theme-color' content='#ffcd00'>
-
-<meta property='og:title' content='自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯 • Yuta Tokoro'>
-<meta property='og:description' content='Photo by Franck V. on Unsplash
+ 以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@spinners_inc" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯 | TOKOROM BLOG" property="og:title"><meta content="Photo by Franck V. on Unsplash
 改善のきっかけ 自宅のインターネット接続環境は、改善前は通信速度が 10Mbps〜40Mbps 程度でした。
 これで特に不満もなく使っていたのですが、同じプロバイダーを使っている同僚の @kudakurage が
 「IPv6にしてWi-Fiルーターをいいやつに変えたら500Mbps以上出るようになったよ」
 と教えてくれたので、 絶対に負けてられない！ せっかくなので自分も改善してみよう！ と思ったのがきっかけです。
 前置き 私はネットワークに関する専門的な知識を持ち合わせていないため、おかしなことを書いたりしているかもしれません。
 間違いなどありましたらよろしければ Twitter までご連絡ください。
- 以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。'>
-<meta property='og:url' content='http://www.tokoro.me/posts/improve-my-internet-connection/'>
-<meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='http://www.tokoro.me/images/improve-my-internet-connection/top.jpg'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='Internet'><meta property='article:tag' content='Wi-Fi'><meta property='article:published_time' content='2020-09-07T16:56:36&#43;09:00'/><meta property='article:modified_time' content='2020-09-07T16:56:36&#43;09:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+ 以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。" property="og:description"><meta content="https://www.tokoro.me/images/improve-my-internet-connection/top.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/improve-my-internet-connection/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
 
-<meta name="generator" content="Hugo 0.62.0" />
 
-  <title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯 • Yuta Tokoro</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
   <link rel='canonical' href='https://spinners.work/posts/improve-my-internet-connection/'>
-  
-  
-  <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.c3be1755.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
-:root{--color-accent:#ffcd00;}
-</style>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-2451574-4', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-
 </head>
-<body class='page type-posts has-sidebar'>
-
-  <div class='site'><div id='sidebar' class='sidebar'>
-  <a class='screen-reader-text' href='#main-menu'></a>
-
-  <div class='container'><section class='widget widget-about sep-after'>
-  <header>
+<body>
     
-    <div class='logo'>
-      <a href='/'>
-        <img src='/images/logo.png'>
-      </a>
-    </div>
+
     
-    <h2 class='title site-title '>
-      <a href='/'>
-      TOKOROM BLOG
-      </a>
-    </h2>
-    <div class='desc'>
-    所 友太 / Yuta Tokoro
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
     </div>
-  </header>
-
-</section>
-<section class='widget widget-company sep-after'>
-  <header>
-    <h4 class='title widget-title'>
-      所属
-    </h4>
-
-    <div class='logo'>
-      <a href="http://www.spinners.work/">
-        <img src="http://www.spinners.work/images/top_logo.png">
-      </a>
-    </div>
-  </header>
-</section>
-<section class='widget widget-taxonomy_cloud sep-after'>
-  <header>
-    <h4 class='title widget-title'></h4>
-  </header>
-
-  <div class='container list-container'>
-  <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
-      </li><li>
-        <a href='/tags/aws/' style='font-size:1.0204081632653061em'>AWS</a>
-      </li><li>
-        <a href='/tags/ci/' style='font-size:1em'>ci</a>
-      </li><li>
-        <a href='/tags/cui/' style='font-size:1.0408163265306123em'>cui</a>
-      </li><li>
-        <a href='/tags/design/' style='font-size:1.0612244897959184em'>design</a>
-      </li><li>
-        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
-      </li><li>
-        <a href='/tags/github/' style='font-size:1em'>GitHub</a>
-      </li><li>
-        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
-      </li><li>
-        <a href='/tags/hig/' style='font-size:1.0204081632653061em'>HIG</a>
-      </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1428571428571428em'>HomeKit</a>
-      </li><li>
-        <a href='/tags/hugo/' style='font-size:1.0204081632653061em'>hugo</a>
-      </li><li>
-        <a href='/tags/internet/' style='font-size:1em'>Internet</a>
-      </li><li>
-        <a href='/tags/ios/' style='font-size:2em'>ios</a>
-      </li><li>
-        <a href='/tags/ios14/' style='font-size:1.0204081632653061em'>iOS14</a>
-      </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.0612244897959184em'>jenkins</a>
-      </li><li>
-        <a href='/tags/lambda/' style='font-size:1.0204081632653061em'>Lambda</a>
-      </li><li>
-        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
-      </li><li>
-        <a href='/tags/mac/' style='font-size:1.0816326530612246em'>mac</a>
-      </li><li>
-        <a href='/tags/markdown/' style='font-size:1.0204081632653061em'>markdown</a>
-      </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0408163265306123em'>nfc</a>
-      </li><li>
-        <a href='/tags/objc/' style='font-size:1.3877551020408163em'>objc</a>
-      </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0408163265306123em'>octopress</a>
-      </li><li>
-        <a href='/tags/publish/' style='font-size:1em'>publish</a>
-      </li><li>
-        <a href='/tags/review/' style='font-size:1em'>review</a>
-      </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0408163265306123em'>sakura</a>
-      </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0408163265306123em'>sesame</a>
-      </li><li>
-        <a href='/tags/slack/' style='font-size:1em'>Slack</a>
-      </li><li>
-        <a href='/tags/swift/' style='font-size:1.2653061224489797em'>swift</a>
-      </li><li>
-        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
-      </li><li>
-        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
-      </li><li>
-        <a href='/tags/test/' style='font-size:1em'>Test</a>
-      </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0204081632653061em'>tvos</a>
-      </li><li>
-        <a href='/tags/ui/' style='font-size:1.1020408163265305em'>ui</a>
-      </li><li>
-        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
-      </li><li>
-        <a href='/tags/vim/' style='font-size:1.1428571428571428em'>vim</a>
-      </li><li>
-        <a href='/tags/wi-fi/' style='font-size:1em'>Wi-Fi</a>
-      </li><li>
-        <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
-      </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0408163265306123em'>wwdc</a>
-      </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0816326530612246em'>xcode</a>
-      </li></ul>
-</div>
+</nav>
 
 
-</section>
-</div>
+<article class="content-page entry-body">
+  <h1 class="page-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</h1>
 
-  <div class='sidebar-overlay'></div>
-</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
-  <div class='container'>
-    <a class='screen-reader-text' href='#content'></a>
-
-<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
-  <span class='screen-reader-text'></span>
-  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="3" y1="12" x2="21" y2="12" />
-  <line x1="3" y1="6" x2="21" y2="6" />
-  <line x1="3" y1="18" x2="21" y2="18" />
-  
-</svg>
-</span>
-  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="18" y1="6" x2="6" y2="18" />
-  <line x1="6" y1="6" x2="18" y2="18" />
-  
-</svg>
-</span>
-</button>
-    <ul><li class='item'>
-        <a href='/'>Blog</a>
-      </li><li class='item'>
-        <a href='https://twitter.com/tokorom/'>Twitter</a>
-      </li><li class='item'>
-        <a href='https://github.com/tokorom/'>GitHub</a>
-      </li><li class='item'>
-        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
-      </li></ul>
-  </div>
-</nav><div class='header-widgets'>
-        <div class='container'></div>
-      </div>
-
-      <header id='header' class='header site-header'>
-        <div class='container sep-after'>
-          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
-          </div>
-        </div>
-      </header>
-
-      <main id='content'>
-
-
-<article lang='ja' class='entry'>
-  <header class='header entry-header'>
-  <div class='container sep-after'>
-    <div class='header-info'>
-      <h1 class='title'>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</h1>
-      
-
-    </div>
-    <div class='entry-meta'>
-  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-  <line x1="16" y1="2" x2="16" y2="6"/>
-  <line x1="8" y1="2" x2="8" y2="6"/>
-  <line x1="3" y1="10" x2="21" y2="10"/>
-  
-</svg>
-<span class='screen-reader-text'> </span>
-  <time class='entry-date' datetime='2020-09-07T16:56:36&#43;09:00'>2020-09-07</time>
-</span>
-
-  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
-  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
-  
-</svg>
-<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
-  
-
-</div>
-
-
-  </div>
-</header>
-
-  
-  
-
-  <div class='container entry-content'>
-  
-
-  <p><img src="/images/improve-my-internet-connection/top.jpg" alt="image"></p>
+  <div class="entry-data">
+    <span class="entry-data-date">2020年9月7日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/internet">
+              Internet
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/wi-fi">
+              Wi-Fi
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/improve-my-internet-connection/top.jpg" alt="image"></p>
 <p><small>Photo by <a href="https://unsplash.com/@franckinjapan?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Franck V.</a> on <a href="https://unsplash.com/s/photos/cable?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></small></p>
 <h2 id="heading">改善のきっかけ</h2>
 <p>自宅のインターネット接続環境は、改善前は通信速度が <strong>10Mbps〜40Mbps</strong> 程度でした。</p>
@@ -509,147 +311,155 @@ if (!doNotTrack) {
 </ol>
 </section>
 
-</div>
-
-  
-
-<footer class='entry-social'>
-  <div class="container">
-    <div class="social-buttons">
-      <ul class="widget-social_menu">
-        <li>
-          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/improve-my-internet-connection/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </li>
-
-        <li>
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </li>
-
-        <li>
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fimprove-my-internet-connection%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-        </li>
-
-        <li>
-          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
-          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        </li>
-      </ul>
-    </div>
   </div>
-</footer>
-
-
-  
-<footer class='entry-footer'>
-  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
-  <line x1="7" y1="7" x2="7" y2="7"/>
-  
-</svg>
-<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/internet/'>Internet</a>, <a class='tag' href='/tags/wi-fi/'>Wi-Fi</a></div>
-
-  </div>
-</footer>
-
-
 </article>
 
-<nav class='entry-nav'>
-  <div class='container'><div class='prev-entry sep-before'>
-      <a href='/posts/vim-swift-format/'>
-        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+
+<div class="wrapper">
   
-  <line x1="20" y1="12" x2="4" y2="12"/>
-  <polyline points="10 18 4 12 10 6"/>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
   
-</svg>
- </span>
-        <span class='screen-reader-text'>: </span>apple/swift-formatをVimで使う</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/posts/iosdc2020/'>
-        <span class='screen-reader-text'>: </span>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
-  
-</svg>
-</span>
-      </a>
-    </div></div>
-</nav>
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
 
-
-
-
-<footer class='entry-works'>
-  <div class='container sep-before'>
-    <h4>所の執筆・監修した書籍</h4>
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897978440/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897978440&linkCode=as2&tag=tokorom-22&linkId=80f63e4a56d7072f274e62a43ee3f55e">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897978440&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">iPhoneプログラミングUIKit詳解リファレンス</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B01HG97S7K/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01HG97S7K&linkCode=as2&tag=tokorom-22&linkId=50a4f9009a5a2ce3b0cf2f084a5d9008">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B01HG97S7K&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">よくわかるAuto Layout (監修)</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>川邉雄介</span></li>
-    <li style="font-size:90%; list-style:none;"><span>監修：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01HG97S7K" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897976839/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897976839&linkCode=as2&tag=tokorom-22&linkId=f1f1abc3834e68b79853e4acbaec1056">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897976839&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">詳解 EZアプリ(BREW)プログラミング</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>溝口 英巳,</span><span>宮北 幸典,</span><span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios11_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios12_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
-
-  </div>
-
-</footer>
-
-
-
-      </main>
-
-      <footer id='footer' class='footer'>
-        <div class='container sep-before'><div class='copyright'>
-  <p>tokorom</p>
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
 </div>
 
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/improve-my-internet-connection/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/improve-my-internet-connection/top.jpg" class="feed-item-image" alt="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯" width="300"></div>
+
+    <span class="feed-item-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</span>
+    <span class="feed-item-date">2020年9月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
         </div>
-      </footer>
-
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
     </div>
-  </div><script>window.__assets_js_src="/assets/js/"</script>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
 
-<script src='/assets/js/main.d8d8e926.js'></script>
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
 
 </body>
-
 </html>
-

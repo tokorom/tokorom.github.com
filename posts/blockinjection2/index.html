@@ -1,289 +1,89 @@
 <!DOCTYPE html>
-<html lang='ja'><head>
-  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>BlockInjectionをバージョンアップしました | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
 クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。
 https://github.com/tokorom/BlockInjection で公開しています。
 バージョンアップ内容 前記事 からのバージョンアップ内容は以下です。
  リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます） クラスメソッドにも対応しました 複数のクラスやメソッドを一度に追加できるようになりました 正規表現で指定できるようになりました(※1) 注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2) オマケで単純なメソッド実装置き換え機能も追加しました  UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる 既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
-[BILib injectToClassWithNameRegex:BIRegex(@&#34;^UIView$&#34;) methodNameRegex:BIRegex(@&#34;^set.*$&#34;) preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
- -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
+[BILib injectToClassWithNameRegex:BIRegex(@&quot;^UIView$&quot;) methodNameRegex:BIRegex(@&quot;^set.*$&quot;) preprocess:^{ NSLog(@&quot;%@&quot;, [BILib prettyFunction]); }];  これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay]  のように全てログ出力されます。
 &#43; (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
 ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
-NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^UIView$&#34; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^set.*$&#34; options:0 error:&amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。'>
-<meta name='theme-color' content='#ffcd00'>
-
-<meta property='og:title' content='BlockInjectionをバージョンアップしました • Yuta Tokoro'>
-<meta property='og:description' content='BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^UIView$&quot; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^set."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@spinners_inc" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="BlockInjectionをバージョンアップしました | TOKOROM BLOG" property="og:title"><meta content="BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
 クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。
 https://github.com/tokorom/BlockInjection で公開しています。
 バージョンアップ内容 前記事 からのバージョンアップ内容は以下です。
  リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます） クラスメソッドにも対応しました 複数のクラスやメソッドを一度に追加できるようになりました 正規表現で指定できるようになりました(※1) 注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2) オマケで単純なメソッド実装置き換え機能も追加しました  UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる 既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
-[BILib injectToClassWithNameRegex:BIRegex(@&#34;^UIView$&#34;) methodNameRegex:BIRegex(@&#34;^set.*$&#34;) preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
- -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
+[BILib injectToClassWithNameRegex:BIRegex(@&quot;^UIView$&quot;) methodNameRegex:BIRegex(@&quot;^set.*$&quot;) preprocess:^{ NSLog(@&quot;%@&quot;, [BILib prettyFunction]); }];  これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay]  のように全てログ出力されます。
 &#43; (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
 ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
-NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^UIView$&#34; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&#34;^set.*$&#34; options:0 error:&amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&#34;%@&#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。'>
-<meta property='og:url' content='http://www.tokoro.me/posts/blockinjection2/'>
-<meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='objc'><meta property='article:published_time' content='2013-04-01T00:00:00Z'/><meta property='article:modified_time' content='2013-04-01T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^UIView$&quot; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^set." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/blockinjection2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
 
-<meta name="generator" content="Hugo 0.62.0" />
 
-  <title>BlockInjectionをバージョンアップしました • Yuta Tokoro</title>
-  <link rel='canonical' href='http://www.tokoro.me/posts/blockinjection2/'>
-  
-  
-  <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.c3be1755.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
-:root{--color-accent:#ffcd00;}
-</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-2451574-4', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
-  
 
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/blockinjection2/'>
 </head>
-<body class='page type-posts layout-post has-sidebar'>
-
-  <div class='site'><div id='sidebar' class='sidebar'>
-  <a class='screen-reader-text' href='#main-menu'></a>
-
-  <div class='container'><section class='widget widget-about sep-after'>
-  <header>
+<body>
     
-    <div class='logo'>
-      <a href='/'>
-        <img src='/images/logo.png'>
-      </a>
-    </div>
+
     
-    <h2 class='title site-title '>
-      <a href='/'>
-      TOKOROM BLOG
-      </a>
-    </h2>
-    <div class='desc'>
-    所 友太 / Yuta Tokoro
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
     </div>
-  </header>
-
-</section>
-<section class='widget widget-company sep-after'>
-  <header>
-    <h4 class='title widget-title'>
-      所属
-    </h4>
-
-    <div class='logo'>
-      <a href="http://www.spinners.work/">
-        <img src="http://www.spinners.work/images/top_logo.png">
-      </a>
-    </div>
-  </header>
-</section>
-<section class='widget widget-taxonomy_cloud sep-after'>
-  <header>
-    <h4 class='title widget-title'></h4>
-  </header>
-
-  <div class='container list-container'>
-  <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
-      </li><li>
-        <a href='/tags/aws/' style='font-size:1.0204081632653061em'>AWS</a>
-      </li><li>
-        <a href='/tags/ci/' style='font-size:1em'>ci</a>
-      </li><li>
-        <a href='/tags/cui/' style='font-size:1.0408163265306123em'>cui</a>
-      </li><li>
-        <a href='/tags/design/' style='font-size:1.0612244897959184em'>design</a>
-      </li><li>
-        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
-      </li><li>
-        <a href='/tags/github/' style='font-size:1em'>GitHub</a>
-      </li><li>
-        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
-      </li><li>
-        <a href='/tags/hig/' style='font-size:1.0204081632653061em'>HIG</a>
-      </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1428571428571428em'>HomeKit</a>
-      </li><li>
-        <a href='/tags/hugo/' style='font-size:1.0204081632653061em'>hugo</a>
-      </li><li>
-        <a href='/tags/internet/' style='font-size:1em'>Internet</a>
-      </li><li>
-        <a href='/tags/ios/' style='font-size:2em'>ios</a>
-      </li><li>
-        <a href='/tags/ios14/' style='font-size:1.0204081632653061em'>iOS14</a>
-      </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.0612244897959184em'>jenkins</a>
-      </li><li>
-        <a href='/tags/lambda/' style='font-size:1.0204081632653061em'>Lambda</a>
-      </li><li>
-        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
-      </li><li>
-        <a href='/tags/mac/' style='font-size:1.0816326530612246em'>mac</a>
-      </li><li>
-        <a href='/tags/markdown/' style='font-size:1.0204081632653061em'>markdown</a>
-      </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0408163265306123em'>nfc</a>
-      </li><li>
-        <a href='/tags/objc/' style='font-size:1.3877551020408163em'>objc</a>
-      </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0408163265306123em'>octopress</a>
-      </li><li>
-        <a href='/tags/publish/' style='font-size:1em'>publish</a>
-      </li><li>
-        <a href='/tags/review/' style='font-size:1em'>review</a>
-      </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0408163265306123em'>sakura</a>
-      </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0408163265306123em'>sesame</a>
-      </li><li>
-        <a href='/tags/slack/' style='font-size:1em'>Slack</a>
-      </li><li>
-        <a href='/tags/swift/' style='font-size:1.2653061224489797em'>swift</a>
-      </li><li>
-        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
-      </li><li>
-        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
-      </li><li>
-        <a href='/tags/test/' style='font-size:1em'>Test</a>
-      </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0204081632653061em'>tvos</a>
-      </li><li>
-        <a href='/tags/ui/' style='font-size:1.1020408163265305em'>ui</a>
-      </li><li>
-        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
-      </li><li>
-        <a href='/tags/vim/' style='font-size:1.1428571428571428em'>vim</a>
-      </li><li>
-        <a href='/tags/wi-fi/' style='font-size:1em'>Wi-Fi</a>
-      </li><li>
-        <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
-      </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0408163265306123em'>wwdc</a>
-      </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0816326530612246em'>xcode</a>
-      </li></ul>
-</div>
+</nav>
 
 
-</section>
-</div>
+<article class="content-page entry-body">
+  <h1 class="page-title">BlockInjectionをバージョンアップしました</h1>
 
-  <div class='sidebar-overlay'></div>
-</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
-  <div class='container'>
-    <a class='screen-reader-text' href='#content'></a>
-
-<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
-  <span class='screen-reader-text'></span>
-  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="3" y1="12" x2="21" y2="12" />
-  <line x1="3" y1="6" x2="21" y2="6" />
-  <line x1="3" y1="18" x2="21" y2="18" />
-  
-</svg>
-</span>
-  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="18" y1="6" x2="6" y2="18" />
-  <line x1="6" y1="6" x2="18" y2="18" />
-  
-</svg>
-</span>
-</button>
-    <ul><li class='item'>
-        <a href='/'>Blog</a>
-      </li><li class='item'>
-        <a href='https://twitter.com/tokorom/'>Twitter</a>
-      </li><li class='item'>
-        <a href='https://github.com/tokorom/'>GitHub</a>
-      </li><li class='item'>
-        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
-      </li></ul>
-  </div>
-</nav><div class='header-widgets'>
-        <div class='container'></div>
-      </div>
-
-      <header id='header' class='header site-header'>
-        <div class='container sep-after'>
-          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
-          </div>
-        </div>
-      </header>
-
-      <main id='content'>
-
-
-<article lang='ja' class='entry'>
-  <header class='header entry-header'>
-  <div class='container sep-after'>
-    <div class='header-info'>
-      <h1 class='title'>BlockInjectionをバージョンアップしました</h1>
-      
-
-    </div>
-    <div class='entry-meta'>
-  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-  <line x1="16" y1="2" x2="16" y2="6"/>
-  <line x1="8" y1="2" x2="8" y2="6"/>
-  <line x1="3" y1="10" x2="21" y2="10"/>
-  
-</svg>
-<span class='screen-reader-text'> </span>
-  <time class='entry-date' datetime='2013-04-01T00:00:00Z'>2013-04-01</time>
-</span>
-
-  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
-  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
-  
-</svg>
-<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
-  
-
-</div>
-
-
-  </div>
-</header>
-
-  
-  
-
-  <div class='container entry-content'>
-  
-  <div class='box box-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
-  
-
-  <h2 id="blockinjection">BlockInjectionとはなんぞや</h2>
+  <div class="entry-data">
+    <span class="entry-data-date">2013年4月1日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <h2 id="blockinjection">BlockInjectionとはなんぞや</h2>
 <p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br>
 クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
 <p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
@@ -302,168 +102,240 @@ if (!doNotTrack) {
 <p>既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。<br>
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして <strong>UIViewのsetter全でまとめてログ出力をする</strong> ようにしてみます。<br>
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">[BILib injectToClassWithNameRegex:BIRegex(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^UIView$</span><span style="color:#e6db74">&#34;</span>) methodNameRegex:BIRegex(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^set.*$</span><span style="color:#e6db74">&#34;</span>) preprocess:<span style="color:#f92672">^</span>{
-  NSLog(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">%@</span><span style="color:#e6db74">&#34;</span>, [BILib prettyFunction]);
+<pre><code class="language-objective-c">[BILib injectToClassWithNameRegex:BIRegex(@&quot;^UIView$&quot;) methodNameRegex:BIRegex(@&quot;^set.*$&quot;) preprocess:^{
+  NSLog(@&quot;%@&quot;, [BILib prettyFunction]);
 }];
-</code></pre></div><p>これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が</p>
+</code></pre>
+<p>これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が</p>
 <pre><code> -[UIView setContentScaleFactor:]
  -[UIView setFrame:]
  -[UIView setNeedsDisplay]
-</code></pre><p>のように全てログ出力されます。</p>
+</code></pre>
+<p>のように全てログ出力されます。</p>
 <p><code>+ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess;</code> が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。<br>
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。</p>
 <p>また、<code>[BILib prettyFunction]</code> は注入先のメソッド名を<code>__PRETTY_FUNCTION__</code>と同じ形式で取得できる便利機能です。</p>
 <p>ちなみに、<code>BIRegex</code>というのはただ<code>NSRegularExpression</code>を簡易的に作るための関数ですので、↑のコードは以下と同義です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">NSError<span style="color:#f92672">*</span> error <span style="color:#f92672">=</span> nil;
-NSRegularExpression<span style="color:#f92672">*</span> classNameRegex <span style="color:#f92672">=</span> [NSRegularExpression regularExpressionWithPattern:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^UIView$</span><span style="color:#e6db74">&#34;</span> options:<span style="color:#ae81ff">0</span> error:<span style="color:#f92672">&amp;</span>error];
-NSRegularExpression<span style="color:#f92672">*</span> methodNameRegex <span style="color:#f92672">=</span> [NSRegularExpression regularExpressionWithPattern:<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">^set.*$</span><span style="color:#e6db74">&#34;</span> options:<span style="color:#ae81ff">0</span> error:<span style="color:#f92672">&amp;</span>error];
+<pre><code class="language-objective-c">NSError* error = nil;
+NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^UIView$&quot; options:0 error:&amp;error];
+NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^set.*$&quot; options:0 error:&amp;error];
 
-[BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:<span style="color:#f92672">^</span>{
-  NSLog(<span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">%@</span><span style="color:#e6db74">&#34;</span>, [BILib prettyFunction]);
+[BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{
+  NSLog(@&quot;%@&quot;, [BILib prettyFunction]);
 }];
-</code></pre></div><p>※2013/04/05追記: ちなみに <strong>特定Prefixのメソッド全てにまとめて振るまいを追加する</strong> というのは <a href="https://twitter.com/7gano">@7gano</a> さんのアイデアです。</p>
-
-</div>
-
-  
-
-<footer class='entry-social'>
-  <div class="container">
-    <div class="social-buttons">
-      <ul class="widget-social_menu">
-        <li>
-          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2013/04/01/blockinjection2/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </li>
-
-        <li>
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </li>
-
-        <li>
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fblockinjection2%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-        </li>
-
-        <li>
-          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
-          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        </li>
-      </ul>
-    </div>
-  </div>
-</footer>
-
-
-  
-<footer class='entry-footer'>
-  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
-  <line x1="7" y1="7" x2="7" y2="7"/>
-  
-</svg>
-<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/objc/'>objc</a></div>
+</code></pre>
+<p>※2013/04/05追記: ちなみに <strong>特定Prefixのメソッド全てにまとめて振るまいを追加する</strong> というのは <a href="https://twitter.com/7gano">@7gano</a> さんのアイデアです。</p>
 
   </div>
-</footer>
-
-
 </article>
 
-<nav class='entry-nav'>
-  <div class='container'><div class='prev-entry sep-before'>
-      <a href='/posts/block-injection/'>
-        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
   
-  <line x1="20" y1="12" x2="4" y2="12"/>
-  <polyline points="10 18 4 12 10 6"/>
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
   
-</svg>
- </span>
-        <span class='screen-reader-text'>: </span>BlockInjectionで元のソースコードを汚さないで振る舞い追加</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/posts/uikit-images/'>
-        <span class='screen-reader-text'>: </span>UIKitで使われている画像パーツをまとめて取得する<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
   
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
   
-</svg>
-</span>
-      </a>
-    </div></div>
-</nav>
+  <a href="/posts/objc-macro/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">Objective-Cで最近お気に入りのマクロ４つ</span>
+    <span class="feed-item-date">2013年1月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
 
-<footer class='entry-works'>
-  <div class='container sep-before'>
-    <h4>所の執筆・監修した書籍</h4>
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897978440/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897978440&linkCode=as2&tag=tokorom-22&linkId=80f63e4a56d7072f274e62a43ee3f55e">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897978440&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">iPhoneプログラミングUIKit詳解リファレンス</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B01HG97S7K/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01HG97S7K&linkCode=as2&tag=tokorom-22&linkId=50a4f9009a5a2ce3b0cf2f084a5d9008">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B01HG97S7K&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">よくわかるAuto Layout (監修)</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>川邉雄介</span></li>
-    <li style="font-size:90%; list-style:none;"><span>監修：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01HG97S7K" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897976839/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897976839&linkCode=as2&tag=tokorom-22&linkId=f1f1abc3834e68b79853e4acbaec1056">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897976839&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">詳解 EZアプリ(BREW)プログラミング</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>溝口 英巳,</span><span>宮北 幸典,</span><span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios11_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios12_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
-
-  </div>
-
-</footer>
-
-
-
-      </main>
-
-      <footer id='footer' class='footer'>
-        <div class='container sep-before'><div class='copyright'>
-  <p>tokorom</p>
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
 </div>
 
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/improve-my-internet-connection/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/improve-my-internet-connection/top.jpg" class="feed-item-image" alt="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯" width="300"></div>
+
+    <span class="feed-item-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</span>
+    <span class="feed-item-date">2020年9月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
         </div>
-      </footer>
-
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
     </div>
-  </div><script>window.__assets_js_src="/assets/js/"</script>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
 
-<script src='/assets/js/main.d8d8e926.js'></script>
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
 
 </body>
-
 </html>
-

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Widgets on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/widgets/</link>
+    <link>https://www.tokoro.me/tags/widgets/</link>
     <description>Recent content in Widgets on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Thu, 02 Jul 2020 17:32:57 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/widgets/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/widgets/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Human Interface GuidelinesのWidgetsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-widgets/</link>
+      <link>https://www.tokoro.me/posts/hig-widgets/</link>
       <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-widgets/</guid>
+      <guid>https://www.tokoro.me/posts/hig-widgets/</guid>
       <description>WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の Widgetsの章 を日本語訳します。
 日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。 訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。
 2020年7月3日時点のものを訳します。

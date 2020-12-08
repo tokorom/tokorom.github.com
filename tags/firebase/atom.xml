@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>firebase on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/firebase/</link>
-    <description>Recent content in firebase on TOKOROM BLOG</description>
+    <title>Firebase on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/firebase/</link>
+    <description>Recent content in Firebase on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 10 Feb 2020 10:43:31 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/firebase/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/firebase/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</title>
-      <link>http://www.tokoro.me/posts/firebsae-app-distribution/</link>
+      <link>https://www.tokoro.me/posts/firebsae-app-distribution/</link>
       <pubDate>Mon, 10 Feb 2020 10:43:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/firebsae-app-distribution/</guid>
+      <guid>https://www.tokoro.me/posts/firebsae-app-distribution/</guid>
       <description>Firebase App Distiribution 先日BETA公開されたFirebase App Distributionですが2020年3月終了のFabricからの移行先としてはもっとも有力ですよね1。
 先日「Firebaseを利用していない既存アプリを配信するためだけにFirebase App Distributionを使いたい！」と思い試してみたら、あまりにも簡単で「これは10分で設定から配信まで完了するんじゃない？」と思い、実際に、
  Firebase未導入のビルド可能なプロジェクトがある状態 Firebaseのプロジェクトを作成するところから開始 配信用にアプリをビルドしてFirebase App Distributionでテスターに配信するところを終了  という条件で実際にストップウォッチで測ってやってみたところ、なんと「4分43秒」で終わりました！

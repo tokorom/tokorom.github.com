@@ -1,289 +1,92 @@
 <!DOCTYPE html>
-<html lang='ja'><head>
-  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Objective-Cでカリー化とか部分適用してみる | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
 ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
 もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
 実際やってみたソースコードは こちら に置いてあります。
 ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
-map (&#43;3) [1, 2, 3] これです。
+map (&#43;3) [1, 2, 3]  これです。
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
-map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+map (&#43;3) ([1, 2, 3])  みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
 しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
-map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。'>
-<meta name='theme-color' content='#ffcd00'>
-
-<meta property='og:title' content='Objective-Cでカリー化とか部分適用してみる • Yuta Tokoro'>
-<meta property='og:description' content='導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); }  CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: }  Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@spinners_inc" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Objective-Cでカリー化とか部分適用してみる | TOKOROM BLOG" property="og:title"><meta content="導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
 ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
 もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
 実際やってみたソースコードは こちら に置いてあります。
 ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
-map (&#43;3) [1, 2, 3] これです。
+map (&#43;3) [1, 2, 3]  これです。
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
-map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+map (&#43;3) ([1, 2, 3])  みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
 しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
-map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。'>
-<meta property='og:url' content='http://www.tokoro.me/posts/objective-c-haskell/'>
-<meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0d04162c7a3c2907c059a06dbcd23cf4?s=256'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='objc'><meta property='article:tag' content='ios'><meta property='article:tag' content='haskell'><meta property='article:published_time' content='2013-11-04T00:00:00Z'/><meta property='article:modified_time' content='2013-11-04T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@tokorom'>
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); }  CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: }  Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objective-c-haskell/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
 
-<meta name="generator" content="Hugo 0.62.0" />
 
-  <title>Objective-Cでカリー化とか部分適用してみる • Yuta Tokoro</title>
-  <link rel='canonical' href='http://www.tokoro.me/posts/objective-c-haskell/'>
-  
-  
-  <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.c3be1755.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
-:root{--color-accent:#ffcd00;}
-</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-2451574-4', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
-  
 
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/objective-c-haskell/'>
 </head>
-<body class='page type-posts layout-post has-sidebar'>
-
-  <div class='site'><div id='sidebar' class='sidebar'>
-  <a class='screen-reader-text' href='#main-menu'></a>
-
-  <div class='container'><section class='widget widget-about sep-after'>
-  <header>
+<body>
     
-    <div class='logo'>
-      <a href='/'>
-        <img src='/images/logo.png'>
-      </a>
-    </div>
+
     
-    <h2 class='title site-title '>
-      <a href='/'>
-      TOKOROM BLOG
-      </a>
-    </h2>
-    <div class='desc'>
-    所 友太 / Yuta Tokoro
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
     </div>
-  </header>
-
-</section>
-<section class='widget widget-company sep-after'>
-  <header>
-    <h4 class='title widget-title'>
-      所属
-    </h4>
-
-    <div class='logo'>
-      <a href="http://www.spinners.work/">
-        <img src="http://www.spinners.work/images/top_logo.png">
-      </a>
-    </div>
-  </header>
-</section>
-<section class='widget widget-taxonomy_cloud sep-after'>
-  <header>
-    <h4 class='title widget-title'></h4>
-  </header>
-
-  <div class='container list-container'>
-  <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
-      </li><li>
-        <a href='/tags/aws/' style='font-size:1.0204081632653061em'>AWS</a>
-      </li><li>
-        <a href='/tags/ci/' style='font-size:1em'>ci</a>
-      </li><li>
-        <a href='/tags/cui/' style='font-size:1.0408163265306123em'>cui</a>
-      </li><li>
-        <a href='/tags/design/' style='font-size:1.0612244897959184em'>design</a>
-      </li><li>
-        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
-      </li><li>
-        <a href='/tags/github/' style='font-size:1em'>GitHub</a>
-      </li><li>
-        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
-      </li><li>
-        <a href='/tags/hig/' style='font-size:1.0204081632653061em'>HIG</a>
-      </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1428571428571428em'>HomeKit</a>
-      </li><li>
-        <a href='/tags/hugo/' style='font-size:1.0204081632653061em'>hugo</a>
-      </li><li>
-        <a href='/tags/internet/' style='font-size:1em'>Internet</a>
-      </li><li>
-        <a href='/tags/ios/' style='font-size:2em'>ios</a>
-      </li><li>
-        <a href='/tags/ios14/' style='font-size:1.0204081632653061em'>iOS14</a>
-      </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.0612244897959184em'>jenkins</a>
-      </li><li>
-        <a href='/tags/lambda/' style='font-size:1.0204081632653061em'>Lambda</a>
-      </li><li>
-        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
-      </li><li>
-        <a href='/tags/mac/' style='font-size:1.0816326530612246em'>mac</a>
-      </li><li>
-        <a href='/tags/markdown/' style='font-size:1.0204081632653061em'>markdown</a>
-      </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0408163265306123em'>nfc</a>
-      </li><li>
-        <a href='/tags/objc/' style='font-size:1.3877551020408163em'>objc</a>
-      </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0408163265306123em'>octopress</a>
-      </li><li>
-        <a href='/tags/publish/' style='font-size:1em'>publish</a>
-      </li><li>
-        <a href='/tags/review/' style='font-size:1em'>review</a>
-      </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0408163265306123em'>sakura</a>
-      </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0408163265306123em'>sesame</a>
-      </li><li>
-        <a href='/tags/slack/' style='font-size:1em'>Slack</a>
-      </li><li>
-        <a href='/tags/swift/' style='font-size:1.2653061224489797em'>swift</a>
-      </li><li>
-        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
-      </li><li>
-        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
-      </li><li>
-        <a href='/tags/test/' style='font-size:1em'>Test</a>
-      </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0204081632653061em'>tvos</a>
-      </li><li>
-        <a href='/tags/ui/' style='font-size:1.1020408163265305em'>ui</a>
-      </li><li>
-        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
-      </li><li>
-        <a href='/tags/vim/' style='font-size:1.1428571428571428em'>vim</a>
-      </li><li>
-        <a href='/tags/wi-fi/' style='font-size:1em'>Wi-Fi</a>
-      </li><li>
-        <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
-      </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0408163265306123em'>wwdc</a>
-      </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0816326530612246em'>xcode</a>
-      </li></ul>
-</div>
+</nav>
 
 
-</section>
-</div>
+<article class="content-page entry-body">
+  <h1 class="page-title">Objective-Cでカリー化とか部分適用してみる</h1>
 
-  <div class='sidebar-overlay'></div>
-</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
-  <div class='container'>
-    <a class='screen-reader-text' href='#content'></a>
-
-<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
-  <span class='screen-reader-text'></span>
-  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="3" y1="12" x2="21" y2="12" />
-  <line x1="3" y1="6" x2="21" y2="6" />
-  <line x1="3" y1="18" x2="21" y2="18" />
-  
-</svg>
-</span>
-  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="18" y1="6" x2="6" y2="18" />
-  <line x1="6" y1="6" x2="18" y2="18" />
-  
-</svg>
-</span>
-</button>
-    <ul><li class='item'>
-        <a href='/'>Blog</a>
-      </li><li class='item'>
-        <a href='https://twitter.com/tokorom/'>Twitter</a>
-      </li><li class='item'>
-        <a href='https://github.com/tokorom/'>GitHub</a>
-      </li><li class='item'>
-        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
-      </li></ul>
-  </div>
-</nav><div class='header-widgets'>
-        <div class='container'></div>
-      </div>
-
-      <header id='header' class='header site-header'>
-        <div class='container sep-after'>
-          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
-          </div>
-        </div>
-      </header>
-
-      <main id='content'>
-
-
-<article lang='ja' class='entry'>
-  <header class='header entry-header'>
-  <div class='container sep-after'>
-    <div class='header-info'>
-      <h1 class='title'>Objective-Cでカリー化とか部分適用してみる</h1>
-      
-
-    </div>
-    <div class='entry-meta'>
-  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-  <line x1="16" y1="2" x2="16" y2="6"/>
-  <line x1="8" y1="2" x2="8" y2="6"/>
-  <line x1="3" y1="10" x2="21" y2="10"/>
-  
-</svg>
-<span class='screen-reader-text'> </span>
-  <time class='entry-date' datetime='2013-11-04T00:00:00Z'>2013-11-04</time>
-</span>
-
-  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
-  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
-  
-</svg>
-<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
-  
-
-</div>
-
-
-  </div>
-</header>
-
-  
-  
-
-  <div class='container entry-content'>
-  
-  <div class='box box-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
-  
-
-  <h2 id="heading">導入</h2>
+  <div class="entry-data">
+    <span class="entry-data-date">2013年11月4日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/haskell">
+              haskell
+          </a>
+          /</div><div class="content">
+      <h2 id="heading">導入</h2>
 <p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
 <p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
@@ -291,282 +94,366 @@ if (!doNotTrack) {
 <p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
 <h2 id="heading-1">ひとまずのゴール</h2>
 <p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">map</span> (<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
-</code></pre></div><p>これです。<br>
+<pre><code class="language-haskell">map (+3) [1, 2, 3]
+</code></pre>
+<p>これです。<br>
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>) ([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>])
-</code></pre></div><p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
+<pre><code class="language-objective-c">map (+3) ([1, 2, 3])
+</code></pre>
+<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
 <p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>)
-</code></pre></div><p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
+<pre><code class="language-objective-c">map (OP('+') (@3)) (@[@1, @2, @3])
+</code></pre>
+<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
 <p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
 <!-- more -->
 <h2 id="heading-2">カリー化の実現方法</h2>
 <p>実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す <code>add</code> の実装です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define add [ObjcHaskell hsAdd]</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-+ (curryingBlock)<span style="color:#a6e22e">hsAdd</span>
+<pre><code class="language-objective-c">#define add [ObjcHaskell hsAdd]
+
++ (curryingBlock)hsAdd
 {
     CURRYING2(
         x, y,
-        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">@(</span>[x intValue] <span style="color:#f92672">+</span> [y intValue]<span style="color:#ae81ff">)</span>;
+        return @([x intValue] + [y intValue]);
     );
 }
-</code></pre></div><p><code>CURRYING2</code>という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define add [ObjcHaskell hsAdd]</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-+ (curryingBlock)<span style="color:#a6e22e">hsAdd</span>
+</code></pre>
+<p><code>CURRYING2</code>という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。</p>
+<pre><code class="language-objective-c">#define add [ObjcHaskell hsAdd]
+
++ (curryingBlock)hsAdd
 {
-    <span style="color:#66d9ef">return</span> (curryingBlock)<span style="color:#f92672">^</span>(<span style="color:#66d9ef">id</span> x) {
-        <span style="color:#66d9ef">return</span> (unaryBlock)<span style="color:#f92672">^</span>(<span style="color:#66d9ef">id</span> y) {
-          <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">@(</span>[x intValue] <span style="color:#f92672">+</span> [y intValue]<span style="color:#ae81ff">)</span>;
+    return (curryingBlock)^(id x) {
+        return (unaryBlock)^(id y) {
+          return @([x intValue] + [y intValue]);
         }
-    }<span style="color:#f92672">:</span>
+    }:
 }
-</code></pre></div><p>Blockを返すBlockを返す関数というかんじになってます。
+</code></pre>
+<p>Blockを返すBlockを返す関数というかんじになってます。
 外側のBlockは<code>x</code>という引数を取り、中側のBlockを返す。
 中側のBlockは<code>y</code>という引数を取り、外側のBlockでキャプチャされた<code>x</code>と自分でキャプチャした<code>y</code>を加算した結果を返す。<br>
 という実装です。</p>
 <p>この関数の戻り値に引数を1つ（<code>x</code>にあたるもの）渡すと、中側のBlockが返されてそのBlockは最後の引数（<code>y</code>にあたるもの）を期待し、<code>x</code>はBlockの仕組みできちんとキャプチャ（保存）された状態になります。
 これで部分適用もばっちりということです！</p>
 <p>例えば、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">curryingBlock add3 <span style="color:#f92672">=</span> add (<span style="color:#ae81ff">@3</span>);
-</code></pre></div><p>とすれば、<code>add</code>に対して<code>@3</code>を部分適用した関数（正確にはBlock）が取得でき、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#66d9ef">id</span> result <span style="color:#f92672">=</span> add3 (<span style="color:#ae81ff">@4</span>);
-</code></pre></div><p>で、<code>3 + 4</code> の結果、<code>7</code> を計算できます。</p>
+<pre><code class="language-objective-c">curryingBlock add3 = add (@3);
+</code></pre>
+<p>とすれば、<code>add</code>に対して<code>@3</code>を部分適用した関数（正確にはBlock）が取得でき、</p>
+<pre><code class="language-objective-c">id result = add3 (@4);
+</code></pre>
+<p>で、<code>3 + 4</code> の結果、<code>7</code> を計算できます。</p>
 <p>論理的には引数の数だけBlockを入れ子にしていくことで引数がいくつであっても対応可能なはず。</p>
 <h2 id="heading-3">演算子の関数化</h2>
 <p>Objective-Cでは<code>+</code>とか<code>-</code>といった演算子は関数ではないのでそのままでは使えません。
 ということで <code>OP('+')</code> みたいにマクロでなんとかすると説明したのですが、そのマクロはこんなかんじになってます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define OP(op) ([ObjcHaskell hsSectionWithOperator:op])</span><span style="color:#75715e">
-</span></code></pre></div><p>単に、charをObjective-Cのメソッドに渡してその演算子に適した関数を得ているだけです。<br>
+<pre><code class="language-objective-c">#define OP(op) ([ObjcHaskell hsSectionWithOperator:op])
+</code></pre>
+<p>単に、charをObjective-Cのメソッドに渡してその演算子に適した関数を得ているだけです。<br>
 このメソッドの実装は、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">+ (curryingBlock)<span style="color:#a6e22e">hsSectionWithOperator:</span>(<span style="color:#66d9ef">int</span>)op
+<pre><code class="language-objective-c">+ (curryingBlock)hsSectionWithOperator:(int)op
 {
-    <span style="color:#66d9ef">switch</span> (op) {
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> add;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> sub;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> mul;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> div;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> cons;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&lt;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> lessThan;
-        <span style="color:#66d9ef">case</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&gt;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> greaterThan;
-        <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> [ObjcHaskell hsReturnNil];
+    switch (op) {
+        case '+': return add;
+        case '-': return sub;
+        case '*': return mul;
+        case '/': return div;
+        case ':': return cons;
+        case '&lt;': return lessThan;
+        case '&gt;': return greaterThan;
+        default: return [ObjcHaskell hsReturnNil];
     }
 }
-</code></pre></div><p>こんなかんじで、演算子に対応するカリー化した関数をそのまま返しています。</p>
+</code></pre>
+<p>こんなかんじで、演算子に対応するカリー化した関数をそのまま返しています。</p>
 <h2 id="heading-4">畳み込み</h2>
 <p>ではこの仕組みを使って畳み込み関数 <code>foldr</code> を作ってみましょう。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define foldr [ObjcHaskell hsFoldr]</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-+ (curryingBlock)<span style="color:#a6e22e">hsFoldr</span>
+<pre><code class="language-objective-c">#define foldr [ObjcHaskell hsFoldr]
+
++ (curryingBlock)hsFoldr
 {
     CURRYING3(
         binary, ini, list,
 
-        <span style="color:#66d9ef">id</span> acc <span style="color:#f92672">=</span> ini;
-        curryingBlock fnc <span style="color:#f92672">=</span> binary;
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">id</span> elem <span style="color:#66d9ef">in</span> [list reverseObjectEnumerator]) {
-            acc <span style="color:#f92672">=</span> fnc (elem) (acc);
+        id acc = ini;
+        curryingBlock fnc = binary;
+        for (id elem in [list reverseObjectEnumerator]) {
+            acc = fnc (elem) (acc);
         }
-        <span style="color:#66d9ef">return</span> acc;
+        return acc;
     );
 }
-</code></pre></div><p><code>CURRYING2</code>が<code>CURRYING3</code>になっただけで、あとの考え方はさっきと同じです。
+</code></pre>
+<p><code>CURRYING2</code>が<code>CURRYING3</code>になっただけで、あとの考え方はさっきと同じです。
 <code>foldr</code>の１つめの引数は２つの引数を持つ関数です。ここでは<code>binary</code>がそれに相当します。<br>
 最終的には<code>binary</code>にリストの要素を１つずつ渡して計算していくわけで、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#66d9ef">id</span> acc <span style="color:#f92672">=</span> ini;
-curryingBlock fnc <span style="color:#f92672">=</span> binary;
-<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">id</span> elem <span style="color:#66d9ef">in</span> [list reverseObjectEnumerator]) {
-    acc <span style="color:#f92672">=</span> fnc (elem) (acc);
+<pre><code class="language-objective-c">id acc = ini;
+curryingBlock fnc = binary;
+for (id elem in [list reverseObjectEnumerator]) {
+    acc = fnc (elem) (acc);
 }
-</code></pre></div><p>の部分がそれに相当します。<br>
+</code></pre>
+<p>の部分がそれに相当します。<br>
 リストの要素を１つずつ取り出して、初期値（もしくは前の計算結果）と一緒に <code>binary</code> に渡していくだけです。</p>
 <p>あとは最後の計算結果（<code>acc</code>）をreturnすれば<code>foldr</code>の完成です！</p>
 <h2 id="haskell">ちょっとHaskellっぽく関数実装</h2>
 <p>では、この畳み込みを使ってさらに新しい関数 <code>sum</code> を作ってみましょう。
 <code>sum</code> は引数に渡したリストの要素を足し合わせたものを返す関数です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">#</span><span style="color:#75715e">define sum [ObjcHaskell hsSum]</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-+ (curryingBlock)<span style="color:#a6e22e">hsSum</span>
+<pre><code class="language-objective-c">#define sum [ObjcHaskell hsSum]
+
++ (curryingBlock)hsSum
 {
-    <span style="color:#66d9ef">return</span> ((<span style="color:#66d9ef">id</span>)
-        foldr OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@0</span>)
+    return ((id)
+        foldr OP('+') (@0)
     );
 }
-</code></pre></div><p>こんなかんじで、さきほど作った<code>foldr</code>を使って簡単に実装できました。</p>
+</code></pre>
+<p>こんなかんじで、さきほど作った<code>foldr</code>を使って簡単に実装できました。</p>
 <h2 id="map">最後にmapの実装</h2>
 <p><code>map</code>ですが本来は畳み込みで実現したかったのですが、今のところはラムダ式に対応していないためできませんでした。
 今回はベタに普通のObjective-C的に中身を実装してます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">+ (curryingBlock)<span style="color:#a6e22e">hsMap</span>
+<pre><code class="language-objective-c">+ (curryingBlock)hsMap
 {
     CURRYING2(
         unary, list,
-        curryingBlock fnc <span style="color:#f92672">=</span> unary;
-        NSMutableArray<span style="color:#f92672">*</span> ret <span style="color:#f92672">=</span> [NSMutableArray array];
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">id</span> elem <span style="color:#66d9ef">in</span> list) {
+        curryingBlock fnc = unary;
+        NSMutableArray* ret = [NSMutableArray array];
+        for (id elem in list) {
             [ret addObject:(fnc (elem))];
         }
-        <span style="color:#66d9ef">return</span> ret;
+        return ret;
     );
 }
-</code></pre></div><p>引数を１つ持つ関数とリストの２つをもらって、そのリストの要素１つ１つにその関数を適用しているだけです。</p>
+</code></pre>
+<p>引数を１つ持つ関数とリストの２つをもらって、そのリストの要素１つ１つにその関数を適用しているだけです。</p>
 <h2 id="map-1">mapを実行</h2>
 <p>ということで、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">map (OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>)
-</code></pre></div><p>を実現する仕組みが出そろいました。</p>
+<pre><code class="language-objective-c">map (OP('+') (@3)) (@[@1, @2, @3])
+</code></pre>
+<p>を実現する仕組みが出そろいました。</p>
 <p>早速テストを実行してみると&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">testMap</span>
+<pre><code class="language-objective-c">- (void)testMap
 {
-    <span style="color:#66d9ef">id</span> result <span style="color:#f92672">=</span> map (OP(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span>) (<span style="color:#ae81ff">@3</span>)) (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@1</span>, <span style="color:#ae81ff">@2</span>, <span style="color:#ae81ff">@3</span><span style="color:#ae81ff">]</span>);
-    XCTAssertEqualObjects(result, (<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@4</span>, <span style="color:#ae81ff">@5</span>, <span style="color:#ae81ff">@6</span><span style="color:#ae81ff">]</span>), <span style="color:#e6db74">@&#34;</span><span style="color:#e6db74">result is invalid</span><span style="color:#e6db74">&#34;</span>);
+    id result = map (OP('+') (@3)) (@[@1, @2, @3]);
+    XCTAssertEqualObjects(result, (@[@4, @5, @6]), @&quot;result is invalid&quot;);
 }
-</code></pre></div><p>無事に <code>@[@4, @5, @6]</code> が返るのを確認できました。</p>
+</code></pre>
+<p>無事に <code>@[@4, @5, @6]</code> が返るのを確認できました。</p>
 <p>やったー！</p>
 <p>まあこれをiOSアプリ開発で使うことはないでしょうが、楽しかった。。。</p>
 <p>　</p>
 
-</div>
-
-  
-
-<footer class='entry-social'>
-  <div class="container">
-    <div class="social-buttons">
-      <ul class="widget-social_menu">
-        <li>
-          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/2013/11/04/objective-c-haskell/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </li>
-
-        <li>
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </li>
-
-        <li>
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2fobjective-c-haskell%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-        </li>
-
-        <li>
-          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
-          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        </li>
-      </ul>
-    </div>
   </div>
-</footer>
-
-
-  
-<footer class='entry-footer'>
-  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
-  <line x1="7" y1="7" x2="7" y2="7"/>
-  
-</svg>
-<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/objc/'>objc</a>, <a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/haskell/'>haskell</a></div>
-
-  </div>
-</footer>
-
-
 </article>
 
-<nav class='entry-nav'>
-  <div class='container'><div class='prev-entry sep-before'>
-      <a href='/posts/ios7-design/'>
-        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
   
-  <line x1="20" y1="12" x2="4" y2="12"/>
-  <polyline points="10 18 4 12 10 6"/>
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
   
-</svg>
- </span>
-        <span class='screen-reader-text'>: </span>iOS 7はもっさりか？比較検証してみた</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/posts/ios-dev-accounts/'>
-        <span class='screen-reader-text'>: </span>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
   
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
   
-</svg>
-</span>
-      </a>
-    </div></div>
-</nav>
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
 
-<footer class='entry-works'>
-  <div class='container sep-before'>
-    <h4>所の執筆・監修した書籍</h4>
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897978440/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897978440&linkCode=as2&tag=tokorom-22&linkId=80f63e4a56d7072f274e62a43ee3f55e">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897978440&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">iPhoneプログラミングUIKit詳解リファレンス</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B01HG97S7K/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01HG97S7K&linkCode=as2&tag=tokorom-22&linkId=50a4f9009a5a2ce3b0cf2f084a5d9008">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B01HG97S7K&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">よくわかるAuto Layout (監修)</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>川邉雄介</span></li>
-    <li style="font-size:90%; list-style:none;"><span>監修：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01HG97S7K" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897976839/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897976839&linkCode=as2&tag=tokorom-22&linkId=f1f1abc3834e68b79853e4acbaec1056">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897976839&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">詳解 EZアプリ(BREW)プログラミング</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>溝口 英巳,</span><span>宮北 幸典,</span><span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios11_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios12_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
-
-  </div>
-
-</footer>
-
-
-
-      </main>
-
-      <footer id='footer' class='footer'>
-        <div class='container sep-before'><div class='copyright'>
-  <p>tokorom</p>
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
 </div>
 
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/improve-my-internet-connection/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/improve-my-internet-connection/top.jpg" class="feed-item-image" alt="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯" width="300"></div>
+
+    <span class="feed-item-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</span>
+    <span class="feed-item-date">2020年9月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
         </div>
-      </footer>
-
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
     </div>
-  </div><script>window.__assets_js_src="/assets/js/"</script>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
 
-<script src='/assets/js/main.d8d8e926.js'></script>
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
 
 </body>
-
 </html>
-

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/posts/</link>
+    <link>https://www.tokoro.me/posts/</link>
     <description>Recent content in Posts on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</title>
-      <link>http://www.tokoro.me/posts/ios14_blank_back_button/</link>
+      <link>https://www.tokoro.me/posts/ios14_blank_back_button/</link>
       <pubDate>Mon, 26 Oct 2020 17:02:15 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios14_blank_back_button/</guid>
-      <description>先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;#34;&amp;#34; } でOK！
+      <guid>https://www.tokoro.me/posts/ios14_blank_back_button/</guid>
+      <description>先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; }  でOK！
 概要 iOS14のアップデートの1つに、
  ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
@@ -31,19 +31,18 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;#34;&amp;#34; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; }  と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
-UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
-   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.</description>
+UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。</description>
     </item>
     
     <item>
       <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</title>
-      <link>http://www.tokoro.me/posts/iosdc2020/</link>
+      <link>https://www.tokoro.me/posts/iosdc2020/</link>
       <pubDate>Tue, 06 Oct 2020 14:57:02 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/iosdc2020/</guid>
+      <guid>https://www.tokoro.me/posts/iosdc2020/</guid>
       <description>2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
 私も HomeKit 2020 というセッションで発表者として参加しました。
 概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
@@ -57,10 +56,10 @@ https://zenn.dev/tokorom/books/homekit-framework
     
     <item>
       <title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</title>
-      <link>http://www.tokoro.me/posts/improve-my-internet-connection/</link>
+      <link>https://www.tokoro.me/posts/improve-my-internet-connection/</link>
       <pubDate>Mon, 07 Sep 2020 16:56:36 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/improve-my-internet-connection/</guid>
+      <guid>https://www.tokoro.me/posts/improve-my-internet-connection/</guid>
       <description>Photo by Franck V. on Unsplash
 改善のきっかけ 自宅のインターネット接続環境は、改善前は通信速度が 10Mbps〜40Mbps 程度でした。
 これで特に不満もなく使っていたのですが、同じプロバイダーを使っている同僚の @kudakurage が
@@ -73,10 +72,10 @@ https://zenn.dev/tokorom/books/homekit-framework
     
     <item>
       <title>apple/swift-formatをVimで使う</title>
-      <link>http://www.tokoro.me/posts/vim-swift-format/</link>
+      <link>https://www.tokoro.me/posts/vim-swift-format/</link>
       <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-swift-format/</guid>
+      <guid>https://www.tokoro.me/posts/vim-swift-format/</guid>
       <description>皆々様におかれましては apple/swift-format を快適にご利用いただいていますでしょうか？1
 swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。
 私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。 iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。
@@ -85,28 +84,25 @@ swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswif
 そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
 https://github.com/tokorom/vim-swift-format
 事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
-which swift-format などで存在を確認してください2。
+which swift-format  などで存在を確認してください2。
 なければ現在ならbrewでもインストール可能です。
 SwiftFormatというのは別のツールですので間違わないようご注意ください。
-brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
+brew install swift-format  aleというVimのPlugin https://github.com/dense-analysis/ale
 非同期にLintをかけるためのPluginです。
 今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
 vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
-Plug &amp;#39;tokorom/vim-swift-format&amp;#39;です。
+Plug &#39;tokorom/vim-swift-format&#39;  です。
 必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
-let g:ale_linters = {\ &amp;#39;swift&amp;#39;: [&amp;#39;swift-format&amp;#39;],\}let g:vim_swift_format_use_ale = 1必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
-let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。
-使ってみる！ 設定が終わったら早速使ってみましょう。
-試しに、
-import Foundation final class Sample{ let hello : String } とわざと2つの間違いを含んだSwiftコードを書きました。</description>
+let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1  必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39;  これらの設定が可能です。</description>
     </item>
     
     <item>
       <title>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</title>
-      <link>http://www.tokoro.me/posts/ios-promocode/</link>
+      <link>https://www.tokoro.me/posts/ios-promocode/</link>
       <pubDate>Tue, 21 Jul 2020 11:48:23 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios-promocode/</guid>
+      <guid>https://www.tokoro.me/posts/ios-promocode/</guid>
       <description>Photo by JJ Ying on Unsplash
  これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
 2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
@@ -129,10 +125,10 @@ A. 担当のかた or アプリの開発者に問い合わせてアカウント�
     
     <item>
       <title>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</title>
-      <link>http://www.tokoro.me/posts/ios-sandbox/</link>
+      <link>https://www.tokoro.me/posts/ios-sandbox/</link>
       <pubDate>Wed, 08 Jul 2020 15:41:47 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios-sandbox/</guid>
+      <guid>https://www.tokoro.me/posts/ios-sandbox/</guid>
       <description>Photo by Markus Spiske on Unsplash
  これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
 2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
@@ -165,10 +161,10 @@ iPhone/iPadの「設定」を開きます。
     
     <item>
       <title>Human Interface GuidelinesのApp Clipsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-app-clips/</link>
+      <link>https://www.tokoro.me/posts/hig-app-clips/</link>
       <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-app-clips/</guid>
+      <guid>https://www.tokoro.me/posts/hig-app-clips/</guid>
       <description>前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
 2020年7月8日時点のものを訳します。
 前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
@@ -184,10 +180,10 @@ App Clipをマーケティング目的だけに使用してはいけません。
     
     <item>
       <title>Human Interface GuidelinesのWidgetsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-widgets/</link>
+      <link>https://www.tokoro.me/posts/hig-widgets/</link>
       <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-widgets/</guid>
+      <guid>https://www.tokoro.me/posts/hig-widgets/</guid>
       <description>WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の Widgetsの章 を日本語訳します。
 日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。 訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。
 2020年7月3日時点のものを訳します。
@@ -213,32 +209,32 @@ Widgetをタップしたときに、アプリの適切な画面を開くよう�
     
     <item>
       <title>Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる</title>
-      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
+      <link>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
       <pubDate>Mon, 15 Jun 2020 14:25:23 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
+      <guid>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
       <description>導入 前回の Swift AWS Lambda Runtimeのサンプルをデプロイしてみた の続きです。
 特に犬の写真を毎朝送ってほしいというわけではないですが、Swift AWS Lambda Runtimeを試すにあたっての題材として、
  AWS Lambdaのスケジュール式トリガーで毎朝自動で実行する 画像検索APIで犬の写真をランダムに取ってくる それをSlackに送る  というのをやってみます。
 画像検索API 画像検索APIは手っ取り早く使えそうなAzureの Image Search API を使ってみます。 Azureのアカウントさえ作れば、月1000回までは無料で叩けるようです。
 curlで叩くとすると、
-curl &amp;#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&amp;#39; \  -H &amp;#39;Ocp-Apim-Subscription-Key: YOUR_KEY&amp;#39; となります。
+curl &#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&#39; \ -H &#39;Ocp-Apim-Subscription-Key: YOUR_KEY&#39;  となります。
  リクエストパラメータに q=検索ワード リクエストヘッダーに Ocp-Apim-Subscription-Key: YOUR_KEY  を渡します1。
 Slackへの通知 Slackの Incoming Webhook用のURLを取得します。
 URLを取得したら、curlで叩くとすると、
-curl -X POST -H &amp;#39;Content-type: application/json&amp;#39; \  --data &amp;#39;{&amp;#34;text&amp;#34;:&amp;#34;犬の画像のURL&amp;#34;}&amp;#39; \  https://hooks.slack.com/services/your/incoming/webhook とするだけです。
+curl -X POST -H &#39;Content-type: application/json&#39; \ --data &#39;{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}&#39; \ https://hooks.slack.com/services/your/incoming/webhook  とするだけです。
  POSTデータで{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}  を送ってあげるだけですね。
 Lambda関数を作る これで画像検索APIとSlackへの通知部分は準備できたので、あとはメインディッシュのLambda関数を作るだけです。
 Packageの作成 まずは、
-swift package init --type executable --name DogImage とPackageを作り、 GitHub上のサンプル をベースにPackage.</description>
+swift package init --type executable --name DogImage  とPackageを作り、 GitHub上のサンプル をベースにPackage.</description>
     </item>
     
     <item>
       <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</title>
-      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
+      <link>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
       <pubDate>Thu, 11 Jun 2020 14:57:28 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
+      <guid>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
       <description>導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
 https://swift.org/blog/aws-lambda-runtime/
 以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
@@ -249,10 +245,10 @@ swift.orgの説明には、
     
     <item>
       <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
-      <link>http://www.tokoro.me/posts/github-actions-context/</link>
+      <link>https://www.tokoro.me/posts/github-actions-context/</link>
       <pubDate>Wed, 13 May 2020 17:26:38 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/github-actions-context/</guid>
+      <guid>https://www.tokoro.me/posts/github-actions-context/</guid>
       <description>この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
 概要 GitHub Actions、簡単便利で良いですね！
 ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
@@ -262,17 +258,16 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
  Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
-いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
- 成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける  といろいろカスタムしてみます。</description>
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、</description>
     </item>
     
     <item>
       <title>Vimにスクショを直接Markdownで貼り付ける</title>
-      <link>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
+      <link>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
       <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
+      <guid>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
       <description>Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
  ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む  という便利環境を作りました。
@@ -280,24 +275,24 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 今回はそこを解決します！
 pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
 screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+screencapture -i 出力ファイル名  とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
 vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
  現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
 そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;)  とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
 今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh  IMAGEDIR=&amp;#34;content/images/$2&amp;#34; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;#34;ss-${CURRENTTIME}.png&amp;#34; TARGET=&amp;#34;${IMAGEDIR}/${IMAGEFILENAME}&amp;#34; IMAGETAG=&amp;#34;![image](/images/$2/${IMAGEFILENAME})&amp;#34; mkdir -p ${IMAGEDIR} screencapture -i &amp;#34;${TARGET}&amp;#34; echo &amp;#34;${IMAGETAG}&amp;#34; IMAGEOPTIM=&amp;#34;open -a ImageOptim&amp;#34; `${IMAGEOPTIM} ${TARGET}` です。</description>
+#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}`  です。</description>
     </item>
     
     <item>
       <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
-      <link>http://www.tokoro.me/posts/vim-markdown-image-tool/</link>
+      <link>https://www.tokoro.me/posts/vim-markdown-image-tool/</link>
       <pubDate>Tue, 31 Mar 2020 16:38:32 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
+      <guid>https://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
       <description>Photo by Victor Grabarczyk on Unsplash
 ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
 最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
@@ -309,19 +304,17 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
 ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
 具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+/Users/tokorom/Desktop/dog.jpg  が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
 現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&amp;#39;.&amp;#39;) let result = system(g:vim_replace_current_line#command . &amp;#39; &amp;#39; . expand(&amp;#39;%&amp;#39;) . &amp;#39; &amp;#39; . expand(&amp;#39;%:t:r&amp;#39;) . &amp;#39; &amp;#39; . trim(line)) call setline(&amp;#39;.&amp;#39;, trim(result))endfunctionという３行のシンプルなfunction１つだけです。
-ここでやっているのは、
- 特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え  ということだけです。</description>
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction  という３行のシンプルなfunction１つだけです。</description>
     </item>
     
     <item>
       <title>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</title>
-      <link>http://www.tokoro.me/posts/firebsae-app-distribution/</link>
+      <link>https://www.tokoro.me/posts/firebsae-app-distribution/</link>
       <pubDate>Mon, 10 Feb 2020 10:43:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/firebsae-app-distribution/</guid>
+      <guid>https://www.tokoro.me/posts/firebsae-app-distribution/</guid>
       <description>Firebase App Distiribution 先日BETA公開されたFirebase App Distributionですが2020年3月終了のFabricからの移行先としてはもっとも有力ですよね1。
 先日「Firebaseを利用していない既存アプリを配信するためだけにFirebase App Distributionを使いたい！」と思い試してみたら、あまりにも簡単で「これは10分で設定から配信まで完了するんじゃない？」と思い、実際に、
  Firebase未導入のビルド可能なプロジェクトがある状態 Firebaseのプロジェクトを作成するところから開始 配信用にアプリをビルドしてFirebase App Distributionでテスターに配信するところを終了  という条件で実際にストップウォッチで測ってやってみたところ、なんと「4分43秒」で終わりました！
@@ -340,10 +333,10 @@ function vim_replace_current_line#execute() let line = getline(&amp;#39;.&amp;#3
     
     <item>
       <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
-      <link>http://www.tokoro.me/posts/swiftui-hackathon/</link>
+      <link>https://www.tokoro.me/posts/swiftui-hackathon/</link>
       <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swiftui-hackathon/</guid>
+      <guid>https://www.tokoro.me/posts/swiftui-hackathon/</guid>
       <description>2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
 いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
 また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&amp;hellip;
@@ -365,10 +358,10 @@ Photo by Michael Longmire on Unsplash
     
     <item>
       <title>HomeKit ADKでSlackにメッセージ送信するアクセサリを作ってみる</title>
-      <link>http://www.tokoro.me/posts/homekitadk/</link>
+      <link>https://www.tokoro.me/posts/homekitadk/</link>
       <pubDate>Mon, 23 Dec 2019 11:47:15 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekitadk/</guid>
+      <guid>https://www.tokoro.me/posts/homekitadk/</guid>
       <description>HomeKitADKのオープンソース化 つい先日（2019/12/18）、AppleがAmazon、Google、Zigbee Allianceと、スマートホームデバイスに関するワーキンググループを結成したとのビッグニュースが発表されましたね！
 https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/
 これに伴い、HomeKitに対応したアクセサリを開発するためのHomeKit ADKがオープンソース化されました。
@@ -377,38 +370,35 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
 こちらですが、
  まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
  アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する  なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
 これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
 といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
-Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といったログが確認できるかと思います。
+Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false  といったログが確認できるかと思います。
 サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
 今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
 https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
 このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
 ただ、今回は実験なので（正直、C言語で書いてビルドし直して&amp;hellip;というのが面倒なので）、
-#include &amp;lt;stdlib.h&amp;gt;して、
-if (value) { system(&amp;#34;./handleLightBulbOn&amp;#34;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
-Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
-例えば、こんなかんじのものです。
-この例ではSlackのIncoming Webhooksを使っています。</description>
+#include &amp;lt;stdlib.h&amp;gt;  して、
+if (value) { system(&amp;quot;./handleLightBulbOn&amp;quot;); }  ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。</description>
     </item>
     
     <item>
       <title>NFCタグ で鍵を開けよう（6） iOS13時代の最終形</title>
-      <link>http://www.tokoro.me/posts/nfc-iphone-6/</link>
+      <link>https://www.tokoro.me/posts/nfc-iphone-6/</link>
       <pubDate>Wed, 30 Oct 2019 13:57:46 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nfc-iphone-6/</guid>
+      <guid>https://www.tokoro.me/posts/nfc-iphone-6/</guid>
       <description>この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。 これで最後の予定です。
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形（この記事）  3〜5についてはiOS13の機能を使った最終形で、もうこれでいいじゃん！となったのでスキップします。（NFCタグを鍵にするパターンはまだ必要なケースあるかも）
 なにができる？ iOS 13でNFCタグをトリガーとしてアプリを叩けるようになった iOS 13（正確にはiOS 13.1）で、純正アプリの ショートカット にオートメーションという機能が追加されました。 このオートメーションのトリガーの１つに、なんと NFCタグ があるのです。
 そして、それをトリガーとしてサードパーティ製アプリの Siri Shortcut を呼び出せます。 つまり、アプリがSiri Shortcutに対応していれば、そのアプリをNFCタグタッチだけで動作させられるようになったということです。 そして、我らがSesameもこれに対応しています。
 １行でまとめると、
-iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる ということです。
+iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる  ということです。
 対応デバイス 正確には、iOS 13であっても Background Tag Reading に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、
  iPhone XR iPhone XS iPhone XS Max iPhone 11 iPhone 11 Pro iPhone 11 Pro Max  の６機種です。
 実際にやってみよう NFCタグの準備 NFCタグには何も情報を書き込む必要はありません。
@@ -419,10 +409,10 @@ iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠が�
     
     <item>
       <title>iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇します</title>
-      <link>http://www.tokoro.me/posts/iosdc_2019_pre/</link>
+      <link>https://www.tokoro.me/posts/iosdc_2019_pre/</link>
       <pubDate>Wed, 04 Sep 2019 18:09:20 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/iosdc_2019_pre/</guid>
+      <guid>https://www.tokoro.me/posts/iosdc_2019_pre/</guid>
       <description>明日、2019年9月5日（木）から開催される iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇予定です。
 スケジュール  2019/09/05（木） 18:40〜  Track B レギュラートーク（30分） Proposal    概要 Proposalからの抜粋です。
  Segueでできること、できないこと、とにかくSegue（UIStoryboardSegue）について凝縮して紹介します。 通常の使い方からUnwindSegueを使うメリット、Xcode 11から利用できるようになったIBSegueActionまで。 Segueを愛して7年の私が、これまでSegueを避けてきた皆さんにもSegueの魅力を知っていただけるようなトークができればと考えています。
@@ -436,10 +426,10 @@ iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心に�
     
     <item>
       <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</title>
-      <link>http://www.tokoro.me/posts/nfc-iphone-2/</link>
+      <link>https://www.tokoro.me/posts/nfc-iphone-2/</link>
       <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nfc-iphone-2/</guid>
+      <guid>https://www.tokoro.me/posts/nfc-iphone-2/</guid>
       <description>この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
 今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
@@ -448,17 +438,17 @@ iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心に�
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
-curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}] 鍵をロック 上で取得したdevice_idを利用し、
-curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。</description>
+curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+ レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
+curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.</description>
     </item>
     
     <item>
       <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
-      <link>http://www.tokoro.me/posts/nfc-iphone-1/</link>
+      <link>https://www.tokoro.me/posts/nfc-iphone-1/</link>
       <pubDate>Mon, 01 Apr 2019 12:43:04 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nfc-iphone-1/</guid>
+      <guid>https://www.tokoro.me/posts/nfc-iphone-1/</guid>
       <description>この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
  NFCタグにURIを書き込む（この記事） iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  導入 我が家にスマートロックのSesameを採用しました。
 私一人ならSesameだけでものすごく便利になったわけですが、我が家には小さい子供が３人います。子供たちにスマホを持たせるにはまだ早く、このままではスマートロックの恩恵を十分に受けることができません。
@@ -474,21 +464,21 @@ nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続し�
 調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
 このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
 情報の読み取り NFCタグに書き込まれた情報を読み取るにはexsamplesの中のtagtool.pyを使って
-python tagtool.py show とするだけです。
+python tagtool.py show  とするだけです。
 フォーマット NFCタグをフォーマットしたいときもtagtool.pyを使って
-python tagtool.py format とするだけです。
+python tagtool.py format  とするだけです。
 URI書き込み NFCタグにURIを書き込みたい場合のみ少し工夫が必要でした。 とはいえ、exsamplesの中にあるものだけで改造なしで可能です。
 例えばhttps://tag.exsample.com/lockというURIを書き込むこととします。
 まず、うまくいくパターンからですが、
-echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load - でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。</description>
+echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load -  でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。</description>
     </item>
     
     <item>
       <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</title>
-      <link>http://www.tokoro.me/posts/vim-review/</link>
+      <link>https://www.tokoro.me/posts/vim-review/</link>
       <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-review/</guid>
+      <guid>https://www.tokoro.me/posts/vim-review/</guid>
       <description>本記事は Vim その2 アドベントカレンダー 21日目の記事です。
 経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
 現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
@@ -497,22 +487,22 @@ echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U -
 シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &amp;gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
 そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
  https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
-let g:vim_review#include_filetypes = [&amp;#39;swift&amp;#39;]と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+let g:vim_review#include_filetypes = [&#39;swift&#39;]  と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
 と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
 これが発火する条件は、
  Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
 リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
  fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
  fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
-事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.</description>
+事前準備 brew install fswatch npm install -g browser-sync  browser-syncの起動 cd articles browser-sync start --server --files *.</description>
     </item>
     
     <item>
       <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</title>
-      <link>http://www.tokoro.me/posts/lottie-ios-1/</link>
+      <link>https://www.tokoro.me/posts/lottie-ios-1/</link>
       <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/lottie-ios-1/</guid>
+      <guid>https://www.tokoro.me/posts/lottie-ios-1/</guid>
       <description>この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
 Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
 iOS用のライブラリは、
@@ -522,21 +512,21 @@ https://github.com/airbnb/lottie-ios
  これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie  let animationView = LOTAnimationView(name: &amp;quot;yes&amp;quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play()  再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。</description>
+animationView.frame = animationView.sceneModel?.compBounds ?? view.</description>
     </item>
     
     <item>
       <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
-      <link>http://www.tokoro.me/posts/homekit_delongi_heater/</link>
+      <link>https://www.tokoro.me/posts/homekit_delongi_heater/</link>
       <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekit_delongi_heater/</guid>
+      <guid>https://www.tokoro.me/posts/homekit_delongi_heater/</guid>
       <description>De&#39;Longhi Multi Dynamic Heater WiFi Model
 主なサービス    HMServiceType〜 説明     Thermostat サーモスタット    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     CurrentHeatingCooling 現在の冷暖房の状態 uint8 -   TargetHeatingCooling 冷暖房の目標状態 uint8 可   CurrentTemperature 現在の温度 float -   TargetTemperature 目標温度 float 可   TemperatureUnits 温度表示装置 uint8 可    概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
 私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
@@ -545,29 +535,29 @@ animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAni
     
     <item>
       <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
-      <link>http://www.tokoro.me/posts/homekit_hue_sensor/</link>
+      <link>https://www.tokoro.me/posts/homekit_hue_sensor/</link>
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekit_hue_sensor/</guid>
+      <guid>https://www.tokoro.me/posts/homekit_hue_sensor/</guid>
       <description>Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。</description>
     </item>
     
     <item>
       <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
-      <link>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
+      <link>https://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
       <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekit_koogeek_lightbulb/</guid>
+      <guid>https://www.tokoro.me/posts/homekit_koogeek_lightbulb/</guid>
       <description>Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
 Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。</description>
     </item>
     
     <item>
       <title>テレビのリモコンのことも忘れないで！</title>
-      <link>http://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
+      <link>https://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
+      <guid>https://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
       <description>AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
 テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
 AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
@@ -583,10 +573,10 @@ UIPageViewController これは意外だったのですが、UIPageViewController
     
     <item>
       <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
-      <link>http://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
+      <link>https://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
+      <guid>https://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
       <description>[問題]コンテンツのスワイプ まずは、tvOSの特定の画面にて「右スワイプ」をした時に、コンテンツが左右どちらに動くでしょう？というクイズを３つ出させていただきます。 クイズの問題を３つ出した後に、それらの答えを実際の動きを撮影したGIFアニメとともに並べてありますので、答えのGIFアニメをできるだけ見ないように考えてみてください！
 いずれもApple純正アプリ（ホーム画面含む）からの問題です。
 Q1. ホーム画面のTop Shelfでの左右スワイプ 最初の問題はホーム画面からです。 このtvOSのホーム画面のTop Shelfで「右スワイプ」をした場合、Top Shelfは左に動いて右隣のコンテンツが表示されるでしょうか？それとも右に動いて左隣のコンテンツが表示されるでしょうか？
@@ -607,10 +597,10 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
     
     <item>
       <title>クリスマスツリーをHomeKitに対応させよう</title>
-      <link>http://www.tokoro.me/posts/homekit_christmastree/</link>
+      <link>https://www.tokoro.me/posts/homekit_christmastree/</link>
       <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekit_christmastree/</guid>
+      <guid>https://www.tokoro.me/posts/homekit_christmastree/</guid>
       <description>やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
 今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&amp;hellip;ということで。
 実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
@@ -633,10 +623,10 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
     
     <item>
       <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
-      <link>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
+      <link>https://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
       <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
+      <guid>https://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
       <description>[Amazon] Philips Hue(ヒュー) Dimmer スイッチ主なサービス    HMServiceType〜 説明     StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ   Battery バッテリー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     InputEvent プログラマブル・スイッチ・イベント uint8 -   BatteryLevel 電池残量 uint8 -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
 Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
 なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
@@ -646,10 +636,10 @@ InputEventをトリガーとするサンプルコード InputEventをトリガ�
     
     <item>
       <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
-      <link>http://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
+      <link>https://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
       <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
+      <guid>https://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
       <description>[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
 カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
 なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
@@ -659,20 +649,20 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
     
     <item>
       <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
-      <link>http://www.tokoro.me/posts/user_notification/</link>
+      <link>https://www.tokoro.me/posts/user_notification/</link>
       <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/user_notification/</guid>
+      <guid>https://www.tokoro.me/posts/user_notification/</guid>
       <description>概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
 コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
 http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
 iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
-iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)  でiOSが必要なら
 とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
 しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
 （やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&amp;hellip;）
 iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
-UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in //gotgranted:) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) }  でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
 ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
 コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
    タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.</description>
@@ -680,10 +670,10 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
     
     <item>
       <title>Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</title>
-      <link>http://www.tokoro.me/posts/has-associated-objects/</link>
+      <link>https://www.tokoro.me/posts/has-associated-objects/</link>
       <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/has-associated-objects/</guid>
+      <guid>https://www.tokoro.me/posts/has-associated-objects/</guid>
       <description>extensionでstored propertyを追加したくなることありますか？ 少なくともSwift 2.1時点ではextensionでstored propertyを追加することはできず、computed propertyのみに限られます。
 でも、ヤダヤダ！ぼくは絶対stored property追加したいんだい！ってことありますか？
 そう思っちゃうあなた、他に解決方法ありますよね？なんでそのやりかたにこだわるんですか？そういう思考になっちゃう時点でまだSwift脳に至ってはいないのではないでしょうか（建前）。
@@ -691,35 +681,35 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
 対象がAnyObjectならAssociated Objectsで代用できるよ で、そんな時は この記事 でやっているように Associated Objects で代用できることがあります。
 対象にきちんとretainさせることも可能ですし、安心ですね！
 以下、サンプルコードです。
-var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } } でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
+var StoredPropertyKey: UInt8 = 0 extension UIViewController { var storedProperty: SomeObject? { get { guard let object = objc_getAssociatedObject(self, &amp;amp;StoredPropertyKey) as? SomeObject else { return nil } return object } set { objc_setAssociatedObject(self, &amp;amp;StoredPropertyKey, newValue, .OBJC_ASSOCIATION_RETAIN) } } }  でも、こんな黒魔術的コードをプロジェクトの各所に書いてしまうと、またみんなに怒られちゃうかもしれませんよ？
 黒魔術（臭いもの）にフタを なので、この objc_xxxAssociatedObject を二度と書かなくて良いようにライブラリ化できないものでしょうか？
 例えば、こんな感じで気軽にextendできるように。
-//UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?</description>
+// UIViewControllerにstoredPropertyを追加！ extension UIViewController: HasAssociatedObjects { var storedProperty: String?</description>
     </item>
     
     <item>
       <title>Swiftでdeinitまで処理をdeferする</title>
-      <link>http://www.tokoro.me/posts/defer-to-deinit/</link>
+      <link>https://www.tokoro.me/posts/defer-to-deinit/</link>
       <pubDate>Mon, 26 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/defer-to-deinit/</guid>
+      <guid>https://www.tokoro.me/posts/defer-to-deinit/</guid>
       <description>deferしてますか？ Swift2でみんな大好きdeferさんが導入されましたね！
 guardと違いそんなに使う機会は訪れていないのですが、昨日、こんな感じで使いたい！という場面に遭遇しました。
 CocoaLumberjackを使ってデバッグ用にUITextViewにログを吐くCustom Loggerを設定していたのですが、とあるViewControllerだけでそれを使いたく、ViewControllerがdeinitされたらそのCustom Loggerも当然外したい。
 そんなコードを書く場合、defer大好きっ子ならCustom Loggerを登録した後にこんな感じで解除したくなりますよね（実際は僕はこのとき初めて実験でないところでdeferを使ったので、本当のdefer大好きっ子はこんな間違いはしないだろう）。
-let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) defer { DDLog.removeLogger(logger) } defer使って、必要なくなったら漏れなくCustom Loggerを解放する俺様は超カッコいいぜ！と言いたかったのだが、当然のごとくこのコードは間違っていて、これを実行し終わるときにはdeferした処理も実行されて登録したCustom Loggerが即解除されるというお馬鹿な状況になるわけです。
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) defer { DDLog.removeLogger(logger) }  defer使って、必要なくなったら漏れなくCustom Loggerを解放する俺様は超カッコいいぜ！と言いたかったのだが、当然のごとくこのコードは間違っていて、これを実行し終わるときにはdeferした処理も実行されて登録したCustom Loggerが即解除されるというお馬鹿な状況になるわけです。
 でもdeferしたいよね？ とお馬鹿な前置きは置いておいても、上のような雰囲気で終処理書けたら便利な気はする。 普通にdeinitでやれば済む話なんだけど、今回のケースだとpropertyにloggerをもたせて、deinitでloggerがあればremoveLoggerする的なことを書かないといけない。まあ普通のことではあるんだけど、できたら、
-let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToDeinit { DDLog.removeLogger(logger) } と、deinitまで処理を遅延させる的な書き方できたら面白いよね、ということで&amp;hellip;
+let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToDeinit { DDLog.removeLogger(logger) }  と、deinitまで処理を遅延させる的な書き方できたら面白いよね、ということで&amp;hellip;
 deinitまでdeferさせてみよう！その1 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
-typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } } てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。</description>
+typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } }  てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。</description>
     </item>
     
     <item>
       <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
-      <link>http://www.tokoro.me/posts/el-capitain-totalterminal/</link>
+      <link>https://www.tokoro.me/posts/el-capitain-totalterminal/</link>
       <pubDate>Mon, 05 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/el-capitain-totalterminal/</guid>
+      <guid>https://www.tokoro.me/posts/el-capitain-totalterminal/</guid>
       <description>El CapitanにしたらTotalTerminalが動かない！ Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。
 しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！
 もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。 （実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）
@@ -727,17 +717,16 @@ typealias DeferredClosure = () -&amp;gt; Void class BaseViewController: UIViewCo
 以下、試したことをまとめます。
 ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
  Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
-tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
-https://github.com/tokorom/ToggleTerminalScript
-現在の課題としましては、</description>
+tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript</description>
     </item>
     
     <item>
       <title>SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</title>
-      <link>http://www.tokoro.me/posts/swifttask-promisekit-bolts/</link>
+      <link>https://www.tokoro.me/posts/swifttask-promisekit-bolts/</link>
       <pubDate>Thu, 12 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swifttask-promisekit-bolts/</guid>
+      <guid>https://www.tokoro.me/posts/swifttask-promisekit-bolts/</guid>
       <description>※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです  次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
  SwiftTask PromiseKit Bolts-iOS  を（表面だけ）使って比較してみました。
 なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。
@@ -745,15 +734,15 @@ https://github.com/tokorom/ToggleTerminalScript
 以下にそれぞれ使ってみた結果を紹介させていただきます。
 更新頻度 この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。
 試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
-Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &amp;#34;\(users)&amp;#34; }.failure { [unowned self] error, _ in self.textView?.text = &amp;#34;\(error)&amp;#34; }  すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます  PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&amp;gt; Void in self.textView?.text = &amp;#34;\(users)&amp;#34; return }.catch { [unowned self] error -&amp;gt; Void in self.</description>
+Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &amp;quot;\(users)&amp;quot; }.failure { [unowned self] error, _ in self.textView?.text = &amp;quot;\(error)&amp;quot; }   すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます  PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&amp;gt; Void in self.textView?.text = &amp;quot;\(users)&amp;quot; return }.catch { [unowned self] error -&amp;gt; Void in self.</description>
     </item>
     
     <item>
       <title>AlamofireでGenericにModelオブジェクトを取得する</title>
-      <link>http://www.tokoro.me/posts/almofire/</link>
+      <link>https://www.tokoro.me/posts/almofire/</link>
       <pubDate>Wed, 11 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/almofire/</guid>
+      <guid>https://www.tokoro.me/posts/almofire/</guid>
       <description>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています
 Swiftいいですね！
 これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。 例えば、Alamofire のInitial Commitも2014/7/31だったりと。。。
@@ -761,55 +750,55 @@ Swiftいいですね！
 ということで、３月からはじめる新案件ではAlamofireの採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。 やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！
 ※基本的にはAlamofireのREADMEに書かれている話です
 ふつうにJSONを取得するインターフェース まず、普通にJSONを取得するインターフェースですが、
-Alamofire.request(.GET, &amp;#34;https://api.github.com/users&amp;#34;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &amp;#34;\(error)&amp;#34; } else if let JSON = JSON { //ここでJSONをパースしてModelに変換する //これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.</description>
+Alamofire.request(.GET, &amp;quot;https://api.github.com/users&amp;quot;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &amp;quot;\(error)&amp;quot; } else if let JSON = JSON { // ここでJSONをパースしてModelに変換する // これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users.</description>
     </item>
     
     <item>
       <title>NSTimeZoneから取得できる表示用文字列のサンプル</title>
-      <link>http://www.tokoro.me/posts/nstimezone-sample/</link>
+      <link>https://www.tokoro.me/posts/nstimezone-sample/</link>
       <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nstimezone-sample/</guid>
+      <guid>https://www.tokoro.me/posts/nstimezone-sample/</guid>
       <description>さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。
-abbreviation GMT+9 name Asia/Tokyo description Asia/Tokyo (GMT+9) offset 32400 localizedName(_:locale:)    NSLocale NSTimeZoneNameStyle 出力結果     en_US Standard Japan Standard Time   en_US ShortStandard GMT+9   en_US DaylightSaving Japan Daylight Time   en_US ShortDaylightSaving GMT+9   en_US Generic Japan Standard Time   en_US ShortGeneric Japan Time   ja_JP Standard 日本標準時   ja_JP ShortStandard JST   ja_JP DaylightSaving 日本夏時間   ja_JP ShortDaylightSaving JDT   ja_JP Generic 日本標準時   ja_JP ShortGeneric JST    上記を試したコード let timeZone = NSTimeZone.</description>
+abbreviation GMT+9  name Asia/Tokyo  description Asia/Tokyo (GMT+9) offset 32400  localizedName(_:locale:)    NSLocale NSTimeZoneNameStyle 出力結果     en_US Standard Japan Standard Time   en_US ShortStandard GMT+9   en_US DaylightSaving Japan Daylight Time   en_US ShortDaylightSaving GMT+9   en_US Generic Japan Standard Time   en_US ShortGeneric Japan Time   ja_JP Standard 日本標準時   ja_JP ShortStandard JST   ja_JP DaylightSaving 日本夏時間   ja_JP ShortDaylightSaving JDT   ja_JP Generic 日本標準時   ja_JP ShortGeneric JST    上記を試したコード let timeZone = NSTimeZone.</description>
     </item>
     
     <item>
       <title>SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</title>
-      <link>http://www.tokoro.me/posts/swift-simulator/</link>
+      <link>https://www.tokoro.me/posts/swift-simulator/</link>
       <pubDate>Sat, 13 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-simulator/</guid>
+      <guid>https://www.tokoro.me/posts/swift-simulator/</guid>
       <description>だいぶ小ネタ。
-コード #if (arch(i386) || arch(x86_64)) &amp;amp;&amp;amp; os(iOS) AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug AFNetworkActivityLogger.sharedLogger().startLogging() #endif UIDeviceを使う方法もあるが、そちらは実際に動いたときに判別することになる。
+コード #if (arch(i386) || arch(x86_64)) &amp;amp;&amp;amp; os(iOS) AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug AFNetworkActivityLogger.sharedLogger().startLogging() #endif  UIDeviceを使う方法もあるが、そちらは実際に動いたときに判別することになる。
 こちらだとそもそもiPhone用のアプリからはこのコード自体省かれる形になる。
 意味  arc(i386)  32bitのMac（シミュレータ）用のビルド   arc(x86_64)  64bitのMac（シミュレータ）用のビルド   os(iOS)  ターゲットがMacじゃなくてiOS    オマケ ぼくの手元では、デバッグ実行時に
-#if DEBUG println(&amp;#34;DEBUG&amp;#34;) #endif で DEBUG が出力されない。普通は出力されるはず？？</description>
+#if DEBUG println(&amp;quot;DEBUG&amp;quot;) #endif  で DEBUG が出力されない。普通は出力されるはず？？</description>
     </item>
     
     <item>
       <title>Swiftで部分適用（カリー化）</title>
-      <link>http://www.tokoro.me/posts/swift-partial-application/</link>
+      <link>https://www.tokoro.me/posts/swift-partial-application/</link>
       <pubDate>Wed, 30 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-partial-application/</guid>
+      <guid>https://www.tokoro.me/posts/swift-partial-application/</guid>
       <description>Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
-func addTwoNumbers(a: Int)(b: Int) -&amp;gt; Int { return a + b } というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
-let add1 = addTwoNumbers(1) add1(b: 2) //&amp;lt;3 というかんじに、
+func addTwoNumbers(a: Int)(b: Int) -&amp;gt; Int { return a + b }  というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
+let add1 = addTwoNumbers(1) add1(b: 2) //&amp;lt; 3  というかんじに、
  まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b）  というのができる。
 専用の書き方じゃなくてふつうのfunctionに部分適用できないの？ 使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。
 また、上のような専用の定義にしちゃうと addTwoNumbers(1, 2) みたいな普通の呼び方ができなくなっちゃうし。
 そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
 実装 https://github.com/tokorom/partial-swift
-func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closure () -&amp;gt; A) -&amp;gt; (B) -&amp;gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&amp;gt; Int { return a + b } let add1 = partial(add, 1) add1(2) //&amp;lt;3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。</description>
+func partial&amp;lt;A, B, R&amp;gt;(function: (A, B) -&amp;gt; R, a: @auto_closure () -&amp;gt; A) -&amp;gt; (B) -&amp;gt; R { return { function(a(), $0) } }  利用サンプル func add(a: Int, b: Int) -&amp;gt; Int { return a + b } let add1 = partial(add, 1) add1(2) //&amp;lt; 3  とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。</description>
     </item>
     
     <item>
       <title>これがXcodeでのバージョニングの決定版になるかも</title>
-      <link>http://www.tokoro.me/posts/xcode-versioning/</link>
+      <link>https://www.tokoro.me/posts/xcode-versioning/</link>
       <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/xcode-versioning/</guid>
+      <guid>https://www.tokoro.me/posts/xcode-versioning/</guid>
       <description>概要 この記事でできるようになること  安定してInfo.plistの内容（ここではBuild番号）を変更できる ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される Info.plistに差分がでないのでcommitのときに邪魔にならない  なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感がこちらに詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、熊谷さんの記事をご一読ください！
 必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
 経緯 これまで、
@@ -824,10 +813,10 @@ potatotips 第７回 で「agvtoolで超かっこよくバージョニングで�
     
     <item>
       <title>Objective-Cで非同期処理のテストをシンプルに書く方法</title>
-      <link>http://www.tokoro.me/posts/objc-async-test/</link>
+      <link>https://www.tokoro.me/posts/objc-async-test/</link>
       <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-async-test/</guid>
+      <guid>https://www.tokoro.me/posts/objc-async-test/</guid>
       <description>非同期処理のテストってどう書いてますか？ 標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、
  GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？） expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う  となるかと思います。 ただ、私が調べた時点だとどれもしっくりきませんでした。
 まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。
@@ -837,38 +826,38 @@ potatotips 第７回 で「agvtoolで超かっこよくバージョニングで�
  テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの TestCaseの親クラスが限定されないほうがよい 余分なコードを書かずにシンプルに書きたい それを利用することでテストの実行が遅くなったりしない  しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。
 他言語ではどういう書き方をしている？ なお、他言語ではどういう書き方が一般的なんだろうと調べてはみたのですが、なかなかしっくりくるものが見つからず、Objective-Cでこう書けたらいいなあと思ったのは RubyMotionで使われている書き方 でした。
 http://mobiletou.ch/2013/10/第五回-rubymotionでhttpや非同期処理を含むユニットテスト
-some_method_with_block {|some_data| @data = some_data resume } wait_max 1.0 do @data.should.equal foo end  待たせたい場所で wait 待たせている処理が終わったら resume  という本当にシンプルで分かりやすい書き方です。
+some_method_with_block {|some_data| @data = some_data resume } wait_max 1.0 do @data.should.equal foo end   待たせたい場所で wait 待たせている処理が終わったら resume  という本当にシンプルで分かりやすい書き方です。
 ということで、Objective-Cで同じようにWait &amp;amp; Resume方式で親クラスを限定せずに使えるシンプルなライブラリを作ることにしました。
 TKRGuard そして作ったのが TKRGuard です。
 TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方ができます。
-// #import &amp;#34;TKRGuard.h&amp;#34;  __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&amp;#34;OK!</description>
+// #import &amp;quot;TKRGuard.h&amp;quot; __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&amp;quot;OK!</description>
     </item>
     
     <item>
       <title>Storyboardでの画面遷移をスマートにやる方法</title>
-      <link>http://www.tokoro.me/posts/improve-storyboard-segue/</link>
+      <link>https://www.tokoro.me/posts/improve-storyboard-segue/</link>
       <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/improve-storyboard-segue/</guid>
+      <guid>https://www.tokoro.me/posts/improve-storyboard-segue/</guid>
       <description>これは potatotips第６回め で発表した この話 のまとめと後書きです。
 Storyboardいいですよね！ Storyboardを使うことで、
  画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
 Storyboard登場以前だと、次の画面に遷移させるだけでも
-#import &amp;#34;NextViewController.h&amp;#34; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+#import &amp;quot;NextViewController.h&amp;quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES];  といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
 しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
 ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
-#import &amp;#34;NextViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
+#import &amp;quot;NextViewController.h&amp;quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; }  要するにStoryboard登場以前のコードに逆戻りです。
 そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
 もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
-#import &amp;#34;NextViewController.h&amp;#34;#import &amp;#34;ModalViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&amp;#34;Modal&amp;#34; isEqualToString:segue.</description>
+#import &amp;quot;NextViewController.h&amp;quot; #import &amp;quot;ModalViewController.h&amp;quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;quot;Next&amp;quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.</description>
     </item>
     
     <item>
       <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
-      <link>http://www.tokoro.me/posts/pbxproj-merge/</link>
+      <link>https://www.tokoro.me/posts/pbxproj-merge/</link>
       <pubDate>Thu, 06 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/pbxproj-merge/</guid>
+      <guid>https://www.tokoro.me/posts/pbxproj-merge/</guid>
       <description>2014/02/09 追記
 コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
 今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
@@ -881,22 +870,21 @@ Storyboard登場以前だと、次の画面に遷移させるだけでも
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
-$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+$ ./build.py  すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B  なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
 2014/02/09 追記
-mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
-次に、.gitattributes で</description>
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。</description>
     </item>
     
     <item>
       <title>提供するXXXViewControllerの親クラスを差し替え可能にしたい!</title>
-      <link>http://www.tokoro.me/posts/super-viewcontroller-for-a-library/</link>
+      <link>https://www.tokoro.me/posts/super-viewcontroller-for-a-library/</link>
       <pubDate>Thu, 23 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/super-viewcontroller-for-a-library/</guid>
+      <guid>https://www.tokoro.me/posts/super-viewcontroller-for-a-library/</guid>
       <description>XXXViewControllerの親クラスを差し替えたいときありますよね？ UIKit内で言えばUITableViewControllerとかはその代表格。
 外部ライブラリで言うと、Google Analytics SDKのGAITrackedViewControllerとか。
 要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。
@@ -904,19 +892,19 @@ mergepbxの最新版ではLANG=を指定しなくても問題が発生しなく�
 runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&amp;hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
 define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
 例えば、こんなかんじでどうでしょう？
-#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT#import XXXLIB_VIEW_CONTROLLER_IMPORT#endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS@interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else@interface TKRContainerTableViewController : UIViewController #endif // ...  @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end  ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
 もしsuperclass変えたいよ！って人は、
-#define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;#34;YourSuperViewController.h&amp;#34;#define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewControllerとどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;quot;YourSuperViewController.h&amp;quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController  とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
 ひとまずこれでなんとかなりそう。
 他に良い方法があればご教示を！</description>
     </item>
     
     <item>
       <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</title>
-      <link>http://www.tokoro.me/posts/ios-dev-accounts/</link>
+      <link>https://www.tokoro.me/posts/ios-dev-accounts/</link>
       <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios-dev-accounts/</guid>
+      <guid>https://www.tokoro.me/posts/ios-dev-accounts/</guid>
       <description>2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
  Member Centerのほうにアカウント追加 -&amp;gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&amp;gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能  失礼しました。
 追加情報などあれば是非おねがいします！
@@ -938,32 +926,32 @@ Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Prog
     
     <item>
       <title>Objective-Cでカリー化とか部分適用してみる</title>
-      <link>http://www.tokoro.me/posts/objective-c-haskell/</link>
+      <link>https://www.tokoro.me/posts/objective-c-haskell/</link>
       <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objective-c-haskell/</guid>
+      <guid>https://www.tokoro.me/posts/objective-c-haskell/</guid>
       <description>導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
 ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
 もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
 実際やってみたソースコードは こちら に置いてあります。
 ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
-map (+3) [1, 2, 3] これです。
+map (+3) [1, 2, 3]  これです。
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
-map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+map (+3) ([1, 2, 3])  みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
 しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
-map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+map (OP(&#39;+&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); }  CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: }  Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。</description>
     </item>
     
     <item>
       <title>iOS 7はもっさりか？比較検証してみた</title>
-      <link>http://www.tokoro.me/posts/ios7-design/</link>
+      <link>https://www.tokoro.me/posts/ios7-design/</link>
       <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-design/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です。
 iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
 特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
@@ -976,10 +964,10 @@ iOS 7が正式リリースされました。既にアップデートを行って
     
     <item>
       <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき</title>
-      <link>http://www.tokoro.me/posts/objc-travis-coveralls/</link>
+      <link>https://www.tokoro.me/posts/objc-travis-coveralls/</link>
       <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-travis-coveralls/</guid>
+      <guid>https://www.tokoro.me/posts/objc-travis-coveralls/</guid>
       <description>今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
 なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
 https://github.com/tokorom/BlockInjection
@@ -990,15 +978,15 @@ iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的
 事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
 Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
 自分の場合は、
-PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ 	-project $(PROJECT) \ 	clean test: xcodebuild \ 	-project $(PROJECT) \ 	-target $(TEST_TARGET) \ 	-sdk iphonesimulator \ 	-configuration Debug \ 	TEST_AFTER_BUILD=YES \ 	TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。</description>
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST=  こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。</description>
     </item>
     
     <item>
       <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</title>
-      <link>http://www.tokoro.me/posts/ios7-ui-design/</link>
+      <link>https://www.tokoro.me/posts/ios7-ui-design/</link>
       <pubDate>Mon, 17 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-ui-design/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-ui-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
 今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
 &amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;quot;フラットデザイン&amp;quot;が採用されて、画面デザインは大分シンプルな外観になりました。
@@ -1039,20 +1027,20 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
     
     <item>
       <title>Objective-Cのコードを削れるだけ削る7のTips</title>
-      <link>http://www.tokoro.me/posts/objc-reduce/</link>
+      <link>https://www.tokoro.me/posts/objc-reduce/</link>
       <pubDate>Sat, 15 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-reduce/</guid>
+      <guid>https://www.tokoro.me/posts/objc-reduce/</guid>
       <description>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
 Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.</description>
     </item>
     
     <item>
       <title>iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</title>
-      <link>http://www.tokoro.me/posts/ios7-video/</link>
+      <link>https://www.tokoro.me/posts/ios7-video/</link>
       <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-video/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-video/</guid>
       <description>今回の記事はUIデザイナの Morino@WWDC2013参加中 に寄稿いただきました！ Appleの公式サイトに iOS 7 を紹介するビデオが公開されましたね。
 http://www.apple.com/ios/ios7/
 特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。
@@ -1069,10 +1057,10 @@ Ultimately of course, design defines so much of our experience.
     
     <item>
       <title>Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</title>
-      <link>http://www.tokoro.me/posts/xcode5-preview/</link>
+      <link>https://www.tokoro.me/posts/xcode5-preview/</link>
       <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/xcode5-preview/</guid>
+      <guid>https://www.tokoro.me/posts/xcode5-preview/</guid>
       <description>tokorom@WWDC2013参加中です。
 WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。
 で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。
@@ -1091,12 +1079,12 @@ Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成で�
     
     <item>
       <title>UIAlertViewよりもおとなしいメッセージダイアログを利用する</title>
-      <link>http://www.tokoro.me/posts/ssgentlealertview/</link>
+      <link>https://www.tokoro.me/posts/ssgentlealertview/</link>
       <pubDate>Mon, 27 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ssgentlealertview/</guid>
+      <guid>https://www.tokoro.me/posts/ssgentlealertview/</guid>
       <description>UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
-一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
+一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。  と記載されています。
 その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
 それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
 警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
@@ -1107,43 +1095,40 @@ https://github.com/tokorom/SSGentleAlertView
 画像パーツやカラーリングなどはUIデザイナの Atsushi Morino さんに作ってもらってるのでちゃんとしてます。
 外観 自分でカスタマイズしない場合でも、次の3種のスタイルが選べます。
 Default Black Native サンプルコード UIAlertViewを使うときのコードのUIAlertViewの部分をSSGentleAlertViewに変更するだけです。
-// #import &amp;#34;SSGentleAlertView.h&amp;#34;  SSGentleAlertView* alert = [SSGentleAlertView new]; alert.delegate = self; alert.title = @&amp;#34;SSGentleAlertView&amp;#34;; alert.message = @&amp;#34;This is GentleAlertView!\nUIAlertView is too strong to use for ordinary messages.&amp;#34;; [alert addButtonWithTitle:@&amp;#34;Cancel&amp;#34;]; [alert addButtonWithTitle:@&amp;#34;OK&amp;#34;]; alert.cancelButtonIndex = 0; [alert show]; なお、インスタンスを作る際に[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack] のようにすることで、３種のスタイルを選択できます。</description>
+// #import &amp;quot;SSGentleAlertView.h&amp;quot; SSGentleAlertView* alert = [SSGentleAlertView new]; alert.delegate = self; alert.title = @&amp;quot;SSGentleAlertView&amp;quot;; alert.message = @&amp;quot;This is GentleAlertView!\nUIAlertView is too strong to use for ordinary messages.&amp;quot;; [alert addButtonWithTitle:@&amp;quot;Cancel&amp;quot;]; [alert addButtonWithTitle:@&amp;quot;OK&amp;quot;]; alert.cancelButtonIndex = 0; [alert show];  なお、インスタンスを作る際に[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack] のようにすることで、３種のスタイルを選択できます。</description>
     </item>
     
     <item>
       <title>UIKitで使われている画像パーツをまとめて取得する</title>
-      <link>http://www.tokoro.me/posts/uikit-images/</link>
+      <link>https://www.tokoro.me/posts/uikit-images/</link>
       <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/uikit-images/</guid>
+      <guid>https://www.tokoro.me/posts/uikit-images/</guid>
       <description>UIKitで使われている画像はどこにある？ 例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。
 プログラマというか特にはデザイナさんにとって有用だと思います。
 その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。
 具体的には（これはiOS6.1の場合）、
-/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork が画像パーツを含むファイルになります。
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork  が画像パーツを含むファイルになります。
 他にも、同じディレクトリに
  Shared.artwork Shared@2x~ipad.artwork Shared@2x~iphone.artwork Shared~ipad.artwork Shared~iphone.artwork  がありますので取りたいものに応じてお好みで。
 ひとまず、
-cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/ などでこのファイルをデスクトップにでもコピーしておきましょう。
+cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/  などでこのファイルをデスクトップにでもコピーしておきましょう。
 artworkから画像ファイルを抽出 で、artworkから肝心の画像ファイルを抽出するのに、 iOS-artwork というやつを使わせてもらいます。
 まずは、これを
-git clone git://github.com/davepeck/iOS-artwork.git などでダウンロードします。
+git clone git://github.com/davepeck/iOS-artwork.git  などでダウンロードします。
 ただ、これを使うにはPythonとPILというライブラリが必要です。
 たぶんPythonは元から入っていると思うので、PILのほうをbrewなどでインストールします。
-brew install pil インストールし終わったら
-mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
-Traceback (most recent call last): File &amp;#34;./iOS-artwork.py&amp;#34;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
-export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
-気を取り直して、
-./iOS-artwork.py export -a ~/Desktop/Shared@2x.</description>
+brew install pil  インストールし終わったら
+mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts  と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
+Traceback (most recent call last): File &amp;quot;./iOS-artwork.py&amp;quot;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL  と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、</description>
     </item>
     
     <item>
       <title>BlockInjectionをバージョンアップしました</title>
-      <link>http://www.tokoro.me/posts/blockinjection2/</link>
+      <link>https://www.tokoro.me/posts/blockinjection2/</link>
       <pubDate>Mon, 01 Apr 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/blockinjection2/</guid>
+      <guid>https://www.tokoro.me/posts/blockinjection2/</guid>
       <description>BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
 クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。
 https://github.com/tokorom/BlockInjection で公開しています。
@@ -1151,65 +1136,65 @@ https://github.com/tokorom/BlockInjection で公開しています。
  リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます） クラスメソッドにも対応しました 複数のクラスやメソッドを一度に追加できるようになりました 正規表現で指定できるようになりました(※1) 注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2) オマケで単純なメソッド実装置き換え機能も追加しました  UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる 既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。
 例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
 BlockInjectionを使えば、たった3行のコードでこれが実現できます。
-[BILib injectToClassWithNameRegex:BIRegex(@&amp;#34;^UIView$&amp;#34;) methodNameRegex:BIRegex(@&amp;#34;^set.*$&amp;#34;) preprocess:^{ NSLog(@&amp;#34;%@&amp;#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
- -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
+[BILib injectToClassWithNameRegex:BIRegex(@&amp;quot;^UIView$&amp;quot;) methodNameRegex:BIRegex(@&amp;quot;^set.*$&amp;quot;) preprocess:^{ NSLog(@&amp;quot;%@&amp;quot;, [BILib prettyFunction]); }];  これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay]  のように全てログ出力されます。
 + (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
 正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
 また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
 ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
-NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^UIView$&amp;#34; options:0 error:&amp;amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^set.*$&amp;#34; options:0 error:&amp;amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&amp;#34;%@&amp;#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。</description>
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;quot;^UIView$&amp;quot; options:0 error:&amp;amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;quot;^set.</description>
     </item>
     
     <item>
       <title>BlockInjectionで元のソースコードを汚さないで振る舞い追加</title>
-      <link>http://www.tokoro.me/posts/block-injection/</link>
+      <link>https://www.tokoro.me/posts/block-injection/</link>
       <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/block-injection/</guid>
+      <guid>https://www.tokoro.me/posts/block-injection/</guid>
       <description>例えばこんなコードに違和感はありませんか？ 自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、
-- (IBAction)sendButtonDidPush:(id)sender { // トラッキングのためのコード  [tracker sendEventWithCategory:@&amp;#34;uiAction&amp;#34; withAction:@&amp;#34;sendButtonDidPush&amp;#34; withLabel:nil withValue:0]; // ...  // 以降、送信ボタンを押したときの処理  // ... } こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。
+- (IBAction)sendButtonDidPush:(id)sender { // トラッキングのためのコード [tracker sendEventWithCategory:@&amp;quot;uiAction&amp;quot; withAction:@&amp;quot;sendButtonDidPush&amp;quot; withLabel:nil withValue:0]; // ... // 以降、送信ボタンを押したときの処理 // ... }  こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。
 これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。
 どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？
 いわゆるアスペクト指向的なかんじで。
 そんなときに BlockInjection ということで本題に入りますが、それを解決するために BlockInjection というライブラリを作りました。
 古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。
 例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。
-#import &amp;#34;BILib.h&amp;#34; [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます  [tracker sendEventWithCategory:@&amp;#34;uiAction&amp;#34; withAction:@&amp;#34;sendButtonDidPush&amp;#34; withLabel:nil withValue:0]; }]; これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
+#import &amp;quot;BILib.h&amp;quot; [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます [tracker sendEventWithCategory:@&amp;quot;uiAction&amp;quot; withAction:@&amp;quot;sendButtonDidPush&amp;quot; withLabel:nil withValue:0]; }];  これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
 以下、Q&amp;amp;A方式でライブラリの機能を簡単に紹介させていただきます。
 対象となるクラスをimportしないと使えないとかダサくない？ 確かに、トラッキングのコードをまとめたいときなど、各クラスに処理を埋め込むためにimportがずらっっと並ぶのも不恰好です。
 そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。
-[BILib injectToClassWithName:@&amp;#34;XXXViewController&amp;#34; methodName:@&amp;#34;sendButtonDidPush:&amp;#34; preprocess:^{ // 埋め込みたい処理 }]; 対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。
+[BILib injectToClassWithName:@&amp;quot;XXXViewController&amp;quot; methodName:@&amp;quot;sendButtonDidPush:&amp;quot; preprocess:^{ // 埋め込みたい処理 }];  対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。
 そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
-[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能  NSLog(@&amp;#34;State: %d&amp;#34;, vc.</description>
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能 NSLog(@&amp;quot;State: %d&amp;quot;, vc.</description>
     </item>
     
     <item>
       <title>tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</title>
-      <link>http://www.tokoro.me/posts/tmux-toggle/</link>
+      <link>https://www.tokoro.me/posts/tmux-toggle/</link>
       <pubDate>Thu, 17 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/tmux-toggle/</guid>
+      <guid>https://www.tokoro.me/posts/tmux-toggle/</guid>
       <description>** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
 導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
 設定は以下のとおり。
- .tmux.conf  bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+ .tmux.conf  bind C-t last-pane  これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
 ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
 例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
 改善 ということで、
  paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
 そんなんできるんかいな？と思ったけどごくごく普通にできた。
 設定は以下のとおり。
- .tmux.conf  bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+ .tmux.conf  bind C-t run &amp;quot;tmux last-pane || tmux last-window || tmux new-window&amp;quot;  runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
 これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
 便利便利！</description>
     </item>
     
     <item>
       <title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</title>
-      <link>http://www.tokoro.me/posts/ctrlp-docset/</link>
+      <link>https://www.tokoro.me/posts/ctrlp-docset/</link>
       <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ctrlp-docset/</guid>
+      <guid>https://www.tokoro.me/posts/ctrlp-docset/</guid>
       <description>Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
 自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
 ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
@@ -1230,61 +1215,60 @@ CtrlPについては、
 ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
 なければここからインストールをしてみてください。
 なお、ここでインストールしたDocsetは、たぶん
-~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset  に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc  Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39; で、その他のかたは各自の環境に合わせて読み替えてください。</description>
+ .vimrc  Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39;  で、その他のかたは各自の環境に合わせて読み替えてください。</description>
     </item>
     
     <item>
       <title>もっと簡単にVimでObjective-Cのコード補完を実行する</title>
-      <link>http://www.tokoro.me/posts/easy-objc-complement/</link>
+      <link>https://www.tokoro.me/posts/easy-objc-complement/</link>
       <pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/easy-objc-complement/</guid>
+      <guid>https://www.tokoro.me/posts/easy-objc-complement/</guid>
       <description>概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
 というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
 具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
- after/ftplugin/objc.vim  let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+ after/ftplugin/objc.vim  let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39;  という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
  path .clang_complete clang  ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
 の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
  ios  が今回作成したpluginにより追加できるオプションです。
 clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
 これを入れることで、clang_completeでのコード補完実行の際に、
  &#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する  という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目+αのことを自動でやってくれるようになります。
-インストール方法  pluginをVundleなどでインストール  # Vundleをご利用の場合 Bundle &amp;#39;git://github.</description>
+インストール方法  pluginをVundleなどでインストール  # Vundleをご利用の場合 Bundle &#39;git://github.</description>
     </item>
     
     <item>
       <title>Objective-Cで最近お気に入りのマクロ４つ</title>
-      <link>http://www.tokoro.me/posts/objc-macro/</link>
+      <link>https://www.tokoro.me/posts/objc-macro/</link>
       <pubDate>Wed, 09 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-macro/</guid>
+      <guid>https://www.tokoro.me/posts/objc-macro/</guid>
       <description>マクロ マクロの利用については賛否両論がありますが、ぼくはわりかし使います。
 ** ※2013/1/9 追記 **
 上記のとおり独自のマクロを使うこと自体に賛否両論あります。
 例えば独自のマクロを定義して利用することで、
  他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない）  などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
-1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&amp;#34;HELLO %3.1d&amp;#34;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&amp;hellip;とよく思ってしまう。
+1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&amp;quot;HELLO %3.1d&amp;quot;, 333.333];  [NSString stringWithFormat:]はよく使うのだが長くて面倒&amp;hellip;とよく思ってしまう。
 ということで、
-#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]を定義して
-NSString* message = NSPRINTF(@&amp;#34;HELLO %3.1d&amp;#34;, 333.333); としています。ちょっと楽！
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]  を定義して
+NSString* message = NSPRINTF(@&amp;quot;HELLO %3.1d&amp;quot;, 333.333);  としています。ちょっと楽！
 ** ※2013/1/9 追記 *
 NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
 元々のイメージはNSString+sprintfだったが再考すべし。
-2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&amp;#34;KEY&amp;#34;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&amp;hellip;とよく思ってしまう。
+2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&amp;quot;KEY&amp;quot;, nil);  NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&amp;hellip;とよく思ってしまう。
 ということで、
-#define LSTR(s) NSLocalizedString((s), nil)を定義して
-NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっと楽！
-3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、</description>
+#define LSTR(s) NSLocalizedString((s), nil)  を定義して
+NSString* message = LSTR(@&amp;quot;KEY&amp;quot;);  としています。ちょっと楽！</description>
     </item>
     
     <item>
       <title>Objective-Cで&#34;@dynamic&#34;の使いどころを考える</title>
-      <link>http://www.tokoro.me/posts/objc-dynamic/</link>
+      <link>https://www.tokoro.me/posts/objc-dynamic/</link>
       <pubDate>Sat, 05 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-dynamic/</guid>
+      <guid>https://www.tokoro.me/posts/objc-dynamic/</guid>
       <description>Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
 @synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。
 そこで、今日は@dynamicについて再考してみることにしました。
@@ -1292,16 +1276,16 @@ NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっ
 みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
 クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
 例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
- GameScore.m  #import &amp;#34;GameScore.h&amp;#34; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
-ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。</description>
+ GameScore.m  #import &amp;quot;GameScore.h&amp;quot; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;quot;highScore&amp;quot;: @1000, @&amp;quot;currentScore&amp;quot;: @530, @&amp;quot;friendScore&amp;quot;: @890, } mutableCopy]; } return self; }  この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end  手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。</description>
     </item>
     
     <item>
       <title>VimでObjective-Cのコード補完を実行する with clang</title>
-      <link>http://www.tokoro.me/posts/clang-complete-for-vim/</link>
+      <link>https://www.tokoro.me/posts/clang-complete-for-vim/</link>
       <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/clang-complete-for-vim/</guid>
+      <guid>https://www.tokoro.me/posts/clang-complete-for-vim/</guid>
       <description>概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
 そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
 具体的には、
@@ -1310,53 +1294,52 @@ NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっ
 clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
 じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
 具体的には、
-// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
+// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m  というコマンドになります。
 例えば、
- Classes/Controllers/MainViewController.m  #import &amp;#34;MainViewController.h&amp;#34; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
-clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
+ Classes/Controllers/MainViewController.m  #import &amp;quot;MainViewController.h&amp;quot; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end  の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m  というコマンドを実行してみます。
 すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
-同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
-clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</description>
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。</description>
     </item>
     
     <item>
       <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
-      <link>http://www.tokoro.me/posts/mac-terminal-japanese/</link>
+      <link>https://www.tokoro.me/posts/mac-terminal-japanese/</link>
       <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/mac-terminal-japanese/</guid>
+      <guid>https://www.tokoro.me/posts/mac-terminal-japanese/</guid>
       <description>Macの初期設定のたびに混乱してるので再整理しておきます。
  Mac Terminal tmux vim  で開発をする人向けです。
 まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
 日本語を扱う上で便利な設定がデフォルトで入ってます。
 当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; alias vim=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi  tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
  こせきの技術日記  に従って対処しておきます。
 この中の、
-date | pbcopy までが成功すればOKです。
+date | pbcopy  までが成功すればOKです。
 .vimrc にクリップボード利用の設定追加 .vimrc に
-set clipboard=unnamed を追加しておきます。</description>
+set clipboard=unnamed  を追加しておきます。</description>
     </item>
     
     <item>
       <title>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</title>
-      <link>http://www.tokoro.me/posts/objc-private-test/</link>
+      <link>https://www.tokoro.me/posts/objc-private-test/</link>
       <pubDate>Wed, 12 Sep 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-private-test/</guid>
+      <guid>https://www.tokoro.me/posts/objc-private-test/</guid>
       <description>dkfjさんが Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法 という記事を書かれていました。
 せっかくなので私がやっている方法も書かせていただきます。
 テスト対象のクラス 以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。
-#import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
-#import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  </description>
+#import &amp;quot;ExampleClass.h&amp;quot; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end  テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
+#import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;quot;ExampleClass.h&amp;quot; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end  メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  </description>
     </item>
     
     <item>
       <title>GHUnitのテストカバレッジをJenkinsで表示する</title>
-      <link>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</link>
+      <link>https://www.tokoro.me/posts/ghunit-jenkins-coverage/</link>
       <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</guid>
+      <guid>https://www.tokoro.me/posts/ghunit-jenkins-coverage/</guid>
       <description>概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
 設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
 実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
@@ -1367,49 +1350,49 @@ set clipboard=unnamed を追加しておきます。</description>
 具体的には、以下のように
  Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
 本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
-Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.  というエラーが出ることになります。
 この対処として、 main.m に以下コードを追記しておく必要があります。</description>
     </item>
     
     <item>
       <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</title>
-      <link>http://www.tokoro.me/posts/safe-objc/</link>
+      <link>https://www.tokoro.me/posts/safe-objc/</link>
       <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/safe-objc/</guid>
+      <guid>https://www.tokoro.me/posts/safe-objc/</guid>
       <description>チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+#import &amp;quot;OtherLibrary1.h&amp;quot; #import &amp;quot;OtherLibrary2.h&amp;quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
 そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
 実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。</description>
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  #import &amp;quot;OtherLibrary1.h&amp;quot; #import &amp;quot;OtherLibrary2.h&amp;quot; @implementation Library // 略 @end  このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。</description>
     </item>
     
     <item>
       <title>Objective-Cで独自クラスに[]でアクセスする</title>
-      <link>http://www.tokoro.me/posts/objc-subscripting/</link>
+      <link>https://www.tokoro.me/posts/objc-subscripting/</link>
       <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-subscripting/</guid>
+      <guid>https://www.tokoro.me/posts/objc-subscripting/</guid>
       <description>まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
 Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
  array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
 こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
 ※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
 でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
-// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key;  に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.</description>
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end  #import &amp;quot;Wrapper.</description>
     </item>
     
     <item>
       <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</title>
-      <link>http://www.tokoro.me/posts/objc-new-statements/</link>
+      <link>https://www.tokoro.me/posts/objc-new-statements/</link>
       <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-new-statements/</guid>
+      <guid>https://www.tokoro.me/posts/objc-new-statements/</guid>
       <description>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
 これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
 Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
@@ -1418,20 +1401,20 @@ Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
     
     <item>
       <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる</title>
-      <link>http://www.tokoro.me/posts/jenkins-octopress/</link>
+      <link>https://www.tokoro.me/posts/jenkins-octopress/</link>
       <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/jenkins-octopress/</guid>
+      <guid>https://www.tokoro.me/posts/jenkins-octopress/</guid>
       <description>目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
 イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&amp;gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&amp;gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&amp;gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &amp;quot;jenkins@your.domain&amp;quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &amp;quot;jenkins&amp;quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.</description>
     </item>
     
     <item>
       <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>
-      <link>http://www.tokoro.me/posts/security-for-jenkins/</link>
+      <link>https://www.tokoro.me/posts/security-for-jenkins/</link>
       <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/security-for-jenkins/</guid>
+      <guid>https://www.tokoro.me/posts/security-for-jenkins/</guid>
       <description>前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
 つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
 ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
@@ -1444,57 +1427,56 @@ JenkinsにBitbucketからアクセスするためのユーザを追加 まずは
 Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
 これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
 nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
-server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。</description>
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } }  XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。</description>
     </item>
     
     <item>
       <title>さくらVPSにJenkinsさんをインストールする</title>
-      <link>http://www.tokoro.me/posts/install-jenkins-to-sakura/</link>
+      <link>https://www.tokoro.me/posts/install-jenkins-to-sakura/</link>
       <pubDate>Tue, 24 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/install-jenkins-to-sakura/</guid>
+      <guid>https://www.tokoro.me/posts/install-jenkins-to-sakura/</guid>
       <description>JDKのインストール Javaが未インストールならこちらから。
-$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
-$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins Jenkinsの起動 $ sudo service jenkins start これでインストールと起動が完了。簡単すぎる！
+$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel  Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins  Jenkinsの起動 $ sudo service jenkins start  これでインストールと起動が完了。簡単すぎる！
 試しに
-$ curl http://localhost:8080/ とすると、
-&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Dashboard [Jenkins]&amp;lt;/title&amp;gt;... みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
+$ curl http://localhost:8080/  とすると、
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Dashboard [Jenkins]&amp;lt;/title&amp;gt;...  みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
 ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。
-$ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストールなら
-$ sudo yum install nginx でインストールしておく。
+$ sudo chkconfig jenkins on  nginxの設定 まず、nginxが未インストールなら
+$ sudo yum install nginx  でインストールしておく。
 Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
-server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins.</description>
+server { listen 80; server_name jenkins.</description>
     </item>
     
     <item>
       <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</title>
-      <link>http://www.tokoro.me/posts/install-pandoc/</link>
+      <link>https://www.tokoro.me/posts/install-pandoc/</link>
       <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/install-pandoc/</guid>
+      <guid>https://www.tokoro.me/posts/install-pandoc/</guid>
       <description>hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
-$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
+$ sudo port install pandoc  したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
 試しに hs-http だけインストールしてみたところ、
-$ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;#34;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;#34; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;#34;$procedure$targetname&amp;#34; Warning: targets not executed for hs-http: org.</description>
+$ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;quot; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;quot;$procedure $targetname&amp;quot; Warning: targets not executed for hs-http: org.</description>
     </item>
     
     <item>
       <title>Octopressでソースコードの一部分だけを参照する</title>
-      <link>http://www.tokoro.me/posts/octopress-part-of-codes/</link>
+      <link>https://www.tokoro.me/posts/octopress-part-of-codes/</link>
       <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/octopress-part-of-codes/</guid>
+      <guid>https://www.tokoro.me/posts/octopress-part-of-codes/</guid>
       <description>おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
 1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
 例えば、ここに sample/test.rb というファイルを置いておく。
-$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/  2. include_code でそのファイルを指定する {% include_code sample/test.rb %}  これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
 コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
 じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
 ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
 この経緯については、 OctopressのPull request に記録がある。
-2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
-masterでなく 2.1 からpullしていることに注意が必要。
-include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、</description>
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style  以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。</description>
     </item>
     
   </channel>

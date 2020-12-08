@@ -1,16 +1,589 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	
-	<sitemap>
-	   	<loc>http://www.tokoro.me/en/sitemap.xml</loc>
-		
-	</sitemap>
-	
-	<sitemap>
-	   	<loc>http://www.tokoro.me/ja/sitemap.xml</loc>
-		
-	   	<lastmod>2020-10-26T17:02:15+09:00</lastmod>
-		
-	</sitemap>
-	
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/ios/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios14_blank_back_button/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/swift/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/homekit/</loc>
+    <lastmod>2020-10-06T14:57:02+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/iosdc2020/</loc>
+    <lastmod>2020-10-06T14:57:02+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/internet/</loc>
+    <lastmod>2020-09-07T16:56:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/wi-fi/</loc>
+    <lastmod>2020-09-07T16:56:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/improve-my-internet-connection/</loc>
+    <lastmod>2020-09-07T16:56:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/vim-swift-format/</loc>
+    <lastmod>2020-08-17T18:11:06+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/vim/</loc>
+    <lastmod>2020-08-17T18:11:06+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/appstore/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios-promocode/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/test/</loc>
+    <lastmod>2020-07-21T11:48:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios-sandbox/</loc>
+    <lastmod>2020-07-08T15:41:47+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/appclips/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/hig/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/hig-app-clips/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/ios14/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/wwdc/</loc>
+    <lastmod>2020-07-07T15:27:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/hig-widgets/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/widgets/</loc>
+    <lastmod>2020-07-02T17:32:57+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/aws/</loc>
+    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/lambda/</loc>
+    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</loc>
+    <lastmod>2020-06-15T14:25:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</loc>
+    <lastmod>2020-06-11T14:57:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/github/</loc>
+    <lastmod>2020-05-13T17:26:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/github-actions-context/</loc>
+    <lastmod>2020-05-13T17:26:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/slack/</loc>
+    <lastmod>2020-05-13T17:26:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/hugo/</loc>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/markdown/</loc>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</loc>
+    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/vim-markdown-image-tool/</loc>
+    <lastmod>2020-03-31T16:38:32+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/firebase/</loc>
+    <lastmod>2020-02-10T10:43:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/firebsae-app-distribution/</loc>
+    <lastmod>2020-02-10T10:43:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/swiftui/</loc>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/swiftui-hackathon/</loc>
+    <lastmod>2020-01-27T14:32:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekitadk/</loc>
+    <lastmod>2019-12-23T11:47:15+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/nfc/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/nfc-iphone-6/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/sesame/</loc>
+    <lastmod>2019-10-30T13:57:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/iosdc_2019_pre/</loc>
+    <lastmod>2019-09-04T18:09:20+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/nfc-iphone-2/</loc>
+    <lastmod>2019-04-01T15:11:25+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/nfc-iphone-1/</loc>
+    <lastmod>2019-04-01T12:43:04+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/review/</loc>
+    <lastmod>2018-12-21T10:14:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/vim-review/</loc>
+    <lastmod>2018-12-21T10:14:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/lottie/</loc>
+    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/lottie-ios-1/</loc>
+    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/ui/</loc>
+    <lastmod>2018-06-06T14:09:34+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekit_delongi_heater/</loc>
+    <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekit_hue_sensor/</loc>
+    <lastmod>2018-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekit_koogeek_lightbulb/</loc>
+    <lastmod>2018-01-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/tvos/</loc>
+    <lastmod>2017-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/tvos_advent_calendar_2/</loc>
+    <lastmod>2017-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/tvos_advent_calendar_1/</loc>
+    <lastmod>2017-12-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekit_christmastree/</loc>
+    <lastmod>2017-12-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekit_hue_dimmer_switch/</loc>
+    <lastmod>2017-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/homekit_hue_white_lamp/</loc>
+    <lastmod>2017-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/user_notification/</loc>
+    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/has-associated-objects/</loc>
+    <lastmod>2015-11-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/defer-to-deinit/</loc>
+    <lastmod>2015-10-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/cui/</loc>
+    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/el-capitain-totalterminal/</loc>
+    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/mac/</loc>
+    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/swifttask-promisekit-bolts/</loc>
+    <lastmod>2015-03-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/almofire/</loc>
+    <lastmod>2015-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/nstimezone-sample/</loc>
+    <lastmod>2014-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/swift-simulator/</loc>
+    <lastmod>2014-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/swift-partial-application/</loc>
+    <lastmod>2014-07-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/xcode/</loc>
+    <lastmod>2014-05-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/xcode-versioning/</loc>
+    <lastmod>2014-05-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/objc/</loc>
+    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-async-test/</loc>
+    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/tdd/</loc>
+    <lastmod>2014-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/improve-storyboard-segue/</loc>
+    <lastmod>2014-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/pbxproj-merge/</loc>
+    <lastmod>2014-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/super-viewcontroller-for-a-library/</loc>
+    <lastmod>2014-01-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/publish/</loc>
+    <lastmod>2013-11-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios-dev-accounts/</loc>
+    <lastmod>2013-11-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/haskell/</loc>
+    <lastmod>2013-11-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objective-c-haskell/</loc>
+    <lastmod>2013-11-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/design/</loc>
+    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios7-design/</loc>
+    <lastmod>2013-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/ci/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-travis-coveralls/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios7-ui-design/</loc>
+    <lastmod>2013-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-reduce/</loc>
+    <lastmod>2013-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ios7-video/</loc>
+    <lastmod>2013-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/xcode5-preview/</loc>
+    <lastmod>2013-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ssgentlealertview/</loc>
+    <lastmod>2013-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/uikit/</loc>
+    <lastmod>2013-05-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/uikit-images/</loc>
+    <lastmod>2013-05-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/blockinjection2/</loc>
+    <lastmod>2013-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/block-injection/</loc>
+    <lastmod>2013-03-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/tmux-toggle/</loc>
+    <lastmod>2013-01-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ctrlp-docset/</loc>
+    <lastmod>2013-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/easy-objc-complement/</loc>
+    <lastmod>2013-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-macro/</loc>
+    <lastmod>2013-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-dynamic/</loc>
+    <lastmod>2013-01-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/clang-complete-for-vim/</loc>
+    <lastmod>2013-01-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/mac-terminal-japanese/</loc>
+    <lastmod>2012-12-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-private-test/</loc>
+    <lastmod>2012-09-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/ghunit-jenkins-coverage/</loc>
+    <lastmod>2012-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/jenkins/</loc>
+    <lastmod>2012-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/safe-objc/</loc>
+    <lastmod>2012-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-subscripting/</loc>
+    <lastmod>2012-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/objc-new-statements/</loc>
+    <lastmod>2012-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/jenkins-octopress/</loc>
+    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/security-for-jenkins/</loc>
+    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/octopress/</loc>
+    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/sakura/</loc>
+    <lastmod>2012-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/install-jenkins-to-sakura/</loc>
+    <lastmod>2012-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/install-pandoc/</loc>
+    <lastmod>2012-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/octopress-part-of-codes/</loc>
+    <lastmod>2012-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/categories/</loc>
+  </url>
+  
+</urlset>

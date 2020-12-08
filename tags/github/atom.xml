@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GitHub on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/github/</link>
+    <link>https://www.tokoro.me/tags/github/</link>
     <description>Recent content in GitHub on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/github/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/github/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
-      <link>http://www.tokoro.me/posts/github-actions-context/</link>
+      <link>https://www.tokoro.me/posts/github-actions-context/</link>
       <pubDate>Wed, 13 May 2020 17:26:38 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/github-actions-context/</guid>
+      <guid>https://www.tokoro.me/posts/github-actions-context/</guid>
       <description>この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
 概要 GitHub Actions、簡単便利で良いですね！
 ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
@@ -26,9 +26,8 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
  Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
-いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
- 成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける  といろいろカスタムしてみます。</description>
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、</description>
     </item>
     
   </channel>
