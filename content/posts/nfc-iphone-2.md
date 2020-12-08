@@ -25,7 +25,7 @@ images: [https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/ima
 
 それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
 
-<div class='alert alert-danger'><span class="fa fa-warning"></span>
+<div class='box box-danger'><span class="fa fa-warning"></span>
 この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
 </div>
 
@@ -160,7 +160,7 @@ async function requestUnlock() {
 
 くどいようですが、
 
-<div class='alert alert-danger'><span class="fa fa-warning"></span>
+<div class='box box-danger'><span class="fa fa-warning"></span>
 この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
 </div>
 
