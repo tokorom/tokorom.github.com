@@ -5,10 +5,22 @@
 
 <article class="content-page entry-body">
   <h1 class="page-title">{{ .Title }}</h1>
+
   <div class="entry-data">
     <span class="entry-data-date">{{ .Date.Format "2006年1月2日" }}</span>
-    {{ partial "authors.html" . }}
   </div>
+
+  {{- with .Params.tags -}}
+      <div class="tags my-3">
+      {{- range . -}}
+          <a class="badge badge-pill badge-light border mr-2" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">
+              {{ . }}
+          </a>
+          /
+      {{- end -}}
+      </div>
+  {{- end -}}
+
   <div class="content">
       {{ .Content }}
   </div>
