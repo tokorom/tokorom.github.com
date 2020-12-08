@@ -1,28 +1,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/</link>
+    <link>https://www.tokoro.me/</link>
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
     <image>
-      <url>http://www.tokoro.me/img/hugo.png</url>
+      <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
-      <link>http://www.tokoro.me/</link>
+      <link>https://www.tokoro.me/</link>
     </image>
     
-	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</title>
-      <link>http://www.tokoro.me/posts/ios14_blank_back_button/</link>
+      <link>https://www.tokoro.me/posts/ios14_blank_back_button/</link>
       <pubDate>Mon, 26 Oct 2020 17:02:15 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios14_blank_back_button/</guid>
+      <guid>https://www.tokoro.me/posts/ios14_blank_back_button/</guid>
       <description>
-        先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;#34;&amp;#34; } でOK！
+        先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; }  でOK！
 概要 iOS14のアップデートの1つに、
  ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
@@ -36,23 +36,22 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;#34;&amp;#34; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; }  と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
 UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
-   BackButtonDisplayMode 挙動     default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.
       </description>
       
-      <coverImage>http://www.tokoro.me/images/ios14_blank_back_button/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/ios14_blank_back_button/top.png</coverImage>
       
     </item>
     
     <item>
       <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</title>
-      <link>http://www.tokoro.me/posts/iosdc2020/</link>
+      <link>https://www.tokoro.me/posts/iosdc2020/</link>
       <pubDate>Tue, 06 Oct 2020 14:57:02 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/iosdc2020/</guid>
+      <guid>https://www.tokoro.me/posts/iosdc2020/</guid>
       <description>
         2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
 私も HomeKit 2020 というセッションで発表者として参加しました。
@@ -65,16 +64,16 @@ https://zenn.dev/tokorom/books/homekit-framework
   iOS 11 Programmingの第12章に掲載したものです https://peaks.
       </description>
       
-      <coverImage>http://www.tokoro.me/images/iosdc2020/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/iosdc2020/top.png</coverImage>
       
     </item>
     
     <item>
       <title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</title>
-      <link>http://www.tokoro.me/posts/improve-my-internet-connection/</link>
+      <link>https://www.tokoro.me/posts/improve-my-internet-connection/</link>
       <pubDate>Mon, 07 Sep 2020 16:56:36 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/improve-my-internet-connection/</guid>
+      <guid>https://www.tokoro.me/posts/improve-my-internet-connection/</guid>
       <description>
         Photo by Franck V. on Unsplash
 改善のきっかけ 自宅のインターネット接続環境は、改善前は通信速度が 10Mbps〜40Mbps 程度でした。
@@ -86,16 +85,16 @@ https://zenn.dev/tokorom/books/homekit-framework
  以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/improve-my-internet-connection/top.jpg</coverImage>
+      <coverImage>https://www.tokoro.me/images/improve-my-internet-connection/top.jpg</coverImage>
       
     </item>
     
     <item>
       <title>apple/swift-formatをVimで使う</title>
-      <link>http://www.tokoro.me/posts/vim-swift-format/</link>
+      <link>https://www.tokoro.me/posts/vim-swift-format/</link>
       <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-swift-format/</guid>
+      <guid>https://www.tokoro.me/posts/vim-swift-format/</guid>
       <description>
         皆々様におかれましては apple/swift-format を快適にご利用いただいていますでしょうか？1
 swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。
@@ -105,32 +104,29 @@ swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswif
 そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
 https://github.com/tokorom/vim-swift-format
 事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
-which swift-format などで存在を確認してください2。
+which swift-format  などで存在を確認してください2。
 なければ現在ならbrewでもインストール可能です。
 SwiftFormatというのは別のツールですので間違わないようご注意ください。
-brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
+brew install swift-format  aleというVimのPlugin https://github.com/dense-analysis/ale
 非同期にLintをかけるためのPluginです。
 今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
 vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
-Plug &amp;#39;tokorom/vim-swift-format&amp;#39;です。
+Plug &#39;tokorom/vim-swift-format&#39;  です。
 必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
-let g:ale_linters = {\ &amp;#39;swift&amp;#39;: [&amp;#39;swift-format&amp;#39;],\}let g:vim_swift_format_use_ale = 1必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
-let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。
-使ってみる！ 設定が終わったら早速使ってみましょう。
-試しに、
-import Foundation final class Sample{ let hello : String } とわざと2つの間違いを含んだSwiftコードを書きました。
+let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1  必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39;  これらの設定が可能です。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/vim-swift-format/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/vim-swift-format/top.png</coverImage>
       
     </item>
     
     <item>
       <title>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</title>
-      <link>http://www.tokoro.me/posts/ios-promocode/</link>
+      <link>https://www.tokoro.me/posts/ios-promocode/</link>
       <pubDate>Tue, 21 Jul 2020 11:48:23 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios-promocode/</guid>
+      <guid>https://www.tokoro.me/posts/ios-promocode/</guid>
       <description>
         Photo by JJ Ying on Unsplash
  これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
@@ -152,16 +148,16 @@ A. 担当のかた or アプリの開発者に問い合わせてアカウント�
 プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/ios-promocode/top.jpg</coverImage>
+      <coverImage>https://www.tokoro.me/images/ios-promocode/top.jpg</coverImage>
       
     </item>
     
     <item>
       <title>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</title>
-      <link>http://www.tokoro.me/posts/ios-sandbox/</link>
+      <link>https://www.tokoro.me/posts/ios-sandbox/</link>
       <pubDate>Wed, 08 Jul 2020 15:41:47 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios-sandbox/</guid>
+      <guid>https://www.tokoro.me/posts/ios-sandbox/</guid>
       <description>
         Photo by Markus Spiske on Unsplash
  これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
@@ -193,16 +189,16 @@ iPhone/iPadの「設定」を開きます。
 このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/ios-sandbox/top.jpg</coverImage>
+      <coverImage>https://www.tokoro.me/images/ios-sandbox/top.jpg</coverImage>
       
     </item>
     
     <item>
       <title>Human Interface GuidelinesのApp Clipsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-app-clips/</link>
+      <link>https://www.tokoro.me/posts/hig-app-clips/</link>
       <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-app-clips/</guid>
+      <guid>https://www.tokoro.me/posts/hig-app-clips/</guid>
       <description>
         前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
 2020年7月8日時点のものを訳します。
@@ -217,16 +213,16 @@ App Clipをマーケティング目的だけに使用してはいけません。
 ユーザーがすぐに利用できるようにしましょう。 App Clipには本当に必要なアセットのみ含めてください。 スプラッシュ画面を入れるなどしてユーザーに起動を待たせるようなことをしてはいけません。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/hig-app-clips/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/hig-app-clips/top.png</coverImage>
       
     </item>
     
     <item>
       <title>Human Interface GuidelinesのWidgetsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-widgets/</link>
+      <link>https://www.tokoro.me/posts/hig-widgets/</link>
       <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-widgets/</guid>
+      <guid>https://www.tokoro.me/posts/hig-widgets/</guid>
       <description>
         WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の Widgetsの章 を日本語訳します。
 日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。 訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。
@@ -251,43 +247,43 @@ Widgetの設定とインタラクティブ性 Widgetに設定すべき項目が�
 Widgetをタップしたときに、アプリの適切な画面を開くようにしましょう。 ユーザーがWidgetをタップすると、Widgetはアプリ本体にDeep Linkし、Widgetのコンテンツに直接関連する詳細情報やアクションを提供することができます。 例えば、ユーザーが特定の株価を表示しているWidgetをタップすると、株価アプリのその株価の詳細な情報を表示する画面を開きます。 また、ウォッチリストの一部を表示しているWidgetをタップすると、アプリが開いて全てのウォッチリストを確認できます。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/hig-widgets/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/hig-widgets/top.png</coverImage>
       
     </item>
     
     <item>
       <title>Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる</title>
-      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
+      <link>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</link>
       <pubDate>Mon, 15 Jun 2020 14:25:23 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
+      <guid>https://www.tokoro.me/posts/swift-aws-lambda-runtime2/</guid>
       <description>
         導入 前回の Swift AWS Lambda Runtimeのサンプルをデプロイしてみた の続きです。
 特に犬の写真を毎朝送ってほしいというわけではないですが、Swift AWS Lambda Runtimeを試すにあたっての題材として、
  AWS Lambdaのスケジュール式トリガーで毎朝自動で実行する 画像検索APIで犬の写真をランダムに取ってくる それをSlackに送る  というのをやってみます。
 画像検索API 画像検索APIは手っ取り早く使えそうなAzureの Image Search API を使ってみます。 Azureのアカウントさえ作れば、月1000回までは無料で叩けるようです。
 curlで叩くとすると、
-curl &amp;#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&amp;#39; \  -H &amp;#39;Ocp-Apim-Subscription-Key: YOUR_KEY&amp;#39; となります。
+curl &#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&#39; \ -H &#39;Ocp-Apim-Subscription-Key: YOUR_KEY&#39;  となります。
  リクエストパラメータに q=検索ワード リクエストヘッダーに Ocp-Apim-Subscription-Key: YOUR_KEY  を渡します1。
 Slackへの通知 Slackの Incoming Webhook用のURLを取得します。
 URLを取得したら、curlで叩くとすると、
-curl -X POST -H &amp;#39;Content-type: application/json&amp;#39; \  --data &amp;#39;{&amp;#34;text&amp;#34;:&amp;#34;犬の画像のURL&amp;#34;}&amp;#39; \  https://hooks.slack.com/services/your/incoming/webhook とするだけです。
+curl -X POST -H &#39;Content-type: application/json&#39; \ --data &#39;{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}&#39; \ https://hooks.slack.com/services/your/incoming/webhook  とするだけです。
  POSTデータで{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}  を送ってあげるだけですね。
 Lambda関数を作る これで画像検索APIとSlackへの通知部分は準備できたので、あとはメインディッシュのLambda関数を作るだけです。
 Packageの作成 まずは、
-swift package init --type executable --name DogImage とPackageを作り、 GitHub上のサンプル をベースにPackage.
+swift package init --type executable --name DogImage  とPackageを作り、 GitHub上のサンプル をベースにPackage.
       </description>
       
-      <coverImage>http://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
       
     </item>
     
     <item>
       <title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</title>
-      <link>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
+      <link>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</link>
       <pubDate>Thu, 11 Jun 2020 14:57:28 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
+      <guid>https://www.tokoro.me/posts/swift-aws-lambda-runtime/</guid>
       <description>
         導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
 https://swift.org/blog/aws-lambda-runtime/
@@ -297,16 +293,16 @@ swift.orgの説明には、
   AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
       
     </item>
     
     <item>
       <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
-      <link>http://www.tokoro.me/posts/github-actions-context/</link>
+      <link>https://www.tokoro.me/posts/github-actions-context/</link>
       <pubDate>Wed, 13 May 2020 17:26:38 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/github-actions-context/</guid>
+      <guid>https://www.tokoro.me/posts/github-actions-context/</guid>
       <description>
         この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
 概要 GitHub Actions、簡単便利で良いですね！
@@ -317,21 +313,20 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
  Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
 いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
- 成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける  といろいろカスタムしてみます。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/github-actions-context/github-actions.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/github-actions-context/github-actions.png</coverImage>
       
     </item>
     
     <item>
       <title>Vimにスクショを直接Markdownで貼り付ける</title>
-      <link>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
+      <link>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
       <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
+      <guid>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
       <description>
         Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
@@ -340,28 +335,28 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 今回はそこを解決します！
 pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
 screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+screencapture -i 出力ファイル名  とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
 vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
  現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
 そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;)  とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
 今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh  IMAGEDIR=&amp;#34;content/images/$2&amp;#34; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;#34;ss-${CURRENTTIME}.png&amp;#34; TARGET=&amp;#34;${IMAGEDIR}/${IMAGEFILENAME}&amp;#34; IMAGETAG=&amp;#34;![image](/images/$2/${IMAGEFILENAME})&amp;#34; mkdir -p ${IMAGEDIR} screencapture -i &amp;#34;${TARGET}&amp;#34; echo &amp;#34;${IMAGETAG}&amp;#34; IMAGEOPTIM=&amp;#34;open -a ImageOptim&amp;#34; `${IMAGEOPTIM} ${TARGET}` です。
+#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}`  です。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png</coverImage>
       
     </item>
     
     <item>
       <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
-      <link>http://www.tokoro.me/posts/vim-markdown-image-tool/</link>
+      <link>https://www.tokoro.me/posts/vim-markdown-image-tool/</link>
       <pubDate>Tue, 31 Mar 2020 16:38:32 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
+      <guid>https://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
       <description>
         Photo by Victor Grabarczyk on Unsplash
 ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
@@ -374,23 +369,21 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
 ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
 具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+/Users/tokorom/Desktop/dog.jpg  が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
 現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&amp;#39;.&amp;#39;) let result = system(g:vim_replace_current_line#command . &amp;#39; &amp;#39; . expand(&amp;#39;%&amp;#39;) . &amp;#39; &amp;#39; . expand(&amp;#39;%:t:r&amp;#39;) . &amp;#39; &amp;#39; . trim(line)) call setline(&amp;#39;.&amp;#39;, trim(result))endfunctionという３行のシンプルなfunction１つだけです。
-ここでやっているのは、
- 特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え  ということだけです。
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction  という３行のシンプルなfunction１つだけです。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg</coverImage>
+      <coverImage>https://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg</coverImage>
       
     </item>
     
     <item>
       <title>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</title>
-      <link>http://www.tokoro.me/posts/firebsae-app-distribution/</link>
+      <link>https://www.tokoro.me/posts/firebsae-app-distribution/</link>
       <pubDate>Mon, 10 Feb 2020 10:43:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/firebsae-app-distribution/</guid>
+      <guid>https://www.tokoro.me/posts/firebsae-app-distribution/</guid>
       <description>
         Firebase App Distiribution 先日BETA公開されたFirebase App Distributionですが2020年3月終了のFabricからの移行先としてはもっとも有力ですよね1。
 先日「Firebaseを利用していない既存アプリを配信するためだけにFirebase App Distributionを使いたい！」と思い試してみたら、あまりにも簡単で「これは10分で設定から配信まで完了するんじゃない？」と思い、実際に、
@@ -408,16 +401,16 @@ function vim_replace_current_line#execute() let line = getline(&amp;#39;.&amp;#3
 この記事で書いていないこと  AdHoc or Enterprise?
       </description>
       
-      <coverImage>http://www.tokoro.me/images/posts/firebase-app-distribution/3-create-app.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/posts/firebase-app-distribution/3-create-app.png</coverImage>
       
     </item>
     
     <item>
       <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
-      <link>http://www.tokoro.me/posts/swiftui-hackathon/</link>
+      <link>https://www.tokoro.me/posts/swiftui-hackathon/</link>
       <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swiftui-hackathon/</guid>
+      <guid>https://www.tokoro.me/posts/swiftui-hackathon/</guid>
       <description>
         2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
 いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
@@ -438,16 +431,16 @@ Photo by Michael Longmire on Unsplash
  こどもに現金を持たせないで親が残高だけ管理すれば十分 記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない 入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心 普段使いの少額の現金はその残高から出金してこどもに渡せばOK おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！  と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。
       </description>
       
-      <coverImage>http://www.tokoro.me/images/apple/swiftui.png</coverImage>
+      <coverImage>https://www.tokoro.me/images/apple/swiftui.png</coverImage>
       
     </item>
     
     <item>
       <title>HomeKit ADKでSlackにメッセージ送信するアクセサリを作ってみる</title>
-      <link>http://www.tokoro.me/posts/homekitadk/</link>
+      <link>https://www.tokoro.me/posts/homekitadk/</link>
       <pubDate>Mon, 23 Dec 2019 11:47:15 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/homekitadk/</guid>
+      <guid>https://www.tokoro.me/posts/homekitadk/</guid>
       <description>
         HomeKitADKのオープンソース化 つい先日（2019/12/18）、AppleがAmazon、Google、Zigbee Allianceと、スマートホームデバイスに関するワーキンググループを結成したとのビッグニュースが発表されましたね！
 https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/
@@ -457,24 +450,21 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
 こちらですが、
  まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
  アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する  なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
 これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
 といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
-Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といったログが確認できるかと思います。
+Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false  といったログが確認できるかと思います。
 サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
 今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
 https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
 このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
 ただ、今回は実験なので（正直、C言語で書いてビルドし直して&amp;hellip;というのが面倒なので）、
-#include &amp;lt;stdlib.h&amp;gt;して、
-if (value) { system(&amp;#34;./handleLightBulbOn&amp;#34;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
-Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
-例えば、こんなかんじのものです。
-この例ではSlackのIncoming Webhooksを使っています。
+#include &amp;lt;stdlib.h&amp;gt;  して、
+if (value) { system(&amp;quot;./handleLightBulbOn&amp;quot;); }  ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png</coverImage>
@@ -483,17 +473,17 @@ Slackにメッセージ送信するスクリプトの追加 ここからは慣�
     
     <item>
       <title>NFCタグ で鍵を開けよう（6） iOS13時代の最終形</title>
-      <link>http://www.tokoro.me/posts/nfc-iphone-6/</link>
+      <link>https://www.tokoro.me/posts/nfc-iphone-6/</link>
       <pubDate>Wed, 30 Oct 2019 13:57:46 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nfc-iphone-6/</guid>
+      <guid>https://www.tokoro.me/posts/nfc-iphone-6/</guid>
       <description>
         この記事は「NFCタグ で鍵を開けよう」シリーズの第6弾です。 これで最後の予定です。
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形（この記事）  3〜5についてはiOS13の機能を使った最終形で、もうこれでいいじゃん！となったのでスキップします。（NFCタグを鍵にするパターンはまだ必要なケースあるかも）
 なにができる？ iOS 13でNFCタグをトリガーとしてアプリを叩けるようになった iOS 13（正確にはiOS 13.1）で、純正アプリの ショートカット にオートメーションという機能が追加されました。 このオートメーションのトリガーの１つに、なんと NFCタグ があるのです。
 そして、それをトリガーとしてサードパーティ製アプリの Siri Shortcut を呼び出せます。 つまり、アプリがSiri Shortcutに対応していれば、そのアプリをNFCタグタッチだけで動作させられるようになったということです。 そして、我らがSesameもこれに対応しています。
 １行でまとめると、
-iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる ということです。
+iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠ができる  ということです。
 対応デバイス 正確には、iOS 13であっても Background Tag Reading に対応したiPhoneでないとこの機能は使えません。2019年10月時点での対応機種は、
  iPhone XR iPhone XS iPhone XS Max iPhone 11 iPhone 11 Pro iPhone 11 Pro Max  の６機種です。
 実際にやってみよう NFCタグの準備 NFCタグには何も情報を書き込む必要はありません。
@@ -508,10 +498,10 @@ iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠が�
     
     <item>
       <title>iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇します</title>
-      <link>http://www.tokoro.me/posts/iosdc_2019_pre/</link>
+      <link>https://www.tokoro.me/posts/iosdc_2019_pre/</link>
       <pubDate>Wed, 04 Sep 2019 18:09:20 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/iosdc_2019_pre/</guid>
+      <guid>https://www.tokoro.me/posts/iosdc_2019_pre/</guid>
       <description>
         明日、2019年9月5日（木）から開催される iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇予定です。
 スケジュール  2019/09/05（木） 18:40〜  Track B レギュラートーク（30分） Proposal    概要 Proposalからの抜粋です。
@@ -530,10 +520,10 @@ iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心に�
     
     <item>
       <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</title>
-      <link>http://www.tokoro.me/posts/nfc-iphone-2/</link>
+      <link>https://www.tokoro.me/posts/nfc-iphone-2/</link>
       <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nfc-iphone-2/</guid>
+      <guid>https://www.tokoro.me/posts/nfc-iphone-2/</guid>
       <description>
         この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
  NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
@@ -543,9 +533,9 @@ iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心に�
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
-curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}] 鍵をロック 上で取得したdevice_idを利用し、
-curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
+curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+ レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
+curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
@@ -554,10 +544,10 @@ curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Conten
     
     <item>
       <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
-      <link>http://www.tokoro.me/posts/nfc-iphone-1/</link>
+      <link>https://www.tokoro.me/posts/nfc-iphone-1/</link>
       <pubDate>Mon, 01 Apr 2019 12:43:04 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/nfc-iphone-1/</guid>
+      <guid>https://www.tokoro.me/posts/nfc-iphone-1/</guid>
       <description>
         この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
  NFCタグにURIを書き込む（この記事） iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  導入 我が家にスマートロックのSesameを採用しました。
@@ -574,13 +564,13 @@ nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続し�
 調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
 このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
 情報の読み取り NFCタグに書き込まれた情報を読み取るにはexsamplesの中のtagtool.pyを使って
-python tagtool.py show とするだけです。
+python tagtool.py show  とするだけです。
 フォーマット NFCタグをフォーマットしたいときもtagtool.pyを使って
-python tagtool.py format とするだけです。
+python tagtool.py format  とするだけです。
 URI書き込み NFCタグにURIを書き込みたい場合のみ少し工夫が必要でした。 とはいえ、exsamplesの中にあるものだけで改造なしで可能です。
 例えばhttps://tag.exsample.com/lockというURIを書き込むこととします。
 まず、うまくいくパターンからですが、
-echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load - でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。
+echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load -  でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>

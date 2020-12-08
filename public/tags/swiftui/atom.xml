@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>swiftui on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/swiftui/</link>
+    <link>https://www.tokoro.me/tags/swiftui/</link>
     <description>Recent content in swiftui on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 27 Jan 2020 14:32:55 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
-      <link>http://www.tokoro.me/posts/swiftui-hackathon/</link>
+      <link>https://www.tokoro.me/posts/swiftui-hackathon/</link>
       <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/swiftui-hackathon/</guid>
+      <guid>https://www.tokoro.me/posts/swiftui-hackathon/</guid>
       <description>2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
 いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
 また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&amp;hellip;

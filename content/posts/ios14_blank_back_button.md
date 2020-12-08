@@ -3,7 +3,7 @@ title: "iOS14で戻るボタンのタイトルを空欄にするきちんとし�
 date: 2020-10-26T17:02:15+09:00
 draft: false
 authors: [tokorom]
-tags: []
+tags: [iOS,Swift]
 images: [/images/ios14_blank_back_button/top.png]
 canonical: https://spinners.work
 ---

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>design on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/design/</link>
+    <link>https://www.tokoro.me/tags/design/</link>
     <description>Recent content in design on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 23 Sep 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/design/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/design/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>iOS 7はもっさりか？比較検証してみた</title>
-      <link>http://www.tokoro.me/posts/ios7-design/</link>
+      <link>https://www.tokoro.me/posts/ios7-design/</link>
       <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-design/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です。
 iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
 特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
@@ -29,10 +29,10 @@ iOS 7が正式リリースされました。既にアップデートを行って
     
     <item>
       <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</title>
-      <link>http://www.tokoro.me/posts/ios7-ui-design/</link>
+      <link>https://www.tokoro.me/posts/ios7-ui-design/</link>
       <pubDate>Mon, 17 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-ui-design/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-ui-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
 今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
 &amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;quot;フラットデザイン&amp;quot;が採用されて、画面デザインは大分シンプルな外観になりました。
@@ -73,10 +73,10 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
     
     <item>
       <title>iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</title>
-      <link>http://www.tokoro.me/posts/ios7-video/</link>
+      <link>https://www.tokoro.me/posts/ios7-video/</link>
       <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-video/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-video/</guid>
       <description>今回の記事はUIデザイナの Morino@WWDC2013参加中 に寄稿いただきました！ Appleの公式サイトに iOS 7 を紹介するビデオが公開されましたね。
 http://www.apple.com/ios/ios7/
 特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。
@@ -93,30 +93,27 @@ Ultimately of course, design defines so much of our experience.
     
     <item>
       <title>UIKitで使われている画像パーツをまとめて取得する</title>
-      <link>http://www.tokoro.me/posts/uikit-images/</link>
+      <link>https://www.tokoro.me/posts/uikit-images/</link>
       <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/uikit-images/</guid>
+      <guid>https://www.tokoro.me/posts/uikit-images/</guid>
       <description>UIKitで使われている画像はどこにある？ 例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。
 プログラマというか特にはデザイナさんにとって有用だと思います。
 その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。
 具体的には（これはiOS6.1の場合）、
-/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork が画像パーツを含むファイルになります。
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork  が画像パーツを含むファイルになります。
 他にも、同じディレクトリに
  Shared.artwork Shared@2x~ipad.artwork Shared@2x~iphone.artwork Shared~ipad.artwork Shared~iphone.artwork  がありますので取りたいものに応じてお好みで。
 ひとまず、
-cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/ などでこのファイルをデスクトップにでもコピーしておきましょう。
+cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/  などでこのファイルをデスクトップにでもコピーしておきましょう。
 artworkから画像ファイルを抽出 で、artworkから肝心の画像ファイルを抽出するのに、 iOS-artwork というやつを使わせてもらいます。
 まずは、これを
-git clone git://github.com/davepeck/iOS-artwork.git などでダウンロードします。
+git clone git://github.com/davepeck/iOS-artwork.git  などでダウンロードします。
 ただ、これを使うにはPythonとPILというライブラリが必要です。
 たぶんPythonは元から入っていると思うので、PILのほうをbrewなどでインストールします。
-brew install pil インストールし終わったら
-mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
-Traceback (most recent call last): File &amp;#34;./iOS-artwork.py&amp;#34;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
-export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
-気を取り直して、
-./iOS-artwork.py export -a ~/Desktop/Shared@2x.</description>
+brew install pil  インストールし終わったら
+mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts  と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
+Traceback (most recent call last): File &amp;quot;./iOS-artwork.py&amp;quot;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL  と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、</description>
     </item>
     
   </channel>

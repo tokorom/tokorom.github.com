@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>xcode on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/xcode/</link>
+    <link>https://www.tokoro.me/tags/xcode/</link>
     <description>Recent content in xcode on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 19 May 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/xcode/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/xcode/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>これがXcodeでのバージョニングの決定版になるかも</title>
-      <link>http://www.tokoro.me/posts/xcode-versioning/</link>
+      <link>https://www.tokoro.me/posts/xcode-versioning/</link>
       <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/xcode-versioning/</guid>
+      <guid>https://www.tokoro.me/posts/xcode-versioning/</guid>
       <description>概要 この記事でできるようになること  安定してInfo.plistの内容（ここではBuild番号）を変更できる ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される Info.plistに差分がでないのでcommitのときに邪魔にならない  なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感がこちらに詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、熊谷さんの記事をご一読ください！
 必要な設定  Preprocess Info.plist file でInfo.plistをビルド前に確定させる Run Scriptで${TEMP_DIR}/Preprocessed-Info.plistを編集する  以下、具体的な話をします。
 経緯 これまで、
@@ -31,10 +31,10 @@ potatotips 第７回 で「agvtoolで超かっこよくバージョニングで�
     
     <item>
       <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
-      <link>http://www.tokoro.me/posts/pbxproj-merge/</link>
+      <link>https://www.tokoro.me/posts/pbxproj-merge/</link>
       <pubDate>Thu, 06 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/pbxproj-merge/</guid>
+      <guid>https://www.tokoro.me/posts/pbxproj-merge/</guid>
       <description>2014/02/09 追記
 コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
 今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
@@ -47,22 +47,21 @@ potatotips 第７回 で「agvtoolで超かっこよくバージョニングで�
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
-$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+$ ./build.py  すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B  なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
 2014/02/09 追記
-mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
-次に、.gitattributes で</description>
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。</description>
     </item>
     
     <item>
       <title>Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</title>
-      <link>http://www.tokoro.me/posts/xcode5-preview/</link>
+      <link>https://www.tokoro.me/posts/xcode5-preview/</link>
       <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/xcode5-preview/</guid>
+      <guid>https://www.tokoro.me/posts/xcode5-preview/</guid>
       <description>tokorom@WWDC2013参加中です。
 WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。
 で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。
@@ -81,28 +80,28 @@ Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成で�
     
     <item>
       <title>Objective-Cで独自クラスに[]でアクセスする</title>
-      <link>http://www.tokoro.me/posts/objc-subscripting/</link>
+      <link>https://www.tokoro.me/posts/objc-subscripting/</link>
       <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-subscripting/</guid>
+      <guid>https://www.tokoro.me/posts/objc-subscripting/</guid>
       <description>まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
 Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
  array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
 こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
 ※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
 でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
-// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key;  に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.</description>
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end  #import &amp;quot;Wrapper.</description>
     </item>
     
     <item>
       <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</title>
-      <link>http://www.tokoro.me/posts/objc-new-statements/</link>
+      <link>https://www.tokoro.me/posts/objc-new-statements/</link>
       <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/objc-new-statements/</guid>
+      <guid>https://www.tokoro.me/posts/objc-new-statements/</guid>
       <description>もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
 これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
 Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;

@@ -8,7 +8,7 @@ theme = "spinners"
 disqusShortname = ""
 googleAnalytics = "UA-2451574-4"
 
-Paginate = 20
+Paginate = 100
 preserveTaxonomyNames = true
 
 enableRobotsTXT = true # generate robots.txt

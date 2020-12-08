@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>wwdc on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/wwdc/</link>
+    <link>https://www.tokoro.me/tags/wwdc/</link>
     <description>Recent content in wwdc on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Tue, 07 Jul 2020 15:27:31 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/wwdc/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/wwdc/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Human Interface GuidelinesのApp Clipsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-app-clips/</link>
+      <link>https://www.tokoro.me/posts/hig-app-clips/</link>
       <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-app-clips/</guid>
+      <guid>https://www.tokoro.me/posts/hig-app-clips/</guid>
       <description>前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
 2020年7月8日時点のものを訳します。
 前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
@@ -32,10 +32,10 @@ App Clipをマーケティング目的だけに使用してはいけません。
     
     <item>
       <title>Human Interface GuidelinesのWidgetsの章の日本語訳</title>
-      <link>http://www.tokoro.me/posts/hig-widgets/</link>
+      <link>https://www.tokoro.me/posts/hig-widgets/</link>
       <pubDate>Thu, 02 Jul 2020 17:32:57 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/hig-widgets/</guid>
+      <guid>https://www.tokoro.me/posts/hig-widgets/</guid>
       <description>WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の Widgetsの章 を日本語訳します。
 日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。 訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。
 2020年7月3日時点のものを訳します。
@@ -61,20 +61,20 @@ Widgetをタップしたときに、アプリの適切な画面を開くよう�
     
     <item>
       <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</title>
-      <link>http://www.tokoro.me/posts/user_notification/</link>
+      <link>https://www.tokoro.me/posts/user_notification/</link>
       <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/user_notification/</guid>
+      <guid>https://www.tokoro.me/posts/user_notification/</guid>
       <description>概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
 コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
 http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
 iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
-iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)  でiOSが必要なら
 とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
 しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
 （やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&amp;hellip;）
 iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
-UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in //gotgranted:) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) }  でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
 ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
 コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
    タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred.</description>

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ui on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/ui/</link>
+    <link>https://www.tokoro.me/tags/ui/</link>
     <description>Recent content in ui on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 06 Jun 2018 14:09:34 +0900</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/ui/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/ui/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</title>
-      <link>http://www.tokoro.me/posts/lottie-ios-1/</link>
+      <link>https://www.tokoro.me/posts/lottie-ios-1/</link>
       <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
       
-      <guid>http://www.tokoro.me/posts/lottie-ios-1/</guid>
+      <guid>https://www.tokoro.me/posts/lottie-ios-1/</guid>
       <description>この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
 Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
 iOS用のライブラリは、
@@ -26,21 +26,21 @@ https://github.com/airbnb/lottie-ios
  これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;#34;yes&amp;#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie  let animationView = LOTAnimationView(name: &amp;quot;yes&amp;quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play()  再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。</description>
+animationView.frame = animationView.sceneModel?.compBounds ?? view.</description>
     </item>
     
     <item>
       <title>テレビのリモコンのことも忘れないで！</title>
-      <link>http://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
+      <link>https://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
+      <guid>https://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
       <description>AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
 テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
 AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
@@ -56,10 +56,10 @@ UIPageViewController これは意外だったのですが、UIPageViewController
     
     <item>
       <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
-      <link>http://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
+      <link>https://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
+      <guid>https://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
       <description>[問題]コンテンツのスワイプ まずは、tvOSの特定の画面にて「右スワイプ」をした時に、コンテンツが左右どちらに動くでしょう？というクイズを３つ出させていただきます。 クイズの問題を３つ出した後に、それらの答えを実際の動きを撮影したGIFアニメとともに並べてありますので、答えのGIFアニメをできるだけ見ないように考えてみてください！
 いずれもApple純正アプリ（ホーム画面含む）からの問題です。
 Q1. ホーム画面のTop Shelfでの左右スワイプ 最初の問題はホーム画面からです。 このtvOSのホーム画面のTop Shelfで「右スワイプ」をした場合、Top Shelfは左に動いて右隣のコンテンツが表示されるでしょうか？それとも右に動いて左隣のコンテンツが表示されるでしょうか？
@@ -80,10 +80,10 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
     
     <item>
       <title>iOS 7はもっさりか？比較検証してみた</title>
-      <link>http://www.tokoro.me/posts/ios7-design/</link>
+      <link>https://www.tokoro.me/posts/ios7-design/</link>
       <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-design/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です。
 iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
 特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
@@ -96,10 +96,10 @@ iOS 7が正式リリースされました。既にアップデートを行って
     
     <item>
       <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</title>
-      <link>http://www.tokoro.me/posts/ios7-ui-design/</link>
+      <link>https://www.tokoro.me/posts/ios7-ui-design/</link>
       <pubDate>Mon, 17 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-ui-design/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-ui-design/</guid>
       <description>今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
 今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
 &amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;quot;フラットデザイン&amp;quot;が採用されて、画面デザインは大分シンプルな外観になりました。
@@ -140,10 +140,10 @@ iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観�
     
     <item>
       <title>iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</title>
-      <link>http://www.tokoro.me/posts/ios7-video/</link>
+      <link>https://www.tokoro.me/posts/ios7-video/</link>
       <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios7-video/</guid>
+      <guid>https://www.tokoro.me/posts/ios7-video/</guid>
       <description>今回の記事はUIデザイナの Morino@WWDC2013参加中 に寄稿いただきました！ Appleの公式サイトに iOS 7 を紹介するビデオが公開されましたね。
 http://www.apple.com/ios/ios7/
 特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang='ja'><head>
-  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編） | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
 Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
 iOS用のライブラリは、
 https://github.com/airbnb/lottie-ios
@@ -11,17 +14,17 @@ https://github.com/airbnb/lottie-ios
  これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie let animationView = LOTAnimationView(name: &#34;yes&#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie  let animationView = LOTAnimationView(name: &quot;yes&quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play()  再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。'>
-<meta name='theme-color' content='#ffcd00'>
-
-<meta property='og:title' content='Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編） • Yuta Tokoro'>
-<meta property='og:description' content='この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
+animationView.frame = animationView.sceneModel?.compBounds ?? view."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@spinners_inc" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編） | TOKOROM BLOG" property="og:title"><meta content="この記事について この記事は Lottieでアプリにアニメーションを組み込む話（デザイナー編） を受けての iOSプログラマー編 になります。 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。
 Lottieとは LottieとはAdobe After Effectsで作ったアニメーションをそのままクライアントアプリで表示するためのライブラリです。 iOSやAndroidのネイティブアプリの他、React Nativeでも利用できます。
 iOS用のライブラリは、
 https://github.com/airbnb/lottie-ios
@@ -30,269 +33,64 @@ https://github.com/airbnb/lottie-ios
  これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie let animationView = LOTAnimationView(name: &#34;yes&#34;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie  let animationView = LOTAnimationView(name: &quot;yes&quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play()  再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
  作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。'>
-<meta property='og:url' content='http://www.tokoro.me/posts/lottie-ios-1/'>
-<meta property='og:site_name' content='TOKOROM BLOG'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png'><meta property='article:author' content='https://facebook.com/yuta.tokoro.7'><meta property='article:section' content='posts'><meta property='article:tag' content='ios'><meta property='article:tag' content='lottie'><meta property='article:tag' content='ui'><meta property='article:published_time' content='2018-06-06T14:09:34&#43;09:00'/><meta property='article:modified_time' content='2018-06-06T14:09:34&#43;09:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@tokorom'><meta property='twitter:image' content='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png'>
+animationView.frame = animationView.sceneModel?.compBounds ?? view." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/lottie-ios-1/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
 
-<meta name="generator" content="Hugo 0.62.0" />
 
-  <title>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編） • Yuta Tokoro</title>
-  <link rel='canonical' href='http://www.tokoro.me/posts/lottie-ios-1/'>
-  
-  
-  <link rel='icon' href='/favicon.ico'>
-<link rel='stylesheet' href='/assets/css/main.c3be1755.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><style>
-:root{--color-accent:#ffcd00;}
-</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-2451574-4', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
-  
 
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel="canonical" href="https://www.tokoro.me/posts/lottie-ios-1/">
 </head>
-<body class='page type-posts has-cover has-sidebar'>
-
-  <div class='site'><div id='sidebar' class='sidebar'>
-  <a class='screen-reader-text' href='#main-menu'></a>
-
-  <div class='container'><section class='widget widget-about sep-after'>
-  <header>
+<body>
     
-    <div class='logo'>
-      <a href='/'>
-        <img src='/images/logo.png'>
-      </a>
-    </div>
+
     
-    <h2 class='title site-title '>
-      <a href='/'>
-      TOKOROM BLOG
-      </a>
-    </h2>
-    <div class='desc'>
-    所 友太 / Yuta Tokoro
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
     </div>
-  </header>
-
-</section>
-<section class='widget widget-company sep-after'>
-  <header>
-    <h4 class='title widget-title'>
-      所属
-    </h4>
-
-    <div class='logo'>
-      <a href="http://www.spinners.work/">
-        <img src="http://www.spinners.work/images/top_logo.png">
-      </a>
-    </div>
-  </header>
-</section>
-<section class='widget widget-taxonomy_cloud sep-after'>
-  <header>
-    <h4 class='title widget-title'></h4>
-  </header>
-
-  <div class='container list-container'>
-  <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/appclips/' style='font-size:1em'>AppClips</a>
-      </li><li>
-        <a href='/tags/aws/' style='font-size:1.0204081632653061em'>AWS</a>
-      </li><li>
-        <a href='/tags/ci/' style='font-size:1em'>ci</a>
-      </li><li>
-        <a href='/tags/cui/' style='font-size:1.0408163265306123em'>cui</a>
-      </li><li>
-        <a href='/tags/design/' style='font-size:1.0612244897959184em'>design</a>
-      </li><li>
-        <a href='/tags/firebase/' style='font-size:1em'>firebase</a>
-      </li><li>
-        <a href='/tags/github/' style='font-size:1em'>GitHub</a>
-      </li><li>
-        <a href='/tags/haskell/' style='font-size:1em'>haskell</a>
-      </li><li>
-        <a href='/tags/hig/' style='font-size:1.0204081632653061em'>HIG</a>
-      </li><li>
-        <a href='/tags/homekit/' style='font-size:1.1428571428571428em'>HomeKit</a>
-      </li><li>
-        <a href='/tags/hugo/' style='font-size:1.0204081632653061em'>hugo</a>
-      </li><li>
-        <a href='/tags/internet/' style='font-size:1em'>Internet</a>
-      </li><li>
-        <a href='/tags/ios/' style='font-size:2em'>ios</a>
-      </li><li>
-        <a href='/tags/ios14/' style='font-size:1.0204081632653061em'>iOS14</a>
-      </li><li>
-        <a href='/tags/jenkins/' style='font-size:1.0612244897959184em'>jenkins</a>
-      </li><li>
-        <a href='/tags/lambda/' style='font-size:1.0204081632653061em'>Lambda</a>
-      </li><li>
-        <a href='/tags/lottie/' style='font-size:1em'>lottie</a>
-      </li><li>
-        <a href='/tags/mac/' style='font-size:1.0816326530612246em'>mac</a>
-      </li><li>
-        <a href='/tags/markdown/' style='font-size:1.0204081632653061em'>markdown</a>
-      </li><li>
-        <a href='/tags/nfc/' style='font-size:1.0408163265306123em'>nfc</a>
-      </li><li>
-        <a href='/tags/objc/' style='font-size:1.3877551020408163em'>objc</a>
-      </li><li>
-        <a href='/tags/octopress/' style='font-size:1.0408163265306123em'>octopress</a>
-      </li><li>
-        <a href='/tags/publish/' style='font-size:1em'>publish</a>
-      </li><li>
-        <a href='/tags/review/' style='font-size:1em'>review</a>
-      </li><li>
-        <a href='/tags/sakura/' style='font-size:1.0408163265306123em'>sakura</a>
-      </li><li>
-        <a href='/tags/sesame/' style='font-size:1.0408163265306123em'>sesame</a>
-      </li><li>
-        <a href='/tags/slack/' style='font-size:1em'>Slack</a>
-      </li><li>
-        <a href='/tags/swift/' style='font-size:1.2653061224489797em'>swift</a>
-      </li><li>
-        <a href='/tags/swiftui/' style='font-size:1em'>swiftui</a>
-      </li><li>
-        <a href='/tags/tdd/' style='font-size:1em'>tdd</a>
-      </li><li>
-        <a href='/tags/test/' style='font-size:1em'>Test</a>
-      </li><li>
-        <a href='/tags/tvos/' style='font-size:1.0204081632653061em'>tvos</a>
-      </li><li>
-        <a href='/tags/ui/' style='font-size:1.1020408163265305em'>ui</a>
-      </li><li>
-        <a href='/tags/uikit/' style='font-size:1em'>uikit</a>
-      </li><li>
-        <a href='/tags/vim/' style='font-size:1.1428571428571428em'>vim</a>
-      </li><li>
-        <a href='/tags/wi-fi/' style='font-size:1em'>Wi-Fi</a>
-      </li><li>
-        <a href='/tags/widgets/' style='font-size:1em'>Widgets</a>
-      </li><li>
-        <a href='/tags/wwdc/' style='font-size:1.0408163265306123em'>wwdc</a>
-      </li><li>
-        <a href='/tags/xcode/' style='font-size:1.0816326530612246em'>xcode</a>
-      </li></ul>
-</div>
+</nav>
 
 
-</section>
-</div>
+<article class="content-page entry-body">
+  <h1 class="page-title">Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</h1>
 
-  <div class='sidebar-overlay'></div>
-</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label=''>
-  <div class='container'>
-    <a class='screen-reader-text' href='#content'></a>
-
-<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
-  <span class='screen-reader-text'></span>
-  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="3" y1="12" x2="21" y2="12" />
-  <line x1="3" y1="6" x2="21" y2="6" />
-  <line x1="3" y1="18" x2="21" y2="18" />
-  
-</svg>
-</span>
-  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="18" y1="6" x2="6" y2="18" />
-  <line x1="6" y1="6" x2="18" y2="18" />
-  
-</svg>
-</span>
-</button>
-    <ul><li class='item'>
-        <a href='/'>Blog</a>
-      </li><li class='item'>
-        <a href='https://twitter.com/tokorom/'>Twitter</a>
-      </li><li class='item'>
-        <a href='https://github.com/tokorom/'>GitHub</a>
-      </li><li class='item'>
-        <a href='http://feeds.feedburner.com/tokorom'>RSS</a>
-      </li></ul>
-  </div>
-</nav><div class='header-widgets'>
-        <div class='container'></div>
-      </div>
-
-      <header id='header' class='header site-header'>
-        <div class='container sep-after'>
-          <div class='header-info'><p class='site-title title'>TOKOROM BLOG</p><p class='desc site-desc'>所 友太 / Yuta Tokoro</p>
-          </div>
-        </div>
-      </header>
-
-      <main id='content'>
-
-
-<article lang='ja' class='entry'>
-  <header class='header entry-header'>
-  <div class='container sep-after'>
-    <div class='header-info'>
-      <h1 class='title'>Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</h1>
-      
-
-    </div>
-    <div class='entry-meta'>
-  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-  <line x1="16" y1="2" x2="16" y2="6"/>
-  <line x1="8" y1="2" x2="8" y2="6"/>
-  <line x1="3" y1="10" x2="21" y2="10"/>
-  
-</svg>
-<span class='screen-reader-text'> </span>
-  <time class='entry-date' datetime='2018-06-06T14:09:34&#43;09:00'>2018-06-06</time>
-</span>
-
-  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
-  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
-  
-</svg>
-<span class='screen-reader-text'>  </span><a href='/authors/tokorom'>Yuta Tokoro</a></span>
-  
-
-</div>
-
-
-  </div>
-</header>
-
-  <div class='entry-cover'>
-  <figure class='container cover-normal'>
-    <img src='https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png'/>
-    
-  </figure>
-</div>
-  
-
-  <div class='container entry-content'>
-  
-  <div class='box box-warning'><span class="fa fa-warning"></span> この記事は投稿日から1年以上が経過しています。</div>
-  
-
-  <h2 id="heading">この記事について</h2>
+  <div class="entry-data">
+    <span class="entry-data-date">2018年6月6日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/lottie">
+              lottie
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ui">
+              ui
+          </a>
+          /</div><div class="content">
+      <h2 id="heading">この記事について</h2>
 <p>この記事は <a href="http://kudakurage.hatenadiary.com/entry/2018/06/02/180828">Lottieでアプリにアニメーションを組み込む話（デザイナー編）</a> を受けての <strong>iOSプログラマー編</strong> になります。
 デザイナー編では実際にアニメーションを作る具体的な方法を含め解説されていますので是非ご参照ください。</p>
 <h2 id="lottie">Lottieとは</h2>
@@ -327,13 +125,15 @@ iOSやAndroidのネイティブアプリの他、React Nativeでも利用でき�
 <h3 id="json">JSONファイルの埋め込み</h3>
 <p>再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <h3 id="heading-4">再生するコード</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Lottie</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> animationView = LOTAnimationView(name: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">yes</span><span style="color:#e6db74">&#34;</span>)
+<pre><code class="language-swift">import Lottie
+</code></pre>
+<pre><code class="language-swift">let animationView = LOTAnimationView(name: &quot;yes&quot;)
 animationView.frame = view.bounds
 view.addSubview(animationView)
 
 animationView.play()
-</code></pre></div><p>再生するのは本当に簡単で、Lottieをimportし、<code>LOTAnimationView</code>をJSONファイル名指定で作成し、<code>addSubview</code>して<code>play()</code>するだけです。</p>
+</code></pre>
+<p>再生するのは本当に簡単で、Lottieをimportし、<code>LOTAnimationView</code>をJSONファイル名指定で作成し、<code>addSubview</code>して<code>play()</code>するだけです。</p>
 <p>なお、<code>LOTAnimationView</code>の<code>frame</code>は適切な大きさに設定する必要があり、デフォルトでは設定した<code>frame</code>の大きさでアニメーションが拡縮されて再生されてしまいます。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <p>上のサンプルはサイズを考えずに<code>addSubview</code>しており、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes-stretch.png" alt="yes-stretch"></p>
@@ -345,26 +145,28 @@ animationView.play()
 <li>アニメーションのJSONファイルを覗いて調べる</li>
 </ul>
 <p>他、プログラムで取得することもできます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds
-</code></pre></div><p><code>LOTAnimationView</code>には<code>sceneModel</code>プロパティがあり、このプロパティからアニメーションに関する情報を参照できます。
+<pre><code class="language-swift">animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds
+</code></pre>
+<p><code>LOTAnimationView</code>には<code>sceneModel</code>プロパティがあり、このプロパティからアニメーションに関する情報を参照できます。
 サイズに関しては<code>compBounds</code>プロパティを見ればOKです。</p>
 <h2 id="json-1">インターネット上にJSONを設置する</h2>
 <p>必要なら、アプリに埋め込まずにインターネット上のアニメーションJSONを参照し、後からアプリのバージョンアップなしでアニメーションを変更することもできます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> animationJSON = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://example.com/example.json</span><span style="color:#e6db74">&#34;</span>
+<pre><code class="language-swift">let animationJSON = &quot;https://example.com/example.json&quot;
 
-<span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> url = URL(string: animationJSON) <span style="color:#66d9ef">else</span> {
-    <span style="color:#66d9ef">return</span>
+guard let url = URL(string: animationJSON) else {
+    return
 }
 
-downloadAnimationJSON(from: url) { [<span style="color:#66d9ef">weak</span> <span style="color:#66d9ef">self</span>] filePath <span style="color:#66d9ef">in</span>
-    <span style="color:#66d9ef">self</span>?.setupAnimation(with: filePath)
-    <span style="color:#66d9ef">self</span>?.animationView?.play()
+downloadAnimationJSON(from: url) { [weak self] filePath in
+    self?.setupAnimation(with: filePath)
+    self?.animationView?.play()
 }
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">downloadAnimationJSON</span>(from url: URL, completion: @escaping (String) -&gt; Void) {
-    <span style="color:#66d9ef">let</span> task = URLSession.shared.downloadTask(with: url) { url, <span style="color:#66d9ef">_</span>, error <span style="color:#66d9ef">in</span>
-        <span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> filePath = url?.path <span style="color:#66d9ef">else</span> {
-            print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">handle error: </span><span style="color:#e6db74">\(</span>String<span style="color:#e6db74">(</span>describing: error<span style="color:#e6db74">)</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
-            <span style="color:#66d9ef">return</span>
+</code></pre>
+<pre><code class="language-swift">private func downloadAnimationJSON(from url: URL, completion: @escaping (String) -&gt; Void) {
+    let task = URLSession.shared.downloadTask(with: url) { url, _, error in
+        guard let filePath = url?.path else {
+            print(&quot;handle error: \(String(describing: error))&quot;)
+            return
         }
 
         DispatchQueue.main.async {
@@ -375,66 +177,75 @@ downloadAnimationJSON(from: url) { [<span style="color:#66d9ef">weak</span> <spa
     task.resume()
 }
 
-<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">setupAnimation</span>(with filePath: String) {
-    <span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> view = animationArea <span style="color:#66d9ef">else</span> {
-        <span style="color:#66d9ef">return</span>
+private func setupAnimation(with filePath: String) {
+    guard let view = animationArea else {
+        return
     }
 
-    <span style="color:#66d9ef">let</span> animationView = LOTAnimationView(filePath: filePath)
+    let animationView = LOTAnimationView(filePath: filePath)
     animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds
 
     view.addSubview(animationView)
-    <span style="color:#66d9ef">self</span>.animationView = animationView
+    self.animationView = animationView
 }
-</code></pre></div><p>こちらも特に難しいことはなく、<code>URLSession</code>の<code>downloadTask</code>などでダウンロードしたファイルを利用するだけです。</p>
+</code></pre>
+<p>こちらも特に難しいことはなく、<code>URLSession</code>の<code>downloadTask</code>などでダウンロードしたファイルを利用するだけです。</p>
 <p>ダウンロードした後は、<code>LOTAnimationView(filePath:)</code>というinitializerにダウンロードしたJSONファイルのfilePathを渡してあげます。あとはアプリに組み込まれたファイルを利用するのと同じです。</p>
 <h2 id="asset-catalogjson">Asset CatalogにJSONを入れる</h2>
 <p>なお、普段からAsset Catalog（xcassets）を使われているかたは、このアニメーションJSONをAsset Catalogで管理したいと感じるかと思います。</p>
 <p>version 2.5.0時点では、<code>LOTAnimationView</code>にはAsset CatalogのJSONファイルを楽に読み込むインターフェースがありません。</p>
 <p>以下のコードにて無理やりAsset Catalogから読み込ませることはできるのですが、無駄に複雑になるのでおすすめしません。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> data = NSDataAsset(name: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">assetName</span><span style="color:#e6db74">&#34;</span>)?.data <span style="color:#66d9ef">else</span> {
-    assertionFailure(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Invalid data asset</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">return</span>
+<pre><code class="language-swift">guard let data = NSDataAsset(name: &quot;assetName&quot;)?.data else {
+    assertionFailure(&quot;Invalid data asset&quot;)
+    return
 }
 
-<span style="color:#66d9ef">let</span> jsonObject: Any
+let jsonObject: Any
 
-<span style="color:#66d9ef">do</span> {
-    jsonObject = <span style="color:#66d9ef">try</span> JSONSerialization.jsonObject(with: data)
-} <span style="color:#66d9ef">catch</span> <span style="color:#66d9ef">let</span> error {
+do {
+    jsonObject = try JSONSerialization.jsonObject(with: data)
+} catch let error {
     assertionFailure(error.localizedDescription)
-    <span style="color:#66d9ef">return</span>
+    return
 }
 
-<span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> validJSON = jsonObject <span style="color:#66d9ef">as</span>? [AnyHashable: Any] <span style="color:#66d9ef">else</span> {
-    assertionFailure(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Invalid json object</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">return</span>
+guard let validJSON = jsonObject as? [AnyHashable: Any] else {
+    assertionFailure(&quot;Invalid json object&quot;)
+    return
 }
 
-<span style="color:#66d9ef">let</span> model = LOTComposition(json: validJSON)
-<span style="color:#66d9ef">let</span> animationView = LOTAnimationView(model: model, <span style="color:#66d9ef">in</span>: <span style="color:#66d9ef">nil</span>)
-</code></pre></div><h2 id="heading-6">再生コントロール</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.play()
-</code></pre></div><p>でアニメーションを開始できるのは前述の通りですが、この他、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.pause()
-</code></pre></div><p>で停止、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.stop()
-</code></pre></div><p>で終了（アニメーション開始時の状態で止まる）もできます。</p>
+let model = LOTComposition(json: validJSON)
+let animationView = LOTAnimationView(model: model, in: nil)
+</code></pre>
+<h2 id="heading-6">再生コントロール</h2>
+<pre><code class="language-swift">animationView.play()
+</code></pre>
+<p>でアニメーションを開始できるのは前述の通りですが、この他、</p>
+<pre><code class="language-swift">animationView.pause()
+</code></pre>
+<p>で停止、</p>
+<pre><code class="language-swift">animationView.stop()
+</code></pre>
+<p>で終了（アニメーション開始時の状態で止まる）もできます。</p>
 <h2 id="heading-7">ループ</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.loopAnimation = <span style="color:#66d9ef">true</span>
-</code></pre></div><p>と<code>loopAnimation</code>に<code>true</code>を設定することでアニメーション終了後に自動的に最初から繰り返し再生されるようになります。</p>
+<pre><code class="language-swift">animationView.loopAnimation = true
+</code></pre>
+<p>と<code>loopAnimation</code>に<code>true</code>を設定することでアニメーション終了後に自動的に最初から繰り返し再生されるようになります。</p>
 <h2 id="heading-8">逆転再生</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.autoReverseAnimation = <span style="color:#66d9ef">true</span>
-</code></pre></div><p>と<code>autoReverseAnimation</code>に<code>true</code>を設定することでアニメーション終了後に自動的に逆転再生されるようになります。</p>
+<pre><code class="language-swift">animationView.autoReverseAnimation = true
+</code></pre>
+<p>と<code>autoReverseAnimation</code>に<code>true</code>を設定することでアニメーション終了後に自動的に逆転再生されるようになります。</p>
 <p><code>loopAnimation</code>とセットで利用すると、再生 =&gt; 逆転再生 =&gt; 再生 =&gt; 逆転再生&hellip; とループされます。</p>
 <h2 id="heading-9">アニメーションスピードの変更</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.animationSpeed = <span style="color:#ae81ff">0.5</span>
-</code></pre></div><p>と<code>animationSpeed</code>に<code>0.5</code>を設定するとアニメーションスピードは50%になります。また、<code>2.0</code>を設定すれば２倍の速度で再生されます。</p>
+<pre><code class="language-swift">animationView.animationSpeed = 0.5
+</code></pre>
+<p>と<code>animationSpeed</code>に<code>0.5</code>を設定するとアニメーションスピードは50%になります。また、<code>2.0</code>を設定すれば２倍の速度で再生されます。</p>
 <h2 id="heading-10">アニメーションの終了をハンドリング</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView?.completionBlock = { finished <span style="color:#66d9ef">in</span>
-    print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">### finished: </span><span style="color:#e6db74">\(</span>finished<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+<pre><code class="language-swift">animationView?.completionBlock = { finished in
+    print(&quot;### finished: \(finished)&quot;)
 }
-</code></pre></div><p>と、<code>completionBlock</code>にclosureを設定することでアニメーションの終了をハンドリングできます。</p>
+</code></pre>
+<p>と、<code>completionBlock</code>にclosureを設定することでアニメーションの終了をハンドリングできます。</p>
 <p><code>loopAnimation</code>でループさせている場合には、アニメーションは終了しないとみなされて終了は通知されません。</p>
 <p>また、lottie-ios 2.5.0 の時点では<code>completionBlock</code>は一度通知されると解除されるようで、必要なら<code>play()</code>するごとにこれを設定する必要があります。</p>
 <h2 id="heading-11">アニメーションの色を動的に変更する</h2>
@@ -448,12 +259,13 @@ downloadAnimationJSON(from: url) { [<span style="color:#66d9ef">weak</span> <spa
 <p>例えば、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/lottie-heart-pink.gif" alt="lottie-heart-pink"></p>
 <p>と全体的にピンク色のアニメーションを、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> color: UIColor = <span style="color:#75715e">//</span><span style="color:#75715e">&lt;</span><span style="color:#75715e"> </span><span style="color:#75715e">任</span><span style="color:#75715e">意</span><span style="color:#75715e">の</span><span style="color:#75715e">U</span><span style="color:#75715e">I</span><span style="color:#75715e">C</span><span style="color:#75715e">o</span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">を</span><span style="color:#75715e">指</span><span style="color:#75715e">定</span>
+<pre><code class="language-swift">let color: UIColor = //&lt; 任意のUIColorを指定
 
-<span style="color:#66d9ef">let</span> keypath = LOTKeypath(string: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">**.Fill 1.Color</span><span style="color:#e6db74">&#34;</span>)
-<span style="color:#66d9ef">let</span> tintColorValue = LOTColorValueCallback(color: color.cgColor)
-lottie.setValueDelegate(tintColorValue, <span style="color:#66d9ef">for</span>: keypath)
-</code></pre></div><p>と数行のコードで、</p>
+let keypath = LOTKeypath(string: &quot;**.Fill 1.Color&quot;)
+let tintColorValue = LOTColorValueCallback(color: color.cgColor)
+lottie.setValueDelegate(tintColorValue, for: keypath)
+</code></pre>
+<p>と数行のコードで、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/lottie-heart-blue.gif" alt="lottie-heart-blue"></p>
 <p>簡単に他の色に変えることが可能です。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
 <p>この変更はアニメーション再生中でも反映されます。</p>
@@ -461,9 +273,10 @@ lottie.setValueDelegate(tintColorValue, <span style="color:#66d9ef">for</span>: 
 <p>具体的には、<code>LOTAnimationView</code>の<code>setValueDelegate</code>メソッドに<code>LOTColorValueCallback</code>と<code>LOTKeypath</code>を渡すだけでこれが実現できます。</p>
 <p><code>LOTColorValueCallback</code>は<code>CGColor</code>を指定するだけのシンプルなものですが、<code>LOTKeypath</code>のKeypathにはなにを指定したら良いでしょうか？</p>
 <p>LottieでいうKeypathとはアニメーションを構成する要素の階層を辿るもので、この階層は、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">animationView.logHierarchyKeypaths()
+<pre><code class="language-swift">animationView.logHierarchyKeypaths()
 
-</code></pre></div><p>でデバッグ出力できます。
+</code></pre>
+<p>でデバッグ出力できます。
 上のアニメーションの<code>logHierarchyKeypaths()</code>の出力結果は、</p>
 <pre><code>heart 2 Outlines
 mini heart 3 Outlines.Group 1.Path 1
@@ -481,15 +294,18 @@ circle 2 Outlines.Group 1.Path 1
 circle 4 Outlines.Group 1.Fill 1
 woman Outlines.Group 4.Fill 1
 //...（以下省略）
-</code></pre><p>といったものでした。</p>
+</code></pre>
+<p>といったものでした。</p>
 <p>例えば、この中の1つの要素 <code>mini heart 2 Outlines.Group 1.Fill 1</code> を使って、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> keypath = LOTKeypath(string: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mini heart 2 Outlines.Group 1.Fill 1.Color</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><p>とすれば対象となる要素の色を変更するKeypathができます。</p>
+<pre><code class="language-swift">let keypath = LOTKeypath(string: &quot;mini heart 2 Outlines.Group 1.Fill 1.Color&quot;)
+</code></pre>
+<p>とすれば対象となる要素の色を変更するKeypathができます。</p>
 <p>KeypathはAfter Effectsで作成したアニメーションの構造をそのまま辿るものでもありますので、特定の要素のKeypathについてはアニメーションを作成したデザイナーさんに聞くほうが手っ取り早いかもしれません。</p>
 <h3 id="heading-12">ワイルドカード</h3>
 <p>Keypathの指定にはワイルドカードも利用できます。上のサンプルでは、</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> keypath = LOTKeypath(string: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">**.Fill 1.Color</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><p>とすべての要素のFill Colorを変更するためのKeypathを作成して使っています。</p>
+<pre><code class="language-swift">let keypath = LOTKeypath(string: &quot;**.Fill 1.Color&quot;)
+</code></pre>
+<p>とすべての要素のFill Colorを変更するためのKeypathを作成して使っています。</p>
 <p>実際に利用する際にはこのようにワイルドカードを指定するのが現実的かと思います。</p>
 <p>アニメーションの色を動的に変更する要件がある場合、アニメーションを作成するデザイナーさんに「ワイルドカードでKeypathを指定したい」旨をあらかじめ伝え、これをやりやすい構造でアニメーションを作ってもらうことをおすすめします。</p>
 <h2 id="heading-13">アニメーション内に動的に画像を当てはめる</h2>
@@ -498,12 +314,13 @@ woman Outlines.Group 4.Fill 1
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-no.gif" alt="call-no"></p>
 <p>この「誰かに電話をかけている&hellip;」ときのアニメーションに、実際に電話をかける相手のアイコンを当てはめる、といったことができます。</p>
 <p>これも以下のように簡単なコードで実現できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">let</span> image: UIImage = <span style="color:#75715e">//</span><span style="color:#75715e">&lt;</span><span style="color:#75715e"> </span><span style="color:#75715e">選</span><span style="color:#75715e">択</span><span style="color:#75715e">さ</span><span style="color:#75715e">れ</span><span style="color:#75715e">た</span><span style="color:#75715e">ユ</span><span style="color:#75715e">ー</span><span style="color:#75715e">ザ</span><span style="color:#75715e">ー</span><span style="color:#75715e">の</span><span style="color:#75715e">プ</span><span style="color:#75715e">ロ</span><span style="color:#75715e">フ</span><span style="color:#75715e">ィ</span><span style="color:#75715e">ー</span><span style="color:#75715e">ル</span><span style="color:#75715e">ア</span><span style="color:#75715e">イ</span><span style="color:#75715e">コ</span><span style="color:#75715e">ン</span>
-<span style="color:#66d9ef">let</span> iconView = UIImageView(image: image)
+<pre><code class="language-swift">let image: UIImage = //&lt; 選択されたユーザーのプロフィールアイコン
+let iconView = UIImageView(image: image)
 
-<span style="color:#66d9ef">let</span> keypath = LOTKeypath(string: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">avatarLayer</span><span style="color:#e6db74">&#34;</span>)
+let keypath = LOTKeypath(string: &quot;avatarLayer&quot;)
 animationView.addSubview(iconView, toKeypathLayer: keypath)
-</code></pre></div><p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-tokorom.gif" alt="call-tokorom"></p>
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/call-tokorom.gif" alt="call-tokorom"></p>
 <p>このコードを見ていただければ分かるように、実際には画像を当てるというよりは任意のUIViewサブクラスをアニメーション内に埋め込むことをします。</p>
 <p>この例では、ユーザーのプロフィールアイコンの<code>UIImage</code>を持った<code>UIImageView</code>を作り、それを貼り付ける先のアニメーションのLayerのKeypathを指定して<code>addSubview</code>しています。</p>
 <p>デザイナーさんがこういった構造のアニメーションを作成することに慣れてさえいれば、このように動的に変更可能なアニメーションを驚くほど簡単に作れます。</p>
@@ -530,147 +347,216 @@ animationView.addSubview(iconView, toKeypathLayer: keypath)
 </ol>
 </section>
 
-</div>
-
-  
-
-<footer class='entry-social'>
-  <div class="container">
-    <div class="social-buttons">
-      <ul class="widget-social_menu">
-        <li>
-          <a href="http://b.hatena.ne.jp/entry/www.tokoro.me/posts/lottie-ios-1/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </li>
-
-        <li>
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </li>
-
-        <li>
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3a%2f%2fwww.tokoro.me%2fposts%2flottie-ios-1%2f&layout=button&size=small&mobile_iframe=true&appId=325504154626023&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-        </li>
-
-        <li>
-          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
-          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        </li>
-      </ul>
-    </div>
   </div>
-</footer>
-
-
-  
-<footer class='entry-footer'>
-  <div class='container sep-before'><div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
-  <line x1="7" y1="7" x2="7" y2="7"/>
-  
-</svg>
-<span class='screen-reader-text'>tags: </span><a class='tag' href='/tags/ios/'>ios</a>, <a class='tag' href='/tags/lottie/'>lottie</a>, <a class='tag' href='/tags/ui/'>ui</a></div>
-
-  </div>
-</footer>
-
-
 </article>
 
-<nav class='entry-nav'>
-  <div class='container'><div class='prev-entry sep-before'>
-      <a href='/posts/homekit_delongi_heater/'>
-        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
   
-  <line x1="20" y1="12" x2="4" y2="12"/>
-  <polyline points="10 18 4 12 10 6"/>
+  <a href="/posts/ios7-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7はもっさりか？比較検証してみた</span>
+    <span class="feed-item-date">2013年9月23日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
   
-</svg>
- </span>
-        <span class='screen-reader-text'>: </span>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</a>
-    </div><div class='next-entry sep-before'>
-      <a href='/posts/vim-review/'>
-        <span class='screen-reader-text'>: </span>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh<span aria-hidden='true'> <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  <a href="/posts/ios7-ui-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</span>
+    <span class="feed-item-date">2013年6月17日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
   
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
+  <a href="/posts/ios7-video/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</span>
+    <span class="feed-item-date">2013年6月13日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
   
-</svg>
-</span>
-      </a>
-    </div></div>
-</nav>
+  <a href="/posts/homekit_delongi_heater/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</span>
+    <span class="feed-item-date">2018年2月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_hue_sensor/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">[HomeKit対応仕様] Philips Hue モーションセンサー</span>
+    <span class="feed-item-date">2018年2月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_koogeek_lightbulb/">
+    <div class="feed-item-image-wrapper"></div>
 
+    <span class="feed-item-title">[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</span>
+    <span class="feed-item-date">2018年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
 
-<footer class='entry-works'>
-  <div class='container sep-before'>
-    <h4>所の執筆・監修した書籍</h4>
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897978440/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897978440&linkCode=as2&tag=tokorom-22&linkId=80f63e4a56d7072f274e62a43ee3f55e">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897978440&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">iPhoneプログラミングUIKit詳解リファレンス</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B01HG97S7K/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01HG97S7K&linkCode=as2&tag=tokorom-22&linkId=50a4f9009a5a2ce3b0cf2f084a5d9008">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B01HG97S7K&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">よくわかるAuto Layout (監修)</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>川邉雄介</span></li>
-    <li style="font-size:90%; list-style:none;"><span>監修：</span>
-    <span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01HG97S7K" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/4897976839/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4897976839&linkCode=as2&tag=tokorom-22&linkId=f1f1abc3834e68b79853e4acbaec1056">
-    <div style="overflow:hidden; padding:20px; border:2px solid #ccc;">
-    <img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4897976839&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL110_&tag=tokorom-22" align="left" style="float:left; margin-right:15px; line-height:0;">
-    <p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;">詳解 EZアプリ(BREW)プログラミング</p>
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>溝口 英巳,</span><span>宮北 幸典,</span><span>所 友太</span></li>
-    </div>
-    </a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios11_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
-
-    <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://peaks-img.s3-ap-northeast-1.amazonaws.com/ios12_project_cover_alpha.png"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
-    <li style="font-size:90%; list-style:none;"><span>著者：</span>
-    <span>加藤 尋樹,</span><span>佐藤 紘一,</span><span>石川 洋資,</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>佐藤剛士,</span><span>大榎一司,</span><span>所 友太,</span></li>
-    <li style="font-size:90%; list-style:none;">製本版,電子版</li>
-    <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
-
-  </div>
-
-</footer>
-
-
-
-      </main>
-
-      <footer id='footer' class='footer'>
-        <div class='container sep-before'><div class='copyright'>
-  <p>tokorom</p>
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
 </div>
 
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/improve-my-internet-connection/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/improve-my-internet-connection/top.jpg" class="feed-item-image" alt="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯" width="300"></div>
+
+    <span class="feed-item-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</span>
+    <span class="feed-item-date">2020年9月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
         </div>
-      </footer>
-
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
     </div>
-  </div><script>window.__assets_js_src="/assets/js/"</script>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
 
-<script src='/assets/js/main.d8d8e926.js'></script>
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
 
 </body>
-
 </html>
-

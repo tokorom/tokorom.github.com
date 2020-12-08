@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>publish on TOKOROM BLOG</title>
-    <link>http://www.tokoro.me/tags/publish/</link>
+    <link>https://www.tokoro.me/tags/publish/</link>
     <description>Recent content in publish on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>tokorom</copyright>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Tue, 05 Nov 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.tokoro.me/tags/publish/atom.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.tokoro.me/tags/publish/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</title>
-      <link>http://www.tokoro.me/posts/ios-dev-accounts/</link>
+      <link>https://www.tokoro.me/posts/ios-dev-accounts/</link>
       <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://www.tokoro.me/posts/ios-dev-accounts/</guid>
+      <guid>https://www.tokoro.me/posts/ios-dev-accounts/</guid>
       <description>2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
  Member Centerのほうにアカウント追加 -&amp;gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&amp;gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能  失礼しました。
 追加情報などあれば是非おねがいします！

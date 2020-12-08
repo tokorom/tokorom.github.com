@@ -3,7 +3,7 @@ title: "iOSアプリの本番環境でのテストをプロモーションコー
 date: 2020-07-21T11:48:23+09:00
 draft: false
 authors: [tokorom]
-tags: []
+tags: [Test,AppStore,iOS]
 images: [/images/ios-promocode/top.jpg]
 canonical: https://spinners.work
 ---

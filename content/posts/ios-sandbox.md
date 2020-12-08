@@ -3,7 +3,7 @@ title: "iOSアプリの購入テストでSandboxアカウントを作って使�
 date: 2020-07-08T15:41:47+09:00
 draft: false
 authors: [tokorom]
-tags: [iOS,Test]
+tags: [Test,iOS]
 images: [/images/ios-sandbox/top.jpg]
 canonical: https://spinners.work
 ---
