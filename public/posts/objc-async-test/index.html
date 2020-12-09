@@ -20,7 +20,7 @@ TKRGuard そして作ったのが TKRGuard です。
 TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方ができます。
 // #import &quot;TKRGuard.h&quot; __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&quot;OK!"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Objective-Cで非同期処理のテストをシンプルに書く方法 | TOKOROM BLOG" property="og:title"><meta content="非同期処理のテストってどう書いてますか？ 標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、
  GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？） expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う  となるかと思います。 ただ、私が調べた時点だとどれもしっくりきませんでした。

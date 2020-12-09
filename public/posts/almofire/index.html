@@ -14,7 +14,7 @@ Swiftいいですね！
 ふつうにJSONを取得するインターフェース まず、普通にJSONを取得するインターフェースですが、
 Alamofire.request(.GET, &quot;https://api.github.com/users&quot;) .validate() .responseJSON { [unowned self] (_, _, JSON, error) in if let error = error { self.textView?.text = &quot;\(error)&quot; } else if let JSON = JSON { // ここでJSONをパースしてModelに変換する // これは擬似的なコードです if let dicts = JSON as? NSArray { var users = [User]() for dict = dicts { if let user = User(dict: dict) { users."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="AlamofireでGenericにModelオブジェクトを取得する | TOKOROM BLOG" property="og:title"><meta content="※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています
 Swiftいいですね！

@@ -15,7 +15,7 @@
  GameScore.m  #import &quot;GameScore.h&quot; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&quot;highScore&quot;: @1000, @&quot;currentScore&quot;: @530, @&quot;friendScore&quot;: @890, } mutableCopy]; } return self; }  この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
 ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end  手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Objective-Cで&#34;@dynamic&#34;の使いどころを考える | TOKOROM BLOG" property="og:title"><meta content="Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
 @synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。

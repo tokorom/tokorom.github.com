@@ -14,7 +14,7 @@
 試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
 Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; }   すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます  PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） | TOKOROM BLOG" property="og:title"><meta content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです  次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
  SwiftTask PromiseKit Bolts-iOS  を（表面だけ）使って比較してみました。
