@@ -23,7 +23,7 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 スクショを撮影して&hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
 #! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}`  です。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Vimにスクショを直接Markdownで貼り付ける | TOKOROM BLOG" property="og:title"><meta content="Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、

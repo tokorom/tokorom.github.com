@@ -19,7 +19,7 @@ https://github.com/tokorom/SSGentleAlertView
 Default Black Native サンプルコード UIAlertViewを使うときのコードのUIAlertViewの部分をSSGentleAlertViewに変更するだけです。
 // #import &quot;SSGentleAlertView.h&quot; SSGentleAlertView* alert = [SSGentleAlertView new]; alert.delegate = self; alert.title = @&quot;SSGentleAlertView&quot;; alert.message = @&quot;This is GentleAlertView!\nUIAlertView is too strong to use for ordinary messages.&quot;; [alert addButtonWithTitle:@&quot;Cancel&quot;]; [alert addButtonWithTitle:@&quot;OK&quot;]; alert.cancelButtonIndex = 0; [alert show];  なお、インスタンスを作る際に[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack] のようにすることで、３種のスタイルを選択できます。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="UIAlertViewよりもおとなしいメッセージダイアログを利用する | TOKOROM BLOG" property="og:title"><meta content="UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
 一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。  と記載されています。

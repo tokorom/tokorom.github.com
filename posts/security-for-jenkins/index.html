@@ -19,7 +19,7 @@ Jenkinsへのビルド命令専用のドメインを追加 これまでは jenki
 nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
 server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &quot;Basic XXXXXX&quot;; } }  XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする | TOKOROM BLOG" property="og:title"><meta content="前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
 つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。

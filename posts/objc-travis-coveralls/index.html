@@ -17,7 +17,7 @@ Makefile を用意する（必須ではない） 必須ではないですが、M
 自分の場合は、
 PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST=  こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="iOSのライブラリだってTravis CIとかCoverallsとか使うべき | TOKOROM BLOG" property="og:title"><meta content="今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
 なお、実際にこれらを適用して運用しているリポジトリのサンプルは、

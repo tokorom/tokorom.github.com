@@ -15,7 +15,7 @@ let logger = TextViewLogger(textView: textView) DDLog.addLogger(logger) deferToD
 deinitまでdeferさせてみよう！その1 まず、超smellな秘伝のBaseViewControllerを使ってベタにやってみると、
 typealias DeferredClosure = () -&gt; Void class BaseViewController: UIViewController { var deferreds: [DeferredClosure] = [] deinit { for deferred in deferreds { deferred() } } func deferToDeinit(closure: DeferredClosure) { deferreds.append(closure) } }  てな感じでBaseViewController君を作っておけば、このsubclassではみんなdeferToDeinitが使えるようになって、ひとまず目的は果たせる（はず）。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Swiftでdeinitまで処理をdeferする | TOKOROM BLOG" property="og:title"><meta content="deferしてますか？ Swift2でみんな大好きdeferさんが導入されましたね！
 guardと違いそんなに使う機会は訪れていないのですが、昨日、こんな感じで使いたい！という場面に遭遇しました。

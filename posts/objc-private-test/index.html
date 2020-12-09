@@ -11,7 +11,7 @@
 #import &quot;ExampleClass.h&quot; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end  テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
 #import &lt;GHUnitIOS/GHUnit.h&gt; #import &quot;ExampleClass.h&quot; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end  メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  "><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい | TOKOROM BLOG" property="og:title"><meta content="dkfjさんが Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法 という記事を書かれていました。
 せっかくなので私がやっている方法も書かせていただきます。

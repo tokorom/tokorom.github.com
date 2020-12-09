@@ -21,7 +21,7 @@
 そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
 [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能 NSLog(@&quot;State: %d&quot;, vc."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="BlockInjectionで元のソースコードを汚さないで振る舞い追加 | TOKOROM BLOG" property="og:title"><meta content="例えばこんなコードに違和感はありませんか？ 自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、
 - (IBAction)sendButtonDidPush:(id)sender { // トラッキングのためのコード [tracker sendEventWithCategory:@&quot;uiAction&quot; withAction:@&quot;sendButtonDidPush&quot; withLabel:nil withValue:0]; // ... // 以降、送信ボタンを押したときの処理 // ... }  こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。

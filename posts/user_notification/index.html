@@ -19,7 +19,7 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
 コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
    タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ | TOKOROM BLOG" property="og:title"><meta content="概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
 コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。

@@ -20,7 +20,7 @@ map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては�
 #define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); }  CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
 #define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: }  Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Objective-Cでカリー化とか部分適用してみる | TOKOROM BLOG" property="og:title"><meta content="導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
 ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。

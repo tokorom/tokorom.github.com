@@ -11,7 +11,7 @@
 意味  arc(i386)  32bitのMac（シミュレータ）用のビルド   arc(x86_64)  64bitのMac（シミュレータ）用のビルド   os(iOS)  ターゲットがMacじゃなくてiOS    オマケ ぼくの手元では、デバッグ実行時に
 #if DEBUG println(&quot;DEBUG&quot;) #endif  で DEBUG が出力されない。普通は出力されるはず？？"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う | TOKOROM BLOG" property="og:title"><meta content="だいぶ小ネタ。
 コード #if (arch(i386) || arch(x86_64)) &amp;&amp; os(iOS) AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug AFNetworkActivityLogger.sharedLogger().startLogging() #endif  UIDeviceを使う方法もあるが、そちらは実際に動いたときに判別することになる。

@@ -15,7 +15,7 @@ let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3  というかんじに、
 実装 https://github.com/tokorom/partial-swift
 func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } }  利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3  とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Swiftで部分適用（カリー化） | TOKOROM BLOG" property="og:title"><meta content="Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
 func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b }  というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
