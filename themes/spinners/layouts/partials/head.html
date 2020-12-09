@@ -14,7 +14,7 @@
 {{- end -}}
 <meta name="author" content="{{ if .Params.authors }}{{ delimit .Params.authors ", " }}{{ else }}{{ .Site.Params.author }}{{ end }}">
 <meta content="summary_large_image" name="twitter:card">
-<meta content="@spinners_inc" name="twitter:site">
+<meta content="{{ .Site.Params.twitterAccount }}" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="{{ block "ogtitle" . }}{{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}" property="og:title">
 {{- if .Summary -}}

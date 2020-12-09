@@ -8,7 +8,7 @@ theme = "spinners"
 disqusShortname = ""
 googleAnalytics = "UA-2451574-4"
 
-Paginate = 100
+Paginate = 1000
 preserveTaxonomyNames = true
 
 enableRobotsTXT = true # generate robots.txt
@@ -26,11 +26,12 @@ baseName = "atom"
 
 [params]
   author = "tokorom"
-  description = "Design & Technology"
+  description = "所のプログラミング関連技術ブログ"
   homepageImage = "/images/top_logo.png"
   share = true
   ogImage = "/images/ogp_image.png"
   favicon = "/images/favicon.ico"
+  twitterAccount = "@tokorom"
 
   [params.social]
     rss = true
