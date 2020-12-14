@@ -14,7 +14,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
  Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
 いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
@@ -28,7 +28,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
  Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
 いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、" property="og:description"><meta content="https://www.tokoro.me/images/github-actions-context/github-actions.png" property="og:image"><meta content="https://www.tokoro.me/posts/github-actions-context/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
@@ -113,7 +113,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 </ul>
 <p>の２つだけ設定すると、</p>
 <pre><code class="language-yml">- name: Slack Notification
-  uses: tokorom/action-slack-incoming-webhook@master
+  uses: tokorom/action-slack-incoming-webhook@main
   env:
     INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   with:
@@ -134,7 +134,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
   run: echo ::set-env name=COMMIT_MESSAGE::$(echo &quot;${{ github.event.head_commit.message }}&quot; | tr '\n' ' ')
 - name: Slack Notification on SUCCESS
   if: success()
-  uses: tokorom/action-slack-incoming-webhook@master
+  uses: tokorom/action-slack-incoming-webhook@main
   env:
     INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   with:

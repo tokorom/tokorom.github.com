@@ -313,7 +313,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
  Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@master env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
 いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
       </description>
       
