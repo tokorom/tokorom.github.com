@@ -48,7 +48,7 @@ Slackへの通知も [Marketplace](https://github.com/marketplace?type=actions&q
 
 ```yml
 - name: Slack Notification
-  uses: tokorom/action-slack-incoming-webhook@master
+  uses: tokorom/action-slack-incoming-webhook@main
   env:
     INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   with:
@@ -75,7 +75,7 @@ Slackへの通知も [Marketplace](https://github.com/marketplace?type=actions&q
   run: echo ::set-env name=COMMIT_MESSAGE::$(echo "${{ github.event.head_commit.message }}" | tr '\n' ' ')
 - name: Slack Notification on SUCCESS
   if: success()
-  uses: tokorom/action-slack-incoming-webhook@master
+  uses: tokorom/action-slack-incoming-webhook@main
   env:
     INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   with:
