@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 17 Dec 2020 11:22:39 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,42 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gitのcommitメッセージをその場で英訳したい！</title>
+      <link>https://www.tokoro.me/posts/commit-message-inline-translation/</link>
+      <pubDate>Thu, 17 Dec 2020 11:22:39 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/commit-message-inline-translation/</guid>
+      <description>
+        完成後に収録した画面 対象者  Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります）  ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
+ぼくは英語でcommitメッセージを書くのが得意ではなく「あの不具合をこんな感じに修正したんだよなあ、それを英語で書くと&amp;hellip;」と考えつつ面倒になってFix a problemとか意味のないcommitメッセージを残してしまうことがありました。いちばんひどいときは.とか&amp;hellip;。ごめんなさい。
+しかし昨今はDeepLなど優秀な翻訳サービスがあるわけですし、それを使えば良いだけじゃんは思うものの、実際にgit commitした後に翻訳サービスを開いてそこに日本語を入力して、翻訳結果をコピーしてエディタに戻ってきてペーストする、というのが日々のコーディングの流れの中では面倒すぎてけっきょくFix a problemとしてしまうわけです&amp;hellip;
+解決案 それを解決するのは簡単で、git commitで開かれたエディタで入力した日本語がその場で英訳されれば良い、というだけです。
+技術的にも英訳APIが使えればすぐにでもできる話ですので、先日、半日程度時間が作れるタイミングでやってしまおう、となったというお話です。
+作る 翻訳API 愛用しているDeepLにAPIがあったのでそれを使います。
+https://www.deepl.com/docs-api/translating-text/request/
+APIの利用はとても簡単で、テキストの翻訳なら、
+curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;amp;target_lang=EN-US&amp;amp;text=おはよう&#39;  とするだけでとても簡単です。
+英訳コマンド 今時点ではDeepLにCUIコマンドがないため、上の翻訳APIを叩くコマンドを自分で作ります。
+といっても上のPOSTリクエストを1つ叩くだけなのですぐできます。
+エディタから使いやすいように、
+ STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す  のが良さそうです。
+ぼくがSwiftで書いたのが、
+https://github.com/tokorom/deepl-cui-swift
+です。 ここは誰かが作ったのを使ってもいいし、自分で作ってもすぐできるかと思います。
+git commitから呼び出す この記事ではgit commitで起動するエディタがVimであることが前提です（macOSではデフォルトです）。
+Vimからツールを呼ぶということはpluginを入れる必要がある？と思いがちですが「選択したテキストを外部コマンドに渡して結果と置き換える」というのはVimが標準で備ている機能です。
+具体的には!lsとコマンド実行すればVimにlsの結果が挿入されますし、JSON文字列を選択して!jq .でjqコマンドに選択範囲を渡して整形してもらった結果で置き換えるといったことが普通にできます。
+今回は、STDINを英訳するコマンドを作ったので（deepl-cui-swiftコマンドとする）、翻訳したいテキストを選択して
+!deep-cui-swift  を実行するだけでこれが実現できます。
+ショートカット 必要なら.vimrcにショートカットキーを用意しましょう。ぼくは、
+nnoremap ze &amp;lt;S-v&amp;gt;!deepl-cui-swift -s JA -w&amp;lt;CR&amp;gt;  とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/commit-message-inline-translation/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</title>
@@ -536,41 +572,6 @@ API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にき�
 curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
  レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
 curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.
-      </description>
-      
-      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</title>
-      <link>https://www.tokoro.me/posts/nfc-iphone-1/</link>
-      <pubDate>Mon, 01 Apr 2019 12:43:04 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/nfc-iphone-1/</guid>
-      <description>
-        この記事は「NFCタグ で鍵を開けよう」シリーズの第1弾です。 以下、5つの記事に分けて投稿していく予定です。
- NFCタグにURIを書き込む（この記事） iPhoneを鍵とし、ドアにNFCタグを設置するパターン iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  導入 我が家にスマートロックのSesameを採用しました。
-私一人ならSesameだけでものすごく便利になったわけですが、我が家には小さい子供が３人います。子供たちにスマホを持たせるにはまだ早く、このままではスマートロックの恩恵を十分に受けることができません。
-なお、Sesameは個人が触れる便利なAPIを公開してくれています。NFC＋Sesame APIでこの状況を改善できるものではないか、と思い立ったのがこの記事を書くきっかけです。まだ現在進行形で実験中ですが、実験した結果を随時記事にしていければと考えています。
-この記事でやること 私がNFCタグを取り扱ったことがないところからスタートしましたので、まずこの記事では「NFCタグに情報を書き込む」ところまでだけが範囲になります。
-実際にSesameをアンロックするところなどは次の記事で書かせていただきます。
-準備した機器 スマートロック 導入に書いたとおりですが、Sesameを購入しました。
- APIでのロックやアンロックが可能で自由度が高そうだったのがSesameを選んだ理由です。
-利用するNFCタグ サンワサプライ NFCタグ(10枚入り)をAmazonで購入しました。
- NFCリーダー/ライター NFCリーダー/ライターとしてはPaSoRiを購入しました。
- これも使えればどれでも良いと思いますが、ネット上で利用実績が多く安全そうなものを選んだだけです。
-nfcpyでNFCタグの情報を扱う まずはMacにNFCリーダーを接続してNFCタグから情報を読み取るところからはじめます。
-調べたところnfcpyというツールがよく使われているようです。 実際に使ってみたところ確かに簡単に利用でき、読み取りから書き込みまでこれで全て完結できそうです。
-このツールのexamplesフォルダにそのまま使える便利なサンプルがたくさん入っていました。
-情報の読み取り NFCタグに書き込まれた情報を読み取るにはexsamplesの中のtagtool.pyを使って
-python tagtool.py show  とするだけです。
-フォーマット NFCタグをフォーマットしたいときもtagtool.pyを使って
-python tagtool.py format  とするだけです。
-URI書き込み NFCタグにURIを書き込みたい場合のみ少し工夫が必要でした。 とはいえ、exsamplesの中にあるものだけで改造なしで可能です。
-例えばhttps://tag.exsample.com/lockというURIを書き込むこととします。
-まず、うまくいくパターンからですが、
-echo -n \\0x04tag.exsample.com/lock | python ndeftool.py pack -t urn:nfc:wkt:U - | python tagtool.py load -  でURIを書き込み可能です。 まず、NFCタグに書き込む情報はNDEF（NFC Data Exchange Format）でないといけないようです。NDEFではText、URI、SmartPosterなどのRecord Typeを扱えます。
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>

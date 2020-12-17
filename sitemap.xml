@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.tokoro.me/tags/english/</loc>
+    <lastmod>2020-12-17T11:22:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/git/</loc>
+    <lastmod>2020-12-17T11:22:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/commit-message-inline-translation/</loc>
+    <lastmod>2020-12-17T11:22:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/posts/</loc>
+    <lastmod>2020-12-17T11:22:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2020-12-17T11:22:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2020-12-17T11:22:39+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.tokoro.me/tags/ios/</loc>
     <lastmod>2020-10-26T17:02:15+09:00</lastmod>
   </url>
@@ -13,22 +43,7 @@
   </url>
   
   <url>
-    <loc>https://www.tokoro.me/posts/</loc>
-    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.tokoro.me/tags/swift/</loc>
-    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.tokoro.me/tags/</loc>
-    <lastmod>2020-10-26T17:02:15+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.tokoro.me/</loc>
     <lastmod>2020-10-26T17:02:15+09:00</lastmod>
   </url>
   
