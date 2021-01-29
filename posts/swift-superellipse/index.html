@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>スーパー楕円UIをiOS&#43;Swiftで実装する | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="弊社デザイナーの @kudakuarge が スーパー楕円に関する良記事 を投稿していました。
+スーパー楕円は最近話題になっているClubhouseでも使われているとのこと。
+そのため便乗してiOS&#43;Swiftでスーパー楕円UIを実装してみます。
+どう実装する？ iOSアプリの上で上にUIImageViewとか様々なViewをのせるような使い方をすることになりそうですので、基本的にはUIViewのサブクラスである必要がありそうです。
+スーパー楕円を表示（描画）するだけならUIBezierPathなどでスーパー楕円を作って UIViewのdrawメソッド をオーバーライドしてfillするなどで良さそうです。
+しかし、上のUIImageViewなどをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 CALayerのmask でスーパー楕円の形にマスクすべきかもしれません。
+スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
+実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
+引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
+import UIKit open struct Superellipse { let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="スーパー楕円UIをiOS&#43;Swiftで実装する | TOKOROM BLOG" property="og:title"><meta content="弊社デザイナーの @kudakuarge が スーパー楕円に関する良記事 を投稿していました。
+スーパー楕円は最近話題になっているClubhouseでも使われているとのこと。
+そのため便乗してiOS&#43;Swiftでスーパー楕円UIを実装してみます。
+どう実装する？ iOSアプリの上で上にUIImageViewとか様々なViewをのせるような使い方をすることになりそうですので、基本的にはUIViewのサブクラスである必要がありそうです。
+スーパー楕円を表示（描画）するだけならUIBezierPathなどでスーパー楕円を作って UIViewのdrawメソッド をオーバーライドしてfillするなどで良さそうです。
+しかし、上のUIImageViewなどをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 CALayerのmask でスーパー楕円の形にマスクすべきかもしれません。
+スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
+実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
+引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
+import UIKit open struct Superellipse { let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect." property="og:description"><meta content="https://www.tokoro.me/images/swift-superellipse/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-superellipse/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/swift-superellipse/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">スーパー楕円UIをiOS&#43;Swiftで実装する</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2021年1月29日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ui">
+              UI
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/swift-superellipse/top.png" alt="image"></p>
+<p>弊社デザイナーの <a href="https://twitter.com/kudakurage">@kudakuarge</a> が <a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">スーパー楕円に関する良記事</a> を投稿していました。</p>
+<p>スーパー楕円は最近話題になっているClubhouseでも使われているとのこと。</p>
+<p><img src="https://www.spinners.work/images/kudakurage-superellipse-desgin/image14.png" alt="clubhouse"></p>
+<p>そのため便乗してiOS+Swiftでスーパー楕円UIを実装してみます。</p>
+<h2 id="heading">どう実装する？</h2>
+<p>iOSアプリの上で上に<code>UIImageView</code>とか様々なViewをのせるような使い方をすることになりそうですので、基本的には<code>UIView</code>のサブクラスである必要がありそうです。</p>
+<p>スーパー楕円を表示（描画）するだけなら<code>UIBezierPath</code>などでスーパー楕円を作って <a href="https://developer.apple.com/documentation/uikit/uiview/1622529-draw">UIViewのdrawメソッド</a> をオーバーライドしてfillするなどで良さそうです。</p>
+<p>しかし、上の<code>UIImageView</code>などをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 <a href="https://developer.apple.com/documentation/quartzcore/calayer/1410861-mask">CALayerのmask</a> でスーパー楕円の形にマスクすべきかもしれません。</p>
+<h2 id="heading-1">スーパー楕円はどう作る？</h2>
+<p><a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">上の記事</a> にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。</p>
+<p>ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。</p>
+<p><img src="https://www.spinners.work/images/kudakurage-superellipse-desgin/image24.png" alt="sample"></p>
+<h2 id="heading-2">実装例</h2>
+<p>ということで、まずは<code>UIBezierPath</code>でスーパー楕円を作ってみます。
+引数で渡した四角形（<code>CGRect</code>）に沿って、4つのベジェ曲線を追加しているだけです。</p>
+<p>引数<code>k</code>でアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。</p>
+<pre><code class="language-swift">import UIKit
+
+open struct Superellipse {
+  let bezierPath: UIBezierPath
+
+  public init(in rect: CGRect, k: CGFloat) {
+    let path = UIBezierPath(ovalIn: rect)
+
+    let handleX: CGFloat = rect.size.width * k / 2
+    let handleY: CGFloat = rect.size.height * k / 2
+
+    let left = CGPoint(x: rect.minX, y: rect.midY)
+    let top = CGPoint(x: rect.midX, y: rect.minY)
+    let right = CGPoint(x: rect.maxX, y: rect.midY)
+    let bottom = CGPoint(x: rect.midX, y: rect.maxY)
+
+    path.move(to: left)
+    path.addCurve(
+      to: top,
+      controlPoint1: CGPoint(x: left.x, y: left.y - handleY),
+      controlPoint2: CGPoint(x: top.x - handleX, y: top.y)
+    )
+    path.addCurve(
+      to: right,
+      controlPoint1: CGPoint(x: top.x + handleX, y: top.y),
+      controlPoint2: CGPoint(x: right.x, y: right.y - handleY)
+    )
+    path.addCurve(
+      to: bottom,
+      controlPoint1: CGPoint(x: right.x, y: right.y + handleY),
+      controlPoint2: CGPoint(x: bottom.x + handleX, y: bottom.y)
+    )
+    path.addCurve(
+      to: left,
+      controlPoint1: CGPoint(x: bottom.x - handleX, y: bottom.y),
+      controlPoint2: CGPoint(x: left.x, y: left.y + handleY)
+    )
+
+    self.bezierPath = path
+  }
+}
+</code></pre>
+<p>あとは、ここで作った<code>UIBezierPath</code>でマスクされる<code>UIView</code>サブクラスを作ってあげるだけです。</p>
+<pre><code class="language-swift">import UIKit
+
+@IBDesignable
+public final class SuperellipseView: UIView {
+  @IBInspectable public var k: CGFloat = 0.75
+
+  public override func draw(_ rect: CGRect) {
+    backgroundColor?.setFill()
+    Superellipse(in: rect, k: k).bezierPath.fill()
+  }
+
+  public override func layoutSubviews() {
+    super.layoutSubviews()
+
+    let path = Superellipse(in: bounds, k: k).bezierPath
+    let mask = CAShapeLayer()
+    mask.path = path.cgPath
+    layer.mask = mask
+  }
+}
+</code></pre>
+<p>とても簡単ですね！</p>
+<h2 id="heading-3">利用例</h2>
+<p>実際に利用するのは簡単です。
+例えば、スーパー楕円形のサムネイル画像を表示するなら、</p>
+<pre><code class="language-swift">let superellipseView = SuperellipseView(frame: CGRect(x: 40, y: 40, width: 100, height: 100))
+superellipseView.backgroundColor = .clear
+view.addSubview(superellipseView)
+
+let imageView = UIImageView(image: UIImage(named: &quot;mayuge_dog_face&quot;))
+imageView.frame = superellipseView.bounds
+superellipseView.addSubview(imageView)
+</code></pre>
+<p>こんな感じに<code>SuperellipseView</code>を<code>addSubview</code>して、その上にサムネイル画像を設定した<code>UIImageView</code>を<code>addSubview</code>するだけです。</p>
+<p><img src="/images/swift-superellipse/ss-1611901779.png" alt="image"></p>
+<h2 id="heading-4">課題</h2>
+<p>本当は <a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">上の記事</a> で紹介されているような <code>n=2.5</code> とか <code>n=3.5</code> といった係数をそのまま反映させるものを作りたかったのですが、私の頭で短時間でこれを実現することはできませんでした&hellip;</p>
+<p>この辺りわかるかた是非ご教示ください！</p>
+<h2 id="heading-5">公開</h2>
+<p>上で実装してみた <code>SuperellipseView</code> をお手軽に使ってみたいというかたがいらっしゃったら、</p>
+<p><a href="https://github.com/tokorom/SwiftSuperellipse">https://github.com/tokorom/SwiftSuperellipse</a></p>
+<p>にSwiftPackage化して公開していますのでお試しください！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/commit-message-inline-translation/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
+
+    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
+    <span class="feed-item-date">2020年12月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/improve-my-internet-connection/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/improve-my-internet-connection/top.jpg" class="feed-item-image" alt="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯" width="300"></div>
+
+    <span class="feed-item-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</span>
+    <span class="feed-item-date">2020年9月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</body>
+</html>

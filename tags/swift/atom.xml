@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Swift on TOKOROM BLOG</title>
+    <title>swift on TOKOROM BLOG</title>
     <link>https://www.tokoro.me/tags/swift/</link>
-    <description>Recent content in Swift on TOKOROM BLOG</description>
+    <description>Recent content in swift on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 29 Jan 2021 15:04:26 +0900</lastBuildDate>
     
 	<atom:link href="https://www.tokoro.me/tags/swift/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>スーパー楕円UIをiOS&#43;Swiftで実装する</title>
+      <link>https://www.tokoro.me/posts/swift-superellipse/</link>
+      <pubDate>Fri, 29 Jan 2021 15:04:26 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/swift-superellipse/</guid>
+      <description>弊社デザイナーの @kudakuarge が スーパー楕円に関する良記事 を投稿していました。
+スーパー楕円は最近話題になっているClubhouseでも使われているとのこと。
+そのため便乗してiOS+Swiftでスーパー楕円UIを実装してみます。
+どう実装する？ iOSアプリの上で上にUIImageViewとか様々なViewをのせるような使い方をすることになりそうですので、基本的にはUIViewのサブクラスである必要がありそうです。
+スーパー楕円を表示（描画）するだけならUIBezierPathなどでスーパー楕円を作って UIViewのdrawメソッド をオーバーライドしてfillするなどで良さそうです。
+しかし、上のUIImageViewなどをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 CALayerのmask でスーパー楕円の形にマスクすべきかもしれません。
+スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
+実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
+引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
+import UIKit open struct Superellipse { let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect.</description>
+    </item>
     
     <item>
       <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</title>

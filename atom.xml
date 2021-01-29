@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 17 Dec 2020 11:22:39 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 29 Jan 2021 15:04:26 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,30 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>スーパー楕円UIをiOS&#43;Swiftで実装する</title>
+      <link>https://www.tokoro.me/posts/swift-superellipse/</link>
+      <pubDate>Fri, 29 Jan 2021 15:04:26 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/swift-superellipse/</guid>
+      <description>
+        弊社デザイナーの @kudakuarge が スーパー楕円に関する良記事 を投稿していました。
+スーパー楕円は最近話題になっているClubhouseでも使われているとのこと。
+そのため便乗してiOS+Swiftでスーパー楕円UIを実装してみます。
+どう実装する？ iOSアプリの上で上にUIImageViewとか様々なViewをのせるような使い方をすることになりそうですので、基本的にはUIViewのサブクラスである必要がありそうです。
+スーパー楕円を表示（描画）するだけならUIBezierPathなどでスーパー楕円を作って UIViewのdrawメソッド をオーバーライドしてfillするなどで良さそうです。
+しかし、上のUIImageViewなどをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 CALayerのmask でスーパー楕円の形にマスクすべきかもしれません。
+スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
+実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
+引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
+import UIKit open struct Superellipse { let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect.
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/swift-superellipse/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>Gitのcommitメッセージをその場で英訳したい！</title>
@@ -551,30 +575,6 @@ iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心に�
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iosdc_2019.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</title>
-      <link>https://www.tokoro.me/posts/nfc-iphone-2/</link>
-      <pubDate>Mon, 01 Apr 2019 15:11:25 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/nfc-iphone-2/</guid>
-      <description>
-        この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
- NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
-今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
-それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
- この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
-https://ameblo.jp/candyhouse-inc/entry-12416936959.html
-をご参照ください。
-API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
-curlで叩いてみる curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&amp;quot;device_id&amp;quot;: &amp;quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&amp;quot;, &amp;quot;serial&amp;quot;: &amp;quot;ABCDEFG&amp;quot;, &amp;quot;nickname&amp;quot;: &amp;quot;\u30c9\u30a2&amp;quot;}]  鍵をロック 上で取得したdevice_idを利用し、
-curl -H &amp;quot;Authorization: YOUR_AUTH_TOKEN&amp;quot; \ -H &amp;quot;Content-Type: application/json&amp;quot; \ -X POST -d &#39;{&amp;quot;command&amp;quot;:&amp;quot;lock&amp;quot;}&#39; \ https://api.
-      </description>
-      
-      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
       
     </item>
     
