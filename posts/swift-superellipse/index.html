@@ -11,7 +11,7 @@
 どう実装する？ iOSアプリの上で上にUIImageViewとか様々なViewをのせるような使い方をすることになりそうですので、基本的にはUIViewのサブクラスである必要がありそうです。
 スーパー楕円を表示（描画）するだけならUIBezierPathなどでスーパー楕円を作って UIViewのdrawメソッド をオーバーライドしてfillするなどで良さそうです。
 しかし、上のUIImageViewなどをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 CALayerのmask でスーパー楕円の形にマスクすべきかもしれません。
-スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る例のため、今回の用途にはアンマッチです。
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
 引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
@@ -25,7 +25,7 @@ import UIKit public struct Superellipse { public let bezierPath: UIBezierPath pu
 どう実装する？ iOSアプリの上で上にUIImageViewとか様々なViewをのせるような使い方をすることになりそうですので、基本的にはUIViewのサブクラスである必要がありそうです。
 スーパー楕円を表示（描画）するだけならUIBezierPathなどでスーパー楕円を作って UIViewのdrawメソッド をオーバーライドしてfillするなどで良さそうです。
 しかし、上のUIImageViewなどをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 CALayerのmask でスーパー楕円の形にマスクすべきかもしれません。
-スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+スーパー楕円はどう作る？ 上の記事 にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る例のため、今回の用途にはアンマッチです。
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
 引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
@@ -90,7 +90,7 @@ import UIKit public struct Superellipse { public let bezierPath: UIBezierPath pu
 <p>スーパー楕円を表示（描画）するだけなら<code>UIBezierPath</code>などでスーパー楕円を作って <a href="https://developer.apple.com/documentation/uikit/uiview/1622529-draw">UIViewのdrawメソッド</a> をオーバーライドしてfillするなどで良さそうです。</p>
 <p>しかし、上の<code>UIImageView</code>などをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 <a href="https://developer.apple.com/documentation/quartzcore/calayer/1410861-mask">CALayerのmask</a> でスーパー楕円の形にマスクすべきかもしれません。</p>
 <h2 id="heading-1">スーパー楕円はどう作る？</h2>
-<p><a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">上の記事</a> にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。</p>
+<p><a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">上の記事</a> にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る例のため、今回の用途にはアンマッチです。</p>
 <p>ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。</p>
 <p><img src="https://www.spinners.work/images/kudakurage-superellipse-desgin/image24.png" alt="sample"></p>
 <h2 id="heading-2">実装例</h2>
@@ -145,11 +145,6 @@ public struct Superellipse {
 @IBDesignable
 public final class SuperellipseView: UIView {
   @IBInspectable public var k: CGFloat = 0.75
-
-  public override func draw(_ rect: CGRect) {
-    backgroundColor?.setFill()
-    Superellipse(in: rect, k: k).bezierPath.fill()
-  }
 
   public override func layoutSubviews() {
     super.layoutSubviews()
