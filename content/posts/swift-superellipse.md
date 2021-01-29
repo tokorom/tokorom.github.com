@@ -28,7 +28,7 @@ iOSアプリの上で上に`UIImageView`とか様々なViewをのせるような
 
 ## スーパー楕円はどう作る？
 
-[上の記事](https://www.spinners.work/posts/kudakurage-superellipse-desgin/) にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る礼のため、今回の用途にはアンマッチです。
+[上の記事](https://www.spinners.work/posts/kudakurage-superellipse-desgin/) にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る例のため、今回の用途にはアンマッチです。
 
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 
@@ -93,11 +93,6 @@ import UIKit
 @IBDesignable
 public final class SuperellipseView: UIView {
   @IBInspectable public var k: CGFloat = 0.75
-
-  public override func draw(_ rect: CGRect) {
-    backgroundColor?.setFill()
-    Superellipse(in: rect, k: k).bezierPath.fill()
-  }
 
   public override func layoutSubviews() {
     super.layoutSubviews()
