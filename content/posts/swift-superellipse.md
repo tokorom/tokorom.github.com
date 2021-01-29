@@ -44,8 +44,8 @@ iOSアプリの上で上に`UIImageView`とか様々なViewをのせるような
 ```swift
 import UIKit
 
-open struct Superellipse {
-  let bezierPath: UIBezierPath
+public struct Superellipse {
+  public let bezierPath: UIBezierPath
 
   public init(in rect: CGRect, k: CGFloat) {
     let path = UIBezierPath(ovalIn: rect)
