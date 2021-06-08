@@ -2,8 +2,9 @@
 title: "WWDC21 Keynote iOS 15についての発表の復習"
 date: 2021-06-08T17:50:33+09:00
 draft: false
+author: "tokorom"
 authors: [tokorom]
-tags: []
+tags: [Swift,iOS,UI]
 images: [/images/wwdc2021-keynote/top.png]
 canonical: https://spinners.work
 ---
