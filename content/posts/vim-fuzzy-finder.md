@@ -1,6 +1,6 @@
 ---
 title: "[Vim] ぼくのかんがえたさいきょうのFuzzy Finder"
-date: 2021-03-22T21:35:20+09:00
+date: 2022-03-22T21:35:20+09:00
 draft: false
 authors: [tokorom]
 tags: [Vim]
