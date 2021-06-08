@@ -17,7 +17,10 @@
       <pubDate>Tue, 08 Jun 2021 17:50:33 +0900</pubDate>
       
       <guid>https://www.tokoro.me/posts/wwdc2021-keynote/</guid>
-      <description>iOS 15 FaceTime Spatial audio 空間オーディオ。 自然に感じられるようビデオ通話画面の各メンバーが映っている方向から音声が聞こえてくるように表現される。
+      <description>iOS 15 2021年6月8日、WWDC21のKeynoteでiOS 15についての発表がありました。
+iOS 15だけでも盛りだくさんな内容でしたので、Keynoteをもう一度見直し、1つ1つ確認しながらメモをして復習してみました。
+これから詳細なセッションもどんどんと公開されますので、これをインデックスに興味を持った新機能のセッションにダイブしていこうと思います！
+FaceTime Spatial audio 空間オーディオ。 自然に感じられるようビデオ通話画面の各メンバーが映っている方向から音声が聞こえてくるように表現される。
 Voice isolation 声を分離。 周いの騒音を遮断できる。
 周りの音も拾いたければワイドスペクトラムに設定することで可能。
 Grid view 全員の顔をグリッド表示する新しいレイアウト。
@@ -35,9 +38,7 @@ SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTime
  Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV  などが既に対応を進めている。
 Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
 Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
-Shared with You あなたと共有。
-たとえばMesasgesでNewsの共有ができるが、Newsアプリに「あなたと共有」の欄があり、Messagesで友達から共有されたNewsが表示される。 そこからNewsを読み、友達からのメッセージもその場で表示でき、返信もできる。
-Apple Musicや写真アプリにも。 共有された写真はおすすめやメモリーにも表示され、自分のライブラリにも自動的に加わる。</description>
+Shared with You あなたと共有。</description>
     </item>
     
     <item>
