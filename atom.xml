@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Fri, 29 Jan 2021 15:04:26 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jun 2021 17:50:33 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,40 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WWDC21 Keynote iOS 15についての発表の復習</title>
+      <link>https://www.tokoro.me/posts/wwdc2021-keynote/</link>
+      <pubDate>Tue, 08 Jun 2021 17:50:33 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc2021-keynote/</guid>
+      <description>
+        iOS 15 FaceTime Spatial audio 空間オーディオ。 自然に感じられるようビデオ通話画面の各メンバーが映っている方向から音声が聞こえてくるように表現される。
+Voice isolation 声を分離。 周いの騒音を遮断できる。
+周りの音も拾いたければワイドスペクトラムに設定することで可能。
+Grid view 全員の顔をグリッド表示する新しいレイアウト。
+Portrait mode ポートレートモード。背景をぼかし、あなたの顔に自然に焦点が合うように。
+FaceTime links FaceTimeの通話に招待するリンクを作成し、どのツールででも共有できる。リンクを事前に作ってカレンダーに登録しておくなども可能。
+AppleのデバイスでだけでなくAndroidやWindowsでもブラウザ経由で参加可能！
+FaceTimeはEnd-to-endで暗号化されておりプライバシーが損なわれることもない。
+SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話中に音楽を流して一緒に聴いたり、映画やテレビ番組を観ることもできる。 その他のアプリも画面共有が可能で無限の可能性がある。
+音楽 SharePlayで音楽を同期再生している間、誰でも再生待ちリストに曲を追加でき、再生や一時停止、次のトラックへのスキップもできる。
+映像 FaceTime中にアプリで映像を再生すると、通話中の友達と同じビデオを同期した状態で観ることができる。
+映像を同時視聴している間も通話は続くし、他のアプリを起動してテイクアウトを注文、なども可能。 その間もピクチャ・イン・ピクチャでビデオと友達の顔の両方が見える。
+PiPをタップすることでSharePlayのコントロールが表示される。
+同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
+SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
+ Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV  などが既に対応を進めている。
+Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
+Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
+Shared with You あなたと共有。
+たとえばMesasgesでNewsの共有ができるが、Newsアプリに「あなたと共有」の欄があり、Messagesで友達から共有されたNewsが表示される。 そこからNewsを読み、友達からのメッセージもその場で表示でき、返信もできる。
+Apple Musicや写真アプリにも。 共有された写真はおすすめやメモリーにも表示され、自分のライブラリにも自動的に加わる。
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/wwdc2021-keynote/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>スーパー楕円UIをiOS&#43;Swiftで実装する</title>
@@ -553,28 +587,6 @@ iOS 13なら何も開発しないで、NFCタグタッチでSesameの解錠が�
       </description>
       
       <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇します</title>
-      <link>https://www.tokoro.me/posts/iosdc_2019_pre/</link>
-      <pubDate>Wed, 04 Sep 2019 18:09:20 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/iosdc_2019_pre/</guid>
-      <description>
-        明日、2019年9月5日（木）から開催される iOSDC Japan 2019 に「Advanced Segue」というセッションで登壇予定です。
-スケジュール  2019/09/05（木） 18:40〜  Track B レギュラートーク（30分） Proposal    概要 Proposalからの抜粋です。
- Segueでできること、できないこと、とにかくSegue（UIStoryboardSegue）について凝縮して紹介します。 通常の使い方からUnwindSegueを使うメリット、Xcode 11から利用できるようになったIBSegueActionまで。 Segueを愛して7年の私が、これまでSegueを避けてきた皆さんにもSegueの魅力を知っていただけるようなトークができればと考えています。
- 見ていただきたいかた  同じくSegueを愛する同士 Segueを使ってはいるがもう少しどうにかならないかと思っているかた 敢えてSegueを使っていないかた  Segueを愛するかたはもちろんですが、敢えてSegueを使っていないかたにこそ価値のあるセッションになるかもしれません。 なお、このセッションを聞いて絶対Segueを使ってくれ！とは考えていないです。 普段Segueを使っていないかたにとっては、３０分でSegueについてキャッチアップしていただき「SegueのProsはもちろん知ってるけど、やはり敢えて使ってないんだよ」と自信を持って言える状態になっていただければ幸いです。
-具体的な内容  Basic Segue iOS 13 New Features! Advanced Tips  というAgendaの予定です。
-Basic Segue  SegueはViewControllerを開くためだけにあるのではないですよ Segueには大きく４種がありますよ  という基本部分と、
- Segueを使うPros Segueを使うCons  について簡単に復習をさせていただきます。
- prepareForSegue  についてもここに含みます。
-iOS 13 New Features!  Segue ActionによりSegueのConsの解決  を中心にお話します。
-      </description>
-      
-      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iosdc_2019.png</coverImage>
       
     </item>
     

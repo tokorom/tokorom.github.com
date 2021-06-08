@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>WWDC21 Keynote iOS 15についての発表の復習 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="iOS 15 FaceTime Spatial audio 空間オーディオ。 自然に感じられるようビデオ通話画面の各メンバーが映っている方向から音声が聞こえてくるように表現される。
+Voice isolation 声を分離。 周いの騒音を遮断できる。
+周りの音も拾いたければワイドスペクトラムに設定することで可能。
+Grid view 全員の顔をグリッド表示する新しいレイアウト。
+Portrait mode ポートレートモード。背景をぼかし、あなたの顔に自然に焦点が合うように。
+FaceTime links FaceTimeの通話に招待するリンクを作成し、どのツールででも共有できる。リンクを事前に作ってカレンダーに登録しておくなども可能。
+AppleのデバイスでだけでなくAndroidやWindowsでもブラウザ経由で参加可能！
+FaceTimeはEnd-to-endで暗号化されておりプライバシーが損なわれることもない。
+SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話中に音楽を流して一緒に聴いたり、映画やテレビ番組を観ることもできる。 その他のアプリも画面共有が可能で無限の可能性がある。
+音楽 SharePlayで音楽を同期再生している間、誰でも再生待ちリストに曲を追加でき、再生や一時停止、次のトラックへのスキップもできる。
+映像 FaceTime中にアプリで映像を再生すると、通話中の友達と同じビデオを同期した状態で観ることができる。
+映像を同時視聴している間も通話は続くし、他のアプリを起動してテイクアウトを注文、なども可能。 その間もピクチャ・イン・ピクチャでビデオと友達の顔の両方が見える。
+PiPをタップすることでSharePlayのコントロールが表示される。
+同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
+SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
+ Disney&#43; Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN&#43; Paramaount&#43; Pluto TV  などが既に対応を進めている。
+Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
+Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
+Shared with You あなたと共有。
+たとえばMesasgesでNewsの共有ができるが、Newsアプリに「あなたと共有」の欄があり、Messagesで友達から共有されたNewsが表示される。 そこからNewsを読み、友達からのメッセージもその場で表示でき、返信もできる。
+Apple Musicや写真アプリにも。 共有された写真はおすすめやメモリーにも表示され、自分のライブラリにも自動的に加わる。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="WWDC21 Keynote iOS 15についての発表の復習 | TOKOROM BLOG" property="og:title"><meta content="iOS 15 FaceTime Spatial audio 空間オーディオ。 自然に感じられるようビデオ通話画面の各メンバーが映っている方向から音声が聞こえてくるように表現される。
+Voice isolation 声を分離。 周いの騒音を遮断できる。
+周りの音も拾いたければワイドスペクトラムに設定することで可能。
+Grid view 全員の顔をグリッド表示する新しいレイアウト。
+Portrait mode ポートレートモード。背景をぼかし、あなたの顔に自然に焦点が合うように。
+FaceTime links FaceTimeの通話に招待するリンクを作成し、どのツールででも共有できる。リンクを事前に作ってカレンダーに登録しておくなども可能。
+AppleのデバイスでだけでなくAndroidやWindowsでもブラウザ経由で参加可能！
+FaceTimeはEnd-to-endで暗号化されておりプライバシーが損なわれることもない。
+SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話中に音楽を流して一緒に聴いたり、映画やテレビ番組を観ることもできる。 その他のアプリも画面共有が可能で無限の可能性がある。
+音楽 SharePlayで音楽を同期再生している間、誰でも再生待ちリストに曲を追加でき、再生や一時停止、次のトラックへのスキップもできる。
+映像 FaceTime中にアプリで映像を再生すると、通話中の友達と同じビデオを同期した状態で観ることができる。
+映像を同時視聴している間も通話は続くし、他のアプリを起動してテイクアウトを注文、なども可能。 その間もピクチャ・イン・ピクチャでビデオと友達の顔の両方が見える。
+PiPをタップすることでSharePlayのコントロールが表示される。
+同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
+SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
+ Disney&#43; Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN&#43; Paramaount&#43; Pluto TV  などが既に対応を進めている。
+Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
+Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
+Shared with You あなたと共有。
+たとえばMesasgesでNewsの共有ができるが、Newsアプリに「あなたと共有」の欄があり、Messagesで友達から共有されたNewsが表示される。 そこからNewsを読み、友達からのメッセージもその場で表示でき、返信もできる。
+Apple Musicや写真アプリにも。 共有された写真はおすすめやメモリーにも表示され、自分のライブラリにも自動的に加わる。" property="og:description"><meta content="https://www.tokoro.me/images/wwdc2021-keynote/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc2021-keynote/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc2021-keynote/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">WWDC21 Keynote iOS 15についての発表の復習</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2021年6月8日</span>
+  </div><div class="content">
+      <p><img src="/images/wwdc2021-keynote/top.png" alt="image"></p>
+<h1 id="ios-15">iOS 15</h1>
+<h2 id="facetime">FaceTime</h2>
+<h3 id="spatial-audio">Spatial audio</h3>
+<p>空間オーディオ。
+自然に感じられるようビデオ通話画面の各メンバーが映っている方向から音声が聞こえてくるように表現される。</p>
+<h3 id="voice-isolation">Voice isolation</h3>
+<p>声を分離。
+周いの騒音を遮断できる。</p>
+<p>周りの音も拾いたければワイドスペクトラムに設定することで可能。</p>
+<h3 id="grid-view">Grid view</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623142880.png" alt="image"></p>
+<p>全員の顔をグリッド表示する新しいレイアウト。</p>
+<h3 id="portrait-mode">Portrait mode</h3>
+<p>ポートレートモード。背景をぼかし、あなたの顔に自然に焦点が合うように。</p>
+<h3 id="facetime-links">FaceTime links</h3>
+<p>FaceTimeの通話に招待するリンクを作成し、どのツールででも共有できる。リンクを事前に作ってカレンダーに登録しておくなども可能。</p>
+<p>AppleのデバイスでだけでなくAndroidやWindowsでもブラウザ経由で参加可能！</p>
+<p>FaceTimeはEnd-to-endで暗号化されておりプライバシーが損なわれることもない。</p>
+<h2 id="shareplay">SharePlay</h2>
+<p>体験を共有する。
+FaceTime中に楽しめる。
+例えば通話中に音楽を流して一緒に聴いたり、映画やテレビ番組を観ることもできる。
+その他のアプリも画面共有が可能で無限の可能性がある。</p>
+<h3 id="heading">音楽</h3>
+<p>SharePlayで音楽を同期再生している間、誰でも再生待ちリストに曲を追加でき、再生や一時停止、次のトラックへのスキップもできる。</p>
+<h3 id="heading-1">映像</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623143730.png" alt="image"></p>
+<p>FaceTime中にアプリで映像を再生すると、通話中の友達と同じビデオを同期した状態で観ることができる。</p>
+<p>映像を同時視聴している間も通話は続くし、他のアプリを起動してテイクアウトを注文、なども可能。
+その間もピクチャ・イン・ピクチャでビデオと友達の顔の両方が見える。</p>
+<p>PiPをタップすることでSharePlayのコントロールが表示される。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623143865.png" alt="image"></p>
+<p>同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。</p>
+<h3 id="shareplay-api">SharePlay API</h3>
+<p>SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。</p>
+<ul>
+<li>Disney+</li>
+<li>Hulu</li>
+<li>HBO Max</li>
+<li>NBAアプリ</li>
+<li>twitch</li>
+<li>TikTOk</li>
+<li>MasterClass</li>
+<li>ESPN+</li>
+<li>Paramaount+</li>
+<li>Pluto TV</li>
+</ul>
+<p>などが既に対応を進めている。</p>
+<h3 id="screen-sharing">Screen sharing</h3>
+<p>画面共有。
+将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。</p>
+<h2 id="messages">Messages</h2>
+<h3 id="heading-2">コラージュデザイン</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623144514.png" alt="image"></p>
+<p>新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。</p>
+<h3 id="shared-with-you">Shared with You</h3>
+<p>あなたと共有。</p>
+<p>たとえばMesasgesでNewsの共有ができるが、Newsアプリに「あなたと共有」の欄があり、Messagesで友達から共有されたNewsが表示される。
+そこからNewsを読み、友達からのメッセージもその場で表示でき、返信もできる。</p>
+<p>Apple Musicや写真アプリにも。
+共有された写真はおすすめやメモリーにも表示され、自分のライブラリにも自動的に加わる。</p>
+<p>写真アプリは賢くなり、自分が写っている写真など大事なものだけを抽出することができる。</p>
+<p>SafariやPodcastsやApple TVアプリもShared with Youに対応。</p>
+<h3 id="heading-3">ピン</h3>
+<p>大事なメッセージをピンで固定できる。
+Shared with Youや検索などで見つけやすい場所に表示される。</p>
+<h2 id="heading-4">通知</h2>
+<h3 id="heading-5">デザインを一新</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623145388.png" alt="image"></p>
+<p>人の顔やアイコンを大きく表示し見分けがつきやすいように。</p>
+<h3 id="notification-summary">Notification summary</h3>
+<p>通知要約。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623145465.png" alt="image"></p>
+<p>通知を自分が好きな時間に対処できるように。
+自分が設定した好きな時間に届く。</p>
+<p>AIにより適切に要約。
+要約の中の通知は優先すべき順に並ぶ。</p>
+<p>人からのメッセージは要約されないので見逃すことはない。</p>
+<h2 id="heading-6">おやすみモード</h2>
+<p>（おやすみモード自体は既存のもの）</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623145697.png" alt="image"></p>
+<p>おやすみモードにすると相手のメッセージアプリ上でその旨が表示され、メッセージを送っても後から通知されるというステータスになる。本当に緊急性の高いメッセージなら送ることも可能。</p>
+<h2 id="focus">Focus</h2>
+<p>集中モード。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623145903.png" alt="image"></p>
+<p>自分で明示的に何に集中したいかを選択する。</p>
+<p>集中モード中に通知を許可するアプリや人物をAIが提案する。</p>
+<p>例えば、仕事中にSlackからの通知のみ受け取る、プライベート中なら友人や家族からのメッセージは受け取る、など。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623146082.png" alt="image"></p>
+<p>集中モードに合わせた専用ページをホーム画面に設定もできる。仕事中なら仕事に関わるWidgetやアプリのみ表示、プライベート中ならYouTubeや友人とのメッセージアプリを配置するなど。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623146224.png" alt="image"></p>
+<p>また、場所や時間帯などの状況に基づいて集中モードの使用を賢く提案もしてくれる。</p>
+<p>独自の集中モードも設定可能。</p>
+<p>集中モードを設定すると、iPhone/iPad/Apple Watch/Macと全てのデバイスで自動で設定される。</p>
+<h2 id="live-text">Live Text</h2>
+<p>テキストの認識表示。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623146481.png" alt="image"></p>
+<p>例えばホワイトボードをカメラで映すとボード部分が自動で認識され、ボードに書かれているテキストを選択してコピーができる。</p>
+<p>撮影済みの写真ライブラリにある写真でも使える。</p>
+<p>コピーだけでなくテキストを選択して調べる、電話番号を選択して電話、なども。</p>
+<p>Live TextはiOS上のあらゆる写真で使える。クイックルックやSafari上の写真でも。</p>
+<p>※ただし日本語はまだ未対応（スクリブルは1年越しで日本語対応されたのでLive Textも来年に期待！）</p>
+<h2 id="visual-look-up">Visual Look Up</h2>
+<p>認識したものや風景についての情報も調べることができる。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623146801.png" alt="image"></p>
+<p>タップするだけで犬や花の種類、アートや本、ランドマークなどを認識して調べてくれる。</p>
+<h2 id="spotlight">Spotlight</h2>
+<p>写真をSpotlightの検索対象にすることで写真の検索も簡単に。
+ホーム画面からも簡単に写真を検索できるようになった。</p>
+<p>人物やランドマークだけでなく地名でも検索できる。</p>
+<p>Live Textで認識したテキストも検索対象に。レシピやレシートや手書きのメモを探すのに便利。</p>
+<p>連絡先も検索でき、すぐに電話やメッセージが可能。探すの対象なら相手のいる場所もわかる。
+最近の会話や共有した写真、カレンダーの予定やメモ、ファイルも。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623147184.png" alt="image"></p>
+<p>俳優やミュージシャン、テレビ番組や映画も新しい専用UIで情報が表示できるように。</p>
+<h2 id="photos-memories">Photos Memories</h2>
+<p>メモリーがApple Musicに対応。
+Apple Musicからパーソナライズされたぴったりの曲が選ばれる。</p>
+<p>新機能のメモリーミックスでメモリーをカスタマイズできるように。
+メモリーミックスで最適な曲やテンポや見た目を選んでくれる（スワイプでテーマを切り替えているように見える）。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623147422.png" alt="image"></p>
+<p>自分で曲を選ぶことも可能。
+選んだ曲でパーソナライズされた関連するメモリーを見続けることもできる。</p>
+<h2 id="wallet">Wallet</h2>
+<h3 id="heading-7">これまで</h3>
+<p>Walletはこれまでクレジットカード（決済カード）、交通系カード（エクスプレスモード対応）、パークチケット（Walt Disney World）に対応してきた。</p>
+<h3 id="heading-8">鍵</h3>
+<p>今回、鍵にも対応した。
+まずは、超広帯域無線を使った車のキーから始めた。</p>
+<p>BMWやほかのメーカーはUWB（Ultra Wide Band：超広帯域無線通信）対応車を2021年後半から出荷する。</p>
+<p>戸建て住宅やアパートのドアも開けられるように。</p>
+<p>社員証を追加すればオフィスにも入れるように。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623156486.png" alt="image"></p>
+<p>ホテルの鍵にも。客室の用意ができると自動的にホテルに到着する前でも鍵を受け取れる。
+ハイアットホテルは2021年秋から世界中の1000施設以上で導入する。</p>
+<p>その他、施錠や入退室管理システムを持つ多くのパートナーとあらゆる鍵に対応していく。</p>
+<h3 id="id">身分証明書（ID）</h3>
+<p>アメリカの対応する州では運転免許証や身分証明書をスキャンするだけでWalletに追加できる。
+暗号化され安全に保管される。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623156723.png" alt="image"></p>
+<p>米国運輸保安庁は空港の保安検査場でデジタル身分証明書が使えるよう準備している。　
+Walletの身分証明書からどの情報が取得されたかも分かります。</p>
+<h2 id="wheather">天気（Wheather）</h2>
+<p>新しいデザイン。
+風や雨や空気室の悪化、晴天など、様々な状況でレイアウトが変化する。</p>
+<p>風やUV指数、気圧などが把握しやすくなった。</p>
+<p><img src="/images/wwdc2021-keynote/ss-1623156980.png" alt="image"></p>
+<p>高解像度の天気図に対応。
+降水量のアニメーションや空気質が表示され、周囲の天気を全画面表示で確認できる。</p>
+<h2 id="apple-maps">マップ（Apple Maps）</h2>
+<h3 id="heading-9">新しいマップの対応拡大</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623158604.png" alt="image"></p>
+<p>新しいマップはこれまでのアメリカ、イギリス、アイルランド、カナダに加え、今日からスペイン、ボルトガル、年内にはオーストラリアにも対応します（日本はまだ&hellip;）。</p>
+<h3 id="heading-10">地球儀</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623158733.png" alt="image"></p>
+<p>地球儀の表示ができるように。</p>
+<h3 id="heading-11">都市圏</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623158805.png" alt="image"></p>
+<p>都市圏ではより詳細な表示ができるように。
+標高や新たな道の色やラベルが追加。
+特別にデザインされた何百ものランドマークも追加。</p>
+<p>月に照らされた美しい夜間モードも実装。</p>
+<h3 id="heading-12">ドライビング</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623159020.png" alt="image"></p>
+<p>車の運転時の表示も進化。
+数多くの道路情報が追加された。</p>
+<p>右左折車線や中央分離帯、バスやタクシーの専用レーンなどの重要な情報を認識しやすく。
+横断歩道や自転車レーンなども表示。</p>
+<p>高速道路の複雑なインターチェンジも３次元空間で再現。</p>
+<p>これらの機能は2021年後半にCarPlayにも提供される。</p>
+<h3 id="heading-13">交通機関</h3>
+<p>交通機関の利用者のための改良も。
+近くの駅を簡単に探せるように。
+お気に入りの路線を一番上にピンで固定もできる。
+Apple Watchとも連携してポケットからiPhoneを取り出さずに利用できる。</p>
+<p>目的の駅に近づくと降りる時間だと教えてくれるようにも。</p>
+<h3 id="heading-14">スキャン</h3>
+<p><img src="/images/wwdc2021-keynote/ss-1623159525.png" alt="image"></p>
+<p>マップアプリで周辺をスキャンすると正確な位置を検知し、目的地への詳細な方角をARで教えてくれる。</p>
+<p>この機能は2021年末までにロンドン、ロサンゼルス、ニューヨーク&hellip;などで。
+以後も拡大していきます。</p>
+<h2 id="heading-15">その他</h2>
+<p><img src="/images/wwdc2021-keynote/ss-1623159751.png" alt="image"></p>
+<ul>
+<li>Safariの音声検索</li>
+<li>アプリケーション間のドラッグ＆ドロップ機能</li>
+<li>ミー文字での服装の選択肢の追加</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/commit-message-inline-translation/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
+
+    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
+    <span class="feed-item-date">2020年12月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/improve-my-internet-connection/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/improve-my-internet-connection/top.jpg" class="feed-item-image" alt="自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯" width="300"></div>
+
+    <span class="feed-item-title">自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</span>
+    <span class="feed-item-date">2020年9月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</body>
+</html>
