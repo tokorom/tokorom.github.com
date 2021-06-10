@@ -23,7 +23,7 @@
       <guid>https://www.tokoro.me/posts/wwdc21-meet-group-activities/</guid>
       <description>
         Meet Group Activities を視聴して内容をまとめたものです。
-先に簡単にまとめ  SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる  再生、一時停止、シークなどの操作による再生位置の変化が同期される   SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる  カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう   ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある イベント送信についてはまだよくわかっておらず&amp;hellip;  導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
+先に簡単にまとめ  SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる  ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう   ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある イベント送信についてはまだよくわかっておらず&amp;hellip;  導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
 SharePlayは、GroupActivities フレームワークによって実現されています。
 このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。
 Communication Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。
@@ -41,6 +41,8 @@ Time-Synced Playback SharePlayでは、再生の同期が可能です。 誰か�
 この同期は、手元のメディアを再送信することで実現しているわけではありません。 各々のデバイスに直接ストリーミングされ、各デバイスでの最高品質のメディアを再生できます。
 スマートボリューム 再生中に誰かが発言すると、コンテンツの音量が自動的に下げられ、同じ部屋にいるようにコミュニケーションをとることができます。
 Picture in Picture Picture in Pictureとの相性も抜群で、PiPによりコンテンツを視聴しながら他の様々なアプリを利用することができます。
+Content FaceTimeで通話中のユーザーは、各アプリを起動したとき、そのアプリのコンテンツを共有できることを期待するようになります。
+SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。 既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。
       </description>
       
       <coverImage>https://www.tokoro.me/images/wwdc21-meet-group-activities/top.png</coverImage>
