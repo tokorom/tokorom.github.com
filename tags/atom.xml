@@ -6,7 +6,7 @@
     <description>Recent content in Tags on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Fri, 29 Jan 2021 15:04:26 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Jun 2021 12:56:44 +0900</lastBuildDate>
     
 	<atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     
@@ -14,16 +14,43 @@
     <item>
       <title>ios</title>
       <link>https://www.tokoro.me/tags/ios/</link>
-      <pubDate>Fri, 29 Jan 2021 15:04:26 +0900</pubDate>
+      <pubDate>Thu, 10 Jun 2021 12:56:44 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/ios/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Swift</title>
+      <title>SharePlay</title>
+      <link>https://www.tokoro.me/tags/shareplay/</link>
+      <pubDate>Thu, 10 Jun 2021 12:56:44 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/shareplay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WWDC21</title>
+      <link>https://www.tokoro.me/tags/wwdc21/</link>
+      <pubDate>Thu, 10 Jun 2021 12:56:44 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/wwdc21/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keynote</title>
+      <link>https://www.tokoro.me/tags/keynote/</link>
+      <pubDate>Tue, 08 Jun 2021 17:50:33 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/keynote/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swift</title>
       <link>https://www.tokoro.me/tags/swift/</link>
-      <pubDate>Fri, 29 Jan 2021 15:04:26 +0900</pubDate>
+      <pubDate>Tue, 08 Jun 2021 17:50:33 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/swift/</guid>
       <description></description>
@@ -32,7 +59,7 @@
     <item>
       <title>ui</title>
       <link>https://www.tokoro.me/tags/ui/</link>
-      <pubDate>Fri, 29 Jan 2021 15:04:26 +0900</pubDate>
+      <pubDate>Tue, 08 Jun 2021 17:50:33 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/ui/</guid>
       <description></description>
@@ -138,7 +165,7 @@
     </item>
     
     <item>
-      <title>wwdc</title>
+      <title>WWDC</title>
       <link>https://www.tokoro.me/tags/wwdc/</link>
       <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       
