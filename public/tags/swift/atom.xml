@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>swift on TOKOROM BLOG</title>
+    <title>Swift on TOKOROM BLOG</title>
     <link>https://www.tokoro.me/tags/swift/</link>
-    <description>Recent content in swift on TOKOROM BLOG</description>
+    <description>Recent content in Swift on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
     <lastBuildDate>Tue, 08 Jun 2021 17:50:33 +0900</lastBuildDate>
