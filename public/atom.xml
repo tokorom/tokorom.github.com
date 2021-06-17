@@ -23,7 +23,7 @@
       <guid>https://www.tokoro.me/posts/wwdc21-meet-group-activities/</guid>
       <description>
         Meet Group Activities を視聴して内容をまとめたものです。
-先に簡単にまとめ  SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる  ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう   ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある イベント送信についてはまだよくわかっておらず&amp;hellip;  導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
+先に簡単にまとめ  SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる  ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう   ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能  導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
 SharePlayは、GroupActivities フレームワークによって実現されています。
 このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。
 Communication Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。
