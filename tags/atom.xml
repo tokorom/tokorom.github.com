@@ -6,7 +6,7 @@
     <description>Recent content in Tags on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 10 Jun 2021 12:56:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jun 2021 13:29:12 +0900</lastBuildDate>
     
 	<atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     
@@ -14,16 +14,25 @@
     <item>
       <title>ios</title>
       <link>https://www.tokoro.me/tags/ios/</link>
-      <pubDate>Thu, 10 Jun 2021 12:56:44 +0900</pubDate>
+      <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/ios/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>potatotips</title>
+      <link>https://www.tokoro.me/tags/potatotips/</link>
+      <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/potatotips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>SharePlay</title>
       <link>https://www.tokoro.me/tags/shareplay/</link>
-      <pubDate>Thu, 10 Jun 2021 12:56:44 +0900</pubDate>
+      <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/shareplay/</guid>
       <description></description>
@@ -165,7 +174,7 @@
     </item>
     
     <item>
-      <title>WWDC</title>
+      <title>wwdc</title>
       <link>https://www.tokoro.me/tags/wwdc/</link>
       <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
       

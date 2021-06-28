@@ -6,10 +6,36 @@
     <description>Recent content in Posts on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 10 Jun 2021 12:56:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jun 2021 13:29:12 +0900</lastBuildDate>
     
 	<atom:link href="https://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>potatotips #74 で「5分でSharePlay入門」のLTをしました</title>
+      <link>https://www.tokoro.me/posts/potatotips-74-shareplay/</link>
+      <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/potatotips-74-shareplay/</guid>
+      <description>potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
+ イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+LTの内容は「5分でSharePlay」です！ スライドは コチラ。
+今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
+SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
+利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
+ 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
+ Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
+じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
+自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
+ パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+動画の共有への対応 最後に動画の共有への対応についてです。
+AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
+まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
+このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
+動画のSharePlayでできること 動画のSharePlayをすると、
+ DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。</description>
+    </item>
     
     <item>
       <title>[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</title>

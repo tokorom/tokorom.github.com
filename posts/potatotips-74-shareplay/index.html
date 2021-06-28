@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>potatotips #74 で「5分でSharePlay入門」のLTをしました | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
+ イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+LTの内容は「5分でSharePlay」です！ スライドは コチラ。
+今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
+SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
+利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
+ 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
+ Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
+じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
+自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
+ パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+動画の共有への対応 最後に動画の共有への対応についてです。
+AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
+まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
+このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
+動画のSharePlayでできること 動画のSharePlayをすると、
+ DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="potatotips #74 で「5分でSharePlay入門」のLTをしました | TOKOROM BLOG" property="og:title"><meta content="potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
+ イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+LTの内容は「5分でSharePlay」です！ スライドは コチラ。
+今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
+SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
+利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
+ 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
+ Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
+じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
+自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
+ パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+動画の共有への対応 最後に動画の共有への対応についてです。
+AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
+まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
+このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
+動画のSharePlayでできること 動画のSharePlayをすると、
+ DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。" property="og:description"><meta content="https://www.tokoro.me/images/potatotips-74-shareplay/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/potatotips-74-shareplay/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/potatotips-74-shareplay/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2021年6月28日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/shareplay">
+              SharePlay
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/potatotips">
+              potatotips
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/potatotips-74-shareplay/top.png" alt="image"></p>
+<h2 id="potatotips-74">potatotips #74</h2>
+<p>2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。</p>
+<ul>
+<li><a href="https://potatotips.connpass.com/event/214754/">イベントページ</a></li>
+<li><a href="https://github.com/potatotips/potatotips/wiki/potatotips-74">当日のLT一覧</a></li>
+</ul>
+<p>私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。</p>
+<p>LTの内容は「5分でSharePlay」です！
+スライドは <a href="https://speakerdeck.com/tokorom/5fen-deshareplayru-men">コチラ</a>。</p>
+<p>今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。</p>
+<h2 id="shareplay">SharePlayとは？</h2>
+<p><img src="/images/potatotips-74-shareplay/ss-1624855130.png" alt="image"></p>
+<p>SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。
+このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。</p>
+<h2 id="heading">利用シーン</h2>
+<p><img src="/images/potatotips-74-shareplay/ss-1624855201.png" alt="image"></p>
+<p>SharePlayの利用シーンは様々です。
+WWDC21の各セッションの中でも様々なシーンが紹介されています。</p>
+<ul>
+<li>一緒に映画やスポーツを視聴する</li>
+<li>ゲームのスーパープレイを自慢する</li>
+<li>旅行のときの写真を友人や家族と一緒に見る</li>
+<li>グループでお絵描きする</li>
+<li>Swift Playgroundsで一緒にSwiftを学ぶ</li>
+<li>不動産アプリで新しい家の候補をふたりで探す</li>
+<li>実家の両親がアプリの使い方がわからないのをサポートする</li>
+</ul>
+<h2 id="3shareplay">3種のSharePlay</h2>
+<p><img src="/images/potatotips-74-shareplay/ss-1624855290.png" alt="image"></p>
+<p>SharePlayには大きく3種あります。</p>
+<ul>
+<li>Screen sharing: 画面共有</li>
+<li>Media playback: 動画や音楽の共有</li>
+<li>Custom UI: カスタム</li>
+</ul>
+<p>※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります</p>
+<h2 id="heading-1">画面共有への対応</h2>
+<p>SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？</p>
+<p>じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。
+正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。</p>
+<h3 id="heading-2">自動的に隠される要素</h3>
+<p>画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。</p>
+<ul>
+<li>パスワードなどセキュアな入力フィールド</li>
+<li>DRM（FairPlay）で保護されたコンテンツ</li>
+</ul>
+<p>です。
+その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。</p>
+<h2 id="heading-3">動画の共有への対応</h2>
+<p>最後に動画の共有への対応についてです。</p>
+<h3 id="appletv">AppleのTVアプリの例</h3>
+<p>AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。</p>
+<p><img src="/images/potatotips-74-shareplay/ss-1624857105.png" alt="image"></p>
+<p>まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に <strong>SharePlayが可能であることを示すアイコン</strong> が表示されます。</p>
+<p><img src="/images/potatotips-74-shareplay/ss-1624857199.png" alt="image"></p>
+<p>このとき動画を再生しようとすると、 <strong>SharePlayするかどうかを確認するダイアログ</strong> が表示されます。
+ここで <strong>SharePlay</strong> を選べば動画のSharePlayの開始です。</p>
+<h3 id="shareplay-1">動画のSharePlayでできること</h3>
+<p>動画のSharePlayをすると、</p>
+<ul>
+<li>DRMで保護されたコンテンツの共有</li>
+<li>再生・停止・シークなどによる再生位置の同期</li>
+</ul>
+<p>などがデフォルトでサポートされます。</p>
+<h3 id="shareplay-2">動画のSharePlay対応に必要なコード</h3>
+<p>実際に動画のSharePlayに対応してみた <code>ViewController</code> のコードが以下です。</p>
+<pre><code class="language-swift">import AVKit
+import GroupActivities
+import UIKit
+
+class ViewController: AVPlayerViewController {
+    private var groupSession: GroupSession&lt;MovieWatchingActivity&gt;?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupPlayer()
+        prepareSharePlay()
+        listenForGroupSession()
+    }
+
+    private func setupPlayer() {
+        guard player == nil, let movieURL = MovieWatchingActivity.movieURL else {
+            return
+        }
+
+        let player = AVPlayer(url: movieURL)
+        self.player = player
+        player.play()
+    }
+    
+    private func prepareSharePlay() {
+        let activity = MovieWatchingActivity()
+        
+        async {
+            switch await activity.prepareForActivation() {
+            case .activationDisabled:
+                break
+            case .activationPreferred:
+                activity.activate()
+            case .cancelled:
+                break
+            default: ()
+            }
+        }
+    }
+
+    private func listenForGroupSession() {
+        async {
+            for await session in MovieWatchingActivity.sessions() {
+                groupSession = session
+                player?.playbackCoordinator.coordinateWithSession(session)
+                session.join()
+            }
+        }
+    }
+}
+
+struct MovieWatchingActivity: GroupActivity {
+    static let movieURL: URL? = URL(string: &quot;https://devstreaming-cdn.apple.com/videos/wwdc/2019/408bmshwds7eoqow1ud/408/hls_vod_mvp.m3u8&quot;)
+
+    static let activityIdentifier = &quot;work.spinners.SharePlaySample.GroupWatching&quot;
+    
+    var metadata: GroupActivityMetadata {
+        var metadata = GroupActivityMetadata()
+        metadata.fallbackURL = Self.movieURL
+        metadata.previewImage = UIImage(named: &quot;wwdc19&quot;)?.cgImage
+        metadata.title = &quot;Sample&quot;
+        metadata.subtitle = &quot;WWDC19 Session Video&quot;
+        return metadata
+    }
+}
+</code></pre>
+<p>このわずか50行程度（空行などを省いて）で、</p>
+<ul>
+<li>動画の再生</li>
+<li>動画の共有</li>
+<li>再生位置の同期</li>
+</ul>
+<p>までひととおり実装できました。</p>
+<p>もう少し重要なところを抜粋して紹介します。</p>
+<h3 id="groupactivity">GroupActivityの用意</h3>
+<p>まず、必要なのが <code>GroupActivity</code> を実装したものです。</p>
+<pre><code class="language-Swift">struct MovieWatchingActivity: GroupActivity {
+    static let movieURL: URL? = URL(string: &quot;https://devstreaming-cdn.apple.com/videos/wwdc/2019/408bmshwds7eoqow1ud/408/hls_vod_mvp.m3u8&quot;)
+
+    static let activityIdentifier = &quot;work.spinners.SharePlaySample.GroupWatching&quot;
+    
+    var metadata: GroupActivityMetadata {
+        var metadata = GroupActivityMetadata()
+        metadata.fallbackURL = Self.movieURL
+        metadata.previewImage = UIImage(named: &quot;wwdc19&quot;)?.cgImage
+        metadata.title = &quot;Sample&quot;
+        metadata.subtitle = &quot;WWDC19 Session Video&quot;
+        return metadata
+    }
+}
+</code></pre>
+<p>といっても、共有するコンテンツのメタデータを返すだけの簡単なものです。</p>
+<h3 id="groupactivity-1">GroupActivityのアクティベート</h3>
+<p>そしてその <code>GroupActivity</code> をインスタンス化して <code>prepareForActivation</code> を呼びます。すると、さきほど紹介した <strong>SharePlayをするかどうかの確認ダイアログ</strong> が画面に表示されます。</p>
+<p>ここでユーザが <strong>SharePlay</strong> を選ぶと <code>.activationPreferred</code> が返るので、そこで <code>GroupActivity</code> を <code>activate</code> してあげるだけです。</p>
+<pre><code class="language-swift">let activity = MovieWatchingActivity()
+
+async {
+    switch await activity.prepareForActivation() {
+    case .activationDisabled:
+        break
+    case .activationPreferred:
+        activity.activate()
+    case .cancelled:
+        break
+    default: ()
+    }
+}
+</code></pre>
+<p>これだけで動画の共有が可能です。</p>
+<h3 id="heading-4">再生位置の同期をサポート</h3>
+<p>最後に再生位置の同期です。</p>
+<p>これも簡単で、<code>GroupActivity</code> のセッションが開始されたら、そのセッションと動画再生に利用している <code>AVPlayer</code> バインドして、セッションに <code>join</code> するだけです。</p>
+<pre><code class="language-swift">async {
+    for await session in MovieWatchingActivity.sessions() {
+        groupSession = session
+        player?.playbackCoordinator.coordinateWithSession(session)
+        session.join()
+    }
+}
+</code></pre>
+<p>これだけで再生位置の同期がサポートできてしまいます。</p>
+<h2 id="heading-5">まとめ</h2>
+<ul>
+<li>SharePlayの画面共有はなにもしなくてもサポートできる</li>
+<li>SharePlayの動画共有も50行程度でサポートできる</li>
+<li>SharePlayはカスタムして自由にコマンドを送受信することもできる</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc21-meet-group-activities/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc21-meet-group-activities/top.png" class="feed-item-image" alt="[WWDC21] [SharePlay] Meet Group Activitiesのまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</span>
+    <span class="feed-item-date">2021年6月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc21-meet-group-activities/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc21-meet-group-activities/top.png" class="feed-item-image" alt="[WWDC21] [SharePlay] Meet Group Activitiesのまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</span>
+    <span class="feed-item-date">2021年6月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/commit-message-inline-translation/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
+
+    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
+    <span class="feed-item-date">2020年12月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</body>
+</html>
