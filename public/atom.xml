@@ -5,7 +5,7 @@
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 10 Jun 2021 12:56:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jun 2021 13:29:12 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -14,6 +14,37 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>potatotips #74 で「5分でSharePlay入門」のLTをしました</title>
+      <link>https://www.tokoro.me/posts/potatotips-74-shareplay/</link>
+      <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/potatotips-74-shareplay/</guid>
+      <description>
+        potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
+ イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+LTの内容は「5分でSharePlay」です！ スライドは コチラ。
+今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
+SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
+利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
+ 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
+ Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
+じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
+自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
+ パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+動画の共有への対応 最後に動画の共有への対応についてです。
+AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
+まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
+このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
+動画のSharePlayでできること 動画のSharePlayをすると、
+ DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/potatotips-74-shareplay/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</title>
@@ -561,42 +592,6 @@ Photo by Michael Longmire on Unsplash
       </description>
       
       <coverImage>https://www.tokoro.me/images/apple/swiftui.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>HomeKit ADKでSlackにメッセージ送信するアクセサリを作ってみる</title>
-      <link>https://www.tokoro.me/posts/homekitadk/</link>
-      <pubDate>Mon, 23 Dec 2019 11:47:15 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/homekitadk/</guid>
-      <description>
-        HomeKitADKのオープンソース化 つい先日（2019/12/18）、AppleがAmazon、Google、Zigbee Allianceと、スマートホームデバイスに関するワーキンググループを結成したとのビッグニュースが発表されましたね！
-https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/
-これに伴い、HomeKitに対応したアクセサリを開発するためのHomeKit ADKがオープンソース化されました。
-https://github.com/apple/HomeKitADK
-HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世界ではHomeKitに対応した機器のことをアクセサリと呼びます。
-ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
-と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
-ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
-こちらですが、
- まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
-LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
- アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する  なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
-これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
-といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
-Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false  といったログが確認できるかと思います。
-サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
-今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
-https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
-このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
-ただ、今回は実験なので（正直、C言語で書いてビルドし直して&amp;hellip;というのが面倒なので）、
-#include &amp;lt;stdlib.h&amp;gt;  して、
-if (value) { system(&amp;quot;./handleLightBulbOn&amp;quot;); }  ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
-      </description>
-      
-      <coverImage>https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png</coverImage>
       
     </item>
     
