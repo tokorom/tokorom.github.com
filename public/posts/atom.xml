@@ -19,21 +19,6 @@
     </item>
     
     <item>
-      <title>[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</title>
-      <link>https://www.tokoro.me/posts/vim-fuzzy-finder/</link>
-      <pubDate>Tue, 22 Mar 2022 21:35:20 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/vim-fuzzy-finder/</guid>
-      <description>導入 みなさんはVimでどんなFuzzy Finderを使っているでしょうか？ ぼくは先日までfzf + fzf.vim を使っていました。
-しかし少し調子が悪い部分が出てきたのをきっかけにそろそろ他にもっと良いFuzzy Finderが出てきてないかな？と探し始めました。 結果として「ぼくのかんがえたさいきょうのFuzzy Finder」に行き着いたのです！
-着想 fzf.vimに代わるものを探している過程で fzy を見つけました。
-このREADMEを読んでいたら、なんと、
-function! FzyCommand(choice_command, vim_command) try let output = system(a:choice_command . &amp;quot; | fzy &amp;quot;) catch /Vim:Interrupt/ &amp;quot; Swallow errors from ^C, allow redraw! below endtry redraw! if v:shell_error == 0 &amp;amp;&amp;amp; !empty(output) exec a:vim_command . &#39; &#39; . output endif endfunction nnoremap &amp;lt;leader&amp;gt;e :call FzyCommand(&amp;quot;find . -type f&amp;quot;, &amp;quot;:e&amp;quot;)&amp;lt;cr&amp;gt; のようにpluginもなしに10行程度のfunctionを定義して使うだけでVim上でfzyによるFuzzy Finderが実現できると書いてあります。
-「そんなバカな！？」と疑いつつ試してみると、実際に実現できてしまいました。
-pluginのメンテもいらずこんなにシンプルに実現できるなんて！これが最強のFuzzy Finderの実現方法では！と驚きこれをこのまま使おうと思ったのですが、fzfの気に入っていた部分がfzyでは再現できず1、それならばと上のfunction内のfzy部分をfzfに置き換えて利用しようとしました。</description>
-    </item>
-    
-    <item>
       <title>potatotips #74 で「5分でSharePlay入門」のLTをしました</title>
       <link>https://www.tokoro.me/posts/potatotips-74-shareplay/</link>
       <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
