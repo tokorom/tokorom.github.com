@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>Gitのcommitメッセージをその場で英訳したい！ | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="完成後に収録した画面 対象者  Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります）  ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="完成後に収録した画面 対象者 Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります） ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
 ぼくは英語でcommitメッセージを書くのが得意ではなく「あの不具合をこんな感じに修正したんだよなあ、それを英語で書くと&hellip;」と考えつつ面倒になってFix a problemとか意味のないcommitメッセージを残してしまうことがありました。いちばんひどいときは.とか&hellip;。ごめんなさい。
 しかし昨今はDeepLなど優秀な翻訳サービスがあるわけですし、それを使えば良いだけじゃんは思うものの、実際にgit commitした後に翻訳サービスを開いてそこに日本語を入力して、翻訳結果をコピーしてエディタに戻ってきてペーストする、というのが日々のコーディングの流れの中では面倒すぎてけっきょくFix a problemとしてしまうわけです&hellip;
 解決案 それを解決するのは簡単で、git commitで開かれたエディタで入力した日本語がその場で英訳されれば良い、というだけです。
@@ -13,11 +13,11 @@
 作る 翻訳API 愛用しているDeepLにAPIがあったのでそれを使います。
 https://www.deepl.com/docs-api/translating-text/request/
 APIの利用はとても簡単で、テキストの翻訳なら、
-curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;target_lang=EN-US&amp;text=おはよう&#39;  とするだけでとても簡単です。
+curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;target_lang=EN-US&amp;text=おはよう&#39; とするだけでとても簡単です。
 英訳コマンド 今時点ではDeepLにCUIコマンドがないため、上の翻訳APIを叩くコマンドを自分で作ります。
 といっても上のPOSTリクエストを1つ叩くだけなのですぐできます。
 エディタから使いやすいように、
- STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す  のが良さそうです。
+STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す のが良さそうです。
 ぼくがSwiftで書いたのが、
 https://github.com/tokorom/deepl-cui-swift
 です。 ここは誰かが作ったのを使ってもいいし、自分で作ってもすぐできるかと思います。
@@ -25,13 +25,16 @@ git commitから呼び出す この記事ではgit commitで起動するエデ�
 Vimからツールを呼ぶということはpluginを入れる必要がある？と思いがちですが「選択したテキストを外部コマンドに渡して結果と置き換える」というのはVimが標準で備ている機能です。
 具体的には!lsとコマンド実行すればVimにlsの結果が挿入されますし、JSON文字列を選択して!jq .でjqコマンドに選択範囲を渡して整形してもらった結果で置き換えるといったことが普通にできます。
 今回は、STDINを英訳するコマンドを作ったので（deepl-cui-swiftコマンドとする）、翻訳したいテキストを選択して
-!deep-cui-swift  を実行するだけでこれが実現できます。
+!deep-cui-swift を実行するだけでこれが実現できます。
 ショートカット 必要なら.vimrcにショートカットキーを用意しましょう。ぼくは、
-nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。"><meta name="author" content="tokorom">
+nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt; とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。
+動作確認 これでgit commit後のエディタで日本語でメッセージを書き、zeするだけで英訳されるようになりました！
+ワイワイ！
+オマケ DeepL APIの料金 なお、DeepL APIは無料で使えるわけではありません。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="Gitのcommitメッセージをその場で英訳したい！ | TOKOROM BLOG" property="og:title"><meta content="完成後に収録した画面 対象者  Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります）  ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
+<meta content="Gitのcommitメッセージをその場で英訳したい！ | TOKOROM BLOG" property="og:title"><meta content="完成後に収録した画面 対象者 Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります） ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
 ぼくは英語でcommitメッセージを書くのが得意ではなく「あの不具合をこんな感じに修正したんだよなあ、それを英語で書くと&hellip;」と考えつつ面倒になってFix a problemとか意味のないcommitメッセージを残してしまうことがありました。いちばんひどいときは.とか&hellip;。ごめんなさい。
 しかし昨今はDeepLなど優秀な翻訳サービスがあるわけですし、それを使えば良いだけじゃんは思うものの、実際にgit commitした後に翻訳サービスを開いてそこに日本語を入力して、翻訳結果をコピーしてエディタに戻ってきてペーストする、というのが日々のコーディングの流れの中では面倒すぎてけっきょくFix a problemとしてしまうわけです&hellip;
 解決案 それを解決するのは簡単で、git commitで開かれたエディタで入力した日本語がその場で英訳されれば良い、というだけです。
@@ -39,11 +42,11 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
 作る 翻訳API 愛用しているDeepLにAPIがあったのでそれを使います。
 https://www.deepl.com/docs-api/translating-text/request/
 APIの利用はとても簡単で、テキストの翻訳なら、
-curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;target_lang=EN-US&amp;text=おはよう&#39;  とするだけでとても簡単です。
+curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;target_lang=EN-US&amp;text=おはよう&#39; とするだけでとても簡単です。
 英訳コマンド 今時点ではDeepLにCUIコマンドがないため、上の翻訳APIを叩くコマンドを自分で作ります。
 といっても上のPOSTリクエストを1つ叩くだけなのですぐできます。
 エディタから使いやすいように、
- STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す  のが良さそうです。
+STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す のが良さそうです。
 ぼくがSwiftで書いたのが、
 https://github.com/tokorom/deepl-cui-swift
 です。 ここは誰かが作ったのを使ってもいいし、自分で作ってもすぐできるかと思います。
@@ -51,9 +54,12 @@ git commitから呼び出す この記事ではgit commitで起動するエデ�
 Vimからツールを呼ぶということはpluginを入れる必要がある？と思いがちですが「選択したテキストを外部コマンドに渡して結果と置き換える」というのはVimが標準で備ている機能です。
 具体的には!lsとコマンド実行すればVimにlsの結果が挿入されますし、JSON文字列を選択して!jq .でjqコマンドに選択範囲を渡して整形してもらった結果で置き換えるといったことが普通にできます。
 今回は、STDINを英訳するコマンドを作ったので（deepl-cui-swiftコマンドとする）、翻訳したいテキストを選択して
-!deep-cui-swift  を実行するだけでこれが実現できます。
+!deep-cui-swift を実行するだけでこれが実現できます。
 ショートカット 必要なら.vimrcにショートカットキーを用意しましょう。ぼくは、
-nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。" property="og:description"><meta content="https://www.tokoro.me/images/commit-message-inline-translation/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/commit-message-inline-translation/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt; とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。
+動作確認 これでgit commit後のエディタで日本語でメッセージを書き、zeするだけで英訳されるようになりました！
+ワイワイ！
+オマケ DeepL APIの料金 なお、DeepL APIは無料で使えるわけではありません。" property="og:description"><meta content="https://www.tokoro.me/images/commit-message-inline-translation/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/commit-message-inline-translation/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -101,22 +107,22 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
               English
           </a>
           /</div><div class="content">
-      <h2 id="heading">完成後に収録した画面</h2>
+      <h2 id="完成後に収録した画面">完成後に収録した画面</h2>
 <p><img src="/images/commit-message-inline-translation/screen.gif" alt="image"></p>
-<h2 id="heading-1">対象者</h2>
+<h2 id="対象者">対象者</h2>
 <ul>
 <li>Vimでコーディングしている人</li>
 <li>Vim以外でコーディングしてるが<code>git commit</code>のときだけVimが起動する人（macOSだとデフォルトでそうなります）</li>
 </ul>
-<h2 id="heading-2">ぼくの課題</h2>
+<h2 id="ぼくの課題">ぼくの課題</h2>
 <p><code>git commit</code>でcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。</p>
 <p>ぼくは英語でcommitメッセージを書くのが得意ではなく「あの不具合をこんな感じに修正したんだよなあ、それを英語で書くと&hellip;」と考えつつ面倒になって<code>Fix a problem</code>とか意味のないcommitメッセージを残してしまうことがありました。いちばんひどいときは<code>.</code>とか&hellip;。ごめんなさい。</p>
 <p>しかし昨今は<a href="https://www.deepl.com/">DeepL</a>など優秀な翻訳サービスがあるわけですし、それを使えば良いだけじゃんは思うものの、実際に<code>git commit</code>した後に翻訳サービスを開いてそこに日本語を入力して、翻訳結果をコピーしてエディタに戻ってきてペーストする、というのが日々のコーディングの流れの中では面倒すぎてけっきょく<code>Fix a problem</code>としてしまうわけです&hellip;</p>
-<h2 id="heading-3">解決案</h2>
+<h2 id="解決案">解決案</h2>
 <p>それを解決するのは簡単で、<code>git commit</code>で開かれたエディタで入力した日本語がその場で英訳されれば良い、というだけです。</p>
 <p>技術的にも英訳APIが使えればすぐにでもできる話ですので、先日、半日程度時間が作れるタイミングでやってしまおう、となったというお話です。</p>
-<h2 id="heading-4">作る</h2>
-<h3 id="api">翻訳API</h3>
+<h2 id="作る">作る</h2>
+<h3 id="翻訳api">翻訳API</h3>
 <p>愛用しているDeepLにAPIがあったのでそれを使います。</p>
 <p><a href="https://www.deepl.com/docs-api/translating-text/request/">https://www.deepl.com/docs-api/translating-text/request/</a></p>
 <p>APIの利用はとても簡単で、テキストの翻訳なら、</p>
@@ -125,7 +131,7 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
   --data 'auth_key=AUTH_KEY&amp;target_lang=EN-US&amp;text=おはよう'
 </code></pre>
 <p>とするだけでとても簡単です。</p>
-<h3 id="heading-5">英訳コマンド</h3>
+<h3 id="英訳コマンド">英訳コマンド</h3>
 <p>今時点ではDeepLにCUIコマンドがないため、上の翻訳APIを叩くコマンドを自分で作ります。</p>
 <p>といっても上のPOSTリクエストを1つ叩くだけなのですぐできます。</p>
 <p>エディタから使いやすいように、</p>
@@ -138,7 +144,7 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
 <p><a href="https://github.com/tokorom/deepl-cui-swift">https://github.com/tokorom/deepl-cui-swift</a></p>
 <p>です。
 ここは誰かが作ったのを使ってもいいし、自分で作ってもすぐできるかと思います。</p>
-<h3 id="git-commit">git commitから呼び出す</h3>
+<h3 id="git-commitから呼び出す">git commitから呼び出す</h3>
 <p>この記事では<code>git commit</code>で起動するエディタがVimであることが前提です（macOSではデフォルトです）。</p>
 <p>Vimからツールを呼ぶということはpluginを入れる必要がある？と思いがちですが「選択したテキストを外部コマンドに渡して結果と置き換える」というのはVimが標準で備ている機能です。</p>
 <p>具体的には<code>!ls</code>とコマンド実行すればVimに<code>ls</code>の結果が挿入されますし、JSON文字列を選択して<code>!jq .</code>で<code>jq</code>コマンドに選択範囲を渡して整形してもらった結果で置き換えるといったことが普通にできます。</p>
@@ -146,17 +152,17 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
 <pre><code>!deep-cui-swift
 </code></pre>
 <p>を実行するだけでこれが実現できます。</p>
-<h3 id="heading-6">ショートカット</h3>
+<h3 id="ショートカット">ショートカット</h3>
 <p>必要なら<code>.vimrc</code>にショートカットキーを用意しましょう。ぼくは、</p>
 <pre><code class="language-vim">nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;
 </code></pre>
 <p>と<code>ze</code>で現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。</p>
-<h2 id="heading-7">動作確認</h2>
+<h2 id="動作確認">動作確認</h2>
 <p>これで<code>git commit</code>後のエディタで日本語でメッセージを書き、<code>ze</code>するだけで英訳されるようになりました！</p>
 <p><img src="/images/commit-message-inline-translation/screen.gif" alt="image"></p>
 <p>ワイワイ！</p>
-<h2 id="heading-8">オマケ</h2>
-<h3 id="deepl-api">DeepL APIの料金</h3>
+<h2 id="オマケ">オマケ</h2>
+<h3 id="deepl-apiの料金">DeepL APIの料金</h3>
 <p>なお、DeepL APIは無料で使えるわけではありません。</p>
 <p>2020年12月時点では、月額630円のプランに入る必要があります。</p>
 <p><a href="https://www.deepl.com/pro?cta=header-prices/">https://www.deepl.com/pro?cta=header-prices/</a></p>
@@ -176,6 +182,30 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
   
   <div class="entry-feed-title">Latest Entries</div>
   <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
     
       <div class="feed-item">
   
@@ -220,30 +250,6 @@ nnoremap ze &lt;S-v&gt;!deepl-cui-swift -s JA -w&lt;CR&gt;  とzeで現在行を
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -317,6 +323,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

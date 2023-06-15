@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -12,8 +12,9 @@
 みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
 クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
 例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
- GameScore.m  #import &quot;GameScore.h&quot; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&quot;highScore&quot;: @1000, @&quot;currentScore&quot;: @530, @&quot;friendScore&quot;: @890, } mutableCopy]; } return self; }  この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
-ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end  手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。"><meta name="author" content="tokorom">
+GameScore.m #import &quot;GameScore.h&quot; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&quot;highScore&quot;: @1000, @&quot;currentScore&quot;: @530, @&quot;friendScore&quot;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう GameScore.h @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。
+たしかに簡単ですが、外部から内部データ（NSDictionary）を好きなようにいじられたり見られたりするのは避けたいところです。このままだとかなり密結合なかんじです。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -24,8 +25,9 @@
 みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
 クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
 例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
- GameScore.m  #import &quot;GameScore.h&quot; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&quot;highScore&quot;: @1000, @&quot;currentScore&quot;: @530, @&quot;friendScore&quot;: @890, } mutableCopy]; } return self; }  この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
-ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end  手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-dynamic/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+GameScore.m #import &quot;GameScore.h&quot; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&quot;highScore&quot;: @1000, @&quot;currentScore&quot;: @530, @&quot;friendScore&quot;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう GameScore.h @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。
+たしかに簡単ですが、外部から内部データ（NSDictionary）を好きなようにいじられたり見られたりするのは避けたいところです。このままだとかなり密結合なかんじです。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-dynamic/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -73,13 +75,13 @@
               ios
           </a>
           /</div><div class="content">
-      <h2 id="objective-c-dynamic-">Objective-Cの @dynamic はお好きですか？</h2>
+      <h2 id="objective-cの-dynamic-はお好きですか">Objective-Cの @dynamic はお好きですか？</h2>
 <p>ぼくはけっこう好きです。</p>
 <p><code>@synthesize</code>のほうは昔はほぼ必須で書かないといけなかったり <a href="/2012/08/12/objc-new-statements/">Xcode4.4で省略できるようになった</a> ことで有名ですが、いっぽうで<code>@dynamic</code>のほうはあまり日の目を浴びていない気がします。</p>
 <p>そこで、今日は<code>@dynamic</code>について再考してみることにしました。<br>
 以下、ぼくが思い返してみて<code>@dynamic</code>がこんなときに便利だったと感じたところを２点挙げさせていただきます。<br>
 みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。</p>
-<h2 id="heading">クラスの内部実装が適当なのを隠すときに</h2>
+<h2 id="クラスの内部実装が適当なのを隠すときに">クラスの内部実装が適当なのを隠すときに</h2>
 <p>そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。<br>
 例えば、ゲームスコアを管理する<code>GameScore</code>クラスを作ったとして、その中で <strong>ハイスコア</strong> とかいくつかのスコアを管理する際、<code>scores</code>というNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。</p>
 <!-- more -->
@@ -107,7 +109,7 @@
 }
 </code></pre>
 <p>この <strong>ハイスコア</strong> を外（他のクラス）から参照させたい場合、どう実装しますか？</p>
-<h3 id="--nsdictionary">ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう</h3>
+<h3 id="ダメそうな例--nsdictionaryのインスタンスをそのまま公開してしまう">ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう</h3>
 <ul>
 <li>GameScore.h</li>
 </ul>
@@ -118,7 +120,7 @@
 <p>手っ取り早いのは<code>scores</code>プロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。<br>
 たしかに簡単ですが、外部から内部データ（NSDictionary）を好きなようにいじられたり見られたりするのは避けたいところです。このままだとかなり密結合なかんじです。<br>
 Privateな範囲だったらまだ雑でも（後からリファクタリングすれば）良いかもしれませんが、外部から使われる部分はきちんとして疎結合にしておきたいところです。</p>
-<h3 id="heading-1">本当に必要な部分だけ公開する</h3>
+<h3 id="本当に必要な部分だけ公開する">本当に必要な部分だけ公開する</h3>
 <p>だったら本当に必要な部分だけ公開すべきということで、こういうのはどうでしょう？</p>
 <ul>
 <li>GameScore.h</li>
@@ -138,7 +140,7 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 <p><code>highScore</code>というハイスコアだけを参照するPublicメソッドを追加してみました。<br>
 こっちのほうが筋が良さそうです。<br>
 これでNSDictionaryで管理している適当な実装を後から修正しても外のクラスには影響しない形になりました。</p>
-<h3 id="-dynamic-">さらに @dynamic がお好きな人向けに</h3>
+<h3 id="さらに-dynamic-がお好きな人向けに">さらに @dynamic がお好きな人向けに</h3>
 <p>ただ、ぼくは<code>@dynamic</code>を愛しているのでここに<code>@dynamic</code>を突っ込んでいきます。</p>
 <ul>
 <li>GameScore.h</li>
@@ -158,7 +160,7 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 </code></pre>
 <p>やってることは１個前のサンプルと全く同じですが、<code>@property</code>で公開したほうがなんかかっこいい（自己満足）気がします。<br>
 強いて言うなら、こっちの場合、ハイスコアを<code>@property (assign) NSUInteger highScore;</code>というPrivateプロパティで管理するようにリファクタリングした後もPublicな<code>@property (assign, readonly) NSUInteger highScore;</code>とそのまま連携できるというメリットはあります（本当に強いて言うならですが）。</p>
-<h2 id="heading-2">重いクラスの初期化を簡便に書きたいときに</h2>
+<h2 id="重いクラスの初期化を簡便に書きたいときに">重いクラスの初期化を簡便に書きたいときに</h2>
 <p>例えば、先ほどの<code>GameScore</code>クラス内で<code>HeavyFunction</code>というとっても重い（初期化に時間がかかるとかメモリをたくさん消費するとか）クラスを使う必要があったとします。<br>
 とっても重いので、</p>
 <ul>
@@ -167,7 +169,7 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 </ul>
 <p>ところです。<br>
 ということで、以下のように実装してみました。</p>
-<h3 id="heading-3">普通に実装してみた例</h3>
+<h3 id="普通に実装してみた例">普通に実装してみた例</h3>
 <ul>
 <li>GameScore.m</li>
 </ul>
@@ -194,7 +196,7 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 <p>まず、<code>HeavyFunction</code>のインスタンスをPrivateなプロパティとして保持するようにしています。<br>
 <code>doSomething1</code>と<code>doSomething2</code>が<code>HeavyFunction</code>を利用したメソッドとすると、それが呼ばれたタイミングではじめて<code>HeavyFunciton</code>が<code>new</code>されるよう留意してあります。具体的には、各メソッド内で<code>self.heavyFunction</code>が<code>nil</code>かどうかをチェックして、<code>nil</code>なら<code>HeavyFunction</code>を<code>new</code>するという実装にしています。<br>
 どうやらこれで事足りそうです。</p>
-<h3 id="-dynamic--1">さらに @dynamic がお好きな人向けに</h3>
+<h3 id="さらに-dynamic-がお好きな人向けに-1">さらに @dynamic がお好きな人向けに</h3>
 <p>ただ、ぼくは<code>@dynamic</code>を愛しているのでここに<code>@dynamic</code>を突っ込んでいきます。</p>
 <ul>
 <li>GameScore.m</li>
@@ -228,7 +230,7 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 そのgetterの中で<code>heavyFunctionInstance</code>プロパティの<code>nil</code>チェック &amp; インスタンス作成をするようにしています。</p>
 <p>こうすることで、実際にHeavyFunctionを使う<code>doSomething1</code>と<code>doSomething2</code>の中では、インスタンスが既に存在するかどうかを気にせずに<code>heavyFunction</code>プロパティを使うだけですむようになりました。<br>
 <code>heavyFunciton</code>を使う箇所が増えれば増えるほどこのメリットは大きくなると思います。</p>
-<h2 id="dynamic-">@dynamic は省略できます&hellip;</h2>
+<h2 id="dynamic-は省略できます">@dynamic は省略できます&hellip;</h2>
 <p>最後になりますが、じつは上記２つのサンプルのどちらでも<code>@dynamic</code>の行が省略可能です。<br>
 ぼくは<code>@dynamic</code>を愛していますが、実際のところこの<code>@dynamic</code>を省略してしまっています。<br>
 それでもぼくは<code>@dynamic</code>を愛しています。  目に見える愛だけが全てではないということなのだと思います。。。</p>
@@ -305,6 +307,30 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -346,30 +372,6 @@ Privateな範囲だったらまだ雑でも（後からリファクタリング�
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -443,6 +445,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

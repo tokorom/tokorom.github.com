@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン | TOKOROM BLOG</title>
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
- NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
+NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形 この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
 今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
 それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
- この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！ Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
-curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}]  鍵をロック 上で取得したdevice_idを利用し、
-curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api."><meta name="author" content="tokorom">
+curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+レスポンス例 [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}] 鍵をロック 上で取得したdevice_idを利用し、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
+鍵をアンロック 同じく、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;unlock&quot;}&#39; \ https://api."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン | TOKOROM BLOG" property="og:title"><meta content="この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
- NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形  この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
+NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形 この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
 今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
 それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
- この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！  Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！ Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
 https://ameblo.jp/candyhouse-inc/entry-12416936959.html
 をご参照ください。
 API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
-curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames  で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
- レスポンス例  [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}]  鍵をロック 上で取得したdevice_idを利用し、
-curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api." property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png" property="og:image"><meta content="https://www.tokoro.me/posts/nfc-iphone-2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+レスポンス例 [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}] 鍵をロック 上で取得したdevice_idを利用し、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
+鍵をアンロック 同じく、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;unlock&quot;}&#39; \ https://api." property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png" property="og:image"><meta content="https://www.tokoro.me/posts/nfc-iphone-2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -90,21 +94,21 @@ curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: appl
 <li><s>より実用的にしていくために</s></li>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-6/">iOS13時代の最終形</a></li>
 </ol>
-<h2 id="heading">この記事でやること</h2>
+<h2 id="この記事でやること">この記事でやること</h2>
 <p><a href="https://www.tokoro.me/posts/nfc-iphone-1/">前回</a>は、NFCタグに<code>https://tag.exsample.com/lock</code>というURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。</p>
 <p>今回は、このURIで動作するAPIをAWS Lambda<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。</p>
 <p>それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。</p>
 <div class='box box-danger'><span class="fa fa-warning"></span>
 この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
 </div>
-<h2 id="sesame-api">Sesame APIの利用</h2>
-<h3 id="api">APIキーの取得</h3>
+<h2 id="sesame-apiの利用">Sesame APIの利用</h2>
+<h3 id="apiキーの取得">APIキーの取得</h3>
 <p>Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ</p>
 <p><a href="https://ameblo.jp/candyhouse-inc/entry-12416936959.html">https://ameblo.jp/candyhouse-inc/entry-12416936959.html</a></p>
 <p>をご参照ください。</p>
-<h3 id="api-1">API仕様</h3>
+<h3 id="api仕様">API仕様</h3>
 <p>Sesame APIの仕様については <a href="https://docs.candyhouse.co/">https://docs.candyhouse.co/</a> にきちんとしたドキュメントがあります。</p>
-<h3 id="curl">curlで叩いてみる</h3>
+<h3 id="curlで叩いてみる">curlで叩いてみる</h3>
 <pre><code>curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \
   https://api.candyhouse.co/public/sesames
 </code></pre>
@@ -115,7 +119,7 @@ YOUR_AUTH_TOKENはAPIキーに置き換えてください。</p>
 </ul>
 <pre><code>[{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}]
 </code></pre>
-<h3 id="heading-1">鍵をロック</h3>
+<h3 id="鍵をロック">鍵をロック</h3>
 <p>上で取得したdevice_idを利用し、</p>
 <pre><code>curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \
   -H &quot;Content-Type: application/json&quot; \
@@ -123,7 +127,7 @@ YOUR_AUTH_TOKENはAPIキーに置き換えてください。</p>
   https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID
 </code></pre>
 <p>とするだけです。</p>
-<h3 id="heading-2">鍵をアンロック</h3>
+<h3 id="鍵をアンロック">鍵をアンロック</h3>
 <p>同じく、</p>
 <pre><code>curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \
   -H &quot;Content-Type: application/json&quot; \
@@ -131,7 +135,7 @@ YOUR_AUTH_TOKENはAPIキーに置き換えてください。</p>
   https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID
 </code></pre>
 <p>でアンロックもできます。</p>
-<h2 id="aws-lambda">AWS Lambdaでの実装</h2>
+<h2 id="aws-lambdaでの実装">AWS Lambdaでの実装</h2>
 <p>※この記事ではAWS Lambdaの使い方については説明しません</p>
 <p>それではこのSesame APIをAWS Lambda上で実行すよう実装してみましょう。</p>
 <p>以下、Node.jsでの実装サンプルです。
@@ -190,7 +194,7 @@ async function requestUnlock() {
   }
 }
 </code></pre>
-<h2 id="heading-3">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p>あとは実装したものをAWS Lambdaにデプロイし、NFCタグに書き込んだURIでこのLambdaが動作するようにするだけです。</p>
 <p>これで、iPhoneを鍵代わりにし、NFCタグをタッチして鍵をアンロックする仕組みができました。</p>
 <p>くどいようですが、</p>
@@ -198,7 +202,7 @@ async function requestUnlock() {
 この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
 </div>
 <p>こちらは絶対に守ってください。</p>
-<h2 id="heading-4">記事一覧</h2>
+<h2 id="記事一覧">記事一覧</h2>
 <ol>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-1/">NFCタグにURIを書き込む</a></li>
 <li>iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事）</li>
@@ -207,14 +211,14 @@ async function requestUnlock() {
 <li><s>より実用的にしていくために</s></li>
 <li><a href="https://www.tokoro.me/posts/nfc-iphone-6/">iOS13時代の最終形</a></li>
 </ol>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>AWS LambdaでなくともこのURIで実行されるプログラムを書ければ別のものでかまいません <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>AWS LambdaでなくともこのURIで実行されるプログラムを書ければ別のものでかまいません&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
   </div>
 </article>
@@ -288,6 +292,30 @@ async function requestUnlock() {
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -329,30 +357,6 @@ async function requestUnlock() {
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -426,6 +430,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

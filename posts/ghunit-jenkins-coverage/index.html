@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -10,13 +10,14 @@
 実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
 うまく動かない場合の設定の比較などにご参照ください。
 なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
-事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+事前準備 Jenkinsの導入 さくらVPSにJenkinsさんをインストールする GHUnitの導入 Jenkins を iOS アプリ開発に導入してみた (GHUnit編) GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
 テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
 具体的には、以下のように
- Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
+Generate Test Coverage Files Instrument Program Flow の２つに YES を設定します。
 本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
-Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.  というエラーが出ることになります。
-この対処として、 main.m に以下コードを追記しておく必要があります。"><meta name="author" content="tokorom">
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+この対処として、 main.m に以下コードを追記しておく必要があります。
+FILE *fopen$UNIX2003(const char *filename, const char *mode) { return fopen(filename, mode); } size_t fwrite$UNIX2003(const void *ptr, size_t size, size_t nitems, FILE *stream) { return fwrite(ptr, size, nitems, stream); } 最後に、テスト用のターゲットの info."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -25,13 +26,14 @@ Detected an attempt to call a symbol in system libraries that is not present on 
 実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
 うまく動かない場合の設定の比較などにご参照ください。
 なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
-事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+事前準備 Jenkinsの導入 さくらVPSにJenkinsさんをインストールする GHUnitの導入 Jenkins を iOS アプリ開発に導入してみた (GHUnit編) GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
 テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
 具体的には、以下のように
- Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
+Generate Test Coverage Files Instrument Program Flow の２つに YES を設定します。
 本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
-Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.  というエラーが出ることになります。
-この対処として、 main.m に以下コードを追記しておく必要があります。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ghunit-jenkins-coverage/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+この対処として、 main.m に以下コードを追記しておく必要があります。
+FILE *fopen$UNIX2003(const char *filename, const char *mode) { return fopen(filename, mode); } size_t fwrite$UNIX2003(const void *ptr, size_t size, size_t nitems, FILE *stream) { return fwrite(ptr, size, nitems, stream); } 最後に、テスト用のターゲットの info." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ghunit-jenkins-coverage/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -79,7 +81,7 @@ Detected an attempt to call a symbol in system libraries that is not present on 
               jenkins
           </a>
           /</div><div class="content">
-      <h2 id="heading">概要</h2>
+      <h2 id="概要">概要</h2>
 <p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ghunit-coverage.png" alt="ghunit-coverage"></p>
 <p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
@@ -87,17 +89,17 @@ Detected an attempt to call a symbol in system libraries that is not present on 
 うまく動かない場合の設定の比較などにご参照ください。</p>
 <p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
 <!-- more -->
-<h2 id="heading-1">事前準備</h2>
-<h3 id="jenkins">Jenkinsの導入</h3>
+<h2 id="事前準備">事前準備</h2>
+<h3 id="jenkinsの導入">Jenkinsの導入</h3>
 <ul>
 <li><a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a></li>
 </ul>
-<h3 id="ghunit">GHUnitの導入</h3>
+<h3 id="ghunitの導入">GHUnitの導入</h3>
 <ul>
 <li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
 </ul>
 <p>GHUnitのiOS用frameworkをビルドするのが面倒な場合は、<a href="https://github.com/tokorom/ghunit-ios-framework">Github</a> にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。</p>
-<h2 id="heading-2">テストカバレッジを出力するためのプロジェクトの設定を変更する</h2>
+<h2 id="テストカバレッジを出力するためのプロジェクトの設定を変更する">テストカバレッジを出力するためのプロジェクトの設定を変更する</h2>
 <p>GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。<br>
 具体的には、以下のように</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/test-coverage-setting.png" alt="test-coverage-setting"></p>
@@ -130,17 +132,17 @@ size_t fwrite$UNIX2003(const void *ptr, size_t size, size_t nitems, FILE *stream
 </ul>
 <p>といったテストカバレッジの結果を出力したファイルが確認できるはずです。<br>
 Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a href="http://code.google.com/p/coverstory/">CoverStory</a> などでこれらのファイルを開けばローカルで確認することも可能です。</p>
-<h2 id="gcovr">gcovrの設置</h2>
+<h2 id="gcovrの設置">gcovrの設置</h2>
 <p>上記で出力したテストカバレッジの結果をJenkinsのCobertura pluginで読める形式に変換するために、 <a href="https://software.sandia.gov/trac/fast/wiki/gcovr">gcovr</a> というPythonスクリプトを利用します。<br>
 具体的には、<a href="https://software.sandia.gov/svn/public/fast/gcovr/trunk/scripts/gcovr">ココ</a> からダウンロードしてPathの通った場所にこれを設置します。</p>
-<h2 id="jenkins-1">Jenkinsのジョブの設定</h2>
-<h3 id="plugin">必要なPlugin</h3>
+<h2 id="jenkinsのジョブの設定">Jenkinsのジョブの設定</h2>
+<h3 id="必要なplugin">必要なPlugin</h3>
 <ul>
 <li>Git plugin</li>
 <li>Cobertura plugin</li>
 </ul>
 <p>をJenkinsにインストールしてください。</p>
-<h3 id="heading-3">ジョブの設定</h3>
+<h3 id="ジョブの設定">ジョブの設定</h3>
 <ul>
 <li>Source Code Management
 <ul>
@@ -182,7 +184,7 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
 <p>テストカバレッジが複数回取られると、Jenkins上で</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coverage-graph.png" alt="coverage-graph"></p>
 <p>のようにカバレッジの変化をグラフで確認することもできるようになります。</p>
-<h2 id="heading-4">参照させていただいたブログ記事へのリンク</h2>
+<h2 id="参照させていただいたブログ記事へのリンク">参照させていただいたブログ記事へのリンク</h2>
 <ul>
 <li><a href="http://blog.octo.com/en/jenkins-quality-dashboard-ios-development/">iOS dev: How to setup quality metrics on your Jenkins job?</a></li>
 <li><a href="http://safx-dev.blogspot.jp/2012/03/jenkins.html">Jenkinsでテストとカバレッジの結果をグラフ表示できるようにする</a></li>
@@ -251,6 +253,30 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -292,30 +318,6 @@ Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a 
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -389,6 +391,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

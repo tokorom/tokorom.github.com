@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -7,29 +7,29 @@
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="これは potatotips第６回め で発表した この話 のまとめと後書きです。
 Storyboardいいですよね！ Storyboardを使うことで、
- 画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
+画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない といったメリットがあります。
 Storyboard登場以前だと、次の画面に遷移させるだけでも
-#import &quot;NextViewController.h&quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES];  といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+#import &quot;NextViewController.h&quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
 しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
 ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
-#import &quot;NextViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; }  要するにStoryboard登場以前のコードに逆戻りです。
+#import &quot;NextViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
 そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
 もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
-#import &quot;NextViewController.h&quot; #import &quot;ModalViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&quot;Next&quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self."><meta name="author" content="tokorom">
+#import &quot;NextViewController.h&quot; #import &quot;ModalViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&quot;Next&quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&quot;Modal&quot; isEqualToString:segue."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Storyboardでの画面遷移をスマートにやる方法 | TOKOROM BLOG" property="og:title"><meta content="これは potatotips第６回め で発表した この話 のまとめと後書きです。
 Storyboardいいですよね！ Storyboardを使うことで、
- 画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
+画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない といったメリットがあります。
 Storyboard登場以前だと、次の画面に遷移させるだけでも
-#import &quot;NextViewController.h&quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES];  といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+#import &quot;NextViewController.h&quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
 しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
 ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
-#import &quot;NextViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; }  要するにStoryboard登場以前のコードに逆戻りです。
+#import &quot;NextViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
 そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
 もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
-#import &quot;NextViewController.h&quot; #import &quot;ModalViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&quot;Next&quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/improve-storyboard-segue/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+#import &quot;NextViewController.h&quot; #import &quot;ModalViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&quot;Next&quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&quot;Modal&quot; isEqualToString:segue." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/improve-storyboard-segue/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -79,7 +79,7 @@ Storyboard登場以前だと、次の画面に遷移させるだけでも
           /</div><div class="content">
       <p>これは <a href="http://connpass.com/event/5803/">potatotips第６回め</a> で発表した <a href="https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka">この話</a> のまとめと後書きです。</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_sample.png" alt="storyboard_sample"></p>
-<h2 id="storyboard">Storyboardいいですよね！</h2>
+<h2 id="storyboardいいですよね">Storyboardいいですよね！</h2>
 <p>Storyboardを使うことで、</p>
 <ul>
 <li>画面と画面が疎結合になる</li>
@@ -94,7 +94,7 @@ NextViewController *nextViewController = [NextViewController new];
 </code></pre>
 <p>といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（<code>import</code>しないといけない）形でした。</p>
 <p>しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。</p>
-<h2 id="storyboard-1">ただしStoryboardを使って今まで以上に悪くなるパターンがある</h2>
+<h2 id="ただしstoryboardを使って今まで以上に悪くなるパターンがある">ただしStoryboardを使って今まで以上に悪くなるパターンがある</h2>
 <p>とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。</p>
 <!-- more -->
 <pre><code class="language-objective-c">#import &quot;NextViewController.h&quot;
@@ -125,7 +125,7 @@ NextViewController *nextViewController = [NextViewController new];
     }
 }
 </code></pre>
-<h2 id="heading">ほんとうはこんな感じに書きたい！！</h2>
+<h2 id="ほんとうはこんな感じに書きたい">ほんとうはこんな感じに書きたい！！</h2>
 <p>せっかくStoryboard使っているのにこんな形で画面遷移先のViewControllerに依存してコードがぐちゃぐちゃになるのは耐えられません。</p>
 <p>ほんとうはこんな感じに書きたいのです！！</p>
 <ul>
@@ -138,7 +138,7 @@ NextViewController *nextViewController = [NextViewController new];
 </ul>
 <pre><code class="language-objective-c">self.label.text = self.segueOptions.stringValue; //&lt; 遷移元で渡した @&quot;1&quot; が取得できる
 </code></pre>
-<h2 id="heading-1">これを実現できるライブラリがあります</h2>
+<h2 id="これを実現できるライブラリがあります">これを実現できるライブラリがあります</h2>
 <p>ということで本題ですが、 <a href="https://github.com/tokorom/TKRSegueOptions">TKRSegueOptions</a> でこれが実現できます。</p>
 <p>これをインストールして <code>#import &quot;TKRSegueOptions.h&quot;</code> とするだけで上の書き方が実現できちゃいます。</p>
 <p>他にも、</p>
@@ -169,7 +169,7 @@ CustomSegueOption *option = (CustomSegueOption *)presentedViewController.segueOp
 NSLog(@&quot;number: %@, string: %@&quot;, option.number, option.string);
 </code></pre>
 <p>といったことも柔軟にできてしまいます。</p>
-<h2 id="heading-2">その他、地味に便利なところ</h2>
+<h2 id="その他地味に便利なところ">その他、地味に便利なところ</h2>
 <p>また、ふつうにやると遷移先がナビゲーションコントローラだったりタブバーコントローラだったりすると、その子要素に値を渡すのが意外と面倒だったりしませんか？</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_navigation.png" alt="storyboard_navigation"></p>
 <p>遷移先がナビゲーションバーコントローラかどうか調べて、そうならその配下のViewControllerを取得して、それが想定するViewControllerならこの値を渡す、といった面倒な手順があります。</p>
@@ -177,7 +177,7 @@ NSLog(@&quot;number: %@, string: %@&quot;, option.number, option.string);
 <pre><code class="language-objective-c">[self performSegueWithIdentifier:@&quot;Navigation&quot; options:@&quot;hello&quot;];
 </code></pre>
 <p>と書けば、遷移先がナビゲーションコントローラなら自動的にrootViewControllerまで値を渡してくれますし、タブバーコントローラなら配下の子ViewController全てに値を配布してくれます。地味に便利です。</p>
-<h2 id="performsegue-"><code>performSegue</code> できないところはどうするの？</h2>
+<h2 id="performsegue-できないところはどうするの"><code>performSegue</code> できないところはどうするの？</h2>
 <p>なお、ここまでは <code>performSegue</code> をするときに一緒に値を渡すやりかただけ紹介しましたので、performSegueが使えないパターン、例えばContainer Viewを使ってViewControllerに子ViewControllerを埋め込むときはどうするの？という疑問がでてきます。</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_embed.png" alt="storyboard_embed"></p>
 <p>じつは <code>TKRSegueOptions</code> はperformSegue方式の他に「事前設定方式」を備えています。</p>
@@ -198,7 +198,7 @@ NSLog(@&quot;number: %@, string: %@&quot;, option.number, option.string);
 <p>この設定はDictionary形式でkeyにSegueのidentifierを指定し、valueに遷移先の画面に渡したい値を返すBlockを指定します。
 このBlockは実際に画面遷移が行われるときに実行されますので、指定した画面遷移が発生するまで無駄にこれらの処理が実行されることはありませんし、その瞬間の最新の値が返るので安心して利用できます。</p>
 <p>場合によっては performSegue方式を使わずにこちらで全て統一するという運用も良いかもしれません。</p>
-<h2 id="heading-3">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <ul>
 <li>Storyboardはすごく便利!</li>
 <li>しかし画面遷移先に値を渡すときに汚くなりがち</li>
@@ -277,6 +277,30 @@ NSLog(@&quot;number: %@, string: %@&quot;, option.number, option.string);
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -318,30 +342,6 @@ NSLog(@&quot;number: %@, string: %@&quot;, option.number, option.string);
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -415,6 +415,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/keynote/</link>
     <description>Recent content in Keynote on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 08 Jun 2021 17:50:33 +0900</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/keynote/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 08 Jun 2021 17:50:33 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/keynote/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WWDC21 Keynote iOS 15についての発表の復習</title>
       <link>https://www.tokoro.me/posts/wwdc2021-keynote/</link>
@@ -35,7 +32,7 @@ SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話
 PiPをタップすることでSharePlayのコントロールが表示される。
 同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
 SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
- Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV  などが既に対応を進めている。
+Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV などが既に対応を進めている。
 Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
 Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
 Shared with You あなたと共有。</description>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -13,21 +13,25 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
 こちらですが、
- まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
+まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
- アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する  なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
+アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
 これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
 といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
-Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false  といったログが確認できるかと思います。
+Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といったログが確認できるかと思います。
 サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
 今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
 https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
 このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
 ただ、今回は実験なので（正直、C言語で書いてビルドし直して&hellip;というのが面倒なので）、
-#include &lt;stdlib.h&gt;  して、
-if (value) { system(&quot;./handleLightBulbOn&quot;); }  ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&hellip;という形に逃げちゃいます。。。"><meta name="author" content="tokorom">
+#include &lt;stdlib.h&gt; して、
+if (value) { system(&quot;./handleLightBulbOn&quot;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&hellip;という形に逃げちゃいます。。。
+Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
+例えば、こんなかんじのものです。
+この例ではSlackのIncoming Webhooksを使っています。
+touch handleLightBulbOn chmod &#43;x handleLightBulbOn vim handleLightBulbOn #!"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -39,21 +43,25 @@ HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世�
 ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
 と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
 ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
-Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL  を実行したらなにやら動きます1。
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
 こちらですが、
- まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル  という理解で良さそうです。
+まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル という理解で良さそうです。
 LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
- アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する  なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
+アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
 これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
 といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
-Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false  といったログが確認できるかと思います。
+Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といったログが確認できるかと思います。
 サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
 今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
 https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
 このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
 ただ、今回は実験なので（正直、C言語で書いてビルドし直して&hellip;というのが面倒なので）、
-#include &lt;stdlib.h&gt;  して、
-if (value) { system(&quot;./handleLightBulbOn&quot;); }  ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&hellip;という形に逃げちゃいます。。。" property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekitadk/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+#include &lt;stdlib.h&gt; して、
+if (value) { system(&quot;./handleLightBulbOn&quot;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&hellip;という形に逃げちゃいます。。。
+Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
+例えば、こんなかんじのものです。
+この例ではSlackのIncoming Webhooksを使っています。
+touch handleLightBulbOn chmod &#43;x handleLightBulbOn vim handleLightBulbOn #!" property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/homekit_logo.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekitadk/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -101,12 +109,12 @@ if (value) { system(&quot;./handleLightBulbOn&quot;); }  ライトがOnになっ
               homekit
           </a>
           /</div><div class="content">
-      <h2 id="homekitadk">HomeKitADKのオープンソース化</h2>
+      <h2 id="homekitadkのオープンソース化">HomeKitADKのオープンソース化</h2>
 <p>つい先日（2019/12/18）、AppleがAmazon、Google、Zigbee Allianceと、スマートホームデバイスに関するワーキンググループを結成したとのビッグニュースが発表されましたね！</p>
 <p><a href="https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/">https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/</a></p>
 <p>これに伴い、HomeKitに対応したアクセサリを開発するためのHomeKit ADKがオープンソース化されました。</p>
 <p><a href="https://github.com/apple/HomeKitADK">https://github.com/apple/HomeKitADK</a></p>
-<h2 id="homekit">HomeKit対応アクセサリ作ってみよう！？</h2>
+<h2 id="homekit対応アクセサリ作ってみよう">HomeKit対応アクセサリ作ってみよう！？</h2>
 <p>ちなみにHomeKitの世界ではHomeKitに対応した機器のことを<a href="https://www.apple.com/jp/shop/accessories/all-accessories/homekit">アクセサリ</a>と呼びます。</p>
 <p>ということで早速HomeKit対応アクセサリを作ってみましょう！
 といってもハードウェアを作るわけではなく、手元のMac上で動き、Homeアプリから<code>On</code>するとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。</p>
@@ -122,7 +130,7 @@ if (value) { system(&quot;./handleLightBulbOn&quot;); }  ライトがOnになっ
 <li>上で動かしている<code>Lightbulb.OpenSSL</code>は、ライト用の<code>HAP Accessory</code>のサンプル</li>
 </ul>
 <p>という理解で良さそうです。</p>
-<h2 id="lightbulbiphonehome">LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう</h2>
+<h2 id="lightbulbのサンプルをiphoneのhomeアプリに追加してみよう">LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう</h2>
 <p>上の<code>Lightbulb.OpenSSL</code>を動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/add_homekitadk_accessory.jpeg" alt="add_accessory"></p>
 <ol>
@@ -137,7 +145,7 @@ if (value) { system(&quot;./handleLightBulbOn&quot;); }  ライトがOnになっ
 Info    HandleLightBulbOnWrite: false
 </code></pre>
 <p>といったログが確認できるかと思います。</p>
-<h2 id="slack">サンプルを改造してSlackにメッセージを送信させよう</h2>
+<h2 id="サンプルを改造してslackにメッセージを送信させよう">サンプルを改造してSlackにメッセージを送信させよう</h2>
 <p>HomeKit対応したライトを作る場合は、上の<code>HandleLightBulbOnWrite</code>のところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。</p>
 <p>今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、</p>
 <p><a href="https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184">https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184</a></p>
@@ -151,7 +159,7 @@ Info    HandleLightBulbOnWrite: false
 }
 </code></pre>
 <p>ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&hellip;という形に逃げちゃいます。。。</p>
-<h2 id="slack-1">Slackにメッセージ送信するスクリプトの追加</h2>
+<h2 id="slackにメッセージ送信するスクリプトの追加">Slackにメッセージ送信するスクリプトの追加</h2>
 <p>ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。</p>
 <p>例えば、こんなかんじのものです。</p>
 <p>この例ではSlackのIncoming Webhooksを使っています。</p>
@@ -184,22 +192,22 @@ task.resume()
 
 semaphore.wait()
 </code></pre>
-<h2 id="heading">実験成功！</h2>
+<h2 id="実験成功">実験成功！</h2>
 <p>これをビルドし直して<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>Homeアプリに追加して、点灯命令を出したら、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/homekitadk/incoming_webhook.png" alt="foo"></p>
 <p>とSlackにメッセージが投稿されるのを確認できました！</p>
 <p>これにて実験終了。</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>Darwin-x86_64-apple-darwin19.0.0部分は環境に合わせて変更してください <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>Darwin-x86_64-apple-darwin19.0.0部分は環境に合わせて変更してください&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
-<p>Shellスクリプト部分をいじるだけならAccessory自体のリビルドの必要はありません <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:2">
+<p>Shellスクリプト部分をいじるだけならAccessory自体のリビルドの必要はありません&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
   </div>
 </article>
@@ -273,6 +281,30 @@ semaphore.wait()
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -314,30 +346,6 @@ semaphore.wait()
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -411,6 +419,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

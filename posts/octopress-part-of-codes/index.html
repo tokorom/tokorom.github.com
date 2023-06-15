@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -8,26 +8,28 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
 1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
 例えば、ここに sample/test.rb というファイルを置いておく。
-$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/  2. include_code でそのファイルを指定する {% include_code sample/test.rb %}  これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
 コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
 じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
 ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
 この経緯については、 OctopressのPull request に記録がある。
-2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style  以上で取り込み完了です。
-masterでなく 2.1 からpullしていることに注意が必要。"><meta name="author" content="tokorom">
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。
+include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Octopressでソースコードの一部分だけを参照する | TOKOROM BLOG" property="og:title"><meta content="おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
 1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
 例えば、ここに sample/test.rb というファイルを置いておく。
-$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/  2. include_code でそのファイルを指定する {% include_code sample/test.rb %}  これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
 コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
 じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
 ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
 この経緯については、 OctopressのPull request に記録がある。
-2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style  以上で取り込み完了です。
-masterでなく 2.1 からpullしていることに注意が必要。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/octopress-part-of-codes/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。
+include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/octopress-part-of-codes/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -75,26 +77,26 @@ masterでなく 2.1 からpullしていることに注意が必要。" property=
               octopress
           </a>
           /</div><div class="content">
-      <h2 id="octopress">おさらい：Octopressでソースコードを表示する</h2>
+      <h2 id="おさらいoctopressでソースコードを表示する">おさらい：Octopressでソースコードを表示する</h2>
 <p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
-<h3 id="1-">1. 指定のディレクトリにファイルを置く</h3>
+<h3 id="1-指定のディレクトリにファイルを置く">1. 指定のディレクトリにファイルを置く</h3>
 <p>置き場所は <em>source/downloads/code</em> 。<br>
 例えば、ここに <em>sample/test.rb</em> というファイルを置いておく。</p>
 <pre><code>$ mkdir -p source/downloads/code/sample
 $ cp test.rb source/downloads/code/sample/
 </code></pre>
 <!-- more -->
-<h3 id="2-include-code-">2. include_code でそのファイルを指定する</h3>
+<h3 id="2-include_code-でそのファイルを指定する">2. include_code でそのファイルを指定する</h3>
 <pre><code>{% include_code sample/test.rb %}
 </code></pre>
 <p>これで↓のようにそのコードが表示できる。
 {% include_code sample/test.rb %}</p>
-<h2 id="heading">コードの全てでなく、指定した箇所だけ表示したい</h2>
+<h2 id="コードの全てでなく指定した箇所だけ表示したい">コードの全てでなく、指定した箇所だけ表示したい</h2>
 <p>それでは、この <em>test.rb</em> の中の <em>to_fraction</em> というコードだけを表示したい場合はどうしたら良いだろう？<br>
 じつは現行のOctopressのデフォルトの状態ではそれができない(<strong>*1</strong>)。</p>
 <p>ただ、この機能は <strong>v2.1</strong> では既に実装済みのようで、Octopressを master ではなく <strong>2.1</strong> ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。</p>
 <p>この経緯については、 <a href="https://github.com/imathis/octopress/pull/478">OctopressのPull request</a> に記録がある。</p>
-<h3 id="21-pulloctopress">2.1 ブランチをpullしてOctopressをアップデート</h3>
+<h3 id="21-ブランチをpullしてoctopressをアップデート">2.1 ブランチをpullしてOctopressをアップデート</h3>
 <pre><code>$ git pull octopress 2.1
 $ bundle install
 $ rake update_source
@@ -102,7 +104,7 @@ $ rake update_style
 </code></pre>
 <p>以上で取り込み完了です。<br>
 masterでなく <strong>2.1</strong> からpullしていることに注意が必要。</p>
-<h3 id="include-code-startend">include_code にstartとendを指定する</h3>
+<h3 id="include_code-にstartとendを指定する">include_code にstartとendを指定する</h3>
 <p>あとは、↓のように <em>include_code</em> で <em>start</em> と <em>end</em> を指定するだけで、</p>
 <pre><code>{% include_code sample/test.rb start:5 end:11 %}
 </code></pre>
@@ -130,6 +132,30 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 </div>
   <div class="entry-feed-title">Latest Entries</div>
   <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
     
       <div class="feed-item">
   
@@ -174,30 +200,6 @@ masterでなく <strong>2.1</strong> からpullしていることに注意が必
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -271,6 +273,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

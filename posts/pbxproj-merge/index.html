@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -9,21 +9,23 @@
 コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
 今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
 複数人でプログラミングしているとpbxprojがやたらとコンフリクトする 例えば、
- Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
+Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて&hellip;
 どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
 @tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&#10;https://t.co/VxXm0fcJMb
-&mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+&mdash; azu (@azu_re) February 4, 2014 mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
-$ ./build.py  すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &quot;mergepbx&quot;] name = XCode project files merger driver = mergepbx %O %A %B  なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &hellip; と日本語まわりでfailedになったので加えました。
+[merge &quot;mergepbx&quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &hellip; と日本語まわりでfailedになったので加えました。
 2014/02/09 追記
-mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。"><meta name="author" content="tokorom">
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
+次に、.gitattributes で
+*.pbxproj merge=mergepbx と pbxprojのときはマージに mergepbx を使うように設定を追加という手順です。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -31,21 +33,23 @@ mergepbxの最新版ではLANG=を指定しなくても問題が発生しなく�
 コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
 今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
 複数人でプログラミングしているとpbxprojがやたらとコンフリクトする 例えば、
- Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
+Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
 ただそれぞれファイルを追加だけのことでコンフリクトするなんて&hellip;
 どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
 @tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&#10;https://t.co/VxXm0fcJMb
-&mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+&mdash; azu (@azu_re) February 4, 2014 mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
 https://github.com/simonwagner/mergepbx
 のREADMEどおりにインストール＆設定するだけ。
 cloneして
-$ ./build.py  すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
 2014/02/09 追記
 （もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
 ~/.gitconfig に以下の設定を追加する
-[merge &quot;mergepbx&quot;] name = XCode project files merger driver = mergepbx %O %A %B  なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &hellip; と日本語まわりでfailedになったので加えました。
+[merge &quot;mergepbx&quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &hellip; と日本語まわりでfailedになったので加えました。
 2014/02/09 追記
-mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/pbxproj-merge/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
+次に、.gitattributes で
+*.pbxproj merge=mergepbx と pbxprojのときはマージに mergepbx を使うように設定を追加という手順です。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/pbxproj-merge/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -96,7 +100,7 @@ mergepbxの最新版ではLANG=を指定しなくても問題が発生しなく�
       <p><strong>2014/02/09 追記</strong><br>
 コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！<br>
 今現在は <code>merge=mergepbx</code> がいい感じになってきているのでそっちがオススメです。</p>
-<h2 id="pbxproj">複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+<h2 id="複数人でプログラミングしているとpbxprojがやたらとコンフリクトする">複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
 <p>例えば、</p>
 <ul>
 <li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
@@ -109,7 +113,7 @@ mergepbxの最新版ではLANG=を指定しなくても問題が発生しなく�
 <!-- more -->
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/tokorom">@tokorom</a> gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&#10;<a href="https://t.co/VxXm0fcJMb">https://t.co/VxXm0fcJMb</a></p>&mdash; azu (@azu_re) <a href="https://twitter.com/azu_re/statuses/430521149861031936">February 4, 2014</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<h2 id="mergepbx">mergepbxを試してみる</h2>
+<h2 id="mergepbxを試してみる">mergepbxを試してみる</h2>
 <p>まだα版ということだがせっかくなので試してみた。基本的には</p>
 <p><a href="https://github.com/simonwagner/mergepbx">https://github.com/simonwagner/mergepbx</a></p>
 <p>のREADMEどおりにインストール＆設定するだけ。</p>
@@ -133,7 +137,7 @@ mergepbxの最新版ではLANG=を指定しなくても問題が発生しなく�
 <pre><code>*.pbxproj merge=mergepbx
 </code></pre>
 <p>と <code>pbxproj</code>のときはマージに <code>mergepbx</code> を使うように設定を追加という手順です。</p>
-<h2 id="mergepbx-1">mergepbxの結果</h2>
+<h2 id="mergepbxの結果">mergepbxの結果</h2>
 <p>ストーリーとしては、</p>
 <ul>
 <li><code>test1</code>ブランチで 適当なファイルを１つ追加してコミット</li>
@@ -147,7 +151,7 @@ mergepbxの最新版ではLANG=を指定しなくても問題が発生しなく�
 <p><s>ただ、READMEの次の項に、 <code>*.pbxproj merge=union</code> が使えるんだったらそれもいいかもよという記述が&hellip;</s></p>
 <p><strong>2014/02/09 追記</strong><br>
 mergepbxの最新版ではこのケースがうまく自動マージされるようになりました。cool :)</p>
-<h2 id="heading">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p><s>ということで、今のところ <code>merge=union</code> を使うのが良さそう。</s></p>
 <p><s>100%うまくいくわけではないけど、一番多く発生する両方で追加するパターンは自動マージされるようになるため、対応コストは確実に低くなると予想しています。</s></p>
 <p><strong>2014/02/09 追記</strong><br>
@@ -226,6 +230,30 @@ mergepbxの最新版（0.5以降）を使いましょう！</p>
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -267,30 +295,6 @@ mergepbxの最新版（0.5以降）を使いましょう！</p>
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -364,6 +368,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

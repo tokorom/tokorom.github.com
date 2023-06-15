@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -10,12 +10,14 @@
 ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
 Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
 ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
- レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい  ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks   Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい  ref: https://api.slack.com/reference/messaging/payload   GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい  と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
- Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
-いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、"><meta name="author" content="tokorom">
+Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
+- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &quot;${{ github."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -24,12 +26,14 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
 Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
 ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
- レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい  ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks   Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい  ref: https://api.slack.com/reference/messaging/payload   GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい  と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
- Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
-いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、" property="og:description"><meta content="https://www.tokoro.me/images/github-actions-context/github-actions.png" property="og:image"><meta content="https://www.tokoro.me/posts/github-actions-context/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
+- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &quot;${{ github." property="og:description"><meta content="https://www.tokoro.me/images/github-actions-context/github-actions.png" property="og:image"><meta content="https://www.tokoro.me/posts/github-actions-context/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -79,11 +83,11 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
           /</div><div class="content">
       <p><img src="/images/github-actions-context/github-actions.png" alt="image"></p>
 <p>この記事は<code>push</code>をトリガーとしたGitHub Actionsのワークフローを前提として書いています。</p>
-<h2 id="heading">概要</h2>
+<h2 id="概要">概要</h2>
 <p>GitHub Actions、簡単便利で良いですね！</p>
 <p>ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。</p>
 <p>Slackへの通知も <a href="https://github.com/marketplace?type=actions&amp;query=slack">Marketplace</a> に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！</p>
-<h2 id="heading-1">ぼくはこんな感じにしたかった</h2>
+<h2 id="ぼくはこんな感じにしたかった">ぼくはこんな感じにしたかった</h2>
 <p>とはいえ、贅沢を言えば、ぼくは</p>
 <ul>
 <li>レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい
@@ -100,8 +104,8 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 </ul>
 <p>と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。</p>
 <p>作ったActionは <a href="https://github.com/marketplace/actions/slack-incoming-webhook">https://github.com/marketplace/actions/slack-incoming-webhook</a> です。</p>
-<h2 id="heading-2">実際の通知</h2>
-<h3 id="heading-3">テキストメッセージ送るだけ</h3>
+<h2 id="実際の通知">実際の通知</h2>
+<h3 id="テキストメッセージ送るだけ">テキストメッセージ送るだけ</h3>
 <p>テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに</p>
 <ul>
 <li>Incoming WebhookのURLをenvに指定</li>
@@ -121,7 +125,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 </code></pre>
 <p><img src="/images/github-actions-context/sample-simple.png" alt="image"></p>
 <p>こんな感じにSlackにメッセージを送れます。</p>
-<h3 id="heading-4">いろいろカスタム</h3>
+<h3 id="いろいろカスタム">いろいろカスタム</h3>
 <p>次に、<code>text</code>だけでなく、<code>attachments</code>フィールドも指定して、</p>
 <ul>
 <li>成功ならgreenなど色をつける</li>
@@ -164,7 +168,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 </code></pre>
 <p><img src="/images/github-actions-context/sample-advanced.png" alt="image"></p>
 <p>この設定を使うと、こんな感じにカスタムしたメッセージも送れます。</p>
-<h2 id="inputs">指定できるフィールド（Inputs）</h2>
+<h2 id="指定できるフィールドinputs">指定できるフィールド（Inputs）</h2>
 <p>指定できるフィールド（Inputs）は、現在、Slackが <a href="https://api.slack.com/reference/messaging/payload">Message payloads</a> に明記している</p>
 <ul>
 <li><code>text</code></li>
@@ -175,7 +179,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 </ul>
 <p>の５つです。</p>
 <p><code>attachments</code>や<code>blocks</code>にJSONフォーマットでなんでも指定できますので、実質、どんなメッセージも表現できるはずです。</p>
-<h2 id="heading-5">ほんとは&hellip;</h2>
+<h2 id="ほんとは">ほんとは&hellip;</h2>
 <p>なお、<code>attachments</code>や<code>blocks</code>にJSONを指定するのは、ほんとはやりたくなくて、はじめは、</p>
 <pre><code class="language-yml">with:
   text: Successfully automated deployment.
@@ -189,7 +193,7 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 </code></pre>
 <p>とYamlのまま子要素も指定させるつもりでした。</p>
 <p>ただ、現状、GitHub ActionsのInputsには文字列しか指定できず、上の指定のしかたを受け入れてくれないため、しかたなくJSONの文字列を指定するようにしています。</p>
-<h2 id="github-actions">GitHub Actionsで利用できるコンテキスト</h2>
+<h2 id="github-actionsで利用できるコンテキスト">GitHub Actionsで利用できるコンテキスト</h2>
 <p>ところで、上のワークフローの設定例では、</p>
 <pre><code class="language-yml">author_icon: ${{ github.event.sender.avatar_url }}
 </code></pre>
@@ -401,6 +405,30 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -442,30 +470,6 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -539,6 +543,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

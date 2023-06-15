@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント | TOKOROM BLOG</title>
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+#import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
 そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
 実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  #import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @implementation Library // 略 @end  このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。"><meta name="author" content="tokorom">
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント | TOKOROM BLOG" property="og:title"><meta content="チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
-#import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+#import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
 そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
 実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
 具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
 以下、これを解消するための変更例です。
-クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end  #import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @implementation Library // 略 @end  このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/safe-objc/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/safe-objc/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -66,7 +66,7 @@
               objc
           </a>
           /</div><div class="content">
-      <h2 id="1-import">チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
+      <h2 id="チェック1-なんでもかんでもヘッダーファイルでimportしていませんか">チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
 <p>例えば、こんなコードを書いていませんか？</p>
 <pre><code class="language-objc">#import &quot;OtherLibrary1.h&quot;
 #import &quot;OtherLibrary2.h&quot;
@@ -86,7 +86,7 @@
 具体的にはこの状態だと、 <strong>OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る</strong> 状態になってしまっています。</p>
 <p>以下、これを解消するための変更例です。</p>
 <!-- more -->
-<h2 id="import">クラスの前方宣言を使い、ヘッダーファイルではimportしない</h2>
+<h2 id="クラスの前方宣言を使いヘッダーファイルではimportしない">クラスの前方宣言を使い、ヘッダーファイルではimportしない</h2>
 <pre><code class="language-objc">@class OtherLibrary1; //&lt; ここではimportしない
 @class OtherLibrary2; //&lt; ここではimportしない
 
@@ -109,7 +109,7 @@
 <p>このように、 <strong>@class</strong> による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを <strong>Opaque pointer: (不透明ポインタ)</strong> と呼ぶそうです。<br>
 ヘッダーファイルの段階では前方宣言を使ってOpaque pointerに留めておき、実際にこのクラスを利用する実装側(Library.m)のほうでOtherLibrary1.hとOtherLibrary2.hをimportするというのがこの変更です。</p>
 <p>これにより、 <strong>Library.hをimportしても、otherLibrary1とotherLibrary2を実際に使わないクラスにはOtherLibrary1とOtherLibrary2の変更が影響しなくなる</strong> というメリットがあります。</p>
-<h2 id="2-delegate">チェック2. なんでもかんでもヘッダーファイルでDelegateの実装を宣言していませんか？</h2>
+<h2 id="チェック2-なんでもかんでもヘッダーファイルでdelegateの実装を宣言していませんか">チェック2. なんでもかんでもヘッダーファイルでDelegateの実装を宣言していませんか？</h2>
 <p>例えば、こんなコードを書いていませんか？</p>
 <pre><code class="language-objc">#import &quot;XXX.h&quot;
 
@@ -122,7 +122,7 @@
 <p>実際にこれが他のクラスに悪影響を与えるかどうかは、<em>XXX.h</em> の内容によって決まってくるのですが、前回の例同様にできればヘッダーファイルでのimportは最小限にしたいところです。<br>
 それならXXXDelegateも前方宣言(protocolの前方宣言も<code>@protocol XXXDelegate;</code>で可能)で解決！としたいところですが、残念ながらプロトコルの実装を宣言する場合にはそのプロトコルの詳細を知る必要があるためその索は使えません。</p>
 <p>以下、これを解消するための例です。</p>
-<h2 id="protocol">プライベートカテゴリでProtocolの実装宣言をする</h2>
+<h2 id="プライベートカテゴリでprotocolの実装宣言をする">プライベートカテゴリでProtocolの実装宣言をする</h2>
 <pre><code class="language-objc">// ヘッダーファイルではimportもprotocolの実装宣言もしない
 
 @interface Library
@@ -143,7 +143,7 @@
 </code></pre>
 <p>ここでは、ヘッダーファイルでのXXXDelegateの実装宣言自体を止めてしまい、Library.mのほうでプライベートカテゴリに対してXXXDelegateの実装宣言をするようにしています。<br>
 これにより、ヘッダーファイルでXXX.hをimportすることを避けることができます。</p>
-<h2 id="heading">ヘッダーファイルで実装宣言をするべきときとそうでないときの判断</h2>
+<h2 id="ヘッダーファイルで実装宣言をするべきときとそうでないときの判断">ヘッダーファイルで実装宣言をするべきときとそうでないときの判断</h2>
 <p>注意しないといけないのは <strong>全てのケースでヘッダーファイルでProtocolの実装宣言をするのがダメというわけではない</strong> ということです。<br>
 あくまでも <strong>なにも考えずに全てヘッダーファイルでやってしまうのを避けよう</strong> というのが今回言いたかったことです。</p>
 <p>例えば、 <strong>このクラスがXXXDelegateを実装しているということを他のクラスに対して知ってもらいたいケース</strong> では、ヘッダーファイルでXXXDelegateの実装を明示することは適切です。</p>
@@ -178,6 +178,30 @@
 </div>
   <div class="entry-feed-title">Latest Entries</div>
   <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
     
       <div class="feed-item">
   
@@ -222,30 +246,6 @@
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -319,6 +319,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

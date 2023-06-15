@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="概要 エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！ 2016/6/28 追記
 コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
 http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
 iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
-iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)  でiOSが必要なら
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
 とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
 しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
 （やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&hellip;）
 iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
-UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) }  でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
 ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
 コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
-   タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred."><meta name="author" content="tokorom">
+タイミング granted 許可ダイアログでAllowを選択 true 許可ダイアログでDon&rsquo;t Allowを選択 false request時に既にAllow済み（ダイアログは表示されない） true request時に既にDon&rsquo;t Allow済み（ダイアログは表示されない） false ちなみに第2引数は An object containing error information or nil if no error occurred."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ | TOKOROM BLOG" property="og:title"><meta content="概要  エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！  2016/6/28 追記
+<meta content="iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ | TOKOROM BLOG" property="og:title"><meta content="概要 エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！ 2016/6/28 追記
 コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
 http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
 iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
-iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)  でiOSが必要なら
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
 とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
 しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
 （やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&hellip;）
 iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
-UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) }  でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
 ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
 コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
-   タイミング granted     許可ダイアログでAllowを選択 true   許可ダイアログでDon&#39;t Allowを選択 false   request時に既にAllow済み（ダイアログは表示されない） true   request時に既にDon&#39;t Allow済み（ダイアログは表示されない） false    ちなみに第2引数は An object containing error information or nil if no error occurred." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/user_notification/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+タイミング granted 許可ダイアログでAllowを選択 true 許可ダイアログでDon&rsquo;t Allowを選択 false request時に既にAllow済み（ダイアログは表示されない） true request時に既にDon&rsquo;t Allow済み（ダイアログは表示されない） false ちなみに第2引数は An object containing error information or nil if no error occurred." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/user_notification/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -84,7 +84,7 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
               wwdc
           </a>
           /</div><div class="content">
-      <h2 id="heading">概要</h2>
+      <h2 id="概要">概要</h2>
 <ul>
 <li>エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題</li>
 <li><s>それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった</s></li>
@@ -94,7 +94,7 @@ UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]
 <p>コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。</p>
 <p><a href="http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775">http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775</a></p>
 <p>iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。</p>
-<h2 id="ios-9-">iOS 9 以前</h2>
+<h2 id="ios-9-以前">iOS 9 以前</h2>
 <pre><code class="language-swift">let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
 UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
 
@@ -104,7 +104,7 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
 <p>とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。</p>
 <p>しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。</p>
 <p>（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&hellip;）</p>
-<h2 id="ios-10-">iOS 10 でこうなる</h2>
+<h2 id="ios-10-でこうなる">iOS 10 でこうなる</h2>
 <p>しかしiOS 10で導入された<code>User Notifications Framework</code>により、これを正確にハンドリングすることができるようになったんです。
 具体的には、</p>
 <pre><code class="language-swift">UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in
@@ -113,7 +113,7 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
 </code></pre>
 <p>でこれまでと同じくiOSの判断で確認ダイアログが表示されます。</p>
 <p>ただ素晴らしいことに（というかようやく）この<code>requestAuthorization</code>の第2引数のclosureは、この許可ダイアログでエンドユーザが<code>Allow</code>もしくは<code>Don't Allow</code>を選択したタイミングでコールバックされるんです！そしてその引数（上の例だと<code>granted</code>）に<code>Allow</code>と<code>Don't Allow</code>のどちらが選択されたかが渡されます。</p>
-<h2 id="granted">コールバックされるタイミングとgrantedの値のまとめ</h2>
+<h2 id="コールバックされるタイミングとgrantedの値のまとめ">コールバックされるタイミングとgrantedの値のまとめ</h2>
 <p>なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。
 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）</p>
 <table>
@@ -129,7 +129,7 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
 <td>true</td>
 </tr>
 <tr>
-<td>許可ダイアログでDon't Allowを選択</td>
+<td>許可ダイアログでDon&rsquo;t Allowを選択</td>
 <td>false</td>
 </tr>
 <tr>
@@ -137,13 +137,13 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
 <td>true</td>
 </tr>
 <tr>
-<td>request時に既にDon't Allow済み（ダイアログは表示されない）</td>
+<td>request時に既にDon&rsquo;t Allow済み（ダイアログは表示されない）</td>
 <td>false</td>
 </tr>
 </tbody>
 </table>
 <p>ちなみに第2引数は <code>An object containing error information or nil if no error occurred. </code> とのことだが今のところerrorが発生したことはない。</p>
-<h2 id="heading-1">ロギングや解析が捗る！</h2>
+<h2 id="ロギングや解析が捗る">ロギングや解析が捗る！</h2>
 <p>これにより、</p>
 <pre><code class="language-swift">UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in
     // Analyticsサービスにこのユーザーの状態を伝える
@@ -152,7 +152,7 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
 </code></pre>
 <p>とするなどし、適切なタイミングで正確な状態を把握できるようになりました。</p>
 <p>ユーザーが通知を許可してくれるかどうかはサービス運営上の重要な課題のひとつですので、通知を許可してもらうための施策をうって、その効果を正確に測りたい場合などに助かりますね♪ （もっと早く欲しかった&hellip;）</p>
-<h2 id="ref-user-notifications-framework">Ref: User Notifications Frameworkについて</h2>
+<h2 id="ref-user-notifications-frameworkについて">Ref: User Notifications Frameworkについて</h2>
 <ul>
 <li>WWDC2016の<a href="https://developer.apple.com/videos/play/wwdc2016/707/">Introduction to Notifications</a></li>
 <li>koogawaさんの<a href="http://qiita.com/koogawa/items/0dff2f59096b292571db">iOS 10 時代の Notification</a></li>
@@ -230,6 +230,30 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -271,30 +295,6 @@ UIApplication.sharedApplication().registerUserNotificationSettings(notificationS
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -368,6 +368,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

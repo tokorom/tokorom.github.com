@@ -1,49 +1,47 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>クリスマスツリーをHomeKitに対応させよう | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="やりたいこと 必須要件 日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する あったらいいね Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W] などの光センサーを利用するので十分かと思います。
 今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&hellip;ということで。
-実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
+実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセント などのHomeKit対応スマートコンセントに繋ぐだけです。
 これを利用することでHomeKitの設定により、
- 日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
-なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming  でも詳細に紹介しています。
+日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する などが実現できます。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
 オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
 このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
 防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
-はじめは 防雨型コンセントボックスなど専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
+はじめは 防雨型コンセントボックス など専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
 さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。
 プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。
 あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。
 実際、普通の雨ならこれで十分な感じです。
 （なお、水滴がケース内に発生して云々&hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&hellip;）
 まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
- 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
- "><meta name="author" content="tokorom">
+「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="クリスマスツリーをHomeKitに対応させよう | TOKOROM BLOG" property="og:title"><meta content="やりたいこと 必須要件  日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する  あったらいいね  Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する  これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]などの光センサーを利用するので十分かと思います。
+<meta content="クリスマスツリーをHomeKitに対応させよう | TOKOROM BLOG" property="og:title"><meta content="やりたいこと 必須要件 日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する あったらいいね Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W] などの光センサーを利用するので十分かと思います。
 今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&hellip;ということで。
-実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセントなどのHomeKit対応スマートコンセントに繋ぐだけです。
+実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセント などのHomeKit対応スマートコンセントに繋ぐだけです。
 これを利用することでHomeKitの設定により、
- 日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する  などが実現できます。
-なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming  でも詳細に紹介しています。
+日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する などが実現できます。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
 オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
 このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
 防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
-はじめは 防雨型コンセントボックスなど専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
+はじめは 防雨型コンセントボックス など専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
 さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。
 プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。
 あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。
 実際、普通の雨ならこれで十分な感じです。
 （なお、水滴がケース内に発生して云々&hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&hellip;）
 まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
- 「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる  iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！
- " property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_christmastree/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_christmastree/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -91,22 +89,22 @@
               homekit
           </a>
           /</div><div class="content">
-      <h2 id="heading">やりたいこと</h2>
-<h3 id="heading-1">必須要件</h3>
+      <h2 id="やりたいこと">やりたいこと</h2>
+<h3 id="必須要件">必須要件</h3>
 <ul>
 <li>日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する</li>
 <li>24:00など時間がきたらクリスマスツリーのライトを自動消灯する</li>
 </ul>
-<h3 id="heading-2">あったらいいね</h3>
+<h3 id="あったらいいね">あったらいいね</h3>
 <ul>
 <li>Siriでクリスマスツリーを点灯/消灯する</li>
 <li>屋外のクリスマスツリー用に防雨対応する</li>
 </ul>
-<h2 id="heading-3">これまで</h2>
+<h2 id="これまで">これまで</h2>
 <p>HomeKitなど使わなくても実利用的には <a target="_blank" href="https://www.amazon.co.jp/gp/product/B001JUA14K/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B001JUA14K&linkCode=as2&tag=tokorom-22&linkId=49cf53217aaafabd4c2f766772135799">オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W]</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B001JUA14K" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> などの光センサーを利用するので十分かと思います。</p>
 <p>今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&hellip;ということで。</p>
-<h2 id="heading-4">実現方法</h2>
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/7883/fbf046d1-39a3-ed3a-d7a7-d67c76a60690.png" width=300 /></p>
+<h2 id="実現方法">実現方法</h2>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/fbf046d1-39a3-ed3a-d7a7-d67c76a60690.png" width=300 />
 <p>クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを <a target="_blank" href="https://www.amazon.co.jp/gp/product/B01N9MMEWH/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01N9MMEWH&linkCode=as2&tag=tokorom-22&linkId=b4f840d6789ef659e726c607316b5b13">Koogeek スマートコンセント</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01N9MMEWH" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> などのHomeKit対応スマートコンセントに繋ぐだけです。</p>
 <p>これを利用することでHomeKitの設定により、</p>
 <ul>
@@ -119,21 +117,21 @@
 iOS 11 Programming
 <img src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg" height=200 />
 </a> でも詳細に紹介しています。</p>
-<h2 id="heading-5">オートメーションの設定</h2>
+<h2 id="オートメーションの設定">オートメーションの設定</h2>
 <p>これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。</p>
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/7883/ce7fc2a8-10ab-b4b5-1ade-c39f0f010755.png" height=500 /></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/ce7fc2a8-10ab-b4b5-1ade-c39f0f010755.png" height=500 />
 <p>このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。</p>
-<h2 id="heading-6">防雨対応</h2>
+<h2 id="防雨対応">防雨対応</h2>
 <p>クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。</p>
 <p>はじめは <a target="_blank" href="https://www.amazon.co.jp/gp/product/B004IRCT3W/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B004IRCT3W&linkCode=as2&tag=tokorom-22&linkId=e232846593aa7324d9653509ea1dcf7d">防雨型コンセントボックス</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B004IRCT3W" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> など専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。</p>
 <p>さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。</p>
 <p>プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。</p>
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/7883/531b6ef7-9f70-74bb-1c55-65565666219b.jpeg" width=300 /></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/531b6ef7-9f70-74bb-1c55-65565666219b.jpeg" width=300 />
 <p>あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。</p>
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/7883/4c26cf27-aad5-8a74-fae7-43355bc701e9.jpeg" width=300 /></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/4c26cf27-aad5-8a74-fae7-43355bc701e9.jpeg" width=300 />
 <p>実際、普通の雨ならこれで十分な感じです。</p>
 <p>（なお、水滴がケース内に発生して云々&hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&hellip;）</p>
-<h2 id="heading-7">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p>前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。</p>
 <ul>
 <li>「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い</li>
@@ -218,6 +216,30 @@ iOS 11 Programming
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -259,30 +281,6 @@ iOS 11 Programming
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -356,6 +354,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

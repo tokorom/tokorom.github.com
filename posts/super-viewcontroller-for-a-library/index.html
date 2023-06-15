@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -12,9 +12,9 @@
 runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
 define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
 例えば、こんなかんじでどうでしょう？
-#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end  ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
 もしsuperclass変えたいよ！って人は、
-#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController  とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
 ひとまずこれでなんとかなりそう。
 他に良い方法があればご教示を！"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
@@ -27,9 +27,9 @@ define! 後から動的に差し替えるってのは class_setSuperclass がDep
 runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
 define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
 例えば、こんなかんじでどうでしょう？
-#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end  ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
 もしsuperclass変えたいよ！って人は、
-#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController  とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
 ひとまずこれでなんとかなりそう。
 他に良い方法があればご教示を！" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/super-viewcontroller-for-a-library/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
@@ -79,12 +79,12 @@ define! 後から動的に差し替えるってのは class_setSuperclass がDep
               ios
           </a>
           /</div><div class="content">
-      <h2 id="xxxviewcontroller">XXXViewControllerの親クラスを差し替えたいときありますよね？</h2>
+      <h2 id="xxxviewcontrollerの親クラスを差し替えたいときありますよね">XXXViewControllerの親クラスを差し替えたいときありますよね？</h2>
 <p>UIKit内で言えば<code>UITableViewController</code>とかはその代表格。<br>
 外部ライブラリで言うと、Google Analytics SDKの<code>GAITrackedViewController</code>とか。</p>
 <p>要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。</p>
 <p>で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。</p>
-<h2 id="runtime">runtime使う?</h2>
+<h2 id="runtime使う">runtime使う?</h2>
 <p>いちおう <code>class_setSuperclass</code>という関数があるのですがDeprecated&hellip;
 なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。</p>
 <!-- more -->
@@ -186,6 +186,30 @@ define! 後から動的に差し替えるってのは class_setSuperclass がDep
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -227,30 +251,6 @@ define! 後から動的に差し替えるってのは class_setSuperclass がDep
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -324,6 +324,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

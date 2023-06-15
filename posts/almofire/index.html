@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -81,7 +81,7 @@ Alamofire.request(.GET, &quot;https://api.github.com/users&quot;) .validate() .r
 やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！</p>
 <p>※基本的にはAlamofireのREADMEに書かれている話です</p>
 <!-- more -->
-<h2 id="json">ふつうにJSONを取得するインターフェース</h2>
+<h2 id="ふつうにjsonを取得するインターフェース">ふつうにJSONを取得するインターフェース</h2>
 <p>まず、普通にJSONを取得するインターフェースですが、</p>
 <pre><code class="language-swift">Alamofire.request(.GET, &quot;https://api.github.com/users&quot;)
     .validate()
@@ -104,7 +104,7 @@ Alamofire.request(.GET, &quot;https://api.github.com/users&quot;) .validate() .r
     }
 </code></pre>
 <p>といったかんじで<code>responseJSON</code>で<code>NSArray</code> or <code>NSDictionary</code>にシリアライズ後の情報をModelオブジェクトに変換して利用するというのがよくある使い方ではないかと思います。</p>
-<h2 id="generic">Genericなインターフェース</h2>
+<h2 id="genericなインターフェース">Genericなインターフェース</h2>
 <p>ただ、せっかくSwiftを使っているので（正確にはObjective-Cでもこうしたいですが&hellip;）Modelオブジェクトへの変換までを裏（APIクライアント側）でやってしまいたいところです。</p>
 <p>例えば、こんなかんじで。</p>
 <pre><code class="language-swift">Alamofire.request(.GET, &quot;https://api.github.com/users&quot;)
@@ -119,7 +119,7 @@ Alamofire.request(.GET, &quot;https://api.github.com/users&quot;) .validate() .r
 </code></pre>
 <p>あら素敵！</p>
 <p>Objective-C時代にもAPIクライアントにParserを渡してModelオブジェクトの状態で返してもらうようなことはやっていましたが、ここまですっきりしたインターフェースでこれが実現できるのはSwiftならではですね！</p>
-<h2 id="alamofire">Alamofireの拡張部分</h2>
+<h2 id="alamofireの拡張部分">Alamofireの拡張部分</h2>
 <p>（AlamofireのREADMEどおりですが）Alamofireを拡張して<code>responseCollection</code>というModelオブジェクトへの変換までやってくれる用のメソッドの実装はこんなかんじです。</p>
 <p>新しく作る<code>ResponseCollectionSerializable</code>というJSON-&gt;Modelオブジェクトのシリアライズ用のprotocolに対応したクラスであれば、全てこのインターフェースで取得できるようになります。Generics偉い！</p>
 <pre><code class="language-swift">import SwiftyJSON
@@ -143,7 +143,7 @@ extension Alamofire.Request {
 }
 </code></pre>
 <p><code>Serializer</code>はAlamofireが具備しているシリアライズ部分のカスタマイズ用の型です。これを<code>response</code>メソッドに渡すことでシリアライズ部分を柔軟に拡張可能です。</p>
-<h2 id="model">Model側の実装</h2>
+<h2 id="model側の実装">Model側の実装</h2>
 <p>（これもほぼREADMEどおりですが）最後に、JSONからのシリアライズにModelを対応させるための実装(<code>ResponseCollectionSerializable</code>)です。</p>
 <p>※ <a href="https://github.com/SwiftyJSON/SwiftyJSON">SwifthJSON</a> を使ってます</p>
 <pre><code class="language-swift">import SwiftyJSON
@@ -188,7 +188,7 @@ class User: Model {
     }
 }
 </code></pre>
-<h2 id="heading">このあと</h2>
+<h2 id="このあと">このあと</h2>
 <p><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a>も使いつつ、このあたりの実装をAPIクライアントとしてまとめておきたい。</p>
 
   </div>
@@ -263,6 +263,30 @@ class User: Model {
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -304,30 +328,6 @@ class User: Model {
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -401,6 +401,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

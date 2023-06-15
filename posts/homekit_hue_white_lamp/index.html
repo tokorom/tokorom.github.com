@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 ColorTemperature 色温度 int 可 Brightness 明るさ int 可 概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
 カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
 なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
 もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
-ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。"><meta name="author" content="tokorom">
+ColorTemperatureのmetadata プロパティ 実際の値 format int units minimumValue 153 maximumValue 454 stepValue 1 validValues maxLength manufacturerDescription Color Temperature ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+ColorTemperatureを更新するサンプルコード let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature } guard let colorTemperature = candidates?"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ | TOKOROM BLOG" property="og:title"><meta content="[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   ColorTemperature 色温度 int 可   Brightness 明るさ int 可    概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+<meta content="[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ | TOKOROM BLOG" property="og:title"><meta content="[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 ColorTemperature 色温度 int 可 Brightness 明るさ int 可 概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
 カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
 なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
 もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
-ColorTemperatureのmetadata    プロパティ 実際の値     format int   units    minimumValue 153   maximumValue 454   stepValue 1   validValues    maxLength    manufacturerDescription Color Temperature    ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_hue_white_lamp/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+ColorTemperatureのmetadata プロパティ 実際の値 format int units minimumValue 153 maximumValue 454 stepValue 1 validValues maxLength manufacturerDescription Color Temperature ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+ColorTemperatureを更新するサンプルコード let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature } guard let colorTemperature = candidates?" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_hue_white_lamp/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -66,7 +70,7 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
           </a>
           /</div><div class="content">
       <p><a target="_blank" href="https://www.amazon.co.jp/gp/product/B01MSITPT1/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01MSITPT1&linkCode=as2&tag=tokorom-22&linkId=a335872d8b17c6b4c0ddb7cb4ce3c4c1">[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01MSITPT1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
-<h2 id="heading">主なサービス</h2>
+<h2 id="主なサービス">主なサービス</h2>
 <table>
 <thead>
 <tr>
@@ -81,7 +85,7 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
 </tr>
 </tbody>
 </table>
-<h2 id="heading-1">主なキャラクタ</h2>
+<h2 id="主なキャラクタ">主なキャラクタ</h2>
 <table>
 <thead>
 <tr>
@@ -112,13 +116,13 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
 </tr>
 </tbody>
 </table>
-<h2 id="heading-2">概要</h2>
+<h2 id="概要">概要</h2>
 <p>スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。
 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。</p>
 <p>カラー版では<code>Hue</code>、<code>Saturation</code>、<code>Brightness</code>の３つのキャラクタを変更することでランプの色を変えますが、この非カラー版では<code>ColorTemperature</code>という１つのキャラクタを変更することで色味を調整します。</p>
 <p>なお<code>HMCharacteristicTypeColorTemperature</code>はiOS 11で新規追加されたキャラクタです。</p>
 <p>もちろん<code>PowerState</code>キャラクタで点灯/消灯を操作することもできます。</p>
-<h2 id="colortemperaturemetadata">ColorTemperatureのmetadata</h2>
+<h2 id="colortemperatureのmetadata">ColorTemperatureのmetadata</h2>
 <table>
 <thead>
 <tr>
@@ -161,10 +165,10 @@ ColorTemperatureのmetadata    プロパティ 実際の値     format int   uni
 </tr>
 </tbody>
 </table>
-<h2 id="colortemperaturevalue">ColorTemperatureのvalue</h2>
+<h2 id="colortemperatureのvalue">ColorTemperatureのvalue</h2>
 <p><code>value</code>プロパティは153から454の範囲で設定できます。
 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。</p>
-<h2 id="colortemperature">ColorTemperatureを更新するサンプルコード</h2>
+<h2 id="colortemperatureを更新するサンプルコード">ColorTemperatureを更新するサンプルコード</h2>
 <pre><code class="language-swift">let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first
 let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature }
 
@@ -175,12 +179,12 @@ guard let colorTemperature = candidates?.first else {
 colorTemperature.writeValue(454) { error in
 }
 </code></pre>
-<h2 id="heading-3">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p>キャラクタの<code>value</code>の更新が視覚的にわかりやすく、また、<code>true</code>/<code>false</code>だけでなく数値の<code>value</code>を書き込み可能な製品としてPhilips Hueをオススメしていますが、実用的にはカラー版でなくこちらのホワイトグラデーション シングルランプで必要十分ではないでしょうか。</p>
 <p>値段的にはカラー版の半額程度になりますので、すでにPhilips Hueのブリッジをお持ちのかたの追加ランプとしては順当かと思います。</p>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B01MSITPT1&linkId=7c229f303ba71da4d599dfec54156115&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
 </iframe>
-<h2 id="ios-11-programming">iOS 11 Programmingについて</h2>
+<h2 id="ios-11-programmingについて">iOS 11 Programmingについて</h2>
 <p>この記事は「iOS 11 Programming」の<strong>第12章 HomeKit入門とiOS 11における新機能</strong>の中の<strong>12.4.2 HomeKit 対応製品利用実例</strong>への追加コンテンツ的位置付けにもなっています。
 この製品がサポートするサービス（&lsquo;HMService&rsquo;）やキャラクタ（&lsquo;HMCharacteristic&rsquo;）の表など、全てこの書籍に合わせた形で掲載しております。</p>
 <p>「iOS 11 Programming」にご興味のあるかたは是非、以下リンクからご参照ください。</p>
@@ -258,6 +262,30 @@ colorTemperature.writeValue(454) { error in
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -299,30 +327,6 @@ colorTemperature.writeValue(454) { error in
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -396,6 +400,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

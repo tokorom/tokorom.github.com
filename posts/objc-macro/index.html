@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -9,18 +9,19 @@
 ** ※2013/1/9 追記 **
 上記のとおり独自のマクロを使うこと自体に賛否両論あります。
 例えば独自のマクロを定義して利用することで、
- 他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない）  などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
-1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333];  [NSString stringWithFormat:]はよく使うのだが長くて面倒&hellip;とよく思ってしまう。
+他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない） などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
+1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&hellip;とよく思ってしまう。
 ということで、
-#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]  を定義して
-NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333);  としています。ちょっと楽！
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__] を定義して
+NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333); としています。ちょっと楽！
 ** ※2013/1/9 追記 *
 NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
 元々のイメージはNSString&#43;sprintfだったが再考すべし。
-2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil);  NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。
+2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。
 ということで、
-#define LSTR(s) NSLocalizedString((s), nil)  を定義して
-NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと楽！"><meta name="author" content="tokorom">
+#define LSTR(s) NSLocalizedString((s), nil) を定義して
+NSString* message = LSTR(@&quot;KEY&quot;); としています。ちょっと楽！
+3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -28,18 +29,19 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 ** ※2013/1/9 追記 **
 上記のとおり独自のマクロを使うこと自体に賛否両論あります。
 例えば独自のマクロを定義して利用することで、
- 他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない）  などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
-1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333];  [NSString stringWithFormat:]はよく使うのだが長くて面倒&hellip;とよく思ってしまう。
+他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない） などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
+1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&hellip;とよく思ってしまう。
 ということで、
-#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]  を定義して
-NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333);  としています。ちょっと楽！
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__] を定義して
+NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333); としています。ちょっと楽！
 ** ※2013/1/9 追記 *
 NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
 元々のイメージはNSString&#43;sprintfだったが再考すべし。
-2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil);  NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。
+2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。
 ということで、
-#define LSTR(s) NSLocalizedString((s), nil)  を定義して
-NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと楽！" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-macro/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+#define LSTR(s) NSLocalizedString((s), nil) を定義して
+NSString* message = LSTR(@&quot;KEY&quot;); としています。ちょっと楽！
+3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-macro/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -87,7 +89,7 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
               ios
           </a>
           /</div><div class="content">
-      <h2 id="heading">マクロ</h2>
+      <h2 id="マクロ">マクロ</h2>
 <p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
 <p>** ※2013/1/9 追記 **</p>
 <p>上記のとおり独自のマクロを使うこと自体に賛否両論あります。<br>
@@ -99,7 +101,7 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 </ul>
 <p>などのデメリットがあります。
 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。</p>
-<h2 id="1-nsstring-stringwithformat-">1. [NSString stringWithFormat:] を簡単に</h2>
+<h2 id="1-nsstring-stringwithformat-を簡単に">1. [NSString stringWithFormat:] を簡単に</h2>
 <pre><code class="language-objc">NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333];
 </code></pre>
 <p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&hellip;とよく思ってしまう。<br>
@@ -114,7 +116,7 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 <p>** ※2013/1/9 追記 *</p>
 <p><code>NSSPRINTF</code>というネーミングは微妙。特に<code>NS</code>という冠詞を勝手に使うのがダメ。<br>
 元々のイメージは<code>NSString</code>+<code>sprintf</code>だったが再考すべし。</p>
-<h2 id="2-nslocalizedstring-">2. NSLocalizedString を簡単に</h2>
+<h2 id="2-nslocalizedstring-を簡単に">2. NSLocalizedString を簡単に</h2>
 <pre><code class="language-objc">NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil);
 </code></pre>
 <p><code>NSLocalizedString</code>もよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。<br>
@@ -125,7 +127,7 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 <pre><code class="language-objc">NSString* message = LSTR(@&quot;KEY&quot;);
 </code></pre>
 <p>としています。ちょっと楽！</p>
-<h2 id="3-">3. クラスメソッドの利用を簡単に</h2>
+<h2 id="3-クラスメソッドの利用を簡単に">3. クラスメソッドの利用を簡単に</h2>
 <pre><code class="language-objc">[LongLongLongNameClass classMethod];
 </code></pre>
 <p>自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドの<code>self</code>と比べて面倒だなと思ってしまう。
@@ -136,7 +138,7 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 <pre><code class="language-objc">[ME classMethod];
 </code></pre>
 <p>としています。ちょっと楽！</p>
-<h2 id="4-block--weakself">4. Blockのお伴の__weakなselfを簡単に</h2>
+<h2 id="4-blockのお伴の__weakなselfを簡単に">4. Blockのお伴の__weakなselfを簡単に</h2>
 <pre><code class="language-objc">__weak MyClass* SELF = self;
 [self doSomethingWithBlock:^{
   [SELF showAlert];
@@ -153,7 +155,7 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 }];
 </code></pre>
 <p>としています。ちょっと楽！</p>
-<h2 id="heading-1">参考ページ</h2>
+<h2 id="参考ページ">参考ページ</h2>
 <ul>
 <li><a href="http://www.zero4racer.com/blog/1014">Objective-C の instancetype キーワードが面白い + typeof(self)の考察</a></li>
 </ul>
@@ -230,6 +232,30 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -271,30 +297,6 @@ NSString* message = LSTR(@&quot;KEY&quot;);  としています。ちょっと�
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -368,6 +370,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

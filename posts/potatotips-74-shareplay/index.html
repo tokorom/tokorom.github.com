@@ -1,49 +1,53 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>potatotips #74 で「5分でSharePlay入門」のLTをしました | TOKOROM BLOG</title>
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
- イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+イベントページ 当日のLT一覧 私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
 LTの内容は「5分でSharePlay」です！ スライドは コチラ。
 今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
 SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
 利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
- 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
- Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする 3種のSharePlay SharePlayには大きく3種あります。
+Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
 画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
 じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
 自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
- パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
 動画の共有への対応 最後に動画の共有への対応についてです。
 AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
 まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
 このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
 動画のSharePlayでできること 動画のSharePlayをすると、
- DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。"><meta name="author" content="tokorom">
+DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期 などがデフォルトでサポートされます。
+動画のSharePlay対応に必要なコード 実際に動画のSharePlayに対応してみた ViewController のコードが以下です。
+import AVKit import GroupActivities import UIKit class ViewController: AVPlayerViewController { private var groupSession: GroupSession&lt;MovieWatchingActivity&gt;?"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="potatotips #74 で「5分でSharePlay入門」のLTをしました | TOKOROM BLOG" property="og:title"><meta content="potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
- イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+イベントページ 当日のLT一覧 私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
 LTの内容は「5分でSharePlay」です！ スライドは コチラ。
 今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
 SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
 利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
- 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
- Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする 3種のSharePlay SharePlayには大きく3種あります。
+Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
 画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
 じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
 自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
- パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
 動画の共有への対応 最後に動画の共有への対応についてです。
 AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
 まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
 このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
 動画のSharePlayでできること 動画のSharePlayをすると、
- DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。" property="og:description"><meta content="https://www.tokoro.me/images/potatotips-74-shareplay/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/potatotips-74-shareplay/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期 などがデフォルトでサポートされます。
+動画のSharePlay対応に必要なコード 実際に動画のSharePlayに対応してみた ViewController のコードが以下です。
+import AVKit import GroupActivities import UIKit class ViewController: AVPlayerViewController { private var groupSession: GroupSession&lt;MovieWatchingActivity&gt;?" property="og:description"><meta content="https://www.tokoro.me/images/potatotips-74-shareplay/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/potatotips-74-shareplay/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -105,11 +109,11 @@ AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手�
 <p>LTの内容は「5分でSharePlay」です！
 スライドは <a href="https://speakerdeck.com/tokorom/5fen-deshareplayru-men">コチラ</a>。</p>
 <p>今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。</p>
-<h2 id="shareplay">SharePlayとは？</h2>
+<h2 id="shareplayとは">SharePlayとは？</h2>
 <p><img src="/images/potatotips-74-shareplay/ss-1624855130.png" alt="image"></p>
 <p>SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。
 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。</p>
-<h2 id="heading">利用シーン</h2>
+<h2 id="利用シーン">利用シーン</h2>
 <p><img src="/images/potatotips-74-shareplay/ss-1624855201.png" alt="image"></p>
 <p>SharePlayの利用シーンは様々です。
 WWDC21の各セッションの中でも様々なシーンが紹介されています。</p>
@@ -122,7 +126,7 @@ WWDC21の各セッションの中でも様々なシーンが紹介されてい�
 <li>不動産アプリで新しい家の候補をふたりで探す</li>
 <li>実家の両親がアプリの使い方がわからないのをサポートする</li>
 </ul>
-<h2 id="3shareplay">3種のSharePlay</h2>
+<h2 id="3種のshareplay">3種のSharePlay</h2>
 <p><img src="/images/potatotips-74-shareplay/ss-1624855290.png" alt="image"></p>
 <p>SharePlayには大きく3種あります。</p>
 <ul>
@@ -131,11 +135,11 @@ WWDC21の各セッションの中でも様々なシーンが紹介されてい�
 <li>Custom UI: カスタム</li>
 </ul>
 <p>※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります</p>
-<h2 id="heading-1">画面共有への対応</h2>
+<h2 id="画面共有への対応">画面共有への対応</h2>
 <p>SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？</p>
 <p>じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。
 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。</p>
-<h3 id="heading-2">自動的に隠される要素</h3>
+<h3 id="自動的に隠される要素">自動的に隠される要素</h3>
 <p>画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。</p>
 <ul>
 <li>パスワードなどセキュアな入力フィールド</li>
@@ -143,23 +147,23 @@ WWDC21の各セッションの中でも様々なシーンが紹介されてい�
 </ul>
 <p>です。
 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。</p>
-<h2 id="heading-3">動画の共有への対応</h2>
+<h2 id="動画の共有への対応">動画の共有への対応</h2>
 <p>最後に動画の共有への対応についてです。</p>
-<h3 id="appletv">AppleのTVアプリの例</h3>
+<h3 id="appleのtvアプリの例">AppleのTVアプリの例</h3>
 <p>AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。</p>
 <p><img src="/images/potatotips-74-shareplay/ss-1624857105.png" alt="image"></p>
 <p>まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に <strong>SharePlayが可能であることを示すアイコン</strong> が表示されます。</p>
 <p><img src="/images/potatotips-74-shareplay/ss-1624857199.png" alt="image"></p>
 <p>このとき動画を再生しようとすると、 <strong>SharePlayするかどうかを確認するダイアログ</strong> が表示されます。
 ここで <strong>SharePlay</strong> を選べば動画のSharePlayの開始です。</p>
-<h3 id="shareplay-1">動画のSharePlayでできること</h3>
+<h3 id="動画のshareplayでできること">動画のSharePlayでできること</h3>
 <p>動画のSharePlayをすると、</p>
 <ul>
 <li>DRMで保護されたコンテンツの共有</li>
 <li>再生・停止・シークなどによる再生位置の同期</li>
 </ul>
 <p>などがデフォルトでサポートされます。</p>
-<h3 id="shareplay-2">動画のSharePlay対応に必要なコード</h3>
+<h3 id="動画のshareplay対応に必要なコード">動画のSharePlay対応に必要なコード</h3>
 <p>実際に動画のSharePlayに対応してみた <code>ViewController</code> のコードが以下です。</p>
 <pre><code class="language-swift">import AVKit
 import GroupActivities
@@ -236,7 +240,7 @@ struct MovieWatchingActivity: GroupActivity {
 </ul>
 <p>までひととおり実装できました。</p>
 <p>もう少し重要なところを抜粋して紹介します。</p>
-<h3 id="groupactivity">GroupActivityの用意</h3>
+<h3 id="groupactivityの用意">GroupActivityの用意</h3>
 <p>まず、必要なのが <code>GroupActivity</code> を実装したものです。</p>
 <pre><code class="language-Swift">struct MovieWatchingActivity: GroupActivity {
     static let movieURL: URL? = URL(string: &quot;https://devstreaming-cdn.apple.com/videos/wwdc/2019/408bmshwds7eoqow1ud/408/hls_vod_mvp.m3u8&quot;)
@@ -254,7 +258,7 @@ struct MovieWatchingActivity: GroupActivity {
 }
 </code></pre>
 <p>といっても、共有するコンテンツのメタデータを返すだけの簡単なものです。</p>
-<h3 id="groupactivity-1">GroupActivityのアクティベート</h3>
+<h3 id="groupactivityのアクティベート">GroupActivityのアクティベート</h3>
 <p>そしてその <code>GroupActivity</code> をインスタンス化して <code>prepareForActivation</code> を呼びます。すると、さきほど紹介した <strong>SharePlayをするかどうかの確認ダイアログ</strong> が画面に表示されます。</p>
 <p>ここでユーザが <strong>SharePlay</strong> を選ぶと <code>.activationPreferred</code> が返るので、そこで <code>GroupActivity</code> を <code>activate</code> してあげるだけです。</p>
 <pre><code class="language-swift">let activity = MovieWatchingActivity()
@@ -272,7 +276,7 @@ async {
 }
 </code></pre>
 <p>これだけで動画の共有が可能です。</p>
-<h3 id="heading-4">再生位置の同期をサポート</h3>
+<h3 id="再生位置の同期をサポート">再生位置の同期をサポート</h3>
 <p>最後に再生位置の同期です。</p>
 <p>これも簡単で、<code>GroupActivity</code> のセッションが開始されたら、そのセッションと動画再生に利用している <code>AVPlayer</code> バインドして、セッションに <code>join</code> するだけです。</p>
 <pre><code class="language-swift">async {
@@ -284,7 +288,7 @@ async {
 }
 </code></pre>
 <p>これだけで再生位置の同期がサポートできてしまいます。</p>
-<h2 id="heading-5">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <ul>
 <li>SharePlayの画面共有はなにもしなくてもサポートできる</li>
 <li>SharePlayの動画共有も50行程度でサポートできる</li>
@@ -363,6 +367,30 @@ async {
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -404,30 +432,6 @@ async {
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -501,6 +505,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

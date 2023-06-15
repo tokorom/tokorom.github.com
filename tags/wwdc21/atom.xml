@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/wwdc21/</link>
     <description>Recent content in WWDC21 on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 10 Jun 2021 12:56:44 +0900</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/wwdc21/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 10 Jun 2021 12:56:44 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/wwdc21/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</title>
       <link>https://www.tokoro.me/posts/wwdc21-meet-group-activities/</link>
@@ -18,7 +15,7 @@
       
       <guid>https://www.tokoro.me/posts/wwdc21-meet-group-activities/</guid>
       <description>Meet Group Activities を視聴して内容をまとめたものです。
-先に簡単にまとめ  SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる  ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう   ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能  導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
+先に簡単にまとめ SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能 導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
 SharePlayは、GroupActivities フレームワークによって実現されています。
 このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。
 Communication Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。
@@ -37,7 +34,8 @@ Time-Synced Playback SharePlayでは、再生の同期が可能です。 誰か�
 スマートボリューム 再生中に誰かが発言すると、コンテンツの音量が自動的に下げられ、同じ部屋にいるようにコミュニケーションをとることができます。
 Picture in Picture Picture in Pictureとの相性も抜群で、PiPによりコンテンツを視聴しながら他の様々なアプリを利用することができます。
 Content FaceTimeで通話中のユーザーは、各アプリを起動したとき、そのアプリのコンテンツを共有できることを期待するようになります。
-SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。 既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。</description>
+SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。 既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。
+Group Activities Group Activitiesはフレームワークのコアコンセプトです。 Group Activitiesは、FaceTimeでSharePlayをして楽しむ対象（オブジェクト）です。</description>
     </item>
     
     <item>
@@ -64,7 +62,7 @@ SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話
 PiPをタップすることでSharePlayのコントロールが表示される。
 同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
 SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
- Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV  などが既に対応を進めている。
+Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV などが既に対応を進めている。
 Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
 Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
 Shared with You あなたと共有。</description>

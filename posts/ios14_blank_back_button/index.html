@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法 | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; }  でOK！
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } でOK！
 概要 iOS14のアップデートの1つに、
- ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
+ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
 と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
 iOS13以前の方法 iOS13以前では、例えば、
@@ -19,16 +19,17 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; }  と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
-UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。"><meta name="author" content="tokorom">
+UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
+BackButtonDisplayMode 挙動 default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される generic スペースがあれば「Back（戻る）」を表示、なければ空欄 minimal 常に空欄 例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法 | TOKOROM BLOG" property="og:title"><meta content="先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; }  でOK！
+<meta content="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法 | TOKOROM BLOG" property="og:title"><meta content="先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } でOK！
 概要 iOS14のアップデートの1つに、
- ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
+ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
 と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
 iOS13以前の方法 iOS13以前では、例えば、
@@ -40,10 +41,11 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; }  と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
-UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。" property="og:description"><meta content="https://www.tokoro.me/images/ios14_blank_back_button/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/ios14_blank_back_button/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
+BackButtonDisplayMode 挙動 default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される generic スペースがあれば「Back（戻る）」を表示、なければ空欄 minimal 常に空欄 例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。" property="og:description"><meta content="https://www.tokoro.me/images/ios14_blank_back_button/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/ios14_blank_back_button/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -91,7 +93,7 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
               Swift
           </a>
           /</div><div class="content">
-      <h2 id="heading">先にまとめ</h2>
+      <h2 id="先にまとめ">先にまとめ</h2>
 <pre><code class="language-swift">if #available(iOS 14.0, *) {
   navigationItem.backButtonDisplayMode = .minimal
 } else {
@@ -99,7 +101,7 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
 }
 </code></pre>
 <p>でOK！</p>
-<h2 id="heading-1">概要</h2>
+<h2 id="概要">概要</h2>
 <p>iOS14のアップデートの1つに、</p>
 <ul>
 <li>ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる</li>
@@ -109,12 +111,12 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
 <p>ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、</p>
 <p><img src="/images/ios14_blank_back_button/95280082-24762480-088f-11eb-9b13-96952266528a.png" alt="image"></p>
 <p>と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。</p>
-<h2 id="ios13">iOS13以前の方法</h2>
+<h2 id="ios13以前の方法">iOS13以前の方法</h2>
 <p>iOS13以前では、例えば、</p>
 <p><img src="/images/ios14_blank_back_button/xcode.png" alt="image"></p>
 <p>Xcodeで該当画面（戻り先の画面）の<code>Navigation Item</code>の<code>Back Button</code>に空白を1つ入れるなどして、戻るのタイトルを消すワークアラウンドがありました。</p>
 <p>しかし、これをすると、iOS 14以降では長押し時の戻り先リストがおかしくなってしまうわけです。</p>
-<h2 id="ios14">iOS14でのきちんとした方法</h2>
+<h2 id="ios14でのきちんとした方法">iOS14でのきちんとした方法</h2>
 <p>そのため、まずiOS14では<code>Back Button</code>の設定はいじらないようにしましょう<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
 <p>そうすると当然、</p>
 <p><img src="/images/ios14_blank_back_button/ss-1603700597.png" alt="image"></p>
@@ -159,14 +161,14 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
 </table>
 <p>例えば、先ほどの画面に<code>generic</code>を設定した時のサンプルはこちらです。</p>
 <p><img src="/images/ios14_blank_back_button/ss-1603701094.png" alt="image"></p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>戻るボタンのタイトルを別のものに差し替えたいときだけ変更する <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>戻るボタンのタイトルを別のものに差し替えたいときだけ変更する&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
   </div>
 </article>
@@ -240,6 +242,30 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -281,30 +307,6 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -378,6 +380,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

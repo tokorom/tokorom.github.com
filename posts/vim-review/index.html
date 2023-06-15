@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -9,18 +9,18 @@
 経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
 現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
 以下、
- シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット  の順に整理いたします。
+シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット の順に整理いたします。
 シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
 そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
- https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
-let g:vim_review#include_filetypes = [&#39;swift&#39;]  と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+https://github.com/tokorom/vim-review このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&#39;swift&#39;] と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
 と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
 これが発火する条件は、
- Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
+Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること です。
 リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
- fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
- fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
-事前準備 brew install fswatch npm install -g browser-sync  browser-syncの起動 cd articles browser-sync start --server --files *."><meta name="author" content="tokorom">
+fswatch browser-sync を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -28,18 +28,18 @@ let g:vim_review#include_filetypes = [&#39;swift&#39;]  と、既存のfiletype�
 経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
 現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
 以下、
- シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット  の順に整理いたします。
+シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット の順に整理いたします。
 シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
 そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
- https://github.com/tokorom/vim-review  このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
-let g:vim_review#include_filetypes = [&#39;swift&#39;]  と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+https://github.com/tokorom/vim-review このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&#39;swift&#39;] と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
 と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
 これが発火する条件は、
- Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること  です。
+Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること です。
 リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
- fswatch browser-sync  を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
- fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード  という手順です。
-事前準備 brew install fswatch npm install -g browser-sync  browser-syncの起動 cd articles browser-sync start --server --files *." property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-review/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+fswatch browser-sync を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *." property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-review/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -88,7 +88,7 @@ let g:vim_review#include_filetypes = [&#39;swift&#39;]  と、既存のfiletype�
           </a>
           /</div><div class="content">
       <p>本記事は <a href="https://qiita.com/advent-calendar/2018/vim2">Vim その2 アドベントカレンダー</a> 21日目の記事です。</p>
-<h2 id="heading">経緯</h2>
+<h2 id="経緯">経緯</h2>
 <p>今年の8月頃から <a href="https://peaks.cc/">PEAKS</a> の <a href="https://peaks.cc/tokorom/iOS12">iOS 12 Programming</a> という技術書の執筆に参加しました。
 このとき初めて <a href="https://github.com/kmuto/review">Re:VIEW</a> による執筆をしました。</p>
 <p>現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。
@@ -101,7 +101,7 @@ let g:vim_review#include_filetypes = [&#39;swift&#39;]  と、既存のfiletype�
 <li><strong>コード・スニペット</strong></li>
 </ul>
 <p>の順に整理いたします。</p>
-<h2 id="heading-1">シンタックス・ハイライト</h2>
+<h2 id="シンタックスハイライト">シンタックス・ハイライト</h2>
 <p><img src="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" alt="syntax-highlight-sample"></p>
 <p>Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。
 Re:VIEW 2.0のフォーマットガイドはこちらです &gt; <a href="https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md">https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md</a></p>
@@ -122,7 +122,7 @@ Re:VIEW 2.0のフォーマットガイドはこちらです &gt; <a href="https:
 <li>Re:VIEWのブロック命令として<code>list</code>、<code>listnum</code>、<code>emlist</code>、<code>emlistnum</code>のいずれかを利用し、言語指定として設定済みの<strong>filetype</strong>を指定していること</li>
 </ul>
 <p>です。</p>
-<h2 id="heading-2">リアリタイムプレビュー</h2>
+<h2 id="リアリタイムプレビュー">リアリタイムプレビュー</h2>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/livereload.png" alt="livereload"></p>
 <p><a href="http://kazuph.hateblo.jp/entry/2016/05/15/142352">Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる</a> を真似させていただきました。</p>
 <ul>
@@ -136,24 +136,24 @@ Re:VIEW 2.0のフォーマットガイドはこちらです &gt; <a href="https:
 <li>そのhtmlをbrowser-syncでブラウザでライブリロード</li>
 </ul>
 <p>という手順です。</p>
-<h3 id="heading-3">事前準備</h3>
+<h3 id="事前準備">事前準備</h3>
 <pre><code class="language-sh">brew install fswatch
 npm install -g browser-sync
 </code></pre>
-<h3 id="browser-sync">browser-syncの起動</h3>
+<h3 id="browser-syncの起動">browser-syncの起動</h3>
 <pre><code class="language-sh">cd articles
 browser-sync start --server --files *.html 
 </code></pre>
 <p>で、Chromeなどデフォルトのブラウザが起動します。
 起動したらブラウザのURLに <code>http://localhost:3000/10.html</code> などプレビューしたいhtmlのURLを入力して開きます。</p>
-<h3 id="heading-4">変更監視の開始</h3>
+<h3 id="変更監視の開始">変更監視の開始</h3>
 <p>以下は、PEAKSでの執筆環境におけるものです。</p>
 <pre><code class="language-sh">cd articles
 fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&amp; browser-sync reload
 </code></pre>
 <p>執筆環境ごとにRe:VIEWのreファイルからhtmlを出力するコマンドがあると思いますので、reの変更を検知したらそのコマンドを叩き、最後に<code>browser-sync reload</code>を呼びます。</p>
 <p>これで、リアリタイムプレビュー完成です！</p>
-<h2 id="heading-5">校正サポート</h2>
+<h2 id="校正サポート">校正サポート</h2>
 <p>執筆時に校正用のサポートツールを使うことも多くあるかと思います。
 たとえばPEAKSのiOS 12 Programmingの執筆では、</p>
 <ul>
@@ -202,7 +202,7 @@ fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&am
 </li>
 </ul>
 <p>という部分です。</p>
-<h3 id="heading-6">両方とも利用する設定</h3>
+<h3 id="両方とも利用する設定">両方とも利用する設定</h3>
 <p>aleでRedPenとprhを両方とも走らせたい場合は、</p>
 <ul>
 <li>ale</li>
@@ -217,7 +217,7 @@ fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&am
 <p>これにより、執筆中にRedPenとprhによる検査が入り、例えば、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/prh.png" alt="prh"></p>
 <p>のように指摘してくれます。この例では「良い」を「よい」と平仮名表記にすることを示唆してくれています。</p>
-<h2 id="heading-7">コード・スニペット</h2>
+<h2 id="コードスニペット">コード・スニペット</h2>
 <p>これはなくてもよいと思いますが、お好みのコード・スニペットpluginをRe:VIEWにも対応させておくと便利です。
 例えば、<code>emlist</code>によりソースコードを埋め込みたいときに、</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/vim-review/snippet1.png" alt="snippet1"></p>
@@ -241,7 +241,7 @@ fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&am
 <p>と日本語文中で展開する必要があります。</p>
 <p>UltiSnipsはsnippetを定義するときに <code>w</code> （word boundary）というオプション指定ができるため、これを付加して定義したsnippetなら問題なく展開できます（上のsnippetsファイルは対処済み）。</p>
 <p>neosnippetはそのままだとこれに対処できませんので少し改造が必要です<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
-<h2 id="heading-8">成果物</h2>
+<h2 id="成果物">成果物</h2>
 <p>実際にこれらを利用してVimで執筆した技術書が、</p>
 <div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS12"><img alt="iOS 12 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project007_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS12">iOS 12 Programming</a></p><ul style="margin:0; padding:0;">
 <li style="font-size:90%; list-style:none;"><span>著者：</span>
@@ -250,20 +250,20 @@ fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&am
 <li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS12">PEAKSで購入する</a></li></ul></div></div>
 <p>です。私はこの中の10章「tvOS 12の新機能」の執筆を担当しました。</p>
 <p>Vim + Re:VIEWで執筆をしている皆様、ぜひ、<a href="https://twitter.com/tokorom">Twitter</a> などで情報交換お願い致します。</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>見つかったのは4年前くらいの情報やpluginでした <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>見つかったのは4年前くらいの情報やpluginでした&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
-<p>私が執筆中に困り、Pull Requestしました <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:2">
+<p>私が執筆中に困り、Pull Requestしました&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
-<p>改造の例がこちらです <a href="https://github.com/tokorom/neosnippet.vim/tree/improve-cur-word">https://github.com/tokorom/neosnippet.vim/tree/improve-cur-word</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:3">
+<p>改造の例がこちらです <a href="https://github.com/tokorom/neosnippet.vim/tree/improve-cur-word">https://github.com/tokorom/neosnippet.vim/tree/improve-cur-word</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
   </div>
 </article>
@@ -317,6 +317,30 @@ fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&am
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -358,30 +382,6 @@ fswatch 10.re | xargs -n1 -I{} bundle exec review-compile --target=html &amp;&am
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -455,6 +455,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>
