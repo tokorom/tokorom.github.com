@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -7,27 +7,27 @@
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
 Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
- array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
+array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる といった変更があります。
 こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
 ※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
 でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
-// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key;  に変換されるそうです。
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end  #import &quot;Wrapper."><meta name="author" content="tokorom">
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &quot;Wrapper."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Objective-Cで独自クラスに[]でアクセスする | TOKOROM BLOG" property="og:title"><meta content="まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
 Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
- array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
+array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる といった変更があります。
 こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
 ※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
 でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
-// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key;  に変換されるそうです。
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
 これらの変換自体はiOSがターゲットの場合でも行われているようです。
 例えば独自クラスに上記メソッドを実装すると&hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
-@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end  #import &quot;Wrapper." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-subscripting/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &quot;Wrapper." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-subscripting/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -79,7 +79,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
           </a>
           /</div><div class="content">
       <p>まず、Xcode4.4から使えるObjective-Cの新しい書き方については <a href="/2012/08/12/objc-new-statements/">前の記事</a> をご参照ください。</p>
-<h2 id="xcode44mac">Xcode4.4からMacアプリ開発で使える新しいリテラル</h2>
+<h2 id="xcode44からmacアプリ開発で使える新しいリテラル">Xcode4.4からMacアプリ開発で使える新しいリテラル</h2>
 <p>上記記事には書いていないのですがMac向けのアプリではこの他にも、</p>
 <ul>
 <li><strong>array[1]</strong> でNSArrayの要素にアクセスできる</li>
@@ -89,7 +89,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 <p>といった変更があります。<br>
 こちらについては残念ながらiOSアプリ開発ではまだ利用できません。</p>
 <p>※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 <a href="https://twitter.com/k_katsumi">@k_katsumi</a> さんに教えてもらいました。</p>
-<h2 id="ios">でも[]でアクセスする仕組み自体はiOSでも使えます!</h2>
+<h2 id="でもでアクセスする仕組み自体はiosでも使えます">でも[]でアクセスする仕組み自体はiOSでも使えます!</h2>
 <!-- more -->
 <p>ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、</p>
 <pre><code class="language-objc">// id obj = array[0]; のときはこれになります
@@ -104,7 +104,7 @@ Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事�
 </code></pre>
 <p>に変換されるそうです。</p>
 <p>これらの変換自体はiOSがターゲットの場合でも行われているようです。</p>
-<h2 id="heading">例えば独自クラスに上記メソッドを実装すると&hellip;</h2>
+<h2 id="例えば独自クラスに上記メソッドを実装すると">例えば独自クラスに上記メソッドを実装すると&hellip;</h2>
 <p>例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。</p>
 <pre><code class="language-objc">@interface Wrapper : NSObject
 
@@ -164,7 +164,7 @@ w[@2] = @200;
 NSLog( @&quot;%@, %@, %@&quot;, w[0], w[@1], w[2] ); //&lt; 0, 100, 200
 </code></pre>
 <p>普通にビルドが通り、ログも <code>0, 100, 200</code> と想定どおりのものが出力されました。</p>
-<h2 id="nsarraynsdictionary">どうしても今すぐ使いたければNSArrayやNSDictionaryでも</h2>
+<h2 id="どうしても今すぐ使いたければnsarrayやnsdictionaryでも">どうしても今すぐ使いたければNSArrayやNSDictionaryでも</h2>
 <p>iOSではまだ残念ながらNSArrayやNSDictionaryの要素に[]でアクセスすることは出来ないということなのですが、じつは上記メソッドを各クラスに宣言さえしてやればiOSアプリ開発でも利用できるとのことです（こちらは <a href="https://twitter.com/saryou_ssk">@saryou_ssk</a> さんにリンクを教えていただきました)。</p>
 <p>例えば、NSArrayにカテゴリで</p>
 <pre><code class="language-objc">@interface NSArray (Subscripting)
@@ -197,6 +197,30 @@ NSLog( @&quot;array[1] = %@&quot;, array[1] ); //&lt; 1
 </div>
   <div class="entry-feed-title">Latest Entries</div>
   <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
     
       <div class="feed-item">
   
@@ -241,30 +265,6 @@ NSLog( @&quot;array[1] = %@&quot;, array[1] ); //&lt; 1
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -338,6 +338,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

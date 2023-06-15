@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -13,17 +13,17 @@ swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswif
 そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
 https://github.com/tokorom/vim-swift-format
 事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
-which swift-format  などで存在を確認してください2。
+which swift-format などで存在を確認してください2。
 なければ現在ならbrewでもインストール可能です。
 SwiftFormatというのは別のツールですので間違わないようご注意ください。
-brew install swift-format  aleというVimのPlugin https://github.com/dense-analysis/ale
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
 非同期にLintをかけるためのPluginです。
 今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
 vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
-Plug &#39;tokorom/vim-swift-format&#39;  です。
+Plug &#39;tokorom/vim-swift-format&#39; です。
 必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
-let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1  必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
-let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39;  これらの設定が可能です。"><meta name="author" content="tokorom">
+let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1 必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -35,17 +35,17 @@ swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswif
 そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
 https://github.com/tokorom/vim-swift-format
 事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
-which swift-format  などで存在を確認してください2。
+which swift-format などで存在を確認してください2。
 なければ現在ならbrewでもインストール可能です。
 SwiftFormatというのは別のツールですので間違わないようご注意ください。
-brew install swift-format  aleというVimのPlugin https://github.com/dense-analysis/ale
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
 非同期にLintをかけるためのPluginです。
 今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
 vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
-Plug &#39;tokorom/vim-swift-format&#39;  です。
+Plug &#39;tokorom/vim-swift-format&#39; です。
 必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
-let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1  必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
-let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39;  これらの設定が可能です。" property="og:description"><meta content="https://www.tokoro.me/images/vim-swift-format/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-swift-format/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1 必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。" property="og:description"><meta content="https://www.tokoro.me/images/vim-swift-format/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-swift-format/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -99,11 +99,11 @@ let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_forma
 <p>私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。
 iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。</p>
 <p>ということでVim+SwiftでiOSアプリを開発して6年（2020年8月現在）の私がこの記事を書くこととしました。</p>
-<h2 id="swift-formatvim-plugin">swift-formatを扱うVim Pluginの存在</h2>
+<h2 id="swift-formatを扱うvim-pluginの存在">swift-formatを扱うVim Pluginの存在</h2>
 <p>2020年8月現在、残念ながらswift-formatを扱うVim Pluginは見つかりませんでした。これまで利用されていたSwiftLintやSwiftFormatのPluginは見つかるのですが、新しめなapple/swift-format用のものはないようです。</p>
 <p>そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。</p>
 <p><a href="https://github.com/tokorom/vim-swift-format">https://github.com/tokorom/vim-swift-format</a></p>
-<h2 id="heading">事前に必要なもの</h2>
+<h2 id="事前に必要なもの">事前に必要なもの</h2>
 <h3 id="swift-format">swift-format</h3>
 <p>とうぜん事前にswift-formatが必要です。</p>
 <pre><code class="language-sh">which swift-format
@@ -113,17 +113,17 @@ iOSアプリをVimでコーディングするプログラマーは希有です�
 <p><code>SwiftFormat</code>というのは別のツールですので間違わないようご注意ください。</p>
 <pre><code class="language-sh">brew install swift-format
 </code></pre>
-<h3 id="alevimplugin">aleというVimのPlugin</h3>
+<h3 id="aleというvimのplugin">aleというVimのPlugin</h3>
 <p><a href="https://github.com/dense-analysis/ale">https://github.com/dense-analysis/ale</a></p>
 <p>非同期にLintをかけるためのPluginです。</p>
 <p>今回、swift-formatによるLintはこのaleを経由してかけるように作っています。</p>
-<h2 id="vim-swift-format">vim-swift-formatのセットアップ</h2>
-<h3 id="vim">Vimへのインストール</h3>
+<h2 id="vim-swift-formatのセットアップ">vim-swift-formatのセットアップ</h2>
+<h3 id="vimへのインストール">Vimへのインストール</h3>
 <p>ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら</p>
 <pre><code class="language-vim">Plug 'tokorom/vim-swift-format'
 </code></pre>
 <p>です。</p>
-<h3 id="heading-1">必須の設定</h3>
+<h3 id="必須の設定">必須の設定</h3>
 <p>swift-formatによるLintをかけるにあたって以下の設定項目が必須です。<code>.vimrc</code>など任意の場所に設定してください。</p>
 <pre><code class="language-vim">let g:ale_linters = {
 \   'swift': ['swift-format'],
@@ -131,14 +131,14 @@ iOSアプリをVimでコーディングするプログラマーは希有です�
 
 let g:vim_swift_format_use_ale = 1
 </code></pre>
-<h3 id="heading-2">必要なら可能な設定</h3>
+<h3 id="必要なら可能な設定">必要なら可能な設定</h3>
 <p><code>swift-format</code>の場所をフルパスで指定したい場合などは必要に応じて、</p>
 <pre><code>let g:vim_swift_format_executable = 'swift-format'
 let g:vim_swift_format_lint_command = 'swift-format lint %s'
 let g:vim_swift_format_format_command = 'swift-format format --in-place %s'
 </code></pre>
 <p>これらの設定が可能です。</p>
-<h2 id="heading-3">使ってみる！</h2>
+<h2 id="使ってみる">使ってみる！</h2>
 <p>設定が終わったら早速使ってみましょう。</p>
 <p>試しに、</p>
 <pre><code class="language-swift">import Foundation
@@ -156,26 +156,26 @@ final class Sample{
 <p>このコードをVimで書いたところ、</p>
 <p><img src="/images/vim-swift-format/ng.png" alt="image"></p>
 <p>と見事にスピーディに指摘してくれました。</p>
-<h2 id="heading-4">自動で直してもらう！</h2>
+<h2 id="自動で直してもらう">自動で直してもらう！</h2>
 <p>これらの指摘を自分で直しても良いですが、swift-formatには自動フォーマット機能もありますので使ってみます。</p>
 <p>Vim上で<code>:SwiftFormatFormat</code>というコマンドを打ちます。</p>
 <p>すると、</p>
 <p><img src="/images/vim-swift-format/fixed.png" alt="image"></p>
 <p>ときちんと自動的に修正してくれました！</p>
 <p>簡単便利！</p>
-<h2 id="heading-5">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p>（数少ない）VimでSwiftを書いている皆々様、ぜひご活用ください！</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>swift-formatと書けば十分なのですが、過去にあったSwiftFormatなどと混同しないようappleというprefixをつけました <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>swift-formatと書けば十分なのですが、過去にあったSwiftFormatなどと混同しないようappleというprefixをつけました&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
-<p>swift-formatがPATHの通った場所に設置されているほうが後が楽です <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:2">
+<p>swift-formatがPATHの通った場所に設置されているほうが後が楽です&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
   </div>
 </article>
@@ -229,6 +229,30 @@ final class Sample{
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -270,30 +294,6 @@ final class Sample{
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -367,6 +367,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

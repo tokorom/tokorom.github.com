@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -13,9 +13,16 @@ AppleTVを利用しているということは当然テレビを利用してい�
 サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
 自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
 テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
-   REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+REGZAのリモコン UIPressType 決定 .select 戻る .menu 再生 .playPause 停止 - 上 .upArrow 下 .downArrow 左 .leftArrow 右 .rightArrow UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
 UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
-UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。"><meta name="author" content="tokorom">
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+ただし条件があり、transitionStyleプロパティにUIPageViewControllerTransitionStyle.scrollを設定している場合のみ操作可能です。.pageCurlだと（デフォルトでは）操作不能でした。
+.scrollの場合には、navigationOrientationプロパティが.horizontalなら左右ボタンで、.verticalなら上下ボタンでそれぞれページ移動が可能です。
+UIScrollView UIScrollViewも特に意識しないでも操作可能になっています。
+上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。
+UITextView UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。
+テレビのリモコンで操作できない画面をなんとかする 一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、UITapGestureRecognizerを使って対処するのが簡単そうです。
+let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:))) leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)] view.addGestureRecognizer(leftTap) let rightTap = UITapGestureRecognizer(target: self, action: #selector(self."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -27,9 +34,16 @@ AppleTVを利用しているということは当然テレビを利用してい�
 サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
 自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
 テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
-   REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+REGZAのリモコン UIPressType 決定 .select 戻る .menu 再生 .playPause 停止 - 上 .upArrow 下 .downArrow 左 .leftArrow 右 .rightArrow UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
 UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
-UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/tvos_advent_calendar_2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+ただし条件があり、transitionStyleプロパティにUIPageViewControllerTransitionStyle.scrollを設定している場合のみ操作可能です。.pageCurlだと（デフォルトでは）操作不能でした。
+.scrollの場合には、navigationOrientationプロパティが.horizontalなら左右ボタンで、.verticalなら上下ボタンでそれぞれページ移動が可能です。
+UIScrollView UIScrollViewも特に意識しないでも操作可能になっています。
+上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。
+UITextView UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。
+テレビのリモコンで操作できない画面をなんとかする 一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、UITapGestureRecognizerを使って対処するのが簡単そうです。
+let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:))) leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)] view.addGestureRecognizer(leftTap) let rightTap = UITapGestureRecognizer(target: self, action: #selector(self." property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/tvos_advent_calendar_2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -77,27 +91,27 @@ UIPageViewController これは意外だったのですが、UIPageViewController
               ui
           </a>
           /</div><div class="content">
-      <h2 id="appletv">AppleTVで使えるリモコンって？</h2>
-<h3 id="siri">Siriリモート</h3>
+      <h2 id="appletvで使えるリモコンって">AppleTVで使えるリモコンって？</h2>
+<h3 id="siriリモート">Siriリモート</h3>
 <p>tvOS/AppleTVのリモコンといえばSiriリモートですよね。
 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。</p>
-<h3 id="heading">テレビのリモコン</h3>
+<h3 id="テレビのリモコン">テレビのリモコン</h3>
 <img src="https://qiita-image-store.s3.amazonaws.com/0/7883/dfe71005-eb5e-bc17-b112-1e0ffdd150ad.jpeg" height=200>
 <p>そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！</p>
 <p>AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。
 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。</p>
-<h3 id="heading-1">ゲームコントローラ/ゲームパッド</h3>
+<h3 id="ゲームコントローラゲームパッド">ゲームコントローラ/ゲームパッド</h3>
 <p>Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。</p>
-<h2 id="heading-2">テレビのリモコンでどこまで操作できる？</h2>
-<h3 id="apple">Apple純正のアプリ</h3>
+<h2 id="テレビのリモコンでどこまで操作できる">テレビのリモコンでどこまで操作できる？</h2>
+<h3 id="apple純正のアプリ">Apple純正のアプリ</h3>
 <p>全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。</p>
-<h3 id="heading-3">サードパーティのアプリ</h3>
+<h3 id="サードパーティのアプリ">サードパーティのアプリ</h3>
 <p>ゲームアプリ以外なら操作できることが多いようです。
 ただしTouchサーフェス前提で組まれているアプリは操作不能です。</p>
-<h3 id="heading-4">自分が開発するアプリはどうすべき？</h3>
+<h3 id="自分が開発するアプリはどうすべき">自分が開発するアプリはどうすべき？</h3>
 <p>タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。
 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。</p>
-<h2 id="uipresstype">テレビのリモコンのボタンに対応するUIPressType</h2>
+<h2 id="テレビのリモコンのボタンに対応するuipresstype">テレビのリモコンのボタンに対応するUIPressType</h2>
 <p>うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。</p>
 <table>
 <thead>
@@ -141,8 +155,8 @@ UIPageViewController これは意外だったのですが、UIPageViewController
 </tr>
 </tbody>
 </table>
-<h2 id="uikit">UIKitの各コントロールの挙動</h2>
-<h3 id="heading-5">フォーカス移動</h3>
+<h2 id="uikitの各コントロールの挙動">UIKitの各コントロールの挙動</h2>
+<h3 id="フォーカス移動">フォーカス移動</h3>
 <p>テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。</p>
 <h3 id="uitableviewuicollectionview">UITableView/UICollectionView</h3>
 <p>UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。
@@ -156,7 +170,7 @@ UIPageViewController これは意外だったのですが、UIPageViewController
 <p>上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。</p>
 <h3 id="uitextview">UITextView</h3>
 <p>UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。</p>
-<h2 id="heading-6">テレビのリモコンで操作できない画面をなんとかする</h2>
+<h2 id="テレビのリモコンで操作できない画面をなんとかする">テレビのリモコンで操作できない画面をなんとかする</h2>
 <p>一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、<code>UITapGestureRecognizer</code>を使って対処するのが簡単そうです。</p>
 <pre><code class="language-swift">let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:)))
 leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)]
@@ -170,7 +184,7 @@ view.addGestureRecognizer(rightTap)
 </code></pre>
 <p>単にUIGestureRecognizerの<code>allowedPressTypes</code>プロパティでハンドリングしたいUIPressTypeを指定してそれに応じたコードを書くだけです！</p>
 <p>※ブログ用にコードで例示しましたが、普段UITapGestureRegognizerの追加はInterface Builderでやってます</p>
-<h2 id="heading-7">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <ul>
 <li>シンプルに作ればtvOSアプリはテレビのリモコンで操作できるようになっている</li>
 <li>利用できるボタンは決定、戻る、再生、上下左右</li>
@@ -229,6 +243,30 @@ view.addGestureRecognizer(rightTap)
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -270,30 +308,6 @@ view.addGestureRecognizer(rightTap)
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -367,6 +381,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

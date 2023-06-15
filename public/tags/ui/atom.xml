@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/ui/</link>
     <description>Recent content in ui on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 08 Jun 2021 17:50:33 +0900</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/ui/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 08 Jun 2021 17:50:33 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/ui/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WWDC21 Keynote iOS 15についての発表の復習</title>
       <link>https://www.tokoro.me/posts/wwdc2021-keynote/</link>
@@ -35,7 +32,7 @@ SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話
 PiPをタップすることでSharePlayのコントロールが表示される。
 同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
 SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
- Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV  などが既に対応を進めている。
+Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV などが既に対応を進めている。
 Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
 Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
 Shared with You あなたと共有。</description>
@@ -57,7 +54,7 @@ Shared with You あなたと共有。</description>
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
 引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
-import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect.</description>
+import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.</description>
     </item>
     
     <item>
@@ -71,17 +68,19 @@ Lottieとは LottieとはAdobe After Effectsで作ったアニメーションを
 iOS用のライブラリは、
 https://github.com/airbnb/lottie-ios
 です。
-なにができるの？  作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗  iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
- これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる  ことは、多くのチームでメリットとなり得るでしょう。
+なにができるの？ 作成されたアニメーション用JSONファイルをアプリに埋め込んでわずかなコードで再生することができる インターネット上に設置したJSONファイルを読み込んでアニメーションを再生することもできる アニメーションはリピート再生のほか、逆転再生やアニメーションスピードの調整もできる プログラムで任意のフレームまで、もしくは任意のフレームから再生することもできる 動的にアニメーション内の要素の色や位置を変更することができる 動的にアニメーション内にUIViewサブクラスを埋め込める UIViewControllerのトランジッションでも利用できる GIFアニメなどより軽くて綺麗 iOSアプリでプログラムで作るよりもいいの？ もちろん、同じことをiOSアプリ内でプログラムで実現しても良いとは思います。しかし、
+これまでアプリプログラマーが実装していた部分をデザイナーさんにお任せするという選択肢ができる Androidや他のプラットフォーム上で同じアニメーションファイルをそのまま利用できる プログラム内のアニメーション（View）のための複雑なコードを省略できる ことは、多くのチームでメリットとなり得るでしょう。
 事前準備 CarthageやCocoaPodsでlottie-iosをプロジェクトに追加します（方法については省略します）。
 アニメーションを表示してみる JSONファイルの埋め込み 再生したいアニメーションJSONをアプリに埋め込むには、単純にXcodeのプロジェクトにドラッグ＆ドロップなどして追加するだけでOKです。1
-再生するコード import Lottie  let animationView = LOTAnimationView(name: &amp;quot;yes&amp;quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play()  再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
+再生するコード import Lottie let animationView = LOTAnimationView(name: &amp;quot;yes&amp;quot;) animationView.frame = view.bounds view.addSubview(animationView) animationView.play() 再生するのは本当に簡単で、Lottieをimportし、LOTAnimationViewをJSONファイル名指定で作成し、addSubviewしてplay()するだけです。
 なお、LOTAnimationViewのframeは適切な大きさに設定する必要があり、デフォルトでは設定したframeの大きさでアニメーションが拡縮されて再生されてしまいます。2
 上のサンプルはサイズを考えずにaddSubviewしており、
 のように意図しない大きさで再生されてしまいます。
 アニメーションのサイズを知る アニメーションのサイズを知るには、
- 作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる  他、プログラムで取得することもできます。
-animationView.frame = animationView.sceneModel?.compBounds ?? view.</description>
+作成したデザイナーさんに聞く アニメーションのJSONファイルを覗いて調べる 他、プログラムで取得することもできます。
+animationView.frame = animationView.sceneModel?.compBounds ?? view.bounds LOTAnimationViewにはsceneModelプロパティがあり、このプロパティからアニメーションに関する情報を参照できます。 サイズに関してはcompBoundsプロパティを見ればOKです。
+インターネット上にJSONを設置する 必要なら、アプリに埋め込まずにインターネット上のアニメーションJSONを参照し、後からアプリのバージョンアップなしでアニメーションを変更することもできます。
+let animationJSON = &amp;quot;https://example.</description>
     </item>
     
     <item>
@@ -98,9 +97,16 @@ AppleTVを利用しているということは当然テレビを利用してい�
 サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
 自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
 テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
-   REGZAのリモコン UIPressType     決定 .select   戻る .menu   再生 .playPause   停止 -   上 .upArrow   下 .downArrow   左 .leftArrow   右 .rightArrow    UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+REGZAのリモコン UIPressType 決定 .select 戻る .menu 再生 .playPause 停止 - 上 .upArrow 下 .downArrow 左 .leftArrow 右 .rightArrow UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
 UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
-UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。</description>
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+ただし条件があり、transitionStyleプロパティにUIPageViewControllerTransitionStyle.scrollを設定している場合のみ操作可能です。.pageCurlだと（デフォルトでは）操作不能でした。
+.scrollの場合には、navigationOrientationプロパティが.horizontalなら左右ボタンで、.verticalなら上下ボタンでそれぞれページ移動が可能です。
+UIScrollView UIScrollViewも特に意識しないでも操作可能になっています。
+上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。
+UITextView UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。
+テレビのリモコンで操作できない画面をなんとかする 一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、UITapGestureRecognizerを使って対処するのが簡単そうです。
+let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:))) leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)] view.addGestureRecognizer(leftTap) let rightTap = UITapGestureRecognizer(target: self, action: #selector(self.</description>
     </item>
     
     <item>
@@ -115,16 +121,19 @@ Q1. ホーム画面のTop Shelfでの左右スワイプ 最初の問題はホー
 Q2. 写真アプリのフルスクリーン画面での左右スワイプ 次の問題は写真アプリの写真をフルスクリーン表示した画面からです。 この 2 という画像が表示されている画面で「右スワイプ」した場合、画像が左に動いて右隣の 3 が表示されるでしょうか？それとも画像が右に動いて左隣の 1 が表示されるでしょうか？
 Q3. Appスイッチャーでの左右スワイプ 次の問題はホーム画面のAppスイッチャー（TV/ホームボタンの2度押しで表示される画面）です。 この ミュージック がセンターに表示されているAppスイッチャーで「右スワイプ」した場合、 ミュージック は左に動くでしょうか？それとも右に動くでしょうか？
 [答え]コンテンツのスワイプ A1. ホーム画面のTop Shelfでの左右スワイプ まず、Top Shelfで「右スワイプ」した時の挙動ですが、
- Top Shelfが左に動き 右隣のコンテンツが表示される  というのが答えです。
+Top Shelfが左に動き 右隣のコンテンツが表示される というのが答えです。
 tvOSには「フォーカス」の存在があり、「フォーカスが右スワイプにより右に移動する」わけなので右隣のものが表示されて当然ですよね。 そして右隣のコンテンツがセンターに表示されるようTop Shelfは左にスクロールします。
 A2. 写真アプリのフルスクリーン画面での左右スワイプ さて、Q1の答えは「左に動いて右隣のものが表示される」という挙動でしたが、次の写真アプリの挙動はどうでしょう？
 実際にこの写真アプリのフルスクリーン画面で「右スワイプ」を試した結果の挙動は、
- 表示されていた 2 が右に動き 左隣の 1 が表示される  でした！
+表示されていた 2 が右に動き 左隣の 1 が表示される でした！
 あれ？Q1の答えと逆の動きだ&amp;hellip;
 A3. Appスイッチャーでの左右スワイプ 続いてQ3のAppスイッチャーでの挙動はどうでしょう？
 Appスイッチャーで「右スワイプ」したときの挙動は、
- 表示されていた ミュージック が右に動き 左隣のアプリが表示される  こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。
-フォーカスどこいった！？</description>
+表示されていた ミュージック が右に動き 左隣のアプリが表示される こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。
+フォーカスどこいった！？
+[問題]トップバーの表示 ここまでの３問の答えに「いや当然だろ」と思ったかたも、「あれ？」と思ったかたもいらっしゃるかと思います。 いったん細かいことを気にせずに、次の「トップバーを表示する方法」のクイズにいかせていただきます。
+※基本的にはタブバーと思いますが、今回のサンプルの全てがタブばーかどうかの確証がなかったため、画面トップに表示されるトップバーという表現をさせていただきます
+Q4. 写真アプリの写真一覧画面でのトップバー表示 まずは写真アプリからの問題です。 写真アプリの写真一覧画面で、画面上部の１つの写真にフォーカスが当たっている状態とします。</description>
     </item>
     
     <item>
@@ -137,10 +146,13 @@ Appスイッチャーで「右スワイプ」したときの挙動は、
 iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
 特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
 頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。
- ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 アプリアイコンをタップしてから開くまでの時間 フォルダをタップしてから開くまでの時間 ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
+ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 アプリアイコンをタップしてから開くまでの時間 フォルダをタップしてから開くまでの時間 ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間 iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
 ※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。
-##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間  iOS 6（左） : 0.5s iOS 7（右） : 1.0s  ##アプリアイコンをタップしてから開くまでの時間  iOS 6（左） : 0.4s iOS 7（右） : 0.7s  ##フォルダをタップしてから開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
-ではアップルはなぜあえて動きを長くする必要があったのでしょうか？</description>
+##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 iOS 6（左） : 0.5s iOS 7（右） : 1.0s ##アプリアイコンをタップしてから開くまでの時間 iOS 6（左） : 0.4s iOS 7（右） : 0.7s ##フォルダをタップしてから開くまでの時間 iOS 6（左） : 0.3s iOS 7（右） : 0.6s ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間 iOS 6（左） : 0.3s iOS 7（右） : 0.6s 検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
+ではアップルはなぜあえて動きを長くする必要があったのでしょうか？
+iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。 ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。
+もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。 また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。
+いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。</description>
     </item>
     
     <item>
@@ -199,12 +211,13 @@ http://www.apple.com/ios/ios7/
 これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。
 デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。
 iOS 7 Video - 書き起こし &amp;amp; 和訳 ※ 画像はすべて iOS 7 Video の中からの抜粋です
- We have always thought of design as being so much more than just the way something looks.
+We have always thought of design as being so much more than just the way something looks.
 私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
 It’s the whole thing the way something actually works on so many different levels.
 デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
 Ultimately of course, design defines so much of our experience.
-最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。</description>
+最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
+I think there is a profound and enduring beauty in simplicity, in clarity, in efficiency.</description>
     </item>
     
   </channel>

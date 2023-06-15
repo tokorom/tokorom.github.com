@@ -5,10 +5,7 @@
     <link>https://www.tokoro.me/categories/</link>
     <description>Recent content in Categories on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    
-	<atom:link href="https://www.tokoro.me/categories/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright><atom:link href="https://www.tokoro.me/categories/atom.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

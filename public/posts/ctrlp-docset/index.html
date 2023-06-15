@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -8,14 +8,14 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
 自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
 ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
- Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト  というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
 ※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
 Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
 オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
 なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
 vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
 CtrlPについては、
- 意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう  あたりがわかりやすかったです。
+意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう あたりがわかりやすかったです。
 インストールして動かすと、
 といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
 参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
@@ -25,23 +25,25 @@ CtrlPについては、
 ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
 なければここからインストールをしてみてください。
 なお、ここでインストールしたDocsetは、たぶん
-~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset  に配置されると思います。
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc  Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39;  で、その他のかたは各自の環境に合わせて読み替えてください。"><meta name="author" content="tokorom">
+.vimrc Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。
+ctrlp-docset の設定 設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。
+.vimrc # docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし） let g:ctrlp_docset_docsetutil_command = &#39;/Applications/Xcode."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました | TOKOROM BLOG" property="og:title"><meta content="Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
 自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
 ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
- Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト  というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
 ※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
 Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
 オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
 なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
 vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
 CtrlPについては、
- 意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう  あたりがわかりやすかったです。
+意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう あたりがわかりやすかったです。
 インストールして動かすと、
 といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
 参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
@@ -51,9 +53,11 @@ CtrlPについては、
 ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
 なければここからインストールをしてみてください。
 なお、ここでインストールしたDocsetは、たぶん
-~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset  に配置されると思います。
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
 CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
- .vimrc  Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39;  で、その他のかたは各自の環境に合わせて読み替えてください。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ctrlp-docset/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+.vimrc Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。
+ctrlp-docset の設定 設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。
+.vimrc # docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし） let g:ctrlp_docset_docsetutil_command = &#39;/Applications/Xcode." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ctrlp-docset/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -104,7 +108,7 @@ CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃる�
               objc
           </a>
           /</div><div class="content">
-      <h2 id="vim">Vimでリファレンス読む必要ありますか？</h2>
+      <h2 id="vimでリファレンス読む必要ありますか">Vimでリファレンス読む必要ありますか？</h2>
 <p>正直微妙なところでしょうか。<br>
 自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
 <p>ただ、せっかく<a href="/2013/01/15/ctrlp-docset/">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
@@ -114,7 +118,7 @@ CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃる�
 </ul>
 <p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
 <p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
-<h2 id="docsetctrlp">Docsetを検索するCtrlPのエクステンションを作りました</h2>
+<h2 id="docsetを検索するctrlpのエクステンションを作りました">Docsetを検索するCtrlPのエクステンションを作りました</h2>
 <p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br>
 オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br>
 なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
@@ -131,8 +135,8 @@ CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃる�
 <!-- more -->
 <p>参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。<br>
 自分はVim内で完結したいので <a href="https://github.com/yuratomo/w3m.vim">w3m.vim</a> を使ってVim内で表示するように設定しました。</p>
-<h2 id="heading">インストール</h2>
-<h3 id="docset">まずはDocsetがインストールされているか確認</h3>
+<h2 id="インストール">インストール</h2>
+<h3 id="まずはdocsetがインストールされているか確認">まずはDocsetがインストールされているか確認</h3>
 <p>これがないとはじまりません。<br>
 あるかどうか心配なかたは、Xcodeを起動し、 <strong>Preferences&hellip;</strong> の <strong>Downloads</strong> を確認してみてください。<br>
 ここの <strong>Documentation</strong> タブのほうで <strong>iOS 6.0 Library</strong> かそれに相当するものが <strong>Installed</strong> とインストール済みになっていれば問題ありません。<br>
@@ -142,7 +146,7 @@ CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃる�
 <pre><code class="language-sh">~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset
 </code></pre>
 <p>に配置されると思います。</p>
-<h3 id="ctrlp--ctrlp-docset-">CtrlP と ctrlp-docset をインストール</h3>
+<h3 id="ctrlp-と-ctrlp-docset-をインストール">CtrlP と ctrlp-docset をインストール</h3>
 <p>Vundleを使ってらっしゃるなら、</p>
 <ul>
 <li>.vimrc</li>
@@ -151,7 +155,7 @@ CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃる�
 Bundle 'git://github.com/tokorom/ctrlp-docset.git'
 </code></pre>
 <p>で、その他のかたは各自の環境に合わせて読み替えてください。</p>
-<h3 id="ctrlp-docset-">ctrlp-docset の設定</h3>
+<h3 id="ctrlp-docset-の設定">ctrlp-docset の設定</h3>
 <p>設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。</p>
 <ul>
 <li>.vimrc</li>
@@ -163,7 +167,7 @@ let g:ctrlp_docset_docsetutil_command = '/Applications/Xcode.app/Contents/Develo
 # objc は filetype です / 他の filetype をご利用の場合はそれを設定してください
 let g:ctrlp_docset_filepaths = {'objc': '~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset'}
 </code></pre>
-<h2 id="heading-1">実行!</h2>
+<h2 id="実行">実行!</h2>
 <p>これらの設定が全部終わったらVimでObjective-Cのファイルを開いた後に、</p>
 <pre><code class="language-sh">:CtrlPDocset
 </code></pre>
@@ -172,13 +176,13 @@ let g:ctrlp_docset_filepaths = {'objc': '~/Library/Developer/Shared/Documentatio
 <p>また、参照したいクラス/メソッドを選択（Enter）すればドキュメントがブラウザで開かれます。</p>
 <p>Vimを起動して１回目の実行はだいぶん遅いと思います。<br>
 ２回目以降はデータがキャッシュされているのでストレスなく利用できると思います。</p>
-<h2 id="heading-2">キーバインドの変更</h2>
+<h2 id="キーバインドの変更">キーバインドの変更</h2>
 <ul>
 <li>.vimrc</li>
 </ul>
 <pre><code class="language-sh">nnoremap お好みのキー :&lt;C-u&gt;CtrlPDocset&lt;CR&gt;
 </code></pre>
-<h2 id="w3m">ドキュメントをw3mで開きたい</h2>
+<h2 id="ドキュメントをw3mで開きたい">ドキュメントをw3mで開きたい</h2>
 <p>w3mコマンドが利用できる環境ならもちろん可能です。
 Macなら <code>brew install w3m</code> などであらかじめインストールしておいてください。</p>
 <ul>
@@ -264,6 +268,30 @@ let g:ctrlp_docset_accept_command = ':W3mSplit local %s'
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -305,30 +333,6 @@ let g:ctrlp_docset_accept_command = ':W3mSplit local %s'
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -402,6 +406,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

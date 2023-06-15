@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -60,7 +60,7 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
           </a>
           /</div><div class="content">
       <p>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。</p>
-<h2 id="tips">Tipsを適用する前のコード</h2>
+<h2 id="tipsを適用する前のコード">Tipsを適用する前のコード</h2>
 <pre><code class="language-objc">#pragma mark - Private Category
 
 @interface Sample ()
@@ -124,7 +124,7 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 </code></pre>
 <p>これを以下の7のTipsで削れるだけ削っていきます。</p>
 <!-- more -->
-<h2 id="tip-1-">Tip 1: プライベートメソッドの宣言を削る</h2>
+<h2 id="tip-1-プライベートメソッドの宣言を削る">Tip 1: プライベートメソッドの宣言を削る</h2>
 <p>Xcode 4.4 以降ではプライベートメソッドの宣言を削ることができます。<br>
 そのため、上記の</p>
 <pre><code class="language-diff">@interface Sample ()
@@ -146,7 +146,7 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 @end 
 </code></pre>
 <p>の部分はごっそり削ることができます。</p>
-<h2 id="tip-2-synthesize">Tip 2: @synthesizeを削る</h2>
+<h2 id="tip-2-synthesizeを削る">Tip 2: @synthesizeを削る</h2>
 <p>Xcode 4.4 以降では <code>@synthesize</code> を書かなくてもコンパイラが自動的にこれを補完してくれます。
 そのため、上記の</p>
 <pre><code class="language-diff">-@synthesize i = i_;
@@ -160,7 +160,7 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 -@synthesize rect = rect_;
 </code></pre>
 <p>の部分もごっそり削ることができます。</p>
-<h2 id="tip-3-strong--assign-">Tip 3: strong / assign は省略できる</h2>
+<h2 id="tip-3-strong--assign-は省略できる">Tip 3: strong / assign は省略できる</h2>
 <p>propetyはオブジェクト型の場合は <code>strong</code> 、それ以外の場合は <code>assign</code> がデフォルトになっています。<br>
 そのため、<code>strong</code> と <code>assign</code> については省略が可能です。</p>
 <pre><code class="language-diff">@interface Sample ()
@@ -187,7 +187,7 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 @end 
 </code></pre>
 <p>※<code>nonatomic</code> にしたい場合は明示的に付加してください</p>
-<h2 id="tip-4-nsnumber-nsarray-nsdictionary-">Tip 4: NSNumber, NSArray, NSDictionary を新しい書き方に変える</h2>
+<h2 id="tip-4-nsnumber-nsarray-nsdictionary-を新しい書き方に変える">Tip 4: NSNumber, NSArray, NSDictionary を新しい書き方に変える</h2>
 <p>NSStringを <code>@&quot;hoge&quot;</code> で作れるように、Xcode 4.4からはNSNumber, NSArray, NSDictionaryについても@からはじまる短い書き方ができるようになりました。</p>
 <pre><code class="language-diff">- (void)privateMethod2
 {
@@ -206,24 +206,24 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 + self.array = @[@&quot;1&quot;, @(1 + 2), @YES];
 + self.dictionary = @{@&quot;key1&quot;: @&quot;val1&quot;, @&quot;key2&quot;: @&quot;val2&quot;};
 </code></pre>
-<h2 id="tip-5-allocinit--new-">Tip 5: alloc/init は new に置き換える</h2>
+<h2 id="tip-5-allocinit-は-new-に置き換える">Tip 5: alloc/init は new に置き換える</h2>
 <p><code>alloc</code> / <code>init</code> の組み合わせは <code>new</code> に置き換えることが可能です。</p>
 <pre><code class="language-diff">- self.child = [[Sample alloc] init];
 + self.child = [Sample new];
 </code></pre>
-<h2 id="tip-6--">Tip 6: 一部のメソッドの呼び出しを .（ドット）アクセスで行う</h2>
+<h2 id="tip-6-一部のメソッドの呼び出しを-ドットアクセスで行う">Tip 6: 一部のメソッドの呼び出しを .（ドット）アクセスで行う</h2>
 <p>引数のないメソッドは <code>.</code> （ドット）によるアクセスに置き換えることが可能です。</p>
 <pre><code class="language-diff">- self.child = [Sample new];
 - self.color = [UIColor redColor];
 + self.child = Sample.new;
 + self.color = UIColor.redColor;
 </code></pre>
-<h2 id="tip-7-cgrectc">Tip 7: CGRectはC言語の構造体として作成することができる</h2>
+<h2 id="tip-7-cgrectはc言語の構造体として作成することができる">Tip 7: CGRectはC言語の構造体として作成することができる</h2>
 <p>CGRectは <code>CGRectMake</code> で作成するのが一般的ですが、CGRectの実態はC言語の構造体のため、構造体を作る書き方で代替することもできます。</p>
 <pre><code class="language-diff">- self.rect = CGRectMake(0.0, 10.0, self.bounds.size.width, self.bounds.size.height);
 + self.rect = (CGRect){.origin.y = 10.0, .size = self.bounds.size};
 </code></pre>
-<h2 id="tips-1">Tips適用後のコード</h2>
+<h2 id="tips適用後のコード">Tips適用後のコード</h2>
 <p>これらのTipsを適用することで、</p>
 <ul>
 <li>コード行数が <strong>62行</strong> -&gt; <strong>49行</strong></li>
@@ -281,9 +281,9 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 
 @end
 </code></pre>
-<h2 id="heading">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p>もちろん、これら全てを適用するのが正しいというわけではありませんので、チームや個人でお好みのものを利用するのが良いのではと思います。</p>
-<h2 id="heading-1">参照</h2>
+<h2 id="参照">参照</h2>
 <ul>
 <li><a href="http://www.tokoro.me/2012/08/12/objc-new-statements/">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</a></li>
 <li><a href="http://cocoadays.blogspot.com/2013/04/objctips.html">ObjCがサクっと書けるコーディングTips</a></li>
@@ -362,6 +362,30 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -403,30 +427,6 @@ Tipsを適用する前のコード #pragma mark - Private Category @interface Sa
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -500,6 +500,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

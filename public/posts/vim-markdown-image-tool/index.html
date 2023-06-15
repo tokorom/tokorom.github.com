@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -11,14 +11,16 @@
 記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
 特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
 手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
- 各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化  をしていました。
+各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
 決して難しいことはありませんが地味に面倒でした。
 ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal &#43; Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
 ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
 具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg  が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
 現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction  という３行のシンプルなfunction１つだけです。"><meta name="author" content="tokorom">
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -28,14 +30,16 @@ function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let 
 記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
 特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
 手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
- 各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化  をしていました。
+各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
 決して難しいことはありませんが地味に面倒でした。
 ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal &#43; Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
 ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
 具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg  が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
 現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction  という３行のシンプルなfunction１つだけです。" property="og:description"><meta content="https://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-image-tool/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。" property="og:description"><meta content="https://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-image-tool/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -88,13 +92,13 @@ function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let 
           /</div><div class="content">
       <p><img src="/images/posts/vim-markdown-image-tool/dog.jpg" alt="top"></p>
 <p><em>Photo by Victor Grabarczyk on Unsplash</em></p>
-<h2 id="heading">ブログ記事書くとき画像を埋め込むのが面倒</h2>
+<h2 id="ブログ記事書くとき画像を埋め込むのが面倒">ブログ記事書くとき画像を埋め込むのが面倒</h2>
 <p>こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？</p>
 <p>最近だと<strong>Hugoなどの静的サイトジェネレータ</strong>を利用することも多いのではないでしょうか。
 この記事もHugoで運用しています。</p>
 <p>記事を投稿するときは、いつも<strong>VimでさらっとMarkdown形式で</strong>書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、<strong>記事に画像を埋め込むのだけが面倒</strong>だと感じてます。</p>
 <p>特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。</p>
-<h2 id="heading-1">手動での画像埋め込み手順</h2>
+<h2 id="手動での画像埋め込み手順">手動での画像埋め込み手順</h2>
 <p>これまで手動で画像を埋め込む際には、このブログ記事の場合だと、</p>
 <ul>
 <li>各記事用の画像ディレクトリとして <code>content/images/記事名</code> ディレクトリを作成</li>
@@ -104,14 +108,14 @@ function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let 
 </ul>
 <p>をしていました。</p>
 <p>決して難しいことはありませんが地味に面倒でした。</p>
-<h2 id="heading-2">ドラッグ＆ドロップでなんとかならない？</h2>
+<h2 id="ドラッグドロップでなんとかならない">ドラッグ＆ドロップでなんとかならない？</h2>
 <p>結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。</p>
 <p>ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。</p>
 <p>具体的には、デスクトップ上の<code>dog.jpg</code>をドラッグ＆ドロップすると、Vim上に</p>
 <pre><code>/Users/tokorom/Desktop/dog.jpg 
 </code></pre>
 <p>が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。</p>
-<h2 id="plugin">現在行のファイルパスに対してなにかをするplugin</h2>
+<h2 id="現在行のファイルパスに対してなにかをするplugin">現在行のファイルパスに対してなにかをするplugin</h2>
 <p>このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、</p>
 <pre><code class="language-vim">function vim_replace_current_line#execute()
   let line = getline('.')
@@ -129,7 +133,7 @@ endfunction
 <p>ということだけです。</p>
 <p>つまり、あとはその<strong>特定のコマンド</strong>で、執筆環境ごとに必要な処理を実行し、最終的に画像を埋め込むための文字列を出力してやるだけです。</p>
 <p>ごくごく簡単なpluginですが、必要でしたら<a href="https://github.com/tokorom/vim-replace-current-line">Githubに置いてあるもの</a>をご利用ください。</p>
-<h2 id="heading-3">コマンドの実装</h2>
+<h2 id="コマンドの実装">コマンドの実装</h2>
 <p>今回の執筆環境で行いたいのは、</p>
 <ul>
 <li>各記事用の画像ディレクトリとして <code>content/images/記事名</code> ディレクトリを作成</li>
@@ -155,20 +159,20 @@ echo &quot;${IMAGETAG}&quot;
 <pre><code>![image](/images/vim-markdown-image-tool/dog.jpg)
 </code></pre>
 <p>といったMarkdown用の画像埋め込み構文に自動的に変換されます。</p>
-<h2 id="heading-4">ついでに画像の最適化も</h2>
+<h2 id="ついでに画像の最適化も">ついでに画像の最適化も</h2>
 <p>ImageOptimをご利用なら上のコマンドの最後に</p>
 <pre><code class="language-sh">IMAGEOPTIM=&quot;open -a ImageOptim&quot;
 `${IMAGEOPTIM} ${TARGET}`
 </code></pre>
 <p>を加えるだけで、画像の最適化も非同期に行ってくれます。</p>
-<h2 id="heading-5">完成</h2>
+<h2 id="完成">完成</h2>
 <p>この環境を一度作れば、あとは、</p>
 <ul>
 <li>Vim上に画像をドラッグ＆ドロップ</li>
 <li>コマンドを１つ実行</li>
 </ul>
 <p>という２ステップだけで、記事内への画像の埋め込みが簡単便利にできるようになります！</p>
-<h2 id="heading-6">次のステップ</h2>
+<h2 id="次のステップ">次のステップ</h2>
 <p>これですでにある画像をドラッグ＆ドロップで埋め込むことは簡単になりました。</p>
 <p>あとは、例えばiPhoneでスクショを撮影し、MacのVim上で１コマンド打ったらそのスクショが埋め込まれる、といったこともできればなあ（やればできそう）。</p>
 
@@ -234,6 +238,30 @@ echo &quot;${IMAGETAG}&quot;
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -275,30 +303,6 @@ echo &quot;${IMAGETAG}&quot;
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -372,6 +376,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

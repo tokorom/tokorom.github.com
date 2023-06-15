@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -7,41 +7,41 @@
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
- ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む  という便利環境を作りました。
+ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
 そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
 今回はそこを解決します！
 pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&hellip;
 screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名  とすると、shift &#43; command &#43; 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+screencapture -i 出力ファイル名 とすると、shift &#43; command &#43; 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
 vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
- 現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
+現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
 そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;)  とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
 今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}`  です。"><meta name="author" content="tokorom">
+#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}` です。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Vimにスクショを直接Markdownで貼り付ける | TOKOROM BLOG" property="og:title"><meta content="Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
- ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む  という便利環境を作りました。
+ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
 そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
 今回はそこを解決します！
 pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&hellip;
 screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名  とすると、shift &#43; command &#43; 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+screencapture -i 出力ファイル名 とすると、shift &#43; command &#43; 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
 vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
- 現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
+現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
 そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;)  とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
 今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}`  です。" property="og:description"><meta content="https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}` です。" property="og:description"><meta content="https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -94,7 +94,7 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
           /</div><div class="content">
       <p><img src="/images/vim-markdown-paste-from-clipboard/cover.png" alt="top">
 <em>Photo by Jae Park on Unsplash</em></p>
-<h2 id="heading">前回</h2>
+<h2 id="前回">前回</h2>
 <p><a href="/posts/vim-markdown-image-tool/">前回の記事</a>では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、</p>
 <ul>
 <li>ImageOptimで画像を最適化</li>
@@ -104,14 +104,14 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 <p>という便利環境を作りました。</p>
 <p>そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。</p>
 <p>今回はそこを解決します！</p>
-<h2 id="pbpaste">pbpasteはダメだった</h2>
+<h2 id="pbpasteはダメだった">pbpasteはダメだった</h2>
 <p>なんとなく<code>pbpaste</code>コマンドでゴニョゴニョするんだろうな思っていたのですが、<code>pbpaste</code>はテキストしか扱えないということがわかりました&hellip;</p>
-<h2 id="screencapture">screencaptureコマンドを使う</h2>
+<h2 id="screencaptureコマンドを使う">screencaptureコマンドを使う</h2>
 <p>しかしMacには<code>screencapture</code>というコマンドがあり、</p>
 <pre><code class="language-sh">screencapture -i 出力ファイル名
 </code></pre>
 <p>とすると、<code>shift</code> + <code>command</code> + <code>4</code> で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。</p>
-<h2 id="vim-plugin">vim pluginを拡張</h2>
+<h2 id="vim-pluginを拡張">vim pluginを拡張</h2>
 <p>前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、</p>
 <ul>
 <li>現在行の画像ファイル名を使って画像を適切に埋め込むコマンド</li>
@@ -126,7 +126,7 @@ command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#exe
 <p>今回のものは<code>:MarkdownImageWithScreenshot</code>というコマンドをVim上で叩くと、<code>markdown-image-with-screenshot</code>というシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。</p>
 <p>仕組み自体は前回と変わりません。</p>
 <p>このpluginは <a href="https://github.com/tokorom/vim-replace-current-line/releases/tag/2.0.0">GitHub</a> に置いてあります。</p>
-<h2 id="heading-1">スクショを撮影して&hellip;のコマンド</h2>
+<h2 id="スクショを撮影してのコマンド">スクショを撮影して&hellip;のコマンド</h2>
 <p><code>markdown-image-with-screenshot</code>コマンドの具体的な中身は、</p>
 <pre><code class="language-sh">#! /bin/sh
 
@@ -148,7 +148,7 @@ IMAGEOPTIM=&quot;open -a ImageOptim&quot;
 <p>です。</p>
 <p>ほぼ前回と変わりませんが、指定された画像をcopyする代わりに<code>screencapture -i &quot;${TARGET}&quot;</code>でインタラクティブなスクショ撮影を開始しています。</p>
 <p>最後にImageOptimで画像を最適化しているのも同じです。</p>
-<h2 id="heading-2">完成</h2>
+<h2 id="完成">完成</h2>
 <p>これで、Vim上で</p>
 <pre><code>:MarkdownImageWithScreenshot
 </code></pre>
@@ -164,7 +164,7 @@ IMAGEOPTIM=&quot;open -a ImageOptim&quot;
 <p><img src="/images/vim-markdown-paste-from-clipboard/ss-1588238897.png" alt="image"></p>
 <p>できた！</p>
 <p>超絶便利！！！</p>
-<h2 id="heading-3">次のステップ</h2>
+<h2 id="次のステップ">次のステップ</h2>
 <p>iPhoneで撮影したスクショを貼り付け、となるとクリップボードから貼り付ける必要があるが、なんとかなるかな？</p>
 
   </div>
@@ -239,6 +239,30 @@ IMAGEOPTIM=&quot;open -a ImageOptim&quot;
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -280,30 +304,6 @@ IMAGEOPTIM=&quot;open -a ImageOptim&quot;
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -377,6 +377,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

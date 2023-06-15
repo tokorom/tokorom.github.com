@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>Swiftで部分適用（カリー化） | TOKOROM BLOG</title>
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
-func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b }  というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
-let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3  というかんじに、
- まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b）  というのができる。
+func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b } というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
+let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3 というかんじに、
+まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b） というのができる。
 専用の書き方じゃなくてふつうのfunctionに部分適用できないの？ 使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。
 また、上のような専用の定義にしちゃうと addTwoNumbers(1, 2) みたいな普通の呼び方ができなくなっちゃうし。
 そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
 実装 https://github.com/tokorom/partial-swift
-func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } }  利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3  とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。"><meta name="author" content="tokorom">
+func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Swiftで部分適用（カリー化） | TOKOROM BLOG" property="og:title"><meta content="Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
-func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b }  というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
-let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3  というかんじに、
- まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b）  というのができる。
+func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b } というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
+let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3 というかんじに、
+まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b） というのができる。
 専用の書き方じゃなくてふつうのfunctionに部分適用できないの？ 使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。
 また、上のような専用の定義にしちゃうと addTwoNumbers(1, 2) みたいな普通の呼び方ができなくなっちゃうし。
 そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
 実装 https://github.com/tokorom/partial-swift
-func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } }  利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3  とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-partial-application/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-partial-application/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -73,7 +73,7 @@ func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; 
               ios
           </a>
           /</div><div class="content">
-      <h2 id="swift">Swiftオフィシャルの部分適用</h2>
+      <h2 id="swiftオフィシャルの部分適用">Swiftオフィシャルの部分適用</h2>
 <p>まず、Swiftオフィシャルな構文として</p>
 <pre><code class="language-swift">func addTwoNumbers(a: Int)(b: Int) -&gt; Int {
   return a + b
@@ -89,18 +89,18 @@ add1(b: 2) //&lt; 3
 <li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
 </ul>
 <p>というのができる。</p>
-<h2 id="function">専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+<h2 id="専用の書き方じゃなくてふつうのfunctionに部分適用できないの">専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
 <p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
 <p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
 <p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
-<h2 id="heading">実装</h2>
+<h2 id="実装">実装</h2>
 <p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
 <pre><code class="language-swift">func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R {
     return { function(a(), $0) }
 }
 </code></pre>
 <!-- more -->
-<h2 id="heading-1">利用サンプル</h2>
+<h2 id="利用サンプル">利用サンプル</h2>
 <pre><code class="language-swift">func add(a: Int, b: Int) -&gt; Int {
     return a + b
 }
@@ -110,7 +110,7 @@ add1(2) //&lt; 3
 </code></pre>
 <p>とこんなかんじで普通の <code>add()</code> というfunctionに <code>partial(add, 1)</code> といった形で部分適用できるようになります。</p>
 <p><code>add()</code>自体は普通のfunctionなので、もちろん<code>add(1, 2)</code>という普通の呼び方もそのままできます。</p>
-<h2 id="heading-2">遅延評価</h2>
+<h2 id="遅延評価">遅延評価</h2>
 <p>ミソは <code>@auto_closure</code> を使った遅延評価です。これをやらないと</p>
 <pre><code class="language-swift">let add100 = partial(add, someting(100)) //&lt; この時点で someting(100) が実行されちゃう
 
@@ -122,7 +122,7 @@ add100(10) //&lt; ここでは実行済みの someting(100) の結果が使わ�
 add100(10) //&lt; ここではじめて someting(100) が実行されてその結果が使われる
 </code></pre>
 <p>というように、本当に必要になるまで部分適用した引数の内容が評価されない形になりました。</p>
-<h2 id="heading-3">参考</h2>
+<h2 id="参考">参考</h2>
 <p>ちなみに、既に他の人もやってるかもなと思いGoogleで <code>swift partial</code> で検索したらこんな<a href="https://gist.github.com/kristopherjohnson/4ee565cfcdf912deacf6">Gists</a>が&hellip;</p>
 <p>ぼくがイメージしてたのと同じような実装で、かつ、こっちのGistsのほうが良さそうなところもあったので上の実装はそれを取り込んだものです。<br>
 結果としては、このGistsに遅延評価の機能を加えたものが上の実装というかんじになりました。</p>
@@ -199,6 +199,30 @@ add100(10) //&lt; ここではじめて someting(100) が実行されてその�
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -240,30 +264,6 @@ add100(10) //&lt; ここではじめて someting(100) が実行されてその�
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -337,6 +337,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

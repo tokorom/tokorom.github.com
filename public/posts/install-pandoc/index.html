@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順 | TOKOROM BLOG</title>
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
-$ sudo port install pandoc  したところ hs-http のインストールのところでなにやらエラー&hellip;
+$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&hellip;
 試しに hs-http だけインストールしてみたところ、
 $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&quot; &amp;&amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &quot;$procedure $targetname&quot; Warning: targets not executed for hs-http: org."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順 | TOKOROM BLOG" property="og:title"><meta content="hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
-$ sudo port install pandoc  したところ hs-http のインストールのところでなにやらエラー&hellip;
+$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&hellip;
 試しに hs-http だけインストールしてみたところ、
 $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&quot; &amp;&amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &quot;$procedure $targetname&quot; Warning: targets not executed for hs-http: org." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/install-pandoc/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
@@ -60,7 +60,7 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
               mac
           </a>
           /</div><div class="content">
-      <h2 id="hs-http">hs-httpがインストールできない!</h2>
+      <h2 id="hs-httpがインストールできない">hs-httpがインストールできない!</h2>
 <p>Macにpandocを入れようと気軽にMacPortsで</p>
 <pre><code class="language-sh">$ sudo port install pandoc
 </code></pre>
@@ -86,7 +86,7 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
   Error: Processing of port hs-http failed
 </code></pre>
 <p>と、<em>gcc-4.2</em> が実行できないというエラーが発生している。</p>
-<h2 id="gcc-42-">gcc-4.2 を用意する</h2>
+<h2 id="gcc-42-を用意する">gcc-4.2 を用意する</h2>
 <p>それではと gcc-4.2 が入っているか見てみたところ、</p>
 <pre><code class="language-sh">$ ll /usr/bin/gcc*
   lrwxr-xr-x  1 root  wheel  12 12  4  2011 /usr/bin/gcc -&gt; llvm-gcc-4.2
@@ -99,7 +99,7 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
 それならそれで、 <em>gcc-4.2</em> を <em>llvm-gcc-4.2</em> にリンクして使っちゃうことにします。</p>
 <pre><code class="language-sh">$ sudo ln -s /usr/bin/llvm-gcc-4.2 /usr/bin/gcc-4.2
 </code></pre>
-<h2 id="pandoc">pandocのインストール</h2>
+<h2 id="pandocのインストール">pandocのインストール</h2>
 <p>これで晴れて <em>gcc-4.2</em> が存在することになりましたので、</p>
 <pre><code class="language-sh">$ sudo port -d install hs-http
 </code></pre>
@@ -128,6 +128,30 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
 </div>
   <div class="entry-feed-title">Latest Entries</div>
   <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
     
       <div class="feed-item">
   
@@ -172,30 +196,6 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -269,6 +269,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -10,15 +10,15 @@
 もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
 実際やってみたソースコードは こちら に置いてあります。
 ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
-map (&#43;3) [1, 2, 3]  これです。
+map (&#43;3) [1, 2, 3] これです。
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
-map (&#43;3) ([1, 2, 3])  みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
 しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
-map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); }  CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: }  Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。"><meta name="author" content="tokorom">
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -27,15 +27,15 @@ map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては�
 もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
 実際やってみたソースコードは こちら に置いてあります。
 ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
-map (&#43;3) [1, 2, 3]  これです。
+map (&#43;3) [1, 2, 3] これです。
 Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
-map (&#43;3) ([1, 2, 3])  みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
 しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
-map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
 ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
 カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); }  CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
-#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: }  Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objective-c-haskell/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objective-c-haskell/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -86,13 +86,13 @@ map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3])  セクションに関しては�
               haskell
           </a>
           /</div><div class="content">
-      <h2 id="heading">導入</h2>
+      <h2 id="導入">導入</h2>
 <p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
 <p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
 <p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
 <p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
-<h2 id="heading-1">ひとまずのゴール</h2>
+<h2 id="ひとまずのゴール">ひとまずのゴール</h2>
 <p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
 <pre><code class="language-haskell">map (+3) [1, 2, 3]
 </code></pre>
@@ -107,7 +107,7 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
 <p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
 <p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
 <!-- more -->
-<h2 id="heading-2">カリー化の実現方法</h2>
+<h2 id="カリー化の実現方法">カリー化の実現方法</h2>
 <p>実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す <code>add</code> の実装です。</p>
 <pre><code class="language-objective-c">#define add [ObjcHaskell hsAdd]
 
@@ -145,7 +145,7 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
 </code></pre>
 <p>で、<code>3 + 4</code> の結果、<code>7</code> を計算できます。</p>
 <p>論理的には引数の数だけBlockを入れ子にしていくことで引数がいくつであっても対応可能なはず。</p>
-<h2 id="heading-3">演算子の関数化</h2>
+<h2 id="演算子の関数化">演算子の関数化</h2>
 <p>Objective-Cでは<code>+</code>とか<code>-</code>といった演算子は関数ではないのでそのままでは使えません。
 ということで <code>OP('+')</code> みたいにマクロでなんとかすると説明したのですが、そのマクロはこんなかんじになってます。</p>
 <pre><code class="language-objective-c">#define OP(op) ([ObjcHaskell hsSectionWithOperator:op])
@@ -167,7 +167,7 @@ Objective-Cでは当然、空白区切りで引数を渡していくような構
 }
 </code></pre>
 <p>こんなかんじで、演算子に対応するカリー化した関数をそのまま返しています。</p>
-<h2 id="heading-4">畳み込み</h2>
+<h2 id="畳み込み">畳み込み</h2>
 <p>ではこの仕組みを使って畳み込み関数 <code>foldr</code> を作ってみましょう。</p>
 <pre><code class="language-objective-c">#define foldr [ObjcHaskell hsFoldr]
 
@@ -197,7 +197,7 @@ for (id elem in [list reverseObjectEnumerator]) {
 <p>の部分がそれに相当します。<br>
 リストの要素を１つずつ取り出して、初期値（もしくは前の計算結果）と一緒に <code>binary</code> に渡していくだけです。</p>
 <p>あとは最後の計算結果（<code>acc</code>）をreturnすれば<code>foldr</code>の完成です！</p>
-<h2 id="haskell">ちょっとHaskellっぽく関数実装</h2>
+<h2 id="ちょっとhaskellっぽく関数実装">ちょっとHaskellっぽく関数実装</h2>
 <p>では、この畳み込みを使ってさらに新しい関数 <code>sum</code> を作ってみましょう。
 <code>sum</code> は引数に渡したリストの要素を足し合わせたものを返す関数です。</p>
 <pre><code class="language-objective-c">#define sum [ObjcHaskell hsSum]
@@ -210,7 +210,7 @@ for (id elem in [list reverseObjectEnumerator]) {
 }
 </code></pre>
 <p>こんなかんじで、さきほど作った<code>foldr</code>を使って簡単に実装できました。</p>
-<h2 id="map">最後にmapの実装</h2>
+<h2 id="最後にmapの実装">最後にmapの実装</h2>
 <p><code>map</code>ですが本来は畳み込みで実現したかったのですが、今のところはラムダ式に対応していないためできませんでした。
 今回はベタに普通のObjective-C的に中身を実装してます。</p>
 <pre><code class="language-objective-c">+ (curryingBlock)hsMap
@@ -227,7 +227,7 @@ for (id elem in [list reverseObjectEnumerator]) {
 }
 </code></pre>
 <p>引数を１つ持つ関数とリストの２つをもらって、そのリストの要素１つ１つにその関数を適用しているだけです。</p>
-<h2 id="map-1">mapを実行</h2>
+<h2 id="mapを実行">mapを実行</h2>
 <p>ということで、</p>
 <pre><code class="language-objective-c">map (OP('+') (@3)) (@[@1, @2, @3])
 </code></pre>
@@ -316,6 +316,30 @@ for (id elem in [list reverseObjectEnumerator]) {
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -357,30 +381,6 @@ for (id elem in [list reverseObjectEnumerator]) {
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -454,6 +454,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

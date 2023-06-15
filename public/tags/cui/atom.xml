@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/cui/</link>
     <description>Recent content in cui on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 05 Oct 2015 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/cui/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 05 Oct 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/cui/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
       <link>https://www.tokoro.me/posts/el-capitain-totalterminal/</link>
@@ -23,9 +20,11 @@
 であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！ と思いたって試してみました。 （実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）
 以下、試したことをまとめます。
 ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
- Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
-tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
-https://github.com/tokorom/ToggleTerminalScript</description>
+Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す ことはできるようになった。
+tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript
+現在の課題としましては、
+Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート） かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い） プロセスの名前が常に Terminal でよいのかがよくわからん Terminalが既にカレントのときにCommand+Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？ などがありそうです。</description>
     </item>
     
     <item>
@@ -37,14 +36,14 @@ https://github.com/tokorom/ToggleTerminalScript</description>
       <description>** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
 導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
 設定は以下のとおり。
- .tmux.conf  bind C-t last-pane  これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+.tmux.conf bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
 ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
 例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
 改善 ということで、
- paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
+paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動 というのができれば最強なんじゃないかと思った。
 そんなんできるんかいな？と思ったけどごくごく普通にできた。
 設定は以下のとおり。
- .tmux.conf  bind C-t run &amp;quot;tmux last-pane || tmux last-window || tmux new-window&amp;quot;  runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+.tmux.conf bind C-t run &amp;quot;tmux last-pane || tmux last-window || tmux new-window&amp;quot; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
 これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
 便利便利！</description>
     </item>
@@ -56,16 +55,17 @@ https://github.com/tokorom/ToggleTerminalScript</description>
       
       <guid>https://www.tokoro.me/posts/mac-terminal-japanese/</guid>
       <description>Macの初期設定のたびに混乱してるので再整理しておきます。
- Mac Terminal tmux vim  で開発をする人向けです。
+Mac Terminal tmux vim で開発をする人向けです。
 まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
 日本語を扱う上で便利な設定がデフォルトで入ってます。
 当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi  tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
- こせきの技術日記  に従って対処しておきます。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+こせきの技術日記 に従って対処しておきます。
 この中の、
-date | pbcopy  までが成功すればOKです。
+date | pbcopy までが成功すればOKです。
 .vimrc にクリップボード利用の設定追加 .vimrc に
-set clipboard=unnamed  を追加しておきます。</description>
+set clipboard=unnamed を追加しておきます。
+fakeclip の導入 fakeclip をVimに追加することで、 tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。</description>
     </item>
     
   </channel>

@@ -4,8 +4,9 @@
     <link>https://www.tokoro.me/</link>
     <description>Recent content on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 28 Jun 2021 13:29:12 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jun 2023 15:11:44 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -16,6 +17,41 @@
     
     
     <item>
+      <title>WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</title>
+      <link>https://www.tokoro.me/posts/wwdc2023-keynote-pro-vision/</link>
+      <pubDate>Thu, 15 Jun 2023 15:11:44 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc2023-keynote-pro-vision/</guid>
+      <description>
+        タイトルのとおりですが、KeynoteのApple Pro Visionの紹介部分を見直して、一場面一場面停止して詳細を眺めつつ、感じたことを１つ１つ細かくコメントしていきました（3時間以上かかりました&amp;hellip;）。
+留意事項 ソフトウェア面に注視し、ハードウェアの説明の部分はスキップしています あくまでも所が思ったこと感じたことをコメントしていくだけでエビデンス等はありません Keynoteを視聴しながら都度思ったことを時系列に書き込んでいますので検討外れなことを言ったりもします 視聴が進んでいく中で前半にコメントした疑問が後半で解決したり訂正されたりもしています イントロダクション ホーム画面 丸いアプリアイコンが並ぶ フォルダらしきものもある iPhoneのホーム画面のようにページをサポートしたりするのだろうか？ Spotlightやウィジェットなどの扱いは？ 左端に３つのモード？を切り替えるようなボタンがある １つはアプリモード １つは隣あった人のアイコン SF Symbolsでいうと person.2.fill なんらか人とコミュニケーションをとるためのモードか？ コミュニケーションがトップレベルに位置しているのがそこを重要視しているあらわれか １つは景色的なアイコン SF Symbolsで言うと mountain.2.fill に似ているが同じものは見つからず（それに星的なものが付いている） アプリ、コミュニケーションに並んでトップレベルに置かれるもの、なんだろう？ ARでなく全面を覆うVRモード的なものに入ったりする？ （と思ったが後にDigital Crownで現実と仮想の深度を調整できると紹介されていたので違いそう） 写真アプリ ウィンドウ内で写真のリストをスクロールするデモ ホーム画面にもあった左端のボタンリストが写真アプリに入って切り替わった おそらくこれがvisionOSにおけるタブバーだろう タブバーがホーム画面にも存在するというのはiOSなどではなかった 画面下部にはコンテキストのスイッチャー的なUIがある これはiOSの写真アプリにもあるものだが写真アプリのウィンドウから少し外れて表示されているのが特徴 おそらくiOS標準のUIコントローラを利用していればこのようにOSに合わせて良きように表示してくれるのだろう 可能な場面では標準のUIコントローラを利用するのがより重要になりそう さらにこの下に謎のドットとバーのUIがある バーはiOSだとドラッグ可能であることを示すUI これでウィンドウの場所を変更するなどできるのかもしれない その隣にあるドットもウィンドウをなんらか変更するUIかも？たとえばウィンドウを最小化するとか UI 目、手、声で操作する 重要視する操作方法の順番と思われる 目（Eye Tracking）が一番はじめにくるのが特徴か 360度？好きな位置にウィンドウを配置できるとのこと 「好きな大きさで」アプリを使うというキーワードもあった iOS/iPadOSではなかった複数のアプリが同時にフォアグラウンドにあるという状態がありそう もしくは注視している１アプリがフォアグラウンド扱いとか制御される？ ディスプレイサイズの制限はもちろんないのでアプリのUIデザイン（レイアウト）のしかたは大きく変わってくるのか？ アダプティブなレイアウト（ウィンドウサイズが柔軟に変わる）をサポートする知見は重要 ウィンドウが並ぶのでドラッグ＆ドロップなどアプリ間の連携を意識することもより重要になるだろう このスクショの画面をみるかぎり、真正面にないアプリにもフォーカスがあたっている 複数のアプリがフォアグランドになるか、視線があたっているアプリ１つがフォアグランドになるかのどちらかで確定っぽい この写真がグワっと拡大して没入モードになるところすごい いちおうウィンドウサイズのテンプレート的なもの（Normalサイズ、Expandサイズとか）はあるのかな？ この部分のトップバー的な位置に目を向けると、iOSではナビゲーションバーのleftButtonItem、rightBarButtonItemに配置される要素がある これは透明なナビゲーションバーなのか、それとも別の概念なのか なおKeynote内で他にもナビゲーションバー的なものの他のバリエーションが散見される これらがMacアプリだとこうなる、visionOSアプリだとこうなるみたいなアプリ種別によるものなのか もしくはアプリの状態やモードによるものなのか この場面には利用者本人が映っているのでイメージだろうが、映画やゲームで背景をコンテンツに合わせたものに差し替えるというのはありそう 映画視聴で背景を暗くするというのは後から具体的に説明があった これも利用者本人がいるのでイメージだろうが、FaceTimeなどでプレゼン資料と参加者の顔が空間内で横並びになっているのはリアルに近いミーティングができそうですごい Macがパーソナルコンピューティング iPhoneがモバイルコンピューティング そしてVision Proが空間コンピューティングを切り拓く！しびれる！ Vision Proを実際に使う体験 この画面は「ホームビュー」という名称で紹介されていた アプリの背景は透過されブラーがかかっていて角丸 このタブバー？はフォーカスされることで拡がり、アイコンのみ表示からタイトル付き表示に切り替わった このフォーカスされることで領域も内容も拡大される挙動はタブバーだけでなくアプリ全体の共通のUIのよう アプリのウィンドウの影が現実世界に投影されるのがすごい ウィンドウの右下隅のカーブ状のノブでウィンドウサイズが変更可能とのこと ふだんは表示されていないのでウィンドウの隅を注視すると表示されるのかもしれない ウィンドウ下のバー（ノブ）はウィンドウを動かすUIであることが確定 ここではZ方向に動かしているが、XY方向に動かせるかは不明 アプリ（ウィンドウ）を複数開くと自分（の真正面？）を中心に自動的にスペースが割り当てられるとのこと この場面では、アプリが２つの場合は真正面にどちらか一方がくるのではなく真正面の左右にそれぞれが配置されていた アプリ主動で背景（現実世界）部分を暗くしたりのカスタマイズができるというのも確定で良さそう 現実世界 OR 仮想世界の境界（深度）はデジタルクラウンで任意で調整できるとのこと ２択でなく曖昧にでき、ハードウェアでいつでも？調整できるというのが素敵 視線を向けた部分にフォーカスが当たるというので確定っぽい アプリアイコンはフォーカスが当たると分解されて一部が浮き上がっている！ ということはアプリアイコンをそういう作りにできる（することが推奨される）ということ アプリアイコンのレイヤー分けはtvOSアプリ用のアイコンで既に採用されている フォーカスがあたっている要素を選択するのは「２つの指同士をタップ」 スクロールは「２つの指を上下にずらす」 検索フィールドに視線を合わせたら「声で検索キーワードを入力できる」とのことだが、声を使うのは最後の手段だろうなという印象 複雑なURLやパスワードを打つのは大変そうだから基本的には文字入力はさせないことをベースに考えるのだろう いっぽうで既にAppleTV+iPhoneの連携でtvOSの画面のパスワードをiPhoneで入力という機能は実現されているし、visionOSでも物理キーボードが使えることが明示されているので、複雑な文字入力が必要な場面があっても問題はないだろう EyeSight 装着車の目がゴーグルの前面のディスプレイに表示されるとのこと（見た目はちょっと不気味の谷 ゴーグル装着者を周りから孤立させない（逆もまた然り）という考え方は素敵 EyeSightも「近くに人がいる時は」というトリガーなので良さそう アプリを使っているとき、没入モードのときなど装着者の状態を周りの人が判断できるようになっているのもすごい 装着者目線だと没入モード時に近くに人が来たら自動的に背景が透けてその相手が見えるとのこと 実際の使用感 Vision ProはiPhone/iPad/Macと常に同期 iCloudで常に同期（これは既存にもあるので特別ではない） 真ん中にSafari、左右に別のアプリがある状態で「Safariを拡大」した時はこうなる 拡大（Expand）モード的なものがあり、そのモードになると他のウィンドウは見えなくなるっぽい visionOSのナビゲーションバー（トップバー）はこのコンテンツウィンドウから離れた場所に表示されるものが基本っぽい ここでアプリのウィンドウは「前後にも上下にも積み重ねられる」ことが明示された アプリ内の要素のドラッグ＆ドロップができることも明示 しかも他アプリだけでなく現実世界へのドロップ！ メッセージで届いた3Dオブジェクトを現実世界の机の上におけるのすごい もちろんMagic TrackpadやMagic Keyboardも使える Bluetoothアクセサリ&amp;hellip;と紹介されていたので、ぼくのHHKBもきっと使えるはず あとはこれがすごすぎる 現実世界のMacを見つめるとMacのスクリーンがVision Proのほうに映るとのこと もちろんVision Proのアプリと並列に並ぶ iPhoneやiPadもそうなるのかな？ これはApple製品にどっぷりつかる理由になるな（もう既にどっぷりつかってるけど） リモートで同僚と同じ書類を使いながらの共同作業が&amp;hellip;とあるが、これはvisionOSではじまったものではなく既存からあるもの こういった共同作業サポートがスタンダードになったら嬉しいがアプリ開発の難易度は確実に上がる&amp;hellip; この場面ではアプリが上下に並んでいる実例が このFaceTimeでのミーティングの風景 プレゼン資料が投影されているがこれがSharePlayであることが明示された そのため、SharePlay対応していればサードパーティアプリでもこのような使い方ができるはず そもそもiOSの画面共有もSharePlayなのでなにも対応してなくても自分のアプリをここに投影できる可能性が高い 今考えるとSharePlayがFaceTimeと密結合なのはこのVision Proでの利用を見据えてだったのかもな、と 家での体験 アプリ手動で背景（現実世界）をいじれることを再確認 この場面はパノラマ写真をパノラマ表示したものだったようだ Vision Proでは3Dカメラによる空間再現写真・ビデオの撮影が可能 もちろん空間再現写真・ビデオを視聴することもできる 映画視聴のときは、フッド山などの環境を開いて（おそらく背景に奥行きのある壮大なものを選ぶのが良いということかと）スクリーンを拡大するのがおすすめとのこと もちろん背景は自動的に暗くなる 空間オーディオの品質が高いのはお墨付きだし映画視聴良いかもな もし視聴中に家族がきて声をかけられても、自動でそれを検知して家族の姿が見えて声も聞こえるようになるのがvisionOSのすごいところ Apple TV+だけでなく他の動画視聴サービスにも対応しているとのこと 標準のAVPlayer使っていれば対応してくれるのだと予想 3Dムービーにも対応 アバター２をこれで視聴してみたい 恐竜がウィンドウからXYZ全方向にもはみ出してるのもすごい Apple Arcaceのゲームを遊べるという件は&amp;hellip;コンテンツ次第か ウィンドウに収まらない３Dのゲームとか出たら体感的にはすごそう それよりもNintendo SwitchのゲームをVision Pro経由で遊びたいですね ウォルト・ディズニー Kyenoteでウォルト・ディズニーが登場して、コンテンツが揃っていることを（目標にしている）前面に押し出しているのを感じる コンテンツと一緒に背景も配布してくれるみたいのがあるのかも スポーツ観戦でさまざまな付加情報が表示されたり あとは複数のカメラの映像が同時に表示されていて、おそらく視線を向けたカメラに切り替わるだろうUIになっているのが興味深い ミッキーが自分の部屋に降臨！ ディズニーでなくても、自分の好きなキャラクターが自分のそばにいて動いて喋ってくれるのは喜ぶ人たくさんいそう 現実世界の自分の腕にブレスレットが装備される場面 こういう現実世界とかけあわせたコンテンツはVision Proならではの体験になりそうか 後から出てくるがこういうアプリを「空間対応アプリ」と呼ぶよう ハードウェア （ハードウェアの部分は基本スキップします。気になったところだけスポットで。）
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/wwdc2023-keynote-vision/top.png</coverImage>
+      
+    </item>
+    
+    <item>
+      <title>[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</title>
+      <link>https://www.tokoro.me/posts/vim-fuzzy-finder/</link>
+      <pubDate>Tue, 22 Mar 2022 21:35:20 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/vim-fuzzy-finder/</guid>
+      <description>
+        導入 みなさんはVimでどんなFuzzy Finderを使っているでしょうか？ ぼくは先日までfzf + fzf.vim を使っていました。
+しかし少し調子が悪い部分が出てきたのをきっかけにそろそろ他にもっと良いFuzzy Finderが出てきてないかな？と探し始めました。 結果として「ぼくのかんがえたさいきょうのFuzzy Finder」に行き着いたのです！
+着想 fzf.vimに代わるものを探している過程で fzy を見つけました。
+このREADMEを読んでいたら、なんと、
+function! FzyCommand(choice_command, vim_command) try let output = system(a:choice_command . &amp;quot; | fzy &amp;quot;) catch /Vim:Interrupt/ &amp;quot; Swallow errors from ^C, allow redraw! below endtry redraw! if v:shell_error == 0 &amp;amp;&amp;amp; !empty(output) exec a:vim_command . &#39; &#39; . output endif endfunction nnoremap &amp;lt;leader&amp;gt;e :call FzyCommand(&amp;quot;find . -type f&amp;quot;, &amp;quot;:e&amp;quot;)&amp;lt;cr&amp;gt; のようにpluginもなしに10行程度のfunctionを定義して使うだけでVim上でfzyによるFuzzy Finderが実現できると書いてあります。
+「そんなバカな！？」と疑いつつ試してみると、実際に実現できてしまいました。
+pluginのメンテもいらずこんなにシンプルに実現できるなんて！これが最強のFuzzy Finderの実現方法では！と驚きこれをこのまま使おうと思ったのですが、fzfの気に入っていた部分がfzyでは再現できず1、それならばと上のfunction内のfzy部分をfzfに置き換えて利用しようとしました。
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/vim-fuzzy-finder/top.png</coverImage>
+      
+    </item>
+    
+    <item>
       <title>potatotips #74 で「5分でSharePlay入門」のLTをしました</title>
       <link>https://www.tokoro.me/posts/potatotips-74-shareplay/</link>
       <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
@@ -23,23 +59,25 @@
       <guid>https://www.tokoro.me/posts/potatotips-74-shareplay/</guid>
       <description>
         potatotips #74 2021年6月23日（水）にWantedlyさんご主催のオンラインpotatotips（iOS/Android開発Tips共有会）が開催されました。
- イベントページ 当日のLT一覧  私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
+イベントページ 当日のLT一覧 私はpotatotipsの運営窓口を担当しているのですが、今回はひさびさにLTもさせていただきました。
 LTの内容は「5分でSharePlay」です！ スライドは コチラ。
 今回は、このLTの内容をこちらにブログ記事としてまとめさせていただきます。
 SharePlayとは？ SharePlayとは、FaceTime通話中に離れた場所の友達とアプリのコンテンツを共有する機能です。 このスクショは離れた場所にいる2人が不動産アプリを一緒に見ながら新しい家の候補を決めている様子です。
 利用シーン SharePlayの利用シーンは様々です。 WWDC21の各セッションの中でも様々なシーンが紹介されています。
- 一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする  3種のSharePlay SharePlayには大きく3種あります。
- Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム  ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
+一緒に映画やスポーツを視聴する ゲームのスーパープレイを自慢する 旅行のときの写真を友人や家族と一緒に見る グループでお絵描きする Swift Playgroundsで一緒にSwiftを学ぶ 不動産アプリで新しい家の候補をふたりで探す 実家の両親がアプリの使い方がわからないのをサポートする 3種のSharePlay SharePlayには大きく3種あります。
+Screen sharing: 画面共有 Media playback: 動画や音楽の共有 Custom UI: カスタム ※カスタムについてはこの記事では紹介しませんが、デバイス間でカスタムなコマンドを自由に送受信できる柔軟な仕組みがあります
 画面共有への対応 SharePlayの画面共有に対応するには各アプリでどの程度の実装が必要でしょうか？
 じつは各アプリでの対応は必要なく、なにもしなくても画面共有に対応できます。 正確には画面共有はホーム画面ごと共有され、その時開いているアプリの画面もそのまま共有されます。
 自動的に隠される要素 画面共有は自動的にされる（されてしまう）のですが、一部、共有されない要素があります。
- パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ  です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
+パスワードなどセキュアな入力フィールド DRM（FairPlay）で保護されたコンテンツ です。 その他、必要なら各アプリで隠したい要素（View）をカスタムすることもできます。
 動画の共有への対応 最後に動画の共有への対応についてです。
 AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手順で動画のSharePlayを開始できます。
 まず、FaceTime中にTVアプリを起動すると、コンテンツ表示部分に SharePlayが可能であることを示すアイコン が表示されます。
 このとき動画を再生しようとすると、 SharePlayするかどうかを確認するダイアログ が表示されます。 ここで SharePlay を選べば動画のSharePlayの開始です。
 動画のSharePlayでできること 動画のSharePlayをすると、
- DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期  などがデフォルトでサポートされます。
+DRMで保護されたコンテンツの共有 再生・停止・シークなどによる再生位置の同期 などがデフォルトでサポートされます。
+動画のSharePlay対応に必要なコード 実際に動画のSharePlayに対応してみた ViewController のコードが以下です。
+import AVKit import GroupActivities import UIKit class ViewController: AVPlayerViewController { private var groupSession: GroupSession&amp;lt;MovieWatchingActivity&amp;gt;?
       </description>
       
       <coverImage>https://www.tokoro.me/images/potatotips-74-shareplay/top.png</coverImage>
@@ -54,7 +92,7 @@ AppleのTVアプリの例 AppleオフィシャルのTVアプリでは次の手�
       <guid>https://www.tokoro.me/posts/wwdc21-meet-group-activities/</guid>
       <description>
         Meet Group Activities を視聴して内容をまとめたものです。
-先に簡単にまとめ  SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる  ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう   ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能  導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
+先に簡単にまとめ SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能 導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
 SharePlayは、GroupActivities フレームワークによって実現されています。
 このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。
 Communication Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。
@@ -74,6 +112,7 @@ Time-Synced Playback SharePlayでは、再生の同期が可能です。 誰か�
 Picture in Picture Picture in Pictureとの相性も抜群で、PiPによりコンテンツを視聴しながら他の様々なアプリを利用することができます。
 Content FaceTimeで通話中のユーザーは、各アプリを起動したとき、そのアプリのコンテンツを共有できることを期待するようになります。
 SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。 既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。
+Group Activities Group Activitiesはフレームワークのコアコンセプトです。 Group Activitiesは、FaceTimeでSharePlayをして楽しむ対象（オブジェクト）です。
       </description>
       
       <coverImage>https://www.tokoro.me/images/wwdc21-meet-group-activities/top.png</coverImage>
@@ -105,7 +144,7 @@ SharePlay 体験を共有する。 FaceTime中に楽しめる。 例えば通話
 PiPをタップすることでSharePlayのコントロールが表示される。
 同時視聴中のビデオをAppleTVでAirPlayし、テレビの大画面で再生することもできる。
 SharePlay API SharePlay APIによりサードパーティ製アプリもFaceTimeに組み込むことができる。
- Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV  などが既に対応を進めている。
+Disney+ Hulu HBO Max NBAアプリ twitch TikTOk MasterClass ESPN+ Paramaount+ Pluto TV などが既に対応を進めている。
 Screen sharing 画面共有。 将来のルームメイトと一緒に不動産アプリで物件を閲覧したり、ゲームの画面を共有したり、画面共有して困っている人を助けたり。
 Messages コラージュデザイン 新しいコラージュデザイン。スワイプで写真をめくったりタップして全部の写真を見たりできる。
 Shared with You あなたと共有。
@@ -132,7 +171,7 @@ Shared with You あなたと共有。
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
 引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
-import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect.
+import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.
       </description>
       
       <coverImage>https://www.tokoro.me/images/swift-superellipse/top.png</coverImage>
@@ -146,7 +185,7 @@ import UIKit public struct Superellipse { public let bezierPath: UIBezierPath pu
       
       <guid>https://www.tokoro.me/posts/commit-message-inline-translation/</guid>
       <description>
-        完成後に収録した画面 対象者  Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります）  ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
+        完成後に収録した画面 対象者 Vimでコーディングしている人 Vim以外でコーディングしてるがgit commitのときだけVimが起動する人（macOSだとデフォルトでそうなります） ぼくの課題 git commitでcommitメッセージを書く時、英語で書くことが多いと思います（プロジェクトによるとは思いますが）。
 ぼくは英語でcommitメッセージを書くのが得意ではなく「あの不具合をこんな感じに修正したんだよなあ、それを英語で書くと&amp;hellip;」と考えつつ面倒になってFix a problemとか意味のないcommitメッセージを残してしまうことがありました。いちばんひどいときは.とか&amp;hellip;。ごめんなさい。
 しかし昨今はDeepLなど優秀な翻訳サービスがあるわけですし、それを使えば良いだけじゃんは思うものの、実際にgit commitした後に翻訳サービスを開いてそこに日本語を入力して、翻訳結果をコピーしてエディタに戻ってきてペーストする、というのが日々のコーディングの流れの中では面倒すぎてけっきょくFix a problemとしてしまうわけです&amp;hellip;
 解決案 それを解決するのは簡単で、git commitで開かれたエディタで入力した日本語がその場で英訳されれば良い、というだけです。
@@ -154,11 +193,11 @@ import UIKit public struct Superellipse { public let bezierPath: UIBezierPath pu
 作る 翻訳API 愛用しているDeepLにAPIがあったのでそれを使います。
 https://www.deepl.com/docs-api/translating-text/request/
 APIの利用はとても簡単で、テキストの翻訳なら、
-curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;amp;target_lang=EN-US&amp;amp;text=おはよう&#39;  とするだけでとても簡単です。
+curl https://api.deepl.com/v2/translate \ -X POST \ --data &#39;auth_key=AUTH_KEY&amp;amp;target_lang=EN-US&amp;amp;text=おはよう&#39; とするだけでとても簡単です。
 英訳コマンド 今時点ではDeepLにCUIコマンドがないため、上の翻訳APIを叩くコマンドを自分で作ります。
 といっても上のPOSTリクエストを1つ叩くだけなのですぐできます。
 エディタから使いやすいように、
- STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す  のが良さそうです。
+STDIN（標準入力）から翻訳したいテキストを受けて STDOUT（標準出力）に翻訳後のテキストを返す のが良さそうです。
 ぼくがSwiftで書いたのが、
 https://github.com/tokorom/deepl-cui-swift
 です。 ここは誰かが作ったのを使ってもいいし、自分で作ってもすぐできるかと思います。
@@ -166,9 +205,12 @@ git commitから呼び出す この記事ではgit commitで起動するエデ�
 Vimからツールを呼ぶということはpluginを入れる必要がある？と思いがちですが「選択したテキストを外部コマンドに渡して結果と置き換える」というのはVimが標準で備ている機能です。
 具体的には!lsとコマンド実行すればVimにlsの結果が挿入されますし、JSON文字列を選択して!jq .でjqコマンドに選択範囲を渡して整形してもらった結果で置き換えるといったことが普通にできます。
 今回は、STDINを英訳するコマンドを作ったので（deepl-cui-swiftコマンドとする）、翻訳したいテキストを選択して
-!deep-cui-swift  を実行するだけでこれが実現できます。
+!deep-cui-swift を実行するだけでこれが実現できます。
 ショートカット 必要なら.vimrcにショートカットキーを用意しましょう。ぼくは、
-nnoremap ze &amp;lt;S-v&amp;gt;!deepl-cui-swift -s JA -w&amp;lt;CR&amp;gt;  とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。
+nnoremap ze &amp;lt;S-v&amp;gt;!deepl-cui-swift -s JA -w&amp;lt;CR&amp;gt; とzeで現在行を英訳コマンドに渡す（ついでに翻訳前の言語を明示して、翻訳前のテキストも結果に含めるオプションを指定）ショートカットを用意して使っています。
+動作確認 これでgit commit後のエディタで日本語でメッセージを書き、zeするだけで英訳されるようになりました！
+ワイワイ！
+オマケ DeepL APIの料金 なお、DeepL APIは無料で使えるわけではありません。
       </description>
       
       <coverImage>https://www.tokoro.me/images/commit-message-inline-translation/top.png</coverImage>
@@ -182,9 +224,9 @@ nnoremap ze &amp;lt;S-v&amp;gt;!deepl-cui-swift -s JA -w&amp;lt;CR&amp;gt;  とz
       
       <guid>https://www.tokoro.me/posts/ios14_blank_back_button/</guid>
       <description>
-        先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; }  でOK！
+        先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; } でOK！
 概要 iOS14のアップデートの1つに、
- ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる  というのがありますよね。
+ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる というのがありますよね。
 ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
 と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
 iOS13以前の方法 iOS13以前では、例えば、
@@ -196,10 +238,11 @@ iOS14でのきちんとした方法 そのため、まずiOS14ではBack Button�
 そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
 https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
 戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; }  と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
 また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
 のようにきちんと表示されます。
 UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
+BackButtonDisplayMode 挙動 default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される generic スペースがあれば「Back（戻る）」を表示、なければ空欄 minimal 常に空欄 例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。
       </description>
       
       <coverImage>https://www.tokoro.me/images/ios14_blank_back_button/top.png</coverImage>
@@ -216,12 +259,12 @@ UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以�
         2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
 私も HomeKit 2020 というセッションで発表者として参加しました。
 概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
-HomeKit Frameworkざっくり入門  HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例  時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない    HomeKitのBridgeについて  Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&amp;hellip; オープンソースのソフトウェアBridge「Homebridge」  HomebridgeでHomeKit未対応製品をHomeKit対応  ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　 プラグインの自作  HomeKit ADKで作る自作アクセサリ  HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！  セッションビデオ  スライド  HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
+HomeKit Frameworkざっくり入門 HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例 時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない HomeKitのBridgeについて Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&amp;hellip; オープンソースのソフトウェアBridge「Homebridge」 HomebridgeでHomeKit未対応製品をHomeKit対応 ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　プラグインの自作 HomeKit ADKで作る自作アクセサリ HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！ セッションビデオ スライド HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
 そのため、かねてよりどこかで公開しようと思っていた『HomeKit入門』1 をZennで無料公開しました。
 https://zenn.dev/tokorom/books/homekit-framework
- 　iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
+iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
 ご興味ありましたら是非ご参照ください！
-  iOS 11 Programmingの第12章に掲載したものです https://peaks.
+iOS 11 Programmingの第12章に掲載したものです https://peaks.cc/books/iOS11&amp;#160;&amp;#x21a9;&amp;#xfe0e;
       </description>
       
       <coverImage>https://www.tokoro.me/images/iosdc2020/top.png</coverImage>
@@ -242,7 +285,11 @@ https://zenn.dev/tokorom/books/homekit-framework
 と教えてくれたので、 絶対に負けてられない！ せっかくなので自分も改善してみよう！ と思ったのがきっかけです。
 前置き 私はネットワークに関する専門的な知識を持ち合わせていないため、おかしなことを書いたりしているかもしれません。
 間違いなどありましたらよろしければ Twitter までご連絡ください。
- 以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。
+以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています 有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています 改善前の状態 Key Value 通信速度 10〜40Mbps プロバイダー Interlink ZOOT NEXT IP IPv4 接続方式 PPPoE LANケーブル CAT6のフラットケーブル Wi-Fiルーター Apple AirMac Time Capsule Wi-Fi規格 Wi-Fi 5 (11ac) 上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。
+LANケーブルだけ変えた後 せっかくなのでいっきに全部変えてしまうのでなく、１要素ずつ変更して速度計測することにしました。
+まず一発目に「これは効果はないだろうなあ」と思いつつも、LANケーブルだけ新調しました。 光回線の終端装置（ONU）とWi-FiルーターをつなぐLANケーブルです。
+LANケーブルを新しいものに変えて計測したところ&amp;hellip;
+いきなり最大 130Mbps まで速度が跳ね上がってしまいました。
       </description>
       
       <coverImage>https://www.tokoro.me/images/improve-my-internet-connection/top.jpg</coverImage>
@@ -264,17 +311,17 @@ swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswif
 そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
 https://github.com/tokorom/vim-swift-format
 事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
-which swift-format  などで存在を確認してください2。
+which swift-format などで存在を確認してください2。
 なければ現在ならbrewでもインストール可能です。
 SwiftFormatというのは別のツールですので間違わないようご注意ください。
-brew install swift-format  aleというVimのPlugin https://github.com/dense-analysis/ale
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
 非同期にLintをかけるためのPluginです。
 今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
 vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
-Plug &#39;tokorom/vim-swift-format&#39;  です。
+Plug &#39;tokorom/vim-swift-format&#39; です。
 必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
-let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1  必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
-let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39;  これらの設定が可能です。
+let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1 必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。
       </description>
       
       <coverImage>https://www.tokoro.me/images/vim-swift-format/top.png</coverImage>
@@ -289,23 +336,26 @@ let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_forma
       <guid>https://www.tokoro.me/posts/ios-promocode/</guid>
       <description>
         Photo by JJ Ying on Unsplash
- これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
 2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
 プロモーションコードの用途 公式な用途 プロモーションコードの用途ですがAppleのドキュメントでは、
- 報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため
- とプロモーション用であることが説明されています。
+報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため
+とプロモーション用であることが説明されています。
 リリース前のテスト用途 この他、アプリ開発者の間では、リリース前に
- App Storeに公開されるアプリと全く同じものをテスト  するためにも使われています。
+App Storeに公開されるアプリと全く同じものをテスト するためにも使われています。
 プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
- Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい  などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
+Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
 プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
 そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
- アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する  という手順を踏む必要があります。
+アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する という手順を踏む必要があります。
 プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
 Q. アカウントがないのでログインできません
 A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
- ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
+ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
 プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
+このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
+プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
+ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。
       </description>
       
       <coverImage>https://www.tokoro.me/images/ios-promocode/top.jpg</coverImage>
@@ -320,12 +370,12 @@ A. 担当のかた or アプリの開発者に問い合わせてアカウント�
       <guid>https://www.tokoro.me/posts/ios-sandbox/</guid>
       <description>
         Photo by Markus Spiske on Unsplash
- これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
 2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
 1. App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
 Q. アカウントがないのでログインできません
 A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
- ログインしたら「ユーザとアクセス」をクリックして表示します。
+ログインしたら「ユーザとアクセス」をクリックして表示します。
 2. Sandboxアカウント追加する 左のサイドメニューから「Sandbox テスター」を選んだあと、(+)マークの追加ボタンを押します。
 姓名やメールアドレスを適切に入力します。
 このときのポイントとして メールアドレスは実在するものでなくてもかまいません 1。 そのため、テスト用のアカウントはカジュアルに作成できます。 セキュリティ質問なども基本的には使いませんので適当でも大丈夫です2。
@@ -334,10 +384,10 @@ A. 担当のかた or アプリの開発者に問い合わせてアカウント�
 Sandboxアカウントの作成はこれでおしまいです。
 Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。
 A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。
- 3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
+3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
 以下、Appleのドキュメントからの引用です。
- Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
- プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
+Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
+プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
 Sandboxは調子が悪くなることが多々あります。
 Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。
 時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。 その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。
@@ -347,6 +397,9 @@ iPhone/iPadの「設定」を開きます。
 その中の「iTunes StoreとApp Store」を選びます。
 その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。
 このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
+※この場所では絶対にSandboxアカウントを入れないでください
+この画面の一番下に「SANDBOXアカウント」という項目があります。ここで「サインイン」を押し、作成したSandboxアカウントでログインしてください。
+5. アプリで購入テストをする ログインに成功したらテスト対象のアプリでの購入テストをお試しください。
       </description>
       
       <coverImage>https://www.tokoro.me/images/ios-sandbox/top.jpg</coverImage>
@@ -365,7 +418,7 @@ iPhone/iPadの「設定」を開きます。
 前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
 App Clips App Clipはアプリの軽量版で、ユーザーにアプリをダウンロード・インストールさせずに、日常のタスクを素早く実行させることができます。 ユーザーは様々な状況や目的でApp Clipを見つけ、利用できます。 物理的な場所では、NFCタグや視覚的なコードをスキャンしてApp Clipを起動します。 デバイス上では、位置情報に基づくSiriからの提案、地図アプリ、ウェブサイトのSmart App Banners、メッセージアプリで友達が共有してくれたリンクをタップする、などからApp Clipsを起動します。
 あなたのアプリが、限られた時間の中でタスクを実行するのに役立つ体験（in-the-moment experience）を提供しているなら、App Clipを導入することを考えてみましょう。 例えば、
- レンタル自転車にNFCタグを付け、それをスキャンしてApp Clipを起動し、その自転車をレンタルしてもらうことができます。 コーヒーショップでは、ウェブサイトにSmart App Bannerを設置して、そこからすぐに注文できる事前注文用のApp Clipを提供することができます。ユーザーはメッセージアプリでそのウェブサイトへのリンクを友達1に共有し、共有された友達もそのリンクをタップするだけでApp Clipから注文できます。 レストランでは、ユーザーが地図アプリやSiriからの提案からApp Clipを起動できるようにしたり、テーブルでNFCタグをスキャンしてもらいApp Clipで食事の支払いをするようにできます。 美術館では、来館者に展示品の名札の横にあるQRコード2をスキャンしてもらい、App ClipでARコンテンツを表示したり、音声解説を提供したりできます。  App Clipは、アプリをインストールしていないユーザーにアプリの機能の一部をシェアできる強力な方法です。 開発者向けのガイドは App Clips を参照してください。
+レンタル自転車にNFCタグを付け、それをスキャンしてApp Clipを起動し、その自転車をレンタルしてもらうことができます。 コーヒーショップでは、ウェブサイトにSmart App Bannerを設置して、そこからすぐに注文できる事前注文用のApp Clipを提供することができます。ユーザーはメッセージアプリでそのウェブサイトへのリンクを友達1に共有し、共有された友達もそのリンクをタップするだけでApp Clipから注文できます。 レストランでは、ユーザーが地図アプリやSiriからの提案からApp Clipを起動できるようにしたり、テーブルでNFCタグをスキャンしてもらいApp Clipで食事の支払いをするようにできます。 美術館では、来館者に展示品の名札の横にあるQRコード2をスキャンしてもらい、App ClipでARコンテンツを表示したり、音声解説を提供したりできます。 App Clipは、アプリをインストールしていないユーザーにアプリの機能の一部をシェアできる強力な方法です。 開発者向けのガイドは App Clips を参照してください。
 優れたApp Clipのデザイン 本質的な機能にフォーカスしましょう。 App Clipのインタラクションは素早く、集中して行われるべきです。 目の前のタスクを達成するために必要な機能に限定してください。 高度な機能や複雑な機能はアプリのために取っておきましょう。
 App Clipをマーケティング目的だけに使用してはいけません。 App Clipは真の価値を提供し、人々がタスクを達成するのに役立つものでなければなりません。 サービスや製品を宣伝するための手段として使用しないでください。
 直線的で使いやすく、焦点を絞ったユーザーインターフェースをデザインしましょう。 App Clipには、タブバーや複雑なナビゲーション、設定があってはいけません。 画面の数や入力フォームの数も最小限に抑えましょう。 余分な情報を削り、できる限りシンプルなユーザーインターフェースにしてください。
@@ -391,9 +444,9 @@ Widgets Widgetにより、アプリの重要なコンテンツをiPhone、iPad�
 Widgetは、iOS 14以降と macOS 11以降で利用できます。 Widget Extensionを作成する という開発者向けのガイド記事があります。
 Widgetsの詳細 Widgetには小、中、大の３つのサイズがあります。 iPhone、iPad、Macのどのプラットフォームでも、ユーザーはWidgetギャラリーからWidgetを見つけ、お好みのサイズを選べます。 また、ユーザーは後からWidgetを好きな場所に移動させたり、WidgetごとにWidgetが用意したパラメータを設定することができます。 例えば、ホーム画面に小さなお天気Widgetをいくつか設置して、それぞれのWidgetに別々の場所の天気を表示する、など。 Widgetは、iPhoneならホーム画面やTodayビュー、iPadならTodayビュー、macOSなら通知センターに設置できます。
 iPhoneとiPadではWidgetギャラリーの中にスマートスタックがあります。 スマートスタックにはユーザーがよく使うアプリのWidgetがデフォルトで含まれています（後から変更もできます）。 スマートスタックはiPhoneのホーム画面と、iPhone/iPadのTodayビューに設置できます。 スマートスタックは時間とともにだんだんと賢くなり、Siriが自動で現在の状況に適したWidgetを一番上に表示してくれます。 また、ユーザーが自分で作ったWidgetのスタックでも、スタックの設定からスマート回転（Smart Rotate）をOnにすれば、Siriによる最適なWidgetの自動表示が有効になります。
- NOTE
+NOTE
 iOS 13以前のiOS用に作られた古いWidgetはホーム画面では利用できませんが、Todayビューの下部やmacOSの通知センターでは引き続き利用できます。
- 使いやすく焦点を絞ったWidgetの作成 Widgetをタップすることでアプリ本体を開きアプリ内でより多くのことをできますが、Widgetの主な目的はユーザーがアプリ本体を開かなくてもタイムリーにユーザーごとにパーソナライズされた少量の情報を表示することです。 Widgetで実現すべき1つのアイデアを特定し、表示する情報の焦点を絞ることが、Widgtetのデザインプロセスにおける重要な最初のステップです。
+使いやすく焦点を絞ったWidgetの作成 Widgetをタップすることでアプリ本体を開きアプリ内でより多くのことをできますが、Widgetの主な目的はユーザーがアプリ本体を開かなくてもタイムリーにユーザーごとにパーソナライズされた少量の情報を表示することです。 Widgetで実現すべき1つのアイデアを特定し、表示する情報の焦点を絞ることが、Widgtetのデザインプロセスにおける重要な最初のステップです。
 Widgetで実現するアイデアは1つに集中させてください。 ほとんどの場合はアプリのメインアイデアをWidgetに適用できるでしょう。 例えば、天気アプリでは特定の場所の天気を表示し、カロリートラッキングアプリではその日の消費カロリーを表示し、ニュースアプリではトレンドを表示するなどが考えられます。 また、ゲームアプリでキャラクターのステータスを表示したり、お絵かきアプリでお気に入りのスケッチを表示したりと、アプリのメインアイデアの1つの部分に焦点を当てるのも効果的です。
 どのサイズのWidgetでも、Widgetのアイデアに直接関係する情報のみを表示してください。 大きなWidgetでは、より多くのデータを表示したり、より詳細な情報を表示することができますが、Widgetのアイデアに集中することが重要です。
 例えば天気アプリの場合、小サイズのWidgetには現在の気温と天気、その日の最高気温と最低気温を表示します。
@@ -420,18 +473,18 @@ Widgetをタップしたときに、アプリの適切な画面を開くよう�
       <description>
         導入 前回の Swift AWS Lambda Runtimeのサンプルをデプロイしてみた の続きです。
 特に犬の写真を毎朝送ってほしいというわけではないですが、Swift AWS Lambda Runtimeを試すにあたっての題材として、
- AWS Lambdaのスケジュール式トリガーで毎朝自動で実行する 画像検索APIで犬の写真をランダムに取ってくる それをSlackに送る  というのをやってみます。
+AWS Lambdaのスケジュール式トリガーで毎朝自動で実行する 画像検索APIで犬の写真をランダムに取ってくる それをSlackに送る というのをやってみます。
 画像検索API 画像検索APIは手っ取り早く使えそうなAzureの Image Search API を使ってみます。 Azureのアカウントさえ作れば、月1000回までは無料で叩けるようです。
 curlで叩くとすると、
-curl &#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&#39; \ -H &#39;Ocp-Apim-Subscription-Key: YOUR_KEY&#39;  となります。
- リクエストパラメータに q=検索ワード リクエストヘッダーに Ocp-Apim-Subscription-Key: YOUR_KEY  を渡します1。
+curl &#39;https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=dog&#39; \ -H &#39;Ocp-Apim-Subscription-Key: YOUR_KEY&#39; となります。
+リクエストパラメータに q=検索ワード リクエストヘッダーに Ocp-Apim-Subscription-Key: YOUR_KEY を渡します1。
 Slackへの通知 Slackの Incoming Webhook用のURLを取得します。
 URLを取得したら、curlで叩くとすると、
-curl -X POST -H &#39;Content-type: application/json&#39; \ --data &#39;{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}&#39; \ https://hooks.slack.com/services/your/incoming/webhook  とするだけです。
- POSTデータで{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}  を送ってあげるだけですね。
+curl -X POST -H &#39;Content-type: application/json&#39; \ --data &#39;{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;}&#39; \ https://hooks.slack.com/services/your/incoming/webhook とするだけです。
+POSTデータで{&amp;quot;text&amp;quot;:&amp;quot;犬の画像のURL&amp;quot;} を送ってあげるだけですね。
 Lambda関数を作る これで画像検索APIとSlackへの通知部分は準備できたので、あとはメインディッシュのLambda関数を作るだけです。
 Packageの作成 まずは、
-swift package init --type executable --name DogImage  とPackageを作り、 GitHub上のサンプル をベースにPackage.
+swift package init --type executable --name DogImage とPackageを作り、 GitHub上のサンプル をベースにPackage.
       </description>
       
       <coverImage>https://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
@@ -449,8 +502,8 @@ swift package init --type executable --name DogImage  とPackageを作り、 Git
 https://swift.org/blog/aws-lambda-runtime/
 以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
 swift.orgの説明には、
- The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
-  AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している  とあります。
+The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
+AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している とあります。
       </description>
       
       <coverImage>https://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
@@ -469,12 +522,14 @@ swift.orgの説明には、
 ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
 Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
 ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
- レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい  ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks   Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい  ref: https://api.slack.com/reference/messaging/payload   GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい  と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
 作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
 実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
- Incoming WebhookのURLをenvに指定 textフィールドを指定  フィールド名を SlackのPayloadの仕様 に合わせてます    の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack!  こんな感じにSlackにメッセージを送れます。
+Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
 いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
+- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &amp;quot;${{ github.
       </description>
       
       <coverImage>https://www.tokoro.me/images/github-actions-context/github-actions.png</coverImage>
@@ -490,21 +545,21 @@ Slackへの通知も Marketplace に数ある既存Actionを選んで利用す�
       <description>
         Photo by Jae Park on Unsplash
 前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
- ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む  という便利環境を作りました。
+ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
 そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
 今回はそこを解決します！
 pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
 screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名  とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
 vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
- 現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド  の２つを使い分ける必要が出てきました。
+現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
 そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;)  とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
 今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
 仕組み自体は前回と変わりません。
 このpluginは GitHub に置いてあります。
 スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}`  です。
+#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}` です。
       </description>
       
       <coverImage>https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png</coverImage>
@@ -524,74 +579,19 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
 記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
 特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
 手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
- 各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化  をしていました。
+各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
 決して難しいことはありませんが地味に面倒でした。
 ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
 ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
 具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg  が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
 現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction  という３行のシンプルなfunction１つだけです。
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。
       </description>
       
       <coverImage>https://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</title>
-      <link>https://www.tokoro.me/posts/firebsae-app-distribution/</link>
-      <pubDate>Mon, 10 Feb 2020 10:43:31 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/firebsae-app-distribution/</guid>
-      <description>
-        Firebase App Distiribution 先日BETA公開されたFirebase App Distributionですが2020年3月終了のFabricからの移行先としてはもっとも有力ですよね1。
-先日「Firebaseを利用していない既存アプリを配信するためだけにFirebase App Distributionを使いたい！」と思い試してみたら、あまりにも簡単で「これは10分で設定から配信まで完了するんじゃない？」と思い、実際に、
- Firebase未導入のビルド可能なプロジェクトがある状態 Firebaseのプロジェクトを作成するところから開始 配信用にアプリをビルドしてFirebase App Distributionでテスターに配信するところを終了  という条件で実際にストップウォッチで測ってやってみたところ、なんと「4分43秒」で終わりました！
-この記事用にスクショを撮影しながらでもこのタイムだったので、本気でタイムアタックしたら3分切れると思います。
-ということで「10分で終わるFirebase App Distribution」という記事を書く予定だったのを「5分で終わるFirebase App Distribution」に変更してお届けします。
-そもそも アプリにFirebaseを導入するには基本的にはfirebase-ios-sdkをアプリに組み込む必要があります。
-しかし、App Distributionだけを利用したい場合にはこのSDKの組み込みは不要です。この記事ではSDK組み込みをスキップしていますので、AnalyticsなどFirebaseの他機能を利用したい場合には他のチュートリアルをご利用ください。
-設定チュートリアル（実際の手順） Firebaseのプロジェクトを作成  まずはFirebaseのConsoleにをブラウザで開いてプロジェクトを作成します   今回はApp Distributionのみ利用するので「Googleアナリティクス」はOffにしておきます   プロジェクトを作成したらここにiOSアプリ（配信しようとしているもの）を追加します   設定が必要なのはバンドルIDだけです XcodeのプロジェクトからBundle Identifierをコピーしてペーストします   今回は「設定ファイルのダウンロード」「Firebase SDKの追加」「初期化コードの追加」はスキップしてしまいます そのまま「コンソールに進む」としてしまってOK  これでFirebaseのプロジェクトが作成され、配信するアプリを登録できました。
-実際に配信する それでは、実際にアプリをApp Distributionで配信してみましょう
- まず、アプリをArchiveして適当な場所にエクスポートします エクスポートしたアプリのipaをApp Distributionのページにドラッグ＆ドロップします   アップロードが終わったらテスターのメールアドレスを追加します  これでテスターに配信完了です！
-おわり これだけで終わりです。
-あとはテスターにこんなメールが届いているはずですので、
-「Get setup」からインストールしてもらうだけです。
-この記事で書いていないこと  AdHoc or Enterprise?
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/posts/firebase-app-distribution/3-create-app.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
-      <link>https://www.tokoro.me/posts/swiftui-hackathon/</link>
-      <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/swiftui-hackathon/</guid>
-      <description>
-        2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
-いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
-また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&amp;hellip;
-ということでハッカソン ということで、冬休みにひとりでハッカソンを実施して、
- 24時間でSwiftUIでiOSアプリを開発して AppStoreでリリースする  ところまでやる！ということにしました。
-自分で勝手に企画して出すアプリですのでSwiftUIを使っても誰にも文句は言われません！
-必須利用技術 このハッカソン企画での必須利用技術は、
- SwiftUI Firebase（Firestore） Sign in with Apple  の３つとしました。
-SwiftUI はもちろんですが、ローカルオンリーで動作するアプリだとSwiftUIの検証には弱いかなと思い、サーバにデータを保管するようにしバックエンドには Firebase(Firestore) を利用することにしました。 また、SwiftUIを採用する時点でターゲットOSがiOS 13以降になるので、ついでにiOS 13の新要素 Sign in with Apple でのSign inを実装することにしました。
-リリースの定義 今回はゴールであるリリースの定義を、
- アプリを開発し終えて AppStore用のメタデータやスクリーンショットを作って投稿して 実際に審査に出す  ところまで、としました。
-作るアプリ 作るアプリはちょうど自分が欲しいと思っていた「こどもたちのお金を親が管理するアプリ」にしました。
-Photo by Michael Longmire on Unsplash
-解決したい課題 我が家ではこどもたちにお金の教育を兼ねて毎月おこづかいを渡しているのですが、
- 先月のおこづかい渡したっけ？渡してなかったけ？とよくわからなくなる お年玉が高額で幼稚園児に管理させるのが不安（かといって子供の銀行口座を作るのは面倒） 弟が姉の貯金箱を漁る事件が発生！ お店でこどもが「おこづかいでこのおもちゃ買いたい！」という時におこづかいを持ってきていない ○○カメラでおこづかいでおもちゃを買わせたいが、ほんとは〇〇カメラのポイント使っちゃいたい！ ほんとは余っている〇〇Payで支払いたい！  など様々な悩みが出てきました。
-解決するための機能 これらを解決するためには、
- こどもに現金を持たせないで親が残高だけ管理すれば十分 記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない 入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心 普段使いの少額の現金はその残高から出金してこどもに渡せばOK おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！  と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/apple/swiftui.png</coverImage>
       
     </item>
     

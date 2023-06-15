@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -15,7 +15,7 @@
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
 引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
-import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect."><meta name="author" content="tokorom">
+import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -29,7 +29,7 @@ import UIKit public struct Superellipse { public let bezierPath: UIBezierPath pu
 ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。
 実装例 ということで、まずはUIBezierPathでスーパー楕円を作ってみます。 引数で渡した四角形（CGRect）に沿って、4つのベジェ曲線を追加しているだけです。
 引数kでアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。
-import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect.midY) let top = CGPoint(x: rect." property="og:description"><meta content="https://www.tokoro.me/images/swift-superellipse/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-superellipse/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+import UIKit public struct Superellipse { public let bezierPath: UIBezierPath public init(in rect: CGRect, k: CGFloat) { let path = UIBezierPath(ovalIn: rect) let handleX: CGFloat = rect.size.width * k / 2 let handleY: CGFloat = rect.size.height * k / 2 let left = CGPoint(x: rect.minX, y: rect." property="og:description"><meta content="https://www.tokoro.me/images/swift-superellipse/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-superellipse/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -85,15 +85,15 @@ import UIKit public struct Superellipse { public let bezierPath: UIBezierPath pu
 <p>スーパー楕円は最近話題になっているClubhouseでも使われているとのこと。</p>
 <p><img src="https://www.spinners.work/images/kudakurage-superellipse-desgin/image14.png" alt="clubhouse"></p>
 <p>そのため便乗してiOS+Swiftでスーパー楕円UIを実装してみます。</p>
-<h2 id="heading">どう実装する？</h2>
+<h2 id="どう実装する">どう実装する？</h2>
 <p>iOSアプリの上で上に<code>UIImageView</code>とか様々なViewをのせるような使い方をすることになりそうですので、基本的には<code>UIView</code>のサブクラスである必要がありそうです。</p>
 <p>スーパー楕円を表示（描画）するだけなら<code>UIBezierPath</code>などでスーパー楕円を作って <a href="https://developer.apple.com/documentation/uikit/uiview/1622529-draw">UIViewのdrawメソッド</a> をオーバーライドしてfillするなどで良さそうです。</p>
 <p>しかし、上の<code>UIImageView</code>などをのせて、上にのせたViewも一緒にスーパー楕円でマスクされないといけないので、 <a href="https://developer.apple.com/documentation/quartzcore/calayer/1410861-mask">CALayerのmask</a> でスーパー楕円の形にマスクすべきかもしれません。</p>
-<h2 id="heading-1">スーパー楕円はどう作る？</h2>
+<h2 id="スーパー楕円はどう作る">スーパー楕円はどう作る？</h2>
 <p><a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">上の記事</a> にJavaScriptのサンプルコードがありますが、これはベジェ曲線での描画ではなく、スーパー楕円を構成するドットの配列を作る例のため、今回の用途にはアンマッチです。</p>
 <p>ただ、同じ記事の後半でFigmaやSketchなどのツールで円形からアンカーポイントを移動させてスーパー楕円を作る例が紹介されていて、おそらくこの例のように4つのベジェ曲線を使い、アンカーポイントを調整することでスーパー楕円が作れるだろうということが予想できました。</p>
 <p><img src="https://www.spinners.work/images/kudakurage-superellipse-desgin/image24.png" alt="sample"></p>
-<h2 id="heading-2">実装例</h2>
+<h2 id="実装例">実装例</h2>
 <p>ということで、まずは<code>UIBezierPath</code>でスーパー楕円を作ってみます。
 引数で渡した四角形（<code>CGRect</code>）に沿って、4つのベジェ曲線を追加しているだけです。</p>
 <p>引数<code>k</code>でアンカーポイントの位置（結果としてスーパー楕円の丸み）を調整できるようにしています。</p>
@@ -157,7 +157,7 @@ public final class SuperellipseView: UIView {
 }
 </code></pre>
 <p>とても簡単ですね！</p>
-<h2 id="heading-3">利用例</h2>
+<h2 id="利用例">利用例</h2>
 <p>実際に利用するのは簡単です。
 例えば、スーパー楕円形のサムネイル画像を表示するなら、</p>
 <pre><code class="language-swift">let superellipseView = SuperellipseView(frame: CGRect(x: 40, y: 40, width: 100, height: 100))
@@ -170,10 +170,10 @@ superellipseView.addSubview(imageView)
 </code></pre>
 <p>こんな感じに<code>SuperellipseView</code>を<code>addSubview</code>して、その上にサムネイル画像を設定した<code>UIImageView</code>を<code>addSubview</code>するだけです。</p>
 <p><img src="/images/swift-superellipse/ss-1611901779.png" alt="image"></p>
-<h2 id="heading-4">課題</h2>
+<h2 id="課題">課題</h2>
 <p>本当は <a href="https://www.spinners.work/posts/kudakurage-superellipse-desgin/">上の記事</a> で紹介されているような <code>n=2.5</code> とか <code>n=3.5</code> といった係数をそのまま反映させるものを作りたかったのですが、私の頭で短時間でこれを実現することはできませんでした&hellip;</p>
 <p>この辺りわかるかた是非ご教示ください！</p>
-<h2 id="heading-5">公開</h2>
+<h2 id="公開">公開</h2>
 <p>上で実装してみた <code>SuperellipseView</code> をお手軽に使ってみたいというかたがいらっしゃったら、</p>
 <p><a href="https://github.com/tokorom/SwiftSuperellipse">https://github.com/tokorom/SwiftSuperellipse</a></p>
 <p>にSwiftPackage化して公開していますのでお試しください！</p>
@@ -250,6 +250,30 @@ superellipseView.addSubview(imageView)
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -291,30 +315,6 @@ superellipseView.addSubview(imageView)
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -388,6 +388,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

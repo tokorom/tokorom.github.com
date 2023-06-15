@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/mac/</link>
     <description>Recent content in mac on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 05 Oct 2015 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/mac/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 05 Oct 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/mac/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</title>
       <link>https://www.tokoro.me/posts/el-capitain-totalterminal/</link>
@@ -23,9 +20,11 @@
 であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！ と思いたって試してみました。 （実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）
 以下、試したことをまとめます。
 ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
- Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す  ことはできるようになった。
-tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell  今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
-https://github.com/tokorom/ToggleTerminalScript</description>
+Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す ことはできるようになった。
+tell application &amp;quot;System Events&amp;quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &amp;quot;Terminal&amp;quot; then # Command-Tab tell application &amp;quot;System Events&amp;quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &amp;quot;Terminal&amp;quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript
+現在の課題としましては、
+Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート） かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い） プロセスの名前が常に Terminal でよいのかがよくわからん Terminalが既にカレントのときにCommand+Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？ などがありそうです。</description>
     </item>
     
     <item>
@@ -37,14 +36,14 @@ https://github.com/tokorom/ToggleTerminalScript</description>
       <description>** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
 導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
 設定は以下のとおり。
- .tmux.conf  bind C-t last-pane  これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+.tmux.conf bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
 ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
 例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
 改善 ということで、
- paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
+paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動 というのができれば最強なんじゃないかと思った。
 そんなんできるんかいな？と思ったけどごくごく普通にできた。
 設定は以下のとおり。
- .tmux.conf  bind C-t run &amp;quot;tmux last-pane || tmux last-window || tmux new-window&amp;quot;  runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+.tmux.conf bind C-t run &amp;quot;tmux last-pane || tmux last-window || tmux new-window&amp;quot; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
 これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
 便利便利！</description>
     </item>
@@ -56,16 +55,17 @@ https://github.com/tokorom/ToggleTerminalScript</description>
       
       <guid>https://www.tokoro.me/posts/mac-terminal-japanese/</guid>
       <description>Macの初期設定のたびに混乱してるので再整理しておきます。
- Mac Terminal tmux vim  で開発をする人向けです。
+Mac Terminal tmux vim で開発をする人向けです。
 まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
 日本語を扱う上で便利な設定がデフォルトで入ってます。
 当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi  tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
- こせきの技術日記  に従って対処しておきます。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+こせきの技術日記 に従って対処しておきます。
 この中の、
-date | pbcopy  までが成功すればOKです。
+date | pbcopy までが成功すればOKです。
 .vimrc にクリップボード利用の設定追加 .vimrc に
-set clipboard=unnamed  を追加しておきます。</description>
+set clipboard=unnamed を追加しておきます。
+fakeclip の導入 fakeclip をVimに追加することで、 tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。</description>
     </item>
     
     <item>
@@ -75,7 +75,7 @@ set clipboard=unnamed  を追加しておきます。</description>
       
       <guid>https://www.tokoro.me/posts/install-pandoc/</guid>
       <description>hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
-$ sudo port install pandoc  したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
+$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
 試しに hs-http だけインストールしてみたところ、
 $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;quot;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;quot; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;quot;$procedure $targetname&amp;quot; Warning: targets not executed for hs-http: org.</description>
     </item>
@@ -89,13 +89,14 @@ $ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not e
       <description>おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
 1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
 例えば、ここに sample/test.rb というファイルを置いておく。
-$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/  2. include_code でそのファイルを指定する {% include_code sample/test.rb %}  これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
 コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
 じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
 ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
 この経緯については、 OctopressのPull request に記録がある。
-2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style  以上で取り込み完了です。
-masterでなく 2.1 からpullしていることに注意が必要。</description>
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。
+include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、</description>
     </item>
     
   </channel>

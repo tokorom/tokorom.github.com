@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです  次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
- SwiftTask PromiseKit Bolts-iOS  を（表面だけ）使って比較してみました。
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです 次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
+SwiftTask PromiseKit Bolts-iOS を（表面だけ）使って比較してみました。
 なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。
 その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。
 以下にそれぞれ使ってみた結果を紹介させていただきます。
 更新頻度 この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。
 試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
-Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; }   すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます  PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self."><meta name="author" content="tokorom">
+Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; } すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self.textView?.text = &quot;\(error)&quot; return }."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） | TOKOROM BLOG" property="og:title"><meta content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです  次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
- SwiftTask PromiseKit Bolts-iOS  を（表面だけ）使って比較してみました。
+<meta content="SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） | TOKOROM BLOG" property="og:title"><meta content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです 次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
+SwiftTask PromiseKit Bolts-iOS を（表面だけ）使って比較してみました。
 なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。
 その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。
 以下にそれぞれ使ってみた結果を紹介させていただきます。
 更新頻度 この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。
 試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
-Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; }   すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます  PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/swifttask-promisekit-bolts/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; } すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self.textView?.text = &quot;\(error)&quot; return }." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/swifttask-promisekit-bolts/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -86,11 +86,11 @@ Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [un
 <p>その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。</p>
 <p>以下にそれぞれ使ってみた結果を紹介させていただきます。</p>
 <!-- more -->
-<h2 id="heading">更新頻度</h2>
+<h2 id="更新頻度">更新頻度</h2>
 <p>この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。</p>
-<h2 id="heading-1">試すネタ</h2>
+<h2 id="試すネタ">試すネタ</h2>
 <p><a href="http://www.tokoro.me/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a> で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。</p>
-<h2 id="task">Taskを使うほうのコード</h2>
+<h2 id="taskを使うほうのコード">Taskを使うほうのコード</h2>
 <h3 id="swifttask">SwiftTask</h3>
 <pre><code class="language-swift">request(.GET, urlString).success { [unowned self] (users: [User]) in
     self.textView?.text = &quot;\(users)&quot;
@@ -136,7 +136,7 @@ Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [un
 </ul>
 </li>
 </ul>
-<h2 id="task-1">Taskを作るほうのコード</h2>
+<h2 id="taskを作るほうのコード">Taskを作るほうのコード</h2>
 <ul>
 <li><code>responseCollection</code>といったAlamofireの拡張は事前に済ませている前提です（<a href="http://www.tokoro.me/2015/03/11/almofire/">参考</a>）</li>
 <li>validationの個別カスタマイズなどには今回のサンプルでは対応していません</li>
@@ -205,40 +205,40 @@ public func request&lt;T: ResponseCollectionSerializable&gt;(method: Alamofire.M
     return task.task
 }
 </code></pre>
-<h2 id="heading-2">機能差分</h2>
+<h2 id="機能差分">機能差分</h2>
 <table>
 <thead>
 <tr>
-<th align="left">-</th>
-<th align="center">Genericなインターフェース</th>
-<th align="center">progress用インターフェース</th>
-<th align="center">cancel用インターフェース</th>
+<th style="text-align:left">-</th>
+<th style="text-align:center">Genericなインターフェース</th>
+<th style="text-align:center">progress用インターフェース</th>
+<th style="text-align:center">cancel用インターフェース</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">SwiftTask</td>
-<td align="center">⚪︎</td>
-<td align="center">⚪︎</td>
-<td align="center">⚪︎</td>
+<td style="text-align:left">SwiftTask</td>
+<td style="text-align:center">⚪︎</td>
+<td style="text-align:center">⚪︎</td>
+<td style="text-align:center">⚪︎</td>
 </tr>
 <tr>
-<td align="left">PromiseKit</td>
-<td align="center">⚪︎</td>
-<td align="center"></td>
+<td style="text-align:left">PromiseKit</td>
+<td style="text-align:center">⚪︎</td>
+<td style="text-align:center"></td>
 <td></td>
 </tr>
 <tr>
-<td align="left">Bolts</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">⚪︎</td>
+<td style="text-align:left">Bolts</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">⚪︎</td>
 </tr>
 </tbody>
 </table>
 <p>この表はぼくが気にした点を抽出して書いたものですのでちょっと贔屓目に見えてしまうかも。。。</p>
 <p>この他 <a href="http://qiita.com/inamiy/items/0756339aee35849384c3">inamiyさんのこちらの記事</a> などにも機能差分がまとめられてます。</p>
-<h2 id="heading-3">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <ul>
 <li>どのライブラリも頻繁に更新されパワーアップしているので、どれを使っても大丈夫そうではある</li>
 <li>個人的にはタスクを使うほうのインターフェースを一番すっきり書けるSwiftTaskが気に入った</li>
@@ -319,6 +319,30 @@ public func request&lt;T: ResponseCollectionSerializable&gt;(method: Alamofire.M
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -360,30 +384,6 @@ public func request&lt;T: ResponseCollectionSerializable&gt;(method: Alamofire.M
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -457,6 +457,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

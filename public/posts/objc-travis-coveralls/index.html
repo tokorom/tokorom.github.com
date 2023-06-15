@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -9,13 +9,13 @@
 なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
 https://github.com/tokorom/BlockInjection
 になります。
-前提条件  GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること  Travis CI https://travis-ci.org/
+前提条件 GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること Travis CI https://travis-ci.org/
 目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
 iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
-事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+事前準備 Travis CIのアカウントを作っておく(GitHubのアカウントで） Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
 Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
 自分の場合は、
-PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST=  こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。"><meta name="author" content="tokorom">
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。"><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
@@ -23,13 +23,13 @@ PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests cl
 なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
 https://github.com/tokorom/BlockInjection
 になります。
-前提条件  GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること  Travis CI https://travis-ci.org/
+前提条件 GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること Travis CI https://travis-ci.org/
 目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
 iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
-事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+事前準備 Travis CIのアカウントを作っておく(GitHubのアカウントで） Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
 Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
 自分の場合は、
-PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST=  こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-travis-coveralls/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-travis-coveralls/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -83,24 +83,24 @@ PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests cl
 <p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a></p>
 <p>になります。</p>
 <!-- more -->
-<h2 id="heading">前提条件</h2>
+<h2 id="前提条件">前提条件</h2>
 <ul>
 <li>GitHubを使っていること</li>
 <li>GitHubでなんらかiOS/Mac用のライブラリを公開していること</li>
 </ul>
 <h2 id="travis-ci">Travis CI</h2>
 <p><a href="https://travis-ci.org/">https://travis-ci.org/</a></p>
-<h3 id="heading-1">目的</h3>
+<h3 id="目的">目的</h3>
 <p>公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。<br>
 iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。</p>
-<h3 id="heading-2">事前準備</h3>
+<h3 id="事前準備">事前準備</h3>
 <ul>
 <li>Travis CIのアカウントを作っておく(GitHubのアカウントで）</li>
 </ul>
-<h3 id="travis-cion">Travis CI上で該当のリポジトリをONにする</h3>
+<h3 id="travis-ci上で該当のリポジトリをonにする">Travis CI上で該当のリポジトリをONにする</h3>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/travis_on.png" alt="travis_on"></p>
 <p>Travis CI に行って、このスクリーンショットのように該当リポジトリを <code>ON</code> にするだけです。簡単！</p>
-<h3 id="makefile-">Makefile を用意する（必須ではない）</h3>
+<h3 id="makefile-を用意する必須ではない">Makefile を用意する（必須ではない）</h3>
 <p>必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。</p>
 <p>自分の場合は、</p>
 <pre><code class="language-sh">PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj
@@ -123,7 +123,7 @@ test:
 <p>こんなかんじで、 <code>make test</code> とすると <code>xcodebuild</code> で <code>Tests</code> がビルドされるようにしています。
 <code>TEST_AFTER_BUILD=YES</code> と <code>TEST_HOST=</code> は重要です。</p>
 <p>このMakefileを設置したら、まずはローカル環境で <code>make test</code> が成功するかを確認するのが良いと思います。</p>
-<h3 id="travisyml-">.travis.yml を用意する</h3>
+<h3 id="travisyml-を用意する">.travis.yml を用意する</h3>
 <p>次に、Travis CI用の設定ファイル .travis.yml を設置します。</p>
 <pre><code class="language-sh">language: objective-c
 
@@ -138,7 +138,7 @@ script:
 <h3 id="commit--push">commit &amp; push</h3>
 <p>これらの設定が終わったら、GitHubにpushします。<br>
 すると、自動的にTravis CIで設定した内容が動き始めるはずです。</p>
-<h3 id="heading-3">確認</h3>
+<h3 id="確認">確認</h3>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/travis_success.png" alt="travis_success"></p>
 <p>うまくいけば、 <a href="https://travis-ci.org/tokorom/BlockInjection">こんなかんじ</a> でビルド/テスト結果が確認できるはずです。</p>
 <p>また、</p>
@@ -148,7 +148,7 @@ script:
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/BlockInjection.png?branch=master" alt="BlockInjection"></p>
 <h2 id="coveralls">Coveralls</h2>
 <p><a href="https://coveralls.io/">https://coveralls.io/</a></p>
-<h3 id="heading-4">目的</h3>
+<h3 id="目的-1">目的</h3>
 <p>公開しているライブラリに対してどれくらいテストがきちんと書かれているかを明示できます。<br>
 例えば、ソースコードの全行を網羅するテストコードを書いてあるなら <code>coverage: 100%</code> という表示になります。<br>
 100%を目指す必要はないと思いますが、これがあることで、</p>
@@ -158,15 +158,15 @@ script:
 <li>利用者に対して安心感を持ってもらえる</li>
 </ul>
 <p>といった効果がありそうです。</p>
-<h3 id="heading-5">事前準備</h3>
+<h3 id="事前準備-1">事前準備</h3>
 <ul>
 <li>テストコードを書いておく</li>
 <li>Coverallsのアカウントを作っておく(GitHubのアカウントで）</li>
 </ul>
-<h3 id="coverallson">Coveralls上で該当のリポジトリをONにする</h3>
+<h3 id="coveralls上で該当のリポジトリをonにする">Coveralls上で該当のリポジトリをONにする</h3>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_on.png" alt="coveralls_on"></p>
 <p>やりかたもUIもTravis CI と同じです。CoverallsのADD REPOページに入って該当リポジトリを <code>ON</code> にするだけです。</p>
-<h3 id="gcov">gcovを吐き出す設定を加える</h3>
+<h3 id="gcovを吐き出す設定を加える">gcovを吐き出す設定を加える</h3>
 <p>Makefileにgcovを吐き出す用の設定を追加します。</p>
 <pre><code class="language-sh">test-with-coverage:
 	xcodebuild \
@@ -180,14 +180,14 @@ script:
 		GCC_GENERATE_TEST_COVERAGE_FILES=YES
 </code></pre>
 <p>最後の２つ <code>GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES</code> と <code>GCC_GENERATE_TEST_COVERAGE_FILES=YES</code> がキーポイントです。</p>
-<h3 id="coveralls-1">カバレッジをCoverallsに送る設定を加える</h3>
+<h3 id="カバレッジをcoverallsに送る設定を加える">カバレッジをCoverallsに送る設定を加える</h3>
 <p>さらにMakefileにカバレッジをCoverallsに送信するための設定を追加します。<br>
 <code>coveralls</code> というコマンドが使われていますが、これについてはこの後説明します。</p>
 <pre><code class="language-sh">send-coverage:
 	coveralls \
 		-e BlockInjectionTest/Tests 
 </code></pre>
-<h3 id="travisyml--1">.travis.yml を更新</h3>
+<h3 id="travisyml-を更新">.travis.yml を更新</h3>
 <p>最後に、.travis.yml にCoveralls対応のための設定を追加します。</p>
 <pre><code class="language-sh">language: objective-c
 
@@ -206,7 +206,7 @@ after_success:
 </ul>
 <h3 id="commit--push-1">commit &amp; push</h3>
 <p>すべての設定が終わったら、GitHubにpushすれば、GitHub -&gt; Travis CI -&gt; Coveralls と自動的に連携していきます。</p>
-<h3 id="heading-6">確認</h3>
+<h3 id="確認-1">確認</h3>
 <p>うまく動いていれば、Coverallsで</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_list.png" alt="coveralls_list"></p>
 <p>こんなかんじでカバレッジの確認ができるはずです。</p>
@@ -217,11 +217,11 @@ after_success:
 </code></pre>
 <p>でバッヂの表示ができます。</p>
 <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/badge.png" alt="badge"></p>
-<h3 id="heading-7">カバレッジ計測対象から除外する指定</h3>
+<h3 id="カバレッジ計測対象から除外する指定">カバレッジ計測対象から除外する指定</h3>
 <p>なお、coverallsをそのまま使うとテストコードもカバレッジの計測対象に含まれてしまいます。<br>
 そういった計測対象から除外したいファイルがある場合、<code>-e BlockInjectionTest/Tests</code> のように除外したいファイルのあるディレクトリを指定します。<br>
 この場合だと <code>-e BlockInjectionTest</code> とか <code>-e Tests</code> のようにディレクトリ構造の一部分だけ指定してもうまくいきません。</p>
-<h2 id="heading-8">課題</h2>
+<h2 id="課題">課題</h2>
 <ul>
 <li><s><code>cpp-coveralls</code> で特定のクラスを除外するのがうまくいかない</s>
 <ul>
@@ -303,6 +303,30 @@ after_success:
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -344,30 +368,6 @@ after_success:
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -441,6 +441,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>[HomeKit対応仕様] Philips Hue モーションセンサー | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。"><meta name="author" content="tokorom">
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Philips Hue モーションセンサー
+主なサービス HMServiceType〜 説明 MotionSensor モーションセンサー LightSensor 光センサー TemperatureSensor 温度センサー 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み MotionDetected 動きを検知 bool - CurrentLightLevel 現在の光量 float - BatteryLevel 電池残量 uint8 - CurrentTemperature 現在の温度 float - ChargingState 充電の状態 uint8 - StatusLowBattery 状況（電池残量低下） uint8 - 概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。
+しかも、Eve Motionが6000円だったのと比較するとこちらは4000円台で購入可能で、しかも光センサーや温度センサーまで付いているという豪華仕様です。 また、（HomeKitとは直接関係ありませんが）Hueのライトとの相性はとにかくよく、
+モーションを検知して点灯してから何分後に消灯するか設定でき、かつ、完全消灯の前にうっすら暗くなるフェーズが入る 光センサーによりどのくらいの暗さなら点灯するかを設定できる といったことが可能で、この２点によりライトの自動点灯用としてはEve Motionよりも圧倒的に優れています。 特に「完全消灯の前にうっすら暗くなるフェーズが入る」のが地味に大切で、トイレなどで使っているときにいきなり真っ暗になるのを防ぎ、少し暗くなったらちょっと動いてライトを復活させるといった猶予が作れます。
+ということでEve Motionと比較すると機能的には圧倒的に優れているわけですが、唯一のネックはHueのブリッジが必要というところです。 逆にHueのブリッジを導入済みならこちら一択かと。。。
+もちろん電池残量関連のキャラクタも参照可能です。
+現在の光量を条件に加えるサンプルコード このセンサーの設定はHueアプリで完結できるのですが、せっかくなので光センサーを使って「現在の光量がNより下の場合」だけ「モーションを検知したらライトを点灯する」というサンプルコードを紹介します。
+let home: HMHome = //&lt; 任意のHome let lightLevel: HMCharacteristic = //&lt; HMCharacteristicTypeCurrentLightLevel let motionDetected: HMCharacteristic = //&lt; HMCharacteristicTypeMotionDetected // 現在が15ルクスより暗い場合という条件 let predicate = HMEventTrigger."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="[HomeKit対応仕様] Philips Hue モーションセンサー | TOKOROM BLOG" property="og:title"><meta content="Philips Hue モーションセンサー主なサービス    HMServiceType〜 説明     MotionSensor モーションセンサー   LightSensor 光センサー   TemperatureSensor 温度センサー    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     MotionDetected 動きを検知 bool -   CurrentLightLevel 現在の光量 float -   BatteryLevel 電池残量 uint8 -   CurrentTemperature 現在の温度 float -   ChargingState 充電の状態 uint8 -   StatusLowBattery 状況（電池残量低下） uint8 -    概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_hue_sensor/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<meta content="[HomeKit対応仕様] Philips Hue モーションセンサー | TOKOROM BLOG" property="og:title"><meta content="Philips Hue モーションセンサー
+主なサービス HMServiceType〜 説明 MotionSensor モーションセンサー LightSensor 光センサー TemperatureSensor 温度センサー 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み MotionDetected 動きを検知 bool - CurrentLightLevel 現在の光量 float - BatteryLevel 電池残量 uint8 - CurrentTemperature 現在の温度 float - ChargingState 充電の状態 uint8 - StatusLowBattery 状況（電池残量低下） uint8 - 概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。
+しかも、Eve Motionが6000円だったのと比較するとこちらは4000円台で購入可能で、しかも光センサーや温度センサーまで付いているという豪華仕様です。 また、（HomeKitとは直接関係ありませんが）Hueのライトとの相性はとにかくよく、
+モーションを検知して点灯してから何分後に消灯するか設定でき、かつ、完全消灯の前にうっすら暗くなるフェーズが入る 光センサーによりどのくらいの暗さなら点灯するかを設定できる といったことが可能で、この２点によりライトの自動点灯用としてはEve Motionよりも圧倒的に優れています。 特に「完全消灯の前にうっすら暗くなるフェーズが入る」のが地味に大切で、トイレなどで使っているときにいきなり真っ暗になるのを防ぎ、少し暗くなったらちょっと動いてライトを復活させるといった猶予が作れます。
+ということでEve Motionと比較すると機能的には圧倒的に優れているわけですが、唯一のネックはHueのブリッジが必要というところです。 逆にHueのブリッジを導入済みならこちら一択かと。。。
+もちろん電池残量関連のキャラクタも参照可能です。
+現在の光量を条件に加えるサンプルコード このセンサーの設定はHueアプリで完結できるのですが、せっかくなので光センサーを使って「現在の光量がNより下の場合」だけ「モーションを検知したらライトを点灯する」というサンプルコードを紹介します。
+let home: HMHome = //&lt; 任意のHome let lightLevel: HMCharacteristic = //&lt; HMCharacteristicTypeCurrentLightLevel let motionDetected: HMCharacteristic = //&lt; HMCharacteristicTypeMotionDetected // 現在が15ルクスより暗い場合という条件 let predicate = HMEventTrigger." property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_hue_sensor/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -58,7 +72,7 @@
           </a>
           /</div><div class="content">
       <p><a target="_blank" href="https://www.amazon.co.jp/gp/product/B076ZFF1KR/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B076ZFF1KR&linkCode=as2&tag=tokorom-22&linkId=d39e14ef523d34df26d1c8357919e03f">Philips Hue モーションセンサー</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B076ZFF1KR" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
-<h2 id="heading">主なサービス</h2>
+<h2 id="主なサービス">主なサービス</h2>
 <table>
 <thead>
 <tr>
@@ -81,7 +95,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="heading-1">主なキャラクタ</h2>
+<h2 id="主なキャラクタ">主なキャラクタ</h2>
 <table>
 <thead>
 <tr>
@@ -130,7 +144,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="heading-2">概要</h2>
+<h2 id="概要">概要</h2>
 <p>日本で普通に購入できるモーションセンサーとしては <a href="https://www.apple.com/jp/shop/product/HKVZ2PA/A/elgato-eve-motion-wireless-motion-sensor">Elgato Eve Motion</a> に次ぐ待望の２つめです。</p>
 <p>しかも、Eve Motionが6000円だったのと比較するとこちらは4000円台で購入可能で、しかも光センサーや温度センサーまで付いているという豪華仕様です。
 また、（HomeKitとは直接関係ありませんが）Hueのライトとの相性はとにかくよく、</p>
@@ -143,7 +157,7 @@
 <p>ということでEve Motionと比較すると機能的には圧倒的に優れているわけですが、唯一のネックはHueのブリッジが必要というところです。
 逆にHueのブリッジを導入済みならこちら一択かと。。。</p>
 <p>もちろん電池残量関連のキャラクタも参照可能です。</p>
-<h2 id="heading-3">現在の光量を条件に加えるサンプルコード</h2>
+<h2 id="現在の光量を条件に加えるサンプルコード">現在の光量を条件に加えるサンプルコード</h2>
 <p>このセンサーの設定はHueアプリで完結できるのですが、せっかくなので光センサーを使って「現在の光量がNより下の場合」だけ「モーションを検知したらライトを点灯する」というサンプルコードを紹介します。</p>
 <pre><code class="language-swift">let home: HMHome = //&lt; 任意のHome
 let lightLevel: HMCharacteristic = //&lt; HMCharacteristicTypeCurrentLightLevel
@@ -181,11 +195,11 @@ home.addTrigger(trigger) { error in
     }
 }
 </code></pre>
-<h2 id="heading-4">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p>Hueブリッジを導入済みならHueモーションセンサーは超オススメ！</p>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B076ZFF1KR&linkId=8e54dfa5e1dd91c6acfd29b7b25af2ce&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
 </iframe>
-<h2 id="ios-11-programming">iOS 11 Programmingについて</h2>
+<h2 id="ios-11-programmingについて">iOS 11 Programmingについて</h2>
 <p>この記事は「iOS 11 Programming」の <strong>第12章 HomeKit入門とiOS 11における新機能</strong> の中の <strong>12.4.2 HomeKit 対応製品利用実例</strong> への追加コンテンツ的位置付けにもなっています。
 この製品がサポートするサービス（<code>HMService</code>）やキャラクタ（<code>HMCharacteristic</code>）の表など、全てこの書籍に合わせた形で掲載しております。</p>
 <p>「iOS 11 Programming」にご興味のあるかたは是非、以下リンクからご参照ください。</p>
@@ -263,6 +277,30 @@ home.addTrigger(trigger) { error in
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -304,30 +342,6 @@ home.addTrigger(trigger) { error in
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -401,6 +415,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/internet/</link>
     <description>Recent content in Internet on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/internet/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 07 Sep 2020 16:56:36 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/internet/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</title>
       <link>https://www.tokoro.me/posts/improve-my-internet-connection/</link>
@@ -24,7 +21,11 @@
 と教えてくれたので、 絶対に負けてられない！ せっかくなので自分も改善してみよう！ と思ったのがきっかけです。
 前置き 私はネットワークに関する専門的な知識を持ち合わせていないため、おかしなことを書いたりしているかもしれません。
 間違いなどありましたらよろしければ Twitter までご連絡ください。
- 以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています  有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています    改善前の状態    Key Value     通信速度 10〜40Mbps   プロバイダー Interlink ZOOT NEXT   IP IPv4   接続方式 PPPoE   LANケーブル CAT6のフラットケーブル   Wi-Fiルーター Apple AirMac Time Capsule   Wi-Fi規格 Wi-Fi 5 (11ac)    上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。</description>
+以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています 有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています 改善前の状態 Key Value 通信速度 10〜40Mbps プロバイダー Interlink ZOOT NEXT IP IPv4 接続方式 PPPoE LANケーブル CAT6のフラットケーブル Wi-Fiルーター Apple AirMac Time Capsule Wi-Fi規格 Wi-Fi 5 (11ac) 上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。
+LANケーブルだけ変えた後 せっかくなのでいっきに全部変えてしまうのでなく、１要素ずつ変更して速度計測することにしました。
+まず一発目に「これは効果はないだろうなあ」と思いつつも、LANケーブルだけ新調しました。 光回線の終端装置（ONU）とWi-FiルーターをつなぐLANケーブルです。
+LANケーブルを新しいものに変えて計測したところ&amp;hellip;
+いきなり最大 130Mbps まで速度が跳ね上がってしまいました。</description>
     </item>
     
   </channel>

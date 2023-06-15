@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="ja">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED | TOKOROM BLOG</title>
 
-<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
-Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。"><meta name="author" content="tokorom">
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 Hue 色相 float 可 Saturation 彩度 float 可 Brightness 明るさ int 可 概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
+Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。
+一方で、Hueのほうが 各種APIが充実している など一日の長があります。 既にHueのブリッジを所持している、追加のランプはカラー版でなく安いホワイトグラデーションのほうで良いなどあればHueが優位になってきます。 また、計測情報などもなくどのくらいの差があるかはわかりませんが、単体で動作しWi-Fi通信を行うKoogeekのランプに比べ、ZigBeeで通信するHueのランプのほうが日々の電気代は安くなるかもしれません。
+まずは試してみたいという感覚なのか、本格的に長期で使っていきたいのかなどによって選択は変わってくるかと思います。
+参考: スマートホーム×DIY 実践と展望 〜 2. 実践Homekitの暮らし（実際に自宅でHueとKoogeekを一緒に利用しての所感が書かれた記事）
+ライトの電源をOnにするサンプルコード ライトを点けたり消したりする程度の設定はホームアプリ上でGUIで設定できるわけですが、参考までに敢えてこれをプログラムで実現する場合は以下のようにします。
+// Koogeek LightBulbのpowerStateを取得 let powerState = //&lt; HMCharacteristicTypePowerState // 電源をOnにする powerState."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
-<meta content="[HomeKit対応仕様] Koogeek Wi-Fiスマート LED | TOKOROM BLOG" property="og:title"><meta content="Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色主なサービス    HMServiceType〜 説明     Lightbulb 電球    主なキャラクタ    HMCharacteristicType〜 説明 フォーマット 書き込み     PowerState 電源の状態 bool 可   Hue 色相 float 可   Saturation 彩度 float 可   Brightness 明るさ int 可    概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
-Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_koogeek_lightbulb/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<meta content="[HomeKit対応仕様] Koogeek Wi-Fiスマート LED | TOKOROM BLOG" property="og:title"><meta content="Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 Hue 色相 float 可 Saturation 彩度 float 可 Brightness 明るさ int 可 概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
+Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。
+一方で、Hueのほうが 各種APIが充実している など一日の長があります。 既にHueのブリッジを所持している、追加のランプはカラー版でなく安いホワイトグラデーションのほうで良いなどあればHueが優位になってきます。 また、計測情報などもなくどのくらいの差があるかはわかりませんが、単体で動作しWi-Fi通信を行うKoogeekのランプに比べ、ZigBeeで通信するHueのランプのほうが日々の電気代は安くなるかもしれません。
+まずは試してみたいという感覚なのか、本格的に長期で使っていきたいのかなどによって選択は変わってくるかと思います。
+参考: スマートホーム×DIY 実践と展望 〜 2. 実践Homekitの暮らし（実際に自宅でHueとKoogeekを一緒に利用しての所感が書かれた記事）
+ライトの電源をOnにするサンプルコード ライトを点けたり消したりする程度の設定はホームアプリ上でGUIで設定できるわけですが、参考までに敢えてこれをプログラムで実現する場合は以下のようにします。
+// Koogeek LightBulbのpowerStateを取得 let powerState = //&lt; HMCharacteristicTypePowerState // 電源をOnにする powerState." property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_koogeek_lightbulb/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -60,7 +72,7 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
           </a>
           /</div><div class="content">
       <p><a target="_blank" href="https://www.amazon.co.jp/gp/product/B0721QN7YT/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B0721QN7YT&linkCode=as2&tag=tokorom-22&linkId=2d02e58e189b9fe7b31069cab2f5c71a">Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B0721QN7YT" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
-<h2 id="heading">主なサービス</h2>
+<h2 id="主なサービス">主なサービス</h2>
 <table>
 <thead>
 <tr>
@@ -75,7 +87,7 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
 </tr>
 </tbody>
 </table>
-<h2 id="heading-1">主なキャラクタ</h2>
+<h2 id="主なキャラクタ">主なキャラクタ</h2>
 <table>
 <thead>
 <tr>
@@ -112,10 +124,10 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
 </tr>
 </tbody>
 </table>
-<h2 id="heading-2">概要</h2>
+<h2 id="概要">概要</h2>
 <p>HomeKitのサービス/キャラクタ的には <a href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a> で紹介されているPhilips Hueのランプ（カラー版）と同じです。
 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。</p>
-<h2 id="hue">Hueどっちが良い？</h2>
+<h2 id="hueどっちが良い">Hueどっちが良い？</h2>
 <p>まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。
 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。</p>
 <p>一方で、Hueのほうが <a href="https://www.developers.meethue.com/">各種APIが充実している</a> など一日の長があります。
@@ -123,7 +135,7 @@ Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプの
 また、計測情報などもなくどのくらいの差があるかはわかりませんが、単体で動作しWi-Fi通信を行うKoogeekのランプに比べ、ZigBeeで通信するHueのランプのほうが日々の電気代は安くなるかもしれません。</p>
 <p>まずは試してみたいという感覚なのか、本格的に長期で使っていきたいのかなどによって選択は変わってくるかと思います。</p>
 <p>参考: <a href="http://kudakurage.hatenadiary.com/entry/2018/01/02/094514">スマートホーム×DIY 実践と展望 〜 2. 実践Homekitの暮らし</a>（実際に自宅でHueとKoogeekを一緒に利用しての所感が書かれた記事）</p>
-<h2 id="on">ライトの電源をOnにするサンプルコード</h2>
+<h2 id="ライトの電源をonにするサンプルコード">ライトの電源をOnにするサンプルコード</h2>
 <p>ライトを点けたり消したりする程度の設定はホームアプリ上でGUIで設定できるわけですが、参考までに敢えてこれをプログラムで実現する場合は以下のようにします。</p>
 <pre><code class="language-swift">// Koogeek LightBulbのpowerStateを取得
 let powerState = //&lt; HMCharacteristicTypePowerState
@@ -136,7 +148,7 @@ powerState.writeValue(true) { error in
 これは「好みのライトの状態でOnにする」ためには便利な一方、「前回点いていたライトの状態そのままで電源をOnにしたい」という用途には向きません。</p>
 <p>上記コードだとシンプルに電源のOn/Offのみを操作しているため、前回のライトの色や明るさの状態そのままでOn/Offの切り替えだけが可能です。
 こんなかんじにホームアプリではやりづらい、もしくはできない設定もプログラムからなら可能な場合があります。<a href="https://qiita.com/tokorom/items/b1839b216d52141215c1">HomeKit対応仕様 Philips Hue Dimmer スイッチ</a>で紹介しているOn/Offのトグル設定もその１つです。</p>
-<h2 id="heading-3">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 <p><a href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a> ではPhilips Hueを</p>
 <blockquote>
 <p>HomeKitプログラミングにトライするうえで最初に購入するものとして、おすすめしやすい製品の１つです</p>
@@ -144,7 +156,7 @@ powerState.writeValue(true) { error in
 <p>と紹介していますが、このKoogeekのランプは初期費用が圧倒的に安く、HomeKitプログラミングを試すという用途に絞れば、さらにおすすめしやすい製品と言えそうです。</p>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B0721QN7YT&linkId=b9b5f916f2915ccadb329cf459109d30&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
 </iframe>
-<h2 id="ios-11-programming">iOS 11 Programmingについて</h2>
+<h2 id="ios-11-programmingについて">iOS 11 Programmingについて</h2>
 <p>この記事は「iOS 11 Programming」の<strong>第12章 HomeKit入門とiOS 11における新機能</strong>の中の<strong>12.4.2 HomeKit 対応製品利用実例</strong>への追加コンテンツ的位置付けにもなっています。
 この製品がサポートするサービス（&lsquo;HMService&rsquo;）やキャラクタ（&lsquo;HMCharacteristic&rsquo;）の表など、全てこの書籍に合わせた形で掲載しております。</p>
 <p>「iOS 11 Programming」にご興味のあるかたは是非、以下リンクからご参照ください。</p>
@@ -222,6 +234,30 @@ powerState.writeValue(true) { error in
     
       <div class="feed-item">
   
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/vim-fuzzy-finder/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-fuzzy-finder/top.png" class="feed-item-image" alt="[Vim] ぼくのかんがえたさいきょうのFuzzy Finder" width="300"></div>
+
+    <span class="feed-item-title">[Vim] ぼくのかんがえたさいきょうのFuzzy Finder</span>
+    <span class="feed-item-date">2022年3月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
   <a href="/posts/potatotips-74-shareplay/">
     <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
 
@@ -263,30 +299,6 @@ powerState.writeValue(true) { error in
 
     <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
     <span class="feed-item-date">2021年1月29日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/commit-message-inline-translation/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/commit-message-inline-translation/top.png" class="feed-item-image" alt="Gitのcommitメッセージをその場で英訳したい！" width="300"></div>
-
-    <span class="feed-item-title">Gitのcommitメッセージをその場で英訳したい！</span>
-    <span class="feed-item-date">2020年12月17日</span>
-    <span class="feed-item-date">tokorom</span>
-  </a>
-</div>
-
-    
-      <div class="feed-item">
-  
-  <a href="/posts/ios14_blank_back_button/">
-    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
-
-    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
-    <span class="feed-item-date">2020年10月26日</span>
     <span class="feed-item-date">tokorom</span>
   </a>
 </div>
@@ -360,6 +372,5 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </body>
 </html>

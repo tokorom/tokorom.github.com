@@ -5,12 +5,9 @@
     <link>https://www.tokoro.me/tags/ci/</link>
     <description>Recent content in ci on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.tokoro.me/tags/ci/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/ci/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき</title>
       <link>https://www.tokoro.me/posts/objc-travis-coveralls/</link>
@@ -21,13 +18,13 @@
 なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
 https://github.com/tokorom/BlockInjection
 になります。
-前提条件  GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること  Travis CI https://travis-ci.org/
+前提条件 GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること Travis CI https://travis-ci.org/
 目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
 iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
-事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+事前準備 Travis CIのアカウントを作っておく(GitHubのアカウントで） Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
 Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
 自分の場合は、
-PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST=  こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。</description>
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。</description>
     </item>
     
   </channel>
