@@ -45,15 +45,6 @@
     </item>
     
     <item>
-      <title>vim</title>
-      <link>https://www.tokoro.me/tags/vim/</link>
-      <pubDate>Tue, 22 Mar 2022 21:35:20 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/vim/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>potatotips</title>
       <link>https://www.tokoro.me/tags/potatotips/</link>
       <pubDate>Mon, 28 Jun 2021 13:29:12 +0900</pubDate>
@@ -149,6 +140,15 @@
       <pubDate>Mon, 07 Sep 2020 16:56:36 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/wi-fi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://www.tokoro.me/tags/vim/</link>
+      <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/vim/</guid>
       <description></description>
     </item>
     
