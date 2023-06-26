@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 27 Jan 2020 14:32:55 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Jun 2023 17:27:14 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</title>
+      <link>https://www.tokoro.me/posts/visionos-volume-3dmodel/</link>
+      <pubDate>Mon, 26 Jun 2023 17:27:14 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/visionos-volume-3dmodel/</guid>
+      <description>visionOS SDK Betaがリリースされましたので少しずつ勉強していきます！ まずは第一歩目としてSwiftUIアプリの中で3Dモデルを表示してみました。
+どうやって表示する？ WWDCセッションの紹介としてはどうやらSwiftUIのViewで
+Model3D(named: &amp;quot;xxx&amp;quot;) とするだけで表示できるようです。 簡単すごい！
+どんな3Dモデルを表示できる？ https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:) によると
+The name of the USD or Reality file to display.
+USDファイル Realityファイル を読み込めるよう。
+Realityファイルについてはよく知らないがApple独自のものっぽいです。
+USDは Universal Scene Description といってピクサーの開発した3Dシーングラフ形式とのことらしい。
+今回はどこかからUSDファイルをお借りして表示してみることにします。
+使わせていただいたUSDファイル J CUBE Inc. - Maneki USDZ for AR / CC BY 4.0
+ベースとなるSwiftUIアプリ マルチプラットフォーム対応のシンプルなSwiftUIアプリをベースとしました。
+App import SwiftUI @main struct app: App { var body: some Scene { WindowGroup { ContentView() } .windowStyle(.volumetric) } } SwiftUIアプリはデフォルトではWindowタイプ（平面）になるため、3D表示するためのVolumeタイプにするため、WindowGroupに .windowStyle(.volumetric) モディファイアを適用しました。 変更したのはその1行だけです。</description>
+    </item>
+    
     <item>
       <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
       <link>https://www.tokoro.me/posts/swiftui-hackathon/</link>
