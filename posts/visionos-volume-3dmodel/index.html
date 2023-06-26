@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="visionOS SDK Betaがリリースされましたので少しずつ勉強していきます！ まずは第一歩目としてSwiftUIアプリの中で3Dモデルを表示してみました。
+どうやって表示する？ WWDCセッションの紹介としてはどうやらSwiftUIのViewで
+Model3D(named: &quot;xxx&quot;) とするだけで表示できるようです。 簡単すごい！
+どんな3Dモデルを表示できる？ https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:) によると
+The name of the USD or Reality file to display.
+USDファイル Realityファイル を読み込めるよう。
+Realityファイルについてはよく知らないがApple独自のものっぽいです。
+USDは Universal Scene Description といってピクサーの開発した3Dシーングラフ形式とのことらしい。
+今回はどこかからUSDファイルをお借りして表示してみることにします。
+使わせていただいたUSDファイル J CUBE Inc. - Maneki USDZ for AR / CC BY 4.0
+ベースとなるSwiftUIアプリ マルチプラットフォーム対応のシンプルなSwiftUIアプリをベースとしました。
+App import SwiftUI @main struct app: App { var body: some Scene { WindowGroup { ContentView() } .windowStyle(.volumetric) } } SwiftUIアプリはデフォルトではWindowタイプ（平面）になるため、3D表示するためのVolumeタイプにするため、WindowGroupに .windowStyle(.volumetric) モディファイアを適用しました。 変更したのはその1行だけです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する | TOKOROM BLOG" property="og:title"><meta content="visionOS SDK Betaがリリースされましたので少しずつ勉強していきます！ まずは第一歩目としてSwiftUIアプリの中で3Dモデルを表示してみました。
+どうやって表示する？ WWDCセッションの紹介としてはどうやらSwiftUIのViewで
+Model3D(named: &quot;xxx&quot;) とするだけで表示できるようです。 簡単すごい！
+どんな3Dモデルを表示できる？ https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:) によると
+The name of the USD or Reality file to display.
+USDファイル Realityファイル を読み込めるよう。
+Realityファイルについてはよく知らないがApple独自のものっぽいです。
+USDは Universal Scene Description といってピクサーの開発した3Dシーングラフ形式とのことらしい。
+今回はどこかからUSDファイルをお借りして表示してみることにします。
+使わせていただいたUSDファイル J CUBE Inc. - Maneki USDZ for AR / CC BY 4.0
+ベースとなるSwiftUIアプリ マルチプラットフォーム対応のシンプルなSwiftUIアプリをベースとしました。
+App import SwiftUI @main struct app: App { var body: some Scene { WindowGroup { ContentView() } .windowStyle(.volumetric) } } SwiftUIアプリはデフォルトではWindowタイプ（平面）になるため、3D表示するためのVolumeタイプにするため、WindowGroupに .windowStyle(.volumetric) モディファイアを適用しました。 変更したのはその1行だけです。" property="og:description"><meta content="https://www.tokoro.me/images/visionos-volume-3dmodel/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/visionos-volume-3dmodel/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/visionos-volume-3dmodel/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2023年6月26日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swiftui">
+              SwiftUI
+          </a>
+          /</div><div class="content">
+      <p>visionOS SDK Betaがリリースされましたので少しずつ勉強していきます！
+まずは第一歩目としてSwiftUIアプリの中で3Dモデルを表示してみました。</p>
+<h2 id="どうやって表示する">どうやって表示する？</h2>
+<p>WWDCセッションの紹介としてはどうやらSwiftUIのViewで</p>
+<pre><code class="language-swift">Model3D(named: &quot;xxx&quot;)
+</code></pre>
+<p>とするだけで表示できるようです。
+簡単すごい！</p>
+<h2 id="どんな3dモデルを表示できる">どんな3Dモデルを表示できる？</h2>
+<p><a href="https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:)">https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:)</a> によると</p>
+<blockquote>
+<p>The name of the USD or Reality file to display.</p>
+</blockquote>
+<ul>
+<li>USDファイル</li>
+<li>Realityファイル</li>
+</ul>
+<p>を読み込めるよう。</p>
+<p>Realityファイルについてはよく知らないがApple独自のものっぽいです。</p>
+<p>USDは <a href="https://ja.wikipedia.org/wiki/Universal_Scene_Description">Universal Scene Description</a> といってピクサーの開発した3Dシーングラフ形式とのことらしい。</p>
+<p>今回はどこかからUSDファイルをお借りして表示してみることにします。</p>
+<h2 id="使わせていただいたusdファイル">使わせていただいたUSDファイル</h2>
+<p><a href="https://j-cube.jp/solutions/multiverse/assets/">J CUBE Inc. - Maneki USDZ for AR</a> / <a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a></p>
+<p><img src="/images/visionos-volume-3dmodel/maneki.png" alt="image"></p>
+<h2 id="ベースとなるswiftuiアプリ">ベースとなるSwiftUIアプリ</h2>
+<p>マルチプラットフォーム対応のシンプルなSwiftUIアプリをベースとしました。</p>
+<h2 id="app">App</h2>
+<pre><code class="language-swift">import SwiftUI
+
+@main
+struct app: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .windowStyle(.volumetric)
+    }
+}
+</code></pre>
+<p>SwiftUIアプリはデフォルトではWindowタイプ（平面）になるため、3D表示するためのVolumeタイプにするため、WindowGroupに <code>.windowStyle(.volumetric)</code> モディファイアを適用しました。
+変更したのはその1行だけです。</p>
+<h2 id="実行時エラー">実行時エラー</h2>
+<p>ただ、これを実行しようとすると以下の実行時エラーが出てしまいます。</p>
+<blockquote>
+<p>Thread 1: Fatal error: SwiftUI Scene with VolumetricWindowStyle requires a UISceneSessionRole of &ldquo;UIWindowSceneSessionRoleVolumetricApplication&rdquo; for key UIApplicationPreferredDefaultSceneSessionRole in the Application Scene Manifest.</p>
+</blockquote>
+<p>デフォルトのSceneのWindowGroupをVolumeにするにはApplication Scene Manifestに設定をしなければならないようです。
+エラーに書かれているとおりですが、アプリのInfo.plistを以下のように更新しました。</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+	&lt;key&gt;UIApplicationSceneManifest&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;UIApplicationPreferredDefaultSceneSessionRole&lt;/key&gt;
+		&lt;string&gt;UIWindowSceneSessionRoleVolumetricApplication&lt;/string&gt;
+	&lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+<h2 id="3dモデルファイルをアプリに追加">3Dモデルファイルをアプリに追加</h2>
+<p>それでは、アプリに招き猫のUSDファイルを加えてみます。</p>
+<p><code>Model3D</code>のイニシアライザ的にプロジェクトにそのまま突っ込むのが簡単そうでしたので、今回はなにも考えずXcodeプロジェクトに <code>maneki.usdz</code> をドラッグ＆ドロップしました。</p>
+<p><img src="/images/visionos-volume-3dmodel/maneki-drop.png" alt="maneki-drop"></p>
+<h2 id="swiftuiのviewで3dモデルを表示">SwiftUIのViewで3Dモデルを表示</h2>
+<p>ということでViewで3Dモデルを表示するコードを書くわけですが、本当にこれだけで終わりでした。</p>
+<pre><code class="language-swift">import RealityKit
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        Model3D(named: &quot;maneki&quot;)
+    }
+}
+</code></pre>
+<h2 id="シミュレータで実行">シミュレータで実行</h2>
+<p>これをApple Vision Proシミュレータで実行すると、こんな感じに見事に招き猫が出現！</p>
+<p><img src="/images/visionos-volume-3dmodel/sample1.png" alt="sample1"></p>
+<p>そしてもちろん、Volumeで3D表示しているので場所を動かしたり、別の角度から眺めたりもできました。</p>
+<p><img src="/images/visionos-volume-3dmodel/sample2.png" alt="sample2"></p>
+<h2 id="トラブルシューティング">トラブルシューティング</h2>
+<p>と、簡単に3Dモデルを表示できるわけですが、実際に試した時には<code>Model3D</code>がうまくファイルを読み込んでくれないなどのトラブルもありました。そんな時にどんな理由でファイルを読めないかなどを知りたい場合には、 <a href="https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:transaction:content:)">こちらのイニシアライザ</a> を使うことでデバッグが可能でした。</p>
+<pre><code class="language-swift">Model3D(named: &quot;maneki&quot;) { phase in
+    if let model = phase.model {
+        model
+    } else if let error = phase.error {
+        Text(error.localizedDescription)
+    } else {
+        Text(&quot;other reasons...&quot;)
+    }
+}
+</code></pre>
+<h2 id="ソースコード">ソースコード</h2>
+<p>今回試したソースコードは <a href="https://github.com/tokorom/vision-os-samples">こちらのGitHubリポジトリ</a> に含まれております。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc21-meet-group-activities/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc21-meet-group-activities/top.png" class="feed-item-image" alt="[WWDC21] [SharePlay] Meet Group Activitiesのまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</span>
+    <span class="feed-item-date">2021年6月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2451574-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</body>
+</html>

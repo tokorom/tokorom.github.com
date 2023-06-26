@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>visionos on TOKOROM BLOG</title>
+    <title>visionOS on TOKOROM BLOG</title>
     <link>https://www.tokoro.me/tags/visionos/</link>
-    <description>Recent content in visionos on TOKOROM BLOG</description>
+    <description>Recent content in visionOS on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 15 Jun 2023 15:11:44 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/visionos/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Jun 2023 17:27:14 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/visionos/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</title>
+      <link>https://www.tokoro.me/posts/visionos-volume-3dmodel/</link>
+      <pubDate>Mon, 26 Jun 2023 17:27:14 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/visionos-volume-3dmodel/</guid>
+      <description>visionOS SDK Betaがリリースされましたので少しずつ勉強していきます！ まずは第一歩目としてSwiftUIアプリの中で3Dモデルを表示してみました。
+どうやって表示する？ WWDCセッションの紹介としてはどうやらSwiftUIのViewで
+Model3D(named: &amp;quot;xxx&amp;quot;) とするだけで表示できるようです。 簡単すごい！
+どんな3Dモデルを表示できる？ https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:) によると
+The name of the USD or Reality file to display.
+USDファイル Realityファイル を読み込めるよう。
+Realityファイルについてはよく知らないがApple独自のものっぽいです。
+USDは Universal Scene Description といってピクサーの開発した3Dシーングラフ形式とのことらしい。
+今回はどこかからUSDファイルをお借りして表示してみることにします。
+使わせていただいたUSDファイル J CUBE Inc. - Maneki USDZ for AR / CC BY 4.0
+ベースとなるSwiftUIアプリ マルチプラットフォーム対応のシンプルなSwiftUIアプリをベースとしました。
+App import SwiftUI @main struct app: App { var body: some Scene { WindowGroup { ContentView() } .windowStyle(.volumetric) } } SwiftUIアプリはデフォルトではWindowタイプ（平面）になるため、3D表示するためのVolumeタイプにするため、WindowGroupに .windowStyle(.volumetric) モディファイアを適用しました。 変更したのはその1行だけです。</description>
+    </item>
+    
     <item>
       <title>WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</title>
       <link>https://www.tokoro.me/posts/wwdc2023-keynote-pro-vision/</link>
