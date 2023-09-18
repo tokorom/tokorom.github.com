@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 26 Jun 2023 17:27:14 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 18 Sep 2023 11:37:41 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,49 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</title>
+      <link>https://www.tokoro.me/posts/iosdc2023-shareplay/</link>
+      <pubDate>Mon, 18 Sep 2023 11:37:41 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/iosdc2023-shareplay/</guid>
+      <description>
+        去る2023年9月1日に iOSDC Japan 2023 に参加し、 SharePlayの歴史と進化 - そしてvisionOSへ というセッションをもたせていただきました。
+遅ればせながら iwillblog !
+セッションスライドは 公開 しているものの、スライドにはあまり内容書いておらず台本がメインのため、以下、スライドを添付しつつセッションの内容を簡単にまとめます。
+SharePlayってなに？ 2021年の発表時点ではFaceTime通話中に離れた場所の知り合いとアプリのコンテンツを共有するもの」と紹介していましたが、じつはこの2年でSharePlayの基本概念自体も大きく変わってきています。
+まず2022年に「FaceTime通話中」という制限が撤廃され、2023年のiOS17では「離れた場所の知り合い」という前提条件もなくなり、むしろ積極的に近くの誰かとアプリを共有することを推し出すものとなりました。
+SharePlayは、大きく3種に分けることができます。 Screen Sharing、Media playback、Custom UIです。
+Screen Sharingは表示されているアプリの画面をそのまま共有する機能です。 Media playbackは動画や音楽を同期再生するものです。 Custom UIは各アプリで自由にイベントを送受信するためのものです。 Media playbackとCustom UIは各アプリに組み込が必要な機能で、この2つは同居できます。 SharePlayの歴史と進化 2021年にSharePlayが発表されました。しかしこの時点ではFaceTimeの通話中にしか発火できないという大きな制限がありました。
+翌年2022年には、FaceTime通話中でなくても、アプリ手動でSharePlayを開始したり、さらにはiMessageをトリガーとしてFaceTimeを介さずにSharePlayをすることも可能になりました。 ただ、この時点でもFaceTimeかiMessageのどちらかが必要なので「連絡先を知っている相手」とのみSharePlayができると言う制限がありました。
+そして2023年、SharePlayに革新的なバージョンアップがありました！
+こちらはAppleのWebサイトのスクショですが「iPhone同士を近づけてAirDropできるようになった」という紹介とともに「iPhoneを近づけるだけでSharePlayが開始する」というSharePlayの新機能の紹介が押し出されています。
+そうです！AirDropでSharePlayを開始できるようになったのです。
+AirDropでSharePlayとだけ聞くと、ひょっとすると「AirDropでできるのちょっとだけ便利になったね」くらいの印象かもしれません。
+しかし実際にはこれは 「連絡先を知らない相手」とも気軽にSharePlayが可能になった というSharePlayの歴史においては革新的なバージョンアップなんです。
+これでSharePlayを利用開始する敷居は格段に下がりました。
+また、AirDropするということはAirDropする相手がすぐ近くにいるということですので、これまで特にコロナ禍でリモートで離れた場所にいる家族や友達とのSharePlayという押し出しかただったのと比較し、2023年には「近くにいる知り合い」とのSharePlay！というのも大きく推し出されるように変わりました！
+もっというとAirDropの採用は、連絡先を登録しあうまでではない知り合いとの インスタントなSharePlay がユースケースに加わったということを示しています。
+その他のバージョンアップ まず、2022年 iOS15.4でSharePlayのカスタムUIで一度に送信できるメッセージのサイズが64KBから256KBに拡大されました。
+次にiOS15.4でメッセージ送信のレイテンシを改善する機能も入っています。具体的には優先度の低いメッセージをアプリで明示的に指定し、UDPで高速に送信できるようにする仕組みです。
+たとえばお絵描きアプリであれば、線を描いている途中経過については低レイテンシで高速にメッセージを送信し、線を全て描き終わったタイミングで線の全ての情報を改めて信頼性の高いメッセージで送信しなおす、といったことが可能です。
+またiOS15.4ではアプリがSharePlayの開始を簡単に実現できるようにGroupActivitySharingControllerというクラスも追加されました。
+これを利用することでアプリ手動でSharePlayを開始し、FaceTimeやMessageで友達をSharePlayに招待するUIをOS任せで簡単に実現できるようになりました。
+そして2023年、iOS17でSharePlayの仕組みの中でファイル送信も可能になります！
+これまでは画像やPDFなどの重いファイルをSharePlayの仕組みの中だけで送受信することはできませんでした。
+iOS17からは、たとえばお絵描きアプリの写真やPDF添付機能もSharePlayの仕組みの中だけで完結できます。
+さらに素晴らしいことにSharePlayのファイル転送の仕組みは、SharePlayに後から参加した人へのフォローもしてくれます。
+通常SharePlayは後から参加した人に現在の状態を伝えるために、他の参加者がこれまでの経緯をまとめて送り直す必要があります。
+しかしサイズの大きいファイルを送り直すのは大変です。SharePlayのファイル転送機能では、他の参加者が送り直さなくてもAppleのサーバから直接ファイルをダウンロードすることが可能とのことです。
+そして最後に、tvOS17からはApple TVでもFaceTimeが可能になりました！
+これ自体はSharePlayに関するアップデートではありませんが、マルチプラットフォームでSharePlayを扱いやすくなったという点で非常に良いニュースかと思います。
+visionOSでのSharePlay とここまでSharePlayの歴史と進化について紹介してきましたが、今年2023年にはApple Vision Proも発表されました。 SharePlayは、もちろんvisionOSにも対応します。
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/iosdc2023-shareplay/top.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</title>
@@ -568,35 +611,6 @@ command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&
       </description>
       
       <coverImage>https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
-      <link>https://www.tokoro.me/posts/vim-markdown-image-tool/</link>
-      <pubDate>Tue, 31 Mar 2020 16:38:32 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
-      <description>
-        Photo by Victor Grabarczyk on Unsplash
-ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
-最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
-記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
-特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
-手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
-各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
-決して難しいことはありませんが地味に面倒でした。
-ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
-ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
-具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
-/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
-現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
-function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
-ここでやっているのは、
-特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg</coverImage>
       
     </item>
     
