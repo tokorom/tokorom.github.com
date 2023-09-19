@@ -10,6 +10,7 @@ canonical: https://spinners.work
 ---
 
 ![image](/images/iosdc2023-shareplay/top.jpg)
+<span style="color: lightgray;">Photo by <a href="https://twitter.com/huin/status/1700044357808877656" style="color: gray;">@huin</a></span>
 
 去る2023年9月1日に [iOSDC Japan 2023](https://iosdc.jp/2023/) に参加し、 [SharePlayの歴史と進化 - そしてvisionOSへ](https://fortee.jp/iosdc-japan-2023/proposal/f304e4d7-b436-4f30-85eb-21721c465715) というセッションをもたせていただきました。
 
