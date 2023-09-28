@@ -7,22 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 26 Jun 2023 17:27:14 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Sep 2023 11:00:50 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>swiftui</title>
-      <link>https://www.tokoro.me/tags/swiftui/</link>
-      <pubDate>Mon, 26 Jun 2023 17:27:14 +0900</pubDate>
+      <title>RealityKit</title>
+      <link>https://www.tokoro.me/tags/realitykit/</link>
+      <pubDate>Thu, 28 Sep 2023 11:00:50 +0900</pubDate>
       
-      <guid>https://www.tokoro.me/tags/swiftui/</guid>
+      <guid>https://www.tokoro.me/tags/realitykit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>visionOS</title>
       <link>https://www.tokoro.me/tags/visionos/</link>
-      <pubDate>Mon, 26 Jun 2023 17:27:14 +0900</pubDate>
+      <pubDate>Thu, 28 Sep 2023 11:00:50 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/visionos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swiftui</title>
+      <link>https://www.tokoro.me/tags/swiftui/</link>
+      <pubDate>Mon, 26 Jun 2023 17:27:14 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/swiftui/</guid>
       <description></description>
     </item>
     

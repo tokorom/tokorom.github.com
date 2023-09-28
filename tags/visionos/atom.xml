@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 26 Jun 2023 17:27:14 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/visionos/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Sep 2023 11:00:50 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/visionos/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</title>
+      <link>https://www.tokoro.me/posts/visionos-simplest-full-immersion-space-app/</link>
+      <pubDate>Thu, 28 Sep 2023 11:00:50 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/visionos-simplest-full-immersion-space-app/</guid>
+      <description>ぼくがやりたかったのはシンプルに完全没入空間 immersiveStyle = FullImmersionStyle になにか表示するというだけなのですが、それなのに地味にはまったため記事にしています。
+完全没入空間とは 日本語訳が正しいかわかりませんが、パススルー領域が全くない３６０度全面が1つのアプリで覆われた空間が完全没入空間です。
+visionOSならではのUIであるため、なにかしら試してみたいかたも多いのではないでしょうか。
+Appleのサンプルでは宇宙空間に没入するデモがあります。
+最もシンプルなサンプルがほしい！ このAppleのサンプルを動かせばことが済む話でもあるのですが、このサンプルでも地球や月などのコンテンツを読み出してRealityViewに設置するなどしなければならず、RealityKitに慣れていない僕にとってはこれでも冗長かなあという感覚でした。
+僕からすると未知のファイルなどがなにもなく、単に目の前に四角形が1つ出る程度の最もシンプルなものが欲しかったんです。
+それをベースにちょっとずつ自分で実験をしていければ、と。
+これが最低限の３ファイルだ！ app.swift アプリのエントリポイントです。
+import SwiftUI @main struct SimplestFullImmersionApp: App { var body: some Scene { WindowGroup { ContentView() } ImmersiveSpace(id: &amp;quot;ImmersiveSpace&amp;quot;) { ImmersiveView() } .immersionStyle(selection: .constant(.full), in: .full) } } body内に初期表示される WindowGroup と ImmersiveSpace を置きます ImmersiveSpace は完全没入スタイルにするため immersionStyle に full を指定します ContentView.swift 初期表示されるWindowのViewです。
+import SwiftUI struct ContentView: View { @Environment(\.openImmersiveSpace) var openImmersiveSpace var body: some View { Button(&amp;quot;Open Immersive Space&amp;quot;) { Task { await openImmersiveSpace(id: &amp;quot;ImmersiveSpace&amp;quot;) } } } } Environmentの openImmersiveSpace を使えるようにします Buttonを1つ設置し押したら openImmersiveSpace で app.</description>
+    </item>
+    
     <item>
       <title>[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</title>
       <link>https://www.tokoro.me/posts/visionos-volume-3dmodel/</link>
