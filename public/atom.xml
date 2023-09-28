@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 18 Sep 2023 11:37:41 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 28 Sep 2023 11:00:50 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,29 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</title>
+      <link>https://www.tokoro.me/posts/visionos-simplest-full-immersion-space-app/</link>
+      <pubDate>Thu, 28 Sep 2023 11:00:50 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/visionos-simplest-full-immersion-space-app/</guid>
+      <description>
+        ぼくがやりたかったのはシンプルに完全没入空間 immersiveStyle = FullImmersionStyle になにか表示するというだけなのですが、それなのに地味にはまったため記事にしています。
+完全没入空間とは 日本語訳が正しいかわかりませんが、パススルー領域が全くない３６０度全面が1つのアプリで覆われた空間が完全没入空間です。
+visionOSならではのUIであるため、なにかしら試してみたいかたも多いのではないでしょうか。
+Appleのサンプルでは宇宙空間に没入するデモがあります。
+最もシンプルなサンプルがほしい！ このAppleのサンプルを動かせばことが済む話でもあるのですが、このサンプルでも地球や月などのコンテンツを読み出してRealityViewに設置するなどしなければならず、RealityKitに慣れていない僕にとってはこれでも冗長かなあという感覚でした。
+僕からすると未知のファイルなどがなにもなく、単に目の前に四角形が1つ出る程度の最もシンプルなものが欲しかったんです。
+それをベースにちょっとずつ自分で実験をしていければ、と。
+これが最低限の３ファイルだ！ app.swift アプリのエントリポイントです。
+import SwiftUI @main struct SimplestFullImmersionApp: App { var body: some Scene { WindowGroup { ContentView() } ImmersiveSpace(id: &amp;quot;ImmersiveSpace&amp;quot;) { ImmersiveView() } .immersionStyle(selection: .constant(.full), in: .full) } } body内に初期表示される WindowGroup と ImmersiveSpace を置きます ImmersiveSpace は完全没入スタイルにするため immersionStyle に full を指定します ContentView.swift 初期表示されるWindowのViewです。
+import SwiftUI struct ContentView: View { @Environment(\.openImmersiveSpace) var openImmersiveSpace var body: some View { Button(&amp;quot;Open Immersive Space&amp;quot;) { Task { await openImmersiveSpace(id: &amp;quot;ImmersiveSpace&amp;quot;) } } } } Environmentの openImmersiveSpace を使えるようにします Buttonを1つ設置し押したら openImmersiveSpace で app.
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/visionos-simplest-full-immersion-space-app/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</title>
@@ -582,36 +605,6 @@ Incoming WebhookのURLをenvに指定 textフィールドを指定 フィール�
       </description>
       
       <coverImage>https://www.tokoro.me/images/github-actions-context/github-actions.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>Vimにスクショを直接Markdownで貼り付ける</title>
-      <link>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
-      <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
-      <description>
-        Photo by Jae Park on Unsplash
-前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
-ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
-そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
-今回はそこを解決します！
-pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
-screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
-screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
-vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
-現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
-そのため、前回のpluginを少し拡張して、
-command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
-今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
-仕組み自体は前回と変わりません。
-このpluginは GitHub に置いてあります。
-スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
-#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}` です。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png</coverImage>
       
     </item>
     
