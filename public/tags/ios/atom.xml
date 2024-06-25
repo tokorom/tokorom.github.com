@@ -7,7 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 15 Jun 2023 15:11:44 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/ios/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Jun 2024 10:56:06 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/ios/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[WWDC24] SwiftUIの新機能のまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</link>
+      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</guid>
+      <description>WWDC24の What’s new in SwiftUI のまとめです。
+今回、このセッションで紹介される項目の数が例年以上に多すぎてびっくりでした。 セッションでは短い間隔でポンポンとたくさんの機能が流れるように紹介されていきます。
+このまとめでは、セッションでは軽く触れられた程度の内容も、APIリファレンスへのリンクをつけるなどしてもう少しだけ補足します。
+このセッションを視聴する/この記事を参照する目的は、WWDC24で発表されたSwiftUIの新機能をさらっと把握し頭の中にインデックスを貼ることだと思います。
+サイドバー/タブバー サイドバー/タブバーがより柔軟に フローティングタブバーをサポート 項目の並び替えや使用頻度の低いオプションの非表示など、ユーザーが自分好みにカスタマイズすることもできる TabViewに内包する要素も新しいタイプセーフな書き方に struct KaraokeTabView: View { @State var customization = TabViewCustomization() var body: some View { TabView { Tab(&amp;quot;Parties&amp;quot;, image: &amp;quot;party.popper&amp;quot;) { PartiesView(parties: Party.all) } .customizationID(&amp;quot;karaoke.tab.parties&amp;quot;) Tab(&amp;quot;Planning&amp;quot;, image: &amp;quot;pencil.and.list.clipboard&amp;quot;) { PlanningView() } .customizationID(&amp;quot;karaoke.tab.planning&amp;quot;) Tab(&amp;quot;Attendance&amp;quot;, image: &amp;quot;person.3&amp;quot;) { AttendanceView() } .customizationID(&amp;quot;karaoke.tab.attendance&amp;quot;) Tab(&amp;quot;Song List&amp;quot;, image: &amp;quot;music.note.list&amp;quot;) { SongListView() } .customizationID(&amp;quot;karaoke.tab.songlist&amp;quot;) } .tabViewStyle(.sidebarAdaptable) .tabViewCustomization($customization) } } tabViewStyleに sidebarAdaptable を指定することで、プラットフォームごとに柔軟にサイドバー OR タブバーが適用される</description>
+    </item>
+    
     <item>
       <title>WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</title>
       <link>https://www.tokoro.me/posts/wwdc2023-keynote-pro-vision/</link>
