@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 28 Sep 2023 11:00:50 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 25 Jun 2024 10:56:06 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,24 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[WWDC24] SwiftUIの新機能のまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</link>
+      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</guid>
+      <description>
+        WWDC24の What’s new in SwiftUI のまとめです。
+今回、このセッションで紹介される項目の数が例年以上に多すぎてびっくりでした。 セッションでは短い間隔でポンポンとたくさんの機能が流れるように紹介されていきます。
+このまとめでは、セッションでは軽く触れられた程度の内容も、APIリファレンスへのリンクをつけるなどしてもう少しだけ補足します。
+このセッションを視聴する/この記事を参照する目的は、WWDC24で発表されたSwiftUIの新機能をさらっと把握し頭の中にインデックスを貼ることだと思います。
+サイドバー/タブバー サイドバー/タブバーがより柔軟に フローティングタブバーをサポート 項目の並び替えや使用頻度の低いオプションの非表示など、ユーザーが自分好みにカスタマイズすることもできる TabViewに内包する要素も新しいタイプセーフな書き方に struct KaraokeTabView: View { @State var customization = TabViewCustomization() var body: some View { TabView { Tab(&amp;quot;Parties&amp;quot;, image: &amp;quot;party.popper&amp;quot;) { PartiesView(parties: Party.all) } .customizationID(&amp;quot;karaoke.tab.parties&amp;quot;) Tab(&amp;quot;Planning&amp;quot;, image: &amp;quot;pencil.and.list.clipboard&amp;quot;) { PlanningView() } .customizationID(&amp;quot;karaoke.tab.planning&amp;quot;) Tab(&amp;quot;Attendance&amp;quot;, image: &amp;quot;person.3&amp;quot;) { AttendanceView() } .customizationID(&amp;quot;karaoke.tab.attendance&amp;quot;) Tab(&amp;quot;Song List&amp;quot;, image: &amp;quot;music.note.list&amp;quot;) { SongListView() } .customizationID(&amp;quot;karaoke.tab.songlist&amp;quot;) } .tabViewStyle(.sidebarAdaptable) .tabViewCustomization($customization) } } tabViewStyleに sidebarAdaptable を指定することで、プラットフォームごとに柔軟にサイドバー OR タブバーが適用される
+      </description>
+      
+      <coverImage>https://www.tokoro.me/images/wwdc24-whats-new-in-swiftui/top.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</title>
@@ -579,32 +597,6 @@ AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクラ�
       </description>
       
       <coverImage>https://www.tokoro.me/images/swift-aws-lambda-runtime/top.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
-      <link>https://www.tokoro.me/posts/github-actions-context/</link>
-      <pubDate>Wed, 13 May 2020 17:26:38 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/github-actions-context/</guid>
-      <description>
-        この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
-概要 GitHub Actions、簡単便利で良いですね！
-ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
-Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
-ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
-レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
-作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
-実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
-Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
-- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
-いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
-成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
-- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &amp;quot;${{ github.
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/github-actions-context/github-actions.png</coverImage>
       
     </item>
     
