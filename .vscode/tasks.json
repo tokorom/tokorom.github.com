@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Open in Terminal",
+            "type": "shell",
+            "command": "open -a Terminal ./",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ImageOptim",
+            "type": "shell",
+            "command": "open -a ImageOptim ./",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        }
+    ]
+} 
