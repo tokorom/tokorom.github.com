@@ -10,22 +10,13 @@ SPINNERSDIR="${HOME}/develop/spinners/www.spinners.work"
 POSTDIR="content/posts"
 IMAGEDIR="content/images"
 
-SOURCEENTRY="./${POSTDIR}/${ENTRYNAME}.md"
+SOURCEENTRY="./${POSTDIR}/${ENTRYNAME}"
 TARGETENTRY="${SPINNERSDIR}/${POSTDIR}/"
-SOURCEIMAGES="./${IMAGEDIR}/${ENTRYNAME}"
-TARGETIMAGES="${SPINNERSDIR}/${IMAGEDIR}/"
 
-cp "${SOURCEENTRY}" "${TARGETENTRY}"
+cp -r "${SOURCEENTRY}" "${TARGETENTRY}"
 ret=$?
 if [ $ret -eq 0 ]; then
-  echo "Copied to ${TARGETENTRY}/${ENTRYNAME}.md"
+  echo "Copied to ${TARGETENTRY}/${ENTRYNAME}"
 fi
 
-if [ -e "${SOURCEIMAGES}" ]; then
-  cp -r "${SOURCEIMAGES}" "${TARGETIMAGES}"
-  ret=$?
-  if [ $ret -eq 0 ]; then
-    echo "Copied to ${TARGETIMAGES}${ENTRYNAME}"
-    ls "${TARGETIMAGES}${ENTRYNAME}"
-  fi
-fi
+echo "${TARGETENTRY}/${ENTRYNAME}" | pbcopy
