@@ -1,3 +1,1060 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[TOKOROM BLOG]]></title>
+  <link href="http://www.tokoro.me/atom.xml" rel="self"/>
+  <link href="http://www.tokoro.me/"/>
+  <updated>2015-10-06T10:30:06+09:00</updated>
+  <id>http://www.tokoro.me/</id>
+  <author>
+    <name><![CDATA[Yuta ToKoRo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?]]></title>
+<link href="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/"/>
+<updated>2015-10-05T12:27:00+09:00</updated>
+<id>http://www.tokoro.me/2015/10/05/el-capitain-totalterminal</id>
+
+      <content type="html"><![CDATA[<h2>El CapitanにしたらTotalTerminalが動かない！</h2>
+
+<p>Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。</p>
+
+<p>しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！</p>
+
+<p>もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。
+（実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）</p>
+
+<p>であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！
+と思いたって試してみました。
+（実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）</p>
+
+<p>以下、試したことをまとめます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2015/10/05/el-capitain-totalterminal/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）]]></title>
+<link href="http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/"/>
+<updated>2015-03-12T17:01:00+09:00</updated>
+<id>http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts</id>
+
+      <content type="html"><![CDATA[<ul>
+<li>※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます</li>
+<li>※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです</li>
+</ul>
+
+
+<p>次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の</p>
+
+<ul>
+<li><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a></li>
+<li><a href="https://github.com/mxcl/PromiseKit">PromiseKit</a></li>
+<li><a href="https://github.com/BoltsFramework/Bolts-iOS">Bolts-iOS</a></li>
+</ul>
+
+
+<p>を（表面だけ）使って比較してみました。</p>
+
+<p>なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。</p>
+
+<p>その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。</p>
+
+<p>以下にそれぞれ使ってみた結果を紹介させていただきます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2015/03/12/swifttask-promisekit-bolts/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[AlamofireでGenericにModelオブジェクトを取得する]]></title>
+<link href="http://www.tokoro.me/2015/03/11/almofire/"/>
+<updated>2015-03-11T15:59:00+09:00</updated>
+<id>http://www.tokoro.me/2015/03/11/almofire</id>
+
+      <content type="html"><![CDATA[<p>※この記事のコードはXcode 6.3 beta（Swift 1.2）で試しています</p>
+
+<p>Swiftいいですね！</p>
+
+<p>これまでSwiftの案件を２つほどやってきたのですが、どちらも開発スタートが2014年7月だったため新しめのSwiftライブラリもリスクが高そうで、利用できるライブラリはある程度限定されてしまいました。
+例えば、<a href="https://github.com/Alamofire/Alamofire">Alamofire</a> のInitial Commitも2014/7/31だったりと。。。</p>
+
+<p>今となっては（2015年3月）Swift公開から早９ヶ月が経過しており、ライブラリの選択肢もだいぶ広がりました。
+また、まだSwiftのライブラリを管理する環境もだいぶ整ってきました（ちょうど本日3/11にCocoaPodsのDynamic Framework対応版が公開されました！）。</p>
+
+<p>ということで、３月からはじめる新案件では<code>Alamofire</code>の採用を決め、APIアクセスまわりのインターフェースをいろいろと検討してみました。
+やはりSwiftを使うからには、Genericsを使ってModelオブジェクトに変換された状態のレスポンスを受け取れるインターフェースになっていて欲しいですよね！</p>
+
+<p>※基本的にはAlamofireのREADMEに書かれている話です</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2015/03/11/almofire/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[NSTimeZoneから取得できる表示用文字列のサンプル]]></title>
+<link href="http://www.tokoro.me/2014/11/10/nstimezone-sample/"/>
+<updated>2014-11-10T10:22:00+09:00</updated>
+<id>http://www.tokoro.me/2014/11/10/nstimezone-sample</id>
+
+      <content type="html"><![CDATA[<p>さっき、画面上に現在設定されているTime Zoneを表示するって機能を実装していたのですが、NSTimeZoneからどういう文字列が取れるかのサンプルが意外と見つからなかったのでメモします。</p>
+
+<h2>abbreviation</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>GMT+9</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>name</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Asia/Tokyo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>description</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Asia/Tokyo (GMT+9) offset 32400</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>localizedName(_:locale:)</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> NSLocale </th>
+<th align="left"> NSTimeZoneNameStyle  </th>
+<th align="left"> 出力結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> Standard  </td>
+<td align="left"> <strong>Japan Standard Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortStandard  </td>
+<td align="left"> <strong>GMT+9</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> DaylightSaving  </td>
+<td align="left"> <strong>Japan Daylight Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortDaylightSaving  </td>
+<td align="left"> <strong>GMT+9</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> Generic  </td>
+<td align="left"> <strong>Japan Standard Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> en_US </td>
+<td align="left"> ShortGeneric  </td>
+<td align="left"> <strong>Japan Time</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> Standard  </td>
+<td align="left"> <strong>日本標準時</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortStandard  </td>
+<td align="left"> <strong>JST</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> DaylightSaving  </td>
+<td align="left"> <strong>日本夏時間</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortDaylightSaving  </td>
+<td align="left"> <strong>JDT</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> Generic  </td>
+<td align="left"> <strong>日本標準時</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> ja_JP </td>
+<td align="left"> ShortGeneric  </td>
+<td align="left"> <strong>JST</strong></td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>上記を試したコード</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let timeZone = NSTimeZone.systemTimeZone()
+</span><span class='line'>
+</span><span class='line'>println("#### abbreviation, \(timeZone.abbreviation)")
+</span><span class='line'>println("#### name, \(timeZone.name)")
+</span><span class='line'>println("#### description, \(timeZone.description)")
+</span><span class='line'>
+</span><span class='line'>let en = NSLocale(localeIdentifier: "en_US")
+</span><span class='line'>println("#### Standard, \(timeZone.localizedName(.Standard, locale: en))")
+</span><span class='line'>println("#### ShortStandard, \(timeZone.localizedName(.ShortStandard, locale: en))")
+</span><span class='line'>println("#### DaylightSaving, \(timeZone.localizedName(.DaylightSaving, locale: en))")
+</span><span class='line'>println("#### ShortDaylightSaving, \(timeZone.localizedName(.ShortDaylightSaving, locale: en))")
+</span><span class='line'>println("#### Generic, \(timeZone.localizedName(.Generic, locale: en))")
+</span><span class='line'>println("#### ShortGeneric, \(timeZone.localizedName(.ShortGeneric, locale: en))")
+</span><span class='line'>
+</span><span class='line'>let ja = NSLocale(localeIdentifier: "ja_JP")
+</span><span class='line'>println("#### Standard, \(timeZone.localizedName(.Standard, locale: ja))")
+</span><span class='line'>println("#### ShortStandard, \(timeZone.localizedName(.ShortStandard, locale: ja))")
+</span><span class='line'>println("#### DaylightSaving, \(timeZone.localizedName(.DaylightSaving, locale: ja))")
+</span><span class='line'>println("#### ShortDaylightSaving, \(timeZone.localizedName(.ShortDaylightSaving, locale: ja))")
+</span><span class='line'>println("#### Generic, \(timeZone.localizedName(.Generic, locale: ja))")
+</span><span class='line'>println("#### ShortGeneric, \(timeZone.localizedName(.ShortGeneric, locale: ja))")</span></code></pre></td></tr></table></div></figure>
+
+
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/11/10/nstimezone-sample/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う]]></title>
+<link href="http://www.tokoro.me/2014/09/13/swift-simulator/"/>
+<updated>2014-09-13T13:14:00+09:00</updated>
+<id>http://www.tokoro.me/2014/09/13/swift-simulator</id>
+
+      <content type="html"><![CDATA[<p>だいぶ小ネタ。</p>
+
+<h2>コード</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>#if (arch(i386) || arch(x86_64)) && os(iOS)
+</span><span class='line'>    AFNetworkActivityLogger.sharedLogger().level = .AFLoggerLevelDebug
+</span><span class='line'>    AFNetworkActivityLogger.sharedLogger().startLogging()
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>UIDevice</code>を使う方法もあるが、そちらは実際に動いたときに判別することになる。<br/>
+こちらだとそもそもiPhone用のアプリからはこのコード自体省かれる形になる。</p>
+
+<h2>意味</h2>
+
+<ul>
+<li><code>arc(i386)</code>
+
+<ul>
+<li>32bitのMac（シミュレータ）用のビルド</li>
+</ul>
+</li>
+<li><code>arc(x86_64)</code>
+
+<ul>
+<li>64bitのMac（シミュレータ）用のビルド</li>
+</ul>
+</li>
+<li><code>os(iOS)</code>
+
+<ul>
+<li>ターゲットがMacじゃなくてiOS</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>オマケ</h2>
+
+<p>ぼくの手元では、デバッグ実行時に</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>#if DEBUG
+</span><span class='line'>    println("DEBUG")
+</span><span class='line'>#endif</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で <code>DEBUG</code> が出力されない。普通は出力されるはず？？</p>
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/09/13/swift-simulator/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Swiftで部分適用（カリー化）]]></title>
+<link href="http://www.tokoro.me/2014/07/30/swift-partial-application/"/>
+<updated>2014-07-30T21:52:00+09:00</updated>
+<id>http://www.tokoro.me/2014/07/30/swift-partial-application</id>
+
+      <content type="html"><![CDATA[<h2>Swiftオフィシャルの部分適用</h2>
+
+<p>まず、Swiftオフィシャルな構文として</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func addTwoNumbers(a: Int)(b: Int) -> Int {
+</span><span class='line'>  return a + b
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>let add1 = addTwoNumbers(1)
+</span><span class='line'>add1(b: 2) //&lt; 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というかんじに、</p>
+
+<ul>
+<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
+<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
+</ul>
+
+
+<p>というのができる。</p>
+
+<h2>専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+
+<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
+
+<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
+
+<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
+
+<h2>実装</h2>
+
+<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>func partial&lt;A, B, R>(function: (A, B) -> R, a: @auto_closure () -> A) -> (B) -> R {
+</span><span class='line'>    return { function(a(), $0) }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/07/30/swift-partial-application/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[これがXcodeでのバージョニングの決定版になるかも]]></title>
+<link href="http://www.tokoro.me/2014/05/19/xcode-versioning/"/>
+<updated>2014-05-19T14:16:00+09:00</updated>
+<id>http://www.tokoro.me/2014/05/19/xcode-versioning</id>
+
+      <content type="html"><![CDATA[<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/xcode_versioning.png"></p>
+
+<h2>概要</h2>
+
+<h3>この記事でできるようになること</h3>
+
+<ul>
+<li>安定してInfo.plistの内容（ここではBuild番号）を変更できる</li>
+<li>ふつうにRun Scriptで編集するとタイミングによってすぐにアプリに反映されないことがあったりしたがそれが解消される</li>
+<li>Info.plistに差分がでないのでcommitのときに邪魔にならない</li>
+</ul>
+
+
+<p>なお、この方法を教えてくれた熊谷さんがこの方法に行き着いた経緯や所感が<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">こちら</a>に詳しくまとめられています。詳細や考え方などをきちんと知りたいかたは是非、<a href="http://program.station.ez-net.jp/special/objective-c/xcode/update-build.asp">熊谷さんの記事</a>をご一読ください！</p>
+
+<h3>必要な設定</h3>
+
+<ul>
+<li><code>Preprocess Info.plist file</code> でInfo.plistをビルド前に確定させる</li>
+<li>Run Scriptで<code>${TEMP_DIR}/Preprocessed-Info.plist</code>を編集する</li>
+</ul>
+
+
+<p>以下、具体的な話をします。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/05/19/xcode-versioning/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cで非同期処理のテストをシンプルに書く方法]]></title>
+<link href="http://www.tokoro.me/2014/04/21/objc-async-test/"/>
+<updated>2014-04-21T17:03:00+09:00</updated>
+<id>http://www.tokoro.me/2014/04/21/objc-async-test</id>
+
+      <content type="html"><![CDATA[<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/TKRGuard_image.png"></p>
+
+<h2>非同期処理のテストってどう書いてますか？</h2>
+
+<p>標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、</p>
+
+<ul>
+<li>GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する</li>
+<li>GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？）</li>
+<li>expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う</li>
+</ul>
+
+
+<p>となるかと思います。
+ただ、私が調べた時点だとどれもしっくりきませんでした。</p>
+
+<p>まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。</p>
+
+<p>また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えば<code>GHAsyncTestCase</code>を継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前に<code>prepare</code>とかを呼ばないといけないのがちょっと鬱陶しい。</p>
+
+<p>そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。</p>
+
+<h2>こうしたい！</h2>
+
+<p>ぼくとしては理想的にはこういうライブラリを使いたいと思いました。</p>
+
+<ol>
+<li>テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの</li>
+<li>TestCaseの親クラスが限定されないほうがよい</li>
+<li>余分なコードを書かずにシンプルに書きたい</li>
+<li>それを利用することでテストの実行が遅くなったりしない</li>
+</ol>
+
+
+<p>しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/04/21/objc-async-test/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Storyboardでの画面遷移をスマートにやる方法]]></title>
+<link href="http://www.tokoro.me/2014/04/12/improve-storyboard-segue/"/>
+<updated>2014-04-12T17:58:00+09:00</updated>
+<id>http://www.tokoro.me/2014/04/12/improve-storyboard-segue</id>
+
+      <content type="html"><![CDATA[<p>これは <a href="http://connpass.com/event/5803/">potatotips第６回め</a> で発表した <a href="https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka">この話</a> のまとめと後書きです。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/storyboard_sample.png"></p>
+
+<h2>Storyboardいいですよね！</h2>
+
+<p>Storyboardを使うことで、</p>
+
+<ul>
+<li>画面と画面が疎結合になる</li>
+<li>簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない</li>
+</ul>
+
+
+<p>といったメリットがあります。</p>
+
+<p>Storyboard登場以前だと、次の画面に遷移させるだけでも</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="cp">#import &quot;NextViewController.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NextViewController</span> <span class="o">*</span><span class="n">nextViewController</span> <span class="o">=</span> <span class="p">[</span><span class="n">NextViewController</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">pushViewController:</span><span class="n">nextViewController</span> <span class="nl">animated:</span><span class="n">YES</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（<code>import</code>しないといけない）形でした。</p>
+
+<p>しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。</p>
+
+<h2>ただしStoryboardを使って今まで以上に悪くなるパターンがある</h2>
+
+<p>とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/04/12/improve-storyboard-segue/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！]]></title>
+<link href="http://www.tokoro.me/2014/02/06/pbxproj-merge/"/>
+<updated>2014-02-06T14:02:00+09:00</updated>
+<id>http://www.tokoro.me/2014/02/06/pbxproj-merge</id>
+
+      <content type="html"><![CDATA[<p><strong>2014/02/09 追記</strong><br/>
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！<br/>
+今現在は <code>merge=mergepbx</code> がいい感じになってきているのでそっちがオススメです。</p>
+
+<h2>複数人でプログラミングしているとpbxprojがやたらとコンフリクトする</h2>
+
+<p>例えば、</p>
+
+<ul>
+<li>Aさんが <code>AALabel.m</code> をプロジェクトに追加して</li>
+<li>Bさんが <code>BBLabel.m</code> をプロジェクトに追加して</li>
+</ul>
+
+
+<p>とただそれだけなのにマージのときにコンフリクトする<code>pbxproj</code>さん。。。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/pbxproj_status.png"></p>
+
+<p>ただそれぞれファイルを追加だけのことでコンフリクトするなんて&#8230;<br/>
+どうにかならんもんかいとTwitterでつぶやいたところ、 <a href="https://twitter.com/azu_re">@azu_re</a> さんから有り難い教えが！</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/02/06/pbxproj-merge/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[提供するXXXViewControllerの親クラスを差し替え可能にしたい!]]></title>
+<link href="http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library/"/>
+<updated>2014-01-23T11:20:00+09:00</updated>
+<id>http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library</id>
+
+      <content type="html"><![CDATA[<h2>XXXViewControllerの親クラスを差し替えたいときありますよね？</h2>
+
+<p>UIKit内で言えば<code>UITableViewController</code>とかはその代表格。<br/>
+外部ライブラリで言うと、Google Analytics SDKの<code>GAITrackedViewController</code>とか。</p>
+
+<p>要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。</p>
+
+<p>で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。</p>
+
+<h2>runtime使う?</h2>
+
+<p>いちおう <code>class_setSuperclass</code>という関数があるのですがDeprecated&#8230;
+なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2014/01/23/super-viewcontroller-for-a-library/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？]]></title>
+<link href="http://www.tokoro.me/2013/11/05/ios-dev-accounts/"/>
+<updated>2013-11-05T19:21:00+09:00</updated>
+<id>http://www.tokoro.me/2013/11/05/ios-dev-accounts</id>
+
+      <content type="html"><![CDATA[<h2>2013年11月18日 追記</h2>
+
+<p>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、</p>
+
+<ul>
+<li><code>Member Centerのほうにアカウント追加</code> -> <code>iTunes Connectに同じアカウント追加</code>という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能</li>
+<li><code>iTunes Connectにアカウント追加</code> -> <code>Member Centerに同じ追加</code>という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能</li>
+</ul>
+
+
+<p>失礼しました。<br/>
+追加情報などあれば是非おねがいします！</p>
+
+<h2>概要</h2>
+
+<p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br/>
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
+
+<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br/>
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。</p>
+
+<h2>iOS Dev Center の構成</h2>
+
+<p>まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。</p>
+
+<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/iOSDevCenterStruct.png"></p>
+
+<p>大きくは、</p>
+
+<ul>
+<li>iOS Developer Program</li>
+<li>Member Center</li>
+<li>iTunes Connect</li>
+</ul>
+
+
+<p>に分かれます。</p>
+
+<h2>メンバーを追加する方法が２つある？？</h2>
+
+<p>今回、私が混乱してしまった部分がここでした。<br/>
+iOSアプリ開発/公開のために必要なアカウントは、</p>
+
+<ul>
+<li><code>Member Center</code>の<code>People</code></li>
+<li><code>iTunes Connect</code>の<code>Manage Users</code></li>
+</ul>
+
+
+<p>の2カ所で管理されています。<br/>
+また、この２つのアカウントはそれぞれ別々の用途になります。</p>
+
+<p>個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/11/05/ios-dev-accounts/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cでカリー化とか部分適用してみる]]></title>
+<link href="http://www.tokoro.me/2013/11/04/objective-c-haskell/"/>
+<updated>2013-11-04T16:09:00+09:00</updated>
+<id>http://www.tokoro.me/2013/11/04/objective-c-haskell</id>
+
+      <content type="html"><![CDATA[<h2>導入</h2>
+
+<p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
+しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
+
+<p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
+
+<p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
+
+<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
+
+<h2>ひとまずのゴール</h2>
+
+<p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) [1, 2, 3]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これです。<br/>
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (+3) ([1, 2, 3])</span></code></pre></td></tr></table></div></figure>
+
+
+<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
+
+<p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>map (OP('+') (@3)) (@[@1, @2, @3])</span></code></pre></td></tr></table></div></figure>
+
+
+<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
+
+<p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/11/04/objective-c-haskell/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[iOS 7はもっさりか？比較検証してみた]]></title>
+<link href="http://www.tokoro.me/2013/09/23/ios7-design/"/>
+<updated>2013-09-23T17:45:00+09:00</updated>
+<id>http://www.tokoro.me/2013/09/23/ios7-design</id>
+
+      <content type="html"><![CDATA[<p><strong>今回の記事はUIデザイナの Morino氏 からの寄稿です。</strong></p>
+
+<p>iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。</p>
+
+<p>特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。
+今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。</p>
+
+<p>頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。</p>
+
+<ul>
+<li>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</li>
+<li>アプリアイコンをタップしてから開くまでの時間</li>
+<li>フォルダをタップしてから開くまでの時間</li>
+<li>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</li>
+</ul>
+
+
+<p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
+
+<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/09/23/ios7-design/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[iOSのライブラリだってTravis CIとかCoverallsとか使うべき]]></title>
+<link href="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/"/>
+<updated>2013-07-09T07:00:00+09:00</updated>
+<id>http://www.tokoro.me/2013/07/09/objc-travis-coveralls</id>
+
+      <content type="html"><![CDATA[<p><img class="center" src="http://dl.dropbox.com/u/10351676/images/ci_coverage_badges.png"></p>
+
+<p>今日はGithubに公開したiOS用のライブラリを <strong>Travis CI</strong> と <strong>Coveralls</strong> に対応した手順を紹介したいと思います。</p>
+
+<p>なお、実際にこれらを適用して運用しているリポジトリのサンプルは、</p>
+
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a></p>
+
+<p>になります。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/07/09/objc-travis-coveralls/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント]]></title>
+<link href="http://www.tokoro.me/2013/06/17/ios7-ui-design/"/>
+<updated>2013-06-17T13:29:00+09:00</updated>
+<id>http://www.tokoro.me/2013/06/17/ios7-ui-design</id>
+
+      <content type="html"><![CDATA[<h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino氏</a> からの寄稿です</h2>
+
+<p><a href="http://www.tokoro.me/2013/06/13/ios7-video/">前回</a> はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。</p>
+
+<p>今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/06/17/ios7-ui-design/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Objective-Cのコードを削れるだけ削る7のTips]]></title>
+<link href="http://www.tokoro.me/2013/06/15/objc-reduce/"/>
+<updated>2013-06-15T16:04:00+09:00</updated>
+<id>http://www.tokoro.me/2013/06/15/objc-reduce</id>
+
+      <content type="html"><![CDATA[<p>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。</p>
+
+<h2>Tipsを適用する前のコード</h2>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#pragma mark - Private Category</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">Sample</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span><span class="o">*</span> <span class="n">f</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">*</span> <span class="n">array</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">*</span> <span class="n">dictionary</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">Sample</span><span class="o">*</span> <span class="n">child</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">)</span> <span class="n">UIColor</span><span class="o">*</span> <span class="n">color</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="n">NSUInteger</span> <span class="n">index</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">)</span> <span class="n">CGRect</span> <span class="n">rect</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod1</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod2</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod3</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#pragma mark - Main Implementation</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">Sample</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">array</span> <span class="o">=</span> <span class="n">array_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">child</span> <span class="o">=</span> <span class="n">child_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index_</span><span class="p">;</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">rect</span> <span class="o">=</span> <span class="n">rect_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod1</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethod2</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">privateMethod3</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod2</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">100</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithChar:</span><span class="sc">&#39;a&#39;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="mf">3.14f</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">privateMethod3</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="nl">arrayWithObjects:</span><span class="s">@&quot;1&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithInt:</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool:</span><span class="n">YES</span><span class="p">],</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span><span class="s">@&quot;val1&quot;</span><span class="p">,</span> <span class="s">@&quot;key1&quot;</span><span class="p">,</span> <span class="s">@&quot;val2&quot;</span><span class="p">,</span> <span class="s">@&quot;key2&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">child</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Sample</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これを以下の7のTipsで削れるだけ削っていきます。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/06/15/objc-reduce/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)]]></title>
+<link href="http://www.tokoro.me/2013/06/13/ios7-video/"/>
+<updated>2013-06-13T01:49:00+09:00</updated>
+<id>http://www.tokoro.me/2013/06/13/ios7-video</id>
+
+      <content type="html"><![CDATA[<h2>今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino@WWDC2013参加中</a> に寄稿いただきました！</h2>
+
+<p>Appleの公式サイトに <strong>iOS 7</strong> を紹介するビデオが公開されましたね。<br/>
+<a href="http://www.apple.com/ios/ios7/">http://www.apple.com/ios/ios7/</a></p>
+
+<p>特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。<br/>
+これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。</p>
+
+<p>デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/06/13/ios7-video/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)]]></title>
+<link href="http://www.tokoro.me/2013/06/12/xcode5-preview/"/>
+<updated>2013-06-12T01:09:00+09:00</updated>
+<id>http://www.tokoro.me/2013/06/12/xcode5-preview</id>
+
+      <content type="html"><![CDATA[<p><a href="https://twitter.com/tokorom">tokorom@WWDC2013参加中</a>です。<br/>
+WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。</p>
+
+<p>で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。</p>
+
+<p>概要レベルでありますが、なかでも <strong>TDD</strong> とか <strong>CI</strong> まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。<br/>
+あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/06/12/xcode5-preview/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[UIAlertViewよりもおとなしいメッセージダイアログを利用する]]></title>
+<link href="http://www.tokoro.me/2013/05/27/ssgentlealertview/"/>
+<updated>2013-05-27T23:30:00+09:00</updated>
+<id>http://www.tokoro.me/2013/05/27/ssgentlealertview</id>
+
+      <content type="html"><![CDATA[<h2>UIAlertViewは警告目的のダイアログ</h2>
+
+<p>そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>一般にアラートは、次のような場合には不要です。
+</span><span class='line'>* なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。
+</span><span class='line'>  代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と記載されています。</p>
+
+<p>その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。<br/>
+それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。</p>
+
+<p>警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。</p>
+
+<h2>警告目的ではない普通のメッセージダイアログ</h2>
+
+<p>それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。</p>
+
+<p><a href="https://github.com/tokorom/SSGentleAlertView">https://github.com/tokorom/SSGentleAlertView</a></p>
+
+<p>このSSGentleAlertViewは、</p>
+
+<ul>
+<li>UIAlertViewと同じコードで利用できる</li>
+<li>UIAlertViewとは違い、外観を変更できる</li>
+<li>デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる</li>
+</ul>
+
+
+<p>という３点に留意して作っています。</p>
+
+<p><a rel="bookmark" href="http://www.tokoro.me/2013/05/27/ssgentlealertview/">続きを読む &rarr;</a></p>]]></content>
+    </entry>
+  
+</feed>
+||||||| empty tree
+=======
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TOKOROM BLOG</title>
@@ -604,3 +1661,4 @@ swift package init --type executable --name DogImage とPackageを作り、 GitH
     
   </channel>
 </rss>
+>>>>>>> 3c7b1813eba1cb16c2f7139ac363273c205753e3

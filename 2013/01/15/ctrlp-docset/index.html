@@ -1,3 +1,558 @@
+<<<<<<< HEAD
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました - TOKOROM BLOG</title>
+  <meta name="author" content="Yuta ToKoRo">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.tokoro.me/2013/01/15/ctrlp-docset/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/tokorom" rel="alternate" title="TOKOROM BLOG" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Hatena::Star -->
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+  Hatena.Star.Token = 'e1db0a8e529b51a6d686706984a62c1ee102a22d';
+  Hatena.Star.SiteConfig = {
+    entryNodes: {
+      'article header': {
+        uri: 'h1 a.entry-title-link',
+        title: 'h1',
+        container: 'h1'
+      }
+    }
+  };
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2451574-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <link href="/favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">TOKOROM BLOG</a></h1>
+  
+    <h2>iOSとかVimとかその他日々の雑多な技術情報</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/tokorom" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.tokoro.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+    <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/15/ctrlp-docset/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/15/ctrlp-docset/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/15/ctrlp-docset/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/01/15/ctrlp-docset/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/01/15/ctrlp-docset/" target="_blank" >Tweet</a>
+  
+</div>
+
+  
+  
+  <header>
+    <h1 class="entry-title">
+
+VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました<a class="entry-title-link" href="http://www.tokoro.me/2013/01/15/ctrlp-docset/" style="display:none">-</a>
+
+<a href="http://b.hatena.ne.jp/entry/http://www.tokoro.me/2013/01/15/ctrlp-docset/"><img class="hatena-bookmark-users" src="http://b.hatena.ne.jp/entry/image/http://www.tokoro.me/2013/01/15/ctrlp-docset/" alt="はてなブックマーク - VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました" title="はてなブックマーク - VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました"></a>
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T00:40:00+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+         &bull; <a rel="bookmark" href="/2013/01/15/ctrlp-docset/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><h2>Vimでリファレンス読む必要ありますか？</h2>
+
+<p>正直微妙なところでしょうか。<br/>
+自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
+
+<p>ただ、せっかく<a href="/2013/01/15/ctrlp-docset/">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
+
+<ul>
+<li>Vimでさらっと検索してリファレンスから関数をコピー</li>
+<li>そのままプログラミングにペースト</li>
+</ul>
+
+
+<p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
+
+<p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
+
+<h2>Docsetを検索するCtrlPのエクステンションを作りました</h2>
+
+<p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br/>
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br/>
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
+
+<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
+
+<p>CtrlPについては、</p>
+
+<ul>
+<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
+<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
+</ul>
+
+
+<p>あたりがわかりやすかったです。</p>
+
+<p>インストールして動かすと、</p>
+
+<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg" /></p>
+
+<p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。</p>
+
+<!-- more -->
+
+
+<p>参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。<br/>
+自分はVim内で完結したいので <a href="https://github.com/yuratomo/w3m.vim">w3m.vim</a> を使ってVim内で表示するように設定しました。</p>
+
+<h2>インストール</h2>
+
+<h3>まずはDocsetがインストールされているか確認</h3>
+
+<p>これがないとはじまりません。<br/>
+あるかどうか心配なかたは、Xcodeを起動し、 <strong>Preferences&#8230;</strong> の <strong>Downloads</strong> を確認してみてください。<br/>
+ここの <strong>Documentation</strong> タブのほうで <strong>iOS 6.0 Library</strong> かそれに相当するものが <strong>Installed</strong> とインストール済みになっていれば問題ありません。<br/>
+なければここからインストールをしてみてください。</p>
+
+<p><img src="http://dl.dropbox.com/u/10351676/images/xcode_docset.jpg" alt="xcode_docset.jpg" /></p>
+
+<p>なお、ここでインストールしたDocsetは、たぶん</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>に配置されると思います。</p>
+
+<h3>CtrlP と ctrlp-docset をインストール</h3>
+
+<p>Vundleを使ってらっしゃるなら、</p>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Bundle <span class="s1">&#39;git://github.com/kien/ctrlp.vim.git&#39;</span>
+</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/tokorom/ctrlp-docset.git&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、その他のかたは各自の環境に合わせて読み替えてください。</p>
+
+<h3>ctrlp-docset の設定</h3>
+
+<p>設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。</p>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし）</span>
+</span><span class='line'><span class="nb">let </span>g:ctrlp_docset_docsetutil_command <span class="o">=</span> <span class="s1">&#39;/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># iOS用のDocsetの場所を指定する（下記と同じ場所なら設定必要なし）</span>
+</span><span class='line'><span class="c"># objc は filetype です / 他の filetype をご利用の場合はそれを設定してください</span>
+</span><span class='line'><span class="nb">let </span>g:ctrlp_docset_filepaths <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;objc&#39;</span>: <span class="s1">&#39;~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset&#39;</span><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>実行!</h2>
+
+<p>これらの設定が全部終わったらVimでObjective-Cのファイルを開いた後に、</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>:CtrlPDocset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>を実行してみてください。<br/>
+設定がうまくいっていればiOSのクラス/メソッドがインクリメンタル検索できるはずです。</p>
+
+<p>また、参照したいクラス/メソッドを選択（Enter）すればドキュメントがブラウザで開かれます。</p>
+
+<p>Vimを起動して１回目の実行はだいぶん遅いと思います。<br/>
+２回目以降はデータがキャッシュされているのでストレスなく利用できると思います。</p>
+
+<h2>キーバインドの変更</h2>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nnoremap お好みのキー :&lt;C-u&gt;CtrlPDocset&lt;CR&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ドキュメントをw3mで開きたい</h2>
+
+<p>w3mコマンドが利用できる環境ならもちろん可能です。
+Macなら <code>brew install w3m</code> などであらかじめインストールしておいてください。</p>
+
+<ul>
+<li>.vimrc</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># w3m.vim が必要です</span>
+</span><span class='line'>Bundle <span class="s1">&#39;git://github.com/yuratomo/w3m.vim.git&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ドキュメントを開くときのコマンドを変える場合にはこのオプション（%sにURLが渡される）</span>
+</span><span class='line'><span class="nb">let </span>g:ctrlp_docset_accept_command <span class="o">=</span> <span class="s1">&#39;:W3mSplit local %s&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これらの設定をしておけば、ブラウザで開く代わりにVim内でドキュメント参照が完結できるようになるはずです。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yuta ToKoRo</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T00:40:00+09:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/objc/'>objc</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://www.tokoro.me/2013/01/15/ctrlp-docset/" target="_blank">+1</a>
+    
+  
+  
+    
+    <a title="Share on Facebook" class="facebook-share" href="http://www.facebook.com/sharer.php?u=http://www.tokoro.me/2013/01/15/ctrlp-docset/" target="_blank">Share</a>
+    
+  
+  
+<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button"
+  data-hatena-bookmark-layout="standard"
+  data-hatena-bookmark-url="http://www.tokoro.me/2013/01/15/ctrlp-docset/">
+  <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+    alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+    style="border: none">
+</a>
+
+  
+    <a href="http://twitter.com/share" title="Tweet this" class="twitter-share-button" data-url="http://www.tokoro.me/2013/01/15/ctrlp-docset/" data-via="tokorom" data-counturl="http://www.tokoro.me/2013/01/15/ctrlp-docset/" target="_blank" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/01/14/easy-objc-complement/" title="Previous Post: もっと簡単にVimでObjective-Cのコード補完を実行する">&laquo; もっと簡単にVimでObjective-Cのコード補完を実行する</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/01/17/tmux-toggle/" title="Next Post: tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた">tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>On GitHub</h1>
+  
+  <a class="github-follow" href="https://github.com/tokorom">Follow @tokorom</a>
+  
+</section>
+
+
+
+<section>
+  <h1>On Twitter</h1>
+  
+    <a href="http://twitter.com/tokorom" class="twitter-follow-button" data-show-count="false">Follow @tokorom</a>
+  
+</section>
+
+
+<section>
+  <h1>My Face</h1>
+  <p></p>
+  <a href="https://twitter.com/tokorom/"><img class="profile-image" src="http://dl.dropbox.com/u/10351676/images/mayuge_dog_face.jpg" /></a>
+</section>
+
+<section>
+  <h1>My Works</h1>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897978440?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897978440"><img src="http://images-jp.amazon.com/images/P/4897978440.09.TZZZZZZZ.jpg" border="0" alt="UIKit本" align="left" />iPhoneプログラミング UIKit詳解リファレンス</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897978440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <p>
+    <a href="http://www.amazon.co.jp/gp/product/4897976839?ie=UTF8&tag=tokorom-22&linkCode=as2&camp=247&creative=7399&creativeASIN=4897976839"><img src="http://images-jp.amazon.com/images/P/4897976839.09.TZZZZZZZ.jpg" border="0" alt="BREW本" align="left" /> 詳解 EZアプリ(BREW)プログラミング</a><img src="http://www.assoc-amazon.jp/e/ir?t=tokorom-22&l=as2&o=9&a=4897976839" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </p>
+  <br clear="left" />
+</section>
+
+<section>
+  <h1>Hot</h1>
+  <div class="hatena-widget">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+    <script language="javascript" type="text/javascript">
+    Hatena.BookmarkWidget.url   = "http://www.tokoro.me/";
+    Hatena.BookmarkWidget.sort  = "count";
+    Hatena.BookmarkWidget.width = 0;
+    Hatena.BookmarkWidget.num   = 10;
+    Hatena.BookmarkWidget.theme = "notheme";
+    Hatena.BookmarkWidget.load();
+    </script>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/05/el-capitain-totalterminal/">El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/12/swifttask-promisekit-bolts/">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/11/10/nstimezone-sample/">NSTimeZoneから取得できる表示用文字列のサンプル</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/09/13/swift-simulator/">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yuta ToKoRo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tokorom';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.tokoro.me/2013/01/15/ctrlp-docset/';
+        var disqus_url = 'http://www.tokoro.me/2013/01/15/ctrlp-docset/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+<script>
+(function(w,d){
+    var c,e=d.createDocumentFragment(),f=d.getElementsByTagName("script")[0],
+    a=function(a,b){if(!d.getElementById(b)){c=d.createElement("script");
+    c.src=a;c.id=b||null;c.async=true;e.appendChild(c);}};
+
+    a("https://apis.google.com/js/plusone.js");
+
+
+    a("//platform.twitter.com/widgets.js");
+
+
+    a("//connect.facebook.net/en_US/all.js#xfbml=1","facebook-jssdk");
+
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    f.parentNode.insertBefore(e,f);
+})(this,document);
+</script>
+
+
+</body>
+</html>
+||||||| empty tree
+=======
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -8,3 +563,4 @@
     <meta http-equiv="refresh" content="0; url=https://www.tokoro.me/posts/ctrlp-docset/">
   </head>
 </html>
+>>>>>>> 3c7b1813eba1cb16c2f7139ac363273c205753e3
