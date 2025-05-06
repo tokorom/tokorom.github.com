@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>uikit on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/uikit/</link>
+    <description>Recent content in uikit on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Thu, 23 May 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/uikit/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UIKitで使われている画像パーツをまとめて取得する</title>
+      <link>https://www.tokoro.me/posts/uikit-images/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/uikit-images/</guid>
+      <description>UIKitで使われている画像はどこにある？ 例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。
+プログラマというか特にはデザイナさんにとって有用だと思います。
+その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。
+具体的には（これはiOS6.1の場合）、
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork が画像パーツを含むファイルになります。
+他にも、同じディレクトリに
+Shared.artwork Shared@2x~ipad.artwork Shared@2x~iphone.artwork Shared~ipad.artwork Shared~iphone.artwork がありますので取りたいものに応じてお好みで。
+ひとまず、
+cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/ などでこのファイルをデスクトップにでもコピーしておきましょう。
+artworkから画像ファイルを抽出 で、artworkから肝心の画像ファイルを抽出するのに、 iOS-artwork というやつを使わせてもらいます。
+まずは、これを
+git clone git://github.com/davepeck/iOS-artwork.git などでダウンロードします。
+ただ、これを使うにはPythonとPILというライブラリが必要です。
+たぶんPythonは元から入っていると思うので、PILのほうをbrewなどでインストールします。
+brew install pil インストールし終わったら
+mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
+Traceback (most recent call last): File &amp;quot;./iOS-artwork.py&amp;quot;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
+export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
+気を取り直して、
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts を実行すれば、デスクトップのUIKitPartsというディレクトリにUIKitの画像一式がもりもりと出力されていくはずです！</description>
+    </item>
+    
+  </channel>
+</rss>

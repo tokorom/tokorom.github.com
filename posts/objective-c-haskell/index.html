@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Objective-Cでカリー化とか部分適用してみる | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
+もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
+実際やってみたソースコードは こちら に置いてあります。
+ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
+map (&#43;3) [1, 2, 3] これです。
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
+map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
+map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
+カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Objective-Cでカリー化とか部分適用してみる | TOKOROM BLOG" property="og:title"><meta content="導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
+もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
+実際やってみたソースコードは こちら に置いてあります。
+ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
+map (&#43;3) [1, 2, 3] これです。
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
+map (&#43;3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
+map (OP(&#39;&#43;&#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
+カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] &#43; [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] &#43; (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] &#43; [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objective-c-haskell/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/objective-c-haskell/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Objective-Cでカリー化とか部分適用してみる</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年11月4日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/haskell">
+              haskell
+          </a>
+          /</div><div class="content">
+      <h2 id="導入">導入</h2>
+<p><a href="https://info.cookpad.com/">会社</a>でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。
+しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！</p>
+<p>ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。</p>
+<p>もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。</p>
+<p>実際やってみたソースコードは <a href="https://github.com/tokorom/ObjcHaskell">こちら</a> に置いてあります。</p>
+<h2 id="ひとまずのゴール">ひとまずのゴール</h2>
+<p>カリー化して部分適用ができる状態までということで、Haskellの<code>map</code>が実現できるところまでを目標にしました。</p>
+<pre><code class="language-haskell">map (+3) [1, 2, 3]
+</code></pre>
+<p>これです。<br>
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、</p>
+<pre><code class="language-objective-c">map (+3) ([1, 2, 3])
+</code></pre>
+<p>みたいな形で<code>()</code>で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。</p>
+<p>しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。</p>
+<pre><code class="language-objective-c">map (OP('+') (@3)) (@[@1, @2, @3])
+</code></pre>
+<p>セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。</p>
+<p>ということで、Objective-Cで上の<code>map</code>が実現できたらはじめのゴールとしては十分かなと思いました。</p>
+<!-- more -->
+<h2 id="カリー化の実現方法">カリー化の実現方法</h2>
+<p>実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す <code>add</code> の実装です。</p>
+<pre><code class="language-objective-c">#define add [ObjcHaskell hsAdd]
+
++ (curryingBlock)hsAdd
+{
+    CURRYING2(
+        x, y,
+        return @([x intValue] + [y intValue]);
+    );
+}
+</code></pre>
+<p><code>CURRYING2</code>という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。</p>
+<pre><code class="language-objective-c">#define add [ObjcHaskell hsAdd]
+
++ (curryingBlock)hsAdd
+{
+    return (curryingBlock)^(id x) {
+        return (unaryBlock)^(id y) {
+          return @([x intValue] + [y intValue]);
+        }
+    }:
+}
+</code></pre>
+<p>Blockを返すBlockを返す関数というかんじになってます。
+外側のBlockは<code>x</code>という引数を取り、中側のBlockを返す。
+中側のBlockは<code>y</code>という引数を取り、外側のBlockでキャプチャされた<code>x</code>と自分でキャプチャした<code>y</code>を加算した結果を返す。<br>
+という実装です。</p>
+<p>この関数の戻り値に引数を1つ（<code>x</code>にあたるもの）渡すと、中側のBlockが返されてそのBlockは最後の引数（<code>y</code>にあたるもの）を期待し、<code>x</code>はBlockの仕組みできちんとキャプチャ（保存）された状態になります。
+これで部分適用もばっちりということです！</p>
+<p>例えば、</p>
+<pre><code class="language-objective-c">curryingBlock add3 = add (@3);
+</code></pre>
+<p>とすれば、<code>add</code>に対して<code>@3</code>を部分適用した関数（正確にはBlock）が取得でき、</p>
+<pre><code class="language-objective-c">id result = add3 (@4);
+</code></pre>
+<p>で、<code>3 + 4</code> の結果、<code>7</code> を計算できます。</p>
+<p>論理的には引数の数だけBlockを入れ子にしていくことで引数がいくつであっても対応可能なはず。</p>
+<h2 id="演算子の関数化">演算子の関数化</h2>
+<p>Objective-Cでは<code>+</code>とか<code>-</code>といった演算子は関数ではないのでそのままでは使えません。
+ということで <code>OP('+')</code> みたいにマクロでなんとかすると説明したのですが、そのマクロはこんなかんじになってます。</p>
+<pre><code class="language-objective-c">#define OP(op) ([ObjcHaskell hsSectionWithOperator:op])
+</code></pre>
+<p>単に、charをObjective-Cのメソッドに渡してその演算子に適した関数を得ているだけです。<br>
+このメソッドの実装は、</p>
+<pre><code class="language-objective-c">+ (curryingBlock)hsSectionWithOperator:(int)op
+{
+    switch (op) {
+        case '+': return add;
+        case '-': return sub;
+        case '*': return mul;
+        case '/': return div;
+        case ':': return cons;
+        case '&lt;': return lessThan;
+        case '&gt;': return greaterThan;
+        default: return [ObjcHaskell hsReturnNil];
+    }
+}
+</code></pre>
+<p>こんなかんじで、演算子に対応するカリー化した関数をそのまま返しています。</p>
+<h2 id="畳み込み">畳み込み</h2>
+<p>ではこの仕組みを使って畳み込み関数 <code>foldr</code> を作ってみましょう。</p>
+<pre><code class="language-objective-c">#define foldr [ObjcHaskell hsFoldr]
+
++ (curryingBlock)hsFoldr
+{
+    CURRYING3(
+        binary, ini, list,
+
+        id acc = ini;
+        curryingBlock fnc = binary;
+        for (id elem in [list reverseObjectEnumerator]) {
+            acc = fnc (elem) (acc);
+        }
+        return acc;
+    );
+}
+</code></pre>
+<p><code>CURRYING2</code>が<code>CURRYING3</code>になっただけで、あとの考え方はさっきと同じです。
+<code>foldr</code>の１つめの引数は２つの引数を持つ関数です。ここでは<code>binary</code>がそれに相当します。<br>
+最終的には<code>binary</code>にリストの要素を１つずつ渡して計算していくわけで、</p>
+<pre><code class="language-objective-c">id acc = ini;
+curryingBlock fnc = binary;
+for (id elem in [list reverseObjectEnumerator]) {
+    acc = fnc (elem) (acc);
+}
+</code></pre>
+<p>の部分がそれに相当します。<br>
+リストの要素を１つずつ取り出して、初期値（もしくは前の計算結果）と一緒に <code>binary</code> に渡していくだけです。</p>
+<p>あとは最後の計算結果（<code>acc</code>）をreturnすれば<code>foldr</code>の完成です！</p>
+<h2 id="ちょっとhaskellっぽく関数実装">ちょっとHaskellっぽく関数実装</h2>
+<p>では、この畳み込みを使ってさらに新しい関数 <code>sum</code> を作ってみましょう。
+<code>sum</code> は引数に渡したリストの要素を足し合わせたものを返す関数です。</p>
+<pre><code class="language-objective-c">#define sum [ObjcHaskell hsSum]
+
++ (curryingBlock)hsSum
+{
+    return ((id)
+        foldr OP('+') (@0)
+    );
+}
+</code></pre>
+<p>こんなかんじで、さきほど作った<code>foldr</code>を使って簡単に実装できました。</p>
+<h2 id="最後にmapの実装">最後にmapの実装</h2>
+<p><code>map</code>ですが本来は畳み込みで実現したかったのですが、今のところはラムダ式に対応していないためできませんでした。
+今回はベタに普通のObjective-C的に中身を実装してます。</p>
+<pre><code class="language-objective-c">+ (curryingBlock)hsMap
+{
+    CURRYING2(
+        unary, list,
+        curryingBlock fnc = unary;
+        NSMutableArray* ret = [NSMutableArray array];
+        for (id elem in list) {
+            [ret addObject:(fnc (elem))];
+        }
+        return ret;
+    );
+}
+</code></pre>
+<p>引数を１つ持つ関数とリストの２つをもらって、そのリストの要素１つ１つにその関数を適用しているだけです。</p>
+<h2 id="mapを実行">mapを実行</h2>
+<p>ということで、</p>
+<pre><code class="language-objective-c">map (OP('+') (@3)) (@[@1, @2, @3])
+</code></pre>
+<p>を実現する仕組みが出そろいました。</p>
+<p>早速テストを実行してみると&hellip;</p>
+<pre><code class="language-objective-c">- (void)testMap
+{
+    id result = map (OP('+') (@3)) (@[@1, @2, @3]);
+    XCTAssertEqualObjects(result, (@[@4, @5, @6]), @&quot;result is invalid&quot;);
+}
+</code></pre>
+<p>無事に <code>@[@4, @5, @6]</code> が返るのを確認できました。</p>
+<p>やったー！</p>
+<p>まあこれをiOSアプリ開発で使うことはないでしょうが、楽しかった。。。</p>
+<p>　</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

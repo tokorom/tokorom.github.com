@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://www.tokoro.me/en/authors/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/authors/"
+                />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/en/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/en/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>http://www.tokoro.me/en/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://www.tokoro.me/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://www.tokoro.me/en/"
+                />
+  </url>
+  
+</urlset>

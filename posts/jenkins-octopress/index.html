@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ 自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする 事前準備 Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく Jenkinsに入れておく必要のあるPlugin RVM Plugin JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &quot;jenkins&quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Jenkins@さくらVPSにOctopressのデプロイを任せてみる | TOKOROM BLOG" property="og:title"><meta content="目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ 自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする 事前準備 Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく Jenkinsに入れておく必要のあるPlugin RVM Plugin JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &quot;jenkins&quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/jenkins-octopress/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/jenkins-octopress/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Jenkins@さくらVPSにOctopressのデプロイを任せてみる</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年7月29日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/sakura">
+              sakura
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/octopress">
+              octopress
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/jenkins">
+              jenkins
+          </a>
+          /</div><div class="content">
+      <h2 id="目的">目的</h2>
+<p>Octopressで記事を書いたあと、 <strong>Bitbucket</strong> に <code>git push origin source</code> とするだけで <strong>Github Pages</strong> に勝手にデプロイされるようにする。</p>
+<h2 id="イメージ">イメージ</h2>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/octopress_deploy.png" alt="octopress_deploy"></p>
+<ol>
+<li>自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく</li>
+<li>Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く</li>
+<li>Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する</li>
+<li>Jenkinsは作成した記事をGithub Pagesにデプロイする</li>
+</ol>
+<!-- more -->
+<h2 id="事前準備">事前準備</h2>
+<ul>
+<li>Github PagesにOctopressでブログを投稿できるようにしておく =&gt; まだなら <a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">このあたりを参照</a></li>
+<li>さくらVPSを使えるようにしておく</li>
+<li>さくらVPSにJenkinsをインストールしておく =&gt; まだなら <a href="http://www.tokoro.me/2012/07/24/install-jenkins-to-sakura/">こちらを参照</a></li>
+<li>さくらVPSでGitを使えるようにしておく =&gt; まだなら <a href="http://blog.araishi.com/sakura-vps-git-yum-install/">こちらを参照</a></li>
+<li>Githubを使えるようにしておく</li>
+<li>Bitbucketを使えるようにしておく</li>
+</ul>
+<h2 id="jenkinsに入れておく必要のあるplugin">Jenkinsに入れておく必要のあるPlugin</h2>
+<ul>
+<li>RVM Plugin</li>
+</ul>
+<h2 id="jenkinsからbitbucketとgithubにアクセスできるようにする">JenkinsからBitbucketとGithubにアクセスできるようにする</h2>
+<pre><code>$ cd /var/lib/jenkins
+$ sudo -u jenkins -H /usr/local/bin/git config --global user.email &quot;jenkins@your.domain&quot;
+$ sudo -u jenkins -H /usr/local/bin/git config --global user.name &quot;jenkins&quot;
+$ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.domain
+</code></pre>
+<p>でJenkins用の秘密鍵と公開鍵を作る。
+このとき、パスフレーズを設定しないように注意。</p>
+<p>これで <em>/var/lib/jenkins/.ssh/id_rsa.pub</em> という公開鍵ができているはずなので、この公開鍵を <strong>Github</strong> と <strong>Bitbucket</strong> に登録しておく。</p>
+<p>ちなみに公開鍵の中身を</p>
+<pre><code>$ sudo -u jenkins -H more .ssh/id_rsa.pub
+</code></pre>
+<p>などで表示し、表示された文字列をそのまま <strong>Github</strong> や <strong>Bitbucket</strong> にコピペすればOK。</p>
+<pre><code>$ sudo -u jenkins mkdir tmp 
+$ cd tmp
+$ sudo -u jenkins /usr/local/bin/git clone git@bitbucket.org:yourname/yourname.github.com.git
+$ sudo -u jenkins /usr/local/bin/git clone git@github.com:yourname/yourname.github.com.git
+</code></pre>
+<p>で実際に <strong>Bitbucket</strong> と <strong>Github</strong> からcloneをすると、それぞれ一度目に限り yes/no が問われるのでそこでyesとしておく必要がある（そうしないとJenkinsから使えない）。</p>
+<h2 id="jenkinsからrvmを使えるようにする">JenkinsからRVMを使えるようにする</h2>
+<pre><code>$ cd /var/lib/jenkins
+$ sudo -u jenkins -H -s bash -c 'bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )'
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl' 
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm install 1.9.2 -C --with-openssl-dir=~/.rvm/usr --with-readline-dir=~/.rvm/usr --with-zlib-dir=~/.rvm/usr'
+</code></pre>
+<p>で、jenkinsユーザでRVMでインストールしたRubyが使えるようになる。</p>
+<p>実際にRubyが使えるかどうかは</p>
+<pre><code>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; ruby -v'
+</code></pre>
+<p>などで確認できる。</p>
+<h2 id="gemsetを作成して必要なgemのインストール">gemsetを作成して必要なgemのインストール</h2>
+<pre><code>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm gemset create octopress'
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm use 1.9.2@octopress; gem install bundle'
+</code></pre>
+<p>octopress用のoctopressというgemsetを作って、そこに <strong>bundle</strong> をインストールしておく。</p>
+<h2 id="jenkinsのjobの設定">JenkinsのJobの設定</h2>
+<p><em>Build a free-style software project</em> をベースに設定した項目は以下のとおり。</p>
+<ul>
+<li>Project name
+<ul>
+<li><strong>deploy-octopress</strong> (お好みのジョブ名を設定)</li>
+</ul>
+</li>
+<li>Source Code Management
+<ul>
+<li><strong>None</strong> (Gitからソースを取得するところを含めてコマンドでやってしまうため)</li>
+</ul>
+</li>
+<li>Build Triggers
+<ul>
+<li><strong>Trigger builds remotely</strong>
+<ul>
+<li>Authentication Token: <strong>a-word-you-like</strong> (適当なワードを指定する)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Build Environment
+<ul>
+<li>Run the build in a RVM-managed environment
+<ul>
+<li>Implementation: <strong>1.9.2@octopress</strong> (利用するRubyバージョンとgemset名を設定)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Executable shell
+<ul>
+<li>Command</li>
+</ul>
+</li>
+</ul>
+<pre><code>export PATH=$PATH:/usr/local/bin
+
+rm -rf octopress
+mkdir octopress
+cd octopress
+
+git init
+git remote add -t source origin git@bitbucket.org:yourname/yourname.github.com.git
+git fetch
+git checkout source
+
+bundle install
+
+rake setup_github_pages\[git@github.com:yourname/yourname.github.com.git\]
+rake generate
+rake deploy
+</code></pre>
+<p>最後の <em>Command</em> のところでは、</p>
+<ul>
+<li>作業ディレクトリを作り直す</li>
+<li>Bitbucketのリポジトリからsourceブランチを取得</li>
+<li>bundleで必要なgemなどをインストール</li>
+<li>generate &amp; デプロイ!</li>
+</ul>
+<p>をしている。</p>
+<h2 id="bitbucketからjobの実行ができるように権限の設定を変更をする">BitbucketからJobの実行ができるように権限の設定を変更をする</h2>
+<p>BitbucketからJenkinsにアクセスする際に、 <em><a href="http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like">http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like</a></em> といったURLを叩いてJobを実行することになるので、それが可能なように権限の設定を変更しておく（<strong>この方法は簡易的なものでセキュリティの面では良くないので、これを解消するには<a href="/2012/07/29/security-for-jenkins/">次の記事</a>を参照して別の設定とするのが良い</strong>）。</p>
+<p>また、 <strong>Manage Jenkins</strong> -&gt; <em>Configure System</em> で、</p>
+<ul>
+<li>Access Control
+<ul>
+<li>Authorization
+<ul>
+<li>Matrix-based security
+<ul>
+<li>Anonymousユーザの <strong>Job</strong> の <strong>Read</strong> だけチェック</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="bitbucketのほうの設定">Bitbucketのほうの設定</h2>
+<p>作成したリポジトリの <strong>Admin</strong> タブの <strong>Services</strong> を選択。</p>
+<p><em>Select a service&hellip;</em> の中に <em>Jenkins</em> があるのでそれを選択して、 <strong>Add service</strong>。</p>
+<p>設定項目には、</p>
+<pre><code>http://jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like
+</code></pre>
+<p>と叩くべきURLをそのまま設定する (※ yourdomainなどは各自の環境に合わせて変更すること)。</p>
+<h2 id="完成">完成!</h2>
+<p>これでひととおりの設定は完了。<br>
+うまくいっていればいつもどおり記事を書いてコミットした後に <code>git push origin source</code> とBitbucketにpushするだけで、あとは勝手にデプロイしてくれる。<br>
+このとき、Bitbucketのプライベートリポジトリにファイル一式がバックアップされることにもなる。</p>
+<p>なお、sourceブランチがデプロイの対象となっているので、書き途中の記事をBitbucketに保存しておきたい場合には、 <strong>draft</strong> など別のブランチにコミットしておけば書き途中のものが勝手にデプロイされる心配はない。</p>
+<h2 id="課題">課題</h2>
+<p>このままだと、認証なしで全てのJobが参照できる形になってしまっている。<br>
+<a href="/2012/07/29/security-for-jenkins/">次の記事</a>ではこれを解消することにトライしたい。</p>
+<h2 id="じつは途中ではいろいろと引っかかった">じつは途中ではいろいろと引っかかった</h2>
+<p>以上、うまくいった手順をまとめたが実際にはいろいろとひっかかったところがあったので、そこも言及しておく。</p>
+<h3 id="rvmrc-の実行許可の確認が越えられない">.rvmrc の実行許可の確認が越えられない</h3>
+<p>はじめて <em>.rvmrc</em> が設置されたディレクトリに入る際、 <em>.rvmrc</em> の内容を実行して良いか? といった問い合わせが入り、自分で操作しているときは単純に <strong>yes</strong> と応えるだけなのですが、それをJenkinsさんにやってもらう方法がわからなかった。<br>
+<code>rvmrc trust ディレクトリ名</code>とすれば以降その確認がいらなくなるというのは既知なのだが、Git Plugin を使ってソースを取得すると、その時点でcloneしたディレクトリに入ってしまうのでタイミング的にそれも無理。<br>
+けっきょくGit Pluginを使うのをあきらめ、ソースのcloneからブランチの切り替えまでコマンドで直接やることとした。</p>
+<h3 id="rvmがうまく扱えない">RVMがうまく扱えない</h3>
+<p>ビルド時のコマンドの中で <strong>rvm</strong> を使っているわけですが、やたらとこのコマンドがないといったエラーが出まくり「うぎゃー」となった。
+これは <strong>RVM Plugin</strong> を使えば簡単に解決できた。</p>
+<h3 id="gemがインストールできない">gemがインストールできない</h3>
+<p><strong>bundler</strong> を使うため、<code>gem install bundle</code>をビルド時のコマンド中に入れたのだが、</p>
+<pre><code>ERROR:  Loading command: install (LoadError)
+    no such file to load -- zlib
+</code></pre>
+<p>というエラーで先に進めない。</p>
+<p>これはRubyのほうの話で、</p>
+<pre><code>$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm pkg install readline zlib openssl' 
+$ sudo -u jenkins -H -s bash -c 'source ~/.rvm/scripts/rvm; rvm reinstall 1.9.2'
+</code></pre>
+<p>とzlibなどをRVMでインストールした後に、Rubyをreinstallすることで解決。<br>
+本記事のほうの手順ではきちんと先に <code>rvm pkg install</code> を済ませておくようにしてある。</p>
+<h3 id="rake-installに失敗する">rake installに失敗する</h3>
+<p>Jenkinsでの<code>rake install</code>時に</p>
+<pre><code>A theme is already installed, proceeding will overwrite existing files. Are you sure? [y/n]
+</code></pre>
+<p>という確認が出てきたそこでこけていた模様。<br>
+よくよく考えてみると、<code>rake install</code>はこのリポジトリには適用済みの状態でpushしてあるので不要だった。</p>
+<h3 id="rake-generateでエラー">rake generateでエラー</h3>
+<p><code>rake generate</code>時に</p>
+<pre><code>Building site: source -&gt; public
+/var/lib/jenkins/.rvm/gems/ruby-1.9.2-p320@octopress/gems/ffi-1.0.11/lib/ffi/library.rb:121:in `block in ffi_lib': Could not open library 'lib.so': lib.so: cannot open shared object file: No such file or directory (LoadError)
+</code></pre>
+<p>といったエラーが発生。
+これは <strong>python-devel</strong> が入っていない場合のエラーということだったので、さくらVPSのほうで <code>sudo yum install python-devel</code> しておくことで解消。</p>
+<h3 id="rake-deployでエラー">rake deployでエラー</h3>
+<p><code>rake deploy</code>時に</p>
+<pre><code>## Pushing generated _deploy website
+
+Host key verification failed.
+fatal: The remote end hung up unexpectedly
+</code></pre>
+<p>といったエラーが発生。</p>
+<p>公開鍵はきっちり登録してあるはずなのにおかしいなと思ったら、一度めのアクセスの際にアクセス確認の問い合わせが入り、ここでyesとしないと先に進まないという状態で止まっていたというオチ。<br>
+これはあらかじめさくらVPSのほうで、</p>
+<pre><code>$ sudo -u jenkins /usr/local/bin/git clone git@github.com:yourname/yourname.github.com.git
+</code></pre>
+<p>と一度Githubにアクセスしておけば解消される。</p>
+<h3 id="おしまい">おしまい</h3>
+<p>じつにJenkinsで自動デプロイするまでにかかったビルド試行回数は25回。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/security-for-jenkins/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</span>
+    <span class="feed-item-date">2012年7月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/install-jenkins-to-sakura/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">さくらVPSにJenkinsさんをインストールする</span>
+    <span class="feed-item-date">2012年7月24日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/octopress-part-of-codes/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Octopressでソースコードの一部分だけを参照する</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>BlockInjectionをバージョンアップしました | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。
+https://github.com/tokorom/BlockInjection で公開しています。
+バージョンアップ内容 前記事 からのバージョンアップ内容は以下です。
+リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます） クラスメソッドにも対応しました 複数のクラスやメソッドを一度に追加できるようになりました 正規表現で指定できるようになりました(※1) 注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2) オマケで単純なメソッド実装置き換え機能も追加しました UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる 既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。
+例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
+BlockInjectionを使えば、たった3行のコードでこれが実現できます。
+[BILib injectToClassWithNameRegex:BIRegex(@&quot;^UIView$&quot;) methodNameRegex:BIRegex(@&quot;^set.*$&quot;) preprocess:^{ NSLog(@&quot;%@&quot;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
+-[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
+&#43; (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
+正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
+また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
+ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^UIView$&quot; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^set.*$&quot; options:0 error:&amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&quot;%@&quot;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="BlockInjectionをバージョンアップしました | TOKOROM BLOG" property="og:title"><meta content="BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。
+https://github.com/tokorom/BlockInjection で公開しています。
+バージョンアップ内容 前記事 からのバージョンアップ内容は以下です。
+リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます） クラスメソッドにも対応しました 複数のクラスやメソッドを一度に追加できるようになりました 正規表現で指定できるようになりました(※1) 注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2) オマケで単純なメソッド実装置き換え機能も追加しました UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる 既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。
+例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
+BlockInjectionを使えば、たった3行のコードでこれが実現できます。
+[BILib injectToClassWithNameRegex:BIRegex(@&quot;^UIView$&quot;) methodNameRegex:BIRegex(@&quot;^set.*$&quot;) preprocess:^{ NSLog(@&quot;%@&quot;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
+-[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
+&#43; (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
+正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
+また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
+ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^UIView$&quot; options:0 error:&amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^set.*$&quot; options:0 error:&amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&quot;%@&quot;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/blockinjection2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/blockinjection2/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">BlockInjectionをバージョンアップしました</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年4月1日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <h2 id="blockinjectionとはなんぞや">BlockInjectionとはなんぞや</h2>
+<p>Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。<br>
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。</p>
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a> で公開しています。</p>
+<h2 id="バージョンアップ内容">バージョンアップ内容</h2>
+<p><a href="/2013/03/07/block-injection/">前記事</a> からのバージョンアップ内容は以下です。</p>
+<ul>
+<li>リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます）</li>
+<li>クラスメソッドにも対応しました</li>
+<li>複数のクラスやメソッドを一度に追加できるようになりました</li>
+<li>正規表現で指定できるようになりました(※1)</li>
+<li>注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2)</li>
+<li>オマケで単純なメソッド実装置き換え機能も追加しました</li>
+</ul>
+<h2 id="uiviewの勝手に呼ばれているsetterでまとめて全てログ出力させる">UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる</h2>
+<!-- more -->
+<p>既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。<br>
+例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして <strong>UIViewのsetter全でまとめてログ出力をする</strong> ようにしてみます。<br>
+BlockInjectionを使えば、たった3行のコードでこれが実現できます。</p>
+<pre><code class="language-objective-c">[BILib injectToClassWithNameRegex:BIRegex(@&quot;^UIView$&quot;) methodNameRegex:BIRegex(@&quot;^set.*$&quot;) preprocess:^{
+  NSLog(@&quot;%@&quot;, [BILib prettyFunction]);
+}];
+</code></pre>
+<p>これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が</p>
+<pre><code> -[UIView setContentScaleFactor:]
+ -[UIView setFrame:]
+ -[UIView setNeedsDisplay]
+</code></pre>
+<p>のように全てログ出力されます。</p>
+<p><code>+ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess;</code> が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。<br>
+正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。</p>
+<p>また、<code>[BILib prettyFunction]</code> は注入先のメソッド名を<code>__PRETTY_FUNCTION__</code>と同じ形式で取得できる便利機能です。</p>
+<p>ちなみに、<code>BIRegex</code>というのはただ<code>NSRegularExpression</code>を簡易的に作るための関数ですので、↑のコードは以下と同義です。</p>
+<pre><code class="language-objective-c">NSError* error = nil;
+NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^UIView$&quot; options:0 error:&amp;error];
+NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&quot;^set.*$&quot; options:0 error:&amp;error];
+
+[BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{
+  NSLog(@&quot;%@&quot;, [BILib prettyFunction]);
+}];
+</code></pre>
+<p>※2013/04/05追記: ちなみに <strong>特定Prefixのメソッド全てにまとめて振るまいを追加する</strong> というのは <a href="https://twitter.com/7gano">@7gano</a> さんのアイデアです。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-macro/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで最近お気に入りのマクロ４つ</span>
+    <span class="feed-item-date">2013年1月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

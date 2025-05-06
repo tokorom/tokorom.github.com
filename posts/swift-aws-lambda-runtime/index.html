@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Swift AWS Lambda Runtimeのサンプルをデプロイしてみた | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
+https://swift.org/blog/aws-lambda-runtime/
+以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
+swift.orgの説明には、
+The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
+AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している とあります。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Swift AWS Lambda Runtimeのサンプルをデプロイしてみた | TOKOROM BLOG" property="og:title"><meta content="導入 先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！
+https://swift.org/blog/aws-lambda-runtime/
+以前から Custom AWS Lambda runtimes を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。
+swift.orgの説明には、
+The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.
+AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている さまざまな種類のLambda関数を作るのに便利なAPIを提供している とあります。" property="og:description"><meta content="https://www.tokoro.me/images/swift-aws-lambda-runtime/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-aws-lambda-runtime/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/swift-aws-lambda-runtime/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年6月11日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/aws">
+              AWS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/lambda">
+              Lambda
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/swift-aws-lambda-runtime/top.png" alt="image"></p>
+<h2 id="導入">導入</h2>
+<p>先日（2020/5/29）、Swift AWS Lambda Runtimeが発表されましたね！</p>
+<p><a href="https://swift.org/blog/aws-lambda-runtime/">https://swift.org/blog/aws-lambda-runtime/</a></p>
+<p>以前から <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html">Custom AWS Lambda runtimes</a> を使い、自分でも実現することができましたが、このオフィシャルなライブラリを使い、よりシンプルに安全にSwift製AWS Lambda関数を構築できるようになります。</p>
+<p>swift.orgの説明には、</p>
+<blockquote>
+<p>The library is an implementation of the AWS Lambda Runtime API and uses an embedded asynchronous HTTP Client that is fine-tuned for performance in the AWS Runtime context. The library provides a multi-tier API that allows building a range of Lambda functions: From quick and simple closures to complex, performance-sensitive event handlers.</p>
+</blockquote>
+<ul>
+<li>AWS Lambda runtime用にパフォーマンスを調整した非同期HTTPクライアントが組み込まれている</li>
+<li>さまざまな種類のLambda関数を作るのに便利なAPIを提供している</li>
+</ul>
+<p>とあります。</p>
+<p>それでは早速、Swift AWS Lambda Runtimeを使ったLambda関数をデプロイしてみましょう。</p>
+<h2 id="事前準備">事前準備</h2>
+<ul>
+<li>AWS Lambdaを作る権限のあるAWSアカウントが必要です</li>
+<li><a href="https://docs.docker.com/docker-for-mac/install/">Docker Desktop on Mac</a> などをインストールしdockerコマンドが使える環境が必要です</li>
+</ul>
+<h2 id="サンプルを試す">サンプルを試す</h2>
+<p>今回は <a href="https://github.com/swift-server/swift-aws-lambda-runtime">Swift AWS Lambda Runtimeのリポジトリ</a> に含まれているサンプルの<code>HelloWorld</code>を試してみます。</p>
+<p>具体的には、 <a href="https://github.com/swift-server/swift-aws-lambda-runtime/tree/master/Examples/LambdaFunctions">https://github.com/swift-server/swift-aws-lambda-runtime/tree/master/Examples/LambdaFunctions</a> です。</p>
+<p>READMEでは<code>scripts/deploy.sh</code>を試すように指示されていますが、この記事ではAWS CLIやS3周りの説明を省略したいため、Swiftで書かれたLamda関数をビルドしてパッケージングするところまでをやってくれる<code>scripts/build-and-package.sh</code>を使います<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<pre><code class="language-sh">git clone https://github.com/swift-server/swift-aws-lambda-runtime.git
+cd swift-aws-lambda-runtime/Examples/LambdaFunctions
+
+./scripts/build-and-package.sh HelloWorld
+</code></pre>
+<p>dockerコマンドが実行できる状態であれば、自動でSwiftで書いたLambda関数をビルドするためのDockerイメージが取得され、Lambda関数がビルドされ、成果物として</p>
+<pre><code>.build/lambda/HelloWorld/lambda.zip
+</code></pre>
+<p>が得られます。</p>
+<h2 id="aws-lambdaにアップロードして実行">AWS Lambdaにアップロードして実行</h2>
+<p>それでは、AWSのコンソールに入って作成したHelloWorldを動かしてみましょう。</p>
+<h3 id="aws-lambdaの作成">AWS Lambdaの作成</h3>
+<p>適当な名前で関数を作成します。</p>
+<p><img src="/images/swift-aws-lambda-runtime/create-lambda.png" alt="image"></p>
+<ul>
+<li>ラインタイムは <strong>ユーザー独自のブートストラップを提供する</strong> にします</li>
+<li>アクセス権限など他の項目はデフォルトのままでOKです</li>
+</ul>
+<h3 id="lamdazipのアップロード">lamda.zipのアップロード</h3>
+<p>関数コードセクションで <strong>アクション</strong> の <strong>.zipファイルをアップロード</strong> を選びます。</p>
+<p><img src="/images/swift-aws-lambda-runtime/upload-zip.png" alt="image"></p>
+<p>ここで先ほどビルドした<code>lambda.zip</code>を選んでアップロードします。
+これだけでSwift製Lambda関数のデプロイは完了です！</p>
+<h3 id="実行してみる">実行してみる</h3>
+<p>右上のメニューの中の <strong>テスト</strong> を選びます。</p>
+<p><img src="/images/swift-aws-lambda-runtime/create-test.png" alt="image"></p>
+<p>テストイベントの設定は、デフォルトのまま適当な名前で保存、でOKです。</p>
+<p>今回は特にインプットを使わないためです。今後インプットのあるLambda関数を作った場合は、ここでテスト用のインプットを指定できます。</p>
+<p>テストイベントの設定が終わったら、改めて <strong>テスト</strong> ボタンを押します。</p>
+<p>すると、スクショのように実行結果のログのところに</p>
+<pre><code>&quot;hello, world!&quot;
+</code></pre>
+<p>と表示されるのが確認できるはずです。</p>
+<p><img src="/images/swift-aws-lambda-runtime/result.png" alt="image"></p>
+<p>これで初めてのSwift製Lambda関数の作成、デプロイ、実行まで終わりました！</p>
+<h2 id="次の記事">次の記事</h2>
+<p>これでSwift AWS Lambda Runtimeを使ったSwift製Lambda関数のビルドとデプロイの流れを確認できました。</p>
+<p>ただ、このままだと流れがわかっただけですので、次の記事ではなにか適当な関数を作ってAPI化し、curlなどで叩くところまでやってみたいと思います。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>AWSに慣れていてスクリプト一発でAWS Lambdaのデプロイまでやってしまいたい人はdeploy.shをお試しください&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

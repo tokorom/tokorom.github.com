@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[WWDC24] SwiftUIの新機能のまとめ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="WWDC24の What’s new in SwiftUI のまとめです。
+今回、このセッションで紹介される項目の数が例年以上に多すぎてびっくりでした。 セッションでは短い間隔でポンポンとたくさんの機能が流れるように紹介されていきます。
+このまとめでは、セッションでは軽く触れられた程度の内容も、APIリファレンスへのリンクをつけるなどしてもう少しだけ補足します。
+このセッションを視聴する/この記事を参照する目的は、WWDC24で発表されたSwiftUIの新機能をさらっと把握し頭の中にインデックスを貼ることだと思います。
+サイドバー/タブバー サイドバー/タブバーがより柔軟に フローティングタブバーをサポート 項目の並び替えや使用頻度の低いオプションの非表示など、ユーザーが自分好みにカスタマイズすることもできる TabViewに内包する要素も新しいタイプセーフな書き方に struct KaraokeTabView: View { @State var customization = TabViewCustomization() var body: some View { TabView { Tab(&quot;Parties&quot;, image: &quot;party.popper&quot;) { PartiesView(parties: Party.all) } .customizationID(&quot;karaoke.tab.parties&quot;) Tab(&quot;Planning&quot;, image: &quot;pencil.and.list.clipboard&quot;) { PlanningView() } .customizationID(&quot;karaoke.tab.planning&quot;) Tab(&quot;Attendance&quot;, image: &quot;person.3&quot;) { AttendanceView() } .customizationID(&quot;karaoke.tab.attendance&quot;) Tab(&quot;Song List&quot;, image: &quot;music.note.list&quot;) { SongListView() } .customizationID(&quot;karaoke.tab.songlist&quot;) } .tabViewStyle(.sidebarAdaptable) .tabViewCustomization($customization) } } tabViewStyleに sidebarAdaptable を指定することで、プラットフォームごとに柔軟にサイドバー OR タブバーが適用される"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[WWDC24] SwiftUIの新機能のまとめ | TOKOROM BLOG" property="og:title"><meta content="WWDC24の What’s new in SwiftUI のまとめです。
+今回、このセッションで紹介される項目の数が例年以上に多すぎてびっくりでした。 セッションでは短い間隔でポンポンとたくさんの機能が流れるように紹介されていきます。
+このまとめでは、セッションでは軽く触れられた程度の内容も、APIリファレンスへのリンクをつけるなどしてもう少しだけ補足します。
+このセッションを視聴する/この記事を参照する目的は、WWDC24で発表されたSwiftUIの新機能をさらっと把握し頭の中にインデックスを貼ることだと思います。
+サイドバー/タブバー サイドバー/タブバーがより柔軟に フローティングタブバーをサポート 項目の並び替えや使用頻度の低いオプションの非表示など、ユーザーが自分好みにカスタマイズすることもできる TabViewに内包する要素も新しいタイプセーフな書き方に struct KaraokeTabView: View { @State var customization = TabViewCustomization() var body: some View { TabView { Tab(&quot;Parties&quot;, image: &quot;party.popper&quot;) { PartiesView(parties: Party.all) } .customizationID(&quot;karaoke.tab.parties&quot;) Tab(&quot;Planning&quot;, image: &quot;pencil.and.list.clipboard&quot;) { PlanningView() } .customizationID(&quot;karaoke.tab.planning&quot;) Tab(&quot;Attendance&quot;, image: &quot;person.3&quot;) { AttendanceView() } .customizationID(&quot;karaoke.tab.attendance&quot;) Tab(&quot;Song List&quot;, image: &quot;music.note.list&quot;) { SongListView() } .customizationID(&quot;karaoke.tab.songlist&quot;) } .tabViewStyle(.sidebarAdaptable) .tabViewCustomization($customization) } } tabViewStyleに sidebarAdaptable を指定することで、プラットフォームごとに柔軟にサイドバー OR タブバーが適用される" property="og:description"><meta content="https://www.tokoro.me/images/wwdc24-whats-new-in-swiftui/top.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc24-whats-new-in-swiftui/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[WWDC24] SwiftUIの新機能のまとめ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2024年6月25日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swiftui">
+              SwiftUI
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/wwdc24-whats-new-in-swiftui/top.jpg" alt="image"></p>
+<p>WWDC24の <a href="https://developer.apple.com/videos/play/wwdc2024/10144/">What’s new in SwiftUI</a> のまとめです。</p>
+<p>今回、このセッションで紹介される項目の数が例年以上に多すぎてびっくりでした。
+セッションでは短い間隔でポンポンとたくさんの機能が流れるように紹介されていきます。</p>
+<p>このまとめでは、セッションでは軽く触れられた程度の内容も、APIリファレンスへのリンクをつけるなどしてもう少しだけ補足します。</p>
+<p>このセッションを視聴する/この記事を参照する目的は、WWDC24で発表されたSwiftUIの新機能をさらっと把握し頭の中にインデックスを貼ることだと思います。</p>
+<h2 id="サイドバータブバー">サイドバー/タブバー</h2>
+<ul>
+<li>サイドバー/タブバーがより柔軟に</li>
+<li>フローティングタブバーをサポート</li>
+<li>項目の並び替えや使用頻度の低いオプションの非表示など、ユーザーが自分好みにカスタマイズすることもできる</li>
+</ul>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/sidebar-customize.png" alt="sidebar-customize"></p>
+<ul>
+<li>TabViewに内包する要素も新しいタイプセーフな書き方に</li>
+</ul>
+<pre><code class="language-swift">struct KaraokeTabView: View {
+    @State var customization = TabViewCustomization()
+    
+    var body: some View {
+        TabView {
+            Tab(&quot;Parties&quot;, image: &quot;party.popper&quot;) {
+                PartiesView(parties: Party.all)
+            }
+            .customizationID(&quot;karaoke.tab.parties&quot;)
+            
+            Tab(&quot;Planning&quot;, image: &quot;pencil.and.list.clipboard&quot;) {
+                PlanningView()
+            }
+            .customizationID(&quot;karaoke.tab.planning&quot;)
+
+            Tab(&quot;Attendance&quot;, image: &quot;person.3&quot;) {
+                AttendanceView()
+            }
+            .customizationID(&quot;karaoke.tab.attendance&quot;)
+
+            Tab(&quot;Song List&quot;, image: &quot;music.note.list&quot;) {
+                SongListView()
+            }
+            .customizationID(&quot;karaoke.tab.songlist&quot;)
+        }
+        .tabViewStyle(.sidebarAdaptable)
+        .tabViewCustomization($customization)
+    }
+}
+</code></pre>
+<ul>
+<li>
+<p>tabViewStyleに <a href="https://developer.apple.com/documentation/swiftui/tabviewstyle/sidebaradaptable">sidebarAdaptable</a> を指定することで、プラットフォームごとに柔軟にサイドバー OR タブバーが適用される</p>
+<ul>
+<li>iOSでは常にボトムタブバー</li>
+<li>iPadOSではフローティングタブバーとサイドバーが自動で切り替わる</li>
+<li>macOS/tvOSでは常にサイドバー</li>
+<li>visionOSではオーナメント/TabSectionが使われている場合はサイドバーも</li>
+</ul>
+</li>
+<li>
+<p><a href="https://developer.apple.com/documentation/swiftui/tabviewcustomization">tabViewCustomization</a> により、ユーザーがカスタマイズできる要素を調整できる（並び替え、非表示など）</p>
+</li>
+<li>
+<p>tvOSのサイドバーはフローティング表示に</p>
+</li>
+</ul>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/tvos-sidebar.png" alt="tvos-sidebar"></p>
+<ul>
+<li>macOSではセグメンティッドコントロールスタイルに切り替えることもできる</li>
+</ul>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/macos-segmented.png" alt="macos-segmented"></p>
+<h2 id="sheet">sheet</h2>
+<ul>
+<li>UIKitでいうpresentViewController</li>
+<li>従来はsheetが半モーダル表示という位置付けだったが、iOS18からはsheetで表示するViewに対してどのような表示にするかを指定できるようになる</li>
+<li><a href="https://developer.apple.com/documentation/swiftui/presentationsizing">presentationSizing</a>
+<ul>
+<li><code>automatic</code>: プラットフォームごとに適切な表示に</li>
+<li><code>fitted</code>: コンテンツにフィットするサイズに</li>
+<li><code>form</code>: <code>page</code>よりも一回り小さい</li>
+<li><code>page</code>: おそらく従来のsheetのデフォルトサイズ</li>
+</ul>
+</li>
+<li>また、presentationSizingは追加で<code>fitted</code>、<code>sticky</code>、<code>proposedSize</code>を追記できる
+<ul>
+<li><code>fitted</code>: コンテンツにフィットさせる</li>
+<li><code>sticky</code>: コンテンツに合わせて大きくはなるが小さくはなならない</li>
+<li><code>proposedSize</code>: 詳細不明</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">.presentationSizing(
+    .page
+        .fitted(horizontal: false, vertical: true)
+        .sticky(horizontal: false, vertical: true)
+)
+</code></pre>
+<h2 id="zoom-navigation-transition">Zoom Navigation Transition</h2>
+<ul>
+<li>写真アプリにある写真セルを選択すると拡大しながらその写真の画面に遷移するトランジション</li>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/navigationtransition(_:)">navigationTransition</a> が新設され、そこに　<code>.zoom</code> を指定することで実現できる</li>
+<li>あわせて <a href="https://developer.apple.com/documentation/swiftui/view/matchedtransitionsource(id:in:configuration:)">matchedTransitionSource</a> で設定をする必要がある
+<ul>
+<li>逆にいうとこれでトランジションをカスタマイズできる</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">struct PartyView: View {
+    var party: Party
+    @Namespace() var namespace
+    
+    var body: some View {
+        NavigationLink {
+            PartyDetailView(party: party)
+                .navigationTransition(.zoom(
+                    sourceID: party.id, in: namespace))
+        } label: {
+            Text(&quot;Party!&quot;)
+        }
+        .matchedTransitionSource(id: party.id, in: namespace)
+    }
+}
+
+struct PartyDetailView: View {
+    var party: Party
+    
+    var body: some View {
+        Text(&quot;PartyDetailView&quot;)
+    }
+}
+
+struct Party: Identifiable {
+    var id = UUID()
+    static var all: [Party] = []
+}
+</code></pre>
+<h2 id="controls">Controls</h2>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/controls.png" alt="controls"></p>
+<ul>
+<li>コントロールセンターに表示するボタンやスイッチをアプリが作成できるように</li>
+<li>ロック画面のカメラボタンやライトボタンも置き換えられる</li>
+<li>ControlはWidgetの一種でApp Intentsを使って作成できる</li>
+</ul>
+<pre><code class="language-swift">import WidgetKit
+import SwiftUI
+
+struct StartPartyControl: ControlWidget {
+    var body: some ControlWidgetConfiguration {
+        StaticControlConfiguration(
+            kind: &quot;com.apple.karaoke_start_party&quot;
+        ) {
+            ControlWidgetButton(action: StartPartyIntent()) {
+                Label(&quot;Start the Party!&quot;, systemImage: &quot;music.mic&quot;)
+                Text(PartyManager.shared.nextParty.name)
+            }
+        }
+    }
+}
+
+// Model code
+
+class PartyManager {
+    static let shared = PartyManager()
+    var nextParty: Party = Party(name: &quot;WWDC Karaoke&quot;)
+}
+
+struct Party {
+    var name: String
+}
+
+// AppIntent
+
+import AppIntents
+
+struct StartPartyIntent: AppIntent {
+    static let title: LocalizedStringResource = &quot;Start the Party&quot;
+    
+    func perform() async throws -&gt; some IntentResult {
+        return .result()
+    }
+}
+</code></pre>
+<h2 id="swift-charts">Swift Charts</h2>
+<ul>
+<li>Vectorized plotsという新しいチャートが加わった
+<ul>
+<li><a href="https://developer.apple.com/documentation/charts/AreaPlot">AreaPlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/LinePlot">LinePlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/PointPlot">PointPlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/RectanglePlot">RectanglePlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/RulePlot">RulePlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/BarPlot">BarPlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/SectorPlot">SectorPlot</a></li>
+<li><a href="https://developer.apple.com/documentation/charts/AreaPlot">AreaPlot</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/lineplot.png" alt="lineplot"></p>
+<pre><code class="language-swift">import SwiftUI
+import Charts
+
+struct AttendanceView: View {
+    var body: some View {
+        Chart {
+          LinePlot(x: &quot;Parties&quot;, y: &quot;Guests&quot;) { x in
+            pow(x, 2)
+          }
+          .foregroundStyle(.purple)
+        }
+        .chartXScale(domain: 1...10)
+        .chartYScale(domain: 1...100)
+    }
+}
+</code></pre>
+<h2 id="tablecolumnforeach">TableColumnForEach</h2>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/tablecolumnforeach.png" alt="tablecolumnforeach"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/tablecolumnforeach">TableColumnForEach</a> を使うことで、動的な数のカラムを持ったテーブルを作ることができる</li>
+</ul>
+<pre><code class="language-swift">Table(guestData) {
+    // A static column for the name
+    TableColumn(&quot;Name&quot;, value: \.name)
+    
+    TableColumnForEach(partyData) { party in
+        TableColumn(party.name) { guest in
+            Text(guest.songsSung[party.id] ?? 0, format: .number)
+        }
+    }
+}
+</code></pre>
+<h2 id="meshgradient">MeshGradient</h2>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/meshgradient.png" alt="meshgradient"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/meshgradient">MeshGradient</a> で、複雑なメッシュグラデーションを表現できるように</li>
+</ul>
+<pre><code class="language-swift">MeshGradient(
+    width: 3,
+    height: 3,
+    points: [
+        .init(0, 0), .init(0.5, 0), .init(1, 0),
+        .init(0, 0.5), .init(0.3, 0.5), .init(1, 0.5),
+        .init(0, 1), .init(0.5, 1), .init(1, 1)
+    ],
+    colors: [
+        .red, .purple, .indigo,
+        .orange, .cyan, .blue,
+        .yellow, .green, .mint
+    ]
+)
+</code></pre>
+<h2 id="document-launch-scene">Document Launch Scene</h2>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/DocumentGroupLaunchScene.png" alt="DocumentGroupLaunchScene"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/SwiftUI/DocumentGroupLaunchScene">DocumentGroupLaunchScene</a> を使い、ドキュメントベースのアプリのリッチな起動画面を作りやすく</li>
+<li>大きな文字のタイトル</li>
+<li>操作可能なボタン類の追加</li>
+<li>背景のカスタマイズ</li>
+<li>装飾をタイトルのViewの前面と背面に追加</li>
+</ul>
+<pre><code class="language-swift">DocumentGroupLaunchScene(&quot;Your Lyrics&quot;) {
+    NewDocumentButton()
+    Button(&quot;New Parody from Existing Song&quot;) {
+        // Do something!
+    }
+} background: {
+    PinkPurpleGradient()
+} backgroundAccessoryView: { geometry in
+    MusicNotesAccessoryView(geometry: geometry)
+         .symbolEffect(.wiggle(.rotational.continuous()))
+} overlayAccessoryView: { geometry in
+    MicrophoneAccessoryView(geometry: geometry)
+}
+</code></pre>
+<h2 id="sf-symbols">SF Symbols</h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/symbols/symboleffect">SymbolEffect</a> に3つのアニメーションが追加された
+<ul>
+<li><code>breathe</code>: シンボルを滑らかに上下にスケール</li>
+<li><code>rotate</code>: 回転エフェクト、指定したアンカーポイントを中心にシンボルの一部を回転させる</li>
+<li><code>wiggle</code>: くねくねエフェクト、シンボルを好きな方向や角度に揺らす</li>
+</ul>
+</li>
+<li><code>replace</code> など既存のアニメーションにも新しい機能が追加された
+<ul>
+<li><a href="https://developer.apple.com/documentation/symbols/replacesymboleffect/magicreplace/">MagicReplace</a> により、バッジやスラッシュをスムーズにアニメーションできるように</li>
+</ul>
+</li>
+</ul>
+<h2 id="macos">macOS</h2>
+<h3 id="window">Window</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/windowstyle">windowStyle</a> に <code>plain</code> を追加
+<ul>
+<li>デフォルトのウィンドウ背景やバーのないスタイル</li>
+</ul>
+</li>
+<li><a href="https://developer.apple.com/documentation/swiftui/windowlevel">windowLevel</a> を追加
+<ul>
+<li>&rsquo;normal&rsquo;, &lsquo;desktop&rsquo;, &lsquo;floating&rsquo; の３階層のどの層で表示するかを指定</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/window-plain.png" alt="window-plain"></p>
+<pre><code class="language-swift">Window(&quot;Lyric Preview&quot;, id: &quot;lyricPreview&quot;) { ... }
+    .windowStyle(.plain)
+    .windowLevel(.floating)
+</code></pre>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/scene/defaultwindowplacement(_:)">defaultWindowPlacement</a> でWindowのデフォルト位置を任意に調整することもできる</li>
+</ul>
+<pre><code class="language-swift">.defaultWindowPlacement { content, context in
+    let displayBounds = context.defaultDisplay.visibleRect
+    let contentSize = content.sizeThatFits(.unspecified)
+    return topPreviewPlacement(size: contentSize, bounds: displayBounds)
+}
+</code></pre>
+<ul>
+<li>
+<p><a href="https://developer.apple.com/documentation/swiftui/windowdraggesture">WindowDragGesture</a> でコンテンツ部分をドラッグしてウィンドウを動かせるようにできる</p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/documentation/swiftui/utilitywindow">UtilityWindow</a> のような新しいタイプのWindowもある</p>
+<ul>
+<li>アプリのメインコンテンツに関連するコントロール、設定、情報を表示するWindow</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/UtilityWindow.png" alt="UtilityWindow"></p>
+<h3 id="modifierkeyalternate">modifierKeyAlternate</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/modifierKeyAlternate.png" alt="modifierKeyAlternate"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/modifierkeyalternate(_:_:)">modifierKeyAlternate</a> でショートカットキーに対する修飾キーを付与できるように
+<ul>
+<li>その修飾キーを押している間、修飾後のショートカットメニューがUIに自動的に明示される</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">Button(&quot;Preview Lyrics in Window&quot;) {
+    // show preview in window
+}
+.modifierKeyAlternate(.option) {
+    Button(&quot;Preview Lyrics in Full Screen&quot;) {
+        // show preview in full screen
+    }
+}
+.keyboardShortcut(&quot;p&quot;, modifiers: [.shift, .command])
+</code></pre>
+<h3 id="onmodifierkeyschanged">onModifierKeysChanged</h3>
+<ul>
+<li>また <a href="https://developer.apple.com/documentation/mapkit/mapscaleview/4365411-onmodifierkeyschanged">onModifierKeysChanged</a> により修飾キーを押している間にViewを変化させるのを実装しやすくなった</li>
+</ul>
+<pre><code class="language-swift">LyricLine()
+    .overlay(alignment: .top) {
+        if showBouncingBallAlignment {
+            // Show bouncing ball alignment guide
+        }
+    }
+    .onModifierKeysChanged(mask: .option) {
+        showBouncingBallAlignment = !$1.isEmpty
+    }
+</code></pre>
+<h3 id="pointerstyle">pointerStyle</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/pointerStyle.png" alt="pointerStyle"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/pointerstyle(_:)">pointerStyle</a> でマウスポインタの外観や可視性をカスタマイズできるように</li>
+</ul>
+<pre><code class="language-swift">ForEach(resizeAnchors) { anchor in
+    ResizeHandle(anchor: anchor)
+         .pointerStyle(.frameResize(position: anchor.position))
+}
+</code></pre>
+<h2 id="visionos">visionOS</h2>
+<h3 id="pushwindow">pushWindow</h3>
+<ul>
+<li>新しい <a href="https://developer.apple.com/documentation/swiftui/pushwindowaction">PushWindowAction</a> により現在のWindowをバックグラウンドにして新しいWindowで覆うことができる
+<ul>
+<li>覆ったWindowは既存の <code>DismissWindowAction</code> で閉じる</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">struct EditorView: View {
+    @Environment(\.pushWindow) private var pushWindow
+    
+    var body: some View {
+        Button(&quot;Play&quot;, systemImage: &quot;play.fill&quot;) {
+            pushWindow(id: &quot;lyric-preview&quot;)
+        }
+    }
+}
+</code></pre>
+<h3 id="hovereffect">hoverEffect</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/hoverEffect.png" alt="hoverEffect"></p>
+<ul>
+<li>これまでvisionOSのホバーエフェクト（視線を合わせた時の挙動）はカスタマイズしづらかったが、 <a href="https://developer.apple.com/documentation/swiftui/view/hovereffect(_:in:isenabled:)">hoverEffect</a> でカスタムできるようになった
+<ul>
+<li>ただしプライバシーを守るためユーザーが視線を合わせたタイミングをトラッキングできないのはこれまでどおり</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">.hoverEffect { effect, isActive, _ in
+    effect.scaleEffect(isActive ? 1.05 : 1.0)
+}
+</code></pre>
+<h2 id="ipados">iPadOS</h2>
+<h3 id="スクイーズ">スクイーズ</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/SwiftUI/View/onPencilSqueeze(perform:)">onPencilSqueeze</a> でApple Pencilのスクイーズをハンドリングできる
+<ul>
+<li>このときユーザーがシステムに設定した期待される動作を <a href="https://developer.apple.com/documentation/swiftui/environmentvalues/preferredpencilsqueezeaction">preferredPencilSqueezeAction</a> で参照することができる</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">@Environment(\.preferredPencilSqueezeAction) var preferredAction
+    
+var body: some View {
+    LyricsEditorView()
+        .onPencilSqueeze { phase in
+            if preferredAction == .showContextualPalette, case let .ended(value) = phase {
+                if let anchorPoint = value.hoverPose?.anchor {
+                    lyricDoodlePaletteAnchor = .point(anchorPoint)
+                }
+                lyricDoodlePalettePresented = true
+            }
+       }
+}
+</code></pre>
+<h2 id="watchos">watchOS</h2>
+<h3 id="live-activity">Live Activity</h3>
+<ul>
+<li>iOS用のLive Activityは何もしなくてもwatchOSでそのまま動作するように</li>
+<li><a href="https://developer.apple.com/documentation/SwiftUI/WidgetConfiguration/supplementalActivityFamilies(_:)">supplementalActivityFamilies</a> でどのサイズのLive Activityをサポートするかを指定できる</li>
+</ul>
+<h3 id="ダブルタップジェスチャー">ダブルタップジェスチャー</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/SwiftUI/View/handGestureShortcut(_:isEnabled:)">handGestureShortcut</a> を使うことで、watchOSのダブルタップジェスチャーに対応することができるように
+<ul>
+<li>具体的には <code>.handGestureShortcut(.primaryAction)</code> を付与する</li>
+</ul>
+</li>
+</ul>
+<h3 id="時間や日付の表示形式">時間や日付の表示形式</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/textFormat.png" alt="textFormat"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/text/init(_:format:)-9d2x4">Textの新しいイニシアライザ</a> により、時間や日付の表示がしやすく
+<ul>
+<li>具体的には <code>Text(.currentDate, format: .reference(to: xxx))</code> などで「あと何分」といった表示がしやすいように</li>
+<li>その他「-0:58」といった表記や、「00:06.78」のようなタイマー的な表記も指定できる</li>
+<li>なお、これはLive Activityと相性が良いと紹介されたが、watchOSだけでなくiOS/visionOSなど全てのOSで利用できる機能</li>
+</ul>
+</li>
+</ul>
+<h3 id="ウィジェットの表示示唆">ウィジェットの表示示唆</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/widgetkit/widgetrelevances">WidgetRelevances</a> により、システムがスマートスタックなどにウィジェットを表示することを判断する材料を与えやすくなった</li>
+</ul>
+<h2 id="swiftui-framework-foundations">SwiftUI Framework foundations</h2>
+<h3 id="カスタムコンテナ">カスタムコンテナ</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/customContainer.png" alt="customContainer"></p>
+<ul>
+<li>たとえばコルクボードにメモをランダムに並べるようなカスタムなコンテナを定義できるように
+<ul>
+<li>組み込みのListのようなコンテナと同様にForEachで複数の要素を渡す</li>
+<li>Sectionにも対応</li>
+<li>カスタムなmodifierも付与できる</li>
+</ul>
+</li>
+</ul>
+<h3 id="entryマクロ">Entryマクロ</h3>
+<ul>
+<li>Entryマクロにより、EnvironmentValues、FocusValues、Transaction、ContainerValuesを拡張しやすく</li>
+</ul>
+<pre><code class="language-swift">extension EnvironmentValues {
+  @Entry var karaokePartyColor: Color = .purple
+}
+
+extension FocusValues {
+  @Entry var lyricNote: String? = nil
+}
+
+extension Transaction {
+  @Entry var animatePartyIcons: Bool = false
+}
+
+extension ContainerValues {
+  @Entry var displayBoardCardStyle: DisplayBoardCardStyle = .bordered
+}
+</code></pre>
+<h3 id="アクセシビリティ">アクセシビリティ</h3>
+<ul>
+<li>SwiftUIに組み込まれたアクセシビリティラベルに追加情報を付与できるように</li>
+</ul>
+<h3 id="xcode-preview">Xcode Preview</h3>
+<ul>
+<li>リビルドせずにPreviewt実行を切り替えられるように</li>
+<li>また <code>@Previewable</code> マクロでPreview用のStateを簡単に追加できるようになった</li>
+</ul>
+<pre><code class="language-swift">#Preview {
+   @Previewable @State var showAllSongs = true
+   Toggle(&quot;Show All songs&quot;, isOn: $showAllSongs)
+}
+</code></pre>
+<h3 id="テキストの選択範囲">テキストの選択範囲</h3>
+<ul>
+<li>TextFieldのイニシアライザに <code>selection</code> が加わり、テキストの選択範囲を取得できるように</li>
+</ul>
+<pre><code class="language-swift">struct LyricView: View {
+  @State private var selection: TextSelection?
+  
+  var body: some View {
+    TextField(&quot;Line \(line.number)&quot;, text: $line.text, selection: $selection)
+    // ...
+  }
+}
+</code></pre>
+<h3 id="searchfocused">searchFocused</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/searchfocused(_:)">searchFocused</a> により、検索フィールドへのフォーカス移動ができるように</li>
+</ul>
+<h3 id="textinputsuggestions">textInputSuggestions</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/textSuggestions.png" alt="textSuggestions"></p>
+<ul>
+<li>macOS専用だが、 <a href="https://developer.apple.com/documentation/swiftui/view/textinputsuggestions(_:)">textInputSuggestions</a> でテキストフィールドにテキスト補完の候補を出せるように</li>
+</ul>
+<h3 id="色の混合">色の混合</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/colorMix.png" alt="colorMix"></p>
+<ul>
+<li>Colorに <a href="https://developer.apple.com/documentation/swiftui/color/mix(with:by:in:)">mix</a> が新設され、色の混合がしやすく</li>
+</ul>
+<h3 id="カスタムシェーダー">カスタムシェーダー</h3>
+<ul>
+<li>シェーダーをプリコンパイルできるように</li>
+</ul>
+<pre><code class="language-swift">ContentView()
+  .task {
+    let slimShader = ShaderLibrary.slim()
+    try! await slimShader.compile(as: .layerEffect)
+  }
+</code></pre>
+<h3 id="scrollview">ScrollView</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/onscrollgeometrychange(for:of:action:)">onScrollGeometryChange</a> でスクロール位置による任意のアクションを実装できるように
+<ul>
+<li>例えばここまでスクロールしたときだけこのViewが表示されるなど</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">ScrollView {
+    // ...
+  }
+  .onScrollGeometryChange(for: Bool.self) { geometry in
+    geometry.contentOffset.y &lt; geometry.contentInsets.top
+  } action: { wasScrolledToTop, isScrolledToTop in
+    withAnimation {
+      showBackButton = !isScrolledToTop
+    }
+  }
+</code></pre>
+<ul>
+<li><a href="https://developer.apple.com/documentation/mapkit/mapscaleview/4354767-onscrollvisibilitychange">onScrollVisibilityChange</a> で特定のViewが画面にスクロールイン・スクロールアウトした時のアクションを実装できるように
+<ul>
+<li>例えば動画プレイヤーがスクロールインしたら再生を開始し、スクロールアウトしたら停止するなど</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">VideoPlayer(player: player)
+  .onScrollVisibilityChange(threshold: 0.2) { visible in
+    if visible {
+      player.play()
+    } else {
+      player.pause()
+    }
+  }
+</code></pre>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/scrollposition">ScrollPosition</a> が新しくなり、従来通りの特定のIDを持つViewの指定だけでなく、具体的なオフセットや端なども指定できるように</li>
+</ul>
+<pre><code class="language-swift">struct ContentView: View {
+  @State private var position: ScrollPosition =
+    .init(idType: Int.self)
+
+  var body: some View {
+    ScrollView {
+      // ... 
+    }
+    .scrollPosition($position)
+    .overlay {
+      FloatingButton(&quot;Back to Invitation&quot;) {
+        position.scrollTo(edge: .top)
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="swift-6">Swift 6</h3>
+<ul>
+<li>Swift 6サポートのためのAPI改善
+<ul>
+<li>Viewはデフォルトで <code>@MainActor</code> に</li>
+</ul>
+</li>
+</ul>
+<h3 id="uikitappkit連携">UIKit/AppKit連携</h3>
+<ul>
+<li>UIGestureRecognizerをSwiftUIで直接利用できるように</li>
+<li>UIKit/AppKitのアニメーションをSwiftUIで直接利用できるように</li>
+</ul>
+<h2 id="visionos-2">visionOS 2</h2>
+<h3 id="volumeベースプレート">Volumeベースプレート</h3>
+<ul>
+<li>visionOS 2ではVolumeの境界を明示するベースプレートを表示できる</li>
+<li>ベースプレートは <code>volumeBaseplateVisibility(.hidden)</code> で隠すことができる</li>
+</ul>
+<pre><code class="language-swift">WindowGroup {
+  ContentView()
+}
+.windowStyle(.volumetric)
+.defaultWorldScaling(.trueScale)
+.volumeBaseplateVisibility(.hidden)
+</code></pre>
+<h3 id="onvolumeviewpointchange">onVolumeViewpointChange</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/onvolumeviewpointchange(updatestrategy:initial:_:)">onVolumeViewpointChange</a> でユーザーがどの方向から見ているかを検知して、常にユーザーの方向に向けるなどのアクションをすることができる</li>
+</ul>
+<pre><code class="language-swift"> Model3D(named: &quot;microphone&quot;)
+  .onVolumeViewpointChange { _, new in
+    micRotation = rotateToFace(new)
+  }
+  .rotation3DEffect(micRotation)
+  .animation(.easeInOut, value: micRotation)
+</code></pre>
+<h3 id="没入度の範囲指定">没入度の範囲指定</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/immersiveProgerssive.png" alt="immersiveProgerssive"></p>
+<ul>
+<li>ImmersiveStyleに <a href="https://developer.apple.com/documentation/swiftui/immersionstyle/progressive(_:initialamount:)-7gp0e">progressive</a> が加わり、没入度の範囲指定ができるようになりました</li>
+</ul>
+<h3 id="新しいsurroundingseffect">新しいSurroundingsEffect</h3>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/view/preferredsurroundingseffect(_:)">preferredSurroundingsEffect</a> に <a href="https://developer.apple.com/documentation/swiftui/surroundingseffect">semiDakrやcolorMultiplyやdim</a> など新しい効果を指定できるようになりました
+<ul>
+<li>これによりパススルーを好みの暗さにしたりムーディーな雰囲気にできるようになりました</li>
+<li>これまでは <code>systemDark</code> しか指定できませんでした</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-swift">struct LoungeView: View {
+  var body: some View {
+    StageView()
+      .preferredSurroundingsEffect(.colorMultiply(.purple))
+  }
+}
+</code></pre>
+<h3 id="オーナメント">オーナメント</h3>
+<ul>
+<li>その他オーナメントにもアップデートがあるよう</li>
+</ul>
+<h3 id="テキストviewの拡張">テキストViewの拡張</h3>
+<p><img src="/images/wwdc24-whats-new-in-swiftui/textRender.png" alt="textRender"></p>
+<ul>
+<li><a href="https://developer.apple.com/documentation/swiftui/textrenderer">TextRenderer</a> でテキストにブラーや色合いの変更など様々なエフェクトがかけられるように</li>
+</ul>
+<pre><code class="language-swift">struct KaraokeRenderer: TextRenderer {
+  func draw(
+    layout: Text.Layout,
+    in context: inout GraphicsContext
+  ) {
+    for line in layout {
+      for run in line {
+        var glow = context
+
+        glow.addFilter(.blur(radius: 8))
+        glow.addFilter(purpleColorFilter)
+
+        glow.draw(run)
+        context.draw(run)
+      }
+    }
+  }
+}
+
+struct LyricsView: View {
+  var body: some View {
+    Text(&quot;A Whole View World&quot;)
+      .textRenderer(KaraokeRenderer())
+  }
+}
+</code></pre>
+<hr>
+<p>まとめは以上です。
+盛りだくさんすぎてびっくりでした。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

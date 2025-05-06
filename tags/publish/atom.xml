@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>publish on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/publish/</link>
+    <description>Recent content in publish on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 05 Nov 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/publish/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</title>
+      <link>https://www.tokoro.me/posts/ios-dev-accounts/</link>
+      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/ios-dev-accounts/</guid>
+      <description>2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
+Member Centerのほうにアカウント追加 -&amp;gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&amp;gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能 失礼しました。
+追加情報などあれば是非おねがいします！
+概要 私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。
+おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。
+iOS Dev Center の構成 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
+大きくは、
+iOS Developer Program Member Center iTunes Connect に分かれます。
+メンバーを追加する方法が２つある？？ 今回、私が混乱してしまった部分がここでした。
+iOSアプリ開発/公開のために必要なアカウントは、
+Member CenterのPeople iTunes ConnectのManage Users の2カ所で管理されています。
+また、この２つのアカウントはそれぞれ別々の用途になります。
+個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
+Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
+Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行 が必要なユーザがこれに該当します。
+iTunes ConnectのManage Usersに追加すべきユーザは？ リリース担当、経理担当、法務担当などです。
+アプリのリリースと管理 売り上げやダウンロード数の確認 銀行、税金情報などの管理 が必要なユーザがこれに該当します。</description>
+    </item>
+    
+  </channel>
+</rss>

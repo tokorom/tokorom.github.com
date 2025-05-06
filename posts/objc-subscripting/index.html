@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Objective-Cで独自クラスに[]でアクセスする | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
+Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
+array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる といった変更があります。
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
+※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
+でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+これらの変換自体はiOSがターゲットの場合でも行われているようです。
+例えば独自クラスに上記メソッドを実装すると&hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &quot;Wrapper."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Objective-Cで独自クラスに[]でアクセスする | TOKOROM BLOG" property="og:title"><meta content="まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
+Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
+array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる といった変更があります。
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
+※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
+でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+これらの変換自体はiOSがターゲットの場合でも行われているようです。
+例えば独自クラスに上記メソッドを実装すると&hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &quot;Wrapper." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-subscripting/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/objc-subscripting/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Objective-Cで独自クラスに[]でアクセスする</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年8月12日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/xcode">
+              xcode
+          </a>
+          /</div><div class="content">
+      <p>まず、Xcode4.4から使えるObjective-Cの新しい書き方については <a href="/2012/08/12/objc-new-statements/">前の記事</a> をご参照ください。</p>
+<h2 id="xcode44からmacアプリ開発で使える新しいリテラル">Xcode4.4からMacアプリ開発で使える新しいリテラル</h2>
+<p>上記記事には書いていないのですがMac向けのアプリではこの他にも、</p>
+<ul>
+<li><strong>array[1]</strong> でNSArrayの要素にアクセスできる</li>
+<li><strong>dictionary[key]</strong> でNSDictionaryの要素にアクセスできる</li>
+<li><strong>@YES</strong>/<strong>@NO</strong> でもNSNumberのインスタンスを作れる</li>
+</ul>
+<p>といった変更があります。<br>
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。</p>
+<p>※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 <a href="https://twitter.com/k_katsumi">@k_katsumi</a> さんに教えてもらいました。</p>
+<h2 id="でもでアクセスする仕組み自体はiosでも使えます">でも[]でアクセスする仕組み自体はiOSでも使えます!</h2>
+<!-- more -->
+<p>ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、</p>
+<pre><code class="language-objc">// id obj = array[0]; のときはこれになります
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
+// array[0] = obj; のときはこれになります
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
+
+// id obj = array[key]; のときはこれになります
+- (id)objectForKeyedSubscript:(id)key;
+// array[key] = obj; のときはこれになります
+- (void)setObject:(id)object forKeyedSubscript:(id)key;
+</code></pre>
+<p>に変換されるそうです。</p>
+<p>これらの変換自体はiOSがターゲットの場合でも行われているようです。</p>
+<h2 id="例えば独自クラスに上記メソッドを実装すると">例えば独自クラスに上記メソッドを実装すると&hellip;</h2>
+<p>例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。</p>
+<pre><code class="language-objc">@interface Wrapper : NSObject
+
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
+
+- (id)objectForKeyedSubscript:(id)key;
+- (void)setObject:(id)object forKeyedSubscript:(id)key;
+
+@end
+</code></pre>
+<pre><code class="language-objc">#import &quot;Wrapper.h&quot;
+
+@interface Wrapper ()
+@property (strong) NSMutableDictionary* dictionary;
+@end 
+
+@implementation Wrapper
+
+- (id)init
+{
+  if ( (self = [super init]) ) {
+    self.dictionary = [NSMutableDictionary dictionary];
+  }
+  return self;
+}
+
+- (id)objectAtIndexedSubscript:(NSUInteger)index
+{
+  return [self.dictionary objectForKey:@(index)];
+}
+
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index
+{
+  return [self.dictionary setObject:object forKey:@(index)];
+}
+
+- (id)objectForKeyedSubscript:(id)key
+{
+  return [self.dictionary objectForKey:key];
+}
+
+- (void)setObject:(id)object forKeyedSubscript:(id)key
+{
+  return [self.dictionary setObject:object forKey:key];
+}
+
+@end
+</code></pre>
+<p>ただ単純に４つのメソッドを実装し、そのメソッドが呼ばれたときには、中で持っているNSMutableDictionaryにアクセスするようにしているだけです。</p>
+<p>このクラスを使って、以下のようなコードをビルド＆実行してみると、</p>
+<pre><code class="language-objc">Wrapper* w = [Wrapper new];
+
+w[0] = @0;
+w[1] = @100;
+w[@2] = @200;
+NSLog( @&quot;%@, %@, %@&quot;, w[0], w[@1], w[2] ); //&lt; 0, 100, 200
+</code></pre>
+<p>普通にビルドが通り、ログも <code>0, 100, 200</code> と想定どおりのものが出力されました。</p>
+<h2 id="どうしても今すぐ使いたければnsarrayやnsdictionaryでも">どうしても今すぐ使いたければNSArrayやNSDictionaryでも</h2>
+<p>iOSではまだ残念ながらNSArrayやNSDictionaryの要素に[]でアクセスすることは出来ないということなのですが、じつは上記メソッドを各クラスに宣言さえしてやればiOSアプリ開発でも利用できるとのことです（こちらは <a href="https://twitter.com/saryou_ssk">@saryou_ssk</a> さんにリンクを教えていただきました)。</p>
+<p>例えば、NSArrayにカテゴリで</p>
+<pre><code class="language-objc">@interface NSArray (Subscripting)
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
+@end 
+</code></pre>
+<p>と宣言してやれば、</p>
+<pre><code class="language-objc">NSArray* array = @[@0, @1, @2];
+NSLog( @&quot;array[1] = %@&quot;, array[1] ); //&lt; 1
+</code></pre>
+<p>と、NSArrayの要素を[]で取得することができるようになります。</p>
+<p>どうしても今すぐ使いたいということであれば、同様に、NSMutableArray、NSDictionary、NSMutableDictionaryのカテゴリで上記４メソッドの必要なものを宣言してやればそれぞれ[]での値の読み書きが可能になります。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-new-statements/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

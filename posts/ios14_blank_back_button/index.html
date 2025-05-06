@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } でOK！
+概要 iOS14のアップデートの1つに、
+ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる というのがありますよね。
+ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
+と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
+iOS13以前の方法 iOS13以前では、例えば、
+Xcodeで該当画面（戻り先の画面）のNavigation ItemのBack Buttonに空白を1つ入れるなどして、戻るのタイトルを消すワークアラウンドがありました。
+しかし、これをすると、iOS 14以降では長押し時の戻り先リストがおかしくなってしまうわけです。
+iOS14でのきちんとした方法 そのため、まずiOS14ではBack Buttonの設定はいじらないようにしましょう1。
+そうすると当然、
+このように戻るボタンのところに画面名が表示されてしまいます。
+そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
+https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
+戻り先のUIViewControllerで、
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
+のようにきちんと表示されます。
+UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
+BackButtonDisplayMode 挙動 default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される generic スペースがあれば「Back（戻る）」を表示、なければ空欄 minimal 常に空欄 例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法 | TOKOROM BLOG" property="og:title"><meta content="先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } でOK！
+概要 iOS14のアップデートの1つに、
+ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる というのがありますよね。
+ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
+と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
+iOS13以前の方法 iOS13以前では、例えば、
+Xcodeで該当画面（戻り先の画面）のNavigation ItemのBack Buttonに空白を1つ入れるなどして、戻るのタイトルを消すワークアラウンドがありました。
+しかし、これをすると、iOS 14以降では長押し時の戻り先リストがおかしくなってしまうわけです。
+iOS14でのきちんとした方法 そのため、まずiOS14ではBack Buttonの設定はいじらないようにしましょう1。
+そうすると当然、
+このように戻るボタンのところに画面名が表示されてしまいます。
+そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
+https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
+戻り先のUIViewControllerで、
+if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &quot; &quot; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
+また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
+のようにきちんと表示されます。
+UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
+BackButtonDisplayMode 挙動 default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される generic スペースがあれば「Back（戻る）」を表示、なければ空欄 minimal 常に空欄 例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。" property="og:description"><meta content="https://www.tokoro.me/images/ios14_blank_back_button/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/ios14_blank_back_button/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/ios14_blank_back_button/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年10月26日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /</div><div class="content">
+      <h2 id="先にまとめ">先にまとめ</h2>
+<pre><code class="language-swift">if #available(iOS 14.0, *) {
+  navigationItem.backButtonDisplayMode = .minimal
+} else {
+  navigationItem.backButtonTitle = &quot; &quot;
+}
+</code></pre>
+<p>でOK！</p>
+<h2 id="概要">概要</h2>
+<p>iOS14のアップデートの1つに、</p>
+<ul>
+<li>ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる</li>
+</ul>
+<p>というのがありますよね。</p>
+<p><img src="/images/ios14_blank_back_button/top.png" alt="image"></p>
+<p>ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、</p>
+<p><img src="/images/ios14_blank_back_button/95280082-24762480-088f-11eb-9b13-96952266528a.png" alt="image"></p>
+<p>と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。</p>
+<h2 id="ios13以前の方法">iOS13以前の方法</h2>
+<p>iOS13以前では、例えば、</p>
+<p><img src="/images/ios14_blank_back_button/xcode.png" alt="image"></p>
+<p>Xcodeで該当画面（戻り先の画面）の<code>Navigation Item</code>の<code>Back Button</code>に空白を1つ入れるなどして、戻るのタイトルを消すワークアラウンドがありました。</p>
+<p>しかし、これをすると、iOS 14以降では長押し時の戻り先リストがおかしくなってしまうわけです。</p>
+<h2 id="ios14でのきちんとした方法">iOS14でのきちんとした方法</h2>
+<p>そのため、まずiOS14では<code>Back Button</code>の設定はいじらないようにしましょう<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>そうすると当然、</p>
+<p><img src="/images/ios14_blank_back_button/ss-1603700597.png" alt="image"></p>
+<p>このように戻るボタンのところに画面名が表示されてしまいます。</p>
+<p>そのうえで、iOS14から追加された<code>UINavigationItem</code>の<code>backButtonDisplayMode</code>を設定します。</p>
+<p><a href="https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode">https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode</a></p>
+<p>戻り先の<code>UIViewController</code>で、</p>
+<pre><code class="language-swift">if #available(iOS 14.0, *) {
+  navigationItem.backButtonDisplayMode = .minimal
+} else {
+  navigationItem.backButtonTitle = &quot; &quot;
+}
+</code></pre>
+<p>と <code>navigationItem.backButtonDisplayMode</code> に <code>.minimal</code> を設定することで、戻るボタンのタイトルが非表示になります。</p>
+<p><img src="/images/ios14_blank_back_button/ss-1603700885.png" alt="image"></p>
+<p>また、<code>Back Button</code>などもいじっていないため、戻るボタン長押し時の戻り先のリストも、</p>
+<p><img src="/images/ios14_blank_back_button/ss-1603700963.png" alt="image"></p>
+<p>のようにきちんと表示されます。</p>
+<h2 id="uinavigationitembackbuttondisplaymode">UINavigationItem.BackButtonDisplayMode</h2>
+<p>なお、<code>backButtonDisplayMode</code> には以下の３種の値を設定できます。</p>
+<table>
+<thead>
+<tr>
+<th>BackButtonDisplayMode</th>
+<th>挙動</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td>デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面の<code>navigationItem.backButtonTitle</code>」「前画面の<code>title</code>」「Back（戻る）」「空欄」の優先順位でいずれかが表示される</td>
+</tr>
+<tr>
+<td><code>generic</code></td>
+<td>スペースがあれば「Back（戻る）」を表示、なければ空欄</td>
+</tr>
+<tr>
+<td><code>minimal</code></td>
+<td>常に空欄</td>
+</tr>
+</tbody>
+</table>
+<p>例えば、先ほどの画面に<code>generic</code>を設定した時のサンプルはこちらです。</p>
+<p><img src="/images/ios14_blank_back_button/ss-1603701094.png" alt="image"></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>戻るボタンのタイトルを別のものに差し替えたいときだけ変更する&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/vim-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-swift-format/top.png" class="feed-item-image" alt="apple/swift-formatをVimで使う" width="300"></div>
+
+    <span class="feed-item-title">apple/swift-formatをVimで使う</span>
+    <span class="feed-item-date">2020年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

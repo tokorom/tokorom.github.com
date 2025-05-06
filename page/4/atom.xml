@@ -1,0 +1,276 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/</link>
+    <description>Recent content on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
+    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
+    <image>
+      <url>http://www.tokoro.me/img/hugo.png</url>
+      <title>GoHugo.io</title>
+      <link>http://www.tokoro.me/</link>
+    </image>
+    
+	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Objective-Cで&#34;@dynamic&#34;の使いどころを考える</title>
+      <link>http://www.tokoro.me/posts/objc-dynamic/</link>
+      <pubDate>Sat, 05 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-dynamic/</guid>
+      <description>
+        Objective-Cの @dynamic はお好きですか？ ぼくはけっこう好きです。
+@synthesizeのほうは昔はほぼ必須で書かないといけなかったり Xcode4.4で省略できるようになった ことで有名ですが、いっぽうで@dynamicのほうはあまり日の目を浴びていない気がします。
+そこで、今日は@dynamicについて再考してみることにしました。
+以下、ぼくが思い返してみて@dynamicがこんなときに便利だったと感じたところを２点挙げさせていただきます。
+みなさまのほうでも「こんなとき便利だよ」というのがありましたら是非ご教示ください。
+クラスの内部実装が適当なのを隠すときに そもそもこの実装自体がどうかという話もあるのですが、リファクタリング前にひとまず雑な実装をしてしまうことはままあります。
+例えば、ゲームスコアを管理するGameScoreクラスを作ったとして、その中で ハイスコア とかいくつかのスコアを管理する際、scoresというNSDictionaryインスタンスにささっと入れていたとします（ほんとは普通にプロパティにしたほうが良いですが例として）。
+ GameScore.m  #import &amp;#34;GameScore.h&amp;#34; @interface GameScore () @property (strong) NSMutableDictionary* scores; @end @implementation GameScore - (id)init { if ((self = [super init])) { self.scores = [@{ @&amp;#34;highScore&amp;#34;: @1000, @&amp;#34;currentScore&amp;#34;: @530, @&amp;#34;friendScore&amp;#34;: @890, } mutableCopy]; } return self; } この ハイスコア を外（他のクラス）から参照させたい場合、どう実装しますか？
+ダメそうな例 : NSDictionaryのインスタンスをそのまま公開してしまう  GameScore.h  @interface GameScore : NSObject @property (strong) NSMutableDictionary* scores; @end 手っ取り早いのはscoresプロパティをそのままPublicなプロパティとしてアクセス可能にしてしまう方法でしょうか。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>VimでObjective-Cのコード補完を実行する with clang</title>
+      <link>http://www.tokoro.me/posts/clang-complete-for-vim/</link>
+      <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/clang-complete-for-vim/</guid>
+      <description>
+        概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
+そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
+具体的には、
+ clangコマンドでのコード補完を試してみる その結果をもってVimの clang_complete プラグインを導入する  という手順で実施しました。
+結果として満足いく補完環境が整いましたので紹介させていただきます。
+clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
+じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
+具体的には、
+// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
+例えば、
+ Classes/Controllers/MainViewController.m  #import &amp;#34;MainViewController.h&amp;#34; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
+すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
+      <link>http://www.tokoro.me/posts/mac-terminal-japanese/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/mac-terminal-japanese/</guid>
+      <description>
+        Macの初期設定のたびに混乱してるので再整理しておきます。
+ Mac Terminal tmux vim  で開発をする人向けです。
+まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
+日本語を扱う上で便利な設定がデフォルトで入ってます。
+当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; alias vim=&amp;#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;#34;$@&amp;#34;&amp;#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+ こせきの技術日記  に従って対処しておきます。
+この中の、
+date | pbcopy までが成功すればOKです。
+.vimrc にクリップボード利用の設定追加 .vimrc に
+set clipboard=unnamed を追加しておきます。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</title>
+      <link>http://www.tokoro.me/posts/objc-private-test/</link>
+      <pubDate>Wed, 12 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-private-test/</guid>
+      <description>
+        dkfjさんが Objective-Cで、プライベートメソッド・プロパティにアクセスし、ユニットテストを実行する方法 という記事を書かれていました。
+せっかくなので私がやっている方法も書かせていただきます。
+テスト対象のクラス 以下のようにプライベートメソッドとプロパティを持ったExampleClassをテストするとします。
+#import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass() - (BOOL)privateMethod; @property (assign) BOOL flag; @end @implementation ExampleClass - (BOOL)privateMethod { return self.flag; } @end テストクラス 自分の場合は、こんなかんじでテストクラスでテスト対象のプライベートメソッドやプロパティを宣言し直して使ってます。
+#import &amp;lt;GHUnitIOS/GHUnit.h&amp;gt; #import &amp;#34;ExampleClass.h&amp;#34; @interface ExampleClass (Private) - (BOOL)privateMethod; @property (assign) BOOL flag; @end @interface ExsampleClassTest : GHTestCase @end @implementation ExsampleClassTest - (void)testPrivateMethod { ExampleClass* example = [ExampleClass new]; GHAssertFalse([example privateMethod], nil); example.flag = YES; GHAssertTrue([example privateMethod], nil); } @end メリットとデメリット メリット  プライベートメソッドを（テストクラス以外からは）プライベートなまま保てる  デメリット  本体のほうのメソッドが変わったらテストクラスのほうの宣言も書き直す必要がある  
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>GHUnitのテストカバレッジをJenkinsで表示する</title>
+      <link>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</link>
+      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ghunit-jenkins-coverage/</guid>
+      <description>
+        概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
+設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
+実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
+うまく動かない場合の設定の比較などにご参照ください。
+なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
+事前準備 Jenkinsの導入  さくらVPSにJenkinsさんをインストールする  GHUnitの導入  Jenkins を iOS アプリ開発に導入してみた (GHUnit編)  GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
+具体的には、以下のように
+ Generate Test Coverage Files Instrument Program Flow  の２つに YES を設定します。
+本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+この対処として、 main.m に以下コードを追記しておく必要があります。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</title>
+      <link>http://www.tokoro.me/posts/safe-objc/</link>
+      <pubDate>Fri, 17 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/safe-objc/</guid>
+      <description>
+        チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
+#import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
+以下、これを解消するための変更例です。
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&amp;lt; ここではimportしない @class OtherLibrary2; //&amp;lt; ここではimportしない  @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &amp;#34;OtherLibrary1.h&amp;#34;#import &amp;#34;OtherLibrary2.h&amp;#34; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Objective-Cで独自クラスに[]でアクセスする</title>
+      <link>http://www.tokoro.me/posts/objc-subscripting/</link>
+      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-subscripting/</guid>
+      <description>
+        まず、Xcode4.4から使えるObjective-Cの新しい書き方については 前の記事 をご参照ください。
+Xcode4.4からMacアプリ開発で使える新しいリテラル 上記記事には書いていないのですがMac向けのアプリではこの他にも、
+ array[1] でNSArrayの要素にアクセスできる dictionary[key] でNSDictionaryの要素にアクセスできる @YES/@NO でもNSNumberのインスタンスを作れる  といった変更があります。
+こちらについては残念ながらiOSアプリ開発ではまだ利用できません。
+※ これらがターゲットがMacの場合には利用できてiOSの場合には利用できないということは、 @k_katsumi さんに教えてもらいました。
+でも[]でアクセスする仕組み自体はiOSでも使えます! ところで、[]でインスタンスにアクセスするコードを書いたとき、これらはコンパイル時に、
+// id obj = array[0]; のときはこれになります - (id)objectAtIndexedSubscript:(NSUInteger)index; // array[0] = obj; のときはこれになります - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; // id obj = array[key]; のときはこれになります - (id)objectForKeyedSubscript:(id)key; // array[key] = obj; のときはこれになります - (void)setObject:(id)object forKeyedSubscript:(id)key; に変換されるそうです。
+これらの変換自体はiOSがターゲットの場合でも行われているようです。
+例えば独自クラスに上記メソッドを実装すると&amp;hellip; 例えば、以下のように適当なクラスに上記４つのメソッドを実装してみました。
+@interface Wrapper : NSObject - (id)objectAtIndexedSubscript:(NSUInteger)index; - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index; - (id)objectForKeyedSubscript:(id)key; - (void)setObject:(id)object forKeyedSubscript:(id)key; @end #import &amp;#34;Wrapper.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</title>
+      <link>http://www.tokoro.me/posts/objc-new-statements/</link>
+      <pubDate>Sun, 12 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-new-statements/</guid>
+      <description>
+        もうほとんどのかたが既知の内容と思いますが、まとめさせていただきます。
+これらは全てコンパイル時に事が済む類のものなので、iOS5だけでなくiOS4でも当然使えるというのが嬉しいですね!
+Xcode4.4適用前 Xcode4.3までのこのコードを&amp;hellip;
+#pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; - (void)privateMethods1; - (void)privateMethods2; - (void)privateMethods3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; - (void)privateMethods1 { [self privateMethods2]; [self privateMethods3]; } - (void)privateMethods2 { self.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Jenkins@さくらVPSにOctopressのデプロイを任せてみる</title>
+      <link>http://www.tokoro.me/posts/jenkins-octopress/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/jenkins-octopress/</guid>
+      <description>
+        目的 Octopressで記事を書いたあと、 Bitbucket に git push origin source とするだけで Github Pages に勝手にデプロイされるようにする。
+イメージ  自分はブログ記事を書き終わったら、Bitbucketに git push だけしてあとは放っておく Bitbucketは該当リポジトリが更新されると、さくらVPSのJenkinsのURLを叩く Jenkinsはそれを契機にBitbucketからファイル一式をcloneしてOctopresで記事を作成する Jenkinsは作成した記事をGithub Pagesにデプロイする  事前準備  Github PagesにOctopressでブログを投稿できるようにしておく =&amp;gt; まだなら このあたりを参照 さくらVPSを使えるようにしておく さくらVPSにJenkinsをインストールしておく =&amp;gt; まだなら こちらを参照 さくらVPSでGitを使えるようにしておく =&amp;gt; まだなら こちらを参照 Githubを使えるようにしておく Bitbucketを使えるようにしておく  Jenkinsに入れておく必要のあるPlugin  RVM Plugin  JenkinsからBitbucketとGithubにアクセスできるようにする $ cd /var/lib/jenkins $ sudo -u jenkins -H /usr/local/bin/git config --global user.email &amp;quot;jenkins@your.domain&amp;quot; $ sudo -u jenkins -H /usr/local/bin/git config --global user.name &amp;quot;jenkins&amp;quot; $ sudo -u jenkins -H ssh-keygen -t rsa -C jenkins@your.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</title>
+      <link>http://www.tokoro.me/posts/security-for-jenkins/</link>
+      <pubDate>Sun, 29 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/security-for-jenkins/</guid>
+      <description>
+        前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
+JenkinsにBitbucketからアクセスするためのユーザを追加 まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。
+※ ユーザの追加方法については このあたり を参照
+今回は、bitbucket というユーザを追加した。
+また、 Manage Jenkins -&amp;gt; Configure System で、
+ Access Control  Authorization  Matrix-based security  bitbucketユーザに Job の Read だけチェック        としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
+このとき、Anonymousユーザの Job の Read にチェックがついていれば外しておく。
+Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
+nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &amp;quot;Basic XXXXXX&amp;quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>さくらVPSにJenkinsさんをインストールする</title>
+      <link>http://www.tokoro.me/posts/install-jenkins-to-sakura/</link>
+      <pubDate>Tue, 24 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/install-jenkins-to-sakura/</guid>
+      <description>
+        JDKのインストール Javaが未インストールならこちらから。
+$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins Jenkinsの起動 $ sudo service jenkins start これでインストールと起動が完了。簡単すぎる！
+試しに
+$ curl http://localhost:8080/ とすると、
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Dashboard [Jenkins]&amp;lt;/title&amp;gt;... みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
+ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。
+$ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストールなら
+$ sudo yum install nginx でインストールしておく。
+Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
+server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</title>
+      <link>http://www.tokoro.me/posts/install-pandoc/</link>
+      <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/install-pandoc/</guid>
+      <description>
+        hs-httpがインストールできない! Macにpandocを入れようと気軽にMacPortsで
+$ sudo port install pandoc したところ hs-http のインストールのところでなにやらエラー&amp;hellip;
+試しに hs-http だけインストールしてみたところ、
+$ sudo port -d install hs-http ... Configuring HTTP-4000.1.1... ghc: could not execute: /usr/bin/gcc-4.2 Command failed: cd &amp;#34;/opt/local/var/macports/build/_opt_local_var_macports_sources_rsync.macports.org_release_ports_devel_hs-HTTP/hs-http/work/HTTP-4000.1.1&amp;#34; &amp;amp;&amp;amp; runhaskell Setup co nfigure --prefix=/opt/local --with-compiler=/opt/local/bin/ghc Exit code: 1 Error: org.macports.configure for port hs-http returned: configure failure: command execution failed DEBUG: Error code: NONE DEBUG: Backtrace: configure failure: command execution failed while executing &amp;#34;$procedure$targetname&amp;#34; Warning: targets not executed for hs-http: org.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Octopressでソースコードの一部分だけを参照する</title>
+      <link>http://www.tokoro.me/posts/octopress-part-of-codes/</link>
+      <pubDate>Sun, 15 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/octopress-part-of-codes/</guid>
+      <description>
+        おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
+1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
+例えば、ここに sample/test.rb というファイルを置いておく。
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
+じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
+ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
+この経緯については、 OctopressのPull request に記録がある。
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。
+include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、
+      </description>
+      
+    </item>
+    
+  </channel>
+</rss>

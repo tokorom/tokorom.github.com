@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="概要 エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！ 2016/6/28 追記
+コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
+http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
+iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
+しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
+（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&hellip;）
+iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
+コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
+タイミング granted 許可ダイアログでAllowを選択 true 許可ダイアログでDon&rsquo;t Allowを選択 false request時に既にAllow済み（ダイアログは表示されない） true request時に既にDon&rsquo;t Allow済み（ダイアログは表示されない） false ちなみに第2引数は An object containing error information or nil if no error occurred."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ | TOKOROM BLOG" property="og:title"><meta content="概要 エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題 それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった iOS 10でそれを簡単にハンドリングできるようになったよ！ 2016/6/28 追記
+コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。
+http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775
+iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。
+iOS 9 以前 let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil) UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings) でiOSが必要なら
+とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。
+しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。
+（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&hellip;）
+iOS 10 でこうなる しかしiOS 10で導入されたUser Notifications Frameworkにより、これを正確にハンドリングすることができるようになったんです。 具体的には、
+UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in // got granted :) } でこれまでと同じくiOSの判断で確認ダイアログが表示されます。
+ただ素晴らしいことに（というかようやく）このrequestAuthorizationの第2引数のclosureは、この許可ダイアログでエンドユーザがAllowもしくはDon&#39;t Allowを選択したタイミングでコールバックされるんです！そしてその引数（上の例だとgranted）にAllowとDon&#39;t Allowのどちらが選択されたかが渡されます。
+コールバックされるタイミングとgrantedの値のまとめ なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。 （で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）
+タイミング granted 許可ダイアログでAllowを選択 true 許可ダイアログでDon&rsquo;t Allowを選択 false request時に既にAllow済み（ダイアログは表示されない） true request時に既にDon&rsquo;t Allow済み（ダイアログは表示されない） false ちなみに第2引数は An object containing error information or nil if no error occurred." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/user_notification/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/user_notification/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2016年6月28日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              wwdc
+          </a>
+          /</div><div class="content">
+      <h2 id="概要">概要</h2>
+<ul>
+<li>エンドユーザーが通知（特にRemote Push Notification）を許可してくれたかどうかはサービスにとって死活問題</li>
+<li><s>それなのに通知の許可ダイアログでの選択を素直にハンドリングする方法がこれまでなかった</s></li>
+<li>iOS 10でそれを簡単にハンドリングできるようになったよ！</li>
+</ul>
+<p><strong>2016/6/28 追記</strong></p>
+<p>コメントで @mono0926 さんからいただいたとおり、じつはiOS 8/9でもdelegateでハンドリング可能ということが発覚しました。</p>
+<p><a href="http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775">http://qiita.com/tokorom/items/6c6864fa8e841e50e37b#comment-b07920917a7edfb87775</a></p>
+<p>iOS 8/9 でのハンドリングについては別途まとめさせていただきますが、取り急ぎ、こちらで訂正させていただきます。</p>
+<h2 id="ios-9-以前">iOS 9 以前</h2>
+<pre><code class="language-swift">let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+
+</code></pre>
+<p>でiOSが必要なら</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/7883/7fe075a1-eab0-6078-d04c-7ae9b2c1ea19.png" alt="notification_dialog.png" title="notification_dialog.png"></p>
+<p>とエンドユーザにこのアプリが通知機能を使うことを許可するかどうかを確認するダイアログを表示していました。</p>
+<p>しかしこのrequestは投げっぱなしのため、実際にそのダイアログが表示されたタイミングもプログラム的には検知できませんし、このダイアログに対してユーザーが実際に許可（Allow）をしたのかしなかったのかも、その瞬間にハンドリングすることが難しいという問題がありました。</p>
+<p>（やるとすると少し間をおいて通知設定を確認するなどスマートでない方法&hellip;）</p>
+<h2 id="ios-10-でこうなる">iOS 10 でこうなる</h2>
+<p>しかしiOS 10で導入された<code>User Notifications Framework</code>により、これを正確にハンドリングすることができるようになったんです。
+具体的には、</p>
+<pre><code class="language-swift">UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in
+    // got granted :)
+}
+</code></pre>
+<p>でこれまでと同じくiOSの判断で確認ダイアログが表示されます。</p>
+<p>ただ素晴らしいことに（というかようやく）この<code>requestAuthorization</code>の第2引数のclosureは、この許可ダイアログでエンドユーザが<code>Allow</code>もしくは<code>Don't Allow</code>を選択したタイミングでコールバックされるんです！そしてその引数（上の例だと<code>granted</code>）に<code>Allow</code>と<code>Don't Allow</code>のどちらが選択されたかが渡されます。</p>
+<h2 id="コールバックされるタイミングとgrantedの値のまとめ">コールバックされるタイミングとgrantedの値のまとめ</h2>
+<p>なお、すでに許可の判断が済んでいて、この許可ダイアログが表示されない場合もコールバックされますので、正確にはユーザーの選択がコールバックされるというよりは、その時点での許可の状況がコールバックされるというのが正確な言い方かと思います。
+（で、嬉しいのは、許可ダイアログが表示された場合は、許可の判断が終わるまでコールバックを待ってくれるところ）</p>
+<table>
+<thead>
+<tr>
+<th>タイミング</th>
+<th>granted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>許可ダイアログでAllowを選択</td>
+<td>true</td>
+</tr>
+<tr>
+<td>許可ダイアログでDon&rsquo;t Allowを選択</td>
+<td>false</td>
+</tr>
+<tr>
+<td>request時に既にAllow済み（ダイアログは表示されない）</td>
+<td>true</td>
+</tr>
+<tr>
+<td>request時に既にDon&rsquo;t Allow済み（ダイアログは表示されない）</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>ちなみに第2引数は <code>An object containing error information or nil if no error occurred. </code> とのことだが今のところerrorが発生したことはない。</p>
+<h2 id="ロギングや解析が捗る">ロギングや解析が捗る！</h2>
+<p>これにより、</p>
+<pre><code class="language-swift">UNUserNotificationCenter.current().requestAuthorization([.alert, .badge, .sound]) { (granted, _) in
+    // Analyticsサービスにこのユーザーの状態を伝える
+    amplitude.identify(AMPIdentify().set(&quot;notification_granted&quot;, value: granted))
+}
+</code></pre>
+<p>とするなどし、適切なタイミングで正確な状態を把握できるようになりました。</p>
+<p>ユーザーが通知を許可してくれるかどうかはサービス運営上の重要な課題のひとつですので、通知を許可してもらうための施策をうって、その効果を正確に測りたい場合などに助かりますね♪ （もっと早く欲しかった&hellip;）</p>
+<h2 id="ref-user-notifications-frameworkについて">Ref: User Notifications Frameworkについて</h2>
+<ul>
+<li>WWDC2016の<a href="https://developer.apple.com/videos/play/wwdc2016/707/">Introduction to Notifications</a></li>
+<li>koogawaさんの<a href="http://qiita.com/koogawa/items/0dff2f59096b292571db">iOS 10 時代の Notification</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/has-associated-objects/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg" class="feed-item-image" alt="Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）" width="300"></div>
+
+    <span class="feed-item-title">Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</span>
+    <span class="feed-item-date">2015年11月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/defer-to-deinit/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Swiftでdeinitまで処理をdeferする</span>
+    <span class="feed-item-date">2015年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swifttask-promisekit-bolts/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</span>
+    <span class="feed-item-date">2015年3月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/almofire/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">AlamofireでGenericにModelオブジェクトを取得する</span>
+    <span class="feed-item-date">2015年3月11日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/nstimezone-sample/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">NSTimeZoneから取得できる表示用文字列のサンプル</span>
+    <span class="feed-item-date">2014年11月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-simulator/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</span>
+    <span class="feed-item-date">2014年9月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
+いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
+また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&hellip;
+ということでハッカソン ということで、冬休みにひとりでハッカソンを実施して、
+24時間でSwiftUIでiOSアプリを開発して AppStoreでリリースする ところまでやる！ということにしました。
+自分で勝手に企画して出すアプリですのでSwiftUIを使っても誰にも文句は言われません！
+必須利用技術 このハッカソン企画での必須利用技術は、
+SwiftUI Firebase（Firestore） Sign in with Apple の３つとしました。
+SwiftUI はもちろんですが、ローカルオンリーで動作するアプリだとSwiftUIの検証には弱いかなと思い、サーバにデータを保管するようにしバックエンドには Firebase(Firestore) を利用することにしました。 また、SwiftUIを採用する時点でターゲットOSがiOS 13以降になるので、ついでにiOS 13の新要素 Sign in with Apple でのSign inを実装することにしました。
+リリースの定義 今回はゴールであるリリースの定義を、
+アプリを開発し終えて AppStore用のメタデータやスクリーンショットを作って投稿して 実際に審査に出す ところまで、としました。
+作るアプリ 作るアプリはちょうど自分が欲しいと思っていた「こどもたちのお金を親が管理するアプリ」にしました。
+Photo by Michael Longmire on Unsplash
+解決したい課題 我が家ではこどもたちにお金の教育を兼ねて毎月おこづかいを渡しているのですが、
+先月のおこづかい渡したっけ？渡してなかったけ？とよくわからなくなる お年玉が高額で幼稚園児に管理させるのが不安（かといって子供の銀行口座を作るのは面倒） 弟が姉の貯金箱を漁る事件が発生！ お店でこどもが「おこづかいでこのおもちゃ買いたい！」という時におこづかいを持ってきていない ○○カメラでおこづかいでおもちゃを買わせたいが、ほんとは〇〇カメラのポイント使っちゃいたい！ ほんとは余っている〇〇Payで支払いたい！ など様々な悩みが出てきました。
+解決するための機能 これらを解決するためには、
+こどもに現金を持たせないで親が残高だけ管理すれば十分 記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない 入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心 普段使いの少額の現金はその残高から出金してこどもに渡せばOK おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！ と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。
+24時間で実装する機能 こういったアプリを作るうえで欲しい機能はいろいろと浮かんだものの、慣れないSwiftUIを使って24時間となるとだいぶ機能を絞る必要があると思い、
+こどもは複数人管理できる おこづかいやお年玉などを手動入金できる こどもが使った額を出金できる Sign in with AppleでSign inできる Firebase上に残高と履歴を保存できる を必須機能としました。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告 | TOKOROM BLOG" property="og:title"><meta content="2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
+いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
+また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&hellip;
+ということでハッカソン ということで、冬休みにひとりでハッカソンを実施して、
+24時間でSwiftUIでiOSアプリを開発して AppStoreでリリースする ところまでやる！ということにしました。
+自分で勝手に企画して出すアプリですのでSwiftUIを使っても誰にも文句は言われません！
+必須利用技術 このハッカソン企画での必須利用技術は、
+SwiftUI Firebase（Firestore） Sign in with Apple の３つとしました。
+SwiftUI はもちろんですが、ローカルオンリーで動作するアプリだとSwiftUIの検証には弱いかなと思い、サーバにデータを保管するようにしバックエンドには Firebase(Firestore) を利用することにしました。 また、SwiftUIを採用する時点でターゲットOSがiOS 13以降になるので、ついでにiOS 13の新要素 Sign in with Apple でのSign inを実装することにしました。
+リリースの定義 今回はゴールであるリリースの定義を、
+アプリを開発し終えて AppStore用のメタデータやスクリーンショットを作って投稿して 実際に審査に出す ところまで、としました。
+作るアプリ 作るアプリはちょうど自分が欲しいと思っていた「こどもたちのお金を親が管理するアプリ」にしました。
+Photo by Michael Longmire on Unsplash
+解決したい課題 我が家ではこどもたちにお金の教育を兼ねて毎月おこづかいを渡しているのですが、
+先月のおこづかい渡したっけ？渡してなかったけ？とよくわからなくなる お年玉が高額で幼稚園児に管理させるのが不安（かといって子供の銀行口座を作るのは面倒） 弟が姉の貯金箱を漁る事件が発生！ お店でこどもが「おこづかいでこのおもちゃ買いたい！」という時におこづかいを持ってきていない ○○カメラでおこづかいでおもちゃを買わせたいが、ほんとは〇〇カメラのポイント使っちゃいたい！ ほんとは余っている〇〇Payで支払いたい！ など様々な悩みが出てきました。
+解決するための機能 これらを解決するためには、
+こどもに現金を持たせないで親が残高だけ管理すれば十分 記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない 入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心 普段使いの少額の現金はその残高から出金してこどもに渡せばOK おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！ と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。
+24時間で実装する機能 こういったアプリを作るうえで欲しい機能はいろいろと浮かんだものの、慣れないSwiftUIを使って24時間となるとだいぶ機能を絞る必要があると思い、
+こどもは複数人管理できる おこづかいやお年玉などを手動入金できる こどもが使った額を出金できる Sign in with AppleでSign inできる Firebase上に残高と履歴を保存できる を必須機能としました。" property="og:description"><meta content="https://www.tokoro.me/images/apple/swiftui.png" property="og:image"><meta content="https://www.tokoro.me/posts/swiftui-hackathon/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/swiftui-hackathon/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年1月27日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swiftui">
+              swiftui
+          </a>
+          /</div><div class="content">
+      <h2 id="2019年はswiftui誕生の年">2019年はSwiftUI誕生の年</h2>
+<p>2019年のSwiftUIの発表はたいへんインパクトがありましたね！
+Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。</p>
+<p>いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。</p>
+<p>また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&hellip;</p>
+<h2 id="ということでハッカソン">ということでハッカソン</h2>
+<p>ということで、冬休みにひとりでハッカソンを実施して、</p>
+<ul>
+<li>24時間でSwiftUIでiOSアプリを開発して</li>
+<li>AppStoreでリリースする</li>
+</ul>
+<p>ところまでやる！ということにしました。</p>
+<p>自分で勝手に企画して出すアプリですのでSwiftUIを使っても誰にも文句は言われません！</p>
+<h2 id="必須利用技術">必須利用技術</h2>
+<p>このハッカソン企画での必須利用技術は、</p>
+<ul>
+<li>SwiftUI</li>
+<li>Firebase（Firestore）</li>
+<li>Sign in with Apple</li>
+</ul>
+<p>の３つとしました。</p>
+<p><strong>SwiftUI</strong> はもちろんですが、ローカルオンリーで動作するアプリだとSwiftUIの検証には弱いかなと思い、サーバにデータを保管するようにしバックエンドには <strong>Firebase(Firestore)</strong> を利用することにしました。
+また、SwiftUIを採用する時点でターゲットOSがiOS 13以降になるので、ついでにiOS 13の新要素 <strong>Sign in with Apple</strong> でのSign inを実装することにしました。</p>
+<h2 id="リリースの定義">リリースの定義</h2>
+<p>今回はゴールであるリリースの定義を、</p>
+<ul>
+<li>アプリを開発し終えて</li>
+<li>AppStore用のメタデータやスクリーンショットを作って投稿して</li>
+<li>実際に審査に出す</li>
+</ul>
+<p>ところまで、としました。</p>
+<h2 id="作るアプリ">作るアプリ</h2>
+<p>作るアプリはちょうど自分が欲しいと思っていた「こどもたちのお金を親が管理するアプリ」にしました。</p>
+<p><img src="/images/general/piggy-bank.jpg" alt="piggy-bank"></p>
+<p><em>Photo by Michael Longmire on Unsplash</em></p>
+<h3 id="解決したい課題">解決したい課題</h3>
+<p>我が家ではこどもたちにお金の教育を兼ねて毎月おこづかいを渡しているのですが、</p>
+<ul>
+<li>先月のおこづかい渡したっけ？渡してなかったけ？とよくわからなくなる</li>
+<li>お年玉が高額で幼稚園児に管理させるのが不安（かといって子供の銀行口座を作るのは面倒）</li>
+<li>弟が姉の貯金箱を漁る事件が発生！</li>
+<li>お店でこどもが「おこづかいでこのおもちゃ買いたい！」という時におこづかいを持ってきていない</li>
+<li>○○カメラでおこづかいでおもちゃを買わせたいが、ほんとは〇〇カメラのポイント使っちゃいたい！</li>
+<li>ほんとは余っている〇〇Payで支払いたい！</li>
+</ul>
+<p>など様々な悩みが出てきました。</p>
+<h3 id="解決するための機能">解決するための機能</h3>
+<p>これらを解決するためには、</p>
+<ul>
+<li>こどもに現金を持たせないで親が残高だけ管理すれば十分</li>
+<li>記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない</li>
+<li>入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心</li>
+<li>普段使いの少額の現金はその残高から出金してこどもに渡せばOK</li>
+<li>おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！</li>
+</ul>
+<p>と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。</p>
+<h3 id="24時間で実装する機能">24時間で実装する機能</h3>
+<p>こういったアプリを作るうえで欲しい機能はいろいろと浮かんだものの、慣れないSwiftUIを使って24時間となるとだいぶ機能を絞る必要があると思い、</p>
+<ul>
+<li>こどもは複数人管理できる</li>
+<li>おこづかいやお年玉などを手動入金できる</li>
+<li>こどもが使った額を出金できる</li>
+<li>Sign in with AppleでSign inできる</li>
+<li>Firebase上に残高と履歴を保存できる</li>
+</ul>
+<p>を必須機能としました。</p>
+<h3 id="先送りにする機能">先送りにする機能</h3>
+<p>いっぽうで、以下のアイデアはハッカソンが終わった後に、また時間があるときに実装することにしました。</p>
+<ul>
+<li>こども用のView専用のアプリもつくる</li>
+<li>こども用のViewではお金をお札やコインとして触れるUIをつける（幼稚園児でも残高を理解しやすいように）</li>
+<li>おこづかいをスケジューリングして自動入金させる</li>
+<li>入金や出金を関係者にプッシュ通知する</li>
+</ul>
+<h2 id="ハッカソンの結果">ハッカソンの結果</h2>
+<p>まず24時間でリリースをできたかという結果ですが、無事にリリースできました！</p>
+<p><a href="https://apps.apple.com/app/id1494070556">https://apps.apple.com/app/id1494070556</a></p>
+<h3 id="リリースしたアプリ">リリースしたアプリ</h3>
+<p>だいぶ簡素なものですがこんな画面遷移です。
+今回は、ひとりハッカソンとして、1人で24時間限定で開発し、弊社UIデザイナーも関わっていませんので、弊社のアウトプットがこのレベル、というみかたはしないでくださいね！！</p>
+<p>画面遷移だけでは分かりませんが、サーバ上のDB（Firestore）が更新されれば、どの画面の要素もリアルタイムに自動更新されるようになっています。</p>
+<p><img src="/images/posts/swiftui-hackathon/screens.jpg" alt="screens"></p>
+<h2 id="swiftuiで開発リリースをしてみた所感">SwiftUIで開発/リリースをしてみた所感</h2>
+<h3 id="swiftuiでスピーディに開発できる">SwiftUIでスピーディに開発できる？</h3>
+<p>まず私のこの時点での知識と経験では、従来どおりのUIKitベースでの開発のほうがだいぶ速く開発できます。UI部分の開発は従来のやりかたの2倍以上かかってしまったかもしれません<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>ただし、これには <strong>現時点では</strong> という前置きが必要です。SwiftUIは現時点では、</p>
+<ul>
+<li>私本人にもネット上にも知見が少ない</li>
+<li>SwiftUI自体にも機能として足りないと感じる部分がある</li>
+</ul>
+<p>というのがあり、そこで時間がかかってしまっています。しかしこれらは、いずれもここ2年程度で解決されていく話と考えています。
+感覚としては、Swiftが発表された年のObjective-CとSwiftの関係に近いと思います。</p>
+<h3 id="swiftuiのどこがよかった">SwiftUIのどこがよかった？</h3>
+<p>ひとことで言えば「ぼくがなにも考えずに作っても勝手に良い感じの構成になってくれた」という印象です。</p>
+<p>今回、設計などほとんど考えずに手なりで１画面ずつ作っていきました。結果として、</p>
+<ul>
+<li>チュートリアルどおりにViewにState（プロパティ）をおいたら勝手にリアクティブに更新される画面</li>
+<li>PreviewありきでViewを作ったらデータが勝手に差し替え可能</li>
+</ul>
+<p>になりました。</p>
+<p>前者はSwiftUIの売りの部分なので当然ですが、後者は意図せずそうなったので感心してしまいました。</p>
+<p>実際に今回のハッカソンでは、最初にFirebaseにまったく触れない状態でローカルデータ（ただのメモリ上の配列です）だけで全画面を作りました。そしてそのあとViewはいじらずに裏側だけFirebaseに繋ぎ込みをするよう作り替える、という順番で開発をしました。おおむねスムーズに作り替えができたと思います<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h3 id="ダークモードやdynamic-typeも勝手に対応">ダークモードやDynamic Typeも勝手に対応</h3>
+<p>これも特に意識していたわけではないですが、WWDCでの発表どおりSwiftUIでプレーンにアプリを作ったら、</p>
+<ul>
+<li>ダークモード</li>
+<li>Dynamic Type（フォントのサイズ変更）</li>
+</ul>
+<p>にも勝手に対応されていました。</p>
+<p>ダークモードに関しては本当に全く手を加えていません。</p>
+<p><img src="/images/posts/swiftui-hackathon/darkmode.png" alt="dardkmode"></p>
+<p>Dynamic Typeについては文字を大きくしてみたら一部の画面でレイアウトが崩れたので３０分程度で手直ししました。</p>
+<p><img src="/images/posts/swiftui-hackathon/dynamictype.png" alt="dynamictype"></p>
+<h3 id="swiftuiはいつから使うべき">SwiftUIはいつから使うべき？</h3>
+<p>2020年1月時点ではまだ人柱感が強すぎます。2020年の6月のWWDCでのアップデートでだいぶ実用的になってくれるのではと期待しています。</p>
+<p>逆に2021年の6月のWWDCのアップデートあたりで誰もが使っても良い、と思えるくらいになっていそうです。そうなってしまうと、その頃には従来のUIKitベースでの作り方が負債と感じてしまうかもしれません。</p>
+<p>2020年から2022年初めまでが移行期で採用の判断が難しい時期になりそうです。</p>
+<p>それ以降はSwiftUIがスタンダードな世界になっていると予想しています。</p>
+<h2 id="実装面の話題">実装面の話題</h2>
+<p>たいへんシンプルなアプリなので、この記事ではその他実装面の話題については書きません。</p>
+<p>場合によっては、別の記事で実装面の具体的な話（といっても入門レベルの内容になりそうですが）を書いたり、このアプリを題材として機能追加するときに使う要素技術の話題なども書かせてください。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>ハッカソンでSwiftUIの知見が増えたので次はもう少し速くなると思います。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>データ取得時のページネーション周りでView側にも変更が発生するなどありました。このあたりは慣れれば初めからそれを考慮して実装できそうです。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/user_notification/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</span>
+    <span class="feed-item-date">2016年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/has-associated-objects/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg" class="feed-item-image" alt="Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）" width="300"></div>
+
+    <span class="feed-item-title">Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</span>
+    <span class="feed-item-date">2015年11月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/defer-to-deinit/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Swiftでdeinitまで処理をdeferする</span>
+    <span class="feed-item-date">2015年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swifttask-promisekit-bolts/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</span>
+    <span class="feed-item-date">2015年3月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/almofire/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">AlamofireでGenericにModelオブジェクトを取得する</span>
+    <span class="feed-item-date">2015年3月11日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/nstimezone-sample/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">NSTimeZoneから取得できる表示用文字列のサンプル</span>
+    <span class="feed-item-date">2014年11月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

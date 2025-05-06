@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>BlockInjectionで元のソースコードを汚さないで振る舞い追加 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="例えばこんなコードに違和感はありませんか？ 自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、
+- (IBAction)sendButtonDidPush:(id)sender { // トラッキングのためのコード [tracker sendEventWithCategory:@&quot;uiAction&quot; withAction:@&quot;sendButtonDidPush&quot; withLabel:nil withValue:0]; // ... // 以降、送信ボタンを押したときの処理 // ... } こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。
+これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。
+どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？
+いわゆるアスペクト指向的なかんじで。
+そんなときに BlockInjection ということで本題に入りますが、それを解決するために BlockInjection というライブラリを作りました。
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。
+例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。
+#import &quot;BILib.h&quot; [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます [tracker sendEventWithCategory:@&quot;uiAction&quot; withAction:@&quot;sendButtonDidPush&quot; withLabel:nil withValue:0]; }]; これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
+以下、Q&amp;A方式でライブラリの機能を簡単に紹介させていただきます。
+対象となるクラスをimportしないと使えないとかダサくない？ 確かに、トラッキングのコードをまとめたいときなど、各クラスに処理を埋め込むためにimportがずらっっと並ぶのも不恰好です。
+そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。
+[BILib injectToClassWithName:@&quot;XXXViewController&quot; methodName:@&quot;sendButtonDidPush:&quot; preprocess:^{ // 埋め込みたい処理 }]; 対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。
+そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能 NSLog(@&quot;State: %d&quot;, vc."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="BlockInjectionで元のソースコードを汚さないで振る舞い追加 | TOKOROM BLOG" property="og:title"><meta content="例えばこんなコードに違和感はありませんか？ 自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、
+- (IBAction)sendButtonDidPush:(id)sender { // トラッキングのためのコード [tracker sendEventWithCategory:@&quot;uiAction&quot; withAction:@&quot;sendButtonDidPush&quot; withLabel:nil withValue:0]; // ... // 以降、送信ボタンを押したときの処理 // ... } こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。
+これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。
+どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？
+いわゆるアスペクト指向的なかんじで。
+そんなときに BlockInjection ということで本題に入りますが、それを解決するために BlockInjection というライブラリを作りました。
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。
+例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。
+#import &quot;BILib.h&quot; [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます [tracker sendEventWithCategory:@&quot;uiAction&quot; withAction:@&quot;sendButtonDidPush&quot; withLabel:nil withValue:0]; }]; これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
+以下、Q&amp;A方式でライブラリの機能を簡単に紹介させていただきます。
+対象となるクラスをimportしないと使えないとかダサくない？ 確かに、トラッキングのコードをまとめたいときなど、各クラスに処理を埋め込むためにimportがずらっっと並ぶのも不恰好です。
+そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。
+[BILib injectToClassWithName:@&quot;XXXViewController&quot; methodName:@&quot;sendButtonDidPush:&quot; preprocess:^{ // 埋め込みたい処理 }]; 対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。
+そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能 NSLog(@&quot;State: %d&quot;, vc." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/block-injection/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/block-injection/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年3月7日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <h2 id="例えばこんなコードに違和感はありませんか">例えばこんなコードに違和感はありませんか？</h2>
+<p>自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、</p>
+<pre><code class="language-objective-c">- (IBAction)sendButtonDidPush:(id)sender
+{
+  // トラッキングのためのコード
+  [tracker sendEventWithCategory:@&quot;uiAction&quot;
+                      withAction:@&quot;sendButtonDidPush&quot;
+                       withLabel:nil
+                       withValue:0];
+
+  // ...
+  // 以降、送信ボタンを押したときの処理
+  // ...
+}
+</code></pre>
+<p>こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。</p>
+<p>これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。</p>
+<p>どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？<br>
+いわゆるアスペクト指向的なかんじで。</p>
+<h2 id="そんなときに-blockinjection">そんなときに BlockInjection</h2>
+<p>ということで本題に入りますが、それを解決するために <a href="https://github.com/tokorom/BlockInjection">BlockInjection</a> というライブラリを作りました。<br>
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。</p>
+<p>例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。</p>
+<!-- more -->
+<pre><code class="language-objective-c">#import &quot;BILib.h&quot;
+
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{
+
+  // sendButtonDidPush: が実行される直前にこのコードが実行されます
+  [tracker sendEventWithCategory:@&quot;uiAction&quot;
+                      withAction:@&quot;sendButtonDidPush&quot;
+                       withLabel:nil
+                       withValue:0];
+
+}];
+</code></pre>
+<p>これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！</p>
+<p>以下、Q&amp;A方式でライブラリの機能を簡単に紹介させていただきます。</p>
+<h2 id="対象となるクラスをimportしないと使えないとかダサくない">対象となるクラスをimportしないと使えないとかダサくない？</h2>
+<p>確かに、トラッキングのコードをまとめたいときなど、各クラスに処理を埋め込むためにimportがずらっっと並ぶのも不恰好です。<br>
+そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。</p>
+<pre><code class="language-objective-c">[BILib injectToClassWithName:@&quot;XXXViewController&quot; methodName:@&quot;sendButtonDidPush:&quot; preprocess:^{
+  // 埋め込みたい処理
+}];
+</code></pre>
+<h2 id="対象となるクラスインスタンスのpropertyを参照できないと意味ないよ">対象となるクラスインスタンスのpropertyを参照できないと意味ないよ</h2>
+<p>確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。<br>
+そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。</p>
+<pre><code class="language-objective-c">[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){
+
+  // ここでXXXViewControllerの中身が好きなように参照可能
+  NSLog(@&quot;State: %d&quot;, vc.state);
+
+}];
+</code></pre>
+<h2 id="実行したメソッドの引数が使えないと意味ないよ">実行したメソッドの引数が使えないと意味ないよ</h2>
+<p>確かに、引数が参照できないと困ることがありますよね。
+そんなときは埋め込むブロックの第2引数以降で全ての引数が参照できます。</p>
+<pre><code class="language-objective-c">[BILib injectToClass:[Sample class] selector:@selector(sayMessage:) preprocess:^(Sample* sample, NSString* message){
+
+  // 例えば、[[Sample new] sayMessage:@&quot;Hello!&quot;]; の引数もここで参照できます
+  NSLog(@&quot;sayMessage: %@&quot;, message);
+
+}];
+</code></pre>
+<h2 id="ほんとうにどんなメソッドのどんな引数にでも対応できてるの">ほんとうにどんなメソッドのどんな引数にでも対応できてるの？</h2>
+<p>鋭いご指摘ですね。。。<br>
+たしかにいろいろな引数に対応するのはライブラリの実装的に厄介でした。<br>
+現に似たようなライブラリは渡す引数のtypeのsizeが4byte以下の引数にしか対応できていなかったりします（例えばCGRectなどが引数に渡ってきても参照できないとか）。<br>
+BlockInjectionは、現状（v0.3.0）、1096byte以下のtypeには対応しているので現実的に困ることはないと思います。</p>
+<p>そのため、例えば特定の画面を表示したときに、UIKitが内部的にどんなViewを持っていてどこに配置しているかを調査するために、</p>
+<pre><code class="language-objective-c">[BILib injectToClass:[UIView class] selector:@selector(setFrame:) preprocess:^(UIView* view, CGRect frame){
+
+  NSLog(@&quot;%@ setFrame:(%f, %f, %f, %f)&quot;, NSStringFromClass([view class]), frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+
+}];
+</code></pre>
+<p>といったコードを埋め込むこともできます。<br>
+これで目には見えないViewも丸わかりです。</p>
+<h2 id="インストール方法">インストール方法</h2>
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a>
+の<code>BlockInjection</code>ディレクトリだけをプロジェクトに追加してもらえれば利用できます。</p>
+<p>CocoaPodsをご利用のかたは、<code>Podfile</code>に、</p>
+<pre><code class="language-ruby">platform :ios, '5.0'
+
+pod 'BlockInjection', :git =&gt; 'https://github.com/tokorom/BlockInjection.git'
+</code></pre>
+<p>を指定していただければOKです。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-macro/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで最近お気に入りのマクロ４つ</span>
+    <span class="feed-item-date">2013年1月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-private-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</span>
+    <span class="feed-item-date">2012年9月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

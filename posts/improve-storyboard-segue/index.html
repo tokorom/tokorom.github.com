@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Storyboardでの画面遷移をスマートにやる方法 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="これは potatotips第６回め で発表した この話 のまとめと後書きです。
+Storyboardいいですよね！ Storyboardを使うことで、
+画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない といったメリットがあります。
+Storyboard登場以前だと、次の画面に遷移させるだけでも
+#import &quot;NextViewController.h&quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
+ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
+#import &quot;NextViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
+そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
+もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
+#import &quot;NextViewController.h&quot; #import &quot;ModalViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&quot;Next&quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&quot;Modal&quot; isEqualToString:segue."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Storyboardでの画面遷移をスマートにやる方法 | TOKOROM BLOG" property="og:title"><meta content="これは potatotips第６回め で発表した この話 のまとめと後書きです。
+Storyboardいいですよね！ Storyboardを使うことで、
+画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない といったメリットがあります。
+Storyboard登場以前だと、次の画面に遷移させるだけでも
+#import &quot;NextViewController.h&quot; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
+ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
+#import &quot;NextViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
+そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
+もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
+#import &quot;NextViewController.h&quot; #import &quot;ModalViewController.h&quot; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&quot;Next&quot; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&quot;Modal&quot; isEqualToString:segue." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/improve-storyboard-segue/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/improve-storyboard-segue/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Storyboardでの画面遷移をスマートにやる方法</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2014年4月12日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <p>これは <a href="http://connpass.com/event/5803/">potatotips第６回め</a> で発表した <a href="https://speakerdeck.com/tokorom/e-storyboardshi-tuterufalsenisonnahua-mian-qian-yi-falsesikatasiterufalsedesuka">この話</a> のまとめと後書きです。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_sample.png" alt="storyboard_sample"></p>
+<h2 id="storyboardいいですよね">Storyboardいいですよね！</h2>
+<p>Storyboardを使うことで、</p>
+<ul>
+<li>画面と画面が疎結合になる</li>
+<li>簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない</li>
+</ul>
+<p>といったメリットがあります。</p>
+<p>Storyboard登場以前だと、次の画面に遷移させるだけでも</p>
+<pre><code class="language-objective-c">#import &quot;NextViewController.h&quot;
+
+NextViewController *nextViewController = [NextViewController new];
+[self.navigationController pushViewController:nextViewController animated:YES];
+</code></pre>
+<p>といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（<code>import</code>しないといけない）形でした。</p>
+<p>しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。</p>
+<h2 id="ただしstoryboardを使って今まで以上に悪くなるパターンがある">ただしStoryboardを使って今まで以上に悪くなるパターンがある</h2>
+<p>とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。</p>
+<!-- more -->
+<pre><code class="language-objective-c">#import &quot;NextViewController.h&quot;
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NextViewController *nextViewController = (NextViewController *)segue.destinationViewController;
+    nextViewController.number = @1;
+    [self.navigationController pushViewController:nextViewController animated:YES];
+}
+</code></pre>
+<p>要するにStoryboard登場以前のコードに逆戻りです。<br>
+そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。</p>
+<p>もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。</p>
+<pre><code class="language-objective-c">#import &quot;NextViewController.h&quot;
+#import &quot;ModalViewController.h&quot;
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([@&quot;Next&quot; isEqualToString:segue.identifier]) {
+        NextViewController *nextViewController = (NextViewController *)segue.destinationViewController;
+        nextViewController.number = @1;
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    } else if ([@&quot;Modal&quot; isEqualToString:segue.identifier]) {
+        ModalViewController *modalViewController = (ModalViewController *)segue.destinationViewController;
+        modalViewController.number = @2;
+        [self.navigationController presentViewController:modalViewController animated:YES completion:nil];
+    }
+}
+</code></pre>
+<h2 id="ほんとうはこんな感じに書きたい">ほんとうはこんな感じに書きたい！！</h2>
+<p>せっかくStoryboard使っているのにこんな形で画面遷移先のViewControllerに依存してコードがぐちゃぐちゃになるのは耐えられません。</p>
+<p>ほんとうはこんな感じに書きたいのです！！</p>
+<ul>
+<li>遷移先に渡したい値を渡すだけ</li>
+</ul>
+<pre><code class="language-objective-c">[self performSegueWithIdentifier:@&quot;Modal&quot; options:@1];
+</code></pre>
+<ul>
+<li>遷移先で値を受け取るときも簡単に</li>
+</ul>
+<pre><code class="language-objective-c">self.label.text = self.segueOptions.stringValue; //&lt; 遷移元で渡した @&quot;1&quot; が取得できる
+</code></pre>
+<h2 id="これを実現できるライブラリがあります">これを実現できるライブラリがあります</h2>
+<p>ということで本題ですが、 <a href="https://github.com/tokorom/TKRSegueOptions">TKRSegueOptions</a> でこれが実現できます。</p>
+<p>これをインストールして <code>#import &quot;TKRSegueOptions.h&quot;</code> とするだけで上の書き方が実現できちゃいます。</p>
+<p>他にも、</p>
+<ul>
+<li>複数の値をDictionary形式で渡したい</li>
+</ul>
+<pre><code class="language-objective-c">// 遷移元
+NSDictionary *options = @{
+    @&quot;url&quot;: self.url,
+    @&quot;shop&quot;: self.shop,
+};
+[self performSegueWithIdentifier:@&quot;Modal&quot; options:options];
+
+// 遷移先
+NSURL *url = self.segueOptions[@&quot;url&quot;];
+</code></pre>
+<ul>
+<li>もっとかっちりしたクラスで値を渡したい</li>
+</ul>
+<pre><code class="language-objective-c">// 遷移元
+CustomSegueOption *option = [CustomSegueOption new];
+option.number = @888;
+option.string = @&quot;hello&quot;;
+[self performSegueWithIdentifier:@&quot;Modal&quot; options:option];
+
+// 遷移先
+CustomSegueOption *option = (CustomSegueOption *)presentedViewController.segueOptions;
+NSLog(@&quot;number: %@, string: %@&quot;, option.number, option.string);
+</code></pre>
+<p>といったことも柔軟にできてしまいます。</p>
+<h2 id="その他地味に便利なところ">その他、地味に便利なところ</h2>
+<p>また、ふつうにやると遷移先がナビゲーションコントローラだったりタブバーコントローラだったりすると、その子要素に値を渡すのが意外と面倒だったりしませんか？</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_navigation.png" alt="storyboard_navigation"></p>
+<p>遷移先がナビゲーションバーコントローラかどうか調べて、そうならその配下のViewControllerを取得して、それが想定するViewControllerならこの値を渡す、といった面倒な手順があります。</p>
+<p>そんなケースでも <code>TKRSegueOptions</code> は気にすることはありません。いつもどおり、</p>
+<pre><code class="language-objective-c">[self performSegueWithIdentifier:@&quot;Navigation&quot; options:@&quot;hello&quot;];
+</code></pre>
+<p>と書けば、遷移先がナビゲーションコントローラなら自動的にrootViewControllerまで値を渡してくれますし、タブバーコントローラなら配下の子ViewController全てに値を配布してくれます。地味に便利です。</p>
+<h2 id="performsegue-できないところはどうするの"><code>performSegue</code> できないところはどうするの？</h2>
+<p>なお、ここまでは <code>performSegue</code> をするときに一緒に値を渡すやりかただけ紹介しましたので、performSegueが使えないパターン、例えばContainer Viewを使ってViewControllerに子ViewControllerを埋め込むときはどうするの？という疑問がでてきます。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/storyboard_embed.png" alt="storyboard_embed"></p>
+<p>じつは <code>TKRSegueOptions</code> はperformSegue方式の他に「事前設定方式」を備えています。</p>
+<p>具体的には、<code>- (TKRSegueOptionSetting \*)segueOptionSetting</code> という決まったメソッドをオーバーライドして設定を返すだけです。</p>
+<pre><code class="language-objective-c">- (TKRSegueOptionSetting *)segueOptionSetting
+{
+    __weak typeof(self) wself = self;
+    return [TKRSegueOptionSetting settingWithDictionary:@{
+        @&quot;Embed1&quot;: ^{
+            return wself.leftLabel.text;
+        },
+        @&quot;Embed2&quot;: ^{
+            return wself.rightLabel.text;
+        },
+    }];
+}
+</code></pre>
+<p>この設定はDictionary形式でkeyにSegueのidentifierを指定し、valueに遷移先の画面に渡したい値を返すBlockを指定します。
+このBlockは実際に画面遷移が行われるときに実行されますので、指定した画面遷移が発生するまで無駄にこれらの処理が実行されることはありませんし、その瞬間の最新の値が返るので安心して利用できます。</p>
+<p>場合によっては performSegue方式を使わずにこちらで全て統一するという運用も良いかもしれません。</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>Storyboardはすごく便利!</li>
+<li>しかし画面遷移先に値を渡すときに汚くなりがち</li>
+<li><code>TKRSegueOptions</code> を使うと値を渡したいときもスマートにできる</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/super-viewcontroller-for-a-library/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">提供するXXXViewControllerの親クラスを差し替え可能にしたい!</span>
+    <span class="feed-item-date">2014年1月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objective-c-haskell/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cでカリー化とか部分適用してみる</span>
+    <span class="feed-item-date">2013年11月4日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
+今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
+&ldquo;True simplicity&rdquo; iOS 7から話題の&quot;フラットデザイン&quot;が採用されて、画面デザインは大分シンプルな外観になりました。
+使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。
+iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。
+ただ、&ldquo;Simplicity&quot;という言葉は、単に外観を表すものとして使われているわけではありません。
+「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。
+実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。
+なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。
+全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。
+これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。
+アップルは今回、外観的な&quot;Simplicity&quot;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。
+画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。
+これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。
+では、アップルの&quot;Simplicity&quot;を構成する要素にはどのようなものがあるでしょうか。
+1. &ldquo;refining the typography&rdquo; タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。
+英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。
+一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。
+ナビゲーションバーのボタンも、アイコンが廃され、テキストのみで簡潔に機能を伝えるものが多いようです。
+タイポの美しさを最大限に引き出したいという意図だと思われますが、画面のシンプルさを維持するためにボタンの境界線も排除されています。
+その代わりに、押せるボタンであることを明確に示すために、通常テキストとははっきりと違う色を割り当てて、アプリ全体で一貫して使われています。
+その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。
+これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。
+私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。 通常テキストとボタンのテキストの2色だけを使うのが安全です。
+複数のテキスト色が混ざり合ったインタフェースになってしまうと、どれがボタンなのか判断がつかなくなってしまいます。
+もう一つ懸念点があるとすれば、日本語のタイポグラフィーにおいても、英文と同じ可読性・美しさを確保できるかということです。
+場合によっては、余白を多めに取るなどの工夫を行ったほうがよいことも多そうです。
+2. &ldquo;redesigning all the icons&rdquo; 標準アプリのアイコンは全て共通の新しいグリッドシステムに基づいてデザインし直されています。
+このグリッドシステムに従うことで、アイコンごとのグラフィックのバランスに統一感・一貫性を持たせています。
+もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。
+既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。
+3. &ldquo;use of translucency&rdquo; 地味ながらも美しく、活用の余地が大きい機能追加だと思います。
+画面上部から引き下げるNotification Center、画面下部から引き上げるControl Center、キーボードやダイアログなど、様々なアイテムがすりガラス風の半透明な板で表現され、背景がぼんやりとボケて見えるだけですが、その存在を感じ取ることで「後ろに何かがある」ことを認識できるようになりました。
+ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。
+例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。
+4. &ldquo;parallax to create a whole new experience of depth."><meta name="author" content="amorino">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント | TOKOROM BLOG" property="og:title"><meta content="今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
+今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
+&ldquo;True simplicity&rdquo; iOS 7から話題の&quot;フラットデザイン&quot;が採用されて、画面デザインは大分シンプルな外観になりました。
+使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。
+iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。
+ただ、&ldquo;Simplicity&quot;という言葉は、単に外観を表すものとして使われているわけではありません。
+「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。
+実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。
+なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。
+全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。
+これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。
+アップルは今回、外観的な&quot;Simplicity&quot;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。
+画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。
+これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。
+では、アップルの&quot;Simplicity&quot;を構成する要素にはどのようなものがあるでしょうか。
+1. &ldquo;refining the typography&rdquo; タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。
+英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。
+一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。
+ナビゲーションバーのボタンも、アイコンが廃され、テキストのみで簡潔に機能を伝えるものが多いようです。
+タイポの美しさを最大限に引き出したいという意図だと思われますが、画面のシンプルさを維持するためにボタンの境界線も排除されています。
+その代わりに、押せるボタンであることを明確に示すために、通常テキストとははっきりと違う色を割り当てて、アプリ全体で一貫して使われています。
+その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。
+これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。
+私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。 通常テキストとボタンのテキストの2色だけを使うのが安全です。
+複数のテキスト色が混ざり合ったインタフェースになってしまうと、どれがボタンなのか判断がつかなくなってしまいます。
+もう一つ懸念点があるとすれば、日本語のタイポグラフィーにおいても、英文と同じ可読性・美しさを確保できるかということです。
+場合によっては、余白を多めに取るなどの工夫を行ったほうがよいことも多そうです。
+2. &ldquo;redesigning all the icons&rdquo; 標準アプリのアイコンは全て共通の新しいグリッドシステムに基づいてデザインし直されています。
+このグリッドシステムに従うことで、アイコンごとのグラフィックのバランスに統一感・一貫性を持たせています。
+もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。
+既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。
+3. &ldquo;use of translucency&rdquo; 地味ながらも美しく、活用の余地が大きい機能追加だと思います。
+画面上部から引き下げるNotification Center、画面下部から引き上げるControl Center、キーボードやダイアログなど、様々なアイテムがすりガラス風の半透明な板で表現され、背景がぼんやりとボケて見えるだけですが、その存在を感じ取ることで「後ろに何かがある」ことを認識できるようになりました。
+ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。
+例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。
+4. &ldquo;parallax to create a whole new experience of depth." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ios7-ui-design/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/ios7-ui-design/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年6月17日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ui">
+              ui
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/design">
+              design
+          </a>
+          /</div><div class="content">
+      <h2 id="今回の記事はuiデザイナの-morino氏httpstwittercomlimonomori-からの寄稿です">今回の記事はUIデザイナの <a href="https://twitter.com/limonomori">Morino氏</a> からの寄稿です</h2>
+<p><a href="/2013/06/13/ios7-video/">前回</a> はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。</p>
+<p>今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。</p>
+<!-- more -->
+<h2 id="true-simplicity">&ldquo;True simplicity&rdquo;</h2>
+<p>iOS 7から話題の&quot;フラットデザイン&quot;が採用されて、画面デザインは大分シンプルな外観になりました。<br>
+使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。<br>
+iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-01.png" alt="ios7-simplicity-01"></p>
+<p>ただ、&ldquo;Simplicity&quot;という言葉は、単に外観を表すものとして使われているわけではありません。<br>
+「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。<br>
+実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。<br>
+なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。<br>
+全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。<br>
+これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。</p>
+<p>アップルは今回、外観的な&quot;Simplicity&quot;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。<br>
+画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。<br>
+これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。<br>
+では、アップルの&quot;Simplicity&quot;を構成する要素にはどのようなものがあるでしょうか。</p>
+<h2 id="1-refining-the-typography">1. &ldquo;refining the typography&rdquo;</h2>
+<p>タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。<br>
+英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。<br>
+一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。</p>
+<p>ナビゲーションバーのボタンも、アイコンが廃され、テキストのみで簡潔に機能を伝えるものが多いようです。<br>
+タイポの美しさを最大限に引き出したいという意図だと思われますが、画面のシンプルさを維持するためにボタンの境界線も排除されています。<br>
+その代わりに、押せるボタンであることを明確に示すために、通常テキストとははっきりと違う色を割り当てて、アプリ全体で一貫して使われています。<br>
+その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。<br>
+これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-02.png" alt="ios7-simplicity-02"></p>
+<p>私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。
+通常テキストとボタンのテキストの2色だけを使うのが安全です。<br>
+複数のテキスト色が混ざり合ったインタフェースになってしまうと、どれがボタンなのか判断がつかなくなってしまいます。</p>
+<p>もう一つ懸念点があるとすれば、日本語のタイポグラフィーにおいても、英文と同じ可読性・美しさを確保できるかということです。<br>
+場合によっては、余白を多めに取るなどの工夫を行ったほうがよいことも多そうです。</p>
+<h2 id="2-redesigning-all-the-icons">2. &ldquo;redesigning all the icons&rdquo;</h2>
+<p>標準アプリのアイコンは全て共通の新しいグリッドシステムに基づいてデザインし直されています。<br>
+このグリッドシステムに従うことで、アイコンごとのグラフィックのバランスに統一感・一貫性を持たせています。</p>
+<p>もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。<br>
+既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-03.png" alt="ios7-simplicity-03"></p>
+<h2 id="3-use-of-translucency">3. &ldquo;use of translucency&rdquo;</h2>
+<p>地味ながらも美しく、活用の余地が大きい機能追加だと思います。<br>
+画面上部から引き下げるNotification Center、画面下部から引き上げるControl Center、キーボードやダイアログなど、様々なアイテムがすりガラス風の半透明な板で表現され、背景がぼんやりとボケて見えるだけですが、その存在を感じ取ることで「後ろに何かがある」ことを認識できるようになりました。</p>
+<p>ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。<br>
+例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-04.png" alt="ios7-simplicity-04"></p>
+<h2 id="4-parallax-to-create-a-whole-new-experience-of-depth">4. &ldquo;parallax to create a whole new experience of depth.&rdquo;</h2>
+<p>今回Keynoteで流されたiOS紹介ビデオの中で、最も会場が沸いた瞬間ではなかったでしょうか。<br>
+端末を上下左右に傾けると、ダイアログの後ろに隠れていたはずの背景を覗き込む（ように見る）ことができます。<br>
+パララックス（視差効果）と呼ばれる手法で、手前のレイヤーと後ろのレイヤーにスライドの速度差をつけることで擬似的に奥行きを感じるようになります。<br>
+ホーム画面（アイコンと壁紙）でも使われていますね。</p>
+<p>この効果は、&ldquo;translucency&quot;と同様にフラットでシンプルなデザインを維持したまま、情報量を増やすことなく、非常にリッチで満足感を感じる表現を提供することに成功しそうです。<br>
+ただ視覚的な効果として利用するのではなく、操作を行うインタフェースそのものにも活用することで、もっと面白いこともできるようになるのではないでしょうか？</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ios7-simplicity-05.png" alt="ios7-simplicity-05"></p>
+<p>さて、iOS 7が今回目指したのは装飾を徹底して削ぎ落とすことによりシンプルでフラットなUIを実現することですが、これはタイポグラフィーが本来持つ美しさを最大限に引き出すと共に、コンテンツに対して敬意を払い、可能な限りコンテンツの邪魔をしないでその内容がユーザーに少しでも伝わりやすい形にする、という狙いがあります。<br>
+一方で、シンプル・フラットな仮想空間を画面の中に用意しつつも、現実世界を模倣した物理法則・挙動や視覚効果を強く反映させることで、UIに親しみやすさと理解のしやすさ、そして何よりもこれまでになかったようなリッチで満足度の高い体験をもたらしていると、私は考えています。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/ios7-video/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</span>
+    <span class="feed-item-date">2013年6月13日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

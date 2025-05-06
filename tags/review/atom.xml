@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>review on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/review/</link>
+    <description>Recent content in review on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Fri, 21 Dec 2018 10:14:52 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/review/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</title>
+      <link>https://www.tokoro.me/posts/vim-review/</link>
+      <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/vim-review/</guid>
+      <description>本記事は Vim その2 アドベントカレンダー 21日目の記事です。
+経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
+現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
+以下、
+シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット の順に整理いたします。
+シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &amp;gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
+そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
+https://github.com/tokorom/vim-review このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&#39;swift&#39;] と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
+これが発火する条件は、
+Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること です。
+リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
+fswatch browser-sync を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>homekit on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/homekit/</link>
+    <description>Recent content in homekit on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 06 Oct 2020 14:57:02 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/homekit/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</title>
+      <link>https://www.tokoro.me/posts/iosdc2020/</link>
+      <pubDate>Tue, 06 Oct 2020 14:57:02 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/iosdc2020/</guid>
+      <description>2020年9月に開催された iOSDC Japan 2020 今年も盛り上がりましたね！ 2020年は初のオンライン開催でオフラインにはない良さも再認識することができました。
+私も HomeKit 2020 というセッションで発表者として参加しました。
+概要 セッションの概要はこんな感じです。ご興味がある題材がありましたら是非セッションビデオをご覧ください！
+HomeKit Frameworkざっくり入門 HomeKit Frameworkでどんなことができるのか HomeKitの構成 具体的に電球を点灯させるコードの紹介 隠しキャラクター（HomeKitがサポートしていない気圧）を参照するテクニック HomeKitだからこそできる具体例 時間指定でなく「日の入」「日の出」をトリガーに 家に「誰もいなくなったら」をトリガーに 自動点灯したライトをN秒後に消灯する 「部屋が明るければ」自動点灯させない HomeKitのBridgeについて Hueには電球、人感センサー、スイッチなどあるが直接HomeKit対応しているのはじつは&amp;hellip; オープンソースのソフトウェアBridge「Homebridge」 HomebridgeでHomeKit未対応製品をHomeKit対応 ルンバ、スマートロック、赤外線リモコンなどもHomeKit対応できる！ Homebridgeを利用する具体的な方法　プラグインの自作 HomeKit ADKで作る自作アクセサリ HomeKit ADK概要 Homebridgeとの違い ソフトウェアでHomeKit対応アクセサリーを作る！ セッションビデオ スライド HomeKit入門の無料公開 iOSDC 2020とほぼ同時に、ちょうど良いタイミングでZennというサービスが始まり、Web上で簡単に書籍を執筆・公開できるようになりました。
+そのため、かねてよりどこかで公開しようと思っていた『HomeKit入門』1 をZennで無料公開しました。
+https://zenn.dev/tokorom/books/homekit-framework
+iOS 11リリース当時に執筆したものですが、HomeKit FrameworkにはiOS 12以降大きな変更は入っていませんので、現在でも十分有効な内容かと思います。
+ご興味ありましたら是非ご参照ください！
+iOS 11 Programmingの第12章に掲載したものです https://peaks.cc/books/iOS11&amp;#160;&amp;#x21a9;&amp;#xfe0e;</description>
+    </item>
+    
+    <item>
+      <title>HomeKit ADKでSlackにメッセージ送信するアクセサリを作ってみる</title>
+      <link>https://www.tokoro.me/posts/homekitadk/</link>
+      <pubDate>Mon, 23 Dec 2019 11:47:15 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekitadk/</guid>
+      <description>HomeKitADKのオープンソース化 つい先日（2019/12/18）、AppleがAmazon、Google、Zigbee Allianceと、スマートホームデバイスに関するワーキンググループを結成したとのビッグニュースが発表されましたね！
+https://www.apple.com/jp/newsroom/2019/12/amazon-apple-google-and-the-zigbee-alliance-to-develop-connectivity-standard/
+これに伴い、HomeKitに対応したアクセサリを開発するためのHomeKit ADKがオープンソース化されました。
+https://github.com/apple/HomeKitADK
+HomeKit対応アクセサリ作ってみよう！？ ちなみにHomeKitの世界ではHomeKitに対応した機器のことをアクセサリと呼びます。
+ということで早速HomeKit対応アクセサリを作ってみましょう！ といってもハードウェアを作るわけではなく、手元のMac上で動き、HomeアプリからOnするとSlackになにか投稿するというアクセサリを作る実験をしてみようと思います。
+と考えたわけですが、12/23現在ですとまだドキュメント等も優しくはないので、リポジトリを覗いてもなにがなんやらの状態です。
+ひとまず、READMEに書かれているとおりに、必要なものをbrew installして、make allすれば、なにやらビルドは成功します。そして、ビルドされた
+Output/Darwin-x86_64-apple-darwin19.0.0/Debug/IP/Applications/Lightbulb.OpenSSL を実行したらなにやら動きます1。
+こちらですが、
+まず、HomeKit対応したアクセサリはHomeKit Accessory Protocol（HAP）により操作される HomeKit対応するアクセサリではHAP Accessory Serverが動いている必要があり、これによりHomeアプリへの追加だったり、「ライトを点灯して」といった命令を受け入れる 上で動かしているLightbulb.OpenSSLは、ライト用のHAP Accessoryのサンプル という理解で良さそうです。
+LightbulbのサンプルをiPhoneのHomeアプリに追加してみよう 上のLightbulb.OpenSSLを動かしている状態で、iPhoneのHomeアプリを起動し、以下のようにすると、このサンプルのアクセサリを実際に追加できます。
+アクセサリの追加から「コードがないか、スキャンできません」を選ぶ 近くのアクセサリに「Acme Light Bulb」というのが表示されるので追加する 設定コードの入力を求められるので11122333を入力する なお、設定コードは https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/PAL/Mock/HAPPlatformAccessorySetup.c#L12 に書かれていたものを使ってみました。将来、このサンプル用の設定コードは変わるかもしれません。
+これでサンプルのLightbulbがHomeアプリに追加されましたので、Homeアプリ上でこのサンプルのライトを点灯/消灯することができるようになりました。
+といっても実際に電球があるわけではないので、点灯したよ、消灯したよ、というのはログ上で確認できるのみです。ライトの点灯/消灯を切り替えると、
+Info HandleLightBulbOnWrite: true Info HandleLightBulbOnWrite: false といったログが確認できるかと思います。
+サンプルを改造してSlackにメッセージを送信させよう HomeKit対応したライトを作る場合は、上のHandleLightBulbOnWriteのところで実際にライトを点灯させるコードを書くことになりそうです（Raspberry Piなどでそれをやってみるのも簡単と思います）。
+今回はSlackにメッセージを送信するアクセサリを作るというのが目的なので、
+https://github.com/tokorom/HomeKitADK/blob/lightbulb_slack/Applications/Lightbulb/App.c#L165-L184
+このあたりに、SlackにメッセージをPOSTする機能を追加しましょう。
+ただ、今回は実験なので（正直、C言語で書いてビルドし直して&amp;hellip;というのが面倒なので）、
+#include &amp;lt;stdlib.h&amp;gt; して、
+if (value) { system(&amp;quot;./handleLightBulbOn&amp;quot;); } ライトがOnになったら外部のShellスクリプトを叩くという実装だけして、あとはShellスクリプトで書く&amp;hellip;という形に逃げちゃいます。。。
+Slackにメッセージ送信するスクリプトの追加 ここからは慣れ親しんだSwiftなどでSlackにメッセージ送信するコード書くだけなので、ここで紹介するまでもないです。
+例えば、こんなかんじのものです。
+この例ではSlackのIncoming Webhooksを使っています。
+touch handleLightBulbOn chmod +x handleLightBulbOn vim handleLightBulbOn #!</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</title>
+      <link>https://www.tokoro.me/posts/homekit_delongi_heater/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekit_delongi_heater/</guid>
+      <description>De&amp;rsquo;Longhi Multi Dynamic Heater WiFi Model
+主なサービス HMServiceType〜 説明 Thermostat サーモスタット 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み CurrentHeatingCooling 現在の冷暖房の状態 uint8 - TargetHeatingCooling 冷暖房の目標状態 uint8 可 CurrentTemperature 現在の温度 float - TargetTemperature 目標温度 float 可 TemperatureUnits 温度表示装置 uint8 可 概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
+温度を一定に保つ能力が高い 静か 乾燥しない といった特徴があります。 私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。
+一方で、他の実際に利用している知り合いの感想として「あまり暖かくなっている感じがしないので、結局、石油ヒーターのほうを使っている」というものもありました。
+自然に適温な空間を作りたいのか、もっと直接的に暖まりたいのかなどの好みによっても利用感が変わってくるのかもしれません。
+なおHomeKitのサービスとしては主にはサーモスタットのみで、書き込み可能なキャラクタとして「暖房機能のOn/Off」「目標温度」「温度表示装置のOn/Off」などがあります。
+また、隠し機能（というかHomeKitでは定義されていないカスタムキャラクタ）としてEco Modeなど14つのカスタムキャラクタもありますので、解析すればより細かい制御ができると思います。
+暖房をOnにするには？ 温度の設定はCurrentTemperature（目標温度）を上書きすれば良さそうですが、暖房をOnにするにはどうすれば良いでしょう？ この機器には他の機器によくあるPowerState（電源の状態）キャラクタがありません。
+また、TargetHeatingCooling（冷暖房の目標状態）というキャラクタがありますが、この機器に冷房機能はないんですが？
+といった時にはキャラクタのmetadataプロパティを参照すれば明確になることが多いです。例えばこの機器のTargetHeatingCoolingキャラクタのmetadataは以下になっていました。
+プロパティ 実際の値 format uint8 units minimumValue 0 maximumValue 1 stepValue 1 validValues maxLength このキャラクタのvalueには数値で0 or 1を指定できるようです。 実際に以下のコードで 1 を指定すると暖房がOnになりました。</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue モーションセンサー</title>
+      <link>https://www.tokoro.me/posts/homekit_hue_sensor/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekit_hue_sensor/</guid>
+      <description>Philips Hue モーションセンサー
+主なサービス HMServiceType〜 説明 MotionSensor モーションセンサー LightSensor 光センサー TemperatureSensor 温度センサー 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み MotionDetected 動きを検知 bool - CurrentLightLevel 現在の光量 float - BatteryLevel 電池残量 uint8 - CurrentTemperature 現在の温度 float - ChargingState 充電の状態 uint8 - StatusLowBattery 状況（電池残量低下） uint8 - 概要 日本で普通に購入できるモーションセンサーとしては Elgato Eve Motion に次ぐ待望の２つめです。
+しかも、Eve Motionが6000円だったのと比較するとこちらは4000円台で購入可能で、しかも光センサーや温度センサーまで付いているという豪華仕様です。 また、（HomeKitとは直接関係ありませんが）Hueのライトとの相性はとにかくよく、
+モーションを検知して点灯してから何分後に消灯するか設定でき、かつ、完全消灯の前にうっすら暗くなるフェーズが入る 光センサーによりどのくらいの暗さなら点灯するかを設定できる といったことが可能で、この２点によりライトの自動点灯用としてはEve Motionよりも圧倒的に優れています。 特に「完全消灯の前にうっすら暗くなるフェーズが入る」のが地味に大切で、トイレなどで使っているときにいきなり真っ暗になるのを防ぎ、少し暗くなったらちょっと動いてライトを復活させるといった猶予が作れます。
+ということでEve Motionと比較すると機能的には圧倒的に優れているわけですが、唯一のネックはHueのブリッジが必要というところです。 逆にHueのブリッジを導入済みならこちら一択かと。。。
+もちろん電池残量関連のキャラクタも参照可能です。
+現在の光量を条件に加えるサンプルコード このセンサーの設定はHueアプリで完結できるのですが、せっかくなので光センサーを使って「現在の光量がNより下の場合」だけ「モーションを検知したらライトを点灯する」というサンプルコードを紹介します。
+let home: HMHome = //&amp;lt; 任意のHome let lightLevel: HMCharacteristic = //&amp;lt; HMCharacteristicTypeCurrentLightLevel let motionDetected: HMCharacteristic = //&amp;lt; HMCharacteristicTypeMotionDetected // 現在が15ルクスより暗い場合という条件 let predicate = HMEventTrigger.</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</title>
+      <link>https://www.tokoro.me/posts/homekit_koogeek_lightbulb/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekit_koogeek_lightbulb/</guid>
+      <description>Koogeek Wi-Fiスマート LED HomeKit 電球 E26 8W 1600万色変色可能 調光調色
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 Hue 色相 float 可 Saturation 彩度 float 可 Brightness 明るさ int 可 概要 HomeKitのサービス/キャラクタ的には iOS 11 Programming で紹介されているPhilips Hueのランプ（カラー版）と同じです。 そのためHomeKitで操作できる事項もHueと全く同じで、電源のOn/Off、色（色相、彩度、明るさ）が変更可能です。
+Hueどっちが良い？ まず、カラー版の値段はKoogeekのランプのほうがだいぶ安いです。またHueのようにブリッジが必要なく単体で動作するところもメリットになり得ます。 そのため、HomeKitをちょっと試したいくらいであればKoogeekのほうが圧倒的に優位かもしれません。
+一方で、Hueのほうが 各種APIが充実している など一日の長があります。 既にHueのブリッジを所持している、追加のランプはカラー版でなく安いホワイトグラデーションのほうで良いなどあればHueが優位になってきます。 また、計測情報などもなくどのくらいの差があるかはわかりませんが、単体で動作しWi-Fi通信を行うKoogeekのランプに比べ、ZigBeeで通信するHueのランプのほうが日々の電気代は安くなるかもしれません。
+まずは試してみたいという感覚なのか、本格的に長期で使っていきたいのかなどによって選択は変わってくるかと思います。
+参考: スマートホーム×DIY 実践と展望 〜 2. 実践Homekitの暮らし（実際に自宅でHueとKoogeekを一緒に利用しての所感が書かれた記事）
+ライトの電源をOnにするサンプルコード ライトを点けたり消したりする程度の設定はホームアプリ上でGUIで設定できるわけですが、参考までに敢えてこれをプログラムで実現する場合は以下のようにします。
+// Koogeek LightBulbのpowerStateを取得 let powerState = //&amp;lt; HMCharacteristicTypePowerState // 電源をOnにする powerState.</description>
+    </item>
+    
+    <item>
+      <title>クリスマスツリーをHomeKitに対応させよう</title>
+      <link>https://www.tokoro.me/posts/homekit_christmastree/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekit_christmastree/</guid>
+      <description>やりたいこと 必須要件 日の入りあたりで自動的にクリスマスツリーのライトを自動点灯する 24:00など時間がきたらクリスマスツリーのライトを自動消灯する あったらいいね Siriでクリスマスツリーを点灯/消灯する 屋外のクリスマスツリー用に防雨対応する これまで HomeKitなど使わなくても実利用的には オーム電機(OHM) S-OCDSTM7A [防雨型 光センサータイマーコンセント 700W] などの光センサーを利用するので十分かと思います。
+今のところHomeKit化しなければいけない理由は大きくないですが、せっかくなので&amp;hellip;ということで。
+実現方法 クリスマスツリーをHomeKit対応する、といっても実際にはクリスマスツリーのライトのコンセントを Koogeek スマートコンセント などのHomeKit対応スマートコンセントに繋ぐだけです。
+これを利用することでHomeKitの設定により、
+日の入りの前後でクリスマスツリーを点灯（スマートコンセントの電源をOn）する 設定時間でクリスマスツリーを消灯（スマートコンセントの電源をOff）する Siriでクリスマスツリーを点灯/消灯（スマートコンセントの電源をOn/Off）する などが実現できます。
+なお、Koogeekのスマートコンセントの利用実例は iOS 11 Programming でも詳細に紹介しています。
+オートメーションの設定 これらオートメーションの設定は自分でプログラミングして追加することももちろん可能ですが、この程度のものならHomeアプリを使って設定可能です。
+このレベルなら設定も本当に簡単で、オートメーションタブから追加ボタンを押して上のスクショのような設定を２つ追加するだけです。
+防雨対応 クリスマスツリーを室内で運用するならこれでおしまいですが、屋外に設置する場合は防雨対策をしなければなりません。
+はじめは 防雨型コンセントボックス など専用のコンセントボックスを利用しようと思っていましたが、UIデザイナーの元山くんから「そんなのバケツをひっくり返してのせとけばいいんじゃないですか？」と指摘され、まあ、それもそうかなと思い、もうちょっと安く済ませる方針としました。
+さすがにバケツはあれなので、100円均一のお店で適当な大きさのプラスチックのケースとビニールテープを買ってきました。
+プラスチックケースはそのままだとコンセントのケーブルが通りませんので、ノコギリで少し切り込みを入れて、そこにケーブルを通すようにしました。
+あとは蓋を閉めて、ビニールテープで先ほどの切り込みを含めて巻いておしまい、という簡便なものです。
+実際、普通の雨ならこれで十分な感じです。
+（なお、水滴がケース内に発生して云々&amp;hellip;など深くは確認していないので同じ方法を採用するかたは自己責任で&amp;hellip;）
+まとめ 前述のとおりHomeKitでなくても実用的には十分なのですが、HomeKit対応することで（強いて言えば）以下のメリットがあります。
+「日の入り」というトリガーが使え、光センサーによるトリガーよりも精度が高い 例えばSiriで「メリークリスマス！」と言うことでクリスマスツリーを点灯させるなど、子どもたちの喜びそうなイベントに使えそう 自宅に不在時は点灯させないなどプレゼンス関係の条件付けも可能 他の点灯条件が揃ってなくても自分が帰宅してきたときには点灯させるなど自己満足な設定も可能 HomeKit対応させてiOSプログラマー的には気分が上がる iOSプログラマーのお父さん、お母さん、ぜひお子さんたちの喜ぶクリスマスツリーをHomeKitで作りましょう！</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue Dimmer スイッチ</title>
+      <link>https://www.tokoro.me/posts/homekit_hue_dimmer_switch/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekit_hue_dimmer_switch/</guid>
+      <description>[Amazon] Philips Hue(ヒュー) Dimmer スイッチ
+主なサービス HMServiceType〜 説明 StatelessProgrammableSwitch ステートレス・プログラマブル・スイッチ Battery バッテリー 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み InputEvent プログラマブル・スイッチ・イベント uint8 - BatteryLevel 電池残量 uint8 - ChargingState 充電の状態 uint8 - StatusLowBattery 状況（電池残量低下） uint8 - 概要 スマートIoT照明のパイオニアであるPhilips Hueのランプのプログラマブルスイッチです。
+Hueの公式ページにもAppleのHomeKit対応製品一覧にもこの製品がHomeKit対応しているとは書かれていなかったのですが、購入して利用してみたらHomeKit対応していて驚きました。 単体で買えば3000円程度とHomeKit対応したプログラマブルスイッチとしては格安です。
+なお、この製品を動作させるにはHueのブリッジが必要であることに注意が必要です。 逆に、Hueのブリッジがあれば、Hue以外の（HomeKit対応した）ランプのコントロールにも利用できます。 HomeKit的には単なるプログラマブルスイッチですので、ランプの点灯/消灯以外のあらゆる操作にも対応可能です。
+この製品は電池で動作しますので電池残量関連のキャラクタも参照可能です。
+InputEventをトリガーとするサンプルコード InputEventをトリガーとして特定のシーンを実行する、具体的には、ボタンを押したらランプを点灯/消灯するサンプルコードを紹介します。
+なお、単にシーンを実行するだけならコードを書かなくともApple純正のHomeアプリで設定できますので、ここでは、
+ランプが消灯していれば点灯する ランプが点灯していれば消灯する とトグルになるサンプルとします。
+// 設定したいボタンのInputEventを探す // このサンプルでは適当な１つのInputEventを取得 let service = home.servicesWithTypes([HMServiceTypeStatelessProgrammableSwitch])?.first let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeInputEvent } guard let inputEvent = candidates?.first else { return } // InputEventが取り得る値は0のみ let event = HMCharacteristicEvent(characteristic: inputEvent, triggerValue: NSNumber(value: 0)) let powerState = //&amp;lt; チェック対象のランプのPowerStateキャラクタ // ランプが点灯中の場合という条件を作る let onState = HMEventTrigger.</description>
+    </item>
+    
+    <item>
+      <title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</title>
+      <link>https://www.tokoro.me/posts/homekit_hue_white_lamp/</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/homekit_hue_white_lamp/</guid>
+      <description>[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 ColorTemperature 色温度 int 可 Brightness 明るさ int 可 概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
+なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
+もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
+ColorTemperatureのmetadata プロパティ 実際の値 format int units minimumValue 153 maximumValue 454 stepValue 1 validValues maxLength manufacturerDescription Color Temperature ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+ColorTemperatureを更新するサンプルコード let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature } guard let colorTemperature = candidates?</description>
+    </item>
+    
+  </channel>
+</rss>

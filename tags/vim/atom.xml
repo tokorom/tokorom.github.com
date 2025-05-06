@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/vim/</link>
+    <description>Recent content in vim on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Mon, 17 Aug 2020 18:11:06 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/vim/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>apple/swift-formatをVimで使う</title>
+      <link>https://www.tokoro.me/posts/vim-swift-format/</link>
+      <pubDate>Mon, 17 Aug 2020 18:11:06 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/vim-swift-format/</guid>
+      <description>皆々様におかれましては apple/swift-format を快適にご利用いただいていますでしょうか？1
+swift-formatをXcodeのBuild Phasesに設定して利用したり、CIなどで利用されているかたも多いかと思います。
+私もswift-formatを利用しはじめたのですが、私のメインエディタであるVimからswift-formatを利用するといった記事は今のところ見つかりません。 iOSアプリをVimでコーディングするプログラマーは希有ですのでそれもしかたがないことでしょう。
+ということでVim+SwiftでiOSアプリを開発して6年（2020年8月現在）の私がこの記事を書くこととしました。
+swift-formatを扱うVim Pluginの存在 2020年8月現在、残念ながらswift-formatを扱うVim Pluginは見つかりませんでした。これまで利用されていたSwiftLintやSwiftFormatのPluginは見つかるのですが、新しめなapple/swift-format用のものはないようです。
+そのため、Pluginといっても大した機能は必要ないこともあり、自分で作ることにしました。
+https://github.com/tokorom/vim-swift-format
+事前に必要なもの swift-format とうぜん事前にswift-formatが必要です。
+which swift-format などで存在を確認してください2。
+なければ現在ならbrewでもインストール可能です。
+SwiftFormatというのは別のツールですので間違わないようご注意ください。
+brew install swift-format aleというVimのPlugin https://github.com/dense-analysis/ale
+非同期にLintをかけるためのPluginです。
+今回、swift-formatによるLintはこのaleを経由してかけるように作っています。
+vim-swift-formatのセットアップ Vimへのインストール ご利用のプラグインマネージャなどでインストールの設定をしてください。例えばVim-Plugなら
+Plug &#39;tokorom/vim-swift-format&#39; です。
+必須の設定 swift-formatによるLintをかけるにあたって以下の設定項目が必須です。.vimrcなど任意の場所に設定してください。
+let g:ale_linters = { \ &#39;swift&#39;: [&#39;swift-format&#39;], \} let g:vim_swift_format_use_ale = 1 必要なら可能な設定 swift-formatの場所をフルパスで指定したい場合などは必要に応じて、
+let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_format_lint_command = &#39;swift-format lint %s&#39; let g:vim_swift_format_format_command = &#39;swift-format format --in-place %s&#39; これらの設定が可能です。</description>
+    </item>
+    
+    <item>
+      <title>Vimにスクショを直接Markdownで貼り付ける</title>
+      <link>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</link>
+      <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</guid>
+      <description>Photo by Jae Park on Unsplash
+前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
+ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
+そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
+今回はそこを解決します！
+pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&amp;hellip;
+screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
+screencapture -i 出力ファイル名 とすると、shift + command + 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
+現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
+そのため、前回のpluginを少し拡張して、
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-from-line&amp;quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&amp;quot;./.vim-replace-current-line/markdown-image-with-screenshot&amp;quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
+仕組み自体は前回と変わりません。
+このpluginは GitHub に置いてあります。
+スクショを撮影して&amp;hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
+#! /bin/sh IMAGEDIR=&amp;quot;content/images/$2&amp;quot; CURRENTTIME=`date +%s` IMAGEFILENAME=&amp;quot;ss-${CURRENTTIME}.png&amp;quot; TARGET=&amp;quot;${IMAGEDIR}/${IMAGEFILENAME}&amp;quot; IMAGETAG=&amp;quot;![image](/images/$2/${IMAGEFILENAME})&amp;quot; mkdir -p ${IMAGEDIR} screencapture -i &amp;quot;${TARGET}&amp;quot; echo &amp;quot;${IMAGETAG}&amp;quot; IMAGEOPTIM=&amp;quot;open -a ImageOptim&amp;quot; `${IMAGEOPTIM} ${TARGET}` です。</description>
+    </item>
+    
+    <item>
+      <title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</title>
+      <link>https://www.tokoro.me/posts/vim-markdown-image-tool/</link>
+      <pubDate>Tue, 31 Mar 2020 16:38:32 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/vim-markdown-image-tool/</guid>
+      <description>Photo by Victor Grabarczyk on Unsplash
+ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
+最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
+記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
+特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
+手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
+各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
+決して難しいことはありませんが地味に面倒でした。
+ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
+ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
+具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。</description>
+    </item>
+    
+    <item>
+      <title>Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</title>
+      <link>https://www.tokoro.me/posts/vim-review/</link>
+      <pubDate>Fri, 21 Dec 2018 10:14:52 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/vim-review/</guid>
+      <description>本記事は Vim その2 アドベントカレンダー 21日目の記事です。
+経緯 今年の8月頃から PEAKS の iOS 12 Programming という技術書の執筆に参加しました。 このとき初めて Re:VIEW による執筆をしました。
+現在は技術書展も賑わっており、Re:VIEWで執筆する機会は以前より多くなっているかと思います。 一方で、VimでRe:VIEWを取り扱う環境が意外と整っておらず1、2018年時点の情報を整理させていただきます。
+以下、
+シンタックス・ハイライト リアルタイムプレビュー 校正サポート コード・スニペット の順に整理いたします。
+シンタックス・ハイライト Re:VIEWのシンタックス・ハイライト用のpluginはいくつか見つかったものの、最新のRe:VIEW 2.0にきっちり対応されているものが見つかりませんでした。 Re:VIEW 2.0のフォーマットガイドはこちらです &amp;gt; https://github.com/kmuto/review/blob/v2-stable/doc/format.ja.md
+そのため、Re:VIEW 2.0に一通り対応したものを作って利用しました。
+https://github.com/tokorom/vim-review このついでに、Re:VIEW内に埋め込んだソースコードのハイライトにも対応させています。 例えば、私の今回の執筆ではSwiftコードを使っていますので、その場合は、
+let g:vim_review#include_filetypes = [&#39;swift&#39;] と、既存のfiletypeであるswiftをg:vim_review#include_filetypesに指定してあげるだけです。 これで、
+と、文章内に埋め込まれたソースコードもきっちりハイライトされます。
+これが発火する条件は、
+Re:VIEWのブロック命令としてlist、listnum、emlist、emlistnumのいずれかを利用し、言語指定として設定済みのfiletypeを指定していること です。
+リアリタイムプレビュー Re:Viewのリアルタイムプレビューをgulp/gruntのlivereloadを使わずにbrowser-syncとfswatchだけでやる を真似させていただきました。
+fswatch browser-sync を利用します。 こちらはVimで、というよりはシンプルにファイルの変更を監視してhtmlを出力＆プレビューするだけです。
+fswatchでreファイルの変更を監視して変更があればhtmlを出力 そのhtmlをbrowser-syncでブラウザでライブリロード という手順です。
+事前準備 brew install fswatch npm install -g browser-sync browser-syncの起動 cd articles browser-sync start --server --files *.</description>
+    </item>
+    
+    <item>
+      <title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</title>
+      <link>https://www.tokoro.me/posts/ctrlp-docset/</link>
+      <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/ctrlp-docset/</guid>
+      <description>Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
+自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
+ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
+Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
+Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
+vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
+CtrlPについては、
+意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう あたりがわかりやすかったです。
+インストールして動かすと、
+といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
+参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
+自分はVim内で完結したいので w3m.vim を使ってVim内で表示するように設定しました。
+インストール まずはDocsetがインストールされているか確認 これがないとはじまりません。
+あるかどうか心配なかたは、Xcodeを起動し、 Preferences&amp;hellip; の Downloads を確認してみてください。
+ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
+なければここからインストールをしてみてください。
+なお、ここでインストールしたDocsetは、たぶん
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
+CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
+.vimrc Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。
+ctrlp-docset の設定 設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。
+.vimrc # docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし） let g:ctrlp_docset_docsetutil_command = &#39;/Applications/Xcode.</description>
+    </item>
+    
+    <item>
+      <title>もっと簡単にVimでObjective-Cのコード補完を実行する</title>
+      <link>https://www.tokoro.me/posts/easy-objc-complement/</link>
+      <pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/easy-objc-complement/</guid>
+      <description>概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
+というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
+具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
+after/ftplugin/objc.vim let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+path .clang_complete clang ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
+の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
+ios が今回作成したpluginにより追加できるオプションです。
+clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
+これを入れることで、clang_completeでのコード補完実行の際に、
+&#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目+αのことを自動でやってくれるようになります。
+インストール方法 pluginをVundleなどでインストール # Vundleをご利用の場合 Bundle &#39;git://github.com/tokorom/clang_complete.git&#39; Bundle &#39;git://github.com/tokorom/clang_complete-getopts-ios.git&#39; after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39; この他、clang_complete 自体の設定などについては、 VimでObjective-Cのコード補完を実行する With Clang をご参照ください。</description>
+    </item>
+    
+    <item>
+      <title>VimでObjective-Cのコード補完を実行する with clang</title>
+      <link>https://www.tokoro.me/posts/clang-complete-for-vim/</link>
+      <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/clang-complete-for-vim/</guid>
+      <description>概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
+そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
+具体的には、
+clangコマンドでのコード補完を試してみる その結果をもってVimの clang_complete プラグインを導入する という手順で実施しました。
+結果として満足いく補完環境が整いましたので紹介させていただきます。
+clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
+じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
+具体的には、
+// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
+例えば、
+Classes/Controllers/MainViewController.m #import &amp;quot;MainViewController.h&amp;quot; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
+すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
+-w
+=&amp;gt; 全ての警告を無視する（コード補完では警告はいらない） -fblocks</description>
+    </item>
+    
+    <item>
+      <title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</title>
+      <link>https://www.tokoro.me/posts/mac-terminal-japanese/</link>
+      <pubDate>Mon, 31 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/mac-terminal-japanese/</guid>
+      <description>Macの初期設定のたびに混乱してるので再整理しておきます。
+Mac Terminal tmux vim で開発をする人向けです。
+まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
+日本語を扱う上で便利な設定がデフォルトで入ってます。
+当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &amp;quot;$@&amp;quot;&#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+こせきの技術日記 に従って対処しておきます。
+この中の、
+date | pbcopy までが成功すればOKです。
+.vimrc にクリップボード利用の設定追加 .vimrc に
+set clipboard=unnamed を追加しておきます。
+fakeclip の導入 fakeclip をVimに追加することで、 tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。</description>
+    </item>
+    
+  </channel>
+</rss>

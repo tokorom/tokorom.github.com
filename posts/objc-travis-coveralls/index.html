@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
+なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
+https://github.com/tokorom/BlockInjection
+になります。
+前提条件 GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること Travis CI https://travis-ci.org/
+目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
+iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
+事前準備 Travis CIのアカウントを作っておく(GitHubのアカウントで） Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
+自分の場合は、
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="iOSのライブラリだってTravis CIとかCoverallsとか使うべき | TOKOROM BLOG" property="og:title"><meta content="今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
+なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
+https://github.com/tokorom/BlockInjection
+になります。
+前提条件 GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること Travis CI https://travis-ci.org/
+目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
+iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
+事前準備 Travis CIのアカウントを作っておく(GitHubのアカウントで） Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
+自分の場合は、
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ -project $(PROJECT) \ clean test: xcodebuild \ -project $(PROJECT) \ -target $(TEST_TARGET) \ -sdk iphonesimulator \ -configuration Debug \ TEST_AFTER_BUILD=YES \ TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-travis-coveralls/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/objc-travis-coveralls/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">iOSのライブラリだってTravis CIとかCoverallsとか使うべき</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年7月9日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ci">
+              ci
+          </a>
+          /</div><div class="content">
+      <p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ci_coverage_badges.png" alt="ci_coverage_badges"></p>
+<p>今日はGithubに公開したiOS用のライブラリを <strong>Travis CI</strong> と <strong>Coveralls</strong> に対応した手順を紹介したいと思います。</p>
+<p>なお、実際にこれらを適用して運用しているリポジトリのサンプルは、</p>
+<p><a href="https://github.com/tokorom/BlockInjection">https://github.com/tokorom/BlockInjection</a></p>
+<p>になります。</p>
+<!-- more -->
+<h2 id="前提条件">前提条件</h2>
+<ul>
+<li>GitHubを使っていること</li>
+<li>GitHubでなんらかiOS/Mac用のライブラリを公開していること</li>
+</ul>
+<h2 id="travis-ci">Travis CI</h2>
+<p><a href="https://travis-ci.org/">https://travis-ci.org/</a></p>
+<h3 id="目的">目的</h3>
+<p>公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。<br>
+iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。</p>
+<h3 id="事前準備">事前準備</h3>
+<ul>
+<li>Travis CIのアカウントを作っておく(GitHubのアカウントで）</li>
+</ul>
+<h3 id="travis-ci上で該当のリポジトリをonにする">Travis CI上で該当のリポジトリをONにする</h3>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/travis_on.png" alt="travis_on"></p>
+<p>Travis CI に行って、このスクリーンショットのように該当リポジトリを <code>ON</code> にするだけです。簡単！</p>
+<h3 id="makefile-を用意する必須ではない">Makefile を用意する（必須ではない）</h3>
+<p>必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。</p>
+<p>自分の場合は、</p>
+<pre><code class="language-sh">PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj
+TEST_TARGET = Tests
+
+clean:
+	xcodebuild \
+		-project $(PROJECT) \
+		clean
+
+test:
+	xcodebuild \
+		-project $(PROJECT) \
+		-target $(TEST_TARGET) \
+		-sdk iphonesimulator \
+		-configuration Debug \
+		TEST_AFTER_BUILD=YES \
+		TEST_HOST=
+</code></pre>
+<p>こんなかんじで、 <code>make test</code> とすると <code>xcodebuild</code> で <code>Tests</code> がビルドされるようにしています。
+<code>TEST_AFTER_BUILD=YES</code> と <code>TEST_HOST=</code> は重要です。</p>
+<p>このMakefileを設置したら、まずはローカル環境で <code>make test</code> が成功するかを確認するのが良いと思います。</p>
+<h3 id="travisyml-を用意する">.travis.yml を用意する</h3>
+<p>次に、Travis CI用の設定ファイル .travis.yml を設置します。</p>
+<pre><code class="language-sh">language: objective-c
+
+script:
+  - make clean test
+</code></pre>
+<p>これだけです。
+<code>language</code> でobjective-cを指定し、<code>script</code>で<code>make clean</code>と<code>make test</code>を叩くことを記述しています。<br>
+なお、<code>script</code> がなくてもデフォルトでObjective-C用のビルドが走るようです。</p>
+<p>必要な設定はこれだけです。簡単すぎる！<br>
+概ね１５分程度でTravis CI対応は終わってしまうくらいです。</p>
+<h3 id="commit--push">commit &amp; push</h3>
+<p>これらの設定が終わったら、GitHubにpushします。<br>
+すると、自動的にTravis CIで設定した内容が動き始めるはずです。</p>
+<h3 id="確認">確認</h3>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/travis_success.png" alt="travis_success"></p>
+<p>うまくいけば、 <a href="https://travis-ci.org/tokorom/BlockInjection">こんなかんじ</a> でビルド/テスト結果が確認できるはずです。</p>
+<p>また、</p>
+<pre><code>https://travis-ci.org/[YOUR_ACCOUNT]/[YOUR_REPOSITORY].png?branch=master
+</code></pre>
+<p>を画像として表示することで、こんなかんじのバッヂも表示できます。せっかくなのでこいつをReadmeに埋め込みましょう。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/BlockInjection.png?branch=master" alt="BlockInjection"></p>
+<h2 id="coveralls">Coveralls</h2>
+<p><a href="https://coveralls.io/">https://coveralls.io/</a></p>
+<h3 id="目的-1">目的</h3>
+<p>公開しているライブラリに対してどれくらいテストがきちんと書かれているかを明示できます。<br>
+例えば、ソースコードの全行を網羅するテストコードを書いてあるなら <code>coverage: 100%</code> という表示になります。<br>
+100%を目指す必要はないと思いますが、これがあることで、</p>
+<ul>
+<li>新しい機能を加えたときなどにきちんとテストを書く後押しになる</li>
+<li>pull reqを送ってもらうときにもテストを意識してもらえるようになる</li>
+<li>利用者に対して安心感を持ってもらえる</li>
+</ul>
+<p>といった効果がありそうです。</p>
+<h3 id="事前準備-1">事前準備</h3>
+<ul>
+<li>テストコードを書いておく</li>
+<li>Coverallsのアカウントを作っておく(GitHubのアカウントで）</li>
+</ul>
+<h3 id="coveralls上で該当のリポジトリをonにする">Coveralls上で該当のリポジトリをONにする</h3>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_on.png" alt="coveralls_on"></p>
+<p>やりかたもUIもTravis CI と同じです。CoverallsのADD REPOページに入って該当リポジトリを <code>ON</code> にするだけです。</p>
+<h3 id="gcovを吐き出す設定を加える">gcovを吐き出す設定を加える</h3>
+<p>Makefileにgcovを吐き出す用の設定を追加します。</p>
+<pre><code class="language-sh">test-with-coverage:
+	xcodebuild \
+		-project $(PROJECT) \
+		-target $(TEST_TARGET) \
+		-sdk iphonesimulator \
+		-configuration Debug \
+		TEST_AFTER_BUILD=YES \
+		TEST_HOST= \
+		GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES \
+		GCC_GENERATE_TEST_COVERAGE_FILES=YES
+</code></pre>
+<p>最後の２つ <code>GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES</code> と <code>GCC_GENERATE_TEST_COVERAGE_FILES=YES</code> がキーポイントです。</p>
+<h3 id="カバレッジをcoverallsに送る設定を加える">カバレッジをCoverallsに送る設定を加える</h3>
+<p>さらにMakefileにカバレッジをCoverallsに送信するための設定を追加します。<br>
+<code>coveralls</code> というコマンドが使われていますが、これについてはこの後説明します。</p>
+<pre><code class="language-sh">send-coverage:
+	coveralls \
+		-e BlockInjectionTest/Tests 
+</code></pre>
+<h3 id="travisyml-を更新">.travis.yml を更新</h3>
+<p>最後に、.travis.yml にCoveralls対応のための設定を追加します。</p>
+<pre><code class="language-sh">language: objective-c
+
+before_install:
+  - sudo easy_install cpp-coveralls
+script:
+  - make clean test-with-coverage
+after_success:
+  - make send-coverage
+</code></pre>
+<p>変更点は以下のとおりです。</p>
+<ul>
+<li><code>before_install</code> で Objective-C（正確にはC++）用の <code>coveralls</code> コマンドをインストール</li>
+<li><code>script</code> で <code>make test</code> でなくgcovを吐き出す <code>make test-with-coverage</code> を使うようにする</li>
+<li><code>after_success</code> で <code>make send-coverage</code> を呼び出し、Coverallsにカバレッジ情報を送るようにする</li>
+</ul>
+<h3 id="commit--push-1">commit &amp; push</h3>
+<p>すべての設定が終わったら、GitHubにpushすれば、GitHub -&gt; Travis CI -&gt; Coveralls と自動的に連携していきます。</p>
+<h3 id="確認-1">確認</h3>
+<p>うまく動いていれば、Coverallsで</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_list.png" alt="coveralls_list"></p>
+<p>こんなかんじでカバレッジの確認ができるはずです。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coveralls_source.png" alt="coveralls_source"></p>
+<p>また、こんなかんじでソースコードのどの行がカバーされていないかなども確認できます。</p>
+<p>なお、Coverallsも</p>
+<pre><code>https://coveralls.io/repos/[YOUR_ACCOUNT]/[YOUR_REPOSITORY]/badge.png
+</code></pre>
+<p>でバッヂの表示ができます。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/badge.png" alt="badge"></p>
+<h3 id="カバレッジ計測対象から除外する指定">カバレッジ計測対象から除外する指定</h3>
+<p>なお、coverallsをそのまま使うとテストコードもカバレッジの計測対象に含まれてしまいます。<br>
+そういった計測対象から除外したいファイルがある場合、<code>-e BlockInjectionTest/Tests</code> のように除外したいファイルのあるディレクトリを指定します。<br>
+この場合だと <code>-e BlockInjectionTest</code> とか <code>-e Tests</code> のようにディレクトリ構造の一部分だけ指定してもうまくいきません。</p>
+<h2 id="課題">課題</h2>
+<ul>
+<li><s><code>cpp-coveralls</code> で特定のクラスを除外するのがうまくいかない</s>
+<ul>
+<li><s>今は <code>make send-coverage</code> で <code>find ./ -name &quot;*Test.gcno&quot; | xargs rm</code> とかやって特定のgcovのファイルを直接消すという苦肉の策</s></li>
+</ul>
+</li>
+<li>カバレッジはCoverallsに送る前にも開発中にXcode上で簡単に確認できたら最高なんだが</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Octopressでソースコードの一部分だけを参照する | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
+1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
+例えば、ここに sample/test.rb というファイルを置いておく。
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
+じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
+ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
+この経緯については、 OctopressのPull request に記録がある。
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。
+include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Octopressでソースコードの一部分だけを参照する | TOKOROM BLOG" property="og:title"><meta content="おさらい：Octopressでソースコードを表示する まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。
+1. 指定のディレクトリにファイルを置く 置き場所は source/downloads/code 。
+例えば、ここに sample/test.rb というファイルを置いておく。
+$ mkdir -p source/downloads/code/sample $ cp test.rb source/downloads/code/sample/ 2. include_code でそのファイルを指定する {% include_code sample/test.rb %} これで↓のようにそのコードが表示できる。 {% include_code sample/test.rb %}
+コードの全てでなく、指定した箇所だけ表示したい それでは、この test.rb の中の to_fraction というコードだけを表示したい場合はどうしたら良いだろう？
+じつは現行のOctopressのデフォルトの状態ではそれができない(*1)。
+ただ、この機能は v2.1 では既に実装済みのようで、Octopressを master ではなく 2.1 ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。
+この経緯については、 OctopressのPull request に記録がある。
+2.1 ブランチをpullしてOctopressをアップデート $ git pull octopress 2.1 $ bundle install $ rake update_source $ rake update_style 以上で取り込み完了です。
+masterでなく 2.1 からpullしていることに注意が必要。
+include_code にstartとendを指定する あとは、↓のように include_code で start と end を指定するだけで、" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/octopress-part-of-codes/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/octopress-part-of-codes/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Octopressでソースコードの一部分だけを参照する</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年7月15日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/mac">
+              mac
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/octopress">
+              octopress
+          </a>
+          /</div><div class="content">
+      <h2 id="おさらいoctopressでソースコードを表示する">おさらい：Octopressでソースコードを表示する</h2>
+<p>まずはおさらいでOctopressでソースコードを表示する方法は以下のとおり。</p>
+<h3 id="1-指定のディレクトリにファイルを置く">1. 指定のディレクトリにファイルを置く</h3>
+<p>置き場所は <em>source/downloads/code</em> 。<br>
+例えば、ここに <em>sample/test.rb</em> というファイルを置いておく。</p>
+<pre><code>$ mkdir -p source/downloads/code/sample
+$ cp test.rb source/downloads/code/sample/
+</code></pre>
+<!-- more -->
+<h3 id="2-include_code-でそのファイルを指定する">2. include_code でそのファイルを指定する</h3>
+<pre><code>{% include_code sample/test.rb %}
+</code></pre>
+<p>これで↓のようにそのコードが表示できる。
+{% include_code sample/test.rb %}</p>
+<h2 id="コードの全てでなく指定した箇所だけ表示したい">コードの全てでなく、指定した箇所だけ表示したい</h2>
+<p>それでは、この <em>test.rb</em> の中の <em>to_fraction</em> というコードだけを表示したい場合はどうしたら良いだろう？<br>
+じつは現行のOctopressのデフォルトの状態ではそれができない(<strong>*1</strong>)。</p>
+<p>ただ、この機能は <strong>v2.1</strong> では既に実装済みのようで、Octopressを master ではなく <strong>2.1</strong> ブランチから取ってこればこのコードの一部分だけを表示する機能が使えるようになる。</p>
+<p>この経緯については、 <a href="https://github.com/imathis/octopress/pull/478">OctopressのPull request</a> に記録がある。</p>
+<h3 id="21-ブランチをpullしてoctopressをアップデート">2.1 ブランチをpullしてOctopressをアップデート</h3>
+<pre><code>$ git pull octopress 2.1
+$ bundle install
+$ rake update_source
+$ rake update_style
+</code></pre>
+<p>以上で取り込み完了です。<br>
+masterでなく <strong>2.1</strong> からpullしていることに注意が必要。</p>
+<h3 id="include_code-にstartとendを指定する">include_code にstartとendを指定する</h3>
+<p>あとは、↓のように <em>include_code</em> で <em>start</em> と <em>end</em> を指定するだけで、</p>
+<pre><code>{% include_code sample/test.rb start:5 end:11 %}
+</code></pre>
+<p>コードの一部分だけを表示することが可能になる。</p>
+<p>{% include_code sample/test.rb start:5 end:11 %}</p>
+<hr>
+<p><strong>*1</strong>: 2012/7/15現在の話。後述のとおり2.1では実装済みなのでじきに普通にできるようになるはず。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/install-pandoc/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

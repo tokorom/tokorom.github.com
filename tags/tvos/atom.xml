@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tvos on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/tvos/</link>
+    <description>Recent content in tvos on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Sun, 24 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/tvos/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>テレビのリモコンのことも忘れないで！</title>
+      <link>https://www.tokoro.me/posts/tvos_advent_calendar_2/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/tvos_advent_calendar_2/</guid>
+      <description>AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
+テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
+AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
+ゲームコントローラ/ゲームパッド Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。
+テレビのリモコンでどこまで操作できる？ Apple純正のアプリ 全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。
+サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
+自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
+テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
+REGZAのリモコン UIPressType 決定 .select 戻る .menu 再生 .playPause 停止 - 上 .upArrow 下 .downArrow 左 .leftArrow 右 .rightArrow UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+ただし条件があり、transitionStyleプロパティにUIPageViewControllerTransitionStyle.scrollを設定している場合のみ操作可能です。.pageCurlだと（デフォルトでは）操作不能でした。
+.scrollの場合には、navigationOrientationプロパティが.horizontalなら左右ボタンで、.verticalなら上下ボタンでそれぞれページ移動が可能です。
+UIScrollView UIScrollViewも特に意識しないでも操作可能になっています。
+上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。
+UITextView UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。
+テレビのリモコンで操作できない画面をなんとかする 一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、UITapGestureRecognizerを使って対処するのが簡単そうです。
+let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:))) leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)] view.addGestureRecognizer(leftTap) let rightTap = UITapGestureRecognizer(target: self, action: #selector(self.</description>
+    </item>
+    
+    <item>
+      <title>tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</title>
+      <link>https://www.tokoro.me/posts/tvos_advent_calendar_1/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/tvos_advent_calendar_1/</guid>
+      <description>[問題]コンテンツのスワイプ まずは、tvOSの特定の画面にて「右スワイプ」をした時に、コンテンツが左右どちらに動くでしょう？というクイズを３つ出させていただきます。 クイズの問題を３つ出した後に、それらの答えを実際の動きを撮影したGIFアニメとともに並べてありますので、答えのGIFアニメをできるだけ見ないように考えてみてください！
+いずれもApple純正アプリ（ホーム画面含む）からの問題です。
+Q1. ホーム画面のTop Shelfでの左右スワイプ 最初の問題はホーム画面からです。 このtvOSのホーム画面のTop Shelfで「右スワイプ」をした場合、Top Shelfは左に動いて右隣のコンテンツが表示されるでしょうか？それとも右に動いて左隣のコンテンツが表示されるでしょうか？
+Q2. 写真アプリのフルスクリーン画面での左右スワイプ 次の問題は写真アプリの写真をフルスクリーン表示した画面からです。 この 2 という画像が表示されている画面で「右スワイプ」した場合、画像が左に動いて右隣の 3 が表示されるでしょうか？それとも画像が右に動いて左隣の 1 が表示されるでしょうか？
+Q3. Appスイッチャーでの左右スワイプ 次の問題はホーム画面のAppスイッチャー（TV/ホームボタンの2度押しで表示される画面）です。 この ミュージック がセンターに表示されているAppスイッチャーで「右スワイプ」した場合、 ミュージック は左に動くでしょうか？それとも右に動くでしょうか？
+[答え]コンテンツのスワイプ A1. ホーム画面のTop Shelfでの左右スワイプ まず、Top Shelfで「右スワイプ」した時の挙動ですが、
+Top Shelfが左に動き 右隣のコンテンツが表示される というのが答えです。
+tvOSには「フォーカス」の存在があり、「フォーカスが右スワイプにより右に移動する」わけなので右隣のものが表示されて当然ですよね。 そして右隣のコンテンツがセンターに表示されるようTop Shelfは左にスクロールします。
+A2. 写真アプリのフルスクリーン画面での左右スワイプ さて、Q1の答えは「左に動いて右隣のものが表示される」という挙動でしたが、次の写真アプリの挙動はどうでしょう？
+実際にこの写真アプリのフルスクリーン画面で「右スワイプ」を試した結果の挙動は、
+表示されていた 2 が右に動き 左隣の 1 が表示される でした！
+あれ？Q1の答えと逆の動きだ&amp;hellip;
+A3. Appスイッチャーでの左右スワイプ 続いてQ3のAppスイッチャーでの挙動はどうでしょう？
+Appスイッチャーで「右スワイプ」したときの挙動は、
+表示されていた ミュージック が右に動き 左隣のアプリが表示される こちらもQ1の答えの「フォーカスが右スワイプにより右に移動する」という挙動とは逆ですね。
+フォーカスどこいった！？
+[問題]トップバーの表示 ここまでの３問の答えに「いや当然だろ」と思ったかたも、「あれ？」と思ったかたもいらっしゃるかと思います。 いったん細かいことを気にせずに、次の「トップバーを表示する方法」のクイズにいかせていただきます。
+※基本的にはタブバーと思いますが、今回のサンプルの全てがタブばーかどうかの確証がなかったため、画面トップに表示されるトップバーという表現をさせていただきます
+Q4. 写真アプリの写真一覧画面でのトップバー表示 まずは写真アプリからの問題です。 写真アプリの写真一覧画面で、画面上部の１つの写真にフォーカスが当たっている状態とします。</description>
+    </item>
+    
+  </channel>
+</rss>

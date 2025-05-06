@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Macの初期設定のたびに混乱してるので再整理しておきます。
+Mac Terminal tmux vim で開発をする人向けです。
+まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
+日本語を扱う上で便利な設定がデフォルトで入ってます。
+当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+こせきの技術日記 に従って対処しておきます。
+この中の、
+date | pbcopy までが成功すればOKです。
+.vimrc にクリップボード利用の設定追加 .vimrc に
+set clipboard=unnamed を追加しておきます。
+fakeclip の導入 fakeclip をVimに追加することで、 tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う | TOKOROM BLOG" property="og:title"><meta content="Macの初期設定のたびに混乱してるので再整理しておきます。
+Mac Terminal tmux vim で開発をする人向けです。
+まずはMacVim KaoriYa MacでVimを使うならひとまず MacVim KaoriYa は外せません。
+日本語を扱う上で便利な設定がデフォルトで入ってます。
+当然、Terminalでも Macvim KaoriYa を使いたいので、 .zshenv などに以下のaliasを設定してCUIで vi や vim を叩いたときにも MacVim KaoriYa が使われるようにします。
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then alias vi=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39; alias vim=&#39;env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;&#39; fi tmux でも pbcopy/pbpaste が使えるようにする Macの tmux では pbcopy/pbpaste コマンドが正常に動作しないということなので、
+こせきの技術日記 に従って対処しておきます。
+この中の、
+date | pbcopy までが成功すればOKです。
+.vimrc にクリップボード利用の設定追加 .vimrc に
+set clipboard=unnamed を追加しておきます。
+fakeclip の導入 fakeclip をVimに追加することで、 tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/mac-terminal-japanese/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/mac-terminal-japanese/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年12月31日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/mac">
+              mac
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/vim">
+              vim
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/cui">
+              cui
+          </a>
+          /</div><div class="content">
+      <p>Macの初期設定のたびに混乱してるので再整理しておきます。</p>
+<ul>
+<li>Mac</li>
+<li>Terminal</li>
+<li>tmux</li>
+<li>vim</li>
+</ul>
+<p>で開発をする人向けです。</p>
+<h2 id="まずはmacvim-kaoriya">まずはMacVim KaoriYa</h2>
+<p>MacでVimを使うならひとまず <a href="http://code.google.com/p/macvim-kaoriya/">MacVim KaoriYa</a> は外せません。<br>
+日本語を扱う上で便利な設定がデフォルトで入ってます。</p>
+<p>当然、Terminalでも <strong>Macvim KaoriYa</strong> を使いたいので、 <strong>.zshenv</strong> などに以下のaliasを設定してCUIで <strong>vi</strong> や <strong>vim</strong> を叩いたときにも <strong>MacVim KaoriYa</strong> が使われるようにします。</p>
+<pre><code class="language-sh">if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
+  alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;'
+  alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim &quot;$@&quot;'
+fi
+</code></pre>
+<h2 id="tmux-でも-pbcopypbpaste-が使えるようにする">tmux でも pbcopy/pbpaste が使えるようにする</h2>
+<!-- more -->
+<p>Macの <strong>tmux</strong> では <strong>pbcopy/pbpaste</strong> コマンドが正常に動作しないということなので、</p>
+<ul>
+<li><a href="http://d.hatena.ne.jp/koseki2/20110816/TmuxCopy">こせきの技術日記</a></li>
+</ul>
+<p>に従って対処しておきます。</p>
+<p>この中の、</p>
+<pre><code class="language-sh">date | pbcopy
+</code></pre>
+<p>までが成功すればOKです。</p>
+<h2 id="vimrc-にクリップボード利用の設定追加">.vimrc にクリップボード利用の設定追加</h2>
+<p><strong>.vimrc</strong> に</p>
+<pre><code class="language-sh">set clipboard=unnamed
+</code></pre>
+<p>を追加しておきます。</p>
+<h2 id="fakeclip-の導入">fakeclip の導入</h2>
+<ul>
+<li><a href="https://github.com/kana/vim-fakeclip">fakeclip</a></li>
+</ul>
+<p>をVimに追加することで、 <strong>tmux</strong> や <strong>screen</strong> を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には <strong>pbcopy/pbpaste</strong> )が使われるようになります。</p>
+<p>Vundlerを使っているなら .vimrc に</p>
+<pre><code class="language-sh">Bundle 'git://github.com/kana/vim-fakeclip.git'
+</code></pre>
+<p>を追加するだけです。</p>
+<h2 id="完了">完了!</h2>
+<p>これで晴れて、</p>
+<ul>
+<li>ブラウザからコピーしてきた文章をVimに <strong>p</strong> でペースト!</li>
+<li>Vimで <strong>yy</strong> でコピーした行をメールにペースト!</li>
+</ul>
+<p>などが気軽にできるようになります。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/install-pandoc/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/octopress-part-of-codes/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Octopressでソースコードの一部分だけを参照する</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

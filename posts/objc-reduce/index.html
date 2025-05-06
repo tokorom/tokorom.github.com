@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Objective-Cのコードを削れるだけ削る7のTips | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Objective-Cのコードを削れるだけ削る7のTips | TOKOROM BLOG" property="og:title"><meta content="既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-reduce/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/objc-reduce/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Objective-Cのコードを削れるだけ削る7のTips</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年6月15日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /</div><div class="content">
+      <p>既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。</p>
+<h2 id="tipsを適用する前のコード">Tipsを適用する前のコード</h2>
+<pre><code class="language-objc">#pragma mark - Private Category
+
+@interface Sample ()
+
+@property (strong) NSNumber* i;
+@property (strong) NSNumber* c;
+@property (strong) NSNumber* f;
+@property (strong) NSArray* array;
+@property (strong) NSDictionary* dictionary;
+@property (strong) Sample* child;
+@property (strong) UIColor* color;
+@property (assign) NSUInteger index;
+@property (assign) CGRect rect;
+
+- (void)privateMethod1;
+- (void)privateMethod2;
+- (void)privateMethod3;
+
+@end 
+
+#pragma mark - Main Implementation
+
+@implementation Sample
+
+@synthesize i = i_;
+@synthesize c = c_;
+@synthesize f = f_;
+@synthesize array = array_;
+@synthesize dictionary = dictionary_;
+@synthesize child = child_;
+@synthesize color = color_;
+@synthesize index = index_;
+@synthesize rect = rect_;
+
+- (void)privateMethod1
+{
+  [self privateMethod2];
+  [self privateMethod3];
+}
+
+- (void)privateMethod2
+{
+  self.i = [NSNumber numberWithInt:100];
+  self.c = [NSNumber numberWithChar:'a'];
+  self.f = [NSNumber numberWithFloat:3.14f];
+}
+
+- (void)privateMethod3
+{
+  self.array = [NSArray arrayWithObjects:@&quot;1&quot;, [NSNumber numberWithInt:1 + 2], [NSNumber numberWithBool:YES], nil];
+  self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;val1&quot;, @&quot;key1&quot;, @&quot;val2&quot;, @&quot;key2&quot;, nil];
+
+  self.child = [[Sample alloc] init];
+  self.color = [UIColor redColor];
+  self.index = 7;
+
+  self.rect = CGRectMake(0.0, 10.0, self.bounds.size.width, self.bounds.size.height);
+}
+
+@end
+</code></pre>
+<p>これを以下の7のTipsで削れるだけ削っていきます。</p>
+<!-- more -->
+<h2 id="tip-1-プライベートメソッドの宣言を削る">Tip 1: プライベートメソッドの宣言を削る</h2>
+<p>Xcode 4.4 以降ではプライベートメソッドの宣言を削ることができます。<br>
+そのため、上記の</p>
+<pre><code class="language-diff">@interface Sample ()
+
+@property (strong) NSNumber* i;
+@property (strong) NSNumber* c;
+@property (strong) NSNumber* f;
+@property (strong) NSArray* array;
+@property (strong) NSDictionary* dictionary;
+@property (strong) Sample* child;
+@property (strong) UIColor* color;
+@property (assign) NSUInteger index;
+@property (assign) CGRect rect;
+
+-- (void)privateMethod1;
+-- (void)privateMethod2;
+-- (void)privateMethod3;
+
+@end 
+</code></pre>
+<p>の部分はごっそり削ることができます。</p>
+<h2 id="tip-2-synthesizeを削る">Tip 2: @synthesizeを削る</h2>
+<p>Xcode 4.4 以降では <code>@synthesize</code> を書かなくてもコンパイラが自動的にこれを補完してくれます。
+そのため、上記の</p>
+<pre><code class="language-diff">-@synthesize i = i_;
+-@synthesize c = c_;
+-@synthesize f = f_;
+-@synthesize array = array_;
+-@synthesize dictionary = dictionary_;
+-@synthesize child = child_;
+-@synthesize color = color_;
+-@synthesize index = index_;
+-@synthesize rect = rect_;
+</code></pre>
+<p>の部分もごっそり削ることができます。</p>
+<h2 id="tip-3-strong--assign-は省略できる">Tip 3: strong / assign は省略できる</h2>
+<p>propetyはオブジェクト型の場合は <code>strong</code> 、それ以外の場合は <code>assign</code> がデフォルトになっています。<br>
+そのため、<code>strong</code> と <code>assign</code> については省略が可能です。</p>
+<pre><code class="language-diff">@interface Sample ()
+
+- @property (strong) NSNumber* i;
+- @property (strong) NSNumber* c;
+- @property (strong) NSNumber* f;
+- @property (strong) NSArray* array;
+- @property (strong) NSDictionary* dictionary;
+- @property (strong) Sample* child;
+- @property (strong) UIColor* color;
+- @property (assign) NSUInteger index;
+- @property (assign) CGRect rect;
++ @property NSNumber* i;
++ @property NSNumber* c;
++ @property NSNumber* f;
++ @property NSArray* array;
++ @property NSDictionary* dictionary;
++ @property Sample* child;
++ @property UIColor* color;
++ @property NSUInteger index;
++ @property CGRect rect;
+
+@end 
+</code></pre>
+<p>※<code>nonatomic</code> にしたい場合は明示的に付加してください</p>
+<h2 id="tip-4-nsnumber-nsarray-nsdictionary-を新しい書き方に変える">Tip 4: NSNumber, NSArray, NSDictionary を新しい書き方に変える</h2>
+<p>NSStringを <code>@&quot;hoge&quot;</code> で作れるように、Xcode 4.4からはNSNumber, NSArray, NSDictionaryについても@からはじまる短い書き方ができるようになりました。</p>
+<pre><code class="language-diff">- (void)privateMethod2
+{
+- self.i = [NSNumber numberWithInt:100];
+- self.c = [NSNumber numberWithChar:'a'];
+- self.f = [NSNumber numberWithFloat:3.14f];
++ self.i = @100;
++ self.c = @'a';
++ self.f = @3.14f;
+}
+
+- (void)privateMethod3
+{
+- self.array = [NSArray arrayWithObjects:@&quot;1&quot;, [NSNumber numberWithInt:1 + 2], [NSNumber numberWithBool:YES], nil];
+- self.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;val1&quot;, @&quot;key1&quot;, @&quot;val2&quot;, @&quot;key2&quot;, nil];
++ self.array = @[@&quot;1&quot;, @(1 + 2), @YES];
++ self.dictionary = @{@&quot;key1&quot;: @&quot;val1&quot;, @&quot;key2&quot;: @&quot;val2&quot;};
+</code></pre>
+<h2 id="tip-5-allocinit-は-new-に置き換える">Tip 5: alloc/init は new に置き換える</h2>
+<p><code>alloc</code> / <code>init</code> の組み合わせは <code>new</code> に置き換えることが可能です。</p>
+<pre><code class="language-diff">- self.child = [[Sample alloc] init];
++ self.child = [Sample new];
+</code></pre>
+<h2 id="tip-6-一部のメソッドの呼び出しを-ドットアクセスで行う">Tip 6: 一部のメソッドの呼び出しを .（ドット）アクセスで行う</h2>
+<p>引数のないメソッドは <code>.</code> （ドット）によるアクセスに置き換えることが可能です。</p>
+<pre><code class="language-diff">- self.child = [Sample new];
+- self.color = [UIColor redColor];
++ self.child = Sample.new;
++ self.color = UIColor.redColor;
+</code></pre>
+<h2 id="tip-7-cgrectはc言語の構造体として作成することができる">Tip 7: CGRectはC言語の構造体として作成することができる</h2>
+<p>CGRectは <code>CGRectMake</code> で作成するのが一般的ですが、CGRectの実態はC言語の構造体のため、構造体を作る書き方で代替することもできます。</p>
+<pre><code class="language-diff">- self.rect = CGRectMake(0.0, 10.0, self.bounds.size.width, self.bounds.size.height);
++ self.rect = (CGRect){.origin.y = 10.0, .size = self.bounds.size};
+</code></pre>
+<h2 id="tips適用後のコード">Tips適用後のコード</h2>
+<p>これらのTipsを適用することで、</p>
+<ul>
+<li>コード行数が <strong>62行</strong> -&gt; <strong>49行</strong></li>
+<li>バイト数が <strong>1,434 bytes</strong> -&gt; <strong>816 bytes</strong></li>
+</ul>
+<p>となりました。タイプ数も57%以下に削減されています。</p>
+<p>見た目もすっきりです。</p>
+<pre><code class="language-objc">#import &quot;Sample.h&quot;
+
+#pragma mark - Private Category
+
+@interface Sample ()
+
+@property NSNumber* i;
+@property NSNumber* c;
+@property NSNumber* f;
+@property NSArray* array;
+@property NSDictionary* dictionary;
+@property Sample* child;
+@property UIColor* color;
+@property NSUInteger index;
+@property CGRect rect;
+
+@end 
+
+#pragma mark - Main Implementation
+
+@implementation Sample
+
+- (void)privateMethod1
+{
+  [self privateMethod2];
+  [self privateMethod3];
+}
+
+- (void)privateMethod2
+{
+  self.i = @100;
+  self.c = @'a';
+  self.f = @3.14f;
+}
+
+- (void)privateMethod3
+{
+  self.array = @[@&quot;1&quot;, @(1 + 2), @YES];
+  self.dictionary = @{@&quot;key1&quot;: @&quot;val1&quot;, @&quot;key2&quot;: @&quot;val2&quot;};
+
+
+  self.child = Sample.new;
+  self.color = UIColor.redColor;
+  self.index = 7;
+
+  self.rect = (CGRect){.origin.y = 10.0, .size = self.bounds.size};
+}
+
+@end
+</code></pre>
+<h2 id="まとめ">まとめ</h2>
+<p>もちろん、これら全てを適用するのが正しいというわけではありませんので、チームや個人でお好みのものを利用するのが良いのではと思います。</p>
+<h2 id="参照">参照</h2>
+<ul>
+<li><a href="http://www.tokoro.me/2012/08/12/objc-new-statements/">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</a></li>
+<li><a href="http://cocoadays.blogspot.com/2013/04/objctips.html">ObjCがサクっと書けるコーディングTips</a></li>
+<li><a href="http://www.jacopretorius.net/2013/05/c99-initializer-syntax-in-objective-c.html">C99 Initializer Syntax in Objective C</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

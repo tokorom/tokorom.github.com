@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by JJ Ying on Unsplash
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+プロモーションコードの用途 公式な用途 プロモーションコードの用途ですがAppleのドキュメントでは、
+報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため
+とプロモーション用であることが説明されています。
+リリース前のテスト用途 この他、アプリ開発者の間では、リリース前に
+App Storeに公開されるアプリと全く同じものをテスト するためにも使われています。
+プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
+Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
+プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
+そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
+アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する という手順を踏む必要があります。
+プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません
+A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
+ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
+プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
+このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
+プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
+ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル | TOKOROM BLOG" property="og:title"><meta content="Photo by JJ Ying on Unsplash
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+プロモーションコードの用途 公式な用途 プロモーションコードの用途ですがAppleのドキュメントでは、
+報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため
+とプロモーション用であることが説明されています。
+リリース前のテスト用途 この他、アプリ開発者の間では、リリース前に
+App Storeに公開されるアプリと全く同じものをテスト するためにも使われています。
+プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
+Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
+プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
+そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
+アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する という手順を踏む必要があります。
+プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません
+A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
+ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
+プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
+このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
+プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
+ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。" property="og:description"><meta content="https://www.tokoro.me/images/ios-promocode/top.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/ios-promocode/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/ios-promocode/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年7月21日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/test">
+              Test
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/appstore">
+              AppStore
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/ios-promocode/top.jpg" alt="image"></p>
+<p><small>Photo by <a href="https://unsplash.com/@jjying?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">JJ Ying</a> on <a href="https://unsplash.com/s/photos/promotion?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></small></p>
+<hr>
+<p>これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。</p>
+<p>2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。</p>
+<h2 id="プロモーションコードの用途">プロモーションコードの用途</h2>
+<h3 id="公式な用途">公式な用途</h3>
+<p>プロモーションコードの用途ですがAppleのドキュメントでは、</p>
+<blockquote>
+<p>報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため</p>
+</blockquote>
+<p>とプロモーション用であることが説明されています。</p>
+<h3 id="リリース前のテスト用途">リリース前のテスト用途</h3>
+<p>この他、アプリ開発者の間では、リリース前に</p>
+<ul>
+<li>App Storeに公開されるアプリと全く同じものをテスト</li>
+</ul>
+<p>するためにも使われています。</p>
+<p>プロモーションコードを使わなくても<a href="https://developer.apple.com/jp/testflight/">Testflight</a>によりほとんどのテストは可能ですが、場合によっては、</p>
+<ul>
+<li>Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している</li>
+<li>Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい</li>
+</ul>
+<p>などの理由により <strong>アプリをApp Storeで公開する前の最終テスト</strong> として利用できます。</p>
+<h2 id="プロモーションコードを発行できる条件">プロモーションコードを発行できる条件</h2>
+<p>プロモーションコードは <strong>審査が通って公開が可能な状態</strong> のアプリに対してのみ発行できます。</p>
+<p>そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、</p>
+<ul>
+<li>アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく</li>
+<li>審査に通ったらプロモーションコードを発行してテストする</li>
+<li>テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する</li>
+</ul>
+<p>という手順を踏む必要があります。</p>
+<h2 id="プロモーションコードの発行手順">プロモーションコードの発行手順</h2>
+<h3 id="app-store-connectにログインする">App Store Connectにログインする</h3>
+<p><a href="https://appstoreconnect.apple.com/">https://appstoreconnect.apple.com/</a> にログインします。</p>
+<div class='box box-info'>
+<p><b>Q.</b> アカウントがないのでログインできません</p>
+<p><b>A.</b> 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください</p>
+</div>
+<p>ログインしたら <strong>マイApp</strong> をクリックして <strong>プロモーションコードを発行する対象のアプリ</strong> を開きます。</p>
+<h3 id="プロモーションコードのページを開く">プロモーションコードのページを開く</h3>
+<p><img src="/images/ios-promocode/step1.png" alt="image"></p>
+<p>アプリのページを開いたら画面上側の <strong>機能</strong> を選択し、画面左側の <strong>プロモーションコード</strong> を選択してプロモーションコードのページを開きます。</p>
+<p>このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。</p>
+<h3 id="プロモーションコードを発行する">プロモーションコードを発行する</h3>
+<p><img src="/images/ios-promocode/step2.png" alt="image"></p>
+<p>プロモーションコードのページの <strong>Appプロモーションコード</strong> セクションがアプリのプロモーションコードを発行するためのセクションです。</p>
+<p>ここの一番右の数量のフィールドに <code>1</code> を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。</p>
+<p>数量を入力したら右上の <strong>コードを生成</strong> ボタンを押します。</p>
+<p><img src="/images/ios-promocode/step3.png" alt="image"></p>
+<p>確認ダイアログが表示されたら <strong>上記のルールを読み、理解しました。</strong> にチェックをつけ、 <strong>コードを生成</strong> ボタンを押します。</p>
+<p><img src="/images/ios-promocode/step4.png" alt="image"></p>
+<p>これでプロモーションコードの発行を完了です。</p>
+<h3 id="プロモーションコードを確認してテスターに連絡する">プロモーションコードを確認してテスターに連絡する</h3>
+<p><img src="/images/ios-promocode/step5.png" alt="image"></p>
+<p>プロモーションコードの <strong>履歴</strong> タブから発行済みのプロモーションコードが確認できます。</p>
+<p>確認したいコードを探して <strong>コードを表示</strong> を押してください。</p>
+<p><img src="/images/ios-promocode/step6.png" alt="image"></p>
+<p>すると画面にプロモーションコード（ランダムな文字列）が表示されるのでこれをコピーするなどしてテスターさんにプロモーションコードを連絡します。</p>
+<h2 id="プロモーションコードによるアプリのインストール">プロモーションコードによるアプリのインストール</h2>
+<h3 id="app-storeアプリを開く">App Storeアプリを開く</h3>
+<p><img src="/images/ios-promocode/appstore.png" alt="image"></p>
+<p>アプリのインストールに使うのは <strong>App Storeアプリ</strong> です。</p>
+<p><img src="/images/ios-promocode/account.png" alt="image"></p>
+<p>App Storeアプリを開いたら右上の <strong>アカウントアイコンをタップ</strong> します。</p>
+<h3 id="プロモーションコードを入力する">プロモーションコードを入力する</h3>
+<p><img src="/images/ios-promocode/usecode.png" alt="image"></p>
+<p>アカウント画面の中の <strong>ギフトカードまたはコードを使う</strong> をタップします。</p>
+<p><img src="/images/ios-promocode/input.png" alt="image"></p>
+<p><strong>コードはキーボードでも入力できます。</strong> の部分をタップし、発行されたプロモーションコードを入力します。</p>
+<p>入力が終わったら右上の <strong>コードを使う</strong> ボタンをタップします。</p>
+<p><img src="/images/ios-promocode/success.png" alt="image"></p>
+<p>コードが正しければ <strong>コードが適用されました。</strong> とダイアログが表示され、ホーム画面に対象のアプリがインストールされます。</p>
+<hr>
+<p>マニュアルは以上で終わりです。</p>
+<p>その他わからない部分が出てきましたら開発担当者にお問い合わせください。</p>
+<h2 id="その他のマニュアル">その他のマニュアル</h2>
+<ul>
+<li><a href="/posts/ios-sandbox/">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/firebsae-app-distribution/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/firebase-app-distribution/3-create-app.png" class="feed-item-image" alt="５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）" width="300"></div>
+
+    <span class="feed-item-title">５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</span>
+    <span class="feed-item-date">2020年2月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

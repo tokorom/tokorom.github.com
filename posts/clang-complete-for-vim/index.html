@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>VimでObjective-Cのコード補完を実行する with clang | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
+そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
+具体的には、
+clangコマンドでのコード補完を試してみる その結果をもってVimの clang_complete プラグインを導入する という手順で実施しました。
+結果として満足いく補完環境が整いましたので紹介させていただきます。
+clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
+じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
+具体的には、
+// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
+例えば、
+Classes/Controllers/MainViewController.m #import &quot;MainViewController.h&quot; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
+すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
+-w
+=&gt; 全ての警告を無視する（コード補完では警告はいらない） -fblocks"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="VimでObjective-Cのコード補完を実行する with clang | TOKOROM BLOG" property="og:title"><meta content="概要 VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。
+そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。
+具体的には、
+clangコマンドでのコード補完を試してみる その結果をもってVimの clang_complete プラグインを導入する という手順で実施しました。
+結果として満足いく補完環境が整いましたので紹介させていただきます。
+clangコマンドでのコード補完を試してみる clangコマンドはXcodeを使っていればはじめっから入っているコマンドです。
+じつはこのclangコマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。
+具体的には、
+// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m というコマンドになります。
+例えば、
+Classes/Controllers/MainViewController.m #import &quot;MainViewController.h&quot; @implementation MainViewController - (void)viewDidLoad { [super viewDidLoad]; NSArray* numbers = @[@1, @2, @3]; [numbers o } @end の [numbers o のところで補完をしたいとして、
+clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m というコマンドを実行してみます。
+すると COMPLETION: ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。
+同時に、xxx warnings and xxx errors generated. とエラーが発生しているのも確認できるかと思います。
+clangによる補完時のオプション このエラーは、clangに対するオプションの不足によるものです。 そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）
+-w
+=&gt; 全ての警告を無視する（コード補完では警告はいらない） -fblocks" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/clang-complete-for-vim/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/clang-complete-for-vim/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">VimでObjective-Cのコード補完を実行する with clang</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年1月2日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/vim">
+              vim
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /</div><div class="content">
+      <h2 id="概要">概要</h2>
+<p>VimやEmacsでiOSアプリ開発をするときに「Snippetとかちゃんと設定してればXcodeほどのコード補完は必要ない」と強がりを言ってはみるものの「本当はちょっとコード補完使いたいときあるんだよね」と思ってました。</p>
+<p>そこで、重い腰をあげてVimでもObjective-Cのコード補完ができるよう設定してみました。</p>
+<p>具体的には、</p>
+<ol>
+<li><strong>clangコマンドでのコード補完を試してみる</strong></li>
+<li><strong>その結果をもってVimの <code>clang_complete</code> プラグインを導入する</strong></li>
+</ol>
+<p>という手順で実施しました。</p>
+<p>結果として満足いく補完環境が整いましたので紹介させていただきます。</p>
+<!-- more -->
+<h2 id="clangコマンドでのコード補完を試してみる">clangコマンドでのコード補完を試してみる</h2>
+<p><code>clang</code>コマンドはXcodeを使っていればはじめっから入っているコマンドです。<br>
+じつはこの<code>clang</code>コマンドを使うことでObjective-Cのコード補完が普通にできるとのこと。</p>
+<p>具体的には、</p>
+<pre><code class="language-sh">// clang -cc1 -code-completion-at=ソースコード.m:行数:列数 ソースコード.m
+clang -cc1 -code-completion-at=Sample.m:20:5 Sample.m
+</code></pre>
+<p>というコマンドになります。<br>
+例えば、</p>
+<ul>
+<li>Classes/Controllers/MainViewController.m</li>
+</ul>
+<pre><code class="language-objc">#import &quot;MainViewController.h&quot;
+
+@implementation MainViewController
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+
+  NSArray* numbers = @[@1, @2, @3];
+  [numbers o
+}
+
+@end
+</code></pre>
+<p>の <code>[numbers o</code> のところで補完をしたいとして、</p>
+<pre><code class="language-sh">clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m 
+</code></pre>
+<p>というコマンドを実行してみます。<br>
+すると <code>COMPLETION:</code> ではじまる行が幾つか表示され、なんらか補完結果が出ているのが分かります。</p>
+<p>同時に、<code>xxx warnings and xxx errors generated.</code> とエラーが発生しているのも確認できるかと思います。</p>
+<h2 id="clangによる補完時のオプション">clangによる補完時のオプション</h2>
+<p>このエラーは、clangに対するオプションの不足によるものです。
+そこでclangに対して以下のオプションを設定してあげます（※環境依存なので適宜読み替えてください）</p>
+<ul>
+<li><strong>-w</strong><br>
+=&gt; 全ての警告を無視する（コード補完では警告はいらない）</li>
+<li><strong>-fblocks</strong><br>
+=&gt; ブロック構文を利用している場合に指定するオプション</li>
+<li><strong>-fobjc-arc</strong><br>
+=&gt; ARCを使用している場合に指定するオプション</li>
+<li><strong>-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300</strong><br>
+=&gt; ターゲットがiOS 4.3 以上であることを示す</li>
+<li><strong>-include ./**/*-Prefix.pch</strong><br>
+=&gt; プロジェクト内のpch（プリコンパイルヘッダ）のinclude</li>
+<li><strong>-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks</strong><br>
+=&gt; iOS標準のフレームワークがあるディレクトリ指定</li>
+<li><strong>-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include</strong><br>
+=&gt; iOS標準クラスのヘッダーがあるディレクトリ指定</li>
+</ul>
+<p>この他、独自のヘッダーファイルがある場合は <code>-I</code> の設定を加える必要があります。</p>
+<p>これらのオプションを指定してclangを実行してみると、</p>
+<pre><code class="language-sh">clang -cc1 -code-completion-at=Classes/Controllers/MainViewController.m:16:12 Classes/Controllers/MainViewController.m -w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300 -include ./**/*-Prefix.pch -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include 
+</code></pre>
+<p>無事にerrorなしで補完候補を引き出すことが出来ました。</p>
+<h2 id="clang_completeプラグインの導入">clang_completeプラグインの導入</h2>
+<p>あとは <code>clang_complete</code>プラグイン を導入して、上記で試したオプションを設定してあげれば、無事にVim上でObjective-Cのコード補完が出来るようになります。</p>
+<p>なお、自分の場合は <code>neocomplcache</code> と共用する設定をしています。</p>
+<ul>
+<li>.vimrc (Vundleによるプラグインの設定)</li>
+</ul>
+<pre><code class="language-vim">Bundle 'git://github.com/Shougo/neocomplcache.git'
+Bundle 'git://github.com/Rip-Rip/clang_complete.git'
+</code></pre>
+<ul>
+<li>.vimrc (neocomplcacheのドキュメントからコピペしたneocomplcacheとclang_completeを共用するための設定)</li>
+</ul>
+<pre><code class="language-vim">if !exists('g:neocomplcache_force_omni_patterns')
+  let g:neocomplcache_force_omni_patterns = {}
+endif
+let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplcache_force_omni_patterns.c =
+  \ '[^.[:digit:] *\t]\%(\.\|-&gt;\)'
+let g:neocomplcache_force_omni_patterns.cpp =
+  \ '[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.objc =
+  \ '[^.[:digit:] *\t]\%(\.\|-&gt;\)'
+let g:neocomplcache_force_omni_patterns.objcpp =
+  \ '[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+</code></pre>
+<p><strong>※2013/1/14 追記</strong><br>
+**ここから先の話は、 <a href="/2013/01/14/easy-objc-complement/">次の記事</a> でもっと簡単な方法も紹介しています</p>
+<ul>
+<li>.clang_complete (実行するディレクトリに配置するclang実行時の追加オプション指定用ファイル)</li>
+</ul>
+<pre><code>-w
+-fblocks
+-fobjc-arc
+-D __IPHONE_OS_VERSION_MIN_REQUIRED=40300
+-include ./**/*-Prefix.pch
+-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks
+-I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include
+</code></pre>
+<p>特に最後の <code>.clang_complete</code> ファイルが重要です。<br>
+clangのオプションは <code>.vimrc</code> でも指定できるのですが、こいつを利用することでプロジェクトごとに違うオプションを設定できるようになります（実用時にかなり有用）。</p>
+<h2 id="実際にコード補完の実行">実際にコード補完の実行</h2>
+<p>すべての設定が完了したら、実際に先ほどの</p>
+<pre><code class="language-objc">#import &quot;MainViewController.h&quot;
+
+@implementation MainViewController
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+
+  NSArray* numbers = @[@1, @2, @3];
+  [numbers o
+}
+
+@end
+</code></pre>
+<p>の <code>[numbers o</code> の直後で補完を実行してみます。<br>
+上記と全く同じ設定をしているならInsertモード時に <code>Ctrl+x Ctrl+o</code> or <code>Ctrl+x Ctrl+u</code> で実行できるはずです。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/clang_completion.png" alt="clang_completion"></p>
+<p>ぼくの手元では、きっちり「oからはじまるNSArrayのインスタンスメソッドが一覧表示」されました！</p>
+<h2 id="より便利に使うためのオプションを追加">より便利に使うためのオプションを追加</h2>
+<p>なお、実際に使ってみると<code>.clang_complete</code>に全てのディレクトリを追加するのが面倒臭くなってきます。<br>
+例えば、<code>Classes/XXX/XXX/Views/</code>というディレクトリにあるヘッダーファイルを使っている場合、</p>
+<pre><code>-I Classes/XXX/XXX/Views
+</code></pre>
+<p>をわざわざ<code>.clang_complete</code>に加えなければいけません。<br>
+１つなら良いのですがこれがどんどん増えていくようなら<code>.clang_complete</code>のメンテナンスのせいでコーディングリズムが崩れることになりかねません。</p>
+<p>例えば、 <strong>カレントディレクトリ以下を再帰的に全て -I に追加してくれるオプション</strong> があればいいのに！<br>
+と思ったのですが少なくとも自分が調べて限りでは見つかりませんでした。</p>
+<p>ということで<code>clang_complete</code>をForkして自分で作りました。<br>
+ひとまず今は、 <a href="https://github.com/tokorom/clang_complete">tokorom/clang_complete</a> を使っていただければこのオプションが使えます。</p>
+<p>以下、具体的な設定値です。</p>
+<ul>
+<li>.vimrc (Vundleによるプラグインの設定)</li>
+</ul>
+<pre><code class="language-vim">#Bundle 'git://github.com/Rip-Rip/clang_complete.git'
+Bundle 'git://github.com/tokorom/clang_complete.git'
+</code></pre>
+<ul>
+<li>.vimrc (カレントディレクトリ以下を再帰的に -I で加える)</li>
+</ul>
+<pre><code class="language-vim">let g:clang_complete_include_current_directory_recursively = 1
+</code></pre>
+<p>これでカレントディレクトリ以下のヘッダーファイルであれば買ってにインクルードされるようになります！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-private-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</span>
+    <span class="feed-item-date">2012年9月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-new-statements/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/mac-terminal-japanese/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</span>
+    <span class="feed-item-date">2012年12月31日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ghunit-jenkins-coverage/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">GHUnitのテストカバレッジをJenkinsで表示する</span>
+    <span class="feed-item-date">2012年9月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/safe-objc/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</span>
+    <span class="feed-item-date">2012年8月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>iOS 7はもっさりか？比較検証してみた | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="今回の記事はUIデザイナの Morino氏 からの寄稿です。
+iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
+特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
+頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。
+ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 アプリアイコンをタップしてから開くまでの時間 フォルダをタップしてから開くまでの時間 ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間 iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
+※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。
+##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 iOS 6（左） : 0.5s iOS 7（右） : 1.0s ##アプリアイコンをタップしてから開くまでの時間 iOS 6（左） : 0.4s iOS 7（右） : 0.7s ##フォルダをタップしてから開くまでの時間 iOS 6（左） : 0.3s iOS 7（右） : 0.6s ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間 iOS 6（左） : 0.3s iOS 7（右） : 0.6s 検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
+ではアップルはなぜあえて動きを長くする必要があったのでしょうか？
+iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。 ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。
+もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。 また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。
+いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。"><meta name="author" content="amorino">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="iOS 7はもっさりか？比較検証してみた | TOKOROM BLOG" property="og:title"><meta content="今回の記事はUIデザイナの Morino氏 からの寄稿です。
+iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
+特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
+頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。
+ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 アプリアイコンをタップしてから開くまでの時間 フォルダをタップしてから開くまでの時間 ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間 iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
+※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。
+##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 iOS 6（左） : 0.5s iOS 7（右） : 1.0s ##アプリアイコンをタップしてから開くまでの時間 iOS 6（左） : 0.4s iOS 7（右） : 0.7s ##フォルダをタップしてから開くまでの時間 iOS 6（左） : 0.3s iOS 7（右） : 0.6s ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間 iOS 6（左） : 0.3s iOS 7（右） : 0.6s 検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
+ではアップルはなぜあえて動きを長くする必要があったのでしょうか？
+iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。 ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。
+もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。 また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。
+いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ios7-design/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/ios7-design/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">iOS 7はもっさりか？比較検証してみた</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年9月23日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ui">
+              ui
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/design">
+              design
+          </a>
+          /</div><div class="content">
+      <p><strong>今回の記事はUIデザイナの Morino氏 からの寄稿です。</strong></p>
+<p>iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。</p>
+<p>特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。
+今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。</p>
+<p>頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。</p>
+<ul>
+<li>ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間</li>
+<li>アプリアイコンをタップしてから開くまでの時間</li>
+<li>フォルダをタップしてから開くまでの時間</li>
+<li>ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間</li>
+</ul>
+<p>iOS 6とiOS 7それぞれの検証結果は、以下の通りです。</p>
+<p>※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。</p>
+<!-- more -->
+<p>##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間
+<img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/1_unlock.gif" alt="1_unlock"></p>
+<ul>
+<li>iOS 6（左） : 0.5s</li>
+<li>iOS 7（右） : 1.0s</li>
+</ul>
+<p>##アプリアイコンをタップしてから開くまでの時間
+<img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/2_app.gif" alt="2_app"></p>
+<ul>
+<li>iOS 6（左） : 0.4s</li>
+<li>iOS 7（右） : 0.7s</li>
+</ul>
+<p>##フォルダをタップしてから開くまでの時間
+<img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/3_folder.gif" alt="3_folder"></p>
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+<p>##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間
+<img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/20130922/4_multi.gif" alt="4_multi"></p>
+<ul>
+<li>iOS 6（左） : 0.3s</li>
+<li>iOS 7（右） : 0.6s</li>
+</ul>
+<p>検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。
+ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。</p>
+<p>ではアップルはなぜあえて動きを長くする必要があったのでしょうか？</p>
+<p>iOS 7のUIからフラットデザインが採用されたのはご存知の通りです。それはユーザーリテラシーの向上と同時に、コンテンツが最も重要で、UIはあくまでコンテンツの邪魔をしない存在であるべき、という思想から来ています。
+ところがフラットデザインは、UIとしては得てして分かりにくくなってしまいがちな表現手法なんです。アップルはその分かりにくさを補うために独自の工夫を色々盛り込みましたが、その一つに操作結果をはっきりと分かりやすく見せるためのトランジション効果があります。これらのトランジションは動きが速すぎて何が起きたのか分からないのでは意味をなさないため、ちょうどよい速度に調整した結果でもあるでしょう。</p>
+<p>もちろん、UIの機能そのものを改善して画面全体を使うようにしたために、単に動きが大きくなって時間を要するものもありますね。マルチタスク画面やSafariの画面選択などはこれに当たります。
+また遅めに調整された他の画面に合わせるために、単純にスピードを緩めたという場面も中にはあるでしょう。</p>
+<p>いかがでしょうか。上記に示した理由が全てではないとは思いますが、コンテンツを見せること・扱いやすくすることを最優先とした今回の新UIにおいて、そのトレードオフの結果としての動きがゆったりめのトランジションであり、もっさり感じる主な理由であると私は考えています。UIの進化に伴って、必然的に生まれたテンポなのではないでしょうか。今後もフラットUIにユーザーが慣れてきてリテラシーも向上してくれば、より機敏な表現も登場してくると思います。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/ios7-ui-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</span>
+    <span class="feed-item-date">2013年6月17日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-video/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</span>
+    <span class="feed-item-date">2013年6月13日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

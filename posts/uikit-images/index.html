@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>UIKitで使われている画像パーツをまとめて取得する | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="UIKitで使われている画像はどこにある？ 例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。
+プログラマというか特にはデザイナさんにとって有用だと思います。
+その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。
+具体的には（これはiOS6.1の場合）、
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork が画像パーツを含むファイルになります。
+他にも、同じディレクトリに
+Shared.artwork Shared@2x~ipad.artwork Shared@2x~iphone.artwork Shared~ipad.artwork Shared~iphone.artwork がありますので取りたいものに応じてお好みで。
+ひとまず、
+cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/ などでこのファイルをデスクトップにでもコピーしておきましょう。
+artworkから画像ファイルを抽出 で、artworkから肝心の画像ファイルを抽出するのに、 iOS-artwork というやつを使わせてもらいます。
+まずは、これを
+git clone git://github.com/davepeck/iOS-artwork.git などでダウンロードします。
+ただ、これを使うにはPythonとPILというライブラリが必要です。
+たぶんPythonは元から入っていると思うので、PILのほうをbrewなどでインストールします。
+brew install pil インストールし終わったら
+mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
+Traceback (most recent call last): File &quot;./iOS-artwork.py&quot;, line 32, in &lt;module&gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
+export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
+気を取り直して、
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts を実行すれば、デスクトップのUIKitPartsというディレクトリにUIKitの画像一式がもりもりと出力されていくはずです！"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="UIKitで使われている画像パーツをまとめて取得する | TOKOROM BLOG" property="og:title"><meta content="UIKitで使われている画像はどこにある？ 例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。
+プログラマというか特にはデザイナさんにとって有用だと思います。
+その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。
+具体的には（これはiOS6.1の場合）、
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork が画像パーツを含むファイルになります。
+他にも、同じディレクトリに
+Shared.artwork Shared@2x~ipad.artwork Shared@2x~iphone.artwork Shared~ipad.artwork Shared~iphone.artwork がありますので取りたいものに応じてお好みで。
+ひとまず、
+cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/ などでこのファイルをデスクトップにでもコピーしておきましょう。
+artworkから画像ファイルを抽出 で、artworkから肝心の画像ファイルを抽出するのに、 iOS-artwork というやつを使わせてもらいます。
+まずは、これを
+git clone git://github.com/davepeck/iOS-artwork.git などでダウンロードします。
+ただ、これを使うにはPythonとPILというライブラリが必要です。
+たぶんPythonは元から入っていると思うので、PILのほうをbrewなどでインストールします。
+brew install pil インストールし終わったら
+mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
+Traceback (most recent call last): File &quot;./iOS-artwork.py&quot;, line 32, in &lt;module&gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
+export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
+気を取り直して、
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts を実行すれば、デスクトップのUIKitPartsというディレクトリにUIKitの画像一式がもりもりと出力されていくはずです！" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/uikit-images/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/uikit-images/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">UIKitで使われている画像パーツをまとめて取得する</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年5月23日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/design">
+              design
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/uikit">
+              uikit
+          </a>
+          /</div><div class="content">
+      <h2 id="uikitで使われている画像はどこにある">UIKitで使われている画像はどこにある？</h2>
+<p>例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。</p>
+<p>プログラマというか特にはデザイナさんにとって有用だと思います。</p>
+<p>その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。<br>
+具体的には（これはiOS6.1の場合）、</p>
+<pre><code class="language-sh">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork
+</code></pre>
+<p>が画像パーツを含むファイルになります。</p>
+<p>他にも、同じディレクトリに</p>
+<ul>
+<li>Shared.artwork</li>
+<li>Shared@2x~ipad.artwork</li>
+<li>Shared@2x~iphone.artwork</li>
+<li>Shared~ipad.artwork</li>
+<li>Shared~iphone.artwork</li>
+</ul>
+<p>がありますので取りたいものに応じてお好みで。</p>
+<p>ひとまず、</p>
+<pre><code class="language-sh">cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/
+</code></pre>
+<p>などでこのファイルをデスクトップにでもコピーしておきましょう。</p>
+<h2 id="artworkから画像ファイルを抽出">artworkから画像ファイルを抽出</h2>
+<p>で、artworkから肝心の画像ファイルを抽出するのに、 <a href="git://github.com/davepeck/iOS-artwork.git">iOS-artwork</a> というやつを使わせてもらいます。</p>
+<p>まずは、これを</p>
+<!-- more -->
+<pre><code class="language-sh">git clone git://github.com/davepeck/iOS-artwork.git
+</code></pre>
+<p>などでダウンロードします。</p>
+<p>ただ、これを使うには<code>Python</code>と<code>PIL</code>というライブラリが必要です。<br>
+たぶん<code>Python</code>は元から入っていると思うので、<code>PIL</code>のほうをbrewなどでインストールします。</p>
+<pre><code class="language-sh">brew install pil
+</code></pre>
+<p>インストールし終わったら</p>
+<pre><code class="language-sh">mkdir ~/Desktop/UIKitParts
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts
+</code></pre>
+<p>と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、</p>
+<pre><code class="language-sh">Traceback (most recent call last):
+  File &quot;./iOS-artwork.py&quot;, line 32, in &lt;module&gt;
+    import PIL
+ImportError: No module named PIL
+</code></pre>
+<p>と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、</p>
+<pre><code class="language-sh">export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages 
+</code></pre>
+<p>としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。</p>
+<p>気を取り直して、</p>
+<pre><code class="language-sh">./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts
+</code></pre>
+<p>を実行すれば、デスクトップの<code>UIKitParts</code>というディレクトリにUIKitの画像一式がもりもりと出力されていくはずです！</p>
+<p>ぼくの手元では、</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/UIKitParts.png" alt="UIKitParts"></p>
+<p>こんなかんじで取得できました。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/block-injection/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionで元のソースコードを汚さないで振る舞い追加</span>
+    <span class="feed-item-date">2013年3月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-macro/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで最近お気に入りのマクロ４つ</span>
+    <span class="feed-item-date">2013年1月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

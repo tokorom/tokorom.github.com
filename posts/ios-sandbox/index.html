@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by Markus Spiske on Unsplash
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+1. App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません
+A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
+ログインしたら「ユーザとアクセス」をクリックして表示します。
+2. Sandboxアカウント追加する 左のサイドメニューから「Sandbox テスター」を選んだあと、(&#43;)マークの追加ボタンを押します。
+姓名やメールアドレスを適切に入力します。
+このときのポイントとして メールアドレスは実在するものでなくてもかまいません 1。 そのため、テスト用のアカウントはカジュアルに作成できます。 セキュリティ質問なども基本的には使いませんので適当でも大丈夫です2。
+入力し終わったら[招待]ボタンを押します。
+うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。
+Sandboxアカウントの作成はこれでおしまいです。
+Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。
+A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。
+3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
+以下、Appleのドキュメントからの引用です。
+Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
+プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
+Sandboxは調子が悪くなることが多々あります。
+Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。
+時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。 その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。
+このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。
+4. iPhone/iPadでSandboxアカウントを利用して購入テストをする ※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。
+iPhone/iPadの「設定」を開きます。
+その中の「iTunes StoreとApp Store」を選びます。
+その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。
+このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
+※この場所では絶対にSandboxアカウントを入れないでください
+この画面の一番下に「SANDBOXアカウント」という項目があります。ここで「サインイン」を押し、作成したSandboxアカウントでログインしてください。
+5. アプリで購入テストをする ログインに成功したらテスト対象のアプリでの購入テストをお試しください。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル | TOKOROM BLOG" property="og:title"><meta content="Photo by Markus Spiske on Unsplash
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+1. App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません
+A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
+ログインしたら「ユーザとアクセス」をクリックして表示します。
+2. Sandboxアカウント追加する 左のサイドメニューから「Sandbox テスター」を選んだあと、(&#43;)マークの追加ボタンを押します。
+姓名やメールアドレスを適切に入力します。
+このときのポイントとして メールアドレスは実在するものでなくてもかまいません 1。 そのため、テスト用のアカウントはカジュアルに作成できます。 セキュリティ質問なども基本的には使いませんので適当でも大丈夫です2。
+入力し終わったら[招待]ボタンを押します。
+うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。
+Sandboxアカウントの作成はこれでおしまいです。
+Q. 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。
+A. メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。
+3. Sandboxアカウントを利用するうえでの注意点 Sandboxアカウントをプロダクション環境で使ってはいけません。
+以下、Appleのドキュメントからの引用です。
+Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。
+プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。
+Sandboxは調子が悪くなることが多々あります。
+Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。
+時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。 その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。
+このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。
+4. iPhone/iPadでSandboxアカウントを利用して購入テストをする ※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。
+iPhone/iPadの「設定」を開きます。
+その中の「iTunes StoreとApp Store」を選びます。
+その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。
+このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。
+※この場所では絶対にSandboxアカウントを入れないでください
+この画面の一番下に「SANDBOXアカウント」という項目があります。ここで「サインイン」を押し、作成したSandboxアカウントでログインしてください。
+5. アプリで購入テストをする ログインに成功したらテスト対象のアプリでの購入テストをお試しください。" property="og:description"><meta content="https://www.tokoro.me/images/ios-sandbox/top.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/ios-sandbox/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/ios-sandbox/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年7月8日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/test">
+              Test
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/ios-sandbox/top.jpg" alt="image"></p>
+<p><small>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Markus Spiske</a> on <a href="https://unsplash.com/s/photos/sandbox?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></small></p>
+<hr>
+<p>これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。</p>
+<p>2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。</p>
+<h2 id="1-app-store-connectにログインする">1. App Store Connectにログインする</h2>
+<p><a href="https://appstoreconnect.apple.com/">https://appstoreconnect.apple.com/</a> にログインします。</p>
+<div class='box box-info'>
+<p><b>Q.</b> アカウントがないのでログインできません</p>
+<p><b>A.</b> 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください</p>
+</div>
+<p>ログインしたら「ユーザとアクセス」をクリックして表示します。</p>
+<p><img src="/images/ios-sandbox/menu.png" alt="image"></p>
+<h2 id="2-sandboxアカウント追加する">2. Sandboxアカウント追加する</h2>
+<p>左のサイドメニューから「Sandbox テスター」を選んだあと、(+)マークの追加ボタンを押します。</p>
+<p><img src="/images/ios-sandbox/new.png" alt="image"></p>
+<p>姓名やメールアドレスを適切に入力します。</p>
+<p>このときのポイントとして <strong>メールアドレスは実在するものでなくてもかまいません</strong> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。
+そのため、テスト用のアカウントはカジュアルに作成できます。
+セキュリティ質問なども基本的には使いませんので適当でも大丈夫です<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p><img src="/images/ios-sandbox/form.png" alt="image"></p>
+<p>入力し終わったら[招待]ボタンを押します。</p>
+<p>うまくいけば先程のテスター一覧に作成したSandboxアカウントが加わっているはずです。</p>
+<p><img src="/images/ios-sandbox/confirm.png" alt="image"></p>
+<p>Sandboxアカウントの作成はこれでおしまいです。</p>
+<div class='box box-info'>
+<p><b>Q.</b> 招待ボタンを押しても「エラーが発生しました。しばらくしてからもう一度お試しください。」となります。</p>
+<p><b>A.</b> メールアドレスが雑すぎるとそうなる場合があります。@マーク以降は自社のドメインにするほうが安全です。</p>
+</div>
+<h2 id="3-sandboxアカウントを利用するうえでの注意点">3. Sandboxアカウントを利用するうえでの注意点</h2>
+<p><strong>Sandboxアカウントをプロダクション環境で使ってはいけません。</strong></p>
+<p>以下、Appleのドキュメントからの引用です。</p>
+<blockquote>
+<p>Sandboxテスターアカウントを使用して、テスト環境ではなく、iTunesなどのプロダクション環境に誤ってサインインした場合は、Sandboxアカウントは無効になり、以降使用できなくなります。この場合、新しいEメールアドレスを使用して新しいSandboxテスターアカウントを作成してください。</p>
+</blockquote>
+<p>プロダクション環境で使ってしまうと、そのSandboxアカウントは使えなくなってしまう、とのこと。</p>
+<p><strong>Sandboxは調子が悪くなることが多々あります。</strong></p>
+<p>Sandbox環境は調子が悪いことがよくあります。例えば購入テストの時に「iTunes Storeに接続できません」と出て購入に失敗することがよくあります。この場合、時間をおいて試していただくと問題なくなることもあります。</p>
+<p>時間をおいても全く購入に成功しない場合、アプリのバグの場合もありますが、現在利用しているアカウントだとうまくいかない、というケースもあります。
+その場合、別のSandboxアカウントに切り替えてトライするとうまくいくこともあります。</p>
+<p>このあたりを踏まえたうえで、心配な場合はアプリ開発者に状況を報告して相談してみてください。</p>
+<h2 id="4-iphoneipadでsandboxアカウントを利用して購入テストをする">4. iPhone/iPadでSandboxアカウントを利用して購入テストをする</h2>
+<p>※iOS 13のスクショを撮っています。他のOSバージョンだと若干表示などが違うかもしれません。</p>
+<p>iPhone/iPadの「設定」を開きます。</p>
+<p>その中の「iTunes StoreとApp Store」を選びます。</p>
+<p><img src="/images/ios-sandbox/setting.png" alt="image"></p>
+<p>その中の一番上に「Apple ID」があり、それが現在利用している本番用のApple IDです。</p>
+<p>このApple IDが設定されている場合はここをタップして「サインアウト」をしておくとより安全にSandboxアカウントでの購入を試せます。</p>
+<p>※この場所では絶対にSandboxアカウントを入れないでください</p>
+<p><img src="/images/ios-sandbox/signout.png" alt="image"></p>
+<p>この画面の一番下に「SANDBOXアカウント」という項目があります。ここで「サインイン」を押し、作成したSandboxアカウントでログインしてください。</p>
+<p><img src="/images/ios-sandbox/sandboxaccount.png" alt="image"></p>
+<h2 id="5-アプリで購入テストをする">5. アプリで購入テストをする</h2>
+<p>ログインに成功したらテスト対象のアプリでの購入テストをお試しください。</p>
+<hr>
+<p>マニュアルは以上で終わりです。</p>
+<p>その他わからない部分が出てきましたら開発担当者にお問い合わせください。</p>
+<h2 id="その他のマニュアル">その他のマニュアル</h2>
+<ul>
+<li><a href="/posts/ios-promocode/">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</a></li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>2020年7月現在&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>自社内でなんらかルールを決めて入力するのが良いかもしれません&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/firebsae-app-distribution/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/firebase-app-distribution/3-create-app.png" class="feed-item-image" alt="５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）" width="300"></div>
+
+    <span class="feed-item-title">５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</span>
+    <span class="feed-item-date">2020年2月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

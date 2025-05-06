@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Vimにスクショを直接Markdownで貼り付ける | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by Jae Park on Unsplash
+前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
+ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
+そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
+今回はそこを解決します！
+pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&hellip;
+screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
+screencapture -i 出力ファイル名 とすると、shift &#43; command &#43; 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
+現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
+そのため、前回のpluginを少し拡張して、
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
+仕組み自体は前回と変わりません。
+このpluginは GitHub に置いてあります。
+スクショを撮影して&hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
+#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}` です。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Vimにスクショを直接Markdownで貼り付ける | TOKOROM BLOG" property="og:title"><meta content="Photo by Jae Park on Unsplash
+前回 前回の記事では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、
+ImageOptimで画像を最適化 記事ごとの画像ディレクトリを自動作成してそこに画像をコピー Vimに ![image](/images/記事名/画像名) とMarkdown方式で埋め込む という便利環境を作りました。
+そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。
+今回はそこを解決します！
+pbpasteはダメだった なんとなくpbpasteコマンドでゴニョゴニョするんだろうな思っていたのですが、pbpasteはテキストしか扱えないということがわかりました&hellip;
+screencaptureコマンドを使う しかしMacにはscreencaptureというコマンドがあり、
+screencapture -i 出力ファイル名 とすると、shift &#43; command &#43; 4 で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。
+vim pluginを拡張 前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、
+現在行の画像ファイル名を使って画像を適切に埋め込むコマンド スクショを撮影して現在行に埋め込むコマンド の２つを使い分ける必要が出てきました。
+そのため、前回のpluginを少し拡張して、
+command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;) command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;) とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。
+今回のものは:MarkdownImageWithScreenshotというコマンドをVim上で叩くと、markdown-image-with-screenshotというシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。
+仕組み自体は前回と変わりません。
+このpluginは GitHub に置いてあります。
+スクショを撮影して&hellip;のコマンド markdown-image-with-screenshotコマンドの具体的な中身は、
+#! /bin/sh IMAGEDIR=&quot;content/images/$2&quot; CURRENTTIME=`date &#43;%s` IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot; TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot; IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot; mkdir -p ${IMAGEDIR} screencapture -i &quot;${TARGET}&quot; echo &quot;${IMAGETAG}&quot; IMAGEOPTIM=&quot;open -a ImageOptim&quot; `${IMAGEOPTIM} ${TARGET}` です。" property="og:description"><meta content="https://www.tokoro.me/images/vim-markdown-paste-from-clipboard/cover.png" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Vimにスクショを直接Markdownで貼り付ける</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年4月30日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/vim">
+              vim
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/markdown">
+              markdown
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/hugo">
+              hugo
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/vim-markdown-paste-from-clipboard/cover.png" alt="top">
+<em>Photo by Jae Park on Unsplash</em></p>
+<h2 id="前回">前回</h2>
+<p><a href="/posts/vim-markdown-image-tool/">前回の記事</a>では、画像ファイルをVimにドラッグ＆ドロップして、それをコマンド一発で、</p>
+<ul>
+<li>ImageOptimで画像を最適化</li>
+<li>記事ごとの画像ディレクトリを自動作成してそこに画像をコピー</li>
+<li>Vimに <code>![image](/images/記事名/画像名)</code> とMarkdown方式で埋め込む</li>
+</ul>
+<p>という便利環境を作りました。</p>
+<p>そのときの課題として「どうせなら既存画像だけじゃなくてスクショもコマンド一発でVimにMarkdown形式で貼り付けたいなあ」というのがありました。</p>
+<p>今回はそこを解決します！</p>
+<h2 id="pbpasteはダメだった">pbpasteはダメだった</h2>
+<p>なんとなく<code>pbpaste</code>コマンドでゴニョゴニョするんだろうな思っていたのですが、<code>pbpaste</code>はテキストしか扱えないということがわかりました&hellip;</p>
+<h2 id="screencaptureコマンドを使う">screencaptureコマンドを使う</h2>
+<p>しかしMacには<code>screencapture</code>というコマンドがあり、</p>
+<pre><code class="language-sh">screencapture -i 出力ファイル名
+</code></pre>
+<p>とすると、<code>shift</code> + <code>command</code> + <code>4</code> で起動するインタラクティブなスクショモードを開始し、撮影後のスクショを指定したファイル名で保存してくれる、ということがわかりました。</p>
+<h2 id="vim-pluginを拡張">vim pluginを拡張</h2>
+<p>前回、特定のコマンドを実行して、Vimの現在行を置き換えるpluginを作って使ったのですが、今回から、</p>
+<ul>
+<li>現在行の画像ファイル名を使って画像を適切に埋め込むコマンド</li>
+<li>スクショを撮影して現在行に埋め込むコマンド</li>
+</ul>
+<p>の２つを使い分ける必要が出てきました。</p>
+<p>そのため、前回のpluginを少し拡張して、</p>
+<pre><code>command! -nargs=0 MarkdownImageFromLine :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-from-line&quot;)
+command! -nargs=0 MarkdownImageWithScreenshot :call vim_replace_current_line#execute(&quot;./.vim-replace-current-line/markdown-image-with-screenshot&quot;)
+</code></pre>
+<p>とvimrcで好きなコマンド名でそれぞれ別のコマンドを叩けるようにしました。</p>
+<p>今回のものは<code>:MarkdownImageWithScreenshot</code>というコマンドをVim上で叩くと、<code>markdown-image-with-screenshot</code>というシェルコマンドを実行し、そのレスポンスを現在行に埋め込む、という形です。</p>
+<p>仕組み自体は前回と変わりません。</p>
+<p>このpluginは <a href="https://github.com/tokorom/vim-replace-current-line/releases/tag/2.0.0">GitHub</a> に置いてあります。</p>
+<h2 id="スクショを撮影してのコマンド">スクショを撮影して&hellip;のコマンド</h2>
+<p><code>markdown-image-with-screenshot</code>コマンドの具体的な中身は、</p>
+<pre><code class="language-sh">#! /bin/sh
+
+IMAGEDIR=&quot;content/images/$2&quot;
+CURRENTTIME=`date +%s`
+IMAGEFILENAME=&quot;ss-${CURRENTTIME}.png&quot;
+TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot;
+IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot;
+
+mkdir -p ${IMAGEDIR}
+
+screencapture -i &quot;${TARGET}&quot;
+
+echo &quot;${IMAGETAG}&quot;
+
+IMAGEOPTIM=&quot;open -a ImageOptim&quot;
+`${IMAGEOPTIM} ${TARGET}`
+</code></pre>
+<p>です。</p>
+<p>ほぼ前回と変わりませんが、指定された画像をcopyする代わりに<code>screencapture -i &quot;${TARGET}&quot;</code>でインタラクティブなスクショ撮影を開始しています。</p>
+<p>最後にImageOptimで画像を最適化しているのも同じです。</p>
+<h2 id="完成">完成</h2>
+<p>これで、Vim上で</p>
+<pre><code>:MarkdownImageWithScreenshot
+</code></pre>
+<p>とコマンドを実行すると、</p>
+<ul>
+<li>インタラクティブなスクショ撮影が開始</li>
+<li>撮影が終わったら、記事ごとのディレクトリを作って、スクショを保存</li>
+<li>保存したスクショはImageOptimで最適化</li>
+<li>保存したスクショをMarkdown形式でVimの現在行に埋め込み</li>
+</ul>
+<p>という一連の作業を自動でやってくれるようになりました！</p>
+<p>試しに執筆中のこの記事にもスクショを埋め込んでみます。</p>
+<p><img src="/images/vim-markdown-paste-from-clipboard/ss-1588238897.png" alt="image"></p>
+<p>できた！</p>
+<p>超絶便利！！！</p>
+<h2 id="次のステップ">次のステップ</h2>
+<p>iPhoneで撮影したスクショを貼り付け、となるとクリップボードから貼り付ける必要があるが、なんとかなるかな？</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/vim-markdown-image-tool/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/vim-markdown-image-tool/dog.jpg" class="feed-item-image" alt="VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法" width="300"></div>
+
+    <span class="feed-item-title">VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</span>
+    <span class="feed-item-date">2020年3月31日</span>
+    <span class="feed-item-date"></span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/vim-review/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" class="feed-item-image" alt="Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh" width="300"></div>
+
+    <span class="feed-item-title">Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</span>
+    <span class="feed-item-date">2018年12月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/mac-terminal-japanese/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</span>
+    <span class="feed-item-date">2012年12月31日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,536 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TOKOROM BLOG</title>
+    <link>http://www.tokoro.me/</link>
+    <description>Recent content on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>tokorom</copyright>
+    <lastBuildDate>Mon, 26 Oct 2020 17:02:15 +0900</lastBuildDate>
+    <image>
+      <url>http://www.tokoro.me/img/hugo.png</url>
+      <title>GoHugo.io</title>
+      <link>http://www.tokoro.me/</link>
+    </image>
+    
+	<atom:link href="http://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Objective-Cで非同期処理のテストをシンプルに書く方法</title>
+      <link>http://www.tokoro.me/posts/objc-async-test/</link>
+      <pubDate>Mon, 21 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-async-test/</guid>
+      <description>
+        非同期処理のテストってどう書いてますか？ 標準のXCTest自体がサポートしていれば良いのですがそうではないので、非同期処理のテストを書きたい場合には、その仕組みを自作するか出来合いのライブラリを利用する必要があります。現実的な選択肢としては、
+ GHUnitやKiwiなど非同期処理をサポートしたテストフレームワークを利用する GHunitの非同期処理のテストの仕組みを真似て抜粋したライブラリを利用する（意外とこれが多いかも？） expectaなどのマッチャーライブラリに付属の非同期処理の仕組みを使う  となるかと思います。 ただ、私が調べた時点だとどれもしっくりきませんでした。
+まず、GHUnitやKiwiなどを採択している場合には良いのですが、非同期処理のテストを書くという目的だけのためにそれらのフレームワークを使うというのは冗長すぎます。
+また、GHUnitの非同期処理の仕組みだけを抜き出したライブラリもありますが、TestCaseの親クラスを決まったものにしないといけない（例えばGHAsyncTestCaseを継承したTestCaseで場合のみ利用できるとか）という縛りができるのと、非同期処理を発火する前にprepareとかを呼ばないといけないのがちょっと鬱陶しい。
+そういう意味だとexpectaなどのマッチャー系のライブラリの場合、親クラスも限定されないし、非同期でマッチさせたいところでその機能を使うだけなのでとてもシンプルではあります。ただ、これはこれでマッチャーで非同期処理の完了を待つ性質上、マッチするときはいいけどマッチしないときはタイムアウトまでそこで処理が待たされるという大きな課題があります。
+こうしたい！ ぼくとしては理想的にはこういうライブラリを使いたいと思いました。
+ テストフレームワークを使っていなくても非同期処理のテストだけが実現できるシンプルなもの TestCaseの親クラスが限定されないほうがよい 余分なコードを書かずにシンプルに書きたい それを利用することでテストの実行が遅くなったりしない  しかし、当初探した限りではこの条件にマッチするものが見つかりませんでした。
+他言語ではどういう書き方をしている？ なお、他言語ではどういう書き方が一般的なんだろうと調べてはみたのですが、なかなかしっくりくるものが見つからず、Objective-Cでこう書けたらいいなあと思ったのは RubyMotionで使われている書き方 でした。
+http://mobiletou.ch/2013/10/第五回-rubymotionでhttpや非同期処理を含むユニットテスト
+some_method_with_block {|some_data| @data = some_data resume } wait_max 1.0 do @data.should.equal foo end  待たせたい場所で wait 待たせている処理が終わったら resume  という本当にシンプルで分かりやすい書き方です。
+ということで、Objective-Cで同じようにWait &amp;amp; Resume方式で親クラスを限定せずに使えるシンプルなライブラリを作ることにしました。
+TKRGuard そして作ったのが TKRGuard です。
+TKRGuard をimportするだけで先のRubyMotionとほぼ同じ書き方ができます。
+// #import &amp;#34;TKRGuard.h&amp;#34;  __block NSString *response = nil; [self requestGetAsyncronous:^(id res, NSError *error) { response = res; RESUME; }]; WAIT; XCTAssertEqualObjects(response, @&amp;#34;OK!
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Storyboardでの画面遷移をスマートにやる方法</title>
+      <link>http://www.tokoro.me/posts/improve-storyboard-segue/</link>
+      <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/improve-storyboard-segue/</guid>
+      <description>
+        これは potatotips第６回め で発表した この話 のまとめと後書きです。
+Storyboardいいですよね！ Storyboardを使うことで、
+ 画面と画面が疎結合になる 簡単な画面遷移ならノンコーディングで実現できてソースコードを汚さない  といったメリットがあります。
+Storyboard登場以前だと、次の画面に遷移させるだけでも
+#import &amp;#34;NextViewController.h&amp;#34; NextViewController *nextViewController = [NextViewController new]; [self.navigationController pushViewController:nextViewController animated:YES]; といったコーディングをし、遷移元のViewControlelrは遷移先のViewControllerに依存する（importしないといけない）形でした。
+しかし、Storyboardを活用することで画面遷移のために画面同士が密結合になることを避けることができるようになりました。
+ただしStoryboardを使って今まで以上に悪くなるパターンがある とはいえ、Storyboardも完璧ではなく、画面遷移時に次の画面になにか値を渡したいときにはこんな実装をする必要があります。
+#import &amp;#34;NextViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } 要するにStoryboard登場以前のコードに逆戻りです。
+そして、この画面遷移時に値を渡すだけのためにpublicメソッドを公開しないといけない場合もあります。
+もっとひどいのは１つの画面から複数の画面に遷移させたい場合で、もはやぐちゃぐちゃになりStoryboard使ってむしろ複雑になってるとも思えてしまうほどです。
+#import &amp;#34;NextViewController.h&amp;#34;#import &amp;#34;ModalViewController.h&amp;#34; - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender { if ([@&amp;#34;Next&amp;#34; isEqualToString:segue.identifier]) { NextViewController *nextViewController = (NextViewController *)segue.destinationViewController; nextViewController.number = @1; [self.navigationController pushViewController:nextViewController animated:YES]; } else if ([@&amp;#34;Modal&amp;#34; isEqualToString:segue.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</title>
+      <link>http://www.tokoro.me/posts/pbxproj-merge/</link>
+      <pubDate>Thu, 06 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/pbxproj-merge/</guid>
+      <description>
+        2014/02/09 追記
+コメントのところでやり取りしているようにmergepbxの作者さんから連絡があって、この記事で書いた問題が修正されました！
+今現在は merge=mergepbx がいい感じになってきているのでそっちがオススメです。
+複数人でプログラミングしているとpbxprojがやたらとコンフリクトする 例えば、
+ Aさんが AALabel.m をプロジェクトに追加して Bさんが BBLabel.m をプロジェクトに追加して  とただそれだけなのにマージのときにコンフリクトするpbxprojさん。。。
+ただそれぞれファイルを追加だけのことでコンフリクトするなんて&amp;hellip;
+どうにかならんもんかいとTwitterでつぶやいたところ、 @azu_re さんから有り難い教えが！
+@tokorom gitはファイル別にマージ方法を指定できるので、mergepbxみたいなのをpbxprojのマージに使うようにするぐらいですかねー(まだαですが)&amp;#10;https://t.co/VxXm0fcJMb
+&amp;mdash; azu (@azu_re) February 4, 2014  mergepbxを試してみる まだα版ということだがせっかくなので試してみた。基本的には
+https://github.com/simonwagner/mergepbx
+のREADMEどおりにインストール＆設定するだけ。
+cloneして
+$ ./build.py すると、同ディレクトリに mergepbx というファイルができる。それをPATHの通った場所に設置する。
+2014/02/09 追記
+（もしくは自分でビルドしなくても https://github.com/simonwagner/mergepbx/releases から最新版をダウンロードすることも可能）
+~/.gitconfig に以下の設定を追加する
+[merge &amp;quot;mergepbx&amp;quot;] name = XCode project files merger driver = mergepbx %O %A %B なお、LANG= ってところはREADMEには書かれていないのですが、ぼくの手元だと &amp;hellip; と日本語まわりでfailedになったので加えました。
+2014/02/09 追記
+mergepbxの最新版ではLANG=を指定しなくても問題が発生しなくなりました。
+次に、.gitattributes で
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>提供するXXXViewControllerの親クラスを差し替え可能にしたい!</title>
+      <link>http://www.tokoro.me/posts/super-viewcontroller-for-a-library/</link>
+      <pubDate>Thu, 23 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/super-viewcontroller-for-a-library/</guid>
+      <description>
+        XXXViewControllerの親クラスを差し替えたいときありますよね？ UIKit内で言えばUITableViewControllerとかはその代表格。
+外部ライブラリで言うと、Google Analytics SDKのGAITrackedViewControllerとか。
+要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。
+で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。
+runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&amp;hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
+define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
+例えば、こんなかんじでどうでしょう？
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT#import XXXLIB_VIEW_CONTROLLER_IMPORT#endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS@interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else@interface TKRContainerTableViewController : UIViewController #endif // ...  @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+もしsuperclass変えたいよ！って人は、
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &amp;#34;YourSuperViewController.h&amp;#34;#define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewControllerとどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+ひとまずこれでなんとかなりそう。
+他に良い方法があればご教示を！
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</title>
+      <link>http://www.tokoro.me/posts/ios-dev-accounts/</link>
+      <pubDate>Tue, 05 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios-dev-accounts/</guid>
+      <description>
+        2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
+ Member Centerのほうにアカウント追加 -&amp;gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&amp;gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能  失礼しました。
+追加情報などあれば是非おねがいします！
+概要 私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。
+おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。
+iOS Dev Center の構成 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
+大きくは、
+ iOS Developer Program Member Center iTunes Connect  に分かれます。
+メンバーを追加する方法が２つある？？ 今回、私が混乱してしまった部分がここでした。
+iOSアプリ開発/公開のために必要なアカウントは、
+ Member CenterのPeople iTunes ConnectのManage Users  の2カ所で管理されています。
+また、この２つのアカウントはそれぞれ別々の用途になります。
+個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
+Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
+ Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行  が必要なユーザがこれに該当します。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Objective-Cでカリー化とか部分適用してみる</title>
+      <link>http://www.tokoro.me/posts/objective-c-haskell/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objective-c-haskell/</guid>
+      <description>
+        導入 会社でHaskell勉強会に参加して、カリー化とか部分適用のパートの輪読当番になったのだが、正直、輪読時点でもそれがなんなのかよくわかっていませんでした。 しかし、勉強会で参加者のみなさまに教えてもらった結果、カリー化とかがやっと理解できました！
+ということで嬉しくなって先日寝るときに布団の中で「Objective-Cでもできるかなー」と脳内コーディングしてみた結果を実装してみました。
+もう他の人がやってるかもとか、こんなん実装しても実際のところ使わないよねとか、そんなことはまったく気にせずです。
+実際やってみたソースコードは こちら に置いてあります。
+ひとまずのゴール カリー化して部分適用ができる状態までということで、Haskellのmapが実現できるところまでを目標にしました。
+map (+3) [1, 2, 3] これです。
+Objective-Cでは当然、空白区切りで引数を渡していくような構文はないわけなので、関数ポインタ的なやつを使って、
+map (+3) ([1, 2, 3]) みたいな形で()で区切り、関数の実行結果として取得した関数ポインタ（実際に関数が返すのはBlock）を使って次の引数を渡す（要するにカリー化）することでこれを実現することにしました。
+しかし、Objective-Cには演算子を()で囲ってセクション化するとかないし、リストのリテラルも違うので、やるとしたらこうなります。
+map (OP(&amp;#39;+&amp;#39;) (@3)) (@[@1, @2, @3]) セクションに関しては、演算子を関数化するマクロを作り、その関数に引数を１つ部分適用するイメージとします。
+ということで、Objective-Cで上のmapが実現できたらはじめのゴールとしては十分かなと思いました。
+カリー化の実現方法 実際にカリー化した関数の実装はこんなかんじになりました。これは２つの引数を加算して返す add の実装です。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { CURRYING2( x, y, return @([x intValue] + [y intValue]); ); } CURRYING2という変なマクロを使ってObjective-Cらしからぬ見た目になってますが、マクロを展開すると実際はこうなります。
+#define add [ObjcHaskell hsAdd] + (curryingBlock)hsAdd { return (curryingBlock)^(id x) { return (unaryBlock)^(id y) { return @([x intValue] + [y intValue]); } }: } Blockを返すBlockを返す関数というかんじになってます。 外側のBlockはxという引数を取り、中側のBlockを返す。 中側のBlockはyという引数を取り、外側のBlockでキャプチャされたxと自分でキャプチャしたyを加算した結果を返す。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>iOS 7はもっさりか？比較検証してみた</title>
+      <link>http://www.tokoro.me/posts/ios7-design/</link>
+      <pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios7-design/</guid>
+      <description>
+        今回の記事はUIデザイナの Morino氏 からの寄稿です。
+iOS 7が正式リリースされました。既にアップデートを行って実際に試されている方も多いと思いますが、今回はUIに大幅な変更が加えられたために、まだ操作に戸惑いのある方もいるのではないでしょうか。
+特にiOS 7にしてから重く感じる、もっさりしているという意見もけっこう多いようです。iOS 7をしばらくいじってからiOS 6の端末を触ると、たしかにiOS 6の方がきびきび動いているように感じます。 今回は半透明やぼかし、視差効果などの画像エフェクトをふんだんに使用しているために画像処理の負荷が高いことも確かでしょう。しかし、全てが端末の性能のせいというわけでもないことを、今回はご紹介したいと思います。
+頻繁に操作を行う以下の4つのシーンについて、ちょっとした比較検証を行いました。
+ ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間 アプリアイコンをタップしてから開くまでの時間 フォルダをタップしてから開くまでの時間 ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6とiOS 7それぞれの検証結果は、以下の通りです。
+※iOSシミュレータで検証を行ったため、実機とは多少違いがある点はご容赦ください。また、時間の長さも30fpsの動画で1フレームずつ進めながら自分でカウントした数値です。
+##ロック解除してから、ホーム画面のアイコンが全て出現するまでの時間  iOS 6（左） : 0.5s iOS 7（右） : 1.0s  ##アプリアイコンをタップしてから開くまでの時間  iOS 6（左） : 0.4s iOS 7（右） : 0.7s  ##フォルダをタップしてから開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  ##ホームボタンをダブルクリックしてから、マルチタスク画面を開くまでの時間  iOS 6（左） : 0.3s iOS 7（右） : 0.6s  検証を行った全てのシーンにおいて、iOS 7では時間が倍近くかかっていることがお分かりになると思います。 ほんのコンマ数秒の世界ですが、このわずかな違いだけでもっさりしていると感じてしまうものなんですね。
+ではアップルはなぜあえて動きを長くする必要があったのでしょうか？
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>iOSのライブラリだってTravis CIとかCoverallsとか使うべき</title>
+      <link>http://www.tokoro.me/posts/objc-travis-coveralls/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-travis-coveralls/</guid>
+      <description>
+        今日はGithubに公開したiOS用のライブラリを Travis CI と Coveralls に対応した手順を紹介したいと思います。
+なお、実際にこれらを適用して運用しているリポジトリのサンプルは、
+https://github.com/tokorom/BlockInjection
+になります。
+前提条件  GitHubを使っていること GitHubでなんらかiOS/Mac用のライブラリを公開していること  Travis CI https://travis-ci.org/
+目的 公開しているライブラリの最新コードがきちんとビルドが通るものか、テストが通る状態かを明示できます。
+iOS用のCI環境を用意するのは通常すごく敷居が高い（物理的にMacが必要）のですが、Travis CIはiOS/Mac用のライブラリのCIを無料で請け負ってくれるかなり太っ腹なサービスです。
+事前準備  Travis CIのアカウントを作っておく(GitHubのアカウントで）  Travis CI上で該当のリポジトリをONにする Travis CI に行って、このスクリーンショットのように該当リポジトリを ON にするだけです。簡単！
+Makefile を用意する（必須ではない） 必須ではないですが、Makefileを作っておくほうがいろいろとメリットある気がします。
+自分の場合は、
+PROJECT = BlockInjectionTest/BlockInjectionTest.xcodeproj TEST_TARGET = Tests clean: xcodebuild \ 	-project $(PROJECT) \ 	clean test: xcodebuild \ 	-project $(PROJECT) \ 	-target $(TEST_TARGET) \ 	-sdk iphonesimulator \ 	-configuration Debug \ 	TEST_AFTER_BUILD=YES \ 	TEST_HOST= こんなかんじで、 make test とすると xcodebuild で Tests がビルドされるようにしています。 TEST_AFTER_BUILD=YES と TEST_HOST= は重要です。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</title>
+      <link>http://www.tokoro.me/posts/ios7-ui-design/</link>
+      <pubDate>Mon, 17 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios7-ui-design/</guid>
+      <description>
+        今回の記事はUIデザイナの Morino氏 からの寄稿です 前回 はiOS 7紹介ビデオの中のジョナサン・アイブ氏のパートをご紹介しました。
+今回は、その中でも特に重要と感じたいくつかのフレーズをピックアップして深堀りしてみたいと思います。
+&amp;ldquo;True simplicity&amp;rdquo; iOS 7から話題の&amp;quot;フラットデザイン&amp;quot;が採用されて、画面デザインは大分シンプルな外観になりました。
+使う色の数は限定され、簡単明瞭なラインやシルエットがほとんどのデザインを占めています。
+iOS 6まで採用されていたSkeuomorphism（装飾的・リアルな外観）は排除され、立体的で質感を感じるデザインから、平面的で形やテキストの意味性をストレートに伝えるデザインに変わりました。
+ただ、&amp;ldquo;Simplicity&amp;quot;という言葉は、単に外観を表すものとして使われているわけではありません。
+「複雑さに秩序をもたらす」という台詞にもあるように、これは見た目だけではなく、見せたい情報の構造設計から、情報やコントロールをレイアウトした画面の設計まで、目に見える範囲の全ての要素を指していることが分かります。
+実際に設計を行う段階では、一つ一つの画面の中だけで閉じて検討をするのではなくて、アプリ全体の画面の流れを考慮に入れながら三次元的に情報を整理し、「秩序」について考えなくてはいけないでしょう。
+なるべくユーザーにとって理解しやすい情報の見せ方・順番を考え、ユーザーが迷わないインタフェースの動線を考える必要があります。
+全ての情報が詰め込まれた一つの画面よりも、10の画面に整理して分けられたインタフェースのほうが好まれることも多いと思います。
+これらはInformation Architectとして大変重要な要素でもありますが、ひとまず画面の外観に話を戻します。
+アップルは今回、外観的な&amp;quot;Simplicity&amp;quot;を表現するに当たって、ただ画面の要素をシンプルなデザインにしただけではなく、他にも様々な工夫を行っています。
+画面をシンプルにした一方で、分かりやすさや操作性、ユーザーエクスペリエンスを向上させるために色々な仕掛けやルールを用意しているのです。
+これらは、私たちアプリ開発者も積極的に参考にしたり真似をしていくべき考え方でもあります。
+では、アップルの&amp;quot;Simplicity&amp;quot;を構成する要素にはどのようなものがあるでしょうか。
+1. &amp;ldquo;refining the typography&amp;rdquo; タイポグラフィー（文字組み）が読みやすく、認識しやすいようにアップデートされました。
+英文フォントにはこれまでよりも細いフォントタイプが追加され、非常に繊細ながらも読みやすく美しい様を演出しています。
+一方で強調すべきウェイトの重い（太い）文字列との差がよりはっきり認識できるようになり、コンテンツとしての可読性も向上したと言えます。
+ナビゲーションバーのボタンも、アイコンが廃され、テキストのみで簡潔に機能を伝えるものが多いようです。
+タイポの美しさを最大限に引き出したいという意図だと思われますが、画面のシンプルさを維持するためにボタンの境界線も排除されています。
+その代わりに、押せるボタンであることを明確に示すために、通常テキストとははっきりと違う色を割り当てて、アプリ全体で一貫して使われています。
+その色＝ボタンであることをユーザーが一度学習すれば、操作に問題がでないことを前提としていますが、ボタン配置には大きな変更はないのでiOS 6からのユーザーにとっては順応も容易いでしょう。
+これらのボタンのテキスト色はアプリによっても様々なようですが、やはり通常テキストとの比較によって違いが明白であることを基本としています。
+私たちが同様の思想に基づいてアプリ開発を行う場合に気をつけなくてはいけないのは、色を多用しないことです。 通常テキストとボタンのテキストの2色だけを使うのが安全です。
+複数のテキスト色が混ざり合ったインタフェースになってしまうと、どれがボタンなのか判断がつかなくなってしまいます。
+もう一つ懸念点があるとすれば、日本語のタイポグラフィーにおいても、英文と同じ可読性・美しさを確保できるかということです。
+場合によっては、余白を多めに取るなどの工夫を行ったほうがよいことも多そうです。
+2. &amp;ldquo;redesigning all the icons&amp;rdquo; 標準アプリのアイコンは全て共通の新しいグリッドシステムに基づいてデザインし直されています。
+このグリッドシステムに従うことで、アイコンごとのグラフィックのバランスに統一感・一貫性を持たせています。
+もちろん従う必要はありませんが、ホーム画面において標準アプリアイコンとの一体感を重視するのであれば、参考にするとよいでしょう。
+既に一部のデザイナーからリリースされているPhotoshopやIllustratorのグリッドシステムのテンプレートを入手することができます。
+3. &amp;ldquo;use of translucency&amp;rdquo; 地味ながらも美しく、活用の余地が大きい機能追加だと思います。
+画面上部から引き下げるNotification Center、画面下部から引き上げるControl Center、キーボードやダイアログなど、様々なアイテムがすりガラス風の半透明な板で表現され、背景がぼんやりとボケて見えるだけですが、その存在を感じ取ることで「後ろに何かがある」ことを認識できるようになりました。
+ただ画面をフラットに、シンプルにしただけではなく、このようなエフェクトを活用することで画面上の情報量を増やすことなく情報・状況の認知性の向上と、三次元的な重なり合いによる画面の深み・面白みを表現することに成功しています。
+例えばメッセージアプリにおいては、送信した内容がヒュッと画面下部から現れてタイムラインに飛び込んでくる様子を感じることができ、ボタンを押して成功したというフィードバックを得ると同時に、メッセージを送るという行為の楽しさを体感することができます。
+4. &amp;ldquo;parallax to create a whole new experience of depth.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Objective-Cのコードを削れるだけ削る7のTips</title>
+      <link>http://www.tokoro.me/posts/objc-reduce/</link>
+      <pubDate>Sat, 15 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-reduce/</guid>
+      <description>
+        既存記事のまとめのため新しい要素があるわけではないのですが、Appleから発表されたXcode 5が正式にリリースされる前の復習ということで。
+Tipsを適用する前のコード #pragma mark - Private Category @interface Sample () @property (strong) NSNumber* i; @property (strong) NSNumber* c; @property (strong) NSNumber* f; @property (strong) NSArray* array; @property (strong) NSDictionary* dictionary; @property (strong) Sample* child; @property (strong) UIColor* color; @property (assign) NSUInteger index; @property (assign) CGRect rect; - (void)privateMethod1; - (void)privateMethod2; - (void)privateMethod3; @end #pragma mark - Main Implementation @implementation Sample @synthesize i = i_; @synthesize c = c_; @synthesize f = f_; @synthesize array = array_; @synthesize dictionary = dictionary_; @synthesize child = child_; @synthesize color = color_; @synthesize index = index_; @synthesize rect = rect_; - (void)privateMethod1 { [self privateMethod2]; [self privateMethod3]; } - (void)privateMethod2 { self.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</title>
+      <link>http://www.tokoro.me/posts/ios7-video/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ios7-video/</guid>
+      <description>
+        今回の記事はUIデザイナの Morino@WWDC2013参加中 に寄稿いただきました！ Appleの公式サイトに iOS 7 を紹介するビデオが公開されましたね。
+http://www.apple.com/ios/ios7/
+特に前半の4分間でジョナサン・アイブ氏により語られているiOS 7の説明部分に、今回の大きなデザイン変更の様々な要点が含まれており、これからのアプリ設計のあるべき方向性が示唆されています。
+これらをよく理解しておくことが非常に重要だと感じていますので、自分自身の復習のためとみなさんへの展開の意味で、書き起こし＆和訳を行いました。
+デザイナのみならずアプリ開発者の皆様にも有用かと思いますので、ぜひご参照ください。
+iOS 7 Video - 書き起こし &amp;amp; 和訳 ※ 画像はすべて iOS 7 Video の中からの抜粋です
+ We have always thought of design as being so much more than just the way something looks.
+私たちは常にデザインを、ただ外見がどう見えるかよりも遥かに大きな存在として捉えてきました。
+It’s the whole thing the way something actually works on so many different levels.
+デザインは、様々なレベルにおいて何がどう作用するかという、その全てを指すのです。
+Ultimately of course, design defines so much of our experience.
+最終的には、デザインは私たちが体験する物事のあまりに多くを定めるのです。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</title>
+      <link>http://www.tokoro.me/posts/xcode5-preview/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/xcode5-preview/</guid>
+      <description>
+        tokorom@WWDC2013参加中です。
+WWDC2013で膨大なアップデートを学習中でしゃべりたいことが盛りだくさんなんですが、NDAのため我慢の日々。
+で、キーノートの範囲の話は既に各所で情報が出ているわけですが、キーノートに出ていない項でも、Appleが非ログインで参照できるサイトで既に公表しているものがいくつかありました。
+概要レベルでありますが、なかでも TDD とか CI まわりでiOSアプリ開発者にとって嬉しい情報がありましたので報告させていただきます。
+あくまでもAppleのサイトで公表されている範囲内のことしか書けませんのであしからず。
+ついにXcodeから任意のテストだけを簡単に実行できるようになる ついに、ついに&amp;hellip;というかやっとかという話。
+Xcode 5 で Test Navigator というやつが加わり、テスト駆動での開発を助けてくれますとのこと。具体的に、 シングルクリックで特定の１つのテスト、もしくは選択した複数のテストを実行できる という記載があります。
+また、 テストとソースコードを side by side で自動的に配置する という記載もあります。
+これでObjective-Cな人たちもまともにTDDできる日がやってくるかもしれないですね。
+CIの機能も入ります / その名は &amp;ldquo;Bots&amp;rdquo; 公表されている概要だけ並べてみると、
+ ２、３回のクリックで新しいbotを作ることができる ネットワーク上のどのMacでも直ちにbotをスタートできる 別のMacでCIを回している間も、自分のMacでビルド結果やテストの結果を確認できる  とのこと。
+Jenkinsで良い気もしますが、Xcodeから簡単にジョブを作成できるのは魅力的です。もしかするとBotsとJenkinsを連携させて使うという可能性もありそうです。
+その他 もっとしゃべりたいことがたくさんあるのですが、正式に公表されたタイミングでまた紹介させていただければと思います。。。
+参照元 What&#39;s New in Xcode 5
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>UIAlertViewよりもおとなしいメッセージダイアログを利用する</title>
+      <link>http://www.tokoro.me/posts/ssgentlealertview/</link>
+      <pubDate>Mon, 27 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ssgentlealertview/</guid>
+      <description>
+        UIAlertViewは警告目的のダイアログ そもそもUIAlertViewはエンドユーザになんらかの警告をするときに利用するもので、iOSヒューマンインターフェースガイドラインにも、
+一般にアラートは、次のような場合には不要です。 * なんらかの情報、特にアプリケーションの標準機能に関する情報を目に付かせるためだけの場合。 代わりに、アプリケーションのスタイルに調和し、目を引く情報表示の方法を設計すべきです。 と記載されています。
+その一方で、UIAlertViewは簡単に利用でき、なんらかの情報を表示するのにどうしても使いたくなってしまいます。
+それならばUIAlertViewの外観を変えて使えば、というのも考えられますが、ところがどっこいUIAlertViewはAppearanceの変更を一切サポートしていません。
+警告目的のアラートダイアログの外観がアプリによって変更されると、エンドユーザからすればそれがなんらかの警告であると認知しづらくなってしまうからだと思われます（アラートダイアログについては全アプリで共通であるべきという思想）。
+警告目的ではない普通のメッセージダイアログ それでは、警告目的でない汎用的に使える普通のメッセージダイアログがあったほうが良いねという話になり、作ってみました。
+https://github.com/tokorom/SSGentleAlertView
+このSSGentleAlertViewは、
+ UIAlertViewと同じコードで利用できる UIAlertViewとは違い、外観を変更できる デフォルトではUIAlertViewよりもおとなしめなダイアログ表示になる  という３点に留意して作っています。
+画像パーツやカラーリングなどはUIデザイナの Atsushi Morino さんに作ってもらってるのでちゃんとしてます。
+外観 自分でカスタマイズしない場合でも、次の3種のスタイルが選べます。
+Default Black Native サンプルコード UIAlertViewを使うときのコードのUIAlertViewの部分をSSGentleAlertViewに変更するだけです。
+// #import &amp;#34;SSGentleAlertView.h&amp;#34;  SSGentleAlertView* alert = [SSGentleAlertView new]; alert.delegate = self; alert.title = @&amp;#34;SSGentleAlertView&amp;#34;; alert.message = @&amp;#34;This is GentleAlertView!\nUIAlertView is too strong to use for ordinary messages.&amp;#34;; [alert addButtonWithTitle:@&amp;#34;Cancel&amp;#34;]; [alert addButtonWithTitle:@&amp;#34;OK&amp;#34;]; alert.cancelButtonIndex = 0; [alert show]; なお、インスタンスを作る際に[[SSGentleAlertView alloc] initWithStyle:SSGentleAlertViewStyleBlack] のようにすることで、３種のスタイルを選択できます。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>UIKitで使われている画像パーツをまとめて取得する</title>
+      <link>http://www.tokoro.me/posts/uikit-images/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/uikit-images/</guid>
+      <description>
+        UIKitで使われている画像はどこにある？ 例えば、UIAlertViewのアラートの画像ってどういう構成になってる？とかUISegmentedControlのAppearance変えたいんだけど当てはめる画像はどう作る？などというときにUIKitが標準で使っている画像パーツを参照できると便利です。
+プログラマというか特にはデザイナさんにとって有用だと思います。
+その画像パーツですが、Xcode（iOSシミュレータ）の中に入っているのでそこから抜くのが手っ取り早いです。
+具体的には（これはiOS6.1の場合）、
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork が画像パーツを含むファイルになります。
+他にも、同じディレクトリに
+ Shared.artwork Shared@2x~ipad.artwork Shared@2x~iphone.artwork Shared~ipad.artwork Shared~iphone.artwork  がありますので取りたいものに応じてお好みで。
+ひとまず、
+cp /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Shared@2x.artwork ~/Desktop/ などでこのファイルをデスクトップにでもコピーしておきましょう。
+artworkから画像ファイルを抽出 で、artworkから肝心の画像ファイルを抽出するのに、 iOS-artwork というやつを使わせてもらいます。
+まずは、これを
+git clone git://github.com/davepeck/iOS-artwork.git などでダウンロードします。
+ただ、これを使うにはPythonとPILというライブラリが必要です。
+たぶんPythonは元から入っていると思うので、PILのほうをbrewなどでインストールします。
+brew install pil インストールし終わったら
+mkdir ~/Desktop/UIKitParts ./iOS-artwork.py export -a ~/Desktop/Shared@2x.artwork -d ~/Desktop/UIKitParts と先ほどダウンロードしたiOS-artworkを実行するわけですが、おそらくここで、
+Traceback (most recent call last): File &amp;#34;./iOS-artwork.py&amp;#34;, line 32, in &amp;lt;module&amp;gt; import PIL ImportError: No module named PIL と怒られると思います。インストールしたはずのPILが見つからないとのこと。そのため、
+export PYTHONPATH=/usr/local/Cellar/pil/1.1.7/lib/python2.7/site-packages としてPILの場所をPythonに教えてあげます（brew以外でインストールした人はディレクトリをその場所に置き換えてください）。
+気を取り直して、
+./iOS-artwork.py export -a ~/Desktop/Shared@2x.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>BlockInjectionをバージョンアップしました</title>
+      <link>http://www.tokoro.me/posts/blockinjection2/</link>
+      <pubDate>Mon, 01 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/blockinjection2/</guid>
+      <description>
+        BlockInjectionとはなんぞや Objective-Cの特定のメソッドの前後に処理を追加できるライブラリです。
+クラスの外側からアスペクト指向的に振る舞いを追加できるのが特徴です。
+https://github.com/tokorom/BlockInjection で公開しています。
+バージョンアップ内容 前記事 からのバージョンアップ内容は以下です。
+ リファクタリングしてメソッド名が一式変更になりました（これまでのものはDeprecatedですがまだ使えます） クラスメソッドにも対応しました 複数のクラスやメソッドを一度に追加できるようになりました 正規表現で指定できるようになりました(※1) 注入したBlockの中で注入先のメソッド名を取得できるようになりました(※2) オマケで単純なメソッド実装置き換え機能も追加しました  UIViewの勝手に呼ばれているsetterでまとめて全てログ出力させる 既存のクラスライブラリの挙動がいまいち分からなくて、いったいどんなタイミングでなにが変更されているんだろうと気になったことはないでしょうか。
+例えば、上記バージョンアップの中の ※1 と ※2 の利用サンプルとして UIViewのsetter全でまとめてログ出力をする ようにしてみます。
+BlockInjectionを使えば、たった3行のコードでこれが実現できます。
+[BILib injectToClassWithNameRegex:BIRegex(@&amp;#34;^UIView$&amp;#34;) methodNameRegex:BIRegex(@&amp;#34;^set.*$&amp;#34;) preprocess:^{ NSLog(@&amp;#34;%@&amp;#34;, [BILib prettyFunction]); }]; これを実行すると、UIViewを作っただけで勝手に呼ばれたsetter群が
+ -[UIView setContentScaleFactor:] -[UIView setFrame:] -[UIView setNeedsDisplay] のように全てログ出力されます。
++ (BOOL)injectToClassWithNameRegex:(NSRegularExpression*)classNameRegex methodNameRegex:(NSRegularExpression*)methodNameRegex preprocess:(id)preprocess; が正規表現でクラス名とメソッド名を指定して処理を注入するためのメソッドです。
+正規表現にマッチする全てのクラス/メソッドの直前に指定したBlockを埋め込みます。
+また、[BILib prettyFunction] は注入先のメソッド名を__PRETTY_FUNCTION__と同じ形式で取得できる便利機能です。
+ちなみに、BIRegexというのはただNSRegularExpressionを簡易的に作るための関数ですので、↑のコードは以下と同義です。
+NSError* error = nil; NSRegularExpression* classNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^UIView$&amp;#34; options:0 error:&amp;amp;error]; NSRegularExpression* methodNameRegex = [NSRegularExpression regularExpressionWithPattern:@&amp;#34;^set.*$&amp;#34; options:0 error:&amp;amp;error]; [BILib injectToClassWithNameRegex:classNameRegex methodNameRegex:methodNameRegex preprocess:^{ NSLog(@&amp;#34;%@&amp;#34;, [BILib prettyFunction]); }]; ※2013/04/05追記: ちなみに 特定Prefixのメソッド全てにまとめて振るまいを追加する というのは @7gano さんのアイデアです。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>BlockInjectionで元のソースコードを汚さないで振る舞い追加</title>
+      <link>http://www.tokoro.me/posts/block-injection/</link>
+      <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/block-injection/</guid>
+      <description>
+        例えばこんなコードに違和感はありませんか？ 自分の場合よくあることなのですが、例えばiOSアプリを開発していて、Google Analytics のトラッキングのためのコードを加えるとき、
+- (IBAction)sendButtonDidPush:(id)sender { // トラッキングのためのコード  [tracker sendEventWithCategory:@&amp;#34;uiAction&amp;#34; withAction:@&amp;#34;sendButtonDidPush&amp;#34; withLabel:nil withValue:0]; // ...  // 以降、送信ボタンを押したときの処理  // ... } こんなかんじにボタンが押されたときの処理のところにトラッキングのためのコードを埋め込んだりすると思います。
+これはこれで問題はないのですが、プログラムのあちらこちらにトラッキングのためのコードを埋め込んで、本来の処理のコードを汚してしまっているのに違和感がありました。
+どうにかしてトラッキングのためのコードを外出しに（また、理想的にはどこかにひとまとめに）できないものでしょうか？
+いわゆるアスペクト指向的なかんじで。
+そんなときに BlockInjection ということで本題に入りますが、それを解決するために BlockInjection というライブラリを作りました。
+古くは AspectCocoa だったりいくつかそれっぽいのはあったのですが、いずれも古い、大きすぎるなどの理由で適切なものが見つからなかったため、この目的に特化したライトなやつとして作っています。
+例えば、上記のコードの場合、こんなかんじで外側から処理を埋め込めます。
+#import &amp;#34;BILib.h&amp;#34; [BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^{ // sendButtonDidPush: が実行される直前にこのコードが実行されます  [tracker sendEventWithCategory:@&amp;#34;uiAction&amp;#34; withAction:@&amp;#34;sendButtonDidPush&amp;#34; withLabel:nil withValue:0]; }]; これで元のソースコードをいじらずにトラッキングの処理を埋め込むことができるようになりました！
+以下、Q&amp;amp;A方式でライブラリの機能を簡単に紹介させていただきます。
+対象となるクラスをimportしないと使えないとかダサくない？ 確かに、トラッキングのコードをまとめたいときなど、各クラスに処理を埋め込むためにimportがずらっっと並ぶのも不恰好です。
+そんなときのために、クラス名もメソッド名も文字列で指定できるインターフェスが用意されています。
+[BILib injectToClassWithName:@&amp;#34;XXXViewController&amp;#34; methodName:@&amp;#34;sendButtonDidPush:&amp;#34; preprocess:^{ // 埋め込みたい処理 }]; 対象となるクラスインスタンスのpropertyを参照できないと意味ないよ 確かに、ただ処理を埋め込むだけでなく、対象となるインスタンスによって処理が変わるようなことは多々ありますよね。
+そんなときは埋め込むブロックの第1引数に対象となるインスタンスが渡ってくるのでそれを利用できます。
+[BILib injectToClass:[XXXViewController class] selector:@selector(sendButtonDidPush:) preprocess:^(XXXViewController* vc){ // ここでXXXViewControllerの中身が好きなように参照可能  NSLog(@&amp;#34;State: %d&amp;#34;, vc.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</title>
+      <link>http://www.tokoro.me/posts/tmux-toggle/</link>
+      <pubDate>Thu, 17 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/tmux-toggle/</guid>
+      <description>
+        ** ※tmuxのprefixキーが C-t 以外のかたはそのキーに読み替えをお願いします **
+導入 近頃の開発環境 : Mosh、z、tmux、Emacs、Perl について を読んで自分もC-t C-tでtmuxのペイン（pane）を行ったり来たりというのを真似してみた。
+設定は以下のとおり。
+ .tmux.conf  bind C-t last-pane これでpaneが複数ある場合には C-t を連打するだけで２つのpaneを行ったり来たりでき確かに便利。
+ただ、じつはこの真似をする前には C-t C-t には last-window を割り当てており、paneを使っていないケースではそれはそれで便利だった。
+例えば、設定を変えたことによって、paneなしで２つのwindowで作業しているときに C-t C-t で２つのwindow行き来しようと思ったらエラーとなりけっこうストレスがあったりした（慣れれば大丈夫なんでしょうけど）。
+改善 ということで、
+ paneがあれば last-pane paneがなければ last-window ついでにwindowさえもなければ新しいwindowを作って移動  というのができれば最強なんじゃないかと思った。
+そんなんできるんかいな？と思ったけどごくごく普通にできた。
+設定は以下のとおり。
+ .tmux.conf  bind C-t run &amp;#34;tmux last-pane || tmux last-window || tmux new-window&amp;#34; runはshを叩くことを意味し、last-paneとlast-windowとnew-windowを||で連結させている。
+これで、last-paneから順番に試していき、成功したところで終わるという挙動になる。
+便利便利！
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</title>
+      <link>http://www.tokoro.me/posts/ctrlp-docset/</link>
+      <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/ctrlp-docset/</guid>
+      <description>
+        Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
+自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
+ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
+ Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト  というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
+Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
+vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
+CtrlPについては、
+ 意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう  あたりがわかりやすかったです。
+インストールして動かすと、
+といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
+参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
+自分はVim内で完結したいので w3m.vim を使ってVim内で表示するように設定しました。
+インストール まずはDocsetがインストールされているか確認 これがないとはじまりません。
+あるかどうか心配なかたは、Xcodeを起動し、 Preferences&amp;hellip; の Downloads を確認してみてください。
+ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
+なければここからインストールをしてみてください。
+なお、ここでインストールしたDocsetは、たぶん
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
+CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
+ .vimrc  Bundle &amp;#39;git://github.com/kien/ctrlp.vim.git&amp;#39; Bundle &amp;#39;git://github.com/tokorom/ctrlp-docset.git&amp;#39; で、その他のかたは各自の環境に合わせて読み替えてください。
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>もっと簡単にVimでObjective-Cのコード補完を実行する</title>
+      <link>http://www.tokoro.me/posts/easy-objc-complement/</link>
+      <pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/easy-objc-complement/</guid>
+      <description>
+        概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
+というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
+具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
+ after/ftplugin/objc.vim  let g:clang_auto_user_options = &amp;#39;path, .clang_complete, ios&amp;#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+ path .clang_complete clang  ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
+の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
+ ios  が今回作成したpluginにより追加できるオプションです。
+clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
+これを入れることで、clang_completeでのコード補完実行の際に、
+ &#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する  という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目+αのことを自動でやってくれるようになります。
+インストール方法  pluginをVundleなどでインストール  # Vundleをご利用の場合 Bundle &amp;#39;git://github.
+      </description>
+      
+    </item>
+    
+    <item>
+      <title>Objective-Cで最近お気に入りのマクロ４つ</title>
+      <link>http://www.tokoro.me/posts/objc-macro/</link>
+      <pubDate>Wed, 09 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.tokoro.me/posts/objc-macro/</guid>
+      <description>
+        マクロ マクロの利用については賛否両論がありますが、ぼくはわりかし使います。
+** ※2013/1/9 追記 **
+上記のとおり独自のマクロを使うこと自体に賛否両論あります。
+例えば独自のマクロを定義して利用することで、
+ 他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない）  などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
+1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&amp;#34;HELLO %3.1d&amp;#34;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&amp;hellip;とよく思ってしまう。
+ということで、
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]を定義して
+NSString* message = NSPRINTF(@&amp;#34;HELLO %3.1d&amp;#34;, 333.333); としています。ちょっと楽！
+** ※2013/1/9 追記 *
+NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
+元々のイメージはNSString+sprintfだったが再考すべし。
+2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&amp;#34;KEY&amp;#34;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&amp;hellip;とよく思ってしまう。
+ということで、
+#define LSTR(s) NSLocalizedString((s), nil)を定義して
+NSString* message = LSTR(@&amp;#34;KEY&amp;#34;); としています。ちょっと楽！
+3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、
+      </description>
+      
+    </item>
+    
+  </channel>
+</rss>
