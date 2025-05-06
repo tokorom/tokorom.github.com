@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>提供するXXXViewControllerの親クラスを差し替え可能にしたい! | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="XXXViewControllerの親クラスを差し替えたいときありますよね？ UIKit内で言えばUITableViewControllerとかはその代表格。
+外部ライブラリで言うと、Google Analytics SDKのGAITrackedViewControllerとか。
+要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。
+で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。
+runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
+define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
+例えば、こんなかんじでどうでしょう？
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+もしsuperclass変えたいよ！って人は、
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+ひとまずこれでなんとかなりそう。
+他に良い方法があればご教示を！"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="提供するXXXViewControllerの親クラスを差し替え可能にしたい! | TOKOROM BLOG" property="og:title"><meta content="XXXViewControllerの親クラスを差し替えたいときありますよね？ UIKit内で言えばUITableViewControllerとかはその代表格。
+外部ライブラリで言うと、Google Analytics SDKのGAITrackedViewControllerとか。
+要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。
+で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。
+runtime使う? いちおう class_setSuperclassという関数があるのですがDeprecated&hellip; なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。
+define! 後から動的に差し替えるってのは class_setSuperclass がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。
+例えば、こんなかんじでどうでしょう？
+#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT #import XXXLIB_VIEW_CONTROLLER_IMPORT #endif #ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS @interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS #else @interface TKRContainerTableViewController : UIViewController #endif // ... @end ふつうに使うぶんには XXXLIB_VIEW_CONTROLLER_IMPORT も XXXLIB_VIEW_CONTROLLER_SUPER_CLASS も定義されていないので普通にUIViewControllerがsuperclassになります。
+もしsuperclass変えたいよ！って人は、
+#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot; #define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController とどこかで定義してやればsuperclassがYourSuperViewControllerになるイメージです。
+ひとまずこれでなんとかなりそう。
+他に良い方法があればご教示を！" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/super-viewcontroller-for-a-library/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/super-viewcontroller-for-a-library/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">提供するXXXViewControllerの親クラスを差し替え可能にしたい!</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2014年1月23日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /</div><div class="content">
+      <h2 id="xxxviewcontrollerの親クラスを差し替えたいときありますよね">XXXViewControllerの親クラスを差し替えたいときありますよね？</h2>
+<p>UIKit内で言えば<code>UITableViewController</code>とかはその代表格。<br>
+外部ライブラリで言うと、Google Analytics SDKの<code>GAITrackedViewController</code>とか。</p>
+<p>要するに、XXXViewControllerの継承して実現したい機能があるのに、既にYYYViewControllerのサブクラスなので使えないよーとなってしまうケース。</p>
+<p>で、既存のものは置いておくとしても、自分が作るライブラリのXXXViewControllerについては、なんとかその親クラス差し替えの需要に応えられないものかなあと。</p>
+<h2 id="runtime使う">runtime使う?</h2>
+<p>いちおう <code>class_setSuperclass</code>という関数があるのですがDeprecated&hellip;
+なんか良い方法ないかな？と考えた結果、今のところ以下のかんじに落ち着きました。</p>
+<!-- more -->
+<h2 id="define">define!</h2>
+<p>後から動的に差し替えるってのは <code>class_setSuperclass</code> がDeprecatedな時点で諦めるとして、だとするとコンパイル前に差し替えるしかないよねと。</p>
+<p>例えば、こんなかんじでどうでしょう？</p>
+<pre><code class="language-objective-c">#ifdef XXXLIB_VIEW_CONTROLLER_IMPORT
+#import XXXLIB_VIEW_CONTROLLER_IMPORT
+#endif
+
+#ifdef XXXLIB_VIEW_CONTROLLER_SUPER_CLASS
+@interface TKRContainerTableViewController : XXXLIB_VIEW_CONTROLLER_SUPER_CLASS
+#else
+@interface TKRContainerTableViewController : UIViewController
+#endif
+
+// ...
+
+@end
+</code></pre>
+<p>ふつうに使うぶんには <code>XXXLIB_VIEW_CONTROLLER_IMPORT</code> も <code>XXXLIB_VIEW_CONTROLLER_SUPER_CLASS</code> も定義されていないので普通に<code>UIViewController</code>がsuperclassになります。</p>
+<p>もしsuperclass変えたいよ！って人は、</p>
+<pre><code class="language-objective-c">#define XXXLIB_VIEW_CONTROLLER_IMPORT &quot;YourSuperViewController.h&quot;
+#define XXXLIB_VIEW_CONTROLLER_SUPER_CLASS YourSuperViewController
+</code></pre>
+<p>とどこかで定義してやればsuperclassが<code>YourSuperViewController</code>になるイメージです。<br>
+ひとまずこれでなんとかなりそう。</p>
+<p>他に良い方法があればご教示を！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objective-c-haskell/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cでカリー化とか部分適用してみる</span>
+    <span class="feed-item-date">2013年11月4日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ssgentlealertview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIAlertViewよりもおとなしいメッセージダイアログを利用する</span>
+    <span class="feed-item-date">2013年5月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/uikit-images/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">UIKitで使われている画像パーツをまとめて取得する</span>
+    <span class="feed-item-date">2013年5月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/blockinjection2/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">BlockInjectionをバージョンアップしました</span>
+    <span class="feed-item-date">2013年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

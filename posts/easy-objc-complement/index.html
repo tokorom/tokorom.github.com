@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>もっと簡単にVimでObjective-Cのコード補完を実行する | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
+というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
+具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
+after/ftplugin/objc.vim let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+path .clang_complete clang ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
+の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
+ios が今回作成したpluginにより追加できるオプションです。
+clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
+これを入れることで、clang_completeでのコード補完実行の際に、
+&#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目&#43;αのことを自動でやってくれるようになります。
+インストール方法 pluginをVundleなどでインストール # Vundleをご利用の場合 Bundle &#39;git://github.com/tokorom/clang_complete.git&#39; Bundle &#39;git://github.com/tokorom/clang_complete-getopts-ios.git&#39; after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39; この他、clang_complete 自体の設定などについては、 VimでObjective-Cのコード補完を実行する With Clang をご参照ください。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="もっと簡単にVimでObjective-Cのコード補完を実行する | TOKOROM BLOG" property="og:title"><meta content="概要 先日、 VimでObjective-Cのコード補完を実行する With Clang でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。
+というのも、clang_completeにはg:clang_auto_user_optionsという素晴らしいオプションがあり、これによりclang_complete本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。
+具体的には、clang_completeともう１つ、後述の拙作の plugin を１つインストールいただき、
+after/ftplugin/objc.vim let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39; という設定をするだけで多くのプロジェクトが .clang_complete ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。 このオプションの中の、
+path .clang_complete clang ※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました
+の３つ２つはclang_completeにデフォルト値で設定される値で、最後の
+ios が今回作成したpluginにより追加できるオプションです。
+clang_complete-getopts-ios clang_complete-getopts-iosが新しく作成した clang_complete の plugin です。
+これを入れることで、clang_completeでのコード補完実行の際に、
+&#39;-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300&#39;をオプションとして追加する カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する カレントディレクトリ以下の *.pch を全て -include オプションとして追加する -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworksをオプションとして追加する /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include以下のディレクトリを全てIncludeファイル用の検索パスとして追加する という５つのことを自動で行ってくれるようになり、.clang_completeファイルいらずになります。 要するに、前の記事 で手動で .clang_complete ファイルに設定した項目&#43;αのことを自動でやってくれるようになります。
+インストール方法 pluginをVundleなどでインストール # Vundleをご利用の場合 Bundle &#39;git://github.com/tokorom/clang_complete.git&#39; Bundle &#39;git://github.com/tokorom/clang_complete-getopts-ios.git&#39; after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える let g:clang_auto_user_options = &#39;path, .clang_complete, ios&#39; この他、clang_complete 自体の設定などについては、 VimでObjective-Cのコード補完を実行する With Clang をご参照ください。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/easy-objc-complement/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/easy-objc-complement/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">もっと簡単にVimでObjective-Cのコード補完を実行する</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年1月14日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/vim">
+              vim
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <h2 id="概要">概要</h2>
+<p>先日、 <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> でVimでclangを使ったコード補完をする方法について紹介させていただきましたが、今回はそのUpdate版になります。</p>
+<p>というのも、<code>clang_complete</code>には<code>g:clang_auto_user_options</code>という素晴らしいオプションがあり、これにより<code>clang_complete</code>本体をいじらなくてもiOS用の設定を簡単に拡張できることが分かったためです。<br>
+具体的には、<code>clang_complete</code>ともう１つ、後述の拙作の <a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a> を１つインストールいただき、</p>
+<ul>
+<li>after/ftplugin/objc.vim</li>
+</ul>
+<pre><code class="language-sh">let g:clang_auto_user_options = 'path, .clang_complete, ios'
+</code></pre>
+<p>という設定をするだけで多くのプロジェクトが <code>.clang_complete</code> ファイルなしでコード補完できるようになる見込みです（手元のプロジェクトは全て追加設定いらずでした）。
+このオプションの中の、</p>
+<!-- more -->
+<ul>
+<li>path</li>
+<li>.clang_complete</li>
+<li><del>clang</del></li>
+</ul>
+<p><strong>※2013/1/20 追記 clangの項はclang_completeのバージョンアップでなくなりました</strong></p>
+<p>の<del>３つ</del>２つは<code>clang_complete</code>にデフォルト値で設定される値で、最後の</p>
+<ul>
+<li>ios</li>
+</ul>
+<p>が今回作成した<a href="https://github.com/tokorom/clang_complete-getopts-ios">plugin</a>により追加できるオプションです。</p>
+<h2 id="clang_complete-getopts-ios">clang_complete-getopts-ios</h2>
+<p><a href="https://github.com/tokorom/clang_complete-getopts-ios">clang_complete-getopts-ios</a>が新しく作成した clang_complete の plugin です。<br>
+これを入れることで、clang_completeでのコード補完実行の際に、</p>
+<ul>
+<li><code>'-fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300'</code>をオプションとして追加する</li>
+<li>カレントディレクトリ以下のディレクトリを全てIncludeファイル用の検索パスとして追加する</li>
+<li>カレントディレクトリ以下の <strong>*.pch</strong> を全て <code>-include</code> オプションとして追加する</li>
+<li><code>-F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/Frameworks</code>をオプションとして追加する</li>
+<li><code>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include</code>以下のディレクトリを全てIncludeファイル用の検索パスとして追加する</li>
+</ul>
+<p>という５つのことを自動で行ってくれるようになり、<code>.clang_complete</code>ファイルいらずになります。
+要するに、<a href="/2013/01/02/clang-complete-for-vim/">前の記事</a> で手動で <code>.clang_complete</code> ファイルに設定した項目+αのことを自動でやってくれるようになります。</p>
+<h2 id="インストール方法">インストール方法</h2>
+<ul>
+<li>pluginをVundleなどでインストール</li>
+</ul>
+<pre><code class="language-sh"># Vundleをご利用の場合
+Bundle 'git://github.com/tokorom/clang_complete.git'
+Bundle 'git://github.com/tokorom/clang_complete-getopts-ios.git'
+</code></pre>
+<ul>
+<li>after/ftplugin/objc.vim に以下のようにiosアプリ開発用の設定を加える</li>
+</ul>
+<pre><code class="language-sh">let g:clang_auto_user_options = 'path, .clang_complete, ios'
+</code></pre>
+<p>この他、clang_complete 自体の設定などについては、 <a href="/2013/01/02/clang-complete-for-vim/">VimでObjective-Cのコード補完を実行する With Clang</a> をご参照ください。</p>
+<p><s>* .vimrc clang_completeがPythonのライブラリを使うように設定する（どうもこっちのほうが安定してるっぽい）</s></p>
+<ul>
+<li>.vimrc clang_completeがPythonのライブラリを使わないよう設定する（2012/2/11現在、Pythonライブラリだとうまく補完できないケースがあった。ただしclang_complete自体はこのオプションをdeprecatedとしている）</li>
+</ul>
+<pre><code class="language-sh">let g:clang_use_library = 0
+</code></pre>
+<h2 id="設定完了">設定完了！</h2>
+<p>以上の設定でたいていのケースではiOSアプリ開発時のコード補完ができるようになっているかと思います。<br>
+あとは使うだけ！</p>
+<h2 id="オプション事項">オプション事項</h2>
+<h3 id="sdkを-51-にしたい">SDKを <strong>5.1</strong> にしたい</h3>
+<pre><code class="language-objc">let g:clang_complete_getopts_ios_sdk_directory = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk'
+</code></pre>
+<p>といった形で、SDKの場所を設定してあげてください。</p>
+<h3 id="arc非対応にしたいその他オプションを加えたい">ARC非対応にしたい、その他オプションを加えたい</h3>
+<pre><code class="language-objc">let g:clang_complete_getopts_ios_default_options = '-w -fblocks -fobjc-arc -D __IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+</code></pre>
+<p>をご自由にお書き換えください。<br>
+もちろん、これまでどおり <code>.clang_complete</code> ファイルにオプションを加えることもできます。</p>
+<h3 id="includeファイル用の検索パスとして加えたくないディレクトリがある">Includeファイル用の検索パスとして加えたくないディレクトリがある</h3>
+<pre><code class="language-objc">let g:clang_complete_getopts_ios_ignore_directories = [&quot;^\.git&quot;, &quot;\.xcodeproj&quot;]
+</code></pre>
+<p>をご自由にお書き換えください。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-macro/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで最近お気に入りのマクロ４つ</span>
+    <span class="feed-item-date">2013年1月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-private-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</span>
+    <span class="feed-item-date">2012年9月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-new-statements/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

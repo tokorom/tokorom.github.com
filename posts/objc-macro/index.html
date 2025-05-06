@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Objective-Cで最近お気に入りのマクロ４つ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="マクロ マクロの利用については賛否両論がありますが、ぼくはわりかし使います。
+** ※2013/1/9 追記 **
+上記のとおり独自のマクロを使うこと自体に賛否両論あります。
+例えば独自のマクロを定義して利用することで、
+他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない） などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
+1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&hellip;とよく思ってしまう。
+ということで、
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__] を定義して
+NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333); としています。ちょっと楽！
+** ※2013/1/9 追記 *
+NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
+元々のイメージはNSString&#43;sprintfだったが再考すべし。
+2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。
+ということで、
+#define LSTR(s) NSLocalizedString((s), nil) を定義して
+NSString* message = LSTR(@&quot;KEY&quot;); としています。ちょっと楽！
+3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Objective-Cで最近お気に入りのマクロ４つ | TOKOROM BLOG" property="og:title"><meta content="マクロ マクロの利用については賛否両論がありますが、ぼくはわりかし使います。
+** ※2013/1/9 追記 **
+上記のとおり独自のマクロを使うこと自体に賛否両論あります。
+例えば独自のマクロを定義して利用することで、
+他の人がコードを見たときに分かりづらくなる 思わぬ不具合が出るケースがある 名前の衝突リスクがある（マクロは名前空間が使えない） などのデメリットがあります。 特にチームや会社でのご利用の際にはよくよくご留意をお願いします。
+1. [NSString stringWithFormat:] を簡単に NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333]; [NSString stringWithFormat:]はよく使うのだが長くて面倒&hellip;とよく思ってしまう。
+ということで、
+#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__] を定義して
+NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333); としています。ちょっと楽！
+** ※2013/1/9 追記 *
+NSSPRINTFというネーミングは微妙。特にNSという冠詞を勝手に使うのがダメ。
+元々のイメージはNSString&#43;sprintfだったが再考すべし。
+2. NSLocalizedString を簡単に NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil); NSLocalizedStringもよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。
+ということで、
+#define LSTR(s) NSLocalizedString((s), nil) を定義して
+NSString* message = LSTR(@&quot;KEY&quot;); としています。ちょっと楽！
+3. クラスメソッドの利用を簡単に [LongLongLongNameClass classMethod]; 自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドのselfと比べて面倒だなと思ってしまう。 ということで、" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/objc-macro/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/objc-macro/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Objective-Cで最近お気に入りのマクロ４つ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年1月9日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /</div><div class="content">
+      <h2 id="マクロ">マクロ</h2>
+<p>マクロの利用については賛否両論がありますが、ぼくはわりかし使います。</p>
+<p>** ※2013/1/9 追記 **</p>
+<p>上記のとおり独自のマクロを使うこと自体に賛否両論あります。<br>
+例えば独自のマクロを定義して利用することで、</p>
+<ul>
+<li>他の人がコードを見たときに分かりづらくなる</li>
+<li>思わぬ不具合が出るケースがある</li>
+<li>名前の衝突リスクがある（マクロは名前空間が使えない）</li>
+</ul>
+<p>などのデメリットがあります。
+特にチームや会社でのご利用の際にはよくよくご留意をお願いします。</p>
+<h2 id="1-nsstring-stringwithformat-を簡単に">1. [NSString stringWithFormat:] を簡単に</h2>
+<pre><code class="language-objc">NSString* message = [NSString stringWithFormat:@&quot;HELLO %3.1d&quot;, 333.333];
+</code></pre>
+<p><code>[NSString stringWithFormat:]</code>はよく使うのだが長くて面倒&hellip;とよく思ってしまう。<br>
+ということで、</p>
+<!-- more -->
+<pre><code class="language-objc">#define NSPRINTF(f, ...) [NSString stringWithFormat:f, __VA_ARGS__]
+</code></pre>
+<p>を定義して</p>
+<pre><code class="language-objc">NSString* message = NSPRINTF(@&quot;HELLO %3.1d&quot;, 333.333);
+</code></pre>
+<p>としています。ちょっと楽！</p>
+<p>** ※2013/1/9 追記 *</p>
+<p><code>NSSPRINTF</code>というネーミングは微妙。特に<code>NS</code>という冠詞を勝手に使うのがダメ。<br>
+元々のイメージは<code>NSString</code>+<code>sprintf</code>だったが再考すべし。</p>
+<h2 id="2-nslocalizedstring-を簡単に">2. NSLocalizedString を簡単に</h2>
+<pre><code class="language-objc">NSString* message = NSLocalizedString(@&quot;KEY&quot;, nil);
+</code></pre>
+<p><code>NSLocalizedString</code>もよく使うのだが長いしあまり使わない引数がつきまとって面倒&hellip;とよく思ってしまう。<br>
+ということで、</p>
+<pre><code class="language-objc">#define LSTR(s) NSLocalizedString((s), nil)
+</code></pre>
+<p>を定義して</p>
+<pre><code class="language-objc">NSString* message = LSTR(@&quot;KEY&quot;);
+</code></pre>
+<p>としています。ちょっと楽！</p>
+<h2 id="3-クラスメソッドの利用を簡単に">3. クラスメソッドの利用を簡単に</h2>
+<pre><code class="language-objc">[LongLongLongNameClass classMethod];
+</code></pre>
+<p>自クラスのクラスメソッドを使うときにクラス名が長いとインスタンスメソッドの<code>self</code>と比べて面倒だなと思ってしまう。
+ということで、</p>
+<pre><code class="language-objc">#define ME [self class]
+</code></pre>
+<p>を定義して</p>
+<pre><code class="language-objc">[ME classMethod];
+</code></pre>
+<p>としています。ちょっと楽！</p>
+<h2 id="4-blockのお伴の__weakなselfを簡単に">4. Blockのお伴の__weakなselfを簡単に</h2>
+<pre><code class="language-objc">__weak MyClass* SELF = self;
+[self doSomethingWithBlock:^{
+  [SELF showAlert];
+}];
+</code></pre>
+<p>Blockを使ってそこにselfをweakリファレンスで渡したいとき、そのコードの記述が面倒だなと思ってしまう。
+ということで、</p>
+<pre><code class="language-objc">#define PREPARE_SELF __weak typeof(self) SELF = self
+</code></pre>
+<p>を定義して</p>
+<pre><code class="language-objc">PREPARE_SELF;
+[self doSomethingWithBlock:^{
+  [SELF showAlert];
+}];
+</code></pre>
+<p>としています。ちょっと楽！</p>
+<h2 id="参考ページ">参考ページ</h2>
+<ul>
+<li><a href="http://www.zero4racer.com/blog/1014">Objective-C の instancetype キーワードが面白い + typeof(self)の考察</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-private-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</span>
+    <span class="feed-item-date">2012年9月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-new-statements/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ghunit-jenkins-coverage/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">GHUnitのテストカバレッジをJenkinsで表示する</span>
+    <span class="feed-item-date">2012年9月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

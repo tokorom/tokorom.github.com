@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>テレビのリモコンのことも忘れないで！ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
+テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
+AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
+ゲームコントローラ/ゲームパッド Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。
+テレビのリモコンでどこまで操作できる？ Apple純正のアプリ 全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。
+サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
+自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
+テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
+REGZAのリモコン UIPressType 決定 .select 戻る .menu 再生 .playPause 停止 - 上 .upArrow 下 .downArrow 左 .leftArrow 右 .rightArrow UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+ただし条件があり、transitionStyleプロパティにUIPageViewControllerTransitionStyle.scrollを設定している場合のみ操作可能です。.pageCurlだと（デフォルトでは）操作不能でした。
+.scrollの場合には、navigationOrientationプロパティが.horizontalなら左右ボタンで、.verticalなら上下ボタンでそれぞれページ移動が可能です。
+UIScrollView UIScrollViewも特に意識しないでも操作可能になっています。
+上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。
+UITextView UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。
+テレビのリモコンで操作できない画面をなんとかする 一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、UITapGestureRecognizerを使って対処するのが簡単そうです。
+let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:))) leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)] view.addGestureRecognizer(leftTap) let rightTap = UITapGestureRecognizer(target: self, action: #selector(self."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="テレビのリモコンのことも忘れないで！ | TOKOROM BLOG" property="og:title"><meta content="AppleTVで使えるリモコンって？ Siriリモート tvOS/AppleTVのリモコンといえばSiriリモートですよね。 皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。
+テレビのリモコン そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！
+AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。 そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。
+ゲームコントローラ/ゲームパッド Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。
+テレビのリモコンでどこまで操作できる？ Apple純正のアプリ 全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。
+サードパーティのアプリ ゲームアプリ以外なら操作できることが多いようです。 ただしTouchサーフェス前提で組まれているアプリは操作不能です。
+自分が開発するアプリはどうすべき？ タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。 また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。
+テレビのリモコンのボタンに対応するUIPressType うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。
+REGZAのリモコン UIPressType 決定 .select 戻る .menu 再生 .playPause 停止 - 上 .upArrow 下 .downArrow 左 .leftArrow 右 .rightArrow UIKitの各コントロールの挙動 フォーカス移動 テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。
+UITableView/UICollectionView UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。 デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。
+UIPageViewController これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。
+ただし条件があり、transitionStyleプロパティにUIPageViewControllerTransitionStyle.scrollを設定している場合のみ操作可能です。.pageCurlだと（デフォルトでは）操作不能でした。
+.scrollの場合には、navigationOrientationプロパティが.horizontalなら左右ボタンで、.verticalなら上下ボタンでそれぞれページ移動が可能です。
+UIScrollView UIScrollViewも特に意識しないでも操作可能になっています。
+上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。
+UITextView UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。
+テレビのリモコンで操作できない画面をなんとかする 一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、UITapGestureRecognizerを使って対処するのが簡単そうです。
+let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:))) leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)] view.addGestureRecognizer(leftTap) let rightTap = UITapGestureRecognizer(target: self, action: #selector(self." property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/330f9bdc-86fe-97b5-2dca-a2259c525739.jpeg" property="og:image"><meta content="https://www.tokoro.me/posts/tvos_advent_calendar_2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/tvos_advent_calendar_2/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">テレビのリモコンのことも忘れないで！</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2017年12月24日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/tvos">
+              tvos
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ui">
+              ui
+          </a>
+          /</div><div class="content">
+      <h2 id="appletvで使えるリモコンって">AppleTVで使えるリモコンって？</h2>
+<h3 id="siriリモート">Siriリモート</h3>
+<p>tvOS/AppleTVのリモコンといえばSiriリモートですよね。
+皆様におかれましても日々のAppleTV生活ではSiriリモートを使われているかと思います。</p>
+<h3 id="テレビのリモコン">テレビのリモコン</h3>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/dfe71005-eb5e-bc17-b112-1e0ffdd150ad.jpeg" height=200>
+<p>そしてもちろん普通のテレビのリモコンもAppleTVの操作に使えます！</p>
+<p>AppleTVを利用しているということは当然テレビを利用しているわけで、AppleTVを使っている人のほとんどがテレビのリモコンを所持している、かつ普段使いしていることでしょう（AppleTVの操作をするかどうかは置いておいて）。
+そのため、AppleTVの操作という意味ではSiriリモートに次いで利用するチャンスが多くなるリモコンかと思います。</p>
+<h3 id="ゲームコントローラゲームパッド">ゲームコントローラ/ゲームパッド</h3>
+<p>Nimbusなどのゲームコントローラも利用できますが、今回の主役は普通のテレビのリモコンのため、省略させていただきます。</p>
+<h2 id="テレビのリモコンでどこまで操作できる">テレビのリモコンでどこまで操作できる？</h2>
+<h3 id="apple純正のアプリ">Apple純正のアプリ</h3>
+<p>全て確認したわけではないですが、ホーム画面はもちろん、純正アプリならテレビのリモコンだけでも一通りの操作ができるようになっているようです。</p>
+<h3 id="サードパーティのアプリ">サードパーティのアプリ</h3>
+<p>ゲームアプリ以外なら操作できることが多いようです。
+ただしTouchサーフェス前提で組まれているアプリは操作不能です。</p>
+<h3 id="自分が開発するアプリはどうすべき">自分が開発するアプリはどうすべき？</h3>
+<p>タイトルには「忘れないで！」と書いたものの、実際のところそんなに気にしなくても良いのでは。
+また、UIKitをシンプルに使って作ったアプリなら何も処置しなくてもテレビのリモコンで操作できるようになっています（後述します）。</p>
+<h2 id="テレビのリモコンのボタンに対応するuipresstype">テレビのリモコンのボタンに対応するUIPressType</h2>
+<p>うちのテレビ（REGZA）のリモコンではこんな感じになっていました。他のテレビのリモコンも概ね同じじゃないかと思います。</p>
+<table>
+<thead>
+<tr>
+<th>REGZAのリモコン</th>
+<th>UIPressType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>決定</td>
+<td>.select</td>
+</tr>
+<tr>
+<td>戻る</td>
+<td>.menu</td>
+</tr>
+<tr>
+<td>再生</td>
+<td>.playPause</td>
+</tr>
+<tr>
+<td>停止</td>
+<td>-</td>
+</tr>
+<tr>
+<td>上</td>
+<td>.upArrow</td>
+</tr>
+<tr>
+<td>下</td>
+<td>.downArrow</td>
+</tr>
+<tr>
+<td>左</td>
+<td>.leftArrow</td>
+</tr>
+<tr>
+<td>右</td>
+<td>.rightArrow</td>
+</tr>
+</tbody>
+</table>
+<h2 id="uikitの各コントロールの挙動">UIKitの各コントロールの挙動</h2>
+<h3 id="フォーカス移動">フォーカス移動</h3>
+<p>テレビのリモコンの上下左右キーが有効ですので、上下左右を押すことで普通にフォーカスが移動可能です。そのためシンプルにフォーカスが当たるコントロール（UIButtonなど）が配置されただけの画面なら何もしなくても操作可能になっています。</p>
+<h3 id="uitableviewuicollectionview">UITableView/UICollectionView</h3>
+<p>UITableViewやUICollectionViewを使った画面もテレビのリモコンで操作可能です。
+デフォルトで各Cellにフォーカスが当たるので、Cellのフォーカスを移動していくと自動的にスクロールしていく挙動になります。</p>
+<h3 id="uipageviewcontroller">UIPageViewController</h3>
+<p>これは意外だったのですが、UIPageViewControllerもデフォルトでテレビのリモコンでの操作が可能でした。</p>
+<p>ただし条件があり、transitionStyleプロパティに<code>UIPageViewControllerTransitionStyle.scroll</code>を設定している場合のみ操作可能です。<code>.pageCurl</code>だと（デフォルトでは）操作不能でした。</p>
+<p><code>.scroll</code>の場合には、<code>navigationOrientation</code>プロパティが<code>.horizontal</code>なら左右ボタンで、<code>.vertical</code>なら上下ボタンでそれぞれページ移動が可能です。</p>
+<h3 id="uiscrollview">UIScrollView</h3>
+<p>UIScrollViewも特に意識しないでも操作可能になっています。</p>
+<p>上下左右で直接スクロール可能というわけではなく、UIScrollView上に配置された要素を上下左右ボタンでフォーカス移動することで、結果としてスクロールされるという挙動になります（フォーカスが当たった要素が画面内に収まるように）。</p>
+<h3 id="uitextview">UITextView</h3>
+<p>UITextViewはデフォルトでは上下左右ボタンでの操作ができませんでした。</p>
+<h2 id="テレビのリモコンで操作できない画面をなんとかする">テレビのリモコンで操作できない画面をなんとかする</h2>
+<p>一例ですが、UIPanGestureRecognizerを使って独自のページ移動をさせるような実装をした画面でもテレビのリモコンで操作させたい場合には、<code>UITapGestureRecognizer</code>を使って対処するのが簡単そうです。</p>
+<pre><code class="language-swift">let leftTap = UITapGestureRecognizer(target: self, action: #selector(self.leftArrowDidPress(sender:)))
+leftTap.allowedPressTypes = [NSNumber(value: UIPressType.leftArrow.rawValue)]
+view.addGestureRecognizer(leftTap)
+
+let rightTap = UITapGestureRecognizer(target: self, action: #selector(self.rightArrowDidPress(sender:)))
+rightTap.allowedPressTypes = [NSNumber(value: UIPressType.rightArrow.rawValue)]
+view.addGestureRecognizer(rightTap)
+
+// func leftArrowDidPress(sender:) と func rightArrowDidPress(sender:) にそれぞれ左右への移動のための実装をする
+</code></pre>
+<p>単にUIGestureRecognizerの<code>allowedPressTypes</code>プロパティでハンドリングしたいUIPressTypeを指定してそれに応じたコードを書くだけです！</p>
+<p>※ブログ用にコードで例示しましたが、普段UITapGestureRegognizerの追加はInterface Builderでやってます</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>シンプルに作ればtvOSアプリはテレビのリモコンで操作できるようになっている</li>
+<li>利用できるボタンは決定、戻る、再生、上下左右</li>
+<li>凝った実装でデフォルトではテレビのリモコンで操作できない場合でも、各ボタンに対応したUIPressTypeをハンドリングしてあげれば対応可能</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/tvos_advent_calendar_1/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/c911b99d-9d09-08ea-8555-cb07e2d1ab21.jpeg" class="feed-item-image" alt="tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？" width="300"></div>
+
+    <span class="feed-item-title">tvOSフォーカスクイズ！ ここでスワイプしたらどちらに動く？</span>
+    <span class="feed-item-date">2017年12月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7はもっさりか？比較検証してみた</span>
+    <span class="feed-item-date">2013年9月23日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-ui-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</span>
+    <span class="feed-item-date">2013年6月17日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-video/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</span>
+    <span class="feed-item-date">2013年6月13日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

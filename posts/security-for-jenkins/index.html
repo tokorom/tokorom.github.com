@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
+JenkinsにBitbucketからアクセスするためのユーザを追加 まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。
+※ ユーザの追加方法については このあたり を参照
+今回は、bitbucket というユーザを追加した。
+また、 Manage Jenkins -&gt; Configure System で、
+Access Control Authorization Matrix-based security bitbucketユーザに Job の Read だけチェック としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
+このとき、Anonymousユーザの Job の Read にチェックがついていれば外しておく。
+Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
+nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &quot;Basic XXXXXX&quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。
+Base64エンコードの方法が分からない場合は このあたり のサイトでエンコードした文字列をGETするのが手っ取り早い。
+設定後にnginxを再起動しておくこと。
+Bitbucketのほうの設定 該当リポジトリの Admin タブの Services を選択。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする | TOKOROM BLOG" property="og:title"><meta content="前の記事でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。
+JenkinsにBitbucketからアクセスするためのユーザを追加 まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。
+※ ユーザの追加方法については このあたり を参照
+今回は、bitbucket というユーザを追加した。
+また、 Manage Jenkins -&gt; Configure System で、
+Access Control Authorization Matrix-based security bitbucketユーザに Job の Read だけチェック としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。
+このとき、Anonymousユーザの Job の Read にチェックがついていれば外しておく。
+Jenkinsへのビルド命令専用のドメインを追加 これまでは jenkins.yourdomain というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の push-to-jenkins.yourdomain を追加した。
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。
+nginxに設定追加 nginxのconfに、以下のようにpush-to-jenkins.yourdomainへのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。
+server { listen 80; server_name push-to-jenkins.yourdomain; location / { proxy_pass http://localhost:8080; proxy_set_header Authorization &quot;Basic XXXXXX&quot;; } } XXXXXX の部分には実際には bitbucket:yourpassword というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。
+Base64エンコードの方法が分からない場合は このあたり のサイトでエンコードした文字列をGETするのが手っ取り早い。
+設定後にnginxを再起動しておくこと。
+Bitbucketのほうの設定 該当リポジトリの Admin タブの Services を選択。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/security-for-jenkins/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/security-for-jenkins/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年7月29日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/sakura">
+              sakura
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/octopress">
+              octopress
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/jenkins">
+              jenkins
+          </a>
+          /</div><div class="content">
+      <p><a href="/2012/07/29/jenkins-octopress/">前の記事</a>でBitbucketにpushしたのをトリガーにJenkinsでOctopressをデプロイするというのをやったのだが、このときは認証なしでJobの実行できるようになってしまっていた。<br>
+つまりこのままだと自分のJenkinsは認証なしで全てのJobが実行できてしまうという状態でよろしくない。<br>
+ひとつの解決索としてビルド命令用のユーザを作り、そのIDとPasswordをURLに直接埋め込んでしまうという方法も考えられるが、今回はそれを極力しない方向でがんばりたいと思う。</p>
+<h2 id="jenkinsにbitbucketからアクセスするためのユーザを追加">JenkinsにBitbucketからアクセスするためのユーザを追加</h2>
+<p>まずはBitbucketからJenkinsにアクセスする専用のユーザを作る。</p>
+<p>※ ユーザの追加方法については <a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">このあたり</a> を参照</p>
+<p>今回は、<strong>bitbucket</strong> というユーザを追加した。</p>
+<p>また、 <strong>Manage Jenkins</strong> -&gt; <strong>Configure System</strong> で、</p>
+<ul>
+<li>Access Control
+<ul>
+<li>Authorization
+<ul>
+<li>Matrix-based security
+<ul>
+<li>bitbucketユーザに <strong>Job</strong> の <strong>Read</strong> だけチェック</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- more -->
+<p>としておいて、bitbucketユーザが最低限のことのみ可能なように設定しておく。</p>
+<p>このとき、Anonymousユーザの <strong>Job</strong> の <strong>Read</strong> にチェックがついていれば外しておく。</p>
+<h2 id="jenkinsへのビルド命令専用のドメインを追加">Jenkinsへのビルド命令専用のドメインを追加</h2>
+<p>これまでは <code>jenkins.yourdomain</code> というドメインでJenkinsにアクセスさせていたとして、ビルド命令専用の <code>push-to-jenkins.yourdomain</code> を追加した。<br>
+これはnginxが外部からのビルド命令だと分かるようにするための目印としての意味合いなので、ドメインを追加する以外の方法でも良い。</p>
+<h2 id="nginxに設定追加">nginxに設定追加</h2>
+<p>nginxのconfに、以下のように<code>push-to-jenkins.yourdomain</code>へのアクセスをBasic認証つきでローカルのJenkinsのURLに委譲するよう設定を追加する。</p>
+<pre><code>server {
+    listen 80;
+    server_name push-to-jenkins.yourdomain;
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Authorization &quot;Basic XXXXXX&quot;;
+    }
+}
+</code></pre>
+<p><strong>XXXXXX</strong> の部分には実際には <strong>bitbucket:yourpassword</strong> というBasic認証のIDとPasswordの文字列をBase64エンコードした文字列を入れる必要がある。<br>
+Base64エンコードの方法が分からない場合は <a href="http://www.ahref.org/app/base64/base64.cgi">このあたり</a> のサイトでエンコードした文字列をGETするのが手っ取り早い。</p>
+<p>設定後にnginxを再起動しておくこと。</p>
+<h2 id="bitbucketのほうの設定">Bitbucketのほうの設定</h2>
+<p>該当リポジトリの <strong>Admin</strong> タブの <strong>Services</strong> を選択。</p>
+<p>POSTの設定項目を</p>
+<pre><code>http://push-to-jenkins.yourdomain/job/deploy-octopress/build?token=a-word-you-like
+</code></pre>
+<p>に変更しておく。</p>
+<h2 id="おしまい">おしまい</h2>
+<p>以上の設定がうまく言っていれば、Bitbucketへの<code>git push origin source</code>でOctopressのデプロイが自動的にできるはず。<br>
+また、このときベーシック認証のIDとPasswordがインターネット上にさらされることもない。</p>
+<h2 id="20120819-追記">2012/08/19 追記</h2>
+<p>なお、Twitterで**@croquette0212**さんから</p>
+<blockquote class="twitter-tweet tw-align-center"><p><a href="https://twitter.com/tokorom"><s>@</s><b>tokorom</b></a> BitBucketとJenkinsの連携ですが、tokenつかうよりもGit PluginのnotifyCommit使う方がセキュリティの設定とかも楽なのでおすすめです! <a href="http://t.co/uBvrf0vL" title="http://kohsuke.org/2011/12/01/polling-must-die-triggering-jenkins-builds-from-a-git-hook/">kohsuke.org/2011/12/01/pol…</a></p>&mdash; Sousai (@croquette0212) <a href="https://twitter.com/croquette0212/status/236403188574613505" data-datetime="2012-08-17T10:04:46+00:00">August 17, 2012</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+と教えていただきました。  
+この方法だと外部（ここではBitbucket）から叩くURLになんとジョブ名さえ指定する必要がありません。このNotifyを受けたJenkinsのほうで自動でジョブをさらってスケジューリングしてくれるとのことです。  
+また、このNotifyそのものがジョブを実行するわけではなくあくまでもJenkinsに対する通知だけなので、ジョブの実行権限のあるユーザでURLを叩くにはどうしたらよいだろう？とかセキュリティのことをごたごた考えずに済みます。Jenkinsを運用しているサーバが該当のGitリポジトリをcloneできる状態ならOKなようでとても楽そうです。  
+詳しくは [GitHubとJenkinsの連携](http://nantekottai.com/2012/07/13/git-hook-and-access-controlled-jenkins/) をご参照ください。
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/jenkins-octopress/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Jenkins@さくらVPSにOctopressのデプロイを任せてみる</span>
+    <span class="feed-item-date">2012年7月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/install-jenkins-to-sakura/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">さくらVPSにJenkinsさんをインストールする</span>
+    <span class="feed-item-date">2012年7月24日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/octopress-part-of-codes/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Octopressでソースコードの一部分だけを参照する</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

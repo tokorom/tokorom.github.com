@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[WWDC21] [SharePlay] Meet Group Activitiesのまとめ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Meet Group Activities を視聴して内容をまとめたものです。
+先に簡単にまとめ SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能 導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
+SharePlayは、GroupActivities フレームワークによって実現されています。
+このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。
+Communication Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。
+ユーザーは、自分にとって最も身近な人たち、友人や家族とのコミュニケーションにかなりの時間を費やしています。 それらは、映画を見るためにリビングルームに招待する対象となるような人たちです。
+SharePlayで促進したいのは、まさにそのような人たちとの体験の共有です。
+Session SharePlayには、Sessionという概念があります。 Sessionを開始すると、ユーザーはいつものMessagesやFaceTimeで、テキスト、オーディオ、ビデオを使ったコミュニケーションができるようになります。 ユーザーはSessionの中でこれらを柔軟に切り替えられます。 開始済みのSessionに新しい人を招待したり、Sessionの途中で離脱もできます。
+SessionをOSが管理してくれるため、ユーザーはSession中でもあらゆるアプリを利用することができます。
+各アプリの開発者は、Group Activitiesを使えば、これらの機能を全て利用できます。
+Platform Group ActivitiesはiOS、iPadOS、macOSの全てに同じ体験を提供できます。 それだけでなくWebサイト（WebKitブラウザ）でも利用できます（後からmacOSではという言及もあったので要調査）。 Apple TVでも動作するので、大画面のテレビでも楽しめます。
+Sessionにはどのデバイスからも参加できますし、複数のデバイスをシームレスに使うこともできます。 AirPodsをはじめとするBluetoothデバイスにも素晴らしいオーディオを提供できるように設計されています。
+Playback 共視聴体験のトリガーになるのは、再生ボタンです。 ユーザーがどのコンテンツに時間を費やすかを決める瞬間です。
+Appleは、すべての再生ボタンがSharePlayと連動することを目標としています。 ユーザーが友達とFaceTimeで話しているときに、アプリ内のメディアをいつでもSharePlayできるようにしたいと考えています。
+各アプリが簡単にSharePlayできるよう、既存のコードそのままで使えように設計したAPIを提供しています。 グループで会話をしているときにいつでも、各アプリの再生ボタンからSharePlayを開始できるようになります。
+Time-Synced Playback SharePlayでは、再生の同期が可能です。 誰かが再生ボタンを押すと、グループ全員のデバイスで同時に再生が開始します。 お気に入りのシーンにジャンプすれば、他の全員にもそのシーンが表示され、まるで同じ部屋にいるかのように体験することができます。
+この同期は、手元のメディアを再送信することで実現しているわけではありません。 各々のデバイスに直接ストリーミングされ、各デバイスでの最高品質のメディアを再生できます。
+スマートボリューム 再生中に誰かが発言すると、コンテンツの音量が自動的に下げられ、同じ部屋にいるようにコミュニケーションをとることができます。
+Picture in Picture Picture in Pictureとの相性も抜群で、PiPによりコンテンツを視聴しながら他の様々なアプリを利用することができます。
+Content FaceTimeで通話中のユーザーは、各アプリを起動したとき、そのアプリのコンテンツを共有できることを期待するようになります。
+SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。 既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。
+Group Activities Group Activitiesはフレームワークのコアコンセプトです。 Group Activitiesは、FaceTimeでSharePlayをして楽しむ対象（オブジェクト）です。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[WWDC21] [SharePlay] Meet Group Activitiesのまとめ | TOKOROM BLOG" property="og:title"><meta content="Meet Group Activities を視聴して内容をまとめたものです。
+先に簡単にまとめ SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる ビデオや音楽のShareはmacOSのブラウザでも利用できる SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある アプリごとに自由に独自のイベントを送受信すること可能 導入 離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として SharePlay は開発されました。
+SharePlayは、GroupActivities フレームワークによって実現されています。
+このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。
+Communication Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。
+ユーザーは、自分にとって最も身近な人たち、友人や家族とのコミュニケーションにかなりの時間を費やしています。 それらは、映画を見るためにリビングルームに招待する対象となるような人たちです。
+SharePlayで促進したいのは、まさにそのような人たちとの体験の共有です。
+Session SharePlayには、Sessionという概念があります。 Sessionを開始すると、ユーザーはいつものMessagesやFaceTimeで、テキスト、オーディオ、ビデオを使ったコミュニケーションができるようになります。 ユーザーはSessionの中でこれらを柔軟に切り替えられます。 開始済みのSessionに新しい人を招待したり、Sessionの途中で離脱もできます。
+SessionをOSが管理してくれるため、ユーザーはSession中でもあらゆるアプリを利用することができます。
+各アプリの開発者は、Group Activitiesを使えば、これらの機能を全て利用できます。
+Platform Group ActivitiesはiOS、iPadOS、macOSの全てに同じ体験を提供できます。 それだけでなくWebサイト（WebKitブラウザ）でも利用できます（後からmacOSではという言及もあったので要調査）。 Apple TVでも動作するので、大画面のテレビでも楽しめます。
+Sessionにはどのデバイスからも参加できますし、複数のデバイスをシームレスに使うこともできます。 AirPodsをはじめとするBluetoothデバイスにも素晴らしいオーディオを提供できるように設計されています。
+Playback 共視聴体験のトリガーになるのは、再生ボタンです。 ユーザーがどのコンテンツに時間を費やすかを決める瞬間です。
+Appleは、すべての再生ボタンがSharePlayと連動することを目標としています。 ユーザーが友達とFaceTimeで話しているときに、アプリ内のメディアをいつでもSharePlayできるようにしたいと考えています。
+各アプリが簡単にSharePlayできるよう、既存のコードそのままで使えように設計したAPIを提供しています。 グループで会話をしているときにいつでも、各アプリの再生ボタンからSharePlayを開始できるようになります。
+Time-Synced Playback SharePlayでは、再生の同期が可能です。 誰かが再生ボタンを押すと、グループ全員のデバイスで同時に再生が開始します。 お気に入りのシーンにジャンプすれば、他の全員にもそのシーンが表示され、まるで同じ部屋にいるかのように体験することができます。
+この同期は、手元のメディアを再送信することで実現しているわけではありません。 各々のデバイスに直接ストリーミングされ、各デバイスでの最高品質のメディアを再生できます。
+スマートボリューム 再生中に誰かが発言すると、コンテンツの音量が自動的に下げられ、同じ部屋にいるようにコミュニケーションをとることができます。
+Picture in Picture Picture in Pictureとの相性も抜群で、PiPによりコンテンツを視聴しながら他の様々なアプリを利用することができます。
+Content FaceTimeで通話中のユーザーは、各アプリを起動したとき、そのアプリのコンテンツを共有できることを期待するようになります。
+SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。 既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。
+Group Activities Group Activitiesはフレームワークのコアコンセプトです。 Group Activitiesは、FaceTimeでSharePlayをして楽しむ対象（オブジェクト）です。" property="og:description"><meta content="https://www.tokoro.me/images/wwdc21-meet-group-activities/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc21-meet-group-activities/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc21-meet-group-activities/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[WWDC21] [SharePlay] Meet Group Activitiesのまとめ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2021年6月10日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc21">
+              WWDC21
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/shareplay">
+              SharePlay
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/wwdc21-meet-group-activities/top.png" alt="image"></p>
+<p><a href="https://developer.apple.com/videos/play/wwdc2021/10183/#">Meet Group Activities</a> を視聴して内容をまとめたものです。</p>
+<h2 id="先に簡単にまとめ">先に簡単にまとめ</h2>
+<ul>
+<li>SharePlayはiOS、iPadOS、tvOS、macOSの全てで利用できる</li>
+<li>ビデオや音楽のShareはmacOSのブラウザでも利用できる</li>
+<li>SharePlayは大きくは「ビデオや音楽のShare」「その他のカスタム体験のShare」の2つに分けられる
+<ul>
+<li>ビデオや音楽のShareは、再生、一時停止、シークなどによる再生位置の変化が同期される</li>
+<li>カスタム体験のほうは一緒にお絵描きさせるなどだいぶ柔軟性がありそう</li>
+</ul>
+</li>
+<li>ビデオや音楽のShareはAVPlayerを使えば簡単に実現できるが、独自のプレイヤーを実装していても実現するすべがある</li>
+<li>アプリごとに自由に独自のイベントを送受信すること可能</li>
+</ul>
+<h2 id="導入">導入</h2>
+<p>離れた場所にいる人たちと同じ部屋にいるような感覚でアクティビティを楽しめる新しい方法として <code>SharePlay</code> は開発されました。</p>
+<p>SharePlayは、<code>GroupActivities</code> フレームワークによって実現されています。</p>
+<p>このセッションでは、サードパーティアプリにSharePlayを採用する方法が紹介されています。</p>
+<h2 id="communication">Communication</h2>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623297704.png" alt="image"></p>
+<p>Appleは、スムーズに自然なコミュニケーションができることが最重要であると考え、FaceTimeとMessagesにSharePlayを組み込んでいます。</p>
+<p>ユーザーは、自分にとって最も身近な人たち、友人や家族とのコミュニケーションにかなりの時間を費やしています。
+それらは、映画を見るためにリビングルームに招待する対象となるような人たちです。</p>
+<p>SharePlayで促進したいのは、まさにそのような人たちとの体験の共有です。</p>
+<h3 id="session">Session</h3>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623298419.png" alt="image"></p>
+<p>SharePlayには、Sessionという概念があります。
+Sessionを開始すると、ユーザーはいつものMessagesやFaceTimeで、テキスト、オーディオ、ビデオを使ったコミュニケーションができるようになります。
+ユーザーはSessionの中でこれらを柔軟に切り替えられます。
+開始済みのSessionに新しい人を招待したり、Sessionの途中で離脱もできます。</p>
+<p>SessionをOSが管理してくれるため、ユーザーはSession中でもあらゆるアプリを利用することができます。</p>
+<p>各アプリの開発者は、Group Activitiesを使えば、これらの機能を全て利用できます。</p>
+<h2 id="platform">Platform</h2>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623305725.png" alt="image"></p>
+<p>Group ActivitiesはiOS、iPadOS、macOSの全てに同じ体験を提供できます。
+それだけでなくWebサイト（WebKitブラウザ）でも利用できます（後からmacOSではという言及もあったので要調査）。
+Apple TVでも動作するので、大画面のテレビでも楽しめます。</p>
+<p>Sessionにはどのデバイスからも参加できますし、複数のデバイスをシームレスに使うこともできます。
+AirPodsをはじめとするBluetoothデバイスにも素晴らしいオーディオを提供できるように設計されています。</p>
+<h3 id="playback">Playback</h3>
+<p>共視聴体験のトリガーになるのは、再生ボタンです。
+ユーザーがどのコンテンツに時間を費やすかを決める瞬間です。</p>
+<p>Appleは、すべての再生ボタンがSharePlayと連動することを目標としています。
+ユーザーが友達とFaceTimeで話しているときに、アプリ内のメディアをいつでもSharePlayできるようにしたいと考えています。</p>
+<p>各アプリが簡単にSharePlayできるよう、既存のコードそのままで使えように設計したAPIを提供しています。
+グループで会話をしているときにいつでも、各アプリの再生ボタンからSharePlayを開始できるようになります。</p>
+<h3 id="time-synced-playback">Time-Synced Playback</h3>
+<p>SharePlayでは、再生の同期が可能です。
+誰かが再生ボタンを押すと、グループ全員のデバイスで同時に再生が開始します。
+お気に入りのシーンにジャンプすれば、他の全員にもそのシーンが表示され、まるで同じ部屋にいるかのように体験することができます。</p>
+<p>この同期は、手元のメディアを再送信することで実現しているわけではありません。
+各々のデバイスに直接ストリーミングされ、各デバイスでの最高品質のメディアを再生できます。</p>
+<h3 id="スマートボリューム">スマートボリューム</h3>
+<p>再生中に誰かが発言すると、コンテンツの音量が自動的に下げられ、同じ部屋にいるようにコミュニケーションをとることができます。</p>
+<h3 id="picture-in-picture">Picture in Picture</h3>
+<p>Picture in Pictureとの相性も抜群で、PiPによりコンテンツを視聴しながら他の様々なアプリを利用することができます。</p>
+<h2 id="content">Content</h2>
+<p>FaceTimeで通話中のユーザーは、各アプリを起動したとき、そのアプリのコンテンツを共有できることを期待するようになります。</p>
+<p>SharePlayにより、各アプリのタッチポイントを拡大し、アプリにかかわる時間を増やすことができます。
+既存ユーザーが友達とSharePlayをすることで、自然にあなたのアプリを広めてくれることでしょう。</p>
+<h2 id="group-activities">Group Activities</h2>
+<p>Group Activitiesはフレームワークのコアコンセプトです。
+Group Activitiesは、FaceTimeでSharePlayをして楽しむ対象（オブジェクト）です。</p>
+<p>FaceTimeでの通話中、ユーザーがGroup Activitiesを採用しているアプリを起動すると、そのアプリにその旨が通知されます。</p>
+<p>GroupActivity protocolに準拠することで、Activityを共有する設定ができます。
+設定が完了したら <code>prepareForActivation</code> APIによりActivityの共有を開始します。</p>
+<p>このAPIを契機に、ActivityをFaceTime通話中の全員と共有するかしないかの選択をユーザーに提示します。</p>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623313023.png" alt="image"></p>
+<p>ユーザーが共有することを決めると、フレームワークから通知があり、<code>GroupSession</code> オブジェクトに参加します。
+GroupSessionに参加後は、再生、一時停止、シークなどの操作がグループ内で同期されます。</p>
+<p>ユーザーがグループセッションに参加すると、再生、一時停止、シークなどの操作をしても、ビデオはグループと同期したままになります。</p>
+<p>また、再生を終了する場合、ユーザーは自分だけが終了するのか、グループの全員の視聴を終了するのかを選択できます。</p>
+<h2 id="アーキテクチャ">アーキテクチャ</h2>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623313958.png" alt="image"></p>
+<p>GroupActivitiesは、Swiftネイティブのフレームワークです。
+このフレームワークは、AVFoundationと密に連携され、ビデオやオーディオの共視聴を簡単に実現できます。</p>
+<h3 id="groupactivity">GroupActivity</h3>
+<p>GroupActivityは、アプリがなにを共有するかを定義するためのものです。</p>
+<p>例えば、オーディオやビデオを共視聴する場合は、再生されるコンテンツのURLを保持します。</p>
+<p>オーディオやビデオの共視聴だけでなく、アプリ独自の体験の共有（ソースでは custom experience と記載されているが、この記事では以後 カスタム体験 とする）を提供することもできます。
+例えば、グループでお絵描きをする体験など。
+その場合は、ユーザーが何を描くかを保持します。</p>
+<h3 id="groupsession">GroupSession</h3>
+<p>GroupSessionは、基本的には、体験を共有するグループのことです。
+グループへの参加者などを管理できます。</p>
+<p>GroupSessionに参加しているデバイス間でデータを送受信するためのAPIもあります。
+なお、GroupSessionは大量のデータをやり取りするためのものではないことに留意してください。</p>
+<p>たとえば音楽を共有する場合、GroupSessionは曲のデータ自体をやりとりするためには使用されません。
+再生、一時停止、シークのコマンドのみやりとりします。</p>
+<p>また、GroupSessionの通信は、エンドツーエンドで暗号化されています。</p>
+<h3 id="activity開始の実装">Activity開始の実装</h3>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623315208.png" alt="image"></p>
+<p>ふたりがiPhoneのFaceTimeで通話しているとします。
+ふたりは「Awesome App」というアプリを使っていて、ふたりで一緒にこのアプリを体験しようとしています。</p>
+<p>まず、左のiPhoneにあるアプリがActivityを開始するとします。</p>
+<p>アプリが最初にすべきは、GroupActivity protocolに準拠したオブジェクトを作ることです。
+この例では、GroupActivityに準拠したAwesomeActivityオブジェクトを作成しています。</p>
+<p>このGroupActivity protocolに準拠したオブジェクトには、共有されるActivityの情報を保持しています。
+例えば、動画を一緒に視聴する場合は動画のURLを持ちますし、カスタム体験で一緒にお絵描きをする場合は何を描くかについての情報です。</p>
+<p>Activityを作成した後にすべきことは、そのActivityの <code>prepareForActivation</code> を呼び出すことです。
+これにより、ユーザーにActivityを開始するかどうかの許可を求めるプロンプトが表示されます。</p>
+<p>いきなりActivityが開始されユーザーが驚かないよう、ユーザーに同意を得るこのステップは必要です。</p>
+<p>最後に、ユーザーがActivityの開始を許可したら、アプリはActivityの <code>activate</code> を呼びます。
+こうすることで、アプリが体験の共有を開始しようとしていることがOSに伝えられます。</p>
+<h3 id="session監視の実装">Session監視の実装</h3>
+<p>次に、Sessionの監視についてです。
+先ほどActivityをactivateした続きからです。</p>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623316672.png" alt="image"></p>
+<p>アプリはGroupSession classの <code>AsyncSequence</code> から受け取ったSessionを繰り返し処理する必要があります。
+Sessionからは体験を共有するためのGroupSessionオブジェクトを取得できます。</p>
+<p>この手順はSessionを開始した側のデバイスでも、共有された側のデバイスでも同じです。</p>
+<p>GroupSessionの開始と監視についての詳細は、 <a href="https://developer.apple.com/videos/play/wwdc2021/10225/">Coordinate media experiences with Group Activities</a> を参照してください。</p>
+<h3 id="sessionへの参加の実装">Sessionへの参加の実装</h3>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623317080.png" alt="image"></p>
+<p>アプリがSessionを取得したら、そのSessionに参加する前にセットアップが必要です。
+セットアップの内容はアプリのユースケースによって異なります。</p>
+<p>例えば、一緒にお絵描きをするカスタム体験なら、必要なアセット（画像など）をロードします。</p>
+<p>アプリが動画や音楽などのメディアの共視聴を提供する場合は、<code>AVPlayer</code> の <code>AVPlaybackCoordinator</code> を <code>GroupSession</code> にフックして、AVPlayerがコンテンツを同期できるようにします。</p>
+<p>この同期のサポートはAVPlayerを利用していなくても可能です。
+独自のプレイヤーを実装している場合でも <code>AVDelegating PlaybackCoordinator</code> により実現できます。</p>
+<p>アプリの設定が完了したらGroupSessionの <code>join</code> を呼びます。
+joinが呼ばれると、システムは参加したデバイスのアプリ間にエンドツーエンドの暗号化されたチャンネルを作ります。</p>
+<p>これで、アプリはデータを同期し、ユーザーは体験の共有をできるようになりました。</p>
+<p>カスタム体験の場合、アプリはこのチャンネルでデータをやりとりし、独自にユーザー同志を同期させることができます。
+このチャンネルは、AVFoundationでも使用されており、ユーザーが再生、一時停止、スキップなどを行った際に再生状態をやりとりすることで、メディアの再生を同期しています。</p>
+<p>繰り返しになりますが、このチャンネルは大量のデータをやり取りするためのものではありません。ユーザー同士を同期させるための情報のみをやり取りします。</p>
+<p>これで、アプリはSessionに入り、ユーザーは体験を共有して楽しめるようになりました。</p>
+<h3 id="イベント送信の実装">イベント送信の実装</h3>
+<p><img src="/images/wwdc21-meet-group-activities/ss-1623318866.png" alt="image"></p>
+<p>ユーザーの体験を豊かにするために、もう一つできることがあります。
+イベントの送信です。
+イベントを送信することで、ユーザーに体験中に何が起こっているのかを知らせることができます。</p>
+<p>再生、一時停止、スキップなどのメディア再生の体験のためのイベントは、AVPlayerやAVDelegating PlaybackCoordinatorを使っていればなにもしなくても自動的に送信されます。</p>
+<p>もちろん、メディア再生関連以外のアプリ独自のイベントを送受信することもできます。</p>
+<p>独自のカスタム体験の提供やイベントの送信について詳しく知りたい場合は <a href="https://developer.apple.com/videos/play/wwdc2021/10187/">Build custom experience with Group Activities</a> を参照してください。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios14_blank_back_button/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios14_blank_back_button/top.png" class="feed-item-image" alt="iOS14で戻るボタンのタイトルを空欄にするきちんとした方法" width="300"></div>
+
+    <span class="feed-item-title">iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</span>
+    <span class="feed-item-date">2020年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/iosdc2020/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2020/top.png" class="feed-item-image" alt="iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog" width="300"></div>
+
+    <span class="feed-item-title">iOSDC Japan 2020でHomeKitについてのセッションで登壇しました #iwillblog</span>
+    <span class="feed-item-date">2020年10月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-promocode/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-promocode/top.jpg" class="feed-item-image" alt="iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</span>
+    <span class="feed-item-date">2020年7月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-sandbox/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/ios-sandbox/top.jpg" class="feed-item-image" alt="iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル" width="300"></div>
+
+    <span class="feed-item-title">iOSアプリの購入テストでSandboxアカウントを作って使うマニュアル</span>
+    <span class="feed-item-date">2020年7月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

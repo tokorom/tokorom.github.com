@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Human Interface GuidelinesのApp Clipsの章の日本語訳 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
+2020年7月8日時点のものを訳します。
+前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
+App Clips App Clipはアプリの軽量版で、ユーザーにアプリをダウンロード・インストールさせずに、日常のタスクを素早く実行させることができます。 ユーザーは様々な状況や目的でApp Clipを見つけ、利用できます。 物理的な場所では、NFCタグや視覚的なコードをスキャンしてApp Clipを起動します。 デバイス上では、位置情報に基づくSiriからの提案、地図アプリ、ウェブサイトのSmart App Banners、メッセージアプリで友達が共有してくれたリンクをタップする、などからApp Clipsを起動します。
+あなたのアプリが、限られた時間の中でタスクを実行するのに役立つ体験（in-the-moment experience）を提供しているなら、App Clipを導入することを考えてみましょう。 例えば、
+レンタル自転車にNFCタグを付け、それをスキャンしてApp Clipを起動し、その自転車をレンタルしてもらうことができます。 コーヒーショップでは、ウェブサイトにSmart App Bannerを設置して、そこからすぐに注文できる事前注文用のApp Clipを提供することができます。ユーザーはメッセージアプリでそのウェブサイトへのリンクを友達1に共有し、共有された友達もそのリンクをタップするだけでApp Clipから注文できます。 レストランでは、ユーザーが地図アプリやSiriからの提案からApp Clipを起動できるようにしたり、テーブルでNFCタグをスキャンしてもらいApp Clipで食事の支払いをするようにできます。 美術館では、来館者に展示品の名札の横にあるQRコード2をスキャンしてもらい、App ClipでARコンテンツを表示したり、音声解説を提供したりできます。 App Clipは、アプリをインストールしていないユーザーにアプリの機能の一部をシェアできる強力な方法です。 開発者向けのガイドは App Clips を参照してください。
+優れたApp Clipのデザイン 本質的な機能にフォーカスしましょう。 App Clipのインタラクションは素早く、集中して行われるべきです。 目の前のタスクを達成するために必要な機能に限定してください。 高度な機能や複雑な機能はアプリのために取っておきましょう。
+App Clipをマーケティング目的だけに使用してはいけません。 App Clipは真の価値を提供し、人々がタスクを達成するのに役立つものでなければなりません。 サービスや製品を宣伝するための手段として使用しないでください。
+直線的で使いやすく、焦点を絞ったユーザーインターフェースをデザインしましょう。 App Clipには、タブバーや複雑なナビゲーション、設定があってはいけません。 画面の数や入力フォームの数も最小限に抑えましょう。 余分な情報を削り、できる限りシンプルなユーザーインターフェースにしてください。
+起動時には、最適な画面を表示しましょう。 不要なステップをスキップして、ユーザーの現在の状況に最も適した画面をすぐに表示するようにしてください。
+ユーザーがすぐに利用できるようにしましょう。 App Clipには本当に必要なアセットのみ含めてください。 スプラッシュ画面を入れるなどしてユーザーに起動を待たせるようなことをしてはいけません。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Human Interface GuidelinesのApp Clipsの章の日本語訳 | TOKOROM BLOG" property="og:title"><meta content="前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
+2020年7月8日時点のものを訳します。
+前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
+App Clips App Clipはアプリの軽量版で、ユーザーにアプリをダウンロード・インストールさせずに、日常のタスクを素早く実行させることができます。 ユーザーは様々な状況や目的でApp Clipを見つけ、利用できます。 物理的な場所では、NFCタグや視覚的なコードをスキャンしてApp Clipを起動します。 デバイス上では、位置情報に基づくSiriからの提案、地図アプリ、ウェブサイトのSmart App Banners、メッセージアプリで友達が共有してくれたリンクをタップする、などからApp Clipsを起動します。
+あなたのアプリが、限られた時間の中でタスクを実行するのに役立つ体験（in-the-moment experience）を提供しているなら、App Clipを導入することを考えてみましょう。 例えば、
+レンタル自転車にNFCタグを付け、それをスキャンしてApp Clipを起動し、その自転車をレンタルしてもらうことができます。 コーヒーショップでは、ウェブサイトにSmart App Bannerを設置して、そこからすぐに注文できる事前注文用のApp Clipを提供することができます。ユーザーはメッセージアプリでそのウェブサイトへのリンクを友達1に共有し、共有された友達もそのリンクをタップするだけでApp Clipから注文できます。 レストランでは、ユーザーが地図アプリやSiriからの提案からApp Clipを起動できるようにしたり、テーブルでNFCタグをスキャンしてもらいApp Clipで食事の支払いをするようにできます。 美術館では、来館者に展示品の名札の横にあるQRコード2をスキャンしてもらい、App ClipでARコンテンツを表示したり、音声解説を提供したりできます。 App Clipは、アプリをインストールしていないユーザーにアプリの機能の一部をシェアできる強力な方法です。 開発者向けのガイドは App Clips を参照してください。
+優れたApp Clipのデザイン 本質的な機能にフォーカスしましょう。 App Clipのインタラクションは素早く、集中して行われるべきです。 目の前のタスクを達成するために必要な機能に限定してください。 高度な機能や複雑な機能はアプリのために取っておきましょう。
+App Clipをマーケティング目的だけに使用してはいけません。 App Clipは真の価値を提供し、人々がタスクを達成するのに役立つものでなければなりません。 サービスや製品を宣伝するための手段として使用しないでください。
+直線的で使いやすく、焦点を絞ったユーザーインターフェースをデザインしましょう。 App Clipには、タブバーや複雑なナビゲーション、設定があってはいけません。 画面の数や入力フォームの数も最小限に抑えましょう。 余分な情報を削り、できる限りシンプルなユーザーインターフェースにしてください。
+起動時には、最適な画面を表示しましょう。 不要なステップをスキップして、ユーザーの現在の状況に最も適した画面をすぐに表示するようにしてください。
+ユーザーがすぐに利用できるようにしましょう。 App Clipには本当に必要なアセットのみ含めてください。 スプラッシュ画面を入れるなどしてユーザーに起動を待たせるようなことをしてはいけません。" property="og:description"><meta content="https://www.tokoro.me/images/hig-app-clips/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/hig-app-clips/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/hig-app-clips/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年7月7日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/appclips">
+              AppClips
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/hig">
+              HIG
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios14">
+              iOS14
+          </a>
+          /</div><div class="content">
+      <p>前回、<a href="/posts/hig-widgets/">HIGのWidgetsの章を日本語訳した記事</a>が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。
+Human Interface Guidelines (HIG) の <a href="https://developer.apple.com/design/human-interface-guidelines/app-clips/">App Clips</a> がソースです。</p>
+<p>2020年7月8日時点のものを訳します。</p>
+<p>前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。</p>
+<h1 id="app-clips">App Clips</h1>
+<p>App Clipはアプリの軽量版で、ユーザーにアプリをダウンロード・インストールさせずに、日常のタスクを素早く実行させることができます。
+ユーザーは様々な状況や目的でApp Clipを見つけ、利用できます。
+物理的な場所では、NFCタグや視覚的なコードをスキャンしてApp Clipを起動します。
+デバイス上では、位置情報に基づくSiriからの提案、地図アプリ、ウェブサイトのSmart App Banners、メッセージアプリで友達が共有してくれたリンクをタップする、などからApp Clipsを起動します。</p>
+<p><img src="/images/hig-app-clips/image1.png" alt="image"></p>
+<p>あなたのアプリが、限られた時間の中でタスクを実行するのに役立つ体験（in-the-moment experience）を提供しているなら、App Clipを導入することを考えてみましょう。
+例えば、</p>
+<ul>
+<li>レンタル自転車にNFCタグを付け、それをスキャンしてApp Clipを起動し、その自転車をレンタルしてもらうことができます。</li>
+<li>コーヒーショップでは、ウェブサイトにSmart App Bannerを設置して、そこからすぐに注文できる事前注文用のApp Clipを提供することができます。ユーザーはメッセージアプリでそのウェブサイトへのリンクを友達<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>に共有し、共有された友達もそのリンクをタップするだけでApp Clipから注文できます。</li>
+<li>レストランでは、ユーザーが地図アプリやSiriからの提案からApp Clipを起動できるようにしたり、テーブルでNFCタグをスキャンしてもらいApp Clipで食事の支払いをするようにできます。</li>
+<li>美術館では、来館者に展示品の名札の横にあるQRコード<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>をスキャンしてもらい、App ClipでARコンテンツを表示したり、音声解説を提供したりできます。</li>
+</ul>
+<p>App Clipは、アプリをインストールしていないユーザーにアプリの機能の一部をシェアできる強力な方法です。
+開発者向けのガイドは <a href="https://developer.apple.com/documentation/app_clips">App Clips</a> を参照してください。</p>
+<h2 id="優れたapp-clipのデザイン">優れたApp Clipのデザイン</h2>
+<p><strong>本質的な機能にフォーカスしましょう。</strong>
+App Clipのインタラクションは素早く、集中して行われるべきです。
+目の前のタスクを達成するために必要な機能に限定してください。
+高度な機能や複雑な機能はアプリのために取っておきましょう。</p>
+<p><strong>App Clipをマーケティング目的だけに使用してはいけません。</strong>
+App Clipは真の価値を提供し、人々がタスクを達成するのに役立つものでなければなりません。
+サービスや製品を宣伝するための手段として使用しないでください。</p>
+<p><strong>直線的で使いやすく、焦点を絞ったユーザーインターフェースをデザインしましょう。</strong>
+App Clipには、タブバーや複雑なナビゲーション、設定があってはいけません。
+画面の数や入力フォームの数も最小限に抑えましょう。
+余分な情報を削り、できる限りシンプルなユーザーインターフェースにしてください。</p>
+<p><strong>起動時には、最適な画面を表示しましょう。</strong>
+不要なステップをスキップして、ユーザーの現在の状況に最も適した画面をすぐに表示するようにしてください。</p>
+<p><strong>ユーザーがすぐに利用できるようにしましょう。</strong>
+App Clipには本当に必要なアセットのみ含めてください。
+スプラッシュ画面を入れるなどしてユーザーに起動を待たせるようなことをしてはいけません。</p>
+<p><strong>App Clipの容量を小さくしましょう。</strong>
+App Clipの容量が小さければ小さいほど起動が速くなります。
+App Clipを小さくすることは、通信環境が悪い場所では特に重要です。
+できる限り不要なコードを減らし、使用していないアセットを削除してください。
+即時性が失われてしまので、追加でデータをダウンロードすることも避けてください。</p>
+<p><strong>App Clipを共有できるようにしましょう。</strong>
+ユーザーがメッセージアプリでApp Clipのリンクを共有すると、共有された友達はメッセージアプリからそのままApp Clipを開くことができます。
+App Clipの特定のポイントへのリンクを共有する機能を提供し、友達にApp Clipを共有しやすいようにしましょう。</p>
+<p><strong>サービスや商品への支払いを簡単にできるようにしましょう。</strong>
+支払い情報を入力するのは時間がかかるし入力間違もよくあります。
+<a href="https://developer.apple.com/design/human-interface-guidelines/apple-pay/">Apple Pay</a> をサポートして、支払い情報や配送情報の入力なしで即時購入<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>できるようにしましょう。</p>
+<p><img src="/images/hig-app-clips/coffee.png" alt="image"></p>
+<p><strong>App Clipの恩恵を受ける前にアカウントの作成を要求しないようにしましょう。</strong>
+アカウントの作成には時間と労力がかかります。
+アカウントの作成を要求しないことを検討するか、タスクを完了した後にアカウントの作成を求めることを検討してください。
+App Clipの恩恵を受けるためにアカウントが必要な場合は、<a href="https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple/">Sign in with Apple</a> を提供するなど、ユーザーに求める情報の量を最低限にします。</p>
+<p><strong>アプリ本体にスムーズに移行できるようにしましょう。</strong> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>
+アプリ本体をインストールすると、デバイス上のApp Clipが置き換えられます。
+この瞬間から、これまでApp Clipが起動されたタイミングで、代わりにアプリ本体が起動します。
+以前にApp Clipを使用していた人がスムーズにアプリを利用できるようにしてください。
+例えば、App Clipからアプリに移行する際、再度ログインを求めないようにします。</p>
+<h2 id="プライバシーの保護">プライバシーの保護</h2>
+<p>ユーザーのプライバシーを確保するためApp Clipには制限があります。
+たとえば、App Clipはバックグラウンド処理を行うことができません。
+開発者向けのガイドは <a href="https://developer.apple.com/documentation/app_clips/developing_a_great_app_clip/">Developing a Great App Clip</a> を参照してください。</p>
+<p><strong>保存するデータ量を制限し、デバイスにデータが保存されていなくても処理できるようにしましょう。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></strong>
+ログイン情報など、ユーザーのデータを保存する必要がある場合は、セキュリティに配慮してください。
+また、以前保存したデータが残っている前提で処理しないでください。
+OSがApp Clipをデバイスから削除し、以前保存したデータが失われている場合があります。
+ログイン情報を保存する場合はデバイス外<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>に安全に保存してください。</p>
+<p><strong>Sign in with Appleの提供を検討しましょう。</strong>
+Sign in with Appleは、ログイン情報をデバイス外に安全に保管し、ユーザーのプライバシーを保護します。
+<a href="https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple/">こちら</a> にガイドがあります。</p>
+<p><strong>サービスや商品の代金を安全に支払う方法を提供し、ユーザーのプライバシーを尊重しましょう。</strong>
+たとえば、<a href="https://developer.apple.com/design/human-interface-guidelines/apple-pay/">Apple Pay</a> の提供を検討しましょう。</p>
+<h2 id="アプリ本体への導線">アプリ本体への導線</h2>
+<p>ユーザーがApp Clipを自分で管理したり、ホーム画面にApp Clipが表示さたりすることはありません。
+代わりに、App Clipが一定期間利用されないとOSにより自動的に削除されます。</p>
+<p>アプリは長期間に渡ってユーザーに役立つ最良の方法であるため、OSはユーザーがアプリ本体を発見してインストールするのを支援します。</p>
+<ul>
+<li>App Clip Cardには、App Clipを起動するか、アプリのApp Storeページにアクセスするかの選択肢が表示されます。</li>
+<li>App Clipを初めて起動すると、画面の目立つ部分にアプリ本体のインストールを促すバナーが表示されます。バナーをタップするとアプリ本体のApp Storeページにアクセスできます。</li>
+</ul>
+<p>さらに、App Clip内にアプリ本体のインストールを促す導線をオーバーレイを表示することもできます。ただし、この表示は慎重に行いましょう<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>。</p>
+<p><img src="/images/hig-app-clips/getfullapp.png" alt="image"></p>
+<p><strong>アプリ本体のインストールを求めることで、ユーザーエクスペリエンスを犠牲にしてはいけません。</strong>
+App Clip CardやOSが表示するバナーだけでもアプリ本体をダウンロードしてもらう導線として十分でないか考えてみてください。
+App Clipでのタスクを完了するのにアプリ本体のインストールが必要であってはいけません。</p>
+<p><strong>アプリ本体のインストール導線は適切なタイミングで表示しましょう。</strong>
+ユーザーにApp Clipを試してもらうことで、アプリ本体をインストールする価値を知ってもらうようにします。
+App Clipを繰り返し使用したユーザーや、タスクを完了した後にのみ、アプリ本体のインストール導線を表示することを推奨します。</p>
+<p>開発者向けのガイドは <a href="https://developer.apple.com/documentation/app_clips/recommending_an_app_clip_s_corresponding_app">Recommending an App Clip’s Corresponding App</a> を参照してください。</p>
+<h2 id="通知の制限">通知の制限</h2>
+<p>App Clipには起動後最大8時間まで通知をスケジュール/受信するオプションがあります。
+ユーザーへのフォローアップやほとんどの一般的なタスクを完了させるのに十分な時間です。</p>
+<p><strong>長期間有効な通知を利用する許可を求めるのは、本当に必要な場合のみにしましょう。</strong>
+App Clipのタスクが1日以上に及ぶ場合は、ユーザーに通知の利用の許可を明示的に行います。
+例えば、レンタカー会社のApp Clipでは、レンタカーの返却期限を通知する許可を求めるのが適切です<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>。</p>
+<p><strong>通知は重要なものだけにしましょう。</strong>
+App Clipはユーザーに長期間利用されるものではないため、ユーザーにとって重要な通知のみを送信することが特に重要です。
+プロモーションの目的のためだけに通知を送ってはいけません。
+ユーザーの明確なアクションに対応する通知のみ送りましょう。
+ユーザーがApp Clipから離れることなくタスクを完了した場合、通知は全く必要ないかもしれません。</p>
+<p><strong>タスクを完了させるために通知を利用しましょう。</strong>
+App Clipの通知は、直接的にタスクの完了を支援するものでなければいけません。
+たとえば、食品を注文するApp Clipでは配達に関連した通知を送信してもよいでしょう。</p>
+<p>開発者向けのガイドは <a href="https://developer.apple.com/documentation/app_clips/enabling_notifications_in_app_clips">Enabling Notifications in App Clips</a> を参照してください。</p>
+<h2 id="app-clip-cardのアートワークとコピーの作成">App Clip Cardのアートワークとコピーの作成</h2>
+<p>App Clip CardはユーザーがApp Clipと最初に触れ合う部分です。
+そのため、App Clip Cardに使う画像やコピーには十分は配慮が必要です。</p>
+<p><strong>情報を明確に伝えましょう。</strong>
+App Clip Cardの画像は、App Clipの機能、提供されるタスク・コンテンツを明確に伝えるものである必要があります。</p>
+<p><strong>写真やグラフィックを用いましょう。</strong>
+アプリそのもののスクリーンショットを使用するのは、App Clipの目的を伝えるのに不十分なため避けてください。
+代わりに、App Clipの価値を理解してもらうための画像や、関連するビジネスや場所の写真を使用しましょう。</p>
+<p><strong>ヘッダー画像にテキストを使うのは避けましょう。</strong>
+ヘッダー画像内のテキストはローカライズできず、読みづらく、Cardの美観を損ねる可能性があります。</p>
+<p><strong>ヘッダー画像の要件に従いましょう。</strong>
+3000px ×2000pxの非透過なPNGまたはJPEG画像を使用してください。</p>
+<p><strong>簡潔なコピーを使いましょう。</strong>
+App Clip Cardにはタイトルとサブタイトルが必要です。
+限られたスペースでApp Clipの目的を明確に表現することで、ユーザーが一目でApp Clipの目的を理解できるようになります。</p>
+<p><strong>App Clipに最適なアクションボタンの動詞を選びましょう。</strong>
+選択できる動詞は、<code>View</code>、<code>Play</code>、<code>Open</code>です。
+App Clipが情報や教育コンテンツを提供する場合は<code>View</code>、メディアやゲームの場合は<code>Play</code>、その他のApp Clipの場合は<code>Open</code>を選択します。</p>
+<p><img src="/images/hig-app-clips/app-clips-card.png" alt="image"></p>
+<h2 id="企業向けのapp-clipの作成">企業向けのApp Clipの作成</h2>
+<p>対企業<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup>にサービスを提供するプラットフォームプロバイダであれば、App Store Connectに複数のApp Clip Experience<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup>を作成し、１つのApp Clipでそれら全てを利用できます<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup>。
+各企業のApp Clipには各々の企業や場所のブランディングを表示できます（アプリ本体のプロバイダのブランディングではなく）。</p>
+<p><strong>一貫性のあるブランディングにしましょう。</strong>
+各企業のApp Clip Cardでは、その企業のブランドを前面に出します。
+アプリのプロバイダ<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup>自体のブランディングは控えめにして、各企業のブランディングを前面に出し、App Clipを利用するユーザーを混乱させないようにしましょう。</p>
+<p><strong>複数の企業を考慮しましょう。</strong>
+App Clipは、多くの企業や複数の場所を扱う企業<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup>を扱う可能性があります。
+ユーザーがどの企業や場所でApp Clipで終了するかはわかりません。
+App Clipはこのユースケースに対応し、適切にユーザーインターフェースを更新する必要があります。
+たとえば、App Clip起動時にユーザーの現在地を確認し、企業や場所を切り替えることを検討してみてください。</p>
+<p>開発者向けのガイドは <a href="https://developer.apple.com/documentation/app_clips/configuring_your_app_clip_s_launch_experience">Configuring Your App Clip’s Launch Experience</a> を参照してください。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>正確には友達とは書かれておらず単に受信者（recipients）と書かれている。が、受信者だと固すぎるので友達とした。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>このvisual codeのことをHIGの中ではQRコードとは読んでいない。しかしWWDC20のExplore app clipsというセッションの中ではQRと明確に言っているのでQRコード、とした。実際には一般的なQRコードとは違うApple独自のもの。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>express checkoutをどう訳したら良いか分からず即時購入とした。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>元の文が <code>Provide a familiar, focused experience in your app</code> なのだが、その下の内容を踏まえてだいぶ意訳してしまっている。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><code>handle yourself</code>は直訳だと「自分で処理する」だと思うがこれだと意味がよくわからなかったので、その下の内容を鑑みて意訳している。&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p><code>off the device</code>は具体的にはサーバ上に保存しろということと理解。&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p><code>However, be mindful of when you recommend your app to people.</code> が意図することが正確に分かっていない。ここでは、オーバーレイ表示は強いUIなので慎重に使ってね、と言っている捉えた。その後の項目を読む限り、これであっていると思う。&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8">
+<p>レンタカーのレンタル期間は多くの場合は8時間以上のため。&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9">
+<p><code>business</code>を「企業」と訳しているが、これは例えば、ぐるなびに掲載される「店舗」に相当する。ぐるなびで考えるほうがわかりやすそう。アプリプロバイダーがぐるなびで、各企業が店舗。&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10">
+<p><code>App Clip Experience</code>はApp Store Connectの設定項目の名称と思うがまだApp Store Connectにこの項目がないため、いったん原文そのままで記載する。&#160;<a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11">
+<p>この部分だいぶ意訳しないと意味がわからなかったため意訳。直訳だと「1つのApp Clipでそれらすべてをパワーアップさせることができます」とか。&#160;<a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12">
+<p>要するにアプリを開発/提供している自分の会社。&#160;<a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13">
+<p>ぐるなびで言うと複数の支店を持つレストラン的な。&#160;<a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-aws-lambda-runtime2/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-aws-lambda-runtime/top.png" class="feed-item-image" alt="Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる" width="300"></div>
+
+    <span class="feed-item-title">Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる</span>
+    <span class="feed-item-date">2020年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-aws-lambda-runtime/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-aws-lambda-runtime/top.png" class="feed-item-image" alt="Swift AWS Lambda Runtimeのサンプルをデプロイしてみた" width="300"></div>
+
+    <span class="feed-item-title">Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</span>
+    <span class="feed-item-date">2020年6月11日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/firebsae-app-distribution/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/firebase-app-distribution/3-create-app.png" class="feed-item-image" alt="５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）" width="300"></div>
+
+    <span class="feed-item-title">５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</span>
+    <span class="feed-item-date">2020年2月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

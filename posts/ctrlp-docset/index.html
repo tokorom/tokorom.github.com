@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
+自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
+ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
+Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
+Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
+vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
+CtrlPについては、
+意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう あたりがわかりやすかったです。
+インストールして動かすと、
+といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
+参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
+自分はVim内で完結したいので w3m.vim を使ってVim内で表示するように設定しました。
+インストール まずはDocsetがインストールされているか確認 これがないとはじまりません。
+あるかどうか心配なかたは、Xcodeを起動し、 Preferences&hellip; の Downloads を確認してみてください。
+ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
+なければここからインストールをしてみてください。
+なお、ここでインストールしたDocsetは、たぶん
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
+CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
+.vimrc Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。
+ctrlp-docset の設定 設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。
+.vimrc # docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし） let g:ctrlp_docset_docsetutil_command = &#39;/Applications/Xcode."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました | TOKOROM BLOG" property="og:title"><meta content="Vimでリファレンス読む必要ありますか？ 正直微妙なところでしょうか。
+自分の場合、 Dash があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。
+ただ、せっかく前の記事でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。
+Vimでさらっと検索してリファレンスから関数をコピー そのままプログラミングにペースト というのをキーボードから手を離さずに手早くできるというメリットはありそうです。
+※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います
+Docsetを検索するCtrlPのエクステンションを作りました ctrlp-docset というpluginを作りました。
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は Docset 形式になっているので、そのDocsetをVimから参照するイメージです。
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。
+vim-refと迷いましたが、CtrlP を使ってみたかったのでCtrlPのエクステンションとして作成しました。
+CtrlPについては、
+意外と知られていない便利なvimプラグイン「ctrlp.vim」 Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう あたりがわかりやすかったです。
+インストールして動かすと、
+といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。
+参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。
+自分はVim内で完結したいので w3m.vim を使ってVim内で表示するように設定しました。
+インストール まずはDocsetがインストールされているか確認 これがないとはじまりません。
+あるかどうか心配なかたは、Xcodeを起動し、 Preferences&hellip; の Downloads を確認してみてください。
+ここの Documentation タブのほうで iOS 6.0 Library かそれに相当するものが Installed とインストール済みになっていれば問題ありません。
+なければここからインストールをしてみてください。
+なお、ここでインストールしたDocsetは、たぶん
+~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset に配置されると思います。
+CtrlP と ctrlp-docset をインストール Vundleを使ってらっしゃるなら、
+.vimrc Bundle &#39;git://github.com/kien/ctrlp.vim.git&#39; Bundle &#39;git://github.com/tokorom/ctrlp-docset.git&#39; で、その他のかたは各自の環境に合わせて読み替えてください。
+ctrlp-docset の設定 設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。
+.vimrc # docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし） let g:ctrlp_docset_docsetutil_command = &#39;/Applications/Xcode." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ctrlp-docset/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/ctrlp-docset/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年1月15日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/vim">
+              vim
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <h2 id="vimでリファレンス読む必要ありますか">Vimでリファレンス読む必要ありますか？</h2>
+<p>正直微妙なところでしょうか。<br>
+自分の場合、 <strong>Dash</strong> があればVimで直接にリファレンスAPIドキュメントとか)を見れなくてもそんなには困ってないです。</p>
+<p>ただ、せっかく<a href="/2013/01/15/ctrlp-docset/">前の記事</a>でVimでObjective-Cのコード補完をできるようにしたので、リファレンスもVimで参照できるようにしてみたいと思います。</p>
+<ul>
+<li>Vimでさらっと検索してリファレンスから関数をコピー</li>
+<li>そのままプログラミングにペースト</li>
+</ul>
+<p>というのをキーボードから手を離さずに手早くできるというメリットはありそうです。</p>
+<p>※ ただ、がっつりドキュメント読むときはやはりDashとか使ったほうが良いと思います</p>
+<h2 id="docsetを検索するctrlpのエクステンションを作りました">Docsetを検索するCtrlPのエクステンションを作りました</h2>
+<p><a href="https://github.com/tokorom/ctrlp-docset">ctrlp-docset</a> というpluginを作りました。<br>
+オフィシャルのiOSのドキュメント(iOS 6.0 Library)は <strong>Docset</strong> 形式になっているので、そのDocsetをVimから参照するイメージです。<br>
+なのでiOS専用というわけではなく、Docsetならなんでも参照可能です。</p>
+<p>vim-refと迷いましたが、<a href="https://github.com/kien/ctrlp.vim">CtrlP</a> を使ってみたかったのでCtrlPのエクステンションとして作成しました。</p>
+<p>CtrlPについては、</p>
+<ul>
+<li><a href="http://mattn.kaoriya.net/software/vim/20111228013428.htm">意外と知られていない便利なvimプラグイン「ctrlp.vim」</a></li>
+<li><a href="http://kaneshin.hateblo.jp/entry/vim-advent-calendar-2012">Vimプラグインの拡張機能プラグインを作ってVimをさらに使いやすくしよう</a></li>
+</ul>
+<p>あたりがわかりやすかったです。</p>
+<p>インストールして動かすと、</p>
+<p><img src="http://dl.dropbox.com/u/10351676/images/ctrlp_docset.jpg" alt="ctrlp_docset.jpg"></p>
+<p>といったかんじで、クラスやメソッドをインクリメンタル検索できるようになります。</p>
+<!-- more -->
+<p>参照したい項目を選択するとデフォルトだとブラウザでドキュメントが参照できます。<br>
+自分はVim内で完結したいので <a href="https://github.com/yuratomo/w3m.vim">w3m.vim</a> を使ってVim内で表示するように設定しました。</p>
+<h2 id="インストール">インストール</h2>
+<h3 id="まずはdocsetがインストールされているか確認">まずはDocsetがインストールされているか確認</h3>
+<p>これがないとはじまりません。<br>
+あるかどうか心配なかたは、Xcodeを起動し、 <strong>Preferences&hellip;</strong> の <strong>Downloads</strong> を確認してみてください。<br>
+ここの <strong>Documentation</strong> タブのほうで <strong>iOS 6.0 Library</strong> かそれに相当するものが <strong>Installed</strong> とインストール済みになっていれば問題ありません。<br>
+なければここからインストールをしてみてください。</p>
+<p><img src="http://dl.dropbox.com/u/10351676/images/xcode_docset.jpg" alt="xcode_docset.jpg"></p>
+<p>なお、ここでインストールしたDocsetは、たぶん</p>
+<pre><code class="language-sh">~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset
+</code></pre>
+<p>に配置されると思います。</p>
+<h3 id="ctrlp-と-ctrlp-docset-をインストール">CtrlP と ctrlp-docset をインストール</h3>
+<p>Vundleを使ってらっしゃるなら、</p>
+<ul>
+<li>.vimrc</li>
+</ul>
+<pre><code class="language-sh">Bundle 'git://github.com/kien/ctrlp.vim.git'
+Bundle 'git://github.com/tokorom/ctrlp-docset.git'
+</code></pre>
+<p>で、その他のかたは各自の環境に合わせて読み替えてください。</p>
+<h3 id="ctrlp-docset-の設定">ctrlp-docset の設定</h3>
+<p>設定なしでも動く人がいるかもしれませんが、以下２つをご確認ください。</p>
+<ul>
+<li>.vimrc</li>
+</ul>
+<pre><code class="language-sh"># docsetutilコマンドの場所を指定する（docsetutilにPATHが通っていれば設定必要なし）
+let g:ctrlp_docset_docsetutil_command = '/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil'
+
+# iOS用のDocsetの場所を指定する（下記と同じ場所なら設定必要なし）
+# objc は filetype です / 他の filetype をご利用の場合はそれを設定してください
+let g:ctrlp_docset_filepaths = {'objc': '~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset'}
+</code></pre>
+<h2 id="実行">実行!</h2>
+<p>これらの設定が全部終わったらVimでObjective-Cのファイルを開いた後に、</p>
+<pre><code class="language-sh">:CtrlPDocset
+</code></pre>
+<p>を実行してみてください。<br>
+設定がうまくいっていればiOSのクラス/メソッドがインクリメンタル検索できるはずです。</p>
+<p>また、参照したいクラス/メソッドを選択（Enter）すればドキュメントがブラウザで開かれます。</p>
+<p>Vimを起動して１回目の実行はだいぶん遅いと思います。<br>
+２回目以降はデータがキャッシュされているのでストレスなく利用できると思います。</p>
+<h2 id="キーバインドの変更">キーバインドの変更</h2>
+<ul>
+<li>.vimrc</li>
+</ul>
+<pre><code class="language-sh">nnoremap お好みのキー :&lt;C-u&gt;CtrlPDocset&lt;CR&gt;
+</code></pre>
+<h2 id="ドキュメントをw3mで開きたい">ドキュメントをw3mで開きたい</h2>
+<p>w3mコマンドが利用できる環境ならもちろん可能です。
+Macなら <code>brew install w3m</code> などであらかじめインストールしておいてください。</p>
+<ul>
+<li>.vimrc</li>
+</ul>
+<pre><code class="language-sh"># w3m.vim が必要です
+Bundle 'git://github.com/yuratomo/w3m.vim.git'
+
+# ドキュメントを開くときのコマンドを変える場合にはこのオプション（%sにURLが渡される）
+let g:ctrlp_docset_accept_command = ':W3mSplit local %s'
+</code></pre>
+<p>これらの設定をしておけば、ブラウザで開く代わりにVim内でドキュメント参照が完結できるようになるはずです。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-macro/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで最近お気に入りのマクロ４つ</span>
+    <span class="feed-item-date">2013年1月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-dynamic/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで&#34;@dynamic&#34;の使いどころを考える</span>
+    <span class="feed-item-date">2013年1月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-private-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのテストクラスからプライベートメソッド/プロパティを参照したい</span>
+    <span class="feed-item-date">2012年9月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

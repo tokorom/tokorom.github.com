@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Slack on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/slack/</link>
+    <description>Recent content in Slack on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Wed, 13 May 2020 17:26:38 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/slack/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github ActionsからSlackへ通知するのを良い感じにしたい</title>
+      <link>https://www.tokoro.me/posts/github-actions-context/</link>
+      <pubDate>Wed, 13 May 2020 17:26:38 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/github-actions-context/</guid>
+      <description>この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
+概要 GitHub Actions、簡単便利で良いですね！
+ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
+Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
+ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
+レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
+実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
+Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
+- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &amp;quot;${{ github.</description>
+    </item>
+    
+  </channel>
+</rss>

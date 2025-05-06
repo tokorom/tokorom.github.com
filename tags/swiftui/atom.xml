@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>swiftui on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/swiftui/</link>
+    <description>Recent content in swiftui on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 25 Jun 2024 10:56:06 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[WWDC24] SwiftUIの新機能のまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</link>
+      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</guid>
+      <description>WWDC24の What’s new in SwiftUI のまとめです。
+今回、このセッションで紹介される項目の数が例年以上に多すぎてびっくりでした。 セッションでは短い間隔でポンポンとたくさんの機能が流れるように紹介されていきます。
+このまとめでは、セッションでは軽く触れられた程度の内容も、APIリファレンスへのリンクをつけるなどしてもう少しだけ補足します。
+このセッションを視聴する/この記事を参照する目的は、WWDC24で発表されたSwiftUIの新機能をさらっと把握し頭の中にインデックスを貼ることだと思います。
+サイドバー/タブバー サイドバー/タブバーがより柔軟に フローティングタブバーをサポート 項目の並び替えや使用頻度の低いオプションの非表示など、ユーザーが自分好みにカスタマイズすることもできる TabViewに内包する要素も新しいタイプセーフな書き方に struct KaraokeTabView: View { @State var customization = TabViewCustomization() var body: some View { TabView { Tab(&amp;quot;Parties&amp;quot;, image: &amp;quot;party.popper&amp;quot;) { PartiesView(parties: Party.all) } .customizationID(&amp;quot;karaoke.tab.parties&amp;quot;) Tab(&amp;quot;Planning&amp;quot;, image: &amp;quot;pencil.and.list.clipboard&amp;quot;) { PlanningView() } .customizationID(&amp;quot;karaoke.tab.planning&amp;quot;) Tab(&amp;quot;Attendance&amp;quot;, image: &amp;quot;person.3&amp;quot;) { AttendanceView() } .customizationID(&amp;quot;karaoke.tab.attendance&amp;quot;) Tab(&amp;quot;Song List&amp;quot;, image: &amp;quot;music.note.list&amp;quot;) { SongListView() } .customizationID(&amp;quot;karaoke.tab.songlist&amp;quot;) } .tabViewStyle(.sidebarAdaptable) .tabViewCustomization($customization) } } tabViewStyleに sidebarAdaptable を指定することで、プラットフォームごとに柔軟にサイドバー OR タブバーが適用される</description>
+    </item>
+    
+    <item>
+      <title>[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</title>
+      <link>https://www.tokoro.me/posts/visionos-volume-3dmodel/</link>
+      <pubDate>Mon, 26 Jun 2023 17:27:14 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/visionos-volume-3dmodel/</guid>
+      <description>visionOS SDK Betaがリリースされましたので少しずつ勉強していきます！ まずは第一歩目としてSwiftUIアプリの中で3Dモデルを表示してみました。
+どうやって表示する？ WWDCセッションの紹介としてはどうやらSwiftUIのViewで
+Model3D(named: &amp;quot;xxx&amp;quot;) とするだけで表示できるようです。 簡単すごい！
+どんな3Dモデルを表示できる？ https://developer.apple.com/documentation/realitykit/model3d/init(named:bundle:) によると
+The name of the USD or Reality file to display.
+USDファイル Realityファイル を読み込めるよう。
+Realityファイルについてはよく知らないがApple独自のものっぽいです。
+USDは Universal Scene Description といってピクサーの開発した3Dシーングラフ形式とのことらしい。
+今回はどこかからUSDファイルをお借りして表示してみることにします。
+使わせていただいたUSDファイル J CUBE Inc. - Maneki USDZ for AR / CC BY 4.0
+ベースとなるSwiftUIアプリ マルチプラットフォーム対応のシンプルなSwiftUIアプリをベースとしました。
+App import SwiftUI @main struct app: App { var body: some Scene { WindowGroup { ContentView() } .windowStyle(.volumetric) } } SwiftUIアプリはデフォルトではWindowタイプ（平面）になるため、3D表示するためのVolumeタイプにするため、WindowGroupに .windowStyle(.volumetric) モディファイアを適用しました。 変更したのはその1行だけです。</description>
+    </item>
+    
+    <item>
+      <title>SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</title>
+      <link>https://www.tokoro.me/posts/swiftui-hackathon/</link>
+      <pubDate>Mon, 27 Jan 2020 14:32:55 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/swiftui-hackathon/</guid>
+      <description>2019年はSwiftUI誕生の年 2019年のSwiftUIの発表はたいへんインパクトがありましたね！ Objective-CからSwiftへの変遷と同様に、ここ数年で間違いなくSwiftUIがiOSアプリ開発のスタンダードになるものと思います。
+いっぽうでSwiftUIはまだまだ機能不足、情報不足で実際にリリースする案件に適用するには心許ないというのが2020年1月時点での現状です。特に自社のメインサービスやクライアントワークでSwiftUIの導入を決断をするのはなかなか難しい時期かもしれません。
+また次の6月のWWDCでアップデートが発表され状況は変わってくると思いますが、それを待つのも&amp;hellip;
+ということでハッカソン ということで、冬休みにひとりでハッカソンを実施して、
+24時間でSwiftUIでiOSアプリを開発して AppStoreでリリースする ところまでやる！ということにしました。
+自分で勝手に企画して出すアプリですのでSwiftUIを使っても誰にも文句は言われません！
+必須利用技術 このハッカソン企画での必須利用技術は、
+SwiftUI Firebase（Firestore） Sign in with Apple の３つとしました。
+SwiftUI はもちろんですが、ローカルオンリーで動作するアプリだとSwiftUIの検証には弱いかなと思い、サーバにデータを保管するようにしバックエンドには Firebase(Firestore) を利用することにしました。 また、SwiftUIを採用する時点でターゲットOSがiOS 13以降になるので、ついでにiOS 13の新要素 Sign in with Apple でのSign inを実装することにしました。
+リリースの定義 今回はゴールであるリリースの定義を、
+アプリを開発し終えて AppStore用のメタデータやスクリーンショットを作って投稿して 実際に審査に出す ところまで、としました。
+作るアプリ 作るアプリはちょうど自分が欲しいと思っていた「こどもたちのお金を親が管理するアプリ」にしました。
+Photo by Michael Longmire on Unsplash
+解決したい課題 我が家ではこどもたちにお金の教育を兼ねて毎月おこづかいを渡しているのですが、
+先月のおこづかい渡したっけ？渡してなかったけ？とよくわからなくなる お年玉が高額で幼稚園児に管理させるのが不安（かといって子供の銀行口座を作るのは面倒） 弟が姉の貯金箱を漁る事件が発生！ お店でこどもが「おこづかいでこのおもちゃ買いたい！」という時におこづかいを持ってきていない ○○カメラでおこづかいでおもちゃを買わせたいが、ほんとは〇〇カメラのポイント使っちゃいたい！ ほんとは余っている〇〇Payで支払いたい！ など様々な悩みが出てきました。
+解決するための機能 これらを解決するためには、
+こどもに現金を持たせないで親が残高だけ管理すれば十分 記録さえ残せば、親の財布が銀行代わりで、財布から出金、財布に入金でかまわない 入金、出金の記録は親もあとから削除・修正できないようにして証拠として残せばこどもも安心 普段使いの少額の現金はその残高から出金してこどもに渡せばOK おこづかいを使う時は親の財布から出金すればよいので〇〇カメラのポイントも○○Payもクレジットカードも使い放題！ と考え、シンプルに親のアプリでこどものおこづかい残高を管理するのがよいと仮定しました。
+24時間で実装する機能 こういったアプリを作るうえで欲しい機能はいろいろと浮かんだものの、慣れないSwiftUIを使って24時間となるとだいぶ機能を絞る必要があると思い、
+こどもは複数人管理できる おこづかいやお年玉などを手動入金できる こどもが使った額を出金できる Sign in with AppleでSign inできる Firebase上に残高と履歴を保存できる を必須機能としました。</description>
+    </item>
+    
+  </channel>
+</rss>

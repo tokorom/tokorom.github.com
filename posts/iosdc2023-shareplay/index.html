@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by @huin
+去る2023年9月1日に iOSDC Japan 2023 に参加し、 SharePlayの歴史と進化 - そしてvisionOSへ というセッションをもたせていただきました。
+遅ればせながら iwillblog !
+セッションスライドは 公開 しているものの、スライドにはあまり内容書いておらず台本がメインのため、以下、スライドを添付しつつセッションの内容を簡単にまとめます。
+SharePlayってなに？ 2021年の発表時点ではFaceTime通話中に離れた場所の知り合いとアプリのコンテンツを共有するもの」と紹介していましたが、じつはこの2年でSharePlayの基本概念自体も大きく変わってきています。
+まず2022年に「FaceTime通話中」という制限が撤廃され、2023年のiOS17では「離れた場所の知り合い」という前提条件もなくなり、むしろ積極的に近くの誰かとアプリを共有することを推し出すものとなりました。
+SharePlayは、大きく3種に分けることができます。 Screen Sharing、Media playback、Custom UIです。
+Screen Sharingは表示されているアプリの画面をそのまま共有する機能です。 Media playbackは動画や音楽を同期再生するものです。 Custom UIは各アプリで自由にイベントを送受信するためのものです。 Media playbackとCustom UIは各アプリに組み込が必要な機能で、この2つは同居できます。 SharePlayの歴史と進化 2021年にSharePlayが発表されました。しかしこの時点ではFaceTimeの通話中にしか発火できないという大きな制限がありました。
+翌年2022年には、FaceTime通話中でなくても、アプリ手動でSharePlayを開始したり、さらにはiMessageをトリガーとしてFaceTimeを介さずにSharePlayをすることも可能になりました。 ただ、この時点でもFaceTimeかiMessageのどちらかが必要なので「連絡先を知っている相手」とのみSharePlayができると言う制限がありました。
+そして2023年、SharePlayに革新的なバージョンアップがありました！
+こちらはAppleのWebサイトのスクショですが「iPhone同士を近づけてAirDropできるようになった」という紹介とともに「iPhoneを近づけるだけでSharePlayが開始する」というSharePlayの新機能の紹介が押し出されています。
+そうです！AirDropでSharePlayを開始できるようになったのです。
+AirDropでSharePlayとだけ聞くと、ひょっとすると「AirDropでできるのちょっとだけ便利になったね」くらいの印象かもしれません。
+しかし実際にはこれは 「連絡先を知らない相手」とも気軽にSharePlayが可能になった というSharePlayの歴史においては革新的なバージョンアップなんです。
+これでSharePlayを利用開始する敷居は格段に下がりました。
+また、AirDropするということはAirDropする相手がすぐ近くにいるということですので、これまで特にコロナ禍でリモートで離れた場所にいる家族や友達とのSharePlayという押し出しかただったのと比較し、2023年には「近くにいる知り合い」とのSharePlay！というのも大きく推し出されるように変わりました！
+もっというとAirDropの採用は、連絡先を登録しあうまでではない知り合いとの インスタントなSharePlay がユースケースに加わったということを示しています。
+その他のバージョンアップ まず、2022年 iOS15.4でSharePlayのカスタムUIで一度に送信できるメッセージのサイズが64KBから256KBに拡大されました。
+次にiOS15.4でメッセージ送信のレイテンシを改善する機能も入っています。具体的には優先度の低いメッセージをアプリで明示的に指定し、UDPで高速に送信できるようにする仕組みです。
+たとえばお絵描きアプリであれば、線を描いている途中経過については低レイテンシで高速にメッセージを送信し、線を全て描き終わったタイミングで線の全ての情報を改めて信頼性の高いメッセージで送信しなおす、といったことが可能です。
+またiOS15.4ではアプリがSharePlayの開始を簡単に実現できるようにGroupActivitySharingControllerというクラスも追加されました。
+これを利用することでアプリ手動でSharePlayを開始し、FaceTimeやMessageで友達をSharePlayに招待するUIをOS任せで簡単に実現できるようになりました。
+そして2023年、iOS17でSharePlayの仕組みの中でファイル送信も可能になります！
+これまでは画像やPDFなどの重いファイルをSharePlayの仕組みの中だけで送受信することはできませんでした。
+iOS17からは、たとえばお絵描きアプリの写真やPDF添付機能もSharePlayの仕組みの中だけで完結できます。
+さらに素晴らしいことにSharePlayのファイル転送の仕組みは、SharePlayに後から参加した人へのフォローもしてくれます。
+通常SharePlayは後から参加した人に現在の状態を伝えるために、他の参加者がこれまでの経緯をまとめて送り直す必要があります。
+しかしサイズの大きいファイルを送り直すのは大変です。SharePlayのファイル転送機能では、他の参加者が送り直さなくてもAppleのサーバから直接ファイルをダウンロードすることが可能とのことです。
+そして最後に、tvOS17からはApple TVでもFaceTimeが可能になりました！
+これ自体はSharePlayに関するアップデートではありませんが、マルチプラットフォームでSharePlayを扱いやすくなったという点で非常に良いニュースかと思います。
+visionOSでのSharePlay とここまでSharePlayの歴史と進化について紹介してきましたが、今年2023年にはApple Vision Proも発表されました。 SharePlayは、もちろんvisionOSにも対応します。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ | TOKOROM BLOG" property="og:title"><meta content="Photo by @huin
+去る2023年9月1日に iOSDC Japan 2023 に参加し、 SharePlayの歴史と進化 - そしてvisionOSへ というセッションをもたせていただきました。
+遅ればせながら iwillblog !
+セッションスライドは 公開 しているものの、スライドにはあまり内容書いておらず台本がメインのため、以下、スライドを添付しつつセッションの内容を簡単にまとめます。
+SharePlayってなに？ 2021年の発表時点ではFaceTime通話中に離れた場所の知り合いとアプリのコンテンツを共有するもの」と紹介していましたが、じつはこの2年でSharePlayの基本概念自体も大きく変わってきています。
+まず2022年に「FaceTime通話中」という制限が撤廃され、2023年のiOS17では「離れた場所の知り合い」という前提条件もなくなり、むしろ積極的に近くの誰かとアプリを共有することを推し出すものとなりました。
+SharePlayは、大きく3種に分けることができます。 Screen Sharing、Media playback、Custom UIです。
+Screen Sharingは表示されているアプリの画面をそのまま共有する機能です。 Media playbackは動画や音楽を同期再生するものです。 Custom UIは各アプリで自由にイベントを送受信するためのものです。 Media playbackとCustom UIは各アプリに組み込が必要な機能で、この2つは同居できます。 SharePlayの歴史と進化 2021年にSharePlayが発表されました。しかしこの時点ではFaceTimeの通話中にしか発火できないという大きな制限がありました。
+翌年2022年には、FaceTime通話中でなくても、アプリ手動でSharePlayを開始したり、さらにはiMessageをトリガーとしてFaceTimeを介さずにSharePlayをすることも可能になりました。 ただ、この時点でもFaceTimeかiMessageのどちらかが必要なので「連絡先を知っている相手」とのみSharePlayができると言う制限がありました。
+そして2023年、SharePlayに革新的なバージョンアップがありました！
+こちらはAppleのWebサイトのスクショですが「iPhone同士を近づけてAirDropできるようになった」という紹介とともに「iPhoneを近づけるだけでSharePlayが開始する」というSharePlayの新機能の紹介が押し出されています。
+そうです！AirDropでSharePlayを開始できるようになったのです。
+AirDropでSharePlayとだけ聞くと、ひょっとすると「AirDropでできるのちょっとだけ便利になったね」くらいの印象かもしれません。
+しかし実際にはこれは 「連絡先を知らない相手」とも気軽にSharePlayが可能になった というSharePlayの歴史においては革新的なバージョンアップなんです。
+これでSharePlayを利用開始する敷居は格段に下がりました。
+また、AirDropするということはAirDropする相手がすぐ近くにいるということですので、これまで特にコロナ禍でリモートで離れた場所にいる家族や友達とのSharePlayという押し出しかただったのと比較し、2023年には「近くにいる知り合い」とのSharePlay！というのも大きく推し出されるように変わりました！
+もっというとAirDropの採用は、連絡先を登録しあうまでではない知り合いとの インスタントなSharePlay がユースケースに加わったということを示しています。
+その他のバージョンアップ まず、2022年 iOS15.4でSharePlayのカスタムUIで一度に送信できるメッセージのサイズが64KBから256KBに拡大されました。
+次にiOS15.4でメッセージ送信のレイテンシを改善する機能も入っています。具体的には優先度の低いメッセージをアプリで明示的に指定し、UDPで高速に送信できるようにする仕組みです。
+たとえばお絵描きアプリであれば、線を描いている途中経過については低レイテンシで高速にメッセージを送信し、線を全て描き終わったタイミングで線の全ての情報を改めて信頼性の高いメッセージで送信しなおす、といったことが可能です。
+またiOS15.4ではアプリがSharePlayの開始を簡単に実現できるようにGroupActivitySharingControllerというクラスも追加されました。
+これを利用することでアプリ手動でSharePlayを開始し、FaceTimeやMessageで友達をSharePlayに招待するUIをOS任せで簡単に実現できるようになりました。
+そして2023年、iOS17でSharePlayの仕組みの中でファイル送信も可能になります！
+これまでは画像やPDFなどの重いファイルをSharePlayの仕組みの中だけで送受信することはできませんでした。
+iOS17からは、たとえばお絵描きアプリの写真やPDF添付機能もSharePlayの仕組みの中だけで完結できます。
+さらに素晴らしいことにSharePlayのファイル転送の仕組みは、SharePlayに後から参加した人へのフォローもしてくれます。
+通常SharePlayは後から参加した人に現在の状態を伝えるために、他の参加者がこれまでの経緯をまとめて送り直す必要があります。
+しかしサイズの大きいファイルを送り直すのは大変です。SharePlayのファイル転送機能では、他の参加者が送り直さなくてもAppleのサーバから直接ファイルをダウンロードすることが可能とのことです。
+そして最後に、tvOS17からはApple TVでもFaceTimeが可能になりました！
+これ自体はSharePlayに関するアップデートではありませんが、マルチプラットフォームでSharePlayを扱いやすくなったという点で非常に良いニュースかと思います。
+visionOSでのSharePlay とここまでSharePlayの歴史と進化について紹介してきましたが、今年2023年にはApple Vision Proも発表されました。 SharePlayは、もちろんvisionOSにも対応します。" property="og:description"><meta content="https://www.tokoro.me/images/iosdc2023-shareplay/top.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/iosdc2023-shareplay/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/iosdc2023-shareplay/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2023年9月18日</span>
+  </div><div class="content">
+      <p><img src="/images/iosdc2023-shareplay/top.jpg" alt="image">
+<span style="color: lightgray;">Photo by <a href="https://twitter.com/huin/status/1700044357808877656" style="color: gray;">@huin</a></span></p>
+<p>去る2023年9月1日に <a href="https://iosdc.jp/2023/">iOSDC Japan 2023</a> に参加し、 <a href="https://fortee.jp/iosdc-japan-2023/proposal/f304e4d7-b436-4f30-85eb-21721c465715">SharePlayの歴史と進化 - そしてvisionOSへ</a> というセッションをもたせていただきました。</p>
+<p>遅ればせながら <strong>iwillblog</strong> !</p>
+<p>セッションスライドは <a href="https://speakerdeck.com/tokorom/shareplaynoli-shi-tojin-hua-sositevisionoshe-iosdc-2023">公開</a> しているものの、スライドにはあまり内容書いておらず台本がメインのため、以下、スライドを添付しつつセッションの内容を簡単にまとめます。</p>
+<h2 id="shareplayってなに">SharePlayってなに？</h2>
+<p><img src="/images/iosdc2023-shareplay/clip-1695006312.png" alt="image"></p>
+<p>2021年の発表時点ではFaceTime通話中に離れた場所の知り合いとアプリのコンテンツを共有するもの」と紹介していましたが、じつはこの2年でSharePlayの基本概念自体も大きく変わってきています。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007176.png" alt="image"></p>
+<p>まず2022年に「FaceTime通話中」という制限が撤廃され、2023年のiOS17では「離れた場所の知り合い」という前提条件もなくなり、むしろ積極的に近くの誰かとアプリを共有することを推し出すものとなりました。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007249.png" alt="image"></p>
+<p>SharePlayは、大きく3種に分けることができます。
+Screen Sharing、Media playback、Custom UIです。</p>
+<ul>
+<li>Screen Sharingは表示されているアプリの画面をそのまま共有する機能です。</li>
+<li>Media playbackは動画や音楽を同期再生するものです。</li>
+<li>Custom UIは各アプリで自由にイベントを送受信するためのものです。</li>
+<li>Media playbackとCustom UIは各アプリに組み込が必要な機能で、この2つは同居できます。</li>
+</ul>
+<h2 id="shareplayの歴史と進化">SharePlayの歴史と進化</h2>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007393.png" alt="image"></p>
+<p>2021年にSharePlayが発表されました。しかしこの時点ではFaceTimeの通話中にしか発火できないという大きな制限がありました。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007447.png" alt="image"></p>
+<p>翌年2022年には、FaceTime通話中でなくても、アプリ手動でSharePlayを開始したり、さらにはiMessageをトリガーとしてFaceTimeを介さずにSharePlayをすることも可能になりました。
+ただ、この時点でもFaceTimeかiMessageのどちらかが必要なので「連絡先を知っている相手」とのみSharePlayができると言う制限がありました。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007543.png" alt="image"></p>
+<p>そして2023年、SharePlayに革新的なバージョンアップがありました！</p>
+<p>こちらはAppleのWebサイトのスクショですが「iPhone同士を近づけてAirDropできるようになった」という紹介とともに「iPhoneを近づけるだけでSharePlayが開始する」というSharePlayの新機能の紹介が押し出されています。</p>
+<p>そうです！AirDropでSharePlayを開始できるようになったのです。</p>
+<p>AirDropでSharePlayとだけ聞くと、ひょっとすると「AirDropでできるのちょっとだけ便利になったね」くらいの印象かもしれません。</p>
+<p>しかし実際にはこれは <strong>「連絡先を知らない相手」とも気軽にSharePlayが可能になった</strong> というSharePlayの歴史においては革新的なバージョンアップなんです。</p>
+<p>これでSharePlayを利用開始する敷居は格段に下がりました。</p>
+<p>また、AirDropするということはAirDropする相手がすぐ近くにいるということですので、これまで特にコロナ禍でリモートで離れた場所にいる家族や友達とのSharePlayという押し出しかただったのと比較し、2023年には「近くにいる知り合い」とのSharePlay！というのも大きく推し出されるように変わりました！</p>
+<p>もっというとAirDropの採用は、連絡先を登録しあうまでではない知り合いとの <strong>インスタントなSharePlay</strong> がユースケースに加わったということを示しています。</p>
+<h2 id="その他のバージョンアップ">その他のバージョンアップ</h2>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007736.png" alt="image"></p>
+<p>まず、2022年 iOS15.4でSharePlayのカスタムUIで一度に送信できるメッセージのサイズが64KBから256KBに拡大されました。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007759.png" alt="image"></p>
+<p>次にiOS15.4でメッセージ送信のレイテンシを改善する機能も入っています。具体的には優先度の低いメッセージをアプリで明示的に指定し、UDPで高速に送信できるようにする仕組みです。</p>
+<p>たとえばお絵描きアプリであれば、線を描いている途中経過については低レイテンシで高速にメッセージを送信し、線を全て描き終わったタイミングで線の全ての情報を改めて信頼性の高いメッセージで送信しなおす、といったことが可能です。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007782.png" alt="image"></p>
+<p>またiOS15.4ではアプリがSharePlayの開始を簡単に実現できるようにGroupActivitySharingControllerというクラスも追加されました。</p>
+<p>これを利用することでアプリ手動でSharePlayを開始し、FaceTimeやMessageで友達をSharePlayに招待するUIをOS任せで簡単に実現できるようになりました。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007801.png" alt="image"></p>
+<p>そして2023年、iOS17でSharePlayの仕組みの中でファイル送信も可能になります！</p>
+<p>これまでは画像やPDFなどの重いファイルをSharePlayの仕組みの中だけで送受信することはできませんでした。</p>
+<p>iOS17からは、たとえばお絵描きアプリの写真やPDF添付機能もSharePlayの仕組みの中だけで完結できます。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007823.png" alt="image"></p>
+<p>さらに素晴らしいことにSharePlayのファイル転送の仕組みは、SharePlayに後から参加した人へのフォローもしてくれます。</p>
+<p>通常SharePlayは後から参加した人に現在の状態を伝えるために、他の参加者がこれまでの経緯をまとめて送り直す必要があります。</p>
+<p>しかしサイズの大きいファイルを送り直すのは大変です。SharePlayのファイル転送機能では、他の参加者が送り直さなくてもAppleのサーバから直接ファイルをダウンロードすることが可能とのことです。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007843.png" alt="image"></p>
+<p>そして最後に、tvOS17からはApple TVでもFaceTimeが可能になりました！</p>
+<p>これ自体はSharePlayに関するアップデートではありませんが、マルチプラットフォームでSharePlayを扱いやすくなったという点で非常に良いニュースかと思います。</p>
+<h2 id="visionosでのshareplay">visionOSでのSharePlay</h2>
+<p>とここまでSharePlayの歴史と進化について紹介してきましたが、今年2023年にはApple Vision Proも発表されました。
+SharePlayは、もちろんvisionOSにも対応します。</p>
+<p>もっというとvisionOSでコミュニケーション・コラボレーションをするための根幹としてSharePlayが使われています。
+もしかするとSharePlayはもともとvisionOSのために設計されたものだったのではないか、と思ってしまうほどです。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007899.png" alt="image"></p>
+<p>まず、FaceTime通話中はアプリのウィンドウの上部に常にSharePlay用のボタンが表示され、いつでもすぐにSharePlayが可能な状態になっています。</p>
+<p>iOSなどと比較するとSharePlayのプライオリティがかなり高く設定されているという印象です。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007914.png" alt="image"></p>
+<p>また画面サイズの制限がないvisionOSでは、SharePlayでのコラボレーション中のアプリのウィンドウと、コラボレーション中のメンバーのペルソナが同時に表示され、iOSでのSharePlayと比較して格段に良い体験ができることが期待されます。</p>
+<p>メンバーの視線やジェスチャーが見られる状態でアプリのコンテンツもフル表示にしてコラボレーションできるというのは素晴らしいです。</p>
+<p>メンバー同士が視線を合わせるといった動作もvisionOSが良きように再現してくれるそうです。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007930.png" alt="image"></p>
+<p>なお、SharePlay中のアプリのコンテンツに対して、参加者のペルソナがどう並ぶかも制御可能で、</p>
+<ul>
+<li>みんなが横並びになるSide-by-Side</li>
+<li>コンテンツをみんなで囲むSurround</li>
+<li>コンテンツの前で輪を作るようなConversational</li>
+</ul>
+<p>という３種のスタイルを指定可能です。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007973.png" alt="image"></p>
+<p>それでは、そんな素晴らしいvisionOSのSharePlayに自分たちのアプリを対応するには、どうしたら良いでしょうか？</p>
+<p>基本的には、すべてのアプリがなにもしなくてもデフォルトでSharePlayに対応されます。</p>
+<p>SharePlayの３種のうちScreen sharing、つまり画面共有はiOS同様デフォルトで有効になっているということです。</p>
+<p>具体的には先ほど紹介したアプリのウィンドウ上部のSharePlayボタンなどからSharePlayの開始が可能です。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695007994.png" alt="image"></p>
+<p>ただ、 <strong>なにもしなくても対応されるからといって、なにもしなくても良いとは限りません。</strong></p>
+<p>アプリによってはShareされるシーンがどれになるかを制御することが推奨されます。シーンごとにCan（Share可能か）とPrefers（Share可能なシーンの中でもより推奨されるか）の２種のフラグを設定し、コンテキストに応じてShareされるシーンを制御することができます。</p>
+<p>アプリによっては個人情報が表示される部分などShareされたくない画面をガードすることも、もちろん必要かと思います。</p>
+<p>またもちろん、Screen sharingだけでなく、Media playbackやCustom UIに対応するにはアプリごとに実装が必要になります。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008038.png" alt="image"></p>
+<p>もう1つvisionOSの特有のUIとして <strong>Immersive Space（没入空間）</strong> という概念があります。</p>
+<p>没入空間は自分の周り全てがアプリのコンテンツに覆われた空間です。
+この没入空間は基本的には自分一人で入り込む空間です。</p>
+<p>SharePlay中ももちろん没入空間に入ることが可能です。</p>
+<p>ただ前述のとおり没入空間には一人で入るため、他の参加者と見えるものが違い、混乱を招く可能性があります。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008084.png" alt="image"></p>
+<p>SharePlayにはそれを解決するために没入スタイルを同期するための機能も備わっています。</p>
+<p>そのため自分が没入空間に入ったら他のメンバーも同じ空間に連れていき、没入空間から出るときは一緒に出るといった制御も可能とのことです。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008097.png" alt="image"></p>
+<p>また、visionOSでは自分が没入空間のどこにいるかを取得することも可能で、たとえば、自分の目の前、だけにコントロールパネルを設置するなども可能です。</p>
+<h3 id="visionosshareplay">visionOS+SharePlay</h3>
+<p>visionOSでのSharePlayについての紹介、も以上です。</p>
+<p>visionOSでのSharePlayの推し出され方に個人的にはとても感動しております！
+Apple Vision ProでSharePlayできるようになるのが本当に楽しみですね！</p>
+<h2 id="オマケ-qa">オマケ Q&amp;A</h2>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008167.png" alt="image"></p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008189.png" alt="image"></p>
+<p>相手が対象のアプリを持ってない場合は、スクショのように「AppStoreからのダウンロードを促す」表示になります。</p>
+<p>これを押すだけでAppStoreのダウンロードページが表示されます。
+アプリの提供者側からしても、ユーザーが友達同士でアプリを直接紹介してくれる導線になる、というメリットもありそうです。</p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008215.png" alt="image"></p>
+<p><img src="/images/iosdc2023-shareplay/clip-1695008223.png" alt="image"></p>
+<p>この答えですが、どうするかは各アプリ・サービスに委ねられます。</p>
+<p>例えば有料コンテンツであってもSharePlayの場合に限って無料で視聴できるようにすることも考えられます。</p>
+<p>その他、例えばAppleTV+ではフリートライアルの開始を促すようにするようです。</p>
+<p>フリートライアルへの誘導は「SharePlayの体験を阻害せず」「有料サービスへの導線にもなる」と、ユーザーにとってもサービス提供者にとってもメリットがあるという意味で最適かもしれません。</p>
+<hr>
+<p>以上です。
+<strong>ididblog</strong> !!</p>
+<h2 id="留意点とmore-information">留意点とMore Information</h2>
+<p>本資料に掲載しているスクリーンショットは以下WWDCセッションビデオより抜粋したものです。</p>
+<ul>
+<li><a href="https://developer.apple.com/videos/play/wwdc2022/10140/">What&rsquo;s new in SharePlay</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2023/10239/">Add SharePlay to your app</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2023/10075/">Design spatial SharePlay experiences</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2023/10087/">Build spatial SharePlay experiences</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2023/10241/">Share files with SharePlay</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

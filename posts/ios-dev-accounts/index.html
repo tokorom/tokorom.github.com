@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
+Member Centerのほうにアカウント追加 -&gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能 失礼しました。
+追加情報などあれば是非おねがいします！
+概要 私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。
+おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。
+iOS Dev Center の構成 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
+大きくは、
+iOS Developer Program Member Center iTunes Connect に分かれます。
+メンバーを追加する方法が２つある？？ 今回、私が混乱してしまった部分がここでした。
+iOSアプリ開発/公開のために必要なアカウントは、
+Member CenterのPeople iTunes ConnectのManage Users の2カ所で管理されています。
+また、この２つのアカウントはそれぞれ別々の用途になります。
+個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
+Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
+Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行 が必要なユーザがこれに該当します。
+iTunes ConnectのManage Usersに追加すべきユーザは？ リリース担当、経理担当、法務担当などです。
+アプリのリリースと管理 売り上げやダウンロード数の確認 銀行、税金情報などの管理 が必要なユーザがこれに該当します。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？ | TOKOROM BLOG" property="og:title"><meta content="2013年11月18日 追記 この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、
+Member Centerのほうにアカウント追加 -&gt; iTunes Connectに同じアカウント追加という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能 iTunes Connectにアカウント追加 -&gt; Member Centerに同じ追加という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能 失礼しました。
+追加情報などあれば是非おねがいします！
+概要 私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。
+おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。
+iOS Dev Center の構成 まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。
+大きくは、
+iOS Developer Program Member Center iTunes Connect に分かれます。
+メンバーを追加する方法が２つある？？ 今回、私が混乱してしまった部分がここでした。
+iOSアプリ開発/公開のために必要なアカウントは、
+Member CenterのPeople iTunes ConnectのManage Users の2カ所で管理されています。
+また、この２つのアカウントはそれぞれ別々の用途になります。
+個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。
+Member CenterのPeopleに追加すべきユーザは？ 主にiOS Developer Programのページを使うプログラマです。
+Certificate（証明書）の発行 Device（開発機）の登録 App ID の登録 Provisioning Profile の発行 が必要なユーザがこれに該当します。
+iTunes ConnectのManage Usersに追加すべきユーザは？ リリース担当、経理担当、法務担当などです。
+アプリのリリースと管理 売り上げやダウンロード数の確認 銀行、税金情報などの管理 が必要なユーザがこれに該当します。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ios-dev-accounts/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/ios-dev-accounts/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2013年11月5日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/publish">
+              publish
+          </a>
+          /</div><div class="content">
+      <h2 id="2013年11月18日-追記">2013年11月18日 追記</h2>
+<p>この記事を書いた後、何人かのかたから「うちでは同じApple IDで両方とも使えているよ」というご指摘をいただき、</p>
+<ul>
+<li><code>Member Centerのほうにアカウント追加</code> -&gt; <code>iTunes Connectに同じアカウント追加</code>という順番だと「警告は出るもののかまわずContinueすれば」同じApple IDでアカウント作成可能</li>
+<li><code>iTunes Connectにアカウント追加</code> -&gt; <code>Member Centerに同じ追加</code>という順番だと「複雑な手順にはなるものの適切な手順を通せば」同じApple IDでアカウント作成可能</li>
+</ul>
+<p>失礼しました。<br>
+追加情報などあれば是非おねがいします！</p>
+<h2 id="概要">概要</h2>
+<p>私はiOSアプリの開発を3年以上やっていますが、恥ずかしながら会社でこのためのアカウントを管理/運用する方法をきちんと把握できていませんでした。<br>
+というのも個人で開発するぶんにはそんな管理は必要なかったですし、これまで会社でアプリ開発するときも限られた数人だけが担当していたのでアカウントの管理とか必要がなかったのです（というのが言い訳です）。</p>
+<p>おそらく、企業でiOSアプリ開発をしている人にとっては普通のことなんでしょうけど、私は今回はじめて知った部分がいくつかあったのでまとめさせていただきます。<br>
+どこかで困っているどなたかに参考になれば良いなというのと、もっとこうしたほうが良いというご意見をいただくのが目的です。</p>
+<h2 id="ios-dev-center-の構成">iOS Dev Center の構成</h2>
+<p>まず、iOS Dev Centerで今回説明する部分は以下のような構成になっています。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/iOSDevCenterStruct.png" alt="iOSDevCenterStruct"></p>
+<p>大きくは、</p>
+<ul>
+<li>iOS Developer Program</li>
+<li>Member Center</li>
+<li>iTunes Connect</li>
+</ul>
+<p>に分かれます。</p>
+<h2 id="メンバーを追加する方法が２つある">メンバーを追加する方法が２つある？？</h2>
+<p>今回、私が混乱してしまった部分がここでした。<br>
+iOSアプリ開発/公開のために必要なアカウントは、</p>
+<ul>
+<li><code>Member Center</code>の<code>People</code></li>
+<li><code>iTunes Connect</code>の<code>Manage Users</code></li>
+</ul>
+<p>の2カ所で管理されています。<br>
+また、この２つのアカウントはそれぞれ別々の用途になります。</p>
+<p>個人開発のアカウントや、会社の代表アカウントを使う際には１つのアカウントでこの２つの役割を同時に担ってくれるため、この２つが違うということを気にしなくても良かったのです。</p>
+<!-- more -->
+<h2 id="member-centerのpeopleに追加すべきユーザは">Member CenterのPeopleに追加すべきユーザは？</h2>
+<p>主に<code>iOS Developer Program</code>のページを使うプログラマです。</p>
+<ul>
+<li>Certificate（証明書）の発行</li>
+<li>Device（開発機）の登録</li>
+<li>App ID の登録</li>
+<li>Provisioning Profile の発行</li>
+</ul>
+<p>が必要なユーザがこれに該当します。</p>
+<h2 id="itunes-connectのmanage-usersに追加すべきユーザは">iTunes ConnectのManage Usersに追加すべきユーザは？</h2>
+<p>リリース担当、経理担当、法務担当などです。</p>
+<ul>
+<li>アプリのリリースと管理</li>
+<li>売り上げやダウンロード数の確認</li>
+<li>銀行、税金情報などの管理</li>
+</ul>
+<p>が必要なユーザがこれに該当します。</p>
+<h2 id="留意すべきこと">留意すべきこと</h2>
+<ul>
+<li><s>この2つに同じApple ID（メールアドレス）で登録することはできない</s></li>
+<li>Member Centerだけに登録されたユーザでは<code>iOS Developer Program</code>に入れないため開発時に困ることがある</li>
+<li>iTunes Connectだけに登録されたユーザでは<code>iTunes Connect</code>に入れないためリリース作業ができない</li>
+</ul>
+<p><s>この２つで別々のアカウントを用意しなくてはならないというところがポイントになります。</s>
+<s>また、通常、社員一人に対して１つのメールアドレスしかないため工夫が必要になります。</s></p>
+<h2 id="会社での運用はこうするのが良いのでは">会社での運用はこうするのが良いのでは？</h2>
+<ul>
+<li>社員一人ごとに適切な権限のアカウントを個別に発行する</li>
+<li><code>iOS Developer Program</code>にアクセスが必要な社員には<s> 社員名+dev@xxx.com をID＆メールアドレスとしてアカウントを発行する</s> そのアカウントだけを発行する
+<ul>
+<li><s>例：yuta-tokoro<b>+dev</b>@xxx.com</s></li>
+</ul>
+</li>
+<li>&lsquo;iTunes Connect&rsquo;にアクセスが必要な社員には<s> 社員名+itunes@xxx.com をID＆メールアドレスとしてアカウントを発行する</s> そのアカウントだけを発行する
+<ul>
+<li><s>例：yuta-tokoro<b>+itunes</b>@xxx.com</s></li>
+</ul>
+</li>
+</ul>
+<h2 id="会社でやらないほうが良さそうなこと">会社でやらないほうが良さそうなこと</h2>
+<ul>
+<li>代表アカウント（Agent）を多数のメンバーで使い回してはいけない
+<ul>
+<li>このIDは <code>iOS Developer Program</code>にも<code>iTunes Connect</code>にも入れる最強IDだが&hellip;</li>
+<li>最強IDを不特定多数の人に展開すると社員の出入りがあったときにその管理が煩雑になる
+<ul>
+<li>放置しておくと悪意のある退職者が公開中のアプリを削除するなどが可能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><s>アカウントを発行する際にメールアドレスをそのまま使ってしまわないほうが良さそう（前述のとおり +dev +itunes をつける）</s></li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<p>ということで、会社でiOSアプリ開発/運用に必要なアカウントを作る場合には、</p>
+<ul>
+<li><s>１つのメールアドレスで２つのアカウントが作れるような運用をするのが良さそう</s></li>
+<li>代表アカウントをみんなで使い回さないように注意すべし</li>
+</ul>
+<p>といったところです。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objective-c-haskell/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cでカリー化とか部分適用してみる</span>
+    <span class="feed-item-date">2013年11月4日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7はもっさりか？比較検証してみた</span>
+    <span class="feed-item-date">2013年9月23日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-ui-design/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">【アプリ開発のお手本に】iOS 7の設計においてアップルが大切にした4つのポイント</span>
+    <span class="feed-item-date">2013年6月17日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-reduce/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cのコードを削れるだけ削る7のTips</span>
+    <span class="feed-item-date">2013年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios7-video/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 7 Video の内容の書き起こしと日本語訳（寄稿:UIデザイナMorino氏)</span>
+    <span class="feed-item-date">2013年6月13日</span>
+    <span class="feed-item-date">amorino</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[visionOS] 最もシンプルな完全没入空間を試すサンプルコード | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="ぼくがやりたかったのはシンプルに完全没入空間 immersiveStyle = FullImmersionStyle になにか表示するというだけなのですが、それなのに地味にはまったため記事にしています。
+完全没入空間とは 日本語訳が正しいかわかりませんが、パススルー領域が全くない３６０度全面が1つのアプリで覆われた空間が完全没入空間です。
+visionOSならではのUIであるため、なにかしら試してみたいかたも多いのではないでしょうか。
+Appleのサンプルでは宇宙空間に没入するデモがあります。
+最もシンプルなサンプルがほしい！ このAppleのサンプルを動かせばことが済む話でもあるのですが、このサンプルでも地球や月などのコンテンツを読み出してRealityViewに設置するなどしなければならず、RealityKitに慣れていない僕にとってはこれでも冗長かなあという感覚でした。
+僕からすると未知のファイルなどがなにもなく、単に目の前に四角形が1つ出る程度の最もシンプルなものが欲しかったんです。
+それをベースにちょっとずつ自分で実験をしていければ、と。
+これが最低限の３ファイルだ！ app.swift アプリのエントリポイントです。
+import SwiftUI @main struct SimplestFullImmersionApp: App { var body: some Scene { WindowGroup { ContentView() } ImmersiveSpace(id: &quot;ImmersiveSpace&quot;) { ImmersiveView() } .immersionStyle(selection: .constant(.full), in: .full) } } body内に初期表示される WindowGroup と ImmersiveSpace を置きます ImmersiveSpace は完全没入スタイルにするため immersionStyle に full を指定します ContentView.swift 初期表示されるWindowのViewです。
+import SwiftUI struct ContentView: View { @Environment(\.openImmersiveSpace) var openImmersiveSpace var body: some View { Button(&quot;Open Immersive Space&quot;) { Task { await openImmersiveSpace(id: &quot;ImmersiveSpace&quot;) } } } } Environmentの openImmersiveSpace を使えるようにします Buttonを1つ設置し押したら openImmersiveSpace で app."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード | TOKOROM BLOG" property="og:title"><meta content="ぼくがやりたかったのはシンプルに完全没入空間 immersiveStyle = FullImmersionStyle になにか表示するというだけなのですが、それなのに地味にはまったため記事にしています。
+完全没入空間とは 日本語訳が正しいかわかりませんが、パススルー領域が全くない３６０度全面が1つのアプリで覆われた空間が完全没入空間です。
+visionOSならではのUIであるため、なにかしら試してみたいかたも多いのではないでしょうか。
+Appleのサンプルでは宇宙空間に没入するデモがあります。
+最もシンプルなサンプルがほしい！ このAppleのサンプルを動かせばことが済む話でもあるのですが、このサンプルでも地球や月などのコンテンツを読み出してRealityViewに設置するなどしなければならず、RealityKitに慣れていない僕にとってはこれでも冗長かなあという感覚でした。
+僕からすると未知のファイルなどがなにもなく、単に目の前に四角形が1つ出る程度の最もシンプルなものが欲しかったんです。
+それをベースにちょっとずつ自分で実験をしていければ、と。
+これが最低限の３ファイルだ！ app.swift アプリのエントリポイントです。
+import SwiftUI @main struct SimplestFullImmersionApp: App { var body: some Scene { WindowGroup { ContentView() } ImmersiveSpace(id: &quot;ImmersiveSpace&quot;) { ImmersiveView() } .immersionStyle(selection: .constant(.full), in: .full) } } body内に初期表示される WindowGroup と ImmersiveSpace を置きます ImmersiveSpace は完全没入スタイルにするため immersionStyle に full を指定します ContentView.swift 初期表示されるWindowのViewです。
+import SwiftUI struct ContentView: View { @Environment(\.openImmersiveSpace) var openImmersiveSpace var body: some View { Button(&quot;Open Immersive Space&quot;) { Task { await openImmersiveSpace(id: &quot;ImmersiveSpace&quot;) } } } } Environmentの openImmersiveSpace を使えるようにします Buttonを1つ設置し押したら openImmersiveSpace で app." property="og:description"><meta content="https://www.tokoro.me/images/visionos-simplest-full-immersion-space-app/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/visionos-simplest-full-immersion-space-app/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/visionos-simplest-full-immersion-space-app/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2023年9月28日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/realitykit">
+              RealityKit
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/visionos-simplest-full-immersion-space-app/top.png" alt="image"></p>
+<p>ぼくがやりたかったのはシンプルに完全没入空間 <code>immersiveStyle = FullImmersionStyle</code> になにか表示するというだけなのですが、それなのに地味にはまったため記事にしています。</p>
+<h2 id="完全没入空間とは">完全没入空間とは</h2>
+<p>日本語訳が正しいかわかりませんが、パススルー領域が全くない３６０度全面が1つのアプリで覆われた空間が完全没入空間です。</p>
+<p>visionOSならではのUIであるため、なにかしら試してみたいかたも多いのではないでしょうか。</p>
+<p>Appleのサンプルでは宇宙空間に没入するデモがあります。</p>
+<p><img src="/images/visionos-simplest-full-immersion-space-app/clip-1695867505.png" alt="image"></p>
+<h2 id="最もシンプルなサンプルがほしい">最もシンプルなサンプルがほしい！</h2>
+<p>このAppleのサンプルを動かせばことが済む話でもあるのですが、このサンプルでも地球や月などのコンテンツを読み出してRealityViewに設置するなどしなければならず、RealityKitに慣れていない僕にとってはこれでも冗長かなあという感覚でした。</p>
+<p>僕からすると未知のファイルなどがなにもなく、単に目の前に四角形が1つ出る程度の最もシンプルなものが欲しかったんです。</p>
+<p>それをベースにちょっとずつ自分で実験をしていければ、と。</p>
+<h2 id="これが最低限の３ファイルだ">これが最低限の３ファイルだ！</h2>
+<h3 id="appswift">app.swift</h3>
+<p>アプリのエントリポイントです。</p>
+<pre><code class="language-swift">import SwiftUI
+
+@main
+struct SimplestFullImmersionApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+
+        ImmersiveSpace(id: &quot;ImmersiveSpace&quot;) {
+            ImmersiveView()
+        }
+        .immersionStyle(selection: .constant(.full), in: .full)
+    }
+}
+</code></pre>
+<ul>
+<li>body内に初期表示される <code>WindowGroup</code> と <code>ImmersiveSpace</code> を置きます</li>
+<li><code>ImmersiveSpace</code> は完全没入スタイルにするため <code>immersionStyle</code> に <code>full</code> を指定します</li>
+</ul>
+<h3 id="contentviewswift">ContentView.swift</h3>
+<p>初期表示されるWindowのViewです。</p>
+<pre><code class="language-swift">import SwiftUI
+
+struct ContentView: View {
+    @Environment(\.openImmersiveSpace) var openImmersiveSpace
+
+    var body: some View {
+        Button(&quot;Open Immersive Space&quot;) {
+            Task {
+                await openImmersiveSpace(id: &quot;ImmersiveSpace&quot;)
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>Environmentの <code>openImmersiveSpace</code> を使えるようにします</li>
+<li>Buttonを1つ設置し押したら <code>openImmersiveSpace</code> で app.swift に定義した <code>ImmersiveSpace</code> を開くようにします</li>
+</ul>
+<p>ここは本来はエラーハンドリングや <code>dismissImmersiveSpace</code> にも対応するほうが良いですが、最小限にするため削ってあります。</p>
+<h3 id="immersiveviewswift">ImmersiveView.swift</h3>
+<p>これが今回のメインコンテンツ。
+完全没入空間で表示するViewです。</p>
+<pre><code class="language-swift">import SwiftUI
+import RealityKit
+
+struct ImmersiveView: View {
+    var body: some View {
+        RealityView { content in
+            let entity = Entity()
+            content.add(entity)
+            let box = ModelEntity(mesh: .generateBox(size: 0.5))
+            box.position = .init(x: 0.5, y: 1.5, z: -0.5)
+            entity.addChild(box)
+        }
+    }
+}
+</code></pre>
+<ul>
+<li><code>RealityKit</code> をimportし、bodyから <code>RealityView</code> を返します</li>
+<li><code>RealityView</code> のコンテンツとして <code>Entity</code> をaddします</li>
+<li>没入空間に1つ箱を置くため <code>generateBox</code> で作った箱を <code>Entity</code> にaddします</li>
+<li>そしてここがポイントなのですが箱の <code>position</code> を設定しないと見える位置に表示されません</li>
+</ul>
+<p>以上のコードが完全没入空間に箱を表示するための最低限のコードだと思います。</p>
+<h2 id="positionについて">positionについて</h2>
+<p>positionは自分の足元が <code>x: 0, y: 0, z: 0</code> になるとのことなので、</p>
+<ul>
+<li><code>x: 0.5</code> で少し右にずらす</li>
+<li><code>y: 1.5</code> で目線より高いくらいの位置にする</li>
+<li><code>z: -0.5</code> で少し奥側に移動する</li>
+</ul>
+<p>としてみています。</p>
+<p>僕は初心者すぎてこの <code>position</code> がわかっておらず「addしたはずの箱が表示されない！」とずっとはまっていました&hellip;</p>
+<h2 id="まとめ">まとめ</h2>
+<p>この最低限の3つのコードをvisionOSシミュレータで動かすと、</p>
+<p><img src="/images/visionos-simplest-full-immersion-space-app/top.png" alt="image"></p>
+<p>のようにピンクの縞の謎の箱が目の前に現れずはずです！</p>
+<p>これをベースに完全没入空間でいろいろと遊んでいければと考えています。</p>
+<p>このコードはBuild&amp;Run可能なプロジェクトとして</p>
+<p><a href="https://github.com/tokorom/SimplestFullImmersion">https://github.com/tokorom/SimplestFullImmersion</a></p>
+<p>に置いてあります。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

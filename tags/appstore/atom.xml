@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AppStore on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/appstore/</link>
+    <description>Recent content in AppStore on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 21 Jul 2020 11:48:23 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/appstore/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</title>
+      <link>https://www.tokoro.me/posts/ios-promocode/</link>
+      <pubDate>Tue, 21 Jul 2020 11:48:23 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/ios-promocode/</guid>
+      <description>Photo by JJ Ying on Unsplash
+これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
+2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
+プロモーションコードの用途 公式な用途 プロモーションコードの用途ですがAppleのドキュメントでは、
+報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため
+とプロモーション用であることが説明されています。
+リリース前のテスト用途 この他、アプリ開発者の間では、リリース前に
+App Storeに公開されるアプリと全く同じものをテスト するためにも使われています。
+プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
+Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
+プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
+そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
+アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する という手順を踏む必要があります。
+プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
+Q. アカウントがないのでログインできません
+A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
+ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
+プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
+このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
+プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
+ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 ColorTemperature 色温度 int 可 Brightness 明るさ int 可 概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
+なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
+もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
+ColorTemperatureのmetadata プロパティ 実際の値 format int units minimumValue 153 maximumValue 454 stepValue 1 validValues maxLength manufacturerDescription Color Temperature ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+ColorTemperatureを更新するサンプルコード let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature } guard let colorTemperature = candidates?"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ | TOKOROM BLOG" property="og:title"><meta content="[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ
+主なサービス HMServiceType〜 説明 Lightbulb 電球 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み PowerState 電源の状態 bool 可 ColorTemperature 色温度 int 可 Brightness 明るさ int 可 概要 スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。 非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。
+カラー版ではHue、Saturation、Brightnessの３つのキャラクタを変更することでランプの色を変えますが、この非カラー版ではColorTemperatureという１つのキャラクタを変更することで色味を調整します。
+なおHMCharacteristicTypeColorTemperatureはiOS 11で新規追加されたキャラクタです。
+もちろんPowerStateキャラクタで点灯/消灯を操作することもできます。
+ColorTemperatureのmetadata プロパティ 実際の値 format int units minimumValue 153 maximumValue 454 stepValue 1 validValues maxLength manufacturerDescription Color Temperature ColorTemperatureのvalue valueプロパティは153から454の範囲で設定できます。 この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。
+ColorTemperatureを更新するサンプルコード let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature } guard let colorTemperature = candidates?" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_hue_white_lamp/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/homekit_hue_white_lamp/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2017年11月22日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/homekit">
+              homekit
+          </a>
+          /</div><div class="content">
+      <p><a target="_blank" href="https://www.amazon.co.jp/gp/product/B01MSITPT1/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B01MSITPT1&linkCode=as2&tag=tokorom-22&linkId=a335872d8b17c6b4c0ddb7cb4ce3c4c1">[Amazon] Philips Hue(ヒュー) ホワイトグラデーション シングルランプ</a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=tokorom-22&l=am2&o=9&a=B01MSITPT1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
+<h2 id="主なサービス">主なサービス</h2>
+<table>
+<thead>
+<tr>
+<th><code>HMServiceType</code>〜</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lightbulb</code></td>
+<td>電球</td>
+</tr>
+</tbody>
+</table>
+<h2 id="主なキャラクタ">主なキャラクタ</h2>
+<table>
+<thead>
+<tr>
+<th><code>HMCharacteristicType</code>〜</th>
+<th>説明</th>
+<th>フォーマット</th>
+<th>書き込み</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PowerState</code></td>
+<td>電源の状態</td>
+<td>bool</td>
+<td>可</td>
+</tr>
+<tr>
+<td><code>ColorTemperature</code></td>
+<td>色温度</td>
+<td>int</td>
+<td>可</td>
+</tr>
+<tr>
+<td><code>Brightness</code></td>
+<td>明るさ</td>
+<td>int</td>
+<td>可</td>
+</tr>
+</tbody>
+</table>
+<h2 id="概要">概要</h2>
+<p>スマートIoT照明のパイオニアであるPhilips Hueのランプの非カラー版です。
+非カラーといっても、蛍光灯のような白色から白熱電球のようなオレンジ色の温かみのある色まで調整できます。</p>
+<p>カラー版では<code>Hue</code>、<code>Saturation</code>、<code>Brightness</code>の３つのキャラクタを変更することでランプの色を変えますが、この非カラー版では<code>ColorTemperature</code>という１つのキャラクタを変更することで色味を調整します。</p>
+<p>なお<code>HMCharacteristicTypeColorTemperature</code>はiOS 11で新規追加されたキャラクタです。</p>
+<p>もちろん<code>PowerState</code>キャラクタで点灯/消灯を操作することもできます。</p>
+<h2 id="colortemperatureのmetadata">ColorTemperatureのmetadata</h2>
+<table>
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>実際の値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>int</td>
+</tr>
+<tr>
+<td><code>units</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimumValue</code></td>
+<td>153</td>
+</tr>
+<tr>
+<td><code>maximumValue</code></td>
+<td>454</td>
+</tr>
+<tr>
+<td><code>stepValue</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>validValues</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>maxLength</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>manufacturerDescription</code></td>
+<td>Color Temperature</td>
+</tr>
+</tbody>
+</table>
+<h2 id="colortemperatureのvalue">ColorTemperatureのvalue</h2>
+<p><code>value</code>プロパティは153から454の範囲で設定できます。
+この写真の左側のランプが153を、右側のランプが454を設定した時の実際の色味です。</p>
+<h2 id="colortemperatureを更新するサンプルコード">ColorTemperatureを更新するサンプルコード</h2>
+<pre><code class="language-swift">let service = home.servicesWithTypes([HMServiceTypeLightbulb])?.first
+let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeColorTemperature }
+
+guard let colorTemperature = candidates?.first else {
+    return
+}
+
+colorTemperature.writeValue(454) { error in
+}
+</code></pre>
+<h2 id="まとめ">まとめ</h2>
+<p>キャラクタの<code>value</code>の更新が視覚的にわかりやすく、また、<code>true</code>/<code>false</code>だけでなく数値の<code>value</code>を書き込み可能な製品としてPhilips Hueをオススメしていますが、実用的にはカラー版でなくこちらのホワイトグラデーション シングルランプで必要十分ではないでしょうか。</p>
+<p>値段的にはカラー版の半額程度になりますので、すでにPhilips Hueのブリッジをお持ちのかたの追加ランプとしては順当かと思います。</p>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tokorom-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B01MSITPT1&linkId=7c229f303ba71da4d599dfec54156115&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+</iframe>
+<h2 id="ios-11-programmingについて">iOS 11 Programmingについて</h2>
+<p>この記事は「iOS 11 Programming」の<strong>第12章 HomeKit入門とiOS 11における新機能</strong>の中の<strong>12.4.2 HomeKit 対応製品利用実例</strong>への追加コンテンツ的位置付けにもなっています。
+この製品がサポートするサービス（&lsquo;HMService&rsquo;）やキャラクタ（&lsquo;HMCharacteristic&rsquo;）の表など、全てこの書籍に合わせた形で掲載しております。</p>
+<p>「iOS 11 Programming」にご興味のあるかたは是非、以下リンクからご参照ください。</p>
+<div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/user_notification/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</span>
+    <span class="feed-item-date">2016年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/has-associated-objects/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg" class="feed-item-image" alt="Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）" width="300"></div>
+
+    <span class="feed-item-title">Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</span>
+    <span class="feed-item-date">2015年11月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/defer-to-deinit/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Swiftでdeinitまで処理をdeferする</span>
+    <span class="feed-item-date">2015年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swifttask-promisekit-bolts/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</span>
+    <span class="feed-item-date">2015年3月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/almofire/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">AlamofireでGenericにModelオブジェクトを取得する</span>
+    <span class="feed-item-date">2015年3月11日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/nstimezone-sample/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">NSTimeZoneから取得できる表示用文字列のサンプル</span>
+    <span class="feed-item-date">2014年11月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

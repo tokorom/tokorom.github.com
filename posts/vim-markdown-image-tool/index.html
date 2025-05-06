@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Photo by Victor Grabarczyk on Unsplash
+ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
+最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
+記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
+特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
+手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
+各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
+決して難しいことはありませんが地味に面倒でした。
+ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal &#43; Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
+ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
+具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法 | TOKOROM BLOG" property="og:title"><meta content="Photo by Victor Grabarczyk on Unsplash
+ブログ記事書くとき画像を埋め込むのが面倒 こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？
+最近だとHugoなどの静的サイトジェネレータを利用することも多いのではないでしょうか。 この記事もHugoで運用しています。
+記事を投稿するときは、いつもVimでさらっとMarkdown形式で書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、記事に画像を埋め込むのだけが面倒だと感じてます。
+特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。
+手動での画像埋め込み手順 これまで手動で画像を埋め込む際には、このブログ記事の場合だと、
+各記事用の画像ディレクトリとして content/images/記事名 ディレクトリを作成 埋め込みたい画像を content/images/記事名 以下にコピー 記事内に ![image](/images/記事名/画像名) を埋め込む 必要に応じてImageOptimなどで画像の最適化 をしていました。
+決して難しいことはありませんが地味に面倒でした。
+ドラッグ＆ドロップでなんとかならない？ 結論として、私の執筆環境である「Terminal &#43; Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。
+ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。
+具体的には、デスクトップ上のdog.jpgをドラッグ＆ドロップすると、Vim上に
+/Users/tokorom/Desktop/dog.jpg が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。
+現在行のファイルパスに対してなにかをするplugin このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、
+function vim_replace_current_line#execute() let line = getline(&#39;.&#39;) let result = system(g:vim_replace_current_line#command . &#39; &#39; . expand(&#39;%&#39;) . &#39; &#39; . expand(&#39;%:t:r&#39;) . &#39; &#39; . trim(line)) call setline(&#39;.&#39;, trim(result)) endfunction という３行のシンプルなfunction１つだけです。
+ここでやっているのは、
+特定のコマンドを実行し その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す コマンドの実行結果で現在行を置き換え ということだけです。" property="og:description"><meta content="https://www.tokoro.me/images/posts/vim-markdown-image-tool/dog.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/vim-markdown-image-tool/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/vim-markdown-image-tool/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年3月31日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/vim">
+              vim
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/markdown">
+              markdown
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/hugo">
+              hugo
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/posts/vim-markdown-image-tool/dog.jpg" alt="top"></p>
+<p><em>Photo by Victor Grabarczyk on Unsplash</em></p>
+<h2 id="ブログ記事書くとき画像を埋め込むのが面倒">ブログ記事書くとき画像を埋め込むのが面倒</h2>
+<p>こういったブログ記事は、皆さんどういう執筆環境で書いているでしょうか？</p>
+<p>最近だと<strong>Hugoなどの静的サイトジェネレータ</strong>を利用することも多いのではないでしょうか。
+この記事もHugoで運用しています。</p>
+<p>記事を投稿するときは、いつも<strong>VimでさらっとMarkdown形式で</strong>書き上げ、ぱぱっとデプロイコマンドを打つだけで簡単便利な環境なのですが、唯一、<strong>記事に画像を埋め込むのだけが面倒</strong>だと感じてます。</p>
+<p>特に、いわゆるブログサービスを利用している場合には、記事作成ページに埋め込みたい画像をドラッグ＆ドロップするだけで画像をアップロード＆埋め込みできてしまうので、それとの比較で面倒さが際立ちます。</p>
+<h2 id="手動での画像埋め込み手順">手動での画像埋め込み手順</h2>
+<p>これまで手動で画像を埋め込む際には、このブログ記事の場合だと、</p>
+<ul>
+<li>各記事用の画像ディレクトリとして <code>content/images/記事名</code> ディレクトリを作成</li>
+<li>埋め込みたい画像を <code>content/images/記事名</code> 以下にコピー</li>
+<li>記事内に <code>![image](/images/記事名/画像名)</code> を埋め込む</li>
+<li>必要に応じてImageOptimなどで画像の最適化</li>
+</ul>
+<p>をしていました。</p>
+<p>決して難しいことはありませんが地味に面倒でした。</p>
+<h2 id="ドラッグドロップでなんとかならない">ドラッグ＆ドロップでなんとかならない？</h2>
+<p>結論として、私の執筆環境である「Terminal + Vim」ではドラッグ＆ドロップをうまくハンドリングする方法がわからず、ドラッグ＆ドロップだけでなんとかはなっていません。</p>
+<p>ただ、TerminalのVim上に画像ファイルをドラッグ＆ドロップすると、その画像ファイルの絶対パスがVimに埋め込まれますので、その行でワンコマンドかますだけでなんとかなりそうだなと思い、Vim用のpluginを作りました。</p>
+<p>具体的には、デスクトップ上の<code>dog.jpg</code>をドラッグ＆ドロップすると、Vim上に</p>
+<pre><code>/Users/tokorom/Desktop/dog.jpg 
+</code></pre>
+<p>が埋め込まれますので、この行でコマンドを打ち、あとは必要なことを自動でやってくれる、という方式です。</p>
+<h2 id="現在行のファイルパスに対してなにかをするplugin">現在行のファイルパスに対してなにかをするplugin</h2>
+<p>このファイルパスに対してなにをしたいかは執筆環境により異なりますので、pluginに追加したのは、</p>
+<pre><code class="language-vim">function vim_replace_current_line#execute()
+  let line = getline('.')
+  let result = system(g:vim_replace_current_line#command . ' ' . expand('%') . ' ' . expand('%:t:r') . ' ' . trim(line))
+  call setline('.', trim(result))
+endfunction
+</code></pre>
+<p>という３行のシンプルなfunction１つだけです。</p>
+<p>ここでやっているのは、</p>
+<ul>
+<li><strong>特定のコマンド</strong>を実行し</li>
+<li>その引数として「編集中のファイル名」「ファイル名の拡張子を抜いた部分（記事名を想定）」「現在行（画像ファイルのパスを想定）」の３つを渡す</li>
+<li>コマンドの実行結果で現在行を置き換え</li>
+</ul>
+<p>ということだけです。</p>
+<p>つまり、あとはその<strong>特定のコマンド</strong>で、執筆環境ごとに必要な処理を実行し、最終的に画像を埋め込むための文字列を出力してやるだけです。</p>
+<p>ごくごく簡単なpluginですが、必要でしたら<a href="https://github.com/tokorom/vim-replace-current-line">Githubに置いてあるもの</a>をご利用ください。</p>
+<h2 id="コマンドの実装">コマンドの実装</h2>
+<p>今回の執筆環境で行いたいのは、</p>
+<ul>
+<li>各記事用の画像ディレクトリとして <code>content/images/記事名</code> ディレクトリを作成</li>
+<li>埋め込みたい画像を <code>content/images/記事名</code> 以下にコピー</li>
+<li>記事内に <code>![image](/images/記事名/画像名)</code> を埋め込む</li>
+</ul>
+<p>という手順なので、以下のコマンドを書きました。</p>
+<pre><code class="language-sh">#! /bin/sh
+
+SOURCE=&quot;$3&quot;
+IMAGEDIR=&quot;content/images/$2&quot;
+IMAGEFILENAME=`basename ${SOURCE}`
+TARGET=&quot;${IMAGEDIR}/${IMAGEFILENAME}&quot;
+IMAGETAG=&quot;![image](/images/$2/${IMAGEFILENAME})&quot;
+
+mkdir -p ${IMAGEDIR}
+cp &quot;${SOURCE}&quot; &quot;${TARGET}&quot;
+
+echo &quot;${IMAGETAG}&quot;
+</code></pre>
+<p>とても簡単なコマンドです。</p>
+<p>このコマンドが実行されることで、画像が決められたディレクトリにコピーされ、Vim上の画像パスの行が</p>
+<pre><code>![image](/images/vim-markdown-image-tool/dog.jpg)
+</code></pre>
+<p>といったMarkdown用の画像埋め込み構文に自動的に変換されます。</p>
+<h2 id="ついでに画像の最適化も">ついでに画像の最適化も</h2>
+<p>ImageOptimをご利用なら上のコマンドの最後に</p>
+<pre><code class="language-sh">IMAGEOPTIM=&quot;open -a ImageOptim&quot;
+`${IMAGEOPTIM} ${TARGET}`
+</code></pre>
+<p>を加えるだけで、画像の最適化も非同期に行ってくれます。</p>
+<h2 id="完成">完成</h2>
+<p>この環境を一度作れば、あとは、</p>
+<ul>
+<li>Vim上に画像をドラッグ＆ドロップ</li>
+<li>コマンドを１つ実行</li>
+</ul>
+<p>という２ステップだけで、記事内への画像の埋め込みが簡単便利にできるようになります！</p>
+<h2 id="次のステップ">次のステップ</h2>
+<p>これですでにある画像をドラッグ＆ドロップで埋め込むことは簡単になりました。</p>
+<p>あとは、例えばiPhoneでスクショを撮影し、MacのVim上で１コマンド打ったらそのスクショが埋め込まれる、といったこともできればなあ（やればできそう）。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/vim-review/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/vim-review/images/sample.png" class="feed-item-image" alt="Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh" width="300"></div>
+
+    <span class="feed-item-title">Vimで技術書を執筆する環境 with Re:VIEW &#43; RedPen &#43; prh</span>
+    <span class="feed-item-date">2018年12月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ctrlp-docset/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでiOSのリファレンスを直接参照したい → CtrlPの拡張でできるようになりました</span>
+    <span class="feed-item-date">2013年1月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/easy-objc-complement/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">もっと簡単にVimでObjective-Cのコード補完を実行する</span>
+    <span class="feed-item-date">2013年1月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/clang-complete-for-vim/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">VimでObjective-Cのコード補完を実行する with clang</span>
+    <span class="feed-item-date">2013年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/mac-terminal-japanese/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</span>
+    <span class="feed-item-date">2012年12月31日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

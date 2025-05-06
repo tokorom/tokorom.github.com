@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
+NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形 この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
+今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
+それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！ Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+https://ameblo.jp/candyhouse-inc/entry-12416936959.html
+をご参照ください。
+API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
+curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+レスポンス例 [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}] 鍵をロック 上で取得したdevice_idを利用し、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
+鍵をアンロック 同じく、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;unlock&quot;}&#39; \ https://api."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン | TOKOROM BLOG" property="og:title"><meta content="この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。 このシリーズは以下５つの記事に分けられて投稿予定です。
+NFCタグにURIを書き込む iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事） iOSアプリを経由してセキュリティレベルをあげる NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン（まだ書いてないけど気が向いたら書くかも） より実用的にしていくために iOS13時代の最終形 この記事でやること 前回は、NFCタグにhttps://tag.exsample.com/lockというURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。
+今回は、このURIで動作するAPIをAWS Lambda1などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。
+それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！ Sesame APIの利用 APIキーの取得 Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ
+https://ameblo.jp/candyhouse-inc/entry-12416936959.html
+をご参照ください。
+API仕様 Sesame APIの仕様については https://docs.candyhouse.co/ にきちんとしたドキュメントがあります。
+curlで叩いてみる curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ https://api.candyhouse.co/public/sesames で、管理しているデバイスのリストが取得できます。 YOUR_AUTH_TOKENはAPIキーに置き換えてください。
+レスポンス例 [{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}] 鍵をロック 上で取得したdevice_idを利用し、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;lock&quot;}&#39; \ https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID とするだけです。
+鍵をアンロック 同じく、
+curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \ -H &quot;Content-Type: application/json&quot; \ -X POST -d &#39;{&quot;command&quot;:&quot;unlock&quot;}&#39; \ https://api." property="og:description"><meta content="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png" property="og:image"><meta content="https://www.tokoro.me/posts/nfc-iphone-2/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/nfc-iphone-2/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">NFCタグ で鍵を開けよう（2） iPhoneを鍵とし、ドアにNFCタグを設置するパターン</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2019年4月1日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/nfc">
+              nfc
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/sesame">
+              sesame
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /</div><div class="content">
+      <p>この記事は「NFCタグ で鍵を開けよう」シリーズの第2弾です。
+このシリーズは以下５つの記事に分けられて投稿予定です。</p>
+<ol>
+<li><a href="https://www.tokoro.me/posts/nfc-iphone-1/">NFCタグにURIを書き込む</a></li>
+<li>iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事）</li>
+<li><s>iOSアプリを経由してセキュリティレベルをあげる</s></li>
+<li><s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）</li>
+<li><s>より実用的にしていくために</s></li>
+<li><a href="https://www.tokoro.me/posts/nfc-iphone-6/">iOS13時代の最終形</a></li>
+</ol>
+<h2 id="この記事でやること">この記事でやること</h2>
+<p><a href="https://www.tokoro.me/posts/nfc-iphone-1/">前回</a>は、NFCタグに<code>https://tag.exsample.com/lock</code>というURIを書き込むことに成功し、それをiPhone XR/XSで読み込めることを確認しました。</p>
+<p>今回は、このURIで動作するAPIをAWS Lambda<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>などで作成し、そこからSesame APIを叩いて鍵のアンロックを実現します。</p>
+<p>それさえできれば、NFCタグを自宅のドアなどに貼っておけば、iPhoneをそのNFCタグにタッチして鍵をロック/アンロックできるようになるはずです。</p>
+<div class='box box-danger'><span class="fa fa-warning"></span>
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
+</div>
+<h2 id="sesame-apiの利用">Sesame APIの利用</h2>
+<h3 id="apiキーの取得">APIキーの取得</h3>
+<p>Sesame APIを叩くうえで必要なAPIキーやSesame ID（device_id）の取得方法についてはCANDY HOUSEのオフィシャルブログ</p>
+<p><a href="https://ameblo.jp/candyhouse-inc/entry-12416936959.html">https://ameblo.jp/candyhouse-inc/entry-12416936959.html</a></p>
+<p>をご参照ください。</p>
+<h3 id="api仕様">API仕様</h3>
+<p>Sesame APIの仕様については <a href="https://docs.candyhouse.co/">https://docs.candyhouse.co/</a> にきちんとしたドキュメントがあります。</p>
+<h3 id="curlで叩いてみる">curlで叩いてみる</h3>
+<pre><code>curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \
+  https://api.candyhouse.co/public/sesames
+</code></pre>
+<p>で、管理しているデバイスのリストが取得できます。
+YOUR_AUTH_TOKENはAPIキーに置き換えてください。</p>
+<ul>
+<li>レスポンス例</li>
+</ul>
+<pre><code>[{&quot;device_id&quot;: &quot;aaaaaaaa-aaaa-aaaa-1111-111111111111&quot;, &quot;serial&quot;: &quot;ABCDEFG&quot;, &quot;nickname&quot;: &quot;\u30c9\u30a2&quot;}]
+</code></pre>
+<h3 id="鍵をロック">鍵をロック</h3>
+<p>上で取得したdevice_idを利用し、</p>
+<pre><code>curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -X POST -d '{&quot;command&quot;:&quot;lock&quot;}' \
+  https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID
+</code></pre>
+<p>とするだけです。</p>
+<h3 id="鍵をアンロック">鍵をアンロック</h3>
+<p>同じく、</p>
+<pre><code>curl -H &quot;Authorization: YOUR_AUTH_TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -X POST -d '{&quot;command&quot;:&quot;unlock&quot;}' \
+  https://api.candyhouse.co/public/sesame/YOUR_DEVICE_ID
+</code></pre>
+<p>でアンロックもできます。</p>
+<h2 id="aws-lambdaでの実装">AWS Lambdaでの実装</h2>
+<p>※この記事ではAWS Lambdaの使い方については説明しません</p>
+<p>それではこのSesame APIをAWS Lambda上で実行すよう実装してみましょう。</p>
+<p>以下、Node.jsでの実装サンプルです。
+長々書いていますが、やっているのは上で紹介したアンロックAPIを叩くことだけです。</p>
+<pre><code class="language-js">exports.handler = (event, context, callback) =&gt; {
+  console.log('start')
+
+  main(callback)
+}
+
+async function main(callback) {
+  const response = await requestUnlock()
+
+  callbackResponse(200, response, callback)
+
+  return true
+}
+
+const url = require('url')
+const fetch = require('node-fetch')
+
+function callbackResponse(statusCode, message, callback) {
+  let response = {
+    &quot;statusCode&quot;: statusCode,
+    &quot;body&quot;: JSON.stringify(message)
+  }
+  callback(null, response)
+}
+
+async function requestUnlock() {
+  try {
+    const urlObject = {
+      protocol: 'https',
+      hostname: 'api.candyhouse.co',
+      pathname: '/public/sesame/YOUR_DEVICE_ID'
+    }
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'YOUR_AUTH_TOKEN'
+    }
+    const request = url.format(urlObject)
+
+    const params = {
+      command: 'unlock'
+    }
+    const body = JSON.stringify(params)
+
+    console.log('request to ' + request)
+    console.log('body: ' + body)
+
+    const response = await fetch(request, {method: 'POST', headers: headers, body: body})
+    const json = await response.json()
+    return json
+  } catch (error) {
+    console.log(error)
+  }
+}
+</code></pre>
+<h2 id="まとめ">まとめ</h2>
+<p>あとは実装したものをAWS Lambdaにデプロイし、NFCタグに書き込んだURIでこのLambdaが動作するようにするだけです。</p>
+<p>これで、iPhoneを鍵代わりにし、NFCタグをタッチして鍵をアンロックする仕組みができました。</p>
+<p>くどいようですが、</p>
+<div class='box box-danger'><span class="fa fa-warning"></span>
+この記事は実験レベルでセキュリティを考慮していません。例えばこの記事で作ったURLを誰かに知られてしまうと、誰でも鍵を開けることができてしまうため、絶対にこのまま実用しないでください！
+</div>
+<p>こちらは絶対に守ってください。</p>
+<h2 id="記事一覧">記事一覧</h2>
+<ol>
+<li><a href="https://www.tokoro.me/posts/nfc-iphone-1/">NFCタグにURIを書き込む</a></li>
+<li>iPhoneを鍵とし、ドアにNFCタグを設置するパターン（この記事）</li>
+<li><s>iOSアプリを経由してセキュリティレベルをあげる</s></li>
+<li><s>NFCタグを鍵とし、ドアにNFCリーダーを設置するパターン</s>（まだ書いてないけど気が向いたら書くかも）</li>
+<li><s>より実用的にしていくために</s></li>
+<li><a href="https://www.tokoro.me/posts/nfc-iphone-6/">iOS13時代の最終形</a></li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>AWS LambdaでなくともこのURIで実行されるプログラムを書ければ別のものでかまいません&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/nfc-iphone-1/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/sesame.png" class="feed-item-image" alt="NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む" width="300"></div>
+
+    <span class="feed-item-title">NFCタグ で鍵を開けよう（1） NFCタグにURIを書き込む</span>
+    <span class="feed-item-date">2019年4月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/lottie-ios-1/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/yes.png" class="feed-item-image" alt="Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）" width="300"></div>
+
+    <span class="feed-item-title">Lottieでアプリにアニメーションを組み込む話（iOSプログラマー編）</span>
+    <span class="feed-item-date">2018年6月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_delongi_heater/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png" class="feed-item-image" alt="[HomeKit対応仕様] デロンギ マルチダイナミックヒーター" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</span>
+    <span class="feed-item-date">2018年2月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_hue_sensor/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png" class="feed-item-image" alt="[HomeKit対応仕様] Philips Hue モーションセンサー" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] Philips Hue モーションセンサー</span>
+    <span class="feed-item-date">2018年2月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_koogeek_lightbulb/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg" class="feed-item-image" alt="[HomeKit対応仕様] Koogeek Wi-Fiスマート LED" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</span>
+    <span class="feed-item-date">2018年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_christmastree/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg" class="feed-item-image" alt="クリスマスツリーをHomeKitに対応させよう" width="300"></div>
+
+    <span class="feed-item-title">クリスマスツリーをHomeKitに対応させよう</span>
+    <span class="feed-item-date">2017年12月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

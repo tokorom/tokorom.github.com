@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Github ActionsからSlackへ通知するのを良い感じにしたい | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
+概要 GitHub Actions、簡単便利で良いですね！
+ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
+Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
+ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
+レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
+実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
+Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
+- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &quot;${{ github."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Github ActionsからSlackへ通知するのを良い感じにしたい | TOKOROM BLOG" property="og:title"><meta content="この記事はpushをトリガーとしたGitHub Actionsのワークフローを前提として書いています。
+概要 GitHub Actions、簡単便利で良いですね！
+ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。
+Slackへの通知も Marketplace に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！
+ぼくはこんな感じにしたかった とはいえ、贅沢を言えば、ぼくは
+レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい ref: https://api.slack.com/legacy/custom-integrations#incoming-webhooks Action独自のパラメータでなくSlackが定義しているMessage payloadsのフィールドをそのまま指定したい ref: https://api.slack.com/reference/messaging/payload GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。
+作ったActionは https://github.com/marketplace/actions/slack-incoming-webhook です。
+実際の通知 テキストメッセージ送るだけ テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに
+Incoming WebhookのURLをenvに指定 textフィールドを指定 フィールド名を SlackのPayloadの仕様 に合わせてます の２つだけ設定すると、
+- name: Slack Notification uses: tokorom/action-slack-incoming-webhook@main env: INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} with: text: Hello, Slack! こんな感じにSlackにメッセージを送れます。
+いろいろカスタム 次に、textだけでなく、attachmentsフィールドも指定して、
+成功ならgreenなど色をつける pushした人の名前やアイコンも表示する GitHub Actionsの該当のワークフローへのリンクをつける 変更差分を見るためのCompareページへのリンクをつける といろいろカスタムしてみます。
+- name: Set COMMIT_MESSAGE run: echo ::set-env name=COMMIT_MESSAGE::$(echo &quot;${{ github." property="og:description"><meta content="https://www.tokoro.me/images/github-actions-context/github-actions.png" property="og:image"><meta content="https://www.tokoro.me/posts/github-actions-context/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/github-actions-context/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Github ActionsからSlackへ通知するのを良い感じにしたい</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年5月13日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/github">
+              GitHub
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/slack">
+              Slack
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/github-actions-context/github-actions.png" alt="image"></p>
+<p>この記事は<code>push</code>をトリガーとしたGitHub Actionsのワークフローを前提として書いています。</p>
+<h2 id="概要">概要</h2>
+<p>GitHub Actions、簡単便利で良いですね！</p>
+<p>ぼくも遅まきながら使いはじめ、先日、Git pushをトリガーにデプロイしてSlackで通知、とよくあるワークフローを追加して運用しはじめました。</p>
+<p>Slackへの通知も <a href="https://github.com/marketplace?type=actions&amp;query=slack">Marketplace</a> に数ある既存Actionを選んで利用すれば、すぐに実現できました。すごい！</p>
+<h2 id="ぼくはこんな感じにしたかった">ぼくはこんな感じにしたかった</h2>
+<p>とはいえ、贅沢を言えば、ぼくは</p>
+<ul>
+<li>レガシーなCustom integrationsのIncoming Webhooksでなく、きちんと新しいIncoming Webhooksでやりたい
+<ul>
+<li>ref: <a href="https://api.slack.com/legacy/custom-integrations#incoming-webhooks">https://api.slack.com/legacy/custom-integrations#incoming-webhooks</a></li>
+</ul>
+</li>
+<li>Action独自のパラメータでなくSlackが定義している<code>Message payloads</code>のフィールドをそのまま指定したい
+<ul>
+<li>ref: <a href="https://api.slack.com/reference/messaging/payload">https://api.slack.com/reference/messaging/payload</a></li>
+</ul>
+</li>
+<li>GitHubで変更差分を見るためのURLを追加したりとか、お好みでカスタムしたい</li>
+</ul>
+<p>と思い、意外とそれが叶う既存Actionが見つからなかったため、GitHub Actionsを作る練習も兼ねて、自作することにしました。</p>
+<p>作ったActionは <a href="https://github.com/marketplace/actions/slack-incoming-webhook">https://github.com/marketplace/actions/slack-incoming-webhook</a> です。</p>
+<h2 id="実際の通知">実際の通知</h2>
+<h3 id="テキストメッセージ送るだけ">テキストメッセージ送るだけ</h3>
+<p>テキストメッセージを送るだけなら、どのActionを使っても同じようなものですが、こんな感じに</p>
+<ul>
+<li>Incoming WebhookのURLをenvに指定</li>
+<li><code>text</code>フィールドを指定
+<ul>
+<li>フィールド名を <a href="https://api.slack.com/reference/messaging/payload">SlackのPayloadの仕様</a> に合わせてます</li>
+</ul>
+</li>
+</ul>
+<p>の２つだけ設定すると、</p>
+<pre><code class="language-yml">- name: Slack Notification
+  uses: tokorom/action-slack-incoming-webhook@main
+  env:
+    INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  with:
+    text: Hello, Slack!
+</code></pre>
+<p><img src="/images/github-actions-context/sample-simple.png" alt="image"></p>
+<p>こんな感じにSlackにメッセージを送れます。</p>
+<h3 id="いろいろカスタム">いろいろカスタム</h3>
+<p>次に、<code>text</code>だけでなく、<code>attachments</code>フィールドも指定して、</p>
+<ul>
+<li>成功ならgreenなど色をつける</li>
+<li>pushした人の名前やアイコンも表示する</li>
+<li>GitHub Actionsの該当のワークフローへのリンクをつける</li>
+<li>変更差分を見るためのCompareページへのリンクをつける</li>
+</ul>
+<p>といろいろカスタムしてみます。</p>
+<pre><code class="language-yml">- name: Set COMMIT_MESSAGE
+  run: echo ::set-env name=COMMIT_MESSAGE::$(echo &quot;${{ github.event.head_commit.message }}&quot; | tr '\n' ' ')
+- name: Slack Notification on SUCCESS
+  if: success()
+  uses: tokorom/action-slack-incoming-webhook@main
+  env:
+    INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  with:
+    text: Successfully automated deployment.
+    attachments: |
+      [
+        {
+          &quot;color&quot;: &quot;good&quot;,
+          &quot;author_name&quot;: &quot;${{ github.actor }}&quot;,
+          &quot;author_icon&quot;: &quot;${{ github.event.sender.avatar_url }}&quot;,
+          &quot;fields&quot;: [
+            {
+              &quot;title&quot;: &quot;Commit Message&quot;,
+              &quot;value&quot;: &quot;${{ env.COMMIT_MESSAGE }}&quot;
+            },
+            {
+              &quot;title&quot;: &quot;GitHub Actions URL&quot;,
+              &quot;value&quot;: &quot;${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}&quot;
+            },
+            {
+              &quot;title&quot;: &quot;Compare URL&quot;,
+              &quot;value&quot;: &quot;${{ github.event.compare }}&quot;
+            }
+          ]
+        }
+      ]
+</code></pre>
+<p><img src="/images/github-actions-context/sample-advanced.png" alt="image"></p>
+<p>この設定を使うと、こんな感じにカスタムしたメッセージも送れます。</p>
+<h2 id="指定できるフィールドinputs">指定できるフィールド（Inputs）</h2>
+<p>指定できるフィールド（Inputs）は、現在、Slackが <a href="https://api.slack.com/reference/messaging/payload">Message payloads</a> に明記している</p>
+<ul>
+<li><code>text</code></li>
+<li><code>blocks</code></li>
+<li><code>attachments</code></li>
+<li><code>thread_ts</code></li>
+<li><code>mrkdwn</code></li>
+</ul>
+<p>の５つです。</p>
+<p><code>attachments</code>や<code>blocks</code>にJSONフォーマットでなんでも指定できますので、実質、どんなメッセージも表現できるはずです。</p>
+<h2 id="ほんとは">ほんとは&hellip;</h2>
+<p>なお、<code>attachments</code>や<code>blocks</code>にJSONを指定するのは、ほんとはやりたくなくて、はじめは、</p>
+<pre><code class="language-yml">with:
+  text: Successfully automated deployment.
+  attachments:
+    - color: good
+      author_name: ${{ github.actor }}
+      author_icon: ${{ github.event.sender.avatar_url }}
+      fields:
+        - title: Commit Message
+          value: ${{ env.COMMIT_MESSAGE }}
+</code></pre>
+<p>とYamlのまま子要素も指定させるつもりでした。</p>
+<p>ただ、現状、GitHub ActionsのInputsには文字列しか指定できず、上の指定のしかたを受け入れてくれないため、しかたなくJSONの文字列を指定するようにしています。</p>
+<h2 id="github-actionsで利用できるコンテキスト">GitHub Actionsで利用できるコンテキスト</h2>
+<p>ところで、上のワークフローの設定例では、</p>
+<pre><code class="language-yml">author_icon: ${{ github.event.sender.avatar_url }}
+</code></pre>
+<p>で<code>push</code>した人のアイコンを表示したりしていますが、これは、GitHub Actionsで利用できる<code>github</code>コンテキストをdumpしてたまたま見つけたものです。</p>
+<p>これらコンテキストについての情報は <a href="https://help.github.com/ja/actions/reference/context-and-expression-syntax-for-github-actions">https://help.github.com/ja/actions/reference/context-and-expression-syntax-for-github-actions</a> にきちんと書かれているのですが、<code>github.event</code>の中身に具体的にどんな値が入っているか、など詳細については今のところ明記されていません。</p>
+<p>しかし、このドキュメントでは「各コンテキストをdumpして実際にどんな値が使えるか調べられるよ」と紹介されています。</p>
+<p>以下が実際に <code>push</code>をトリガーとした場合の<code>github</code>コンテキストの中身をdumpしたものです。</p>
+<pre><code class="language-js">{
+  &quot;token&quot;: &quot;***&quot;,
+  &quot;job&quot;: &quot;deploy&quot;,
+  &quot;ref&quot;: &quot;refs/heads/master&quot;,
+  &quot;sha&quot;: &quot;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&quot;,
+  &quot;repository&quot;: &quot;tokorom/github-actions-sandbox&quot;,
+  &quot;repository_owner&quot;: &quot;tokorom&quot;,
+  &quot;repositoryUrl&quot;: &quot;git://github.com/tokorom/github-actions-sandbox.git&quot;,
+  &quot;run_id&quot;: &quot;103131997&quot;,
+  &quot;run_number&quot;: &quot;2&quot;,
+  &quot;actor&quot;: &quot;tokorom&quot;,
+  &quot;workflow&quot;: &quot;sandbox&quot;,
+  &quot;head_ref&quot;: &quot;&quot;,
+  &quot;base_ref&quot;: &quot;&quot;,
+  &quot;event_name&quot;: &quot;push&quot;,
+  &quot;event&quot;: {
+    &quot;after&quot;: &quot;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&quot;,
+    &quot;base_ref&quot;: null,
+    &quot;before&quot;: &quot;ea89168554cf912efd3bf2a08b6e2cbd95db2b66&quot;,
+    &quot;commits&quot;: [
+      {
+        &quot;author&quot;: {
+          &quot;email&quot;: &quot;tokorom@gmail.com&quot;,
+          &quot;name&quot;: &quot;tokorom&quot;,
+          &quot;username&quot;: &quot;tokorom&quot;
+        },
+        &quot;committer&quot;: {
+          &quot;email&quot;: &quot;tokorom@gmail.com&quot;,
+          &quot;name&quot;: &quot;tokorom&quot;,
+          &quot;username&quot;: &quot;tokorom&quot;
+        },
+        &quot;distinct&quot;: true,
+        &quot;id&quot;: &quot;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&quot;,
+        &quot;message&quot;: &quot;更新テスト&quot;,
+        &quot;timestamp&quot;: &quot;2020-05-13T11:06:38+09:00&quot;,
+        &quot;tree_id&quot;: &quot;36a30d1029ee63104706e57357a9db8de0ac535b&quot;,
+        &quot;url&quot;: &quot;https://github.com/tokorom/github-actions-sandbox/commit/8a58cb9b359c49b7f2ab604c53a6944dcc221dff&quot;
+      }
+    ],
+    &quot;compare&quot;: &quot;https://github.com/tokorom/github-actions-sandbox/compare/ea89168554cf...8a58cb9b359c&quot;,
+    &quot;created&quot;: false,
+    &quot;deleted&quot;: false,
+    &quot;forced&quot;: false,
+    &quot;head_commit&quot;: {
+      &quot;author&quot;: {
+        &quot;email&quot;: &quot;tokorom@gmail.com&quot;,
+        &quot;name&quot;: &quot;tokorom&quot;,
+        &quot;username&quot;: &quot;tokorom&quot;
+      },
+      &quot;committer&quot;: {
+        &quot;email&quot;: &quot;tokorom@gmail.com&quot;,
+        &quot;name&quot;: &quot;tokorom&quot;,
+        &quot;username&quot;: &quot;tokorom&quot;
+      },
+      &quot;distinct&quot;: true,
+      &quot;id&quot;: &quot;8a58cb9b359c49b7f2ab604c53a6944dcc221dff&quot;,
+      &quot;message&quot;: &quot;更新テスト&quot;,
+      &quot;timestamp&quot;: &quot;2020-05-13T11:06:38+09:00&quot;,
+      &quot;tree_id&quot;: &quot;36a30d1029ee63104706e57357a9db8de0ac535b&quot;,
+      &quot;url&quot;: &quot;https://github.com/tokorom/github-actions-sandbox/commit/8a58cb9b359c49b7f2ab604c53a6944dcc221dff&quot;
+    },
+    &quot;pusher&quot;: {
+      &quot;email&quot;: &quot;tokorom@gmail.com&quot;,
+      &quot;name&quot;: &quot;tokorom&quot;
+    },
+    &quot;ref&quot;: &quot;refs/heads/master&quot;,
+    &quot;repository&quot;: {
+      &quot;archive_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/{archive_format}{/ref}&quot;,
+      &quot;archived&quot;: false,
+      &quot;assignees_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/assignees{/user}&quot;,
+      &quot;blobs_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/git/blobs{/sha}&quot;,
+      &quot;branches_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/branches{/branch}&quot;,
+      &quot;clone_url&quot;: &quot;https://github.com/tokorom/github-actions-sandbox.git&quot;,
+      &quot;collaborators_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/collaborators{/collaborator}&quot;,
+      &quot;comments_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/comments{/number}&quot;,
+      &quot;commits_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/commits{/sha}&quot;,
+      &quot;compare_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/compare/{base}...{head}&quot;,
+      &quot;contents_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/contents/{+path}&quot;,
+      &quot;contributors_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/contributors&quot;,
+      &quot;created_at&quot;: 1589333793,
+      &quot;default_branch&quot;: &quot;master&quot;,
+      &quot;deployments_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/deployments&quot;,
+      &quot;description&quot;: &quot;所がGitHub Actionsを試すお砂場&quot;,
+      &quot;disabled&quot;: false,
+      &quot;downloads_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/downloads&quot;,
+      &quot;events_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/events&quot;,
+      &quot;fork&quot;: false,
+      &quot;forks&quot;: 0,
+      &quot;forks_count&quot;: 0,
+      &quot;forks_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/forks&quot;,
+      &quot;full_name&quot;: &quot;tokorom/github-actions-sandbox&quot;,
+      &quot;git_commits_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/git/commits{/sha}&quot;,
+      &quot;git_refs_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/git/refs{/sha}&quot;,
+      &quot;git_tags_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/git/tags{/sha}&quot;,
+      &quot;git_url&quot;: &quot;git://github.com/tokorom/github-actions-sandbox.git&quot;,
+      &quot;has_downloads&quot;: true,
+      &quot;has_issues&quot;: true,
+      &quot;has_pages&quot;: false,
+      &quot;has_projects&quot;: true,
+      &quot;has_wiki&quot;: true,
+      &quot;homepage&quot;: null,
+      &quot;hooks_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/hooks&quot;,
+      &quot;html_url&quot;: &quot;https://github.com/tokorom/github-actions-sandbox&quot;,
+      &quot;id&quot;: 263495697,
+      &quot;issue_comment_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/issues/comments{/number}&quot;,
+      &quot;issue_events_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/issues/events{/number}&quot;,
+      &quot;issues_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/issues{/number}&quot;,
+      &quot;keys_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/keys{/key_id}&quot;,
+      &quot;labels_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/labels{/name}&quot;,
+      &quot;language&quot;: null,
+      &quot;languages_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/languages&quot;,
+      &quot;license&quot;: null,
+      &quot;master_branch&quot;: &quot;master&quot;,
+      &quot;merges_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/merges&quot;,
+      &quot;milestones_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/milestones{/number}&quot;,
+      &quot;mirror_url&quot;: null,
+      &quot;name&quot;: &quot;github-actions-sandbox&quot;,
+      &quot;node_id&quot;: &quot;MDEwOlJlcG9zaXRvcnkyNjM0OTU2OTc=&quot;,
+      &quot;notifications_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/notifications{?since,all,participating}&quot;,
+      &quot;open_issues&quot;: 0,
+      &quot;open_issues_count&quot;: 0,
+      &quot;owner&quot;: {
+        &quot;avatar_url&quot;: &quot;https://avatars2.githubusercontent.com/u/629993?v=4&quot;,
+        &quot;email&quot;: &quot;tokorom@gmail.com&quot;,
+        &quot;events_url&quot;: &quot;https://api.github.com/users/tokorom/events{/privacy}&quot;,
+        &quot;followers_url&quot;: &quot;https://api.github.com/users/tokorom/followers&quot;,
+        &quot;following_url&quot;: &quot;https://api.github.com/users/tokorom/following{/other_user}&quot;,
+        &quot;gists_url&quot;: &quot;https://api.github.com/users/tokorom/gists{/gist_id}&quot;,
+        &quot;gravatar_id&quot;: &quot;&quot;,
+        &quot;html_url&quot;: &quot;https://github.com/tokorom&quot;,
+        &quot;id&quot;: 629993,
+        &quot;login&quot;: &quot;tokorom&quot;,
+        &quot;name&quot;: &quot;tokorom&quot;,
+        &quot;node_id&quot;: &quot;MDQ6VXNlcjYyOTk5Mw==&quot;,
+        &quot;organizations_url&quot;: &quot;https://api.github.com/users/tokorom/orgs&quot;,
+        &quot;received_events_url&quot;: &quot;https://api.github.com/users/tokorom/received_events&quot;,
+        &quot;repos_url&quot;: &quot;https://api.github.com/users/tokorom/repos&quot;,
+        &quot;site_admin&quot;: false,
+        &quot;starred_url&quot;: &quot;https://api.github.com/users/tokorom/starred{/owner}{/repo}&quot;,
+        &quot;subscriptions_url&quot;: &quot;https://api.github.com/users/tokorom/subscriptions&quot;,
+        &quot;type&quot;: &quot;User&quot;,
+        &quot;url&quot;: &quot;https://api.github.com/users/tokorom&quot;
+      },
+      &quot;private&quot;: false,
+      &quot;pulls_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/pulls{/number}&quot;,
+      &quot;pushed_at&quot;: 1589335611,
+      &quot;releases_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/releases{/id}&quot;,
+      &quot;size&quot;: 0,
+      &quot;ssh_url&quot;: &quot;git@github.com:tokorom/github-actions-sandbox.git&quot;,
+      &quot;stargazers&quot;: 0,
+      &quot;stargazers_count&quot;: 0,
+      &quot;stargazers_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/stargazers&quot;,
+      &quot;statuses_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/statuses/{sha}&quot;,
+      &quot;subscribers_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/subscribers&quot;,
+      &quot;subscription_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/subscription&quot;,
+      &quot;svn_url&quot;: &quot;https://github.com/tokorom/github-actions-sandbox&quot;,
+      &quot;tags_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/tags&quot;,
+      &quot;teams_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/teams&quot;,
+      &quot;trees_url&quot;: &quot;https://api.github.com/repos/tokorom/github-actions-sandbox/git/trees{/sha}&quot;,
+      &quot;updated_at&quot;: &quot;2020-05-13T02:00:26Z&quot;,
+      &quot;url&quot;: &quot;https://github.com/tokorom/github-actions-sandbox&quot;,
+      &quot;watchers&quot;: 0,
+      &quot;watchers_count&quot;: 0
+    },
+    &quot;sender&quot;: {
+      &quot;avatar_url&quot;: &quot;https://avatars2.githubusercontent.com/u/629993?v=4&quot;,
+      &quot;events_url&quot;: &quot;https://api.github.com/users/tokorom/events{/privacy}&quot;,
+      &quot;followers_url&quot;: &quot;https://api.github.com/users/tokorom/followers&quot;,
+      &quot;following_url&quot;: &quot;https://api.github.com/users/tokorom/following{/other_user}&quot;,
+      &quot;gists_url&quot;: &quot;https://api.github.com/users/tokorom/gists{/gist_id}&quot;,
+      &quot;gravatar_id&quot;: &quot;&quot;,
+      &quot;html_url&quot;: &quot;https://github.com/tokorom&quot;,
+      &quot;id&quot;: 629993,
+      &quot;login&quot;: &quot;tokorom&quot;,
+      &quot;node_id&quot;: &quot;MDQ6VXNlcjYyOTk5Mw==&quot;,
+      &quot;organizations_url&quot;: &quot;https://api.github.com/users/tokorom/orgs&quot;,
+      &quot;received_events_url&quot;: &quot;https://api.github.com/users/tokorom/received_events&quot;,
+      &quot;repos_url&quot;: &quot;https://api.github.com/users/tokorom/repos&quot;,
+      &quot;site_admin&quot;: false,
+      &quot;starred_url&quot;: &quot;https://api.github.com/users/tokorom/starred{/owner}{/repo}&quot;,
+      &quot;subscriptions_url&quot;: &quot;https://api.github.com/users/tokorom/subscriptions&quot;,
+      &quot;type&quot;: &quot;User&quot;,
+      &quot;url&quot;: &quot;https://api.github.com/users/tokorom&quot;
+    }
+  },
+  &quot;workspace&quot;: &quot;/home/runner/work/github-actions-sandbox/github-actions-sandbox&quot;,
+  &quot;action&quot;: &quot;run1&quot;,
+  &quot;event_path&quot;: &quot;/home/runner/work/_temp/_github_workflow/event.json&quot;
+}
+</code></pre>
+<p>これを見ていると「最新のcommitメッセージは<code>github.event.head_commit.message</code>で参照できるぞ」など、楽しくなってきますね！</p>
+<p>それでは、ぜひ <a href="https://github.com/marketplace/actions/slack-incoming-webhook">https://github.com/marketplace/actions/slack-incoming-webhook</a> を使って、GitHub ActionsからのSlack通知をお好みにカスタマイズしてみてください！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

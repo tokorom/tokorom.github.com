@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>[HomeKit対応仕様] デロンギ マルチダイナミックヒーター | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="De&rsquo;Longhi Multi Dynamic Heater WiFi Model
+主なサービス HMServiceType〜 説明 Thermostat サーモスタット 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み CurrentHeatingCooling 現在の冷暖房の状態 uint8 - TargetHeatingCooling 冷暖房の目標状態 uint8 可 CurrentTemperature 現在の温度 float - TargetTemperature 目標温度 float 可 TemperatureUnits 温度表示装置 uint8 可 概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
+温度を一定に保つ能力が高い 静か 乾燥しない といった特徴があります。 私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。
+一方で、他の実際に利用している知り合いの感想として「あまり暖かくなっている感じがしないので、結局、石油ヒーターのほうを使っている」というものもありました。
+自然に適温な空間を作りたいのか、もっと直接的に暖まりたいのかなどの好みによっても利用感が変わってくるのかもしれません。
+なおHomeKitのサービスとしては主にはサーモスタットのみで、書き込み可能なキャラクタとして「暖房機能のOn/Off」「目標温度」「温度表示装置のOn/Off」などがあります。
+また、隠し機能（というかHomeKitでは定義されていないカスタムキャラクタ）としてEco Modeなど14つのカスタムキャラクタもありますので、解析すればより細かい制御ができると思います。
+暖房をOnにするには？ 温度の設定はCurrentTemperature（目標温度）を上書きすれば良さそうですが、暖房をOnにするにはどうすれば良いでしょう？ この機器には他の機器によくあるPowerState（電源の状態）キャラクタがありません。
+また、TargetHeatingCooling（冷暖房の目標状態）というキャラクタがありますが、この機器に冷房機能はないんですが？
+といった時にはキャラクタのmetadataプロパティを参照すれば明確になることが多いです。例えばこの機器のTargetHeatingCoolingキャラクタのmetadataは以下になっていました。
+プロパティ 実際の値 format uint8 units minimumValue 0 maximumValue 1 stepValue 1 validValues maxLength このキャラクタのvalueには数値で0 or 1を指定できるようです。 実際に以下のコードで 1 を指定すると暖房がOnになりました。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="[HomeKit対応仕様] デロンギ マルチダイナミックヒーター | TOKOROM BLOG" property="og:title"><meta content="De&rsquo;Longhi Multi Dynamic Heater WiFi Model
+主なサービス HMServiceType〜 説明 Thermostat サーモスタット 主なキャラクタ HMCharacteristicType〜 説明 フォーマット 書き込み CurrentHeatingCooling 現在の冷暖房の状態 uint8 - TargetHeatingCooling 冷暖房の目標状態 uint8 可 CurrentTemperature 現在の温度 float - TargetTemperature 目標温度 float 可 TemperatureUnits 温度表示装置 uint8 可 概要 ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。 私の知っている限りでは、一番高額なHomeKit対応製品です1。
+私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（参考）。
+公開されている情報と、この機器を実際に利用しているUIデザイナーの元山さんの感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して
+温度を一定に保つ能力が高い 静か 乾燥しない といった特徴があります。 私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。
+一方で、他の実際に利用している知り合いの感想として「あまり暖かくなっている感じがしないので、結局、石油ヒーターのほうを使っている」というものもありました。
+自然に適温な空間を作りたいのか、もっと直接的に暖まりたいのかなどの好みによっても利用感が変わってくるのかもしれません。
+なおHomeKitのサービスとしては主にはサーモスタットのみで、書き込み可能なキャラクタとして「暖房機能のOn/Off」「目標温度」「温度表示装置のOn/Off」などがあります。
+また、隠し機能（というかHomeKitでは定義されていないカスタムキャラクタ）としてEco Modeなど14つのカスタムキャラクタもありますので、解析すればより細かい制御ができると思います。
+暖房をOnにするには？ 温度の設定はCurrentTemperature（目標温度）を上書きすれば良さそうですが、暖房をOnにするにはどうすれば良いでしょう？ この機器には他の機器によくあるPowerState（電源の状態）キャラクタがありません。
+また、TargetHeatingCooling（冷暖房の目標状態）というキャラクタがありますが、この機器に冷房機能はないんですが？
+といった時にはキャラクタのmetadataプロパティを参照すれば明確になることが多いです。例えばこの機器のTargetHeatingCoolingキャラクタのmetadataは以下になっていました。
+プロパティ 実際の値 format uint8 units minimumValue 0 maximumValue 1 stepValue 1 validValues maxLength このキャラクタのvalueには数値で0 or 1を指定できるようです。 実際に以下のコードで 1 を指定すると暖房がOnになりました。" property="og:description"><meta content="https://qiita-image-store.s3.amazonaws.com/0/7883/e2d9ecaa-7f81-761e-46ac-ca1555bdab71.png" property="og:image"><meta content="https://www.tokoro.me/posts/homekit_delongi_heater/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/homekit_delongi_heater/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">[HomeKit対応仕様] デロンギ マルチダイナミックヒーター</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2018年2月8日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/homekit">
+              homekit
+          </a>
+          /</div><div class="content">
+      <p><a target="_blank" href="https://www.apple.com/jp/shop/product/HKQ82J/A?fnode=372449abf93d5d1d346f209827d9b3c1af755ac16305ed17d2753e881428bf9d2aba527efa4d11b2dbc6377f455dd2159410e6afb94fd7b77284f2c5eb712c38802e1b54bf4486f5c21b1b77b6cd8f00db52e458cdec8304131e3f7108cf4133bce4b23b33c10cc6de33d0c46152a51f">De&rsquo;Longhi Multi Dynamic Heater WiFi Model</a></p>
+<h2 id="主なサービス">主なサービス</h2>
+<table>
+<thead>
+<tr>
+<th><code>HMServiceType</code>〜</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Thermostat</code></td>
+<td>サーモスタット</td>
+</tr>
+</tbody>
+</table>
+<h2 id="主なキャラクタ">主なキャラクタ</h2>
+<table>
+<thead>
+<tr>
+<th><code>HMCharacteristicType</code>〜</th>
+<th>説明</th>
+<th>フォーマット</th>
+<th>書き込み</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CurrentHeatingCooling</code></td>
+<td>現在の冷暖房の状態</td>
+<td>uint8</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TargetHeatingCooling</code></td>
+<td>冷暖房の目標状態</td>
+<td>uint8</td>
+<td>可</td>
+</tr>
+<tr>
+<td><code>CurrentTemperature</code></td>
+<td>現在の温度</td>
+<td>float</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>TargetTemperature</code></td>
+<td>目標温度</td>
+<td>float</td>
+<td>可</td>
+</tr>
+<tr>
+<td><code>TemperatureUnits</code></td>
+<td>温度表示装置</td>
+<td>uint8</td>
+<td>可</td>
+</tr>
+</tbody>
+</table>
+<h2 id="概要">概要</h2>
+<p>ちょっとお高くて（Apple Storeで￥84,800）試用レベルではなかなか買えないHomeKit製品の代表格かと思います。
+私の知っている限りでは、一番高額なHomeKit対応製品です<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>私はきちんと詳細把握していないのですが純粋にヒーターとしても高性能らしく、第３のヒーターとも言われているようです（<a href="http://the360.life/U1301.doit?id=103">参考</a>）。</p>
+<p>公開されている情報と、この機器を実際に利用している<a href="http://kudakurage.hatenadiary.com/entry/2018/01/02/094514">UIデザイナーの元山さん</a>の感覚をもとにメリットを並べると、一般的なエアコン暖房と比較して</p>
+<ul>
+<li>温度を一定に保つ能力が高い</li>
+<li>静か</li>
+<li>乾燥しない</li>
+</ul>
+<p>といった特徴があります。
+私もワークスペースで一緒に使わせていただいているわけですが、実際に稼働しているかどうかわからないくらい静かで、暖房が付いているという感覚がありません。</p>
+<p>一方で、他の実際に利用している知り合いの感想として「あまり暖かくなっている感じがしないので、結局、石油ヒーターのほうを使っている」というものもありました。</p>
+<p>自然に適温な空間を作りたいのか、もっと直接的に暖まりたいのかなどの好みによっても利用感が変わってくるのかもしれません。</p>
+<p>なおHomeKitのサービスとしては主にはサーモスタットのみで、書き込み可能なキャラクタとして「暖房機能のOn/Off」「目標温度」「温度表示装置のOn/Off」などがあります。</p>
+<p>また、隠し機能（というかHomeKitでは定義されていないカスタムキャラクタ）としてEco Modeなど14つのカスタムキャラクタもありますので、解析すればより細かい制御ができると思います。</p>
+<h2 id="暖房をonにするには">暖房をOnにするには？</h2>
+<p>温度の設定はCurrentTemperature（目標温度）を上書きすれば良さそうですが、暖房をOnにするにはどうすれば良いでしょう？
+この機器には他の機器によくあるPowerState（電源の状態）キャラクタがありません。</p>
+<p>また、TargetHeatingCooling（冷暖房の目標状態）というキャラクタがありますが、この機器に冷房機能はないんですが？</p>
+<p>といった時にはキャラクタの<code>metadata</code>プロパティを参照すれば明確になることが多いです。例えばこの機器のTargetHeatingCoolingキャラクタのmetadataは以下になっていました。</p>
+<table>
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>実際の値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>uint8</td>
+</tr>
+<tr>
+<td><code>units</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimumValue</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>maximumValue</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>stepValue</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>validValues</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>maxLength</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>このキャラクタのvalueには数値で<code>0</code> or <code>1</code>を指定できるようです。
+実際に以下のコードで <code>1</code> を指定すると暖房がOnになりました。</p>
+<pre><code class="language-swift">let service = home.servicesWithTypes([HMServiceTypeThermostat])?.first
+let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeTargetHeatingCooling }
+
+guard let targetHeatingCooling = candidates?.first else {
+    return
+}
+
+targetHeatingCooling.writeValue(1) { error in
+}
+</code></pre>
+<p>逆に<code>0</code>を指定すれば暖房はOffになります。</p>
+<p>この機器ではvalueに指定できる最大値（maximumValue）が<code>1</code>になっていますが、冷房機能がサポートされていれば<code>2</code>も指定することができ、それにより冷房をOnにできるようです。</p>
+<h2 id="tmperatureunit温度表示装置とは">TmperatureUnit（温度表示装置）とは？</h2>
+<p>温度表示装置ってなに？と思ったが、実際に以下コードでこのキャラクタのvalueを上書きするとはっきり分かりました（ちなみにこういった情報はHomeKit Accessory Protocol Specificationのドキュメントに明示されてるんですがブログなどに書いちゃいけない類のやつなので、実際にコードで叩いた結果を示します）。</p>
+<pre><code class="language-swift">let service = home.servicesWithTypes([HMServiceTypeThermostat])?.first
+let candidates = service?.characteristics.filter { $0.characteristicType == HMCharacteristicTypeTemperatureUnits }
+
+guard let temperatureUnit = candidates?.first else {
+    return
+}
+
+temperatureUnit.writeValue(1) { error in
+}
+</code></pre>
+<p>TmperatureUnitを<code>0</code>にするとディスプレイの温度の表示が摂氏になり、<code>1</code>を指定すると華氏になります<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/dba5a934-0d4a-4d79-09fe-fa17cd997e07.jpeg" height=300 />
+<img src="https://qiita-image-store.s3.amazonaws.com/0/7883/98533207-f5f6-0673-c660-481e0911925e.jpeg" height=300 />
+<h2 id="まとめ">まとめ</h2>
+<p>試しに使ってみるという金額ではありませんのでご購入は計画的に。この機器についてHomeKitで操作・参照できる項目は今のところどこにも公開されていないようですので、この記事の<a href="https://qiita.com/tokorom/items/2afd2a2222c58482a2d2#%E4%B8%BB%E3%81%AA%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF">主なキャラクタ</a>も是非ご参考にいただければと思います。</p>
+<p>自宅の子供部屋用の暖房を新設するときはこれにしようかなあという気持ち。</p>
+<h2 id="ios-11-programmingについて">iOS 11 Programmingについて</h2>
+<p>この記事は「iOS 11 Programming」の <strong>第12章 HomeKit入門とiOS 11における新機能</strong> の中の <strong>12.4.2 HomeKit 対応製品利用実例</strong> への追加コンテンツ的位置付けにもなっています。
+この製品がサポートするサービス（<code>HMService</code>）やキャラクタ（<code>HMCharacteristic</code>）の表など、全てこの書籍に合わせた形で掲載しております。</p>
+<p>「iOS 11 Programming」にご興味のあるかたは是非、以下リンクからご参照ください。</p>
+<div class="peaks_widget" style="overflow:hidden; padding:20px; border:2px solid #ccc;"><div class="peaks_widget__image" style="float:left; margin-right:15px; line-height:0;"><a target="_blank" id="purchase" href="https://peaks.cc/tokorom/iOS11"><img alt="iOS 11 Programming" style="border:none; max-width:140px;" src="https://s3-ap-northeast-1.amazonaws.com/peaks-images/project002_cover.jpg"></a></div><div class="peaks_widget__info"><p style="margin:0 0 3px 0; font-size:110%; font-weight:bold;"><a target="_blank" id="purchase" href="http://peaks.cc/tokorom/iOS11">iOS 11 Programming</a></p><ul style="margin:0; padding:0;"><li style="font-size:90%; list-style:none;"><span>著者：</span><span>堤 修一,</span><span>吉田 悠一,</span><span>池田 翔,</span><span>坂田 晃一,</span><span>加藤 尋樹,</span><span>川邉 雄介,</span><span>岸川 克己,</span><span>所 友太,</span><span>永野 哲久,</span><span>加藤 寛人,</span></li><li style="font-size:90%; list-style:none;">製本版,電子版</li><li style="font-size:90%; list-style:none;"><a target="_blank" id="purchase" style="text-decoration:underline; color:#1DA1F2;" href="http://peaks.cc/tokorom/iOS11">PEAKSで購入する</a></li></ul></div></div>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>少なくとも2018年2月8日時点で日本用に発売されているものとしては&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>これはHomeアプリでも切り替えられます&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/homekit_hue_sensor/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/a368e9a9-87fb-eb00-d425-0563e800440b.png" class="feed-item-image" alt="[HomeKit対応仕様] Philips Hue モーションセンサー" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] Philips Hue モーションセンサー</span>
+    <span class="feed-item-date">2018年2月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_koogeek_lightbulb/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/77fdcc8d-0c7a-b9d5-960d-9cb55319049f.jpeg" class="feed-item-image" alt="[HomeKit対応仕様] Koogeek Wi-Fiスマート LED" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] Koogeek Wi-Fiスマート LED</span>
+    <span class="feed-item-date">2018年1月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_christmastree/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/e647692a-13a4-e5b3-14bd-2257ba61915b.jpeg" class="feed-item-image" alt="クリスマスツリーをHomeKitに対応させよう" width="300"></div>
+
+    <span class="feed-item-title">クリスマスツリーをHomeKitに対応させよう</span>
+    <span class="feed-item-date">2017年12月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_hue_dimmer_switch/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/3953d9ee-b01b-4fdd-a869-2215bbe5a33d.png" class="feed-item-image" alt="[HomeKit対応仕様] Philips Hue Dimmer スイッチ" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] Philips Hue Dimmer スイッチ</span>
+    <span class="feed-item-date">2017年12月1日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/homekit_hue_white_lamp/">
+    <div class="feed-item-image-wrapper"><img data-src="https://qiita-image-store.s3.amazonaws.com/0/7883/ddd409f2-d2b4-a9de-c1c2-b2c11ec53d39.png" class="feed-item-image" alt="[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ" width="300"></div>
+
+    <span class="feed-item-title">[HomeKit対応仕様] Philips Hue ホワイトグラデーション シングルランプ</span>
+    <span class="feed-item-date">2017年11月22日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/user_notification/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</span>
+    <span class="feed-item-date">2016年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

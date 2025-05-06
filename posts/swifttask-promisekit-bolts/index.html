@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです 次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
+SwiftTask PromiseKit Bolts-iOS を（表面だけ）使って比較してみました。
+なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。
+その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。
+以下にそれぞれ使ってみた結果を紹介させていただきます。
+更新頻度 この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。
+試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
+Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; } すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self.textView?.text = &quot;\(error)&quot; return }."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="SwiftTask、PromiseKit、Boltsを比較する（2015年3月版） | TOKOROM BLOG" property="og:title"><meta content="※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます ※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです 次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の
+SwiftTask PromiseKit Bolts-iOS を（表面だけ）使って比較してみました。
+なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。
+その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。
+以下にそれぞれ使ってみた結果を紹介させていただきます。
+更新頻度 この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。
+試すネタ AlamofireでGenericにModelオブジェクトを取得する で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。
+Taskを使うほうのコード SwiftTask request(.GET, urlString).success { [unowned self] (users: [User]) in self.textView?.text = &quot;\(users)&quot; }.failure { [unowned self] error, _ in self.textView?.text = &quot;\(error)&quot; } すっきり直感的に書けます Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます PromiseKit request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in self.textView?.text = &quot;\(users)&quot; return }.catch { [unowned self] error -&gt; Void in self.textView?.text = &quot;\(error)&quot; return }." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/swifttask-promisekit-bolts/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/swifttask-promisekit-bolts/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">SwiftTask、PromiseKit、Boltsを比較する（2015年3月版）</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2015年3月12日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              swift
+          </a>
+          /</div><div class="content">
+      <ul>
+<li>※2015/3/11時点での比較結果ですので、今後、各ライブラリともにパワーアップしていくと思われます</li>
+<li>※いまはできないことでも各ライブラリのIssuesでは実装の検討が進んでいるものも多くあるようです</li>
+</ul>
+<p>次の案件で（Swiftで）Promiseライクなフロー制御を実現するために利用するライブラリを選定するため、2015/3/11時点の</p>
+<ul>
+<li><a href="https://github.com/ReactKit/SwiftTask">SwiftTask</a></li>
+<li><a href="https://github.com/mxcl/PromiseKit">PromiseKit</a></li>
+<li><a href="https://github.com/BoltsFramework/Bolts-iOS">Bolts-iOS</a></li>
+</ul>
+<p>を（表面だけ）使って比較してみました。</p>
+<p>なお、昨年の７月時点では（Swiftで使うぶんには）PromiseKitが将来性があると判断し、しばらくはPromiseKitを使っていました。</p>
+<p>その後、SwiftTaskも登場して気になっていたので、今回改めて新案件で採用するライブラリを選定したという経緯になります。</p>
+<p>以下にそれぞれ使ってみた結果を紹介させていただきます。</p>
+<!-- more -->
+<h2 id="更新頻度">更新頻度</h2>
+<p>この３つのライブラリはどれも更新頻度が多く、現在betaのSwift 1.2でも（別ブランチで）きちんと動く形になっています。</p>
+<h2 id="試すネタ">試すネタ</h2>
+<p><a href="http://www.tokoro.me/2015/03/11/almofire/">AlamofireでGenericにModelオブジェクトを取得する</a> で試したAlamofireを使うコードをネタとしてそれぞれ３つのライブラリを適用してみました。</p>
+<h2 id="taskを使うほうのコード">Taskを使うほうのコード</h2>
+<h3 id="swifttask">SwiftTask</h3>
+<pre><code class="language-swift">request(.GET, urlString).success { [unowned self] (users: [User]) in
+    self.textView?.text = &quot;\(users)&quot;
+}.failure { [unowned self] error, _ in
+    self.textView?.text = &quot;\(error)&quot;
+}
+</code></pre>
+<ul>
+<li>すっきり直感的に書けます</li>
+<li>Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます</li>
+</ul>
+<h3 id="promisekit">PromiseKit</h3>
+<pre><code class="language-swift">request(.GET, urlString).then { [unowned self] (users: [User]) -&gt; Void in
+    self.textView?.text = &quot;\(users)&quot;
+    return
+}.catch { [unowned self] error -&gt; Void in
+    self.textView?.text = &quot;\(error)&quot;
+    return
+}.finally {
+}
+</code></pre>
+<ul>
+<li>おおむねすっきりと書けます</li>
+<li>Genericsで欲しいModelオブジェクトを直感的に指定するようなインターフェースにできます</li>
+<li>そのままだとSwiftの型推論がうまくいかなくて一見不要そうな<code>return</code>とか<code>finally</code>を加えて型推論を助けてあげる必要があるケースがあり、ちょっと癖があるかんじです</li>
+</ul>
+<h3 id="bolts">Bolts</h3>
+<pre><code class="language-swift">request(Alamofire.Method.GET, urlString, User.self).continueWithBlock { (task: BFTask!) -&gt; AnyObject! in
+    if let error = task.error {
+        self.textView?.text = &quot;\(error)&quot;
+    } else if let users = task.result as? [User] {
+        self.textView?.text = &quot;\(users)&quot;
+    }
+    return nil
+}
+</code></pre>
+<ul>
+<li>すっきり直感的に書けます</li>
+<li>Swift専用のインターフェースがないため、Genericsを使うには工夫が必要になります
+<ul>
+<li>上の例だと引数にModelクラスのTypeを指定するようにしていますが、素直にGenericsを使えないのはちょっと残念です</li>
+<li>TaskのResultは<code>AnyObject</code>になってしまうので個別にダウンキャストなどが必要です</li>
+</ul>
+</li>
+</ul>
+<h2 id="taskを作るほうのコード">Taskを作るほうのコード</h2>
+<ul>
+<li><code>responseCollection</code>といったAlamofireの拡張は事前に済ませている前提です（<a href="http://www.tokoro.me/2015/03/11/almofire/">参考</a>）</li>
+<li>validationの個別カスタマイズなどには今回のサンプルでは対応していません</li>
+</ul>
+<p>こちらについてはどのライブラリも分かりやすく大差はないかなと思います。</p>
+<h3 id="swifttask-1">SwiftTask</h3>
+<pre><code class="language-swift">// SwiftTaskのみprogress取得に対応したサンプルになっています
+public func request&lt;T: ResponseCollectionSerializable&gt;(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL) -&gt; Task&lt;Progress, [T], NSError&gt; {
+    let task = Task&lt;Progress, [T], NSError&gt; { progress, fulfill, reject, configure in
+        Alamofire.request(method, URLString, parameters: parameters, encoding: encoding)
+            .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+                progress((bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) as Progress)
+            }
+            .validate()
+            .responseCollection { (request, response, collection: [T]?, error) in
+                if let error = error {
+                    reject(error)
+                    return
+                }
+                if let collection = collection {
+                    fulfill(collection)
+                    return
+                }
+                reject(NSError()) //&lt; TODO: unexpected error
+            }
+    }
+    return task
+}
+</code></pre>
+<h3 id="promisekit-1">PromiseKit</h3>
+<pre><code class="language-swift">public func request&lt;T: ResponseCollectionSerializable&gt;(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL) -&gt; Promise&lt;[T]&gt; {
+    let promise = Promise&lt;[T]&gt;({ fulfiller, rejecter in
+        Alamofire.request(method, URLString, parameters: parameters, encoding: encoding)
+            .validate()
+            .responseCollection { (request, response, collection: [T]?, error) in
+                if let error = error {
+                    rejecter(error)
+                    return
+                }
+                if let collection = collection {
+                    fulfiller(collection)
+                    return
+                }
+                rejecter(NSError()) //&lt; TODO: unexpected error
+            }
+    })
+    return promise
+}
+</code></pre>
+<h3 id="bolts-1">Bolts</h3>
+<pre><code class="language-swift">public func request&lt;T: ResponseCollectionSerializable&gt;(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, type: T.Type, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL) -&gt; BFTask {
+    var task = BFTaskCompletionSource()
+    Alamofire.request(method, URLString, parameters: parameters, encoding: encoding)
+        .validate()
+        .responseCollection { (request, response, collection: [T]?, error) in
+            if let error = error {
+                task.setError(error)
+                return
+            }
+            if let object = collection {
+                task.setResult(object as? AnyObject)
+                return
+            }
+            task.setError(NSError()) //&lt; TODO: unexpected error
+        }
+    return task.task
+}
+</code></pre>
+<h2 id="機能差分">機能差分</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">-</th>
+<th style="text-align:center">Genericなインターフェース</th>
+<th style="text-align:center">progress用インターフェース</th>
+<th style="text-align:center">cancel用インターフェース</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SwiftTask</td>
+<td style="text-align:center">⚪︎</td>
+<td style="text-align:center">⚪︎</td>
+<td style="text-align:center">⚪︎</td>
+</tr>
+<tr>
+<td style="text-align:left">PromiseKit</td>
+<td style="text-align:center">⚪︎</td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Bolts</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">⚪︎</td>
+</tr>
+</tbody>
+</table>
+<p>この表はぼくが気にした点を抽出して書いたものですのでちょっと贔屓目に見えてしまうかも。。。</p>
+<p>この他 <a href="http://qiita.com/inamiy/items/0756339aee35849384c3">inamiyさんのこちらの記事</a> などにも機能差分がまとめられてます。</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>どのライブラリも頻繁に更新されパワーアップしているので、どれを使っても大丈夫そうではある</li>
+<li>個人的にはタスクを使うほうのインターフェースを一番すっきり書けるSwiftTaskが気に入った</li>
+<li>また、SwiftTaskには現時点でもprogressやcancel用のインターフェースが用意されているのでこれらが必要になっても困らない</li>
+<li>SwiftTask++</li>
+</ul>
+<p>特にBoltsは本当に表面しか触ってみていませんので、Boltsのほうがココがすげーぞ！といったご指摘は大歓迎です！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/almofire/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">AlamofireでGenericにModelオブジェクトを取得する</span>
+    <span class="feed-item-date">2015年3月11日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/nstimezone-sample/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">NSTimeZoneから取得できる表示用文字列のサンプル</span>
+    <span class="feed-item-date">2014年11月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-simulator/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">SwiftでiOSシミュレータのときだけAFNetworkActivityLoggerを使う</span>
+    <span class="feed-item-date">2014年9月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-partial-application/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Swiftで部分適用（カリー化）</span>
+    <span class="feed-item-date">2014年7月30日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode-versioning/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">これがXcodeでのバージョニングの決定版になるかも</span>
+    <span class="feed-item-date">2014年5月19日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-async-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで非同期処理のテストをシンプルに書く方法</span>
+    <span class="feed-item-date">2014年4月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

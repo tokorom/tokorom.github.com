@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Human Interface GuidelinesのWidgetsの章の日本語訳 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の Widgetsの章 を日本語訳します。
+日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。 訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。
+2020年7月3日時点のものを訳します。
+Widgets Widgetにより、アプリの重要なコンテンツをiPhone、iPad、Mac上の一目で分かる場所に表示できます。 Widgetは便利で楽しく、iPhoneのホーム画面をユーザーごとにパーソナライズするのにも役立ちます。
+Widgetは、iOS 14以降と macOS 11以降で利用できます。 Widget Extensionを作成する という開発者向けのガイド記事があります。
+Widgetsの詳細 Widgetには小、中、大の３つのサイズがあります。 iPhone、iPad、Macのどのプラットフォームでも、ユーザーはWidgetギャラリーからWidgetを見つけ、お好みのサイズを選べます。 また、ユーザーは後からWidgetを好きな場所に移動させたり、WidgetごとにWidgetが用意したパラメータを設定することができます。 例えば、ホーム画面に小さなお天気Widgetをいくつか設置して、それぞれのWidgetに別々の場所の天気を表示する、など。 Widgetは、iPhoneならホーム画面やTodayビュー、iPadならTodayビュー、macOSなら通知センターに設置できます。
+iPhoneとiPadではWidgetギャラリーの中にスマートスタックがあります。 スマートスタックにはユーザーがよく使うアプリのWidgetがデフォルトで含まれています（後から変更もできます）。 スマートスタックはiPhoneのホーム画面と、iPhone/iPadのTodayビューに設置できます。 スマートスタックは時間とともにだんだんと賢くなり、Siriが自動で現在の状況に適したWidgetを一番上に表示してくれます。 また、ユーザーが自分で作ったWidgetのスタックでも、スタックの設定からスマート回転（Smart Rotate）をOnにすれば、Siriによる最適なWidgetの自動表示が有効になります。
+NOTE
+iOS 13以前のiOS用に作られた古いWidgetはホーム画面では利用できませんが、Todayビューの下部やmacOSの通知センターでは引き続き利用できます。
+使いやすく焦点を絞ったWidgetの作成 Widgetをタップすることでアプリ本体を開きアプリ内でより多くのことをできますが、Widgetの主な目的はユーザーがアプリ本体を開かなくてもタイムリーにユーザーごとにパーソナライズされた少量の情報を表示することです。 Widgetで実現すべき1つのアイデアを特定し、表示する情報の焦点を絞ることが、Widgtetのデザインプロセスにおける重要な最初のステップです。
+Widgetで実現するアイデアは1つに集中させてください。 ほとんどの場合はアプリのメインアイデアをWidgetに適用できるでしょう。 例えば、天気アプリでは特定の場所の天気を表示し、カロリートラッキングアプリではその日の消費カロリーを表示し、ニュースアプリではトレンドを表示するなどが考えられます。 また、ゲームアプリでキャラクターのステータスを表示したり、お絵かきアプリでお気に入りのスケッチを表示したりと、アプリのメインアイデアの1つの部分に焦点を当てるのも効果的です。
+どのサイズのWidgetでも、Widgetのアイデアに直接関係する情報のみを表示してください。 大きなWidgetでは、より多くのデータを表示したり、より詳細な情報を表示することができますが、Widgetのアイデアに集中することが重要です。
+例えば天気アプリの場合、小サイズのWidgetには現在の気温と天気、その日の最高気温と最低気温を表示します。
+中サイズのWidgetには小サイズと同じ情報に加えて6時間分の時間ごとの予報も表示します。
+大サイズのWidgetには6時間分の予報に加え、5日後までの予報も表示します。
+アプリ本体を起動するだけのWidgetは避けましょう。 ユーザーがWidgetを評価するのは、意味のあるコンテンツにすぐにアクセスできるからであって、アプリを開くためのショートカットになるからではありません。
+Widgetを複数のサイズで提供することで付加価値が得られる場合は、複数のサイズを提供しましょう。 小さいWidgetのコンテンツを拡大してエリアを埋めただけの大きなWidgetを作るのは避けましょう。すべてのサイズのWidgetを提供することよりも、あなたのアイデアを完璧に表現できる１つのサイズのWidgetを作成することのほうが重要です。
+1日を通してダイナミックに変化することが期待されます。 Widgetの表示に変化がなければ、ユーザーはWidgetを目立つ位置に置き続けようとは思わないでしょう。 Widgetは分刻みで更新されるわけではありませんが、頻繁に見てもらうWidgetにするためにはコンテンツの鮮度を保つことが重要です。
+驚きと喜びを与えてください。 例えばカレンダーWidgetなら、誕生日や祝日に特別な表示をすることができそうです。
+Widgetの設定とインタラクティブ性 Widgetに設定すべき項目がある場合は設定可能なWidgetにしましょう。 多くの場合、Widgetに有用なコンテンツを表示するためには、ユーザーが見たい情報をあらかじめ指定する必要があります。 例えば、天気Widgetでは場所を選択したり、株価Widgetでは表示する株価を選択したりする必要があります。 一方で、ポッドキャストWidgetなら、最近のコンテンツを表示するようにあらかじめ設定されているので、カスタマイズする必要はありません。 設定可能なWidgetを作成する場合は、あまり多くの設定を要求したり、複雑な情報を要求したりすることは避けてください。 Widgetの設定画面はOSが自動的に生成してくれるので設定画面を自分で作る必要はありません。 開発者向けに 設定可能なWidgetを作成する というガイド記事もあります。
+Widgetをタップしたときに、アプリの適切な画面を開くようにしましょう。 ユーザーがWidgetをタップすると、Widgetはアプリ本体にDeep Linkし、Widgetのコンテンツに直接関連する詳細情報やアクションを提供することができます。 例えば、ユーザーが特定の株価を表示しているWidgetをタップすると、株価アプリのその株価の詳細な情報を表示する画面を開きます。 また、ウォッチリストの一部を表示しているWidgetをタップすると、アプリが開いて全てのウォッチリストを確認できます。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Human Interface GuidelinesのWidgetsの章の日本語訳 | TOKOROM BLOG" property="og:title"><meta content="WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の Widgetsの章 を日本語訳します。
+日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。 訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。
+2020年7月3日時点のものを訳します。
+Widgets Widgetにより、アプリの重要なコンテンツをiPhone、iPad、Mac上の一目で分かる場所に表示できます。 Widgetは便利で楽しく、iPhoneのホーム画面をユーザーごとにパーソナライズするのにも役立ちます。
+Widgetは、iOS 14以降と macOS 11以降で利用できます。 Widget Extensionを作成する という開発者向けのガイド記事があります。
+Widgetsの詳細 Widgetには小、中、大の３つのサイズがあります。 iPhone、iPad、Macのどのプラットフォームでも、ユーザーはWidgetギャラリーからWidgetを見つけ、お好みのサイズを選べます。 また、ユーザーは後からWidgetを好きな場所に移動させたり、WidgetごとにWidgetが用意したパラメータを設定することができます。 例えば、ホーム画面に小さなお天気Widgetをいくつか設置して、それぞれのWidgetに別々の場所の天気を表示する、など。 Widgetは、iPhoneならホーム画面やTodayビュー、iPadならTodayビュー、macOSなら通知センターに設置できます。
+iPhoneとiPadではWidgetギャラリーの中にスマートスタックがあります。 スマートスタックにはユーザーがよく使うアプリのWidgetがデフォルトで含まれています（後から変更もできます）。 スマートスタックはiPhoneのホーム画面と、iPhone/iPadのTodayビューに設置できます。 スマートスタックは時間とともにだんだんと賢くなり、Siriが自動で現在の状況に適したWidgetを一番上に表示してくれます。 また、ユーザーが自分で作ったWidgetのスタックでも、スタックの設定からスマート回転（Smart Rotate）をOnにすれば、Siriによる最適なWidgetの自動表示が有効になります。
+NOTE
+iOS 13以前のiOS用に作られた古いWidgetはホーム画面では利用できませんが、Todayビューの下部やmacOSの通知センターでは引き続き利用できます。
+使いやすく焦点を絞ったWidgetの作成 Widgetをタップすることでアプリ本体を開きアプリ内でより多くのことをできますが、Widgetの主な目的はユーザーがアプリ本体を開かなくてもタイムリーにユーザーごとにパーソナライズされた少量の情報を表示することです。 Widgetで実現すべき1つのアイデアを特定し、表示する情報の焦点を絞ることが、Widgtetのデザインプロセスにおける重要な最初のステップです。
+Widgetで実現するアイデアは1つに集中させてください。 ほとんどの場合はアプリのメインアイデアをWidgetに適用できるでしょう。 例えば、天気アプリでは特定の場所の天気を表示し、カロリートラッキングアプリではその日の消費カロリーを表示し、ニュースアプリではトレンドを表示するなどが考えられます。 また、ゲームアプリでキャラクターのステータスを表示したり、お絵かきアプリでお気に入りのスケッチを表示したりと、アプリのメインアイデアの1つの部分に焦点を当てるのも効果的です。
+どのサイズのWidgetでも、Widgetのアイデアに直接関係する情報のみを表示してください。 大きなWidgetでは、より多くのデータを表示したり、より詳細な情報を表示することができますが、Widgetのアイデアに集中することが重要です。
+例えば天気アプリの場合、小サイズのWidgetには現在の気温と天気、その日の最高気温と最低気温を表示します。
+中サイズのWidgetには小サイズと同じ情報に加えて6時間分の時間ごとの予報も表示します。
+大サイズのWidgetには6時間分の予報に加え、5日後までの予報も表示します。
+アプリ本体を起動するだけのWidgetは避けましょう。 ユーザーがWidgetを評価するのは、意味のあるコンテンツにすぐにアクセスできるからであって、アプリを開くためのショートカットになるからではありません。
+Widgetを複数のサイズで提供することで付加価値が得られる場合は、複数のサイズを提供しましょう。 小さいWidgetのコンテンツを拡大してエリアを埋めただけの大きなWidgetを作るのは避けましょう。すべてのサイズのWidgetを提供することよりも、あなたのアイデアを完璧に表現できる１つのサイズのWidgetを作成することのほうが重要です。
+1日を通してダイナミックに変化することが期待されます。 Widgetの表示に変化がなければ、ユーザーはWidgetを目立つ位置に置き続けようとは思わないでしょう。 Widgetは分刻みで更新されるわけではありませんが、頻繁に見てもらうWidgetにするためにはコンテンツの鮮度を保つことが重要です。
+驚きと喜びを与えてください。 例えばカレンダーWidgetなら、誕生日や祝日に特別な表示をすることができそうです。
+Widgetの設定とインタラクティブ性 Widgetに設定すべき項目がある場合は設定可能なWidgetにしましょう。 多くの場合、Widgetに有用なコンテンツを表示するためには、ユーザーが見たい情報をあらかじめ指定する必要があります。 例えば、天気Widgetでは場所を選択したり、株価Widgetでは表示する株価を選択したりする必要があります。 一方で、ポッドキャストWidgetなら、最近のコンテンツを表示するようにあらかじめ設定されているので、カスタマイズする必要はありません。 設定可能なWidgetを作成する場合は、あまり多くの設定を要求したり、複雑な情報を要求したりすることは避けてください。 Widgetの設定画面はOSが自動的に生成してくれるので設定画面を自分で作る必要はありません。 開発者向けに 設定可能なWidgetを作成する というガイド記事もあります。
+Widgetをタップしたときに、アプリの適切な画面を開くようにしましょう。 ユーザーがWidgetをタップすると、Widgetはアプリ本体にDeep Linkし、Widgetのコンテンツに直接関連する詳細情報やアクションを提供することができます。 例えば、ユーザーが特定の株価を表示しているWidgetをタップすると、株価アプリのその株価の詳細な情報を表示する画面を開きます。 また、ウォッチリストの一部を表示しているWidgetをタップすると、アプリが開いて全てのウォッチリストを確認できます。" property="og:description"><meta content="https://www.tokoro.me/images/hig-widgets/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/hig-widgets/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/hig-widgets/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Human Interface GuidelinesのWidgetsの章の日本語訳</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2020年7月2日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/widgets">
+              Widgets
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/hig">
+              HIG
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios14">
+              iOS14
+          </a>
+          /</div><div class="content">
+      <p><img src="/images/hig-widgets/top.png" alt="image"></p>
+<p>WWDC20でiOS 14の新機能として発表されたWidgetsについて勉強するため、Human Interface Guidelines (HIG) の <a href="https://developer.apple.com/design/human-interface-guidelines/ios/system-capabilities/widgets">Widgetsの章</a> を日本語訳します。</p>
+<p>日本語で理解しやすいよう、ぼくの感性で意訳しちゃう部分もありますのでご了承ください。
+訳しながらドキュメントの意図が正確に分からなかった部分は注釈に明記します。</p>
+<p>2020年7月3日時点のものを訳します。</p>
+<h1 id="widgets">Widgets</h1>
+<p>Widgetにより、アプリの重要なコンテンツをiPhone、iPad、Mac上の一目で分かる場所に表示できます。
+Widgetは便利で楽しく、iPhoneのホーム画面をユーザーごとにパーソナライズするのにも役立ちます。</p>
+<p><img src="/images/hig-widgets/screen1.png" alt="image"></p>
+<p>Widgetは、iOS 14以降と macOS 11以降で利用できます。
+<a href="https://developer.apple.com/documentation/widgetkit/creating-a-widget-extension">Widget Extensionを作成する</a> という開発者向けのガイド記事があります。</p>
+<h2 id="widgetsの詳細">Widgetsの詳細</h2>
+<p>Widgetには小、中、大の３つのサイズがあります。
+iPhone、iPad、Macのどのプラットフォームでも、ユーザーはWidgetギャラリーからWidgetを見つけ、お好みのサイズを選べます。
+また、ユーザーは後からWidgetを好きな場所に移動させたり、WidgetごとにWidgetが用意したパラメータを設定することができます。
+例えば、ホーム画面に小さなお天気Widgetをいくつか設置して、それぞれのWidgetに別々の場所の天気を表示する、など。
+Widgetは、iPhoneならホーム画面やTodayビュー、iPadならTodayビュー、macOSなら通知センターに設置できます。</p>
+<p>iPhoneとiPadではWidgetギャラリーの中にスマートスタックがあります。
+スマートスタックにはユーザーがよく使うアプリのWidgetがデフォルトで含まれています（後から変更もできます）。
+スマートスタックはiPhoneのホーム画面と、iPhone/iPadのTodayビューに設置できます。
+スマートスタックは時間とともにだんだんと賢くなり、Siriが自動で現在の状況に適したWidgetを一番上に表示してくれます。
+また、ユーザーが自分で作ったWidgetのスタックでも、スタックの設定からスマート回転（Smart Rotate）をOnにすれば、Siriによる最適なWidgetの自動表示が有効になります。</p>
+<hr>
+<p><strong>NOTE</strong></p>
+<p>iOS 13以前のiOS用に作られた古いWidgetはホーム画面では利用できませんが、Todayビューの下部やmacOSの通知センターでは引き続き利用できます。</p>
+<hr>
+<h2 id="使いやすく焦点を絞ったwidgetの作成">使いやすく焦点を絞ったWidgetの作成</h2>
+<p>Widgetをタップすることでアプリ本体を開きアプリ内でより多くのことをできますが、Widgetの主な目的はユーザーがアプリ本体を開かなくてもタイムリーにユーザーごとにパーソナライズされた少量の情報を表示することです。
+Widgetで実現すべき1つのアイデアを特定し、表示する情報の焦点を絞ることが、Widgtetのデザインプロセスにおける重要な最初のステップです。</p>
+<p><strong>Widgetで実現するアイデアは1つに集中させてください。</strong>
+ほとんどの場合はアプリのメインアイデアをWidgetに適用できるでしょう。
+例えば、天気アプリでは特定の場所の天気を表示し、カロリートラッキングアプリではその日の消費カロリーを表示し、ニュースアプリではトレンドを表示するなどが考えられます。
+また、ゲームアプリでキャラクターのステータスを表示したり、お絵かきアプリでお気に入りのスケッチを表示したりと、アプリのメインアイデアの1つの部分に焦点を当てるのも効果的です。</p>
+<p><img src="/images/hig-widgets/focused-widget.png" alt="image"></p>
+<p><strong>どのサイズのWidgetでも、Widgetのアイデアに直接関係する情報のみを表示してください。</strong>
+大きなWidgetでは、より多くのデータを表示したり、より詳細な情報を表示することができますが、Widgetのアイデアに集中することが重要です。</p>
+<p>例えば天気アプリの場合、小サイズのWidgetには現在の気温と天気、その日の最高気温と最低気温を表示します。</p>
+<p><img src="/images/hig-widgets/weather-small.png" alt="image"></p>
+<p>中サイズのWidgetには小サイズと同じ情報に加えて6時間分の時間ごとの予報も表示します。</p>
+<p><img src="/images/hig-widgets/weather-medium.png" alt="image"></p>
+<p>大サイズのWidgetには6時間分の予報に加え、5日後までの予報も表示します。</p>
+<p><img src="/images/hig-widgets/weather-large.png" alt="image"></p>
+<p><strong>アプリ本体を起動するだけのWidgetは避けましょう。</strong>
+ユーザーがWidgetを評価するのは、意味のあるコンテンツにすぐにアクセスできるからであって、アプリを開くためのショートカットになるからではありません。</p>
+<p><strong>Widgetを複数のサイズで提供することで付加価値が得られる場合は、複数のサイズを提供しましょう。</strong>
+小さいWidgetのコンテンツを拡大してエリアを埋めただけの大きなWidgetを作るのは避けましょう。すべてのサイズのWidgetを提供することよりも、あなたのアイデアを完璧に表現できる１つのサイズのWidgetを作成することのほうが重要です。</p>
+<p><strong>1日を通してダイナミックに変化することが期待されます。</strong>
+Widgetの表示に変化がなければ、ユーザーはWidgetを目立つ位置に置き続けようとは思わないでしょう。
+Widgetは分刻みで更新されるわけではありませんが、頻繁に見てもらうWidgetにするためにはコンテンツの鮮度を保つことが重要です。</p>
+<p><strong>驚きと喜びを与えてください。</strong>
+例えばカレンダーWidgetなら、誕生日や祝日に特別な表示をすることができそうです。</p>
+<p><img src="/images/hig-widgets/birthday-in-calendar.png" alt="image"></p>
+<h2 id="widgetの設定とインタラクティブ性">Widgetの設定とインタラクティブ性</h2>
+<p><strong>Widgetに設定すべき項目がある場合は設定可能なWidgetにしましょう。</strong>
+多くの場合、Widgetに有用なコンテンツを表示するためには、ユーザーが見たい情報をあらかじめ指定する必要があります。
+例えば、天気Widgetでは場所を選択したり、株価Widgetでは表示する株価を選択したりする必要があります。
+一方で、ポッドキャストWidgetなら、最近のコンテンツを表示するようにあらかじめ設定されているので、カスタマイズする必要はありません。
+設定可能なWidgetを作成する場合は、あまり多くの設定を要求したり、複雑な情報を要求したりすることは避けてください。
+Widgetの設定画面はOSが自動的に生成してくれるので設定画面を自分で作る必要はありません。
+開発者向けに <a href="https://developer.apple.com/documentation/widgetkit/making-a-configurable-widget">設定可能なWidgetを作成する</a> というガイド記事もあります。</p>
+<p><strong>Widgetをタップしたときに、アプリの適切な画面を開くようにしましょう。</strong>
+ユーザーがWidgetをタップすると、Widgetはアプリ本体にDeep Linkし、Widgetのコンテンツに直接関連する詳細情報やアクションを提供することができます。
+例えば、ユーザーが特定の株価を表示しているWidgetをタップすると、株価アプリのその株価の詳細な情報を表示する画面を開きます。
+また、ウォッチリストの一部を表示しているWidgetをタップすると、アプリが開いて全てのウォッチリストを確認できます。</p>
+<p><strong>タップ領域をたくさん作りすぎるのは避けましょう。</strong>
+小サイズのWidgetには１つのタップ領域しか持たせられませんが、中サイズと大サイズのWidgetには複数のタップ領域を作れます。
+例えば、中サイズのノートWidgetに複数のノートを表示し、各ノートに別々のタップ領域を作り、タップしたほうのノートをアプリで開くなどできます。</p>
+<p><img src="/images/hig-widgets/multiple-tap-targets.png" alt="image"></p>
+<p>複数のタップ領域を提供することはコンテンツにとって意味のあることかもしれませんが、ユーザーがタップしたいコンテンツをタップするのに苦労するほど細かく領域を分けることは避けましょう。</p>
+<p><strong>ログインすることで付加価値が得られる場合は、それをユーザーに知らせましょう。</strong>
+アプリにログインするとWidgetにより良い情報が表示される場合は、ユーザーにそのことを知らせるようにします。
+例えば、直近の予約を表示するアプリなら、ログインしていないユーザーに対して「直近の予約を表示するためにログインしてください」と表示するなど。</p>
+<h2 id="widgetの更新">Widgetの更新</h2>
+<p><strong>Widgetを最新の状態に保ちましょう。</strong>
+Widgetに適切な情報が表示され有用である状態を維持するために、Widgetは定期的に情報を更新する必要があります。
+Widgetは継続的なリアルタイムな更新をサポートしておらず、OSが様々な要因に応じてWidgetの更新の制限を調整することがあります<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。
+Widgetの適切な更新頻度を見つけるには、データ自体の更新頻度を知り、ユーザーが新しいデータを見る必要がある頻度を考える必要があります。
+例えば、ビーチの潮汐を追跡するWidgetでは、潮の状態が常に変化しているとしても、有用な情報を表示できる更新頻度は1時間に1回程度でしょう。
+ユーザーがWidgetの更新頻度よりも頻繁にチェックする可能性が高い場合は、データが最後に更新された日時を表示することを検討してください。
+開発者向けに <a href="https://developer.apple.com/documentation/widgetkit/keeping-a-widget-up-to-date">Widgetを最新の状態に保つ</a> というガイド記事もあります。</p>
+<p><strong>システムにWidgetの更新日時を指示する。</strong>
+Widgetの更新頻度は限られており、システムに更新日時を指示することで、Widgetの更新を維持することができます。</p>
+<p><strong>コンテンツを素早く表示する。</strong>
+表示するデータに合った更新頻度を決められれば、古いデータをプレースホルダ（表示するデータがない時の仮の見た目）で隠す必要はありません。</p>
+<h2 id="美しいwidgetをデザインする">美しいWidgetをデザインする</h2>
+<p>iOS 14以降のWidgetでは、リッチで大胆な色、喚起的な画像、一目で読みやすい鮮明なテキストが使用されています。
+ユニークで美しいWidgetは、便利な情報を提供するだけでなく、ユーザーのホーム画面をパーソナライズしてくれます。</p>
+<p><strong>色、タイポグラフィー、画像を使ってブランディングしましょう。</strong>
+Widget内にサービスのロゴ、ワードマーク、アプリのアイコンを表示する必要がある場合は、コンテンツの邪魔にならないようにしましょう。
+iPhoneのホーム画面の編集モード中など、必要に応じてシステムが自動的にWidgetの下にアプリ名を表示するので、コンテンツ内で繰り返し表示する必要はありません。</p>
+<p><strong>適切な情報密度を目指しましょう。</strong>
+コンテンツがまばらに見えるとWidgetは不要に見えてしまい、コンテンツが濃すぎるとWidgetの見栄えが悪くなります。
+盛り込みたい情報が多い場合は、Widgetが見辛くならないよう注意しましょう。
+ユーザーが重要な部分を瞬時に把握し、そのうえで関連する情報も見ることができるように、コンテンツを改善する方法を模索してください。
+また、より大きなサイズのWidgetを作成し、明瞭さを失わずにテキストをグラフィックに置き換ええらる部分がないか探してみてください。</p>
+<p><strong>色は慎重に使いましょう。</strong>
+豊かで美しい色は目を引きますが、Widgetの情報をひと目で理解することを妨げてはいけません。
+コンテンツと競合することなくWidgetの外観をよくするために色を使用します。
+Assert Catalog（Xcodeの機能の１つ）で、システムがWidgetの設定画面を生成する際に利用する色を指定することもできます。</p>
+<p><strong>ダークモードをサポートしましょう。</strong>
+Widgetはライトモードとダークモードの両方で見栄えが良くなければなりません。
+一般的に、ダークモードで明るい背景に暗いテキストを表示したり、ライトモードで暗い背景に明るいテキストを表示するようなことは避けてください。
+テキストと背景にシステムカラー（semantic system colors）を使用すると、それらの色は現在のモードに応じて自動的に変更されます。
+また、Asset Catalogにライトモード/ダークモードの両方に自動対応する色を追加することもできます。
+その他、iOSのダークモードについては <a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/">こちら</a> を、macOSのダークモードについては <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">こちら</a> を参照してください。
+Asset Catalogについての開発者向けの情報は <a href="https://help.apple.com/xcode/mac/current/#/dev10510b1f7">Asset Catalogの作成と設定</a> を参照してください。</p>
+<p><img src="/images/hig-widgets/notes-small-light.png" alt="image">
+<img src="/images/hig-widgets/notes-small-dark.png" alt="image"></p>
+<p><strong>SF Proの使用を検討しましょう。</strong>
+システムフォントを使用すると、どのプラットフォームでもWidgetが見やすくなり、さまざまなウェイト、スタイル、サイズで見栄えの良いテキストを簡単に表示できます。
+カスタムフォントを使用する必要がある場合は、使用を控えめにして、一目で読みやすくなっているか留意してください。
+Widgetの中で使う大きなテキストにはカスタムフォントを使用し、小さなテキストにはSF Proを使用するなどが効果的です。
+iOSのタイポグラフィについては <a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/">こちら</a> を、macOSのタイポグラフィについては <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/typography/">こちら</a> を参照してください。</p>
+<p><strong>Widgetギャラリーに表示するためのリアルなプレビューをデザインしましょう。</strong>
+Widgetの外観と機能を強調することで、ユーザーが意思決定しやすくなり、Widgetの追加を促すことができます。
+Widgetのプレビューに実際のデータを表示することもできますが、データの生成やロードに時間がかかりすぎる場合は、代わりにその時点で表示可能な仮のデータを表示します。</p>
+<p><strong>Widgetを認識してもらうためのプレースホルダをデザインしましょう。</strong>
+Widgetは、データがロードされている間にプレースホルダを表示します。
+UIの静的な部分と実際のコンテンツの代わりになる薄い不透明な図形（円や長方形）とを組み合わせることで、効果的なプレビューを作成することができます。
+例えば、幅の異なる長方形を使用してテキストの行を表したり、グリフや画像の代わりに円や四角を使用したりできます。</p>
+<p><img src="/images/hig-widgets/calendar-placeholder.png" alt="image">
+<img src="/images/hig-widgets/calendar.png" alt="image"></p>
+<p><strong>Widgetの簡潔な説明を書きましょう。</strong>
+Widgetギャラリーには、それぞれのWidgetが何をするのか理解するのに役立つ説明が表示されます。
+例えば、「現在の天気とこれからの予報を見る」とか「今後のイベントや会議を追跡する」などです。
+「このWidgetは&hellip;」、「このWidgetを使って&hellip;」、「このWidgetを追加する」などのように、Widget自体を参照する不要なフレーズを含めないようにします。
+わかりやすい言葉で、センテンス・スタイル（文頭の単語の頭文字のみ大文字にする）で説明を書きます。</p>
+<h2 id="異なる画面サイズへの適応">異なる画面サイズへの適応</h2>
+<p>Widgetは、さまざまなデバイスの画面サイズや表示エリアに適応するように自動的に大きさが変わります。
+SF ProとSF Symbolsを使用したり、適切なサイズのコンテンツを提供することで、どのデバイスでもWidgetが見栄えよく見えるようにできます。</p>
+<p><strong>１番大きなWidgetのサイズに合わせて背景画像のサイズを調整しましょう。</strong>
+１番大きなのWidgetで画像が美しく見えるようにし、小さいWidgetでは適切に縮小してください。
+サイズについては以下の表を参考にしてください。</p>
+<table>
+<thead>
+<tr>
+<th>Screen size (portrait)</th>
+<th>Small widget</th>
+<th>Medium widget</th>
+<th>Large widget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>414pt ×896pt</td>
+<td>169pt ×169pt</td>
+<td>360pt ×169pt</td>
+<td>360pt ×376pt</td>
+</tr>
+<tr>
+<td>375pt ×812pt</td>
+<td>155pt ×155pt</td>
+<td>329pt ×155pt</td>
+<td>329pt ×345pt</td>
+</tr>
+<tr>
+<td>414pt ×736pt</td>
+<td>159pt ×159pt</td>
+<td>348pt ×159pt</td>
+<td>348pt ×357pt</td>
+</tr>
+<tr>
+<td>375pt ×667pt</td>
+<td>148pt ×148pt</td>
+<td>322pt ×148pt</td>
+<td>322pt ×324pt</td>
+</tr>
+<tr>
+<td>320pt ×568pt</td>
+<td>141pt ×141pt</td>
+<td>291pt ×141pt</td>
+<td>291pt ×299pt</td>
+</tr>
+</tbody>
+</table>
+<p><strong>コンテンツの角の丸み（Corner Radius）をWidgetの角の丸みに合わせましょう。</strong>
+Widgetの丸みを帯びた四角形の内でコンテンツがきれいに見えるようにするには、SwiftUIコンテナを使用して正しいCorner Radiusを適用します。
+開発者向けのガイドは <a href="https://developer.apple.com/documentation/swiftui/containerrelativeshape">ContainerRelativeShapeのAPIリファレンス</a> にあります。</p>
+<p><strong>通常は、コンテンツが快適に読みやすいよう標準的な余白（マージン）を使用してください。</strong></p>
+<p>標準的なマージンは<code>16</code>ポイントです。
+Widgetにテキスト、グリフ、グラフなどのコンテンツが表示されている場合は、端が混み合ってごちゃごちゃした外観にならないよう、標準のマージンを使用してください。
+コンテンツを視覚的にグループ化するために背景に四角形などを表示したり、ボタンの背景を表示するなど、狭いマージンを使用したほうが良い場合もあります。
+<code>8</code>ポイントの狭いマージンは、情報を含むグラフィックを読みやすくするのに役立ちます。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>正直、この行は正確な意味を分からず訳している。Widgetがいつでも確実に更新されるわけじゃないよ、ということを言っているのか？&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/swift-aws-lambda-runtime2/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-aws-lambda-runtime/top.png" class="feed-item-image" alt="Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる" width="300"></div>
+
+    <span class="feed-item-title">Swift AWS Lambda Runtimeで犬の写真を毎朝Slackに送ってみる</span>
+    <span class="feed-item-date">2020年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-aws-lambda-runtime/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-aws-lambda-runtime/top.png" class="feed-item-image" alt="Swift AWS Lambda Runtimeのサンプルをデプロイしてみた" width="300"></div>
+
+    <span class="feed-item-title">Swift AWS Lambda Runtimeのサンプルをデプロイしてみた</span>
+    <span class="feed-item-date">2020年6月11日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/firebsae-app-distribution/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/firebase-app-distribution/3-create-app.png" class="feed-item-image" alt="５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）" width="300"></div>
+
+    <span class="feed-item-title">５分で終わるFirebase App Distribution（プロジェクト作成からテスターへの配信まで）</span>
+    <span class="feed-item-date">2020年2月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

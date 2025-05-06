@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない? | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="El CapitanにしたらTotalTerminalが動かない！ Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。
+しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！
+もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。 （実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）
+であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！ と思いたって試してみました。 （実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）
+以下、試したことをまとめます。
+ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
+Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す ことはできるようになった。
+tell application &quot;System Events&quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &quot;Terminal&quot; then # Command-Tab tell application &quot;System Events&quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &quot;Terminal&quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript
+現在の課題としましては、
+Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート） かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い） プロセスの名前が常に Terminal でよいのかがよくわからん Terminalが既にカレントのときにCommand&#43;Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？ などがありそうです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない? | TOKOROM BLOG" property="og:title"><meta content="El CapitanにしたらTotalTerminalが動かない！ Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。
+しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！
+もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。 （実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）
+であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！ と思いたって試してみました。 （実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）
+以下、試したことをまとめます。
+ぼくの最強なトグル用AppleScript ひとまずこのスクリプトを実行することで、
+Terminalが動いていなければ起動して最前面に Terminalが裏にいるなら最前面に Terminalが最前面にいるなら裏に回す ことはできるようになった。
+tell application &quot;System Events&quot; set activeApp to first process where it is frontmost if activeApp&#39;s name = &quot;Terminal&quot; then # Command-Tab tell application &quot;System Events&quot; key down command keystroke tab key up command end tell else # Open Terminal tell application &quot;Terminal&quot; to activate end if end tell 今のぼくにはこれが精一杯でした。 こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。
+https://github.com/tokorom/ToggleTerminalScript
+現在の課題としましては、
+Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート） かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い） プロセスの名前が常に Terminal でよいのかがよくわからん Terminalが既にカレントのときにCommand&#43;Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？ などがありそうです。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/el-capitain-totalterminal/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/el-capitain-totalterminal/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">El CapitanでTotalTerminalが動かないならAppleScriptで代用すればいいじゃない?</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2015年10月5日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/mac">
+              mac
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/cui">
+              cui
+          </a>
+          /</div><div class="content">
+      <h2 id="el-capitanにしたらtotalterminalが動かない">El CapitanにしたらTotalTerminalが動かない！</h2>
+<p>Twitter上でもよくこの話題が出ていて、多くの人はiTerm2に移管しているようです。</p>
+<p>しかし、ぼくは長年愛した（普通の）Terminalちゃんをそう簡単に捨てることはできないのです！</p>
+<p>もともとTotalTerminalはTerminalの表示をカッコよくトグルするために使っているわけで、TotalTerminalというよりはTerminalちゃんをそのまま使いたいわけです。
+（実際のところiTerm2を試してないので、iTerm2の良さについては全くの無知です）</p>
+<p>であれば、そんなトグルくらいならAppleScriptで軽やかにできるはず！ぼくのAppleScriptでTerminalちゃんを救ってみせる！
+と思いたって試してみました。
+（実際のところAppleScriptに無知すぎて全く軽やかにはできなかったわけですが、結果自体はシンプルです）</p>
+<p>以下、試したことをまとめます。</p>
+<!-- more -->
+<h2 id="ぼくの最強なトグル用applescript">ぼくの最強なトグル用AppleScript</h2>
+<p>ひとまずこのスクリプトを実行することで、</p>
+<ul>
+<li>Terminalが動いていなければ起動して最前面に</li>
+<li>Terminalが裏にいるなら最前面に</li>
+<li>Terminalが最前面にいるなら裏に回す</li>
+</ul>
+<p>ことはできるようになった。</p>
+<pre><code>tell application &quot;System Events&quot;
+    set activeApp to first process where it is frontmost
+    if activeApp's name = &quot;Terminal&quot; then
+        # Command-Tab
+        tell application &quot;System Events&quot;
+            key down command
+            keystroke tab
+            key up command
+        end tell
+    else
+        # Open Terminal
+        tell application &quot;Terminal&quot; to activate
+    end if
+end tell
+</code></pre>
+<p>今のぼくにはこれが精一杯でした。
+こんなぼくに、もっとこうしたほうが良いよ！と教えてくれるかたがいらっしゃったら、現在のスクリプトをGitHubに置きましたので是非ご指摘いただけると嬉しいです。</p>
+<p><a href="https://github.com/tokorom/ToggleTerminalScript">https://github.com/tokorom/ToggleTerminalScript</a></p>
+<p>現在の課題としましては、</p>
+<ul>
+<li>Terminalが起動しているがウィンドウがないときはウィンドウがないままアクティブになる（困ってはないけど勝手にウィンドウ作ってくれればスマート）</li>
+<li>かっこよくない（冗長かもだが、TotalTerminalみたいにかっこよく動くとより良い）</li>
+<li>プロセスの名前が常に <code>Terminal</code> でよいのかがよくわからん</li>
+<li>Terminalが既にカレントのときにCommand+Tabキーを送って裏に回してるけど、もっとスマートな方法あるんじゃない？</li>
+</ul>
+<p>などがありそうです。</p>
+<h2 id="automatorでこのスクリプトをサービスとして登録">Automatorでこのスクリプトをサービスとして登録</h2>
+<p>次に、このスクリプトを利用するためにAutomatorでサービスとして新規登録する。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_script1.png" alt="toggle_terminal_script1"></p>
+<ul>
+<li>Automatorで<code>サービス</code>を新規作成</li>
+<li>左ペインの<code>ライブラリ</code>-&gt;<code>AppleScriptを実行</code>を右ペインにドラッグ＆ドロップ</li>
+<li>右上の設定は <code>入力なし</code> と <code>すべてのアプリケーション</code> とする</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_script2.png" alt="toggle_terminal_script2"></p>
+<ul>
+<li><code>{* Your script goes here *}</code> のところに上のスクリプトを挿入</li>
+<li>適当な名前で保存</li>
+</ul>
+<h2 id="キーボードショートカットの設定">キーボードショートカットの設定</h2>
+<p>次に、登録したサービスをお好みのショートカットキーで実行できるようにする。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/toggle_terminal_keysetting.png" alt="toggle_terminal_keysetting"></p>
+<ul>
+<li><code>システム環境設定</code> -&gt; <code>キーボード</code> -&gt; <code>ショートカット</code> -&gt; <code>サービス</code> の下の方に登録したサービスがある</li>
+<li>他と被らなそうな適当なショートカットキーを設定する</li>
+</ul>
+<p>で、設定したショートカットキーでTerminalの表示をトグルできるようになったはず！</p>
+<p>ただ、TotalTerminalの時に <code>Ctrl, Ctrl</code> とかいったショートカットキーを使っていると、それがここで設定できずに、うーーーんという感じになるかも。
+僕も <code>Ctrl + Tab</code> を愛用していたため、もれなく、うーーーんとなりました。</p>
+<h2 id="karabinerで特殊なショートカットキーを解決する">Karabinerで特殊なショートカットキーを解決する</h2>
+<p>そんな時は、みんな大好き <a href="https://pqrs.org/osx/karabiner/index.html.ja">Karabiner</a> 様で解決すれば良し。</p>
+<p>ぼくの場合は、</p>
+<pre><code class="language-xml">&lt;item&gt;
+  &lt;name&gt;Change Control_+Tab to Shift_Option_Command_T Keys&lt;/name&gt;
+  &lt;identifier&gt;remap.tokorom.control_tab&lt;/identifier&gt;
+  &lt;not&gt;VIRTUALMACHINE, REMOTEDESKTOPCONNECTION&lt;/not&gt;
+  &lt;autogen&gt;--KeyToKey-- KeyCode::TAB, VK_CONTROL,    KeyCode::T, VK_SHIFT | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND | ModifierFlag::OPTION_L&lt;/autogen&gt;
+&lt;/item&gt;
+</code></pre>
+<p>この設定を追加して<code>Ctrl + Tab</code>で先ほど設定したショートカットキーを押したことにする設定を加えました。</p>
+<p>以上で、ひとまずこれまでと同じショートカットキーでTerminalの表示をToggleすることはできるようになりました。
+せっかくなのでしばらく使ってみます。</p>
+<h2 id="2015106-追記-alfred">2015/10/6 追記： Alfred!!!</h2>
+<p>と、しばらく使ってみますと書いた翌日に早速選手交代することになりました。</p>
+<p>下のコメントで、r.izumitaさんからAflredのWorkflowを使う方法をご教示いただき、試してみたところ、上記でごちゃごちゃやったことが本当に一発で解決できて感涙ものでした。
+AlfredのWorkflowの利用には有償のライセンス（17ユーロ、現在だと2300円くらい）が必要になりますが、超簡単便利なのでオススメです。</p>
+<p>（ぼくもTerminalのトグルにはこれを使うことにしました）</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/tmux-toggle/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">tmuxでC-t C-tでのサイクルをより便利にする : 同じキーでpaneでもwindowでも行き来できるようにしてみた</span>
+    <span class="feed-item-date">2013年1月17日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/mac-terminal-japanese/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Mac &#43; Terminal &#43; tmux &#43; vim でクリップボードを快適に使う</span>
+    <span class="feed-item-date">2012年12月31日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/install-pandoc/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Macにpandocをインストール中にhs-httpで引っかかったのを解消した手順</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/octopress-part-of-codes/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Octopressでソースコードの一部分だけを参照する</span>
+    <span class="feed-item-date">2012年7月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

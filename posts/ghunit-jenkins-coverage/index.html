@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>GHUnitのテストカバレッジをJenkinsで表示する | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
+設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
+実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
+うまく動かない場合の設定の比較などにご参照ください。
+なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
+事前準備 Jenkinsの導入 さくらVPSにJenkinsさんをインストールする GHUnitの導入 Jenkins を iOS アプリ開発に導入してみた (GHUnit編) GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
+具体的には、以下のように
+Generate Test Coverage Files Instrument Program Flow の２つに YES を設定します。
+本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+この対処として、 main.m に以下コードを追記しておく必要があります。
+FILE *fopen$UNIX2003(const char *filename, const char *mode) { return fopen(filename, mode); } size_t fwrite$UNIX2003(const void *ptr, size_t size, size_t nitems, FILE *stream) { return fwrite(ptr, size, nitems, stream); } 最後に、テスト用のターゲットの info."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="GHUnitのテストカバレッジをJenkinsで表示する | TOKOROM BLOG" property="og:title"><meta content="概要 設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。
+設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。
+実際に動かしてみたサンプルプロジェクトは Github に置いてあります。
+うまく動かない場合の設定の比較などにご参照ください。
+なお、ここではiOSアプリ開発用としての紹介をさせていただきます。
+事前準備 Jenkinsの導入 さくらVPSにJenkinsさんをインストールする GHUnitの導入 Jenkins を iOS アプリ開発に導入してみた (GHUnit編) GHUnitのiOS用frameworkをビルドするのが面倒な場合は、Github にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。
+テストカバレッジを出力するためのプロジェクトの設定を変更する GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。
+具体的には、以下のように
+Generate Test Coverage Files Instrument Program Flow の２つに YES を設定します。
+本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に
+Detected an attempt to call a symbol in system libraries that is not present on the iPhone: fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests. というエラーが出ることになります。
+この対処として、 main.m に以下コードを追記しておく必要があります。
+FILE *fopen$UNIX2003(const char *filename, const char *mode) { return fopen(filename, mode); } size_t fwrite$UNIX2003(const void *ptr, size_t size, size_t nitems, FILE *stream) { return fwrite(ptr, size, nitems, stream); } 最後に、テスト用のターゲットの info." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/ghunit-jenkins-coverage/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/ghunit-jenkins-coverage/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">GHUnitのテストカバレッジをJenkinsで表示する</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年9月2日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/jenkins">
+              jenkins
+          </a>
+          /</div><div class="content">
+      <h2 id="概要">概要</h2>
+<p>設定が完了すると、JenkinsでGHUnitのテストが実行された後に以下のようにテストカバレッジが参照できます。</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/ghunit-coverage.png" alt="ghunit-coverage"></p>
+<p>設定がちょっとだけ面倒ですが、一度やって慣れてしまえばなんてことありません。</p>
+<p>実際に動かしてみたサンプルプロジェクトは <a href="https://github.com/tokorom/CodeCoverageWithGHUnit">Github</a> に置いてあります。<br>
+うまく動かない場合の設定の比較などにご参照ください。</p>
+<p>なお、ここではiOSアプリ開発用としての紹介をさせていただきます。</p>
+<!-- more -->
+<h2 id="事前準備">事前準備</h2>
+<h3 id="jenkinsの導入">Jenkinsの導入</h3>
+<ul>
+<li><a href="/2012/07/24/install-jenkins-to-sakura/">さくらVPSにJenkinsさんをインストールする</a></li>
+</ul>
+<h3 id="ghunitの導入">GHUnitの導入</h3>
+<ul>
+<li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
+</ul>
+<p>GHUnitのiOS用frameworkをビルドするのが面倒な場合は、<a href="https://github.com/tokorom/ghunit-ios-framework">Github</a> にビルド済みのものを置いてあるのでこれを使っていただいても構いません(2012/9/2時点でXcode 4.4.1 では問題なく利用できました)。</p>
+<h2 id="テストカバレッジを出力するためのプロジェクトの設定を変更する">テストカバレッジを出力するためのプロジェクトの設定を変更する</h2>
+<p>GHUnitを使っている場合はテスト用のターゲットにのみ設定すればOKです。<br>
+具体的には、以下のように</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/test-coverage-setting.png" alt="test-coverage-setting"></p>
+<ul>
+<li><em>Generate Test Coverage Files</em></li>
+<li><em>Instrument Program Flow</em></li>
+</ul>
+<p>の２つに <strong>YES</strong> を設定します。</p>
+<p>本来であれば上記だけで完了とできるのですが、現状だとXcodeにバグがあるというこでこのままだとJenkinsでのジョブ実行時に</p>
+<pre><code>Detected an attempt to call a symbol in system libraries that is not present on the iPhone:
+fopen$UNIX2003 called from function llvm_gcda_start_file in image Tests.
+</code></pre>
+<p>というエラーが出ることになります。</p>
+<p>この対処として、 <strong>main.m</strong> に以下コードを追記しておく必要があります。</p>
+<pre><code class="language-objc">FILE *fopen$UNIX2003(const char *filename, const char *mode)
+{
+  return fopen(filename, mode);
+}
+ 
+size_t fwrite$UNIX2003(const void *ptr, size_t size, size_t nitems, FILE *stream)
+{
+  return fwrite(ptr, size, nitems, stream);
+}
+</code></pre>
+<p>最後に、テスト用のターゲットの <strong>info.plist</strong> に <em>Application does not run in background</em> を加え、ここに <strong>YES</strong> を設定します。</p>
+<p>ここまででXcode側の設定は完了なので、GHUnitのテストを実行するとbuildディレクトリ以下（自分の場合は <em>build/CodeCoverageWithGHUnit.build/Debug-iphonesimulator/Tests.build/Objects-normal/i386</em>）に</p>
+<ul>
+<li>*.gcda</li>
+<li>*.gcno</li>
+</ul>
+<p>といったテストカバレッジの結果を出力したファイルが確認できるはずです。<br>
+Jenkinsを使わずローカルでこの結果を確認したい場合は、 <a href="http://code.google.com/p/coverstory/">CoverStory</a> などでこれらのファイルを開けばローカルで確認することも可能です。</p>
+<h2 id="gcovrの設置">gcovrの設置</h2>
+<p>上記で出力したテストカバレッジの結果をJenkinsのCobertura pluginで読める形式に変換するために、 <a href="https://software.sandia.gov/trac/fast/wiki/gcovr">gcovr</a> というPythonスクリプトを利用します。<br>
+具体的には、<a href="https://software.sandia.gov/svn/public/fast/gcovr/trunk/scripts/gcovr">ココ</a> からダウンロードしてPathの通った場所にこれを設置します。</p>
+<h2 id="jenkinsのジョブの設定">Jenkinsのジョブの設定</h2>
+<h3 id="必要なplugin">必要なPlugin</h3>
+<ul>
+<li>Git plugin</li>
+<li>Cobertura plugin</li>
+</ul>
+<p>をJenkinsにインストールしてください。</p>
+<h3 id="ジョブの設定">ジョブの設定</h3>
+<ul>
+<li>Source Code Management
+<ul>
+<li>Repositories: 対象となるGitリポジトリのURL</li>
+</ul>
+</li>
+</ul>
+<p>※ サンプルをそのまま利用したい場合は <code>git://github.com/tokorom/CodeCoverageWithGHUnit.git</code> をご利用ください</p>
+<ul>
+<li>BuildにGHUnit実行用の Execute Shell を追加</li>
+</ul>
+<pre><code>GHUNIT_CLI=1 WRITE_JUNIT_XML=YES xcodebuild -target Tests -configuration Debug -sdk iphonesimulator clean build
+</code></pre>
+<ul>
+<li>Buildeにgcovr実行用の Excute Shell を追加</li>
+</ul>
+<pre><code>gcovr -r . --object-directory build/CodeCoverageWithGHUnit.build/Debug-iphonesimulator/Tests.build/Objects-normal/i386 --exclude '.*Tests.*' --exclude '.*ExternalFrameworks.*' --xml &gt; build/coverage.xml
+</code></pre>
+<p>※ テストターゲットやプロジェクト名は適宜変更してください</p>
+<ul>
+<li>Post-build Actionsに Publish JUnit test result report を追加</li>
+</ul>
+<pre><code>build/test-results/*.xml
+</code></pre>
+<ul>
+<li>Post-build Actionsに Publish Cobertura Coverage Report を追加
+<ul>
+<li>Consider only stable builds: <strong>On</strong></li>
+<li>Source Encoding: <strong>UTF-8</strong></li>
+<li>Cobertura xlm report pattern</li>
+</ul>
+</li>
+</ul>
+<pre><code>build/coverage.xml
+</code></pre>
+<p>※ この他、Coverage Metrics Targets で特定のカバレッジを下回った場合にはジョブ失敗とみなすなどの設定ができるようです。</p>
+<p>以上で設定は完了です。</p>
+<p>あとは実行するだけ！</p>
+<p>テストカバレッジが複数回取られると、Jenkins上で</p>
+<p><img src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/coverage-graph.png" alt="coverage-graph"></p>
+<p>のようにカバレッジの変化をグラフで確認することもできるようになります。</p>
+<h2 id="参照させていただいたブログ記事へのリンク">参照させていただいたブログ記事へのリンク</h2>
+<ul>
+<li><a href="http://blog.octo.com/en/jenkins-quality-dashboard-ios-development/">iOS dev: How to setup quality metrics on your Jenkins job?</a></li>
+<li><a href="http://safx-dev.blogspot.jp/2012/03/jenkins.html">Jenkinsでテストとカバレッジの結果をグラフ表示できるようにする</a></li>
+<li><a href="http://akisute.com/2012/01/jenkins-ios-ghunit.html">Jenkins を iOS アプリ開発に導入してみた (GHUnit編)</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-new-statements/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/jenkins-octopress/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Jenkins@さくらVPSにOctopressのデプロイを任せてみる</span>
+    <span class="feed-item-date">2012年7月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/security-for-jenkins/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">JenkinsにBitbucketからビルド命令を出す際にIDとPasswordを埋め込まないようにする</span>
+    <span class="feed-item-date">2012年7月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/install-jenkins-to-sakura/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">さくらVPSにJenkinsさんをインストールする</span>
+    <span class="feed-item-date">2012年7月24日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

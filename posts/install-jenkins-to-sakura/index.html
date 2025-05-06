@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>さくらVPSにJenkinsさんをインストールする | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="JDKのインストール Javaが未インストールならこちらから。
+$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins Jenkinsの起動 $ sudo service jenkins start これでインストールと起動が完了。簡単すぎる！
+試しに
+$ curl http://localhost:8080/ とすると、
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;Dashboard [Jenkins]&lt;/title&gt;... みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
+ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。
+$ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストールなら
+$ sudo yum install nginx でインストールしておく。
+Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
+server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="さくらVPSにJenkinsさんをインストールする | TOKOROM BLOG" property="og:title"><meta content="JDKのインストール Javaが未インストールならこちらから。
+$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel Jenkinsのインストール 基本的に 公式ページ に書いてあるとおりにするだけ。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key $ sudo yum install jenkins Jenkinsの起動 $ sudo service jenkins start これでインストールと起動が完了。簡単すぎる！
+試しに
+$ curl http://localhost:8080/ とすると、
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;Dashboard [Jenkins]&lt;/title&gt;... みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。
+ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。
+$ sudo chkconfig jenkins on nginxの設定 まず、nginxが未インストールなら
+$ sudo yum install nginx でインストールしておく。
+Jenkinsにnginx経由でアクセスするために、自分の場合は /etc/nginx/conf.d/virtual.conf に以下リバースプロキシの設定を加えた。
+server { listen 80; server_name jenkins.自分の.ドメイン location / { proxy_pass http://localhost:8080; } } ここでは、 http://jenkins." property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/install-jenkins-to-sakura/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/install-jenkins-to-sakura/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">さくらVPSにJenkinsさんをインストールする</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年7月24日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/sakura">
+              sakura
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/jenkins">
+              jenkins
+          </a>
+          /</div><div class="content">
+      <h2 id="jdkのインストール">JDKのインストール</h2>
+<p>Javaが未インストールならこちらから。</p>
+<pre><code>$ sudo yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel
+</code></pre>
+<h2 id="jenkinsのインストール">Jenkinsのインストール</h2>
+<p>基本的に <a href="http://pkg.jenkins-ci.org/redhat/">公式ページ</a> に書いてあるとおりにするだけ。</p>
+<pre><code>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+$ sudo yum install jenkins
+</code></pre>
+<!-- more -->
+<h2 id="jenkinsの起動">Jenkinsの起動</h2>
+<pre><code>$ sudo service jenkins start
+</code></pre>
+<p>これでインストールと起動が完了。簡単すぎる！</p>
+<p>試しに</p>
+<pre><code>$ curl http://localhost:8080/
+</code></pre>
+<p>とすると、</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;Dashboard [Jenkins]&lt;/title&gt;...
+</code></pre>
+<p>みたいなHTMLが出力されてJenkinsさんが動いているのを確認できるはず。</p>
+<p>ついでにサーバ再起動時にJenkinsさんが自動で起動するようにしておく。</p>
+<pre><code>$ sudo chkconfig jenkins on 
+</code></pre>
+<h2 id="nginxの設定">nginxの設定</h2>
+<p>まず、nginxが未インストールなら</p>
+<pre><code>$ sudo yum install nginx
+</code></pre>
+<p>でインストールしておく。</p>
+<p>Jenkinsにnginx経由でアクセスするために、自分の場合は <strong>/etc/nginx/conf.d/virtual.conf</strong> に以下リバースプロキシの設定を加えた。</p>
+<pre><code>server {
+    listen 80;
+    server_name jenkins.自分の.ドメイン
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+}
+</code></pre>
+<p>ここでは、 <em>http://jenkins.自分の.ドメイン/</em> でアクセスされたら、 <em>http://localhost:8080/</em> に内部的に転送するよう設定している。
+もし、独自ドメインを使えない場合には、</p>
+<pre><code>server {
+    listen 80;
+    server_name 自分のVPSのドメイン
+    location /jenkins {
+        proxy_pass http://localhost:8080;
+    }
+}
+</code></pre>
+<p>のように設定して、 <em>http://自分のVPSのドメイン/jenkins/</em> でアクセスされたときにJenkinsさんに繋がるようにしたりするよう。</p>
+<p>設定し終わり、nginxを再起動してブラウザで *<em>http://jenkins.自分の.ドメイン/</em> を表示すれば、晴れて</p>
+<p><img src="http://dl.dropbox.com/u/10351676/images/install-jenkins.jpg" alt="install-jenkins"></p>
+<p>のようにJenkinsさんが使えるようになっているはず。</p>
+<h2 id="jenkinsへのアクセス制限">Jenkinsへのアクセス制限</h2>
+<p>ちなみにこのままだと誰からでもジョブなどが作成できてしまう状態のため、</p>
+<p><a href="https://wiki.jenkins-ci.org/display/JA/Standard+Security+Setup">Standard Securiy Setup</a></p>
+<p>を参照してアクセス制限をかけておくことを推奨。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

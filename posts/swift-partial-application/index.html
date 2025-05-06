@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Swiftで部分適用（カリー化） | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
+func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b } というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
+let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3 というかんじに、
+まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b） というのができる。
+専用の書き方じゃなくてふつうのfunctionに部分適用できないの？ 使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。
+また、上のような専用の定義にしちゃうと addTwoNumbers(1, 2) みたいな普通の呼び方ができなくなっちゃうし。
+そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
+実装 https://github.com/tokorom/partial-swift
+func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Swiftで部分適用（カリー化） | TOKOROM BLOG" property="og:title"><meta content="Swiftオフィシャルの部分適用 まず、Swiftオフィシャルな構文として
+func addTwoNumbers(a: Int)(b: Int) -&gt; Int { return a &#43; b } というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると
+let add1 = addTwoNumbers(1) add1(b: 2) //&lt; 3 というかんじに、
+まず、１つめの引数だけ部分適用（ここでは a） 部分適用したものに後から次の引数を適用（ここでは b） というのができる。
+専用の書き方じゃなくてふつうのfunctionに部分適用できないの？ 使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。
+また、上のような専用の定義にしちゃうと addTwoNumbers(1, 2) みたいな普通の呼び方ができなくなっちゃうし。
+そんなとき、 Swiftの関数の引数は、常に一つ という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。
+実装 https://github.com/tokorom/partial-swift
+func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R { return { function(a(), $0) } } 利用サンプル func add(a: Int, b: Int) -&gt; Int { return a &#43; b } let add1 = partial(add, 1) add1(2) //&lt; 3 とこんなかんじで普通の add() というfunctionに partial(add, 1) といった形で部分適用できるようになります。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/swift-partial-application/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/swift-partial-application/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Swiftで部分適用（カリー化）</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2014年7月30日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /</div><div class="content">
+      <h2 id="swiftオフィシャルの部分適用">Swiftオフィシャルの部分適用</h2>
+<p>まず、Swiftオフィシャルな構文として</p>
+<pre><code class="language-swift">func addTwoNumbers(a: Int)(b: Int) -&gt; Int {
+  return a + b
+}
+</code></pre>
+<p>というように引数を１つ１つ別の括弧で囲ってfunctionを定義すると</p>
+<pre><code class="language-swift">let add1 = addTwoNumbers(1)
+add1(b: 2) //&lt; 3
+</code></pre>
+<p>というかんじに、</p>
+<ul>
+<li>まず、１つめの引数だけ部分適用（ここでは <code>a</code>）</li>
+<li>部分適用したものに後から次の引数を適用（ここでは <code>b</code>）</li>
+</ul>
+<p>というのができる。</p>
+<h2 id="専用の書き方じゃなくてふつうのfunctionに部分適用できないの">専用の書き方じゃなくてふつうのfunctionに部分適用できないの？</h2>
+<p>使うかどうかは別としてHaskellみたいに全ての関数に部分適用できたら面白いなーと。</p>
+<p>また、上のような専用の定義にしちゃうと <code>addTwoNumbers(1, 2)</code> みたいな普通の呼び方ができなくなっちゃうし。</p>
+<p>そんなとき、 <a href="http://qiita.com/dankogai/items/46fedc447dd93d1e0fbc">Swiftの関数の引数は、常に一つ</a> という記事に出会い、勉強になるなーと眺めていたら、あれ？ふつうのfunctionに部分適用するための関数作れるかもなーと思い立った。</p>
+<h2 id="実装">実装</h2>
+<p><a href="https://github.com/tokorom/partial-swift">https://github.com/tokorom/partial-swift</a></p>
+<pre><code class="language-swift">func partial&lt;A, B, R&gt;(function: (A, B) -&gt; R, a: @auto_closure () -&gt; A) -&gt; (B) -&gt; R {
+    return { function(a(), $0) }
+}
+</code></pre>
+<!-- more -->
+<h2 id="利用サンプル">利用サンプル</h2>
+<pre><code class="language-swift">func add(a: Int, b: Int) -&gt; Int {
+    return a + b
+}
+
+let add1 = partial(add, 1)
+add1(2) //&lt; 3
+</code></pre>
+<p>とこんなかんじで普通の <code>add()</code> というfunctionに <code>partial(add, 1)</code> といった形で部分適用できるようになります。</p>
+<p><code>add()</code>自体は普通のfunctionなので、もちろん<code>add(1, 2)</code>という普通の呼び方もそのままできます。</p>
+<h2 id="遅延評価">遅延評価</h2>
+<p>ミソは <code>@auto_closure</code> を使った遅延評価です。これをやらないと</p>
+<pre><code class="language-swift">let add100 = partial(add, someting(100)) //&lt; この時点で someting(100) が実行されちゃう
+
+add100(10) //&lt; ここでは実行済みの someting(100) の結果が使われる
+</code></pre>
+<p>といったかんじで、<code>partial</code> で部分適用した時点で適用した引数の内容が評価されちゃいます。しかし <code>@auto_closure</code> を活用することで、</p>
+<pre><code class="language-swift">let add100 = partial(add, someting(100)) //&lt; この時点で someting(100) は実行されない！
+
+add100(10) //&lt; ここではじめて someting(100) が実行されてその結果が使われる
+</code></pre>
+<p>というように、本当に必要になるまで部分適用した引数の内容が評価されない形になりました。</p>
+<h2 id="参考">参考</h2>
+<p>ちなみに、既に他の人もやってるかもなと思いGoogleで <code>swift partial</code> で検索したらこんな<a href="https://gist.github.com/kristopherjohnson/4ee565cfcdf912deacf6">Gists</a>が&hellip;</p>
+<p>ぼくがイメージしてたのと同じような実装で、かつ、こっちのGistsのほうが良さそうなところもあったので上の実装はそれを取り込んだものです。<br>
+結果としては、このGistsに遅延評価の機能を加えたものが上の実装というかんじになりました。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/xcode-versioning/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">これがXcodeでのバージョニングの決定版になるかも</span>
+    <span class="feed-item-date">2014年5月19日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-async-test/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで非同期処理のテストをシンプルに書く方法</span>
+    <span class="feed-item-date">2014年4月21日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/improve-storyboard-segue/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Storyboardでの画面遷移をスマートにやる方法</span>
+    <span class="feed-item-date">2014年4月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/pbxproj-merge/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</span>
+    <span class="feed-item-date">2014年2月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/super-viewcontroller-for-a-library/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">提供するXXXViewControllerの親クラスを差し替え可能にしたい!</span>
+    <span class="feed-item-date">2014年1月23日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/ios-dev-accounts/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">会社でiOSアプリを扱うときのアカウント管理はこうするべきだった？</span>
+    <span class="feed-item-date">2013年11月5日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

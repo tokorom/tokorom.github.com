@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
+#import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
+以下、これを解消するための変更例です。
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント | TOKOROM BLOG" property="og:title"><meta content="チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？ 例えば、こんなコードを書いていませんか？
+#import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？
+そうしてしまうと、この Library.h をimportする全てのクラスに、OtherLibrary1.hとOtherLibrary2.hも芋づる式にimportすることを強要することになってしまいます。
+実際にこの Library を使うクラスでは、otherLibrary1もotherLibrary2も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。
+具体的にはこの状態だと、 OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る 状態になってしまっています。
+以下、これを解消するための変更例です。
+クラスの前方宣言を使い、ヘッダーファイルではimportしない @class OtherLibrary1; //&lt; ここではimportしない @class OtherLibrary2; //&lt; ここではimportしない @interface Library @property (strong) OtherLibrary1* otherLibrary1; @property (strong) OtherLibrary2* otherLibrary2; @property (assign) BOOL flag; @end #import &quot;OtherLibrary1.h&quot; #import &quot;OtherLibrary2.h&quot; @implementation Library // 略 @end このように、 @class による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを Opaque pointer: (不透明ポインタ) と呼ぶそうです。" property="og:description"><meta content="/images/ogp_image.png" property="og:image"><meta content="https://www.tokoro.me/posts/safe-objc/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/safe-objc/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Objective-Cで少しでも疎結合なプログラムを書くためのチェックポイント</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2012年8月17日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/objc">
+              objc
+          </a>
+          /</div><div class="content">
+      <h2 id="チェック1-なんでもかんでもヘッダーファイルでimportしていませんか">チェック1. なんでもかんでもヘッダーファイルでimportしていませんか？</h2>
+<p>例えば、こんなコードを書いていませんか？</p>
+<pre><code class="language-objc">#import &quot;OtherLibrary1.h&quot;
+#import &quot;OtherLibrary2.h&quot;
+
+@interface Library
+
+@property (strong) OtherLibrary1* otherLibrary1;
+@property (strong) OtherLibrary2* otherLibrary2;
+
+@property (assign) BOOL flag;
+
+@end
+</code></pre>
+<p>Libraryというクラスを作り、そこでOtherLibrary1とOtherLibrary2をpublicなpropertyとする場合、当然のごとくOtherLibrary1とOtherLibrary2のimportが必要なわけですが、なにも考えずにヘッダーファイルでOtherLibrary1.hとOtherLibrary2.hをimportしてしまっていませんか？<br>
+そうしてしまうと、この <em>Library.h</em> をimportする全てのクラスに、<em>OtherLibrary1.h</em>と<em>OtherLibrary2.h</em>も芋づる式にimportすることを強要することになってしまいます。<br>
+実際にこの <em>Library</em> を使うクラスでは、<em>otherLibrary1</em>も<em>otherLibrary2</em>も使わないかもしれないですし、確実に使われるのでなければ、ヘッダーファイルでimportしないほうが疎結合なプログラムになります。<br>
+具体的にはこの状態だと、 <strong>OtherLibrary1もしくはOtherLibrary2が変更されると、Library.hをimportする全てのクラスにも影響が出る</strong> 状態になってしまっています。</p>
+<p>以下、これを解消するための変更例です。</p>
+<!-- more -->
+<h2 id="クラスの前方宣言を使いヘッダーファイルではimportしない">クラスの前方宣言を使い、ヘッダーファイルではimportしない</h2>
+<pre><code class="language-objc">@class OtherLibrary1; //&lt; ここではimportしない
+@class OtherLibrary2; //&lt; ここではimportしない
+
+@interface Library
+
+@property (strong) OtherLibrary1* otherLibrary1;
+@property (strong) OtherLibrary2* otherLibrary2;
+
+@property (assign) BOOL flag;
+
+@end
+</code></pre>
+<pre><code class="language-objc">#import &quot;OtherLibrary1.h&quot;
+#import &quot;OtherLibrary2.h&quot;
+
+@implementation Library
+// 略
+@end
+</code></pre>
+<p>このように、 <strong>@class</strong> による前方宣言だけしてあげれば、OtherLibrary1やOtherLibrary2をimportしなくてもpropertyの定義ができます。特定のクラスのポインタを使う定義をするだけなら、そのクラスの実装を知らなくてもそのクラスが存在するということだけを知っていれば済むためです。このように実装が確定していないクラスのポインタのことを <strong>Opaque pointer: (不透明ポインタ)</strong> と呼ぶそうです。<br>
+ヘッダーファイルの段階では前方宣言を使ってOpaque pointerに留めておき、実際にこのクラスを利用する実装側(Library.m)のほうでOtherLibrary1.hとOtherLibrary2.hをimportするというのがこの変更です。</p>
+<p>これにより、 <strong>Library.hをimportしても、otherLibrary1とotherLibrary2を実際に使わないクラスにはOtherLibrary1とOtherLibrary2の変更が影響しなくなる</strong> というメリットがあります。</p>
+<h2 id="チェック2-なんでもかんでもヘッダーファイルでdelegateの実装を宣言していませんか">チェック2. なんでもかんでもヘッダーファイルでDelegateの実装を宣言していませんか？</h2>
+<p>例えば、こんなコードを書いていませんか？</p>
+<pre><code class="language-objc">#import &quot;XXX.h&quot;
+
+@interface Library &lt;XXXDelegate&gt;
+
+@property (assign) BOOL flag;
+
+@end
+</code></pre>
+<p>実際にこれが他のクラスに悪影響を与えるかどうかは、<em>XXX.h</em> の内容によって決まってくるのですが、前回の例同様にできればヘッダーファイルでのimportは最小限にしたいところです。<br>
+それならXXXDelegateも前方宣言(protocolの前方宣言も<code>@protocol XXXDelegate;</code>で可能)で解決！としたいところですが、残念ながらプロトコルの実装を宣言する場合にはそのプロトコルの詳細を知る必要があるためその索は使えません。</p>
+<p>以下、これを解消するための例です。</p>
+<h2 id="プライベートカテゴリでprotocolの実装宣言をする">プライベートカテゴリでProtocolの実装宣言をする</h2>
+<pre><code class="language-objc">// ヘッダーファイルではimportもprotocolの実装宣言もしない
+
+@interface Library
+
+@property (assign) BOOL flag;
+
+@end
+</code></pre>
+<pre><code class="language-objc">#import &quot;XXX.h&quot;
+
+@interface Library () &lt;XXXDelegate&gt;
+@property (strong) XXX* xxx;
+@end
+
+@implementation Library
+// 略
+@end
+</code></pre>
+<p>ここでは、ヘッダーファイルでのXXXDelegateの実装宣言自体を止めてしまい、Library.mのほうでプライベートカテゴリに対してXXXDelegateの実装宣言をするようにしています。<br>
+これにより、ヘッダーファイルでXXX.hをimportすることを避けることができます。</p>
+<h2 id="ヘッダーファイルで実装宣言をするべきときとそうでないときの判断">ヘッダーファイルで実装宣言をするべきときとそうでないときの判断</h2>
+<p>注意しないといけないのは <strong>全てのケースでヘッダーファイルでProtocolの実装宣言をするのがダメというわけではない</strong> ということです。<br>
+あくまでも <strong>なにも考えずに全てヘッダーファイルでやってしまうのを避けよう</strong> というのが今回言いたかったことです。</p>
+<p>例えば、 <strong>このクラスがXXXDelegateを実装しているということを他のクラスに対して知ってもらいたいケース</strong> では、ヘッダーファイルでXXXDelegateの実装を明示することは適切です。</p>
+<p>個人的には、 <strong>デフォルトではヘッダーファイルで実装宣言をしないで、本当に必要なときだけそうする</strong> というのが良いのではないかと考えています。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-new-statements/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">いまさらですがXcode4.4からiOS開発で使えるようになった新しいObjective-Cの書き方をまとめます</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>
