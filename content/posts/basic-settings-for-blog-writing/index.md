@@ -3,19 +3,20 @@ title: "Cursor/VSCodeでブログ記事を書くときの基本設定"
 date: 2025-05-06T15:00:00+09:00
 draft: false
 authors: [tokorom]
-tags: ["vscode", "cursor", "blog", "AI", "markdown"]
+tags: ["vscode", "cursor", "blog", "AI", "markdown", "hugo"]
 images: [/posts/basic-settings-for-blog-writing/top.png]
 canonical: https://spinners.work
+description: "Cursor/VSCodeを使用した効率的なブログ執筆環境の構築方法を解説。Front Matterの自動設定、画像の最適化、リアルタイムプレビューなど、生産性を高める設定を紹介します。"
 ---
 
 ![top](top.png)
 
 最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。
 
-このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。
+このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるのではないかと考え、環境の移行を開始しました。
 
-本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。
-まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！
+本記事では、その移行でCursor（VSCode）にどのような設定を加えたかをまとめています。
+まだこの設定で運用を開始したばかりの段階ですので、改善点やアドバイスをいただけると幸いです！
 
 ## 前提条件
 
@@ -59,7 +60,7 @@ Cursorに自動で設定してもらってもそれっぽくはなるのです�
 
 ```json
 {
-	"Hugo Blog Markdown Frront Matter": {
+	"Hugo Blog Markdown Front Matter": {
 		"scope": "markdown",
 		"prefix": "markdown-frontmatter",
 		"body": [
@@ -168,9 +169,9 @@ ImageOptimに `open -a ImageOptim ./` というコマンドで現在のディレ
 
 ## 記事のリアルタイムプレビュー
 
-Markdownで記事を書きながらリアルタイムにその記事をプレビューする方法ですが、VSCodeが元よりサポートしている **Open Preview to the Side** などでも可能です。
+Markdownで記事を書きながらリアルタイムにプレビューする方法として、VSCodeが標準で提供している**Open Preview to the Side**なども利用可能です。
 
-ただこれだと実際にWebで公開されている内容とは見え方が違うため、Static Site Generatorが備えるプレビュー機能を使うのが良いとは思います。
+ただし、これだと実際のWebサイトでの表示と異なる可能性があるため、Static Site Generatorのプレビュー機能を使用することをお勧めします。
 
 たとえばHugoなら `hugo server -D` というコマンドでプレビュー用のサーバをローカルで起動でき、 `http://localhost:1313/` をブラウザで開けばリアルタイムプレビューが可能です。
 
@@ -192,16 +193,14 @@ hugo server -D
 
 ![preview](cursor-blog-preview.png)
 
-## 拡張機能（Plugin）
+## 拡張機能（プラグイン）
 
-Markdown All in One などの拡張機能の導入も検討はしたものの、現在のところ拡張機能なしで困っていないのでなにも使っていません。
+Markdown All in Oneなどの拡張機能の導入も検討しましたが、現状では拡張機能なしでも十分に執筆が可能なため、使用していません。
 
-現状ではMarkdownのTableなど複雑な記述をスニペットに登録しておけば十分かなと。
+今後、必要に応じて拡張機能の導入を検討していく予定です。
 
-今後、なにかに困った際に都度検討しようと思います。
-
-[^1]: Ctrl + Shift + p
-
-## このあと
+## 今後の展望
 
 もともとAIの支援を得るためにCursorを導入しましたのでそのあたりの話や、VSCodeVimの話を別途記事にする予定です。
+
+[^1]: Ctrl + Shift + p

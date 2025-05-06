@@ -6,24 +6,24 @@
 <title>Cursor/VSCodeでブログ記事を書くときの基本設定 | TOKOROM BLOG</title>
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。
-このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。
-本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。 まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！
+このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるのではないかと考え、環境の移行を開始しました。
+本記事では、その移行でCursor（VSCode）にどのような設定を加えたかをまとめています。 まだこの設定で運用を開始したばかりの段階ですので、改善点やアドバイスをいただけると幸いです！
 前提条件 わたしはCursor/VSCode初級者です ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません 別途記事を書く予定です この記事ではAIの利用方法については触れません 別途記事を書く予定です Cursor導入後にやったこと（要約） この記事では以下の内容について紹介します。
 Front Matterを設置しやすくする そのほかスニペットを設定 画像をドラッグ＆ドロップして記事に挿入する タスクで画像のファイルサイズ縮小をまとめてやる 記事のリアルタイムプレビュー 拡張機能 Front Matterを設置しやすくする このブログ記事では具体的には、
 --- title: &quot;Cursor/VSCodeでブログ記事を書くときの基本設定&quot; date: 2025-05-06T15:00:00&#43;09:00 draft: false authors: [tokorom] tags: [&quot;vscode&quot;, &quot;cursor&quot;, &quot;blog&quot;, &quot;AI&quot;, &quot;markdown&quot;] images: [/posts/basic-settings-for-blog-writing/top.png] --- というFront Matterを設定しています。
 Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを .vscode/markdown.code-snippets に設定しました。
-{ &quot;Hugo Blog Markdown Frront Matter&quot;: { &quot;scope&quot;: &quot;markdown&quot;, &quot;prefix&quot;: &quot;markdown-frontmatter&quot;, &quot;body&quot;: [ &quot;---&quot;, &quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]&#43;)\\/?$/$1/}}&quot;, &quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}&#43;09:00&quot;, &quot;draft: false&quot;, &quot;authors: [tokorom]&quot;, &quot;tags: [$2]&quot;, &quot;images: [/posts/${TM_DIRECTORY/."><meta name="author" content="tokorom">
+{ &quot;Hugo Blog Markdown Front Matter&quot;: { &quot;scope&quot;: &quot;markdown&quot;, &quot;prefix&quot;: &quot;markdown-frontmatter&quot;, &quot;body&quot;: [ &quot;---&quot;, &quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]&#43;)\\/?$/$1/}}&quot;, &quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}&#43;09:00&quot;, &quot;draft: false&quot;, &quot;authors: [tokorom]&quot;, &quot;tags: [$2]&quot;, &quot;images: [/posts/${TM_DIRECTORY/."><meta name="author" content="tokorom">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="@tokorom" name="twitter:site">
 <meta content="website" property="og:type">
 <meta content="Cursor/VSCodeでブログ記事を書くときの基本設定 | TOKOROM BLOG" property="og:title"><meta content="最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。
-このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。
-本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。 まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！
+このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるのではないかと考え、環境の移行を開始しました。
+本記事では、その移行でCursor（VSCode）にどのような設定を加えたかをまとめています。 まだこの設定で運用を開始したばかりの段階ですので、改善点やアドバイスをいただけると幸いです！
 前提条件 わたしはCursor/VSCode初級者です ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません 別途記事を書く予定です この記事ではAIの利用方法については触れません 別途記事を書く予定です Cursor導入後にやったこと（要約） この記事では以下の内容について紹介します。
 Front Matterを設置しやすくする そのほかスニペットを設定 画像をドラッグ＆ドロップして記事に挿入する タスクで画像のファイルサイズ縮小をまとめてやる 記事のリアルタイムプレビュー 拡張機能 Front Matterを設置しやすくする このブログ記事では具体的には、
 --- title: &quot;Cursor/VSCodeでブログ記事を書くときの基本設定&quot; date: 2025-05-06T15:00:00&#43;09:00 draft: false authors: [tokorom] tags: [&quot;vscode&quot;, &quot;cursor&quot;, &quot;blog&quot;, &quot;AI&quot;, &quot;markdown&quot;] images: [/posts/basic-settings-for-blog-writing/top.png] --- というFront Matterを設定しています。
 Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを .vscode/markdown.code-snippets に設定しました。
-{ &quot;Hugo Blog Markdown Frront Matter&quot;: { &quot;scope&quot;: &quot;markdown&quot;, &quot;prefix&quot;: &quot;markdown-frontmatter&quot;, &quot;body&quot;: [ &quot;---&quot;, &quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]&#43;)\\/?$/$1/}}&quot;, &quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}&#43;09:00&quot;, &quot;draft: false&quot;, &quot;authors: [tokorom]&quot;, &quot;tags: [$2]&quot;, &quot;images: [/posts/${TM_DIRECTORY/." property="og:description"><meta content="https://www.tokoro.me/posts/basic-settings-for-blog-writing/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/basic-settings-for-blog-writing/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+{ &quot;Hugo Blog Markdown Front Matter&quot;: { &quot;scope&quot;: &quot;markdown&quot;, &quot;prefix&quot;: &quot;markdown-frontmatter&quot;, &quot;body&quot;: [ &quot;---&quot;, &quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]&#43;)\\/?$/$1/}}&quot;, &quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}&#43;09:00&quot;, &quot;draft: false&quot;, &quot;authors: [tokorom]&quot;, &quot;tags: [$2]&quot;, &quot;images: [/posts/${TM_DIRECTORY/." property="og:description"><meta content="https://www.tokoro.me/posts/basic-settings-for-blog-writing/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/basic-settings-for-blog-writing/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
 <link href="/images/favicon.ico" rel="shortcut icon">
 
 
@@ -79,12 +79,15 @@ Cursorに自動で設定してもらってもそれっぽくはなるのです�
           /<a class="badge badge-pill badge-light border mr-2" href="/tags/markdown">
               markdown
           </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/hugo">
+              hugo
+          </a>
           /</div><div class="content">
       <p><img src="top.png" alt="top"></p>
 <p>最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。</p>
-<p>このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。</p>
-<p>本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。
-まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！</p>
+<p>このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるのではないかと考え、環境の移行を開始しました。</p>
+<p>本記事では、その移行でCursor（VSCode）にどのような設定を加えたかをまとめています。
+まだこの設定で運用を開始したばかりの段階ですので、改善点やアドバイスをいただけると幸いです！</p>
 <h2 id="前提条件">前提条件</h2>
 <ul>
 <li>わたしはCursor/VSCode初級者です</li>
@@ -128,7 +131,7 @@ images: [/posts/basic-settings-for-blog-writing/top.png]
 <p>というFront Matterを設定しています。</p>
 <p>Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを <code>.vscode/markdown.code-snippets</code> に設定しました。</p>
 <pre><code class="language-json">{
-	&quot;Hugo Blog Markdown Frront Matter&quot;: {
+	&quot;Hugo Blog Markdown Front Matter&quot;: {
 		&quot;scope&quot;: &quot;markdown&quot;,
 		&quot;prefix&quot;: &quot;markdown-frontmatter&quot;,
 		&quot;body&quot;: [
@@ -204,8 +207,8 @@ images: [/posts/basic-settings-for-blog-writing/top.png]
 <p><img src="tasks.png" alt="tasks"></p>
 <p><img src="imageoptim.png" alt="imageoptim"></p>
 <h2 id="記事のリアルタイムプレビュー">記事のリアルタイムプレビュー</h2>
-<p>Markdownで記事を書きながらリアルタイムにその記事をプレビューする方法ですが、VSCodeが元よりサポートしている <strong>Open Preview to the Side</strong> などでも可能です。</p>
-<p>ただこれだと実際にWebで公開されている内容とは見え方が違うため、Static Site Generatorが備えるプレビュー機能を使うのが良いとは思います。</p>
+<p>Markdownで記事を書きながらリアルタイムにプレビューする方法として、VSCodeが標準で提供している<strong>Open Preview to the Side</strong>なども利用可能です。</p>
+<p>ただし、これだと実際のWebサイトでの表示と異なる可能性があるため、Static Site Generatorのプレビュー機能を使用することをお勧めします。</p>
 <p>たとえばHugoなら <code>hugo server -D</code> というコマンドでプレビュー用のサーバをローカルで起動でき、 <code>http://localhost:1313/</code> をブラウザで開けばリアルタイムプレビューが可能です。</p>
 <p>わたしはこのプレビューを簡単にするために <code>scripts/preview</code> というシェルコマンドを置いてあります。</p>
 <pre><code class="language-sh">#!/bin/sh
@@ -218,11 +221,10 @@ hugo server -D
 <p><img src="terminal.png" alt="terminal"></p>
 <p>わたしはこれで起動したブラウザのウィンドウをCursorのウィンドウの横においてプレビューをしています。</p>
 <p><img src="cursor-blog-preview.png" alt="preview"></p>
-<h2 id="拡張機能plugin">拡張機能（Plugin）</h2>
-<p>Markdown All in One などの拡張機能の導入も検討はしたものの、現在のところ拡張機能なしで困っていないのでなにも使っていません。</p>
-<p>現状ではMarkdownのTableなど複雑な記述をスニペットに登録しておけば十分かなと。</p>
-<p>今後、なにかに困った際に都度検討しようと思います。</p>
-<h2 id="このあと">このあと</h2>
+<h2 id="拡張機能プラグイン">拡張機能（プラグイン）</h2>
+<p>Markdown All in Oneなどの拡張機能の導入も検討しましたが、現状では拡張機能なしでも十分に執筆が可能なため、使用していません。</p>
+<p>今後、必要に応じて拡張機能の導入を検討していく予定です。</p>
+<h2 id="今後の展望">今後の展望</h2>
 <p>もともとAIの支援を得るためにCursorを導入しましたのでそのあたりの話や、VSCodeVimの話を別途記事にする予定です。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
