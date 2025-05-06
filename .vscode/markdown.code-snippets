@@ -1,7 +1,7 @@
 {
-	"hugo-blog-frontmatter": {
+	"Hugo Blog Markdown Frront Matter": {
 		"scope": "markdown",
-		"prefix": "frontmatter-hugo",
+		"prefix": "markdown-frontmatter",
 		"body": [
 			"---",
 			"title: ${1:${TM_DIRECTORY/.*\\/([^\\/]+)\\/?$/$1/}}",
@@ -13,6 +13,14 @@
 			"canonical: https://spinners.work",
 			"---",
 		],
-		"description": "Hugo Blog Frontmatter"
-	}
+	},
+	"Markdown Table": {
+		"scope": "markdown",
+		"prefix": "markdown-table",
+		"body": [
+			"$1 | $2",
+			"---|---",
+			"$3 | $4",
+		],
+	},
 }
