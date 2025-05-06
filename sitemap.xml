@@ -14,6 +14,9 @@
     <loc>https://www.tokoro.me/posts/basic-settings-for-blog-writing/</loc>
     <lastmod>2025-05-06T15:00:00+09:00</lastmod>
   </url><url>
+    <loc>https://www.tokoro.me/tags/hugo/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://www.tokoro.me/tags/markdown/</loc>
     <lastmod>2025-05-06T15:00:00+09:00</lastmod>
   </url><url>
@@ -175,9 +178,6 @@
   </url><url>
     <loc>https://www.tokoro.me/tags/slack/</loc>
     <lastmod>2020-05-13T17:26:38+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/hugo/</loc>
-    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</loc>
     <lastmod>2020-04-30T18:01:01+09:00</lastmod>
