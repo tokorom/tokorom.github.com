@@ -7,7 +7,52 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 25 Jun 2024 10:56:06 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 May 2025 15:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>https://www.tokoro.me/tags/ai/</link>
+      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://www.tokoro.me/tags/blog/</link>
+      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cursor</title>
+      <link>https://www.tokoro.me/tags/cursor/</link>
+      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/cursor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdown</title>
+      <link>https://www.tokoro.me/tags/markdown/</link>
+      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>https://www.tokoro.me/tags/vscode/</link>
+      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>ios</title>
       <link>https://www.tokoro.me/tags/ios/</link>
@@ -266,15 +311,6 @@
       <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://www.tokoro.me/tags/markdown/</link>
-      <pubDate>Thu, 30 Apr 2020 18:01:01 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/markdown/</guid>
       <description></description>
     </item>
     

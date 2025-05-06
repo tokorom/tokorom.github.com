@@ -2,25 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.tokoro.me/tags/ai/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/blog/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/cursor/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/basic-settings-for-blog-writing/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/markdown/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/vscode/</loc>
+    <lastmod>2025-05-06T15:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</loc>
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/ios/</loc>
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/posts/</loc>
-    <lastmod>2024-06-25T10:56:06+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/tags/swift/</loc>
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/swiftui/</loc>
-    <lastmod>2024-06-25T10:56:06+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/</loc>
-    <lastmod>2024-06-25T10:56:06+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/</loc>
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/visionos/</loc>
@@ -159,9 +177,6 @@
     <lastmod>2020-05-13T17:26:38+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/hugo/</loc>
-    <lastmod>2020-04-30T18:01:01+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/markdown/</loc>
     <lastmod>2020-04-30T18:01:01+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/posts/vim-markdown-paste-from-clipboard/</loc>

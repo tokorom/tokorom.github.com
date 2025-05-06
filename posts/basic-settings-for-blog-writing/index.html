@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Cursor/VSCodeでブログ記事を書くときの基本設定 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。
+このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。
+本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。 まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！
+前提条件 わたしはCursor/VSCode初級者です ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません 別途記事を書く予定です この記事ではAIの利用方法については触れません 別途記事を書く予定です Cursor導入後にやったこと（要約） この記事では以下の内容について紹介します。
+Front Matterを設置しやすくする そのほかスニペットを設定 画像をドラッグ＆ドロップして記事に挿入する タスクで画像のファイルサイズ縮小をまとめてやる 記事のリアルタイムプレビュー 拡張機能 Front Matterを設置しやすくする このブログ記事では具体的には、
+--- title: &quot;Cursor/VSCodeでブログ記事を書くときの基本設定&quot; date: 2025-05-06T15:00:00&#43;09:00 draft: false authors: [tokorom] tags: [&quot;vscode&quot;, &quot;cursor&quot;, &quot;blog&quot;, &quot;AI&quot;, &quot;markdown&quot;] images: [/posts/basic-settings-for-blog-writing/top.png] --- というFront Matterを設定しています。
+Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを .vscode/markdown.code-snippets に設定しました。
+{ &quot;Hugo Blog Markdown Frront Matter&quot;: { &quot;scope&quot;: &quot;markdown&quot;, &quot;prefix&quot;: &quot;markdown-frontmatter&quot;, &quot;body&quot;: [ &quot;---&quot;, &quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]&#43;)\\/?$/$1/}}&quot;, &quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}&#43;09:00&quot;, &quot;draft: false&quot;, &quot;authors: [tokorom]&quot;, &quot;tags: [$2]&quot;, &quot;images: [/posts/${TM_DIRECTORY/."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Cursor/VSCodeでブログ記事を書くときの基本設定 | TOKOROM BLOG" property="og:title"><meta content="最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。
+このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。
+本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。 まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！
+前提条件 わたしはCursor/VSCode初級者です ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません 別途記事を書く予定です この記事ではAIの利用方法については触れません 別途記事を書く予定です Cursor導入後にやったこと（要約） この記事では以下の内容について紹介します。
+Front Matterを設置しやすくする そのほかスニペットを設定 画像をドラッグ＆ドロップして記事に挿入する タスクで画像のファイルサイズ縮小をまとめてやる 記事のリアルタイムプレビュー 拡張機能 Front Matterを設置しやすくする このブログ記事では具体的には、
+--- title: &quot;Cursor/VSCodeでブログ記事を書くときの基本設定&quot; date: 2025-05-06T15:00:00&#43;09:00 draft: false authors: [tokorom] tags: [&quot;vscode&quot;, &quot;cursor&quot;, &quot;blog&quot;, &quot;AI&quot;, &quot;markdown&quot;] images: [/posts/basic-settings-for-blog-writing/top.png] --- というFront Matterを設定しています。
+Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを .vscode/markdown.code-snippets に設定しました。
+{ &quot;Hugo Blog Markdown Frront Matter&quot;: { &quot;scope&quot;: &quot;markdown&quot;, &quot;prefix&quot;: &quot;markdown-frontmatter&quot;, &quot;body&quot;: [ &quot;---&quot;, &quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]&#43;)\\/?$/$1/}}&quot;, &quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}&#43;09:00&quot;, &quot;draft: false&quot;, &quot;authors: [tokorom]&quot;, &quot;tags: [$2]&quot;, &quot;images: [/posts/${TM_DIRECTORY/." property="og:description"><meta content="https://www.tokoro.me/posts/basic-settings-for-blog-writing/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/basic-settings-for-blog-writing/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/basic-settings-for-blog-writing/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Cursor/VSCodeでブログ記事を書くときの基本設定</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年5月6日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/vscode">
+              vscode
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/cursor">
+              cursor
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/blog">
+              blog
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ai">
+              AI
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/markdown">
+              markdown
+          </a>
+          /</div><div class="content">
+      <p><img src="top.png" alt="top"></p>
+<p>最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。</p>
+<p>このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるかな？と考え置き換えを開始しました。</p>
+<p>本記事は、その置き換えでCursor（VSCode）にどのような設定を加えたかをまとめたものです。
+まだこの設定でやりはじめました！という段階ですので、ここはこうしたほうが良いよといったアドバイスは大歓迎です！</p>
+<h2 id="前提条件">前提条件</h2>
+<ul>
+<li>わたしはCursor/VSCode初級者です</li>
+<li>ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています
+<ul>
+<li>これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで</li>
+</ul>
+</li>
+<li>わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません
+<ul>
+<li>別途記事を書く予定です</li>
+</ul>
+</li>
+<li>この記事ではAIの利用方法については触れません
+<ul>
+<li>別途記事を書く予定です</li>
+</ul>
+</li>
+</ul>
+<h2 id="cursor導入後にやったこと要約">Cursor導入後にやったこと（要約）</h2>
+<p>この記事では以下の内容について紹介します。</p>
+<ul>
+<li>Front Matterを設置しやすくする</li>
+<li>そのほかスニペットを設定</li>
+<li>画像をドラッグ＆ドロップして記事に挿入する</li>
+<li>タスクで画像のファイルサイズ縮小をまとめてやる</li>
+<li>記事のリアルタイムプレビュー</li>
+<li>拡張機能</li>
+</ul>
+<h2 id="front-matterを設置しやすくする">Front Matterを設置しやすくする</h2>
+<p>このブログ記事では具体的には、</p>
+<pre><code class="language-markdown">---
+title: &quot;Cursor/VSCodeでブログ記事を書くときの基本設定&quot;
+date: 2025-05-06T15:00:00+09:00
+draft: false
+authors: [tokorom]
+tags: [&quot;vscode&quot;, &quot;cursor&quot;, &quot;blog&quot;, &quot;AI&quot;, &quot;markdown&quot;]
+images: [/posts/basic-settings-for-blog-writing/top.png]
+---
+</code></pre>
+<p>というFront Matterを設定しています。</p>
+<p>Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを <code>.vscode/markdown.code-snippets</code> に設定しました。</p>
+<pre><code class="language-json">{
+	&quot;Hugo Blog Markdown Frront Matter&quot;: {
+		&quot;scope&quot;: &quot;markdown&quot;,
+		&quot;prefix&quot;: &quot;markdown-frontmatter&quot;,
+		&quot;body&quot;: [
+			&quot;---&quot;,
+			&quot;title: ${1:${TM_DIRECTORY/.*\\/([^\\/]+)\\/?$/$1/}}&quot;,
+			&quot;date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}+09:00&quot;,
+			&quot;draft: false&quot;,
+			&quot;authors: [tokorom]&quot;,
+			&quot;tags: [$2]&quot;,
+			&quot;images: [/posts/${TM_DIRECTORY/.*\\/([^\\/]+)\\/?$/$1/}/top.png]&quot;,
+			&quot;canonical: https://spinners.work&quot;,
+			&quot;---&quot;,
+		],
+	}
+}
+</code></pre>
+<p>これにより、コマンドパレット<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>で <em>Insert Snippets</em> を呼び出せば簡単にFront Matterが設置できます。</p>
+<p><img src="snippets.png" alt="snippets"></p>
+<h2 id="そのほかスニペットを設定">そのほかスニペットを設定</h2>
+<p>Front Matter以外にお好みでスニペットを追加するのが良さそうですが、Markdownはスニペットなしでも簡単に書けてしまうので、とりあえずMarkdownに表を追加するスニペットだけ追加しておきました。</p>
+<pre><code class="language-json">{
+	&quot;Markdown Table&quot;: {
+		&quot;scope&quot;: &quot;markdown&quot;,
+		&quot;prefix&quot;: &quot;markdown-table&quot;,
+		&quot;body&quot;: [
+			&quot;$1 | $2&quot;,
+			&quot;---|---&quot;,
+			&quot;$3 | $4&quot;,
+		],
+	}
+}
+</code></pre>
+<h2 id="画像をドラッグドロップして記事に挿入する">画像をドラッグ＆ドロップして記事に挿入する</h2>
+<p>ブログ記事に画像を入れたいときにドラッグ＆ドロップで簡単にできると嬉しいです。</p>
+<p>Vimで記事を書いていたときは <a href="https://www.tokoro.me/posts/vim-markdown-image-tool/">自作のVimプラグイン</a> を作って実現していました。</p>
+<p>Cursor（というかVSCode）ではなんとこれをプラグインなしで <a href="https://code.visualstudio.com/updates/v1_79#_copy-external-media-files-into-workspace-on-drop-or-paste-for-markdown">オフィシャルに対応</a> してくれます。</p>
+<p>なんと、Shiftキーを押しながら画像をドラッグ＆ドロップすればそのファイルと同じディレクトリに画像をコピーしてくれたうえで、</p>
+<pre><code class="language-markdown">![alt text](cursor-blog-preview.png)
+</code></pre>
+<p>とMarkdownも埋め込んでくれます。</p>
+<p>このとき画像をサブディレクトリに設置したい場合には、 <code>.vscode/settings.json</code> に以下の設定を加えるだけです。</p>
+<pre><code class="language-json">{
+    &quot;markdown.copyFiles.destination&quot;: {
+        &quot;/**/*&quot;: &quot;images/&quot;
+    }
+}
+</code></pre>
+<p>これで <code>images</code> というサブディレクトリ以下に画像が設定されるようになります。</p>
+<p>注意点として、記事ごとにディレクトリが分かれていないとこの設定が面倒になりそうです。</p>
+<p>わたしはこれを機に <a href="https://gohugo.io/content-management/page-bundles/">Page Bundles</a> 方式で記事ごとにディレクトリを分けてMarkdownファイルを設定するように変更しました。</p>
+<h2 id="タスクで画像のファイルサイズ縮小をまとめてやる">タスクで画像のファイルサイズ縮小をまとめてやる</h2>
+<p>画像の設置についてはこれでも十分なのですが、ついでに <a href="https://imageoptim.com/mac">ImageOptim</a> などで画像のサイズを最適に縮小するのも簡単にできるようにしたいところです。</p>
+<p>Vimで自作プラグインを使っていたときはそのプラグインでまかなっていたのですが、VSCodeのオフィシャルなドラッグ＆ドロップ機能ではそういったカスタマイズができそうになかったため、ブログを書き終えたらその記事の画像をまとめてImageOptimにかけるタスクを追加しました。</p>
+<p>具体的には、 <code>.vscode/tasks.json</code> に、</p>
+<pre><code class="language-json">{
+    &quot;version&quot;: &quot;2.0.0&quot;,
+    &quot;tasks&quot;: [
+        {
+            &quot;label&quot;: &quot;ImageOptim&quot;,
+            &quot;type&quot;: &quot;shell&quot;,
+            &quot;command&quot;: &quot;open -a ImageOptim ./&quot;,
+            &quot;options&quot;: {
+                &quot;cwd&quot;: &quot;${fileDirname}&quot;
+            },
+            &quot;problemMatcher&quot;: []
+        }
+    ]
+} 
+</code></pre>
+<p>を加えました。</p>
+<p>ImageOptimに <code>open -a ImageOptim ./</code> というコマンドで現在のディレクトリの画像ファイルをまとめて渡せますので、それでブログ記事の画像ファイルをまとめてサイズ縮小できます。</p>
+<p>このタスクもコマンドパレット<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>で <strong>Run Tasks</strong> で呼び出すだけです。</p>
+<p><img src="tasks.png" alt="tasks"></p>
+<p><img src="imageoptim.png" alt="imageoptim"></p>
+<h2 id="記事のリアルタイムプレビュー">記事のリアルタイムプレビュー</h2>
+<p>Markdownで記事を書きながらリアルタイムにその記事をプレビューする方法ですが、VSCodeが元よりサポートしている <strong>Open Preview to the Side</strong> などでも可能です。</p>
+<p>ただこれだと実際にWebで公開されている内容とは見え方が違うため、Static Site Generatorが備えるプレビュー機能を使うのが良いとは思います。</p>
+<p>たとえばHugoなら <code>hugo server -D</code> というコマンドでプレビュー用のサーバをローカルで起動でき、 <code>http://localhost:1313/</code> をブラウザで開けばリアルタイムプレビューが可能です。</p>
+<p>わたしはこのプレビューを簡単にするために <code>scripts/preview</code> というシェルコマンドを置いてあります。</p>
+<pre><code class="language-sh">#!/bin/sh
+
+(sleep 1; open http://localhost:1313/)&amp;
+
+hugo server -D
+</code></pre>
+<p>そのため、 <strong>Cmd + J</strong> でCursor内でTerminalを呼び出し、そこで <code>./scripts/preview</code> スクリプトを実行すればブラウザでのリアルタイムプレビューができます。</p>
+<p><img src="terminal.png" alt="terminal"></p>
+<p>わたしはこれで起動したブラウザのウィンドウをCursorのウィンドウの横においてプレビューをしています。</p>
+<p><img src="cursor-blog-preview.png" alt="preview"></p>
+<h2 id="拡張機能plugin">拡張機能（Plugin）</h2>
+<p>Markdown All in One などの拡張機能の導入も検討はしたものの、現在のところ拡張機能なしで困っていないのでなにも使っていません。</p>
+<p>現状ではMarkdownのTableなど複雑な記述をスニペットに登録しておけば十分かなと。</p>
+<p>今後、なにかに困った際に都度検討しようと思います。</p>
+<h2 id="このあと">このあと</h2>
+<p>もともとAIの支援を得るためにCursorを導入しましたのでそのあたりの話や、VSCodeVimの話を別途記事にする予定です。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Ctrl + Shift + p&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/vim-markdown-paste-from-clipboard/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-markdown-paste-from-clipboard/cover.png" class="feed-item-image" alt="Vimにスクショを直接Markdownで貼り付ける" width="300"></div>
+
+    <span class="feed-item-title">Vimにスクショを直接Markdownで貼り付ける</span>
+    <span class="feed-item-date">2020年4月30日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/vim-markdown-image-tool/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/vim-markdown-image-tool/dog.jpg" class="feed-item-image" alt="VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法" width="300"></div>
+
+    <span class="feed-item-title">VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</span>
+    <span class="feed-item-date">2020年3月31日</span>
+    <span class="feed-item-date"></span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc2023-keynote-pro-vision/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2023-keynote-vision/top.png" class="feed-item-image" alt="WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました" width="300"></div>
+
+    <span class="feed-item-title">WWDC2023 KeynoteのApple Pro Visionの紹介をとにかく細かく視聴してコメントしました</span>
+    <span class="feed-item-date">2023年6月15日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>
