@@ -2,9 +2,11 @@
 title: "CursorでAIの支援を得ながらブログ記事を書く"
 date: 2025-05-08T11:00:00+09:00
 draft: false
+author: tokorom
 authors: [tokorom]
 tags: ["cursor", "AI", "blog", "productivity", "writing", "markdown", "vscode", "chatgpt"]
 images: [/posts/writing-blog-with-cursor-ai/top.png]
+canonical: https://spinners.work
 ---
 
 ![top](top.png)

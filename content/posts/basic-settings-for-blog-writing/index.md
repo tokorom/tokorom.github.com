@@ -2,6 +2,7 @@
 title: "Cursor/VSCodeでブログ記事を書くときの基本設定"
 date: 2025-05-06T15:00:00+09:00
 draft: false
+author: tokorom
 authors: [tokorom]
 tags: ["vscode", "cursor", "blog", "AI", "markdown", "hugo"]
 images: [/posts/basic-settings-for-blog-writing/top.png]

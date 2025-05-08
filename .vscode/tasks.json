@@ -18,6 +18,18 @@
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Copy Article ID",
+            "type": "shell",
+            "command": "basename \"${fileDirname}\" | pbcopy; echo \"Copied: $(pbpaste)\n\"",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+            }
         }
     ],
 } 
