@@ -1,6 +1,6 @@
 ---
 title: "CursorでAIの支援を得ながらブログ記事を書く"
-date: 2024-03-26T15:00:00+09:00
+date: 2025-05-08T11:00:00+09:00
 draft: false
 authors: [tokorom]
 tags: ["cursor", "AI", "blog", "productivity", "writing", "markdown", "vscode", "chatgpt"]
@@ -9,9 +9,10 @@ images: [/posts/writing-blog-with-cursor-ai/top.png]
 
 ![top](top.png)
 
-## 要約
+## はじめに
 
 - まだAIによる執筆支援はうまく活用できていません（アドバイス求む！）
+- Cursor/VSCode自体の設定については別途[こちら](/posts/basic-settings-for-blog-writing/)に書きました
 
 ## 記事のファイル作成と見出し案
 

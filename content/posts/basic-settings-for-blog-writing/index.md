@@ -26,7 +26,7 @@ description: "Cursor/VSCodeを使用した効率的なブログ執筆環境の�
 - わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません
     - 別途記事を書く予定です
 - この記事ではAIの利用方法については触れません
-    - 別途記事を書く予定です
+    - AIの利用については別途[こちら](/posts/writing-blog-with-cursor-ai/)に書きました
 
 ## Cursor導入後にやったこと（要約）
 
