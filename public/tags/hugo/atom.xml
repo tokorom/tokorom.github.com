@@ -17,7 +17,7 @@
       <description>最近は本業のプログラミングを専らAIエディタのCursorで書くようになりました。
 このブログ記事はずっとVimで書き続けていたのですが、こちらもVSCodeやAIの恩恵を受けられるのではないかと考え、環境の移行を開始しました。
 本記事では、その移行でCursor（VSCode）にどのような設定を加えたかをまとめています。 まだこの設定で運用を開始したばかりの段階ですので、改善点やアドバイスをいただけると幸いです！
-前提条件 わたしはCursor/VSCode初級者です ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません 別途記事を書く予定です この記事ではAIの利用方法については触れません 別途記事を書く予定です Cursor導入後にやったこと（要約） この記事では以下の内容について紹介します。
+前提条件 わたしはCursor/VSCode初級者です ブログは昔からの経緯でStatic Site GeneratorのHugoを使っています これから新しく採択するなら別のものにすると思いますが、今Generatorに不満があるわけではないのでそのままで わたしはVimmerなのでVSCodeVimを使いますがこの記事ではそのことに触れません 別途記事を書く予定です この記事ではAIの利用方法については触れません AIの利用については別途こちらに書きました Cursor導入後にやったこと（要約） この記事では以下の内容について紹介します。
 Front Matterを設置しやすくする そのほかスニペットを設定 画像をドラッグ＆ドロップして記事に挿入する タスクで画像のファイルサイズ縮小をまとめてやる 記事のリアルタイムプレビュー 拡張機能 Front Matterを設置しやすくする このブログ記事では具体的には、
 --- title: &amp;quot;Cursor/VSCodeでブログ記事を書くときの基本設定&amp;quot; date: 2025-05-06T15:00:00+09:00 draft: false authors: [tokorom] tags: [&amp;quot;vscode&amp;quot;, &amp;quot;cursor&amp;quot;, &amp;quot;blog&amp;quot;, &amp;quot;AI&amp;quot;, &amp;quot;markdown&amp;quot;] images: [/posts/basic-settings-for-blog-writing/top.png] --- というFront Matterを設定しています。
 Cursorに自動で設定してもらってもそれっぽくはなるのですが安定しなかったので以下のスニペットを .vscode/markdown.code-snippets に設定しました。
