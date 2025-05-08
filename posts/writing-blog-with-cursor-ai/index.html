@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>CursorでAIの支援を得ながらブログ記事を書く | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="はじめに まだAIによる執筆支援はうまく活用できていません（アドバイス求む！） Cursor/VSCode自体の設定については別途こちらに書きました 記事のファイル作成と見出し案 まず記事を書くにあたってタイトルだけ決めて、CursorのAgentに以下のように依頼しました：
+[title] というタイトルでブログ記事のファイルを作ってください。 記事のファイル名は index.md で、content/posts ディレクトリに記事のタイトルを簡易な英語にした新しいディレクトリを作り、その直下に設置してください。 Front Matterのtitleには指定したタイトルを、tagsには記事内容に適したTagを幾つか設定してください。 記事の本文を書く必要はありませんので、この記事を書くための見出しの案だけ作ってください。見出しはMarkdown形式で連番を付与せずにSEOも考慮して構成してください。 これにより、適切なディレクトリを作成し、index.mdを設置し、そこに見出しの案を書いてもらうことができます。
+はじめは文章の案も作ってもらったのですが、イメージ通りの文面になかなかならないため、見出しだけを作ってもらうことにしました。
+たとえば、このブログ記事のタイトルに対してCursorが作ってくれた見出しの案が以下です：
+## CursorのAI機能とは ## ブログ記事執筆での活用方法 ### 文章の推敲と改善 ### コードブロックの生成と最適化 ### 画像の最適化と管理 ### SEO対策の提案 ## 実践的な使い方のコツ ### プロンプトの工夫 ### 段階的な改善 ### コードと文章のバランス ## 注意点と制限事項 ## まとめ ## 今後の展望 けっきょくこのまま使うわけではないですが、ゼロから書き始めるよりは良いかなということで。。。 このあたりはAIへの指示をもっときちんとすれば精度が良くなるのかも？
+アイキャッチ画像の生成と保存 結果としてこれはCursor単体ではできていません。
+Cursorに「この記事のアイキャッチ画像を生成してtop.pngという名前で保存してください。」とお願いしても、
+申し訳ありませんが、現在のツールセットには画像を生成する機能が含まれていません。
+とつれない反応。
+MCPなどを使いこなせば実現できそうですが、いったんあきらめて、外部でChatGPTに作ってもらった画像をドラッグ＆ドロップすることにしました。
+ChatGPTへのお願いのしかた いきなりアイキャッチ画像の生成をお願いすると、長い時間をかけてイメージと違うものが生成されて無駄になることが多かったため、まずは以下のように依頼します：
+[title] というタイトルのブログ記事のアイキャッチ画像を作りたいのですが、まずは画像を生成せずにテキストベースで、どのようなキーワードで作成すべきかの案をいくつか出してください。 そのままコピペできるようにカンマ区切りのおすすめのキーワードの組み合わせを日本語で箇条書きで列挙してください。 案の中のいくつかには、犬というキーワードも含めてください。 これで、そのままコピペで使いやすいよう、カンマ区切りのキーワードの組み合わせを箇条書きで列挙してもらいます。
+その中でイメージにあったキーワードの組み合わせがあればそれをコピーして以下のように画像生成をお願いします：
+[keywords] というキーワードで1200x630のアイキャッチ画像を作ってください。 画像にテキストは含めないでください。 これで少なくともイメージと全く違うものにはならないはずなので、そのあと、何度かリテイクすればそれっぽいアイキャッチ画像ができるはずです。
+本文を書く これもやってみたものの、まだうまく活用できていません。
+Cursorに作ってもらった見出しを自分で整理したら、見出しごとに本文を書いていきます。
+この際、Cursorの ⌘K による Inline Generation で本文の案を作ってもらうこともできます。 ある程度書き始めてから このセクションの続きを書いて。次のセクションには行かないで。 とすると、書き途中のセクションに限定して案を出してくれます。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="CursorでAIの支援を得ながらブログ記事を書く | TOKOROM BLOG" property="og:title"><meta content="はじめに まだAIによる執筆支援はうまく活用できていません（アドバイス求む！） Cursor/VSCode自体の設定については別途こちらに書きました 記事のファイル作成と見出し案 まず記事を書くにあたってタイトルだけ決めて、CursorのAgentに以下のように依頼しました：
+[title] というタイトルでブログ記事のファイルを作ってください。 記事のファイル名は index.md で、content/posts ディレクトリに記事のタイトルを簡易な英語にした新しいディレクトリを作り、その直下に設置してください。 Front Matterのtitleには指定したタイトルを、tagsには記事内容に適したTagを幾つか設定してください。 記事の本文を書く必要はありませんので、この記事を書くための見出しの案だけ作ってください。見出しはMarkdown形式で連番を付与せずにSEOも考慮して構成してください。 これにより、適切なディレクトリを作成し、index.mdを設置し、そこに見出しの案を書いてもらうことができます。
+はじめは文章の案も作ってもらったのですが、イメージ通りの文面になかなかならないため、見出しだけを作ってもらうことにしました。
+たとえば、このブログ記事のタイトルに対してCursorが作ってくれた見出しの案が以下です：
+## CursorのAI機能とは ## ブログ記事執筆での活用方法 ### 文章の推敲と改善 ### コードブロックの生成と最適化 ### 画像の最適化と管理 ### SEO対策の提案 ## 実践的な使い方のコツ ### プロンプトの工夫 ### 段階的な改善 ### コードと文章のバランス ## 注意点と制限事項 ## まとめ ## 今後の展望 けっきょくこのまま使うわけではないですが、ゼロから書き始めるよりは良いかなということで。。。 このあたりはAIへの指示をもっときちんとすれば精度が良くなるのかも？
+アイキャッチ画像の生成と保存 結果としてこれはCursor単体ではできていません。
+Cursorに「この記事のアイキャッチ画像を生成してtop.pngという名前で保存してください。」とお願いしても、
+申し訳ありませんが、現在のツールセットには画像を生成する機能が含まれていません。
+とつれない反応。
+MCPなどを使いこなせば実現できそうですが、いったんあきらめて、外部でChatGPTに作ってもらった画像をドラッグ＆ドロップすることにしました。
+ChatGPTへのお願いのしかた いきなりアイキャッチ画像の生成をお願いすると、長い時間をかけてイメージと違うものが生成されて無駄になることが多かったため、まずは以下のように依頼します：
+[title] というタイトルのブログ記事のアイキャッチ画像を作りたいのですが、まずは画像を生成せずにテキストベースで、どのようなキーワードで作成すべきかの案をいくつか出してください。 そのままコピペできるようにカンマ区切りのおすすめのキーワードの組み合わせを日本語で箇条書きで列挙してください。 案の中のいくつかには、犬というキーワードも含めてください。 これで、そのままコピペで使いやすいよう、カンマ区切りのキーワードの組み合わせを箇条書きで列挙してもらいます。
+その中でイメージにあったキーワードの組み合わせがあればそれをコピーして以下のように画像生成をお願いします：
+[keywords] というキーワードで1200x630のアイキャッチ画像を作ってください。 画像にテキストは含めないでください。 これで少なくともイメージと全く違うものにはならないはずなので、そのあと、何度かリテイクすればそれっぽいアイキャッチ画像ができるはずです。
+本文を書く これもやってみたものの、まだうまく活用できていません。
+Cursorに作ってもらった見出しを自分で整理したら、見出しごとに本文を書いていきます。
+この際、Cursorの ⌘K による Inline Generation で本文の案を作ってもらうこともできます。 ある程度書き始めてから このセクションの続きを書いて。次のセクションには行かないで。 とすると、書き途中のセクションに限定して案を出してくれます。" property="og:description"><meta content="https://www.tokoro.me/posts/writing-blog-with-cursor-ai/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/writing-blog-with-cursor-ai/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://www.tokoro.me/posts/writing-blog-with-cursor-ai/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">CursorでAIの支援を得ながらブログ記事を書く</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年5月8日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/cursor">
+              cursor
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ai">
+              AI
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/blog">
+              blog
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/productivity">
+              productivity
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/writing">
+              writing
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/markdown">
+              markdown
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/vscode">
+              vscode
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/chatgpt">
+              chatgpt
+          </a>
+          /</div><div class="content">
+      <p><img src="top.png" alt="top"></p>
+<h2 id="はじめに">はじめに</h2>
+<ul>
+<li>まだAIによる執筆支援はうまく活用できていません（アドバイス求む！）</li>
+<li>Cursor/VSCode自体の設定については別途<a href="/posts/basic-settings-for-blog-writing/">こちら</a>に書きました</li>
+</ul>
+<h2 id="記事のファイル作成と見出し案">記事のファイル作成と見出し案</h2>
+<p>まず記事を書くにあたってタイトルだけ決めて、CursorのAgentに以下のように依頼しました：</p>
+<pre><code>[title]
+というタイトルでブログ記事のファイルを作ってください。
+記事のファイル名は index.md で、content/posts ディレクトリに記事のタイトルを簡易な英語にした新しいディレクトリを作り、その直下に設置してください。
+Front Matterのtitleには指定したタイトルを、tagsには記事内容に適したTagを幾つか設定してください。
+記事の本文を書く必要はありませんので、この記事を書くための見出しの案だけ作ってください。見出しはMarkdown形式で連番を付与せずにSEOも考慮して構成してください。
+</code></pre>
+<p>これにより、適切なディレクトリを作成し、<code>index.md</code>を設置し、そこに見出しの案を書いてもらうことができます。</p>
+<p>はじめは文章の案も作ってもらったのですが、イメージ通りの文面になかなかならないため、見出しだけを作ってもらうことにしました。</p>
+<p>たとえば、このブログ記事のタイトルに対してCursorが作ってくれた見出しの案が以下です：</p>
+<pre><code class="language-md">## CursorのAI機能とは
+
+## ブログ記事執筆での活用方法
+
+### 文章の推敲と改善
+
+### コードブロックの生成と最適化
+
+### 画像の最適化と管理
+
+### SEO対策の提案
+
+## 実践的な使い方のコツ
+
+### プロンプトの工夫
+
+### 段階的な改善
+
+### コードと文章のバランス
+
+## 注意点と制限事項
+
+## まとめ
+
+## 今後の展望 
+</code></pre>
+<p>けっきょくこのまま使うわけではないですが、ゼロから書き始めるよりは良いかなということで。。。
+このあたりはAIへの指示をもっときちんとすれば精度が良くなるのかも？</p>
+<h2 id="アイキャッチ画像の生成と保存">アイキャッチ画像の生成と保存</h2>
+<p>結果としてこれはCursor単体ではできていません。</p>
+<p>Cursorに「この記事のアイキャッチ画像を生成してtop.pngという名前で保存してください。」とお願いしても、</p>
+<blockquote>
+<p>申し訳ありませんが、現在のツールセットには画像を生成する機能が含まれていません。</p>
+</blockquote>
+<p>とつれない反応。</p>
+<p>MCPなどを使いこなせば実現できそうですが、いったんあきらめて、外部でChatGPTに作ってもらった画像をドラッグ＆ドロップすることにしました。</p>
+<h3 id="chatgptへのお願いのしかた">ChatGPTへのお願いのしかた</h3>
+<p>いきなりアイキャッチ画像の生成をお願いすると、長い時間をかけてイメージと違うものが生成されて無駄になることが多かったため、まずは以下のように依頼します：</p>
+<pre><code>[title]
+というタイトルのブログ記事のアイキャッチ画像を作りたいのですが、まずは画像を生成せずにテキストベースで、どのようなキーワードで作成すべきかの案をいくつか出してください。
+そのままコピペできるようにカンマ区切りのおすすめのキーワードの組み合わせを日本語で箇条書きで列挙してください。
+案の中のいくつかには、犬というキーワードも含めてください。
+</code></pre>
+<p>これで、そのままコピペで使いやすいよう、カンマ区切りのキーワードの組み合わせを箇条書きで列挙してもらいます。</p>
+<p>その中でイメージにあったキーワードの組み合わせがあればそれをコピーして以下のように画像生成をお願いします：</p>
+<pre><code>[keywords]
+というキーワードで1200x630のアイキャッチ画像を作ってください。
+画像にテキストは含めないでください。
+</code></pre>
+<p>これで少なくともイメージと全く違うものにはならないはずなので、そのあと、何度かリテイクすればそれっぽいアイキャッチ画像ができるはずです。</p>
+<h2 id="本文を書く">本文を書く</h2>
+<p>これもやってみたものの、まだうまく活用できていません。</p>
+<p>Cursorに作ってもらった見出しを自分で整理したら、見出しごとに本文を書いていきます。</p>
+<p>この際、Cursorの <strong>⌘K</strong> による <a href="https://docs.cursor.com/cmdk/overview#inline-generation">Inline Generation</a> で本文の案を作ってもらうこともできます。
+ある程度書き始めてから <code>このセクションの続きを書いて。次のセクションには行かないで。</code> とすると、書き途中のセクションに限定して案を出してくれます。</p>
+<h2 id="commitメッセージの自動生成">commitメッセージの自動生成</h2>
+<p><img src="commit.png" alt="commit"></p>
+<p>細かいところですが、文章の書き途中で都度commitをしたいとき、Cursorではcommitメッセージを自動生成してくれるため楽ができます。</p>
+<p>Cursorの <em>SOURCE CONTROL</em> ペインで <em>Commit</em> ボタンの上の <strong>キラキラのアイコン</strong> をクリックすればメッセージが自動生成されてそのままcommitできます。</p>
+<h2 id="校正とファクトチェック">校正とファクトチェック</h2>
+<p>これについては確実にCursorの恩恵を得られそうです。</p>
+<p>CursorのAgentに以下のように依頼します：</p>
+<pre><code>このブログ記事に対して、以下を実施してください。
+・誤字脱字の修正
+・表記の統一
+	・一人称は「わたし」で統一
+・文体・トーンの統一
+	・ですます調で
+・文法・構文のチェック
+	・長すぎる文は適切に分割
+・専門用語や略語、固有名詞が正確かチェック
+・ファクトチェック　
+・SEO的観点での改善
+</code></pre>
+<p>たとえば、このブログ記事に対してチェックをお願いしたところ、以下の修正案を出してくれました。</p>
+<p><img src="diff.png" alt="diff"></p>
+<p>これらの案に対して、<strong>採用</strong>(<em>Accept</em>) または <strong>非採用</strong>(<em>Reject</em>) を決めていきます。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>Cursorを使ったブログ記事の執筆は、まだ試行錯誤の段階ですが、以下のような利点と課題があります。
+課題についてはわたしが初級者すぎるからで、使いこなしている人たちはおそらくもっとAIの恩恵を上手に受けていると思います。</p>
+<h3 id="利点">利点</h3>
+<ul>
+<li>記事を書くとっかかりになる</li>
+<li>校正やファクトチェックをしてもらえて記事の品質が上がる</li>
+<li>commitメッセージが楽</li>
+<li><strong>記事を書くのに飽きてきた面があったが、また楽しくなってきた！</strong></li>
+</ul>
+<h3 id="課題">課題</h3>
+<ul>
+<li>現状、文章を書くこと自体への恩恵はいまいち受けられていない</li>
+<li>画像や図などの生成＆埋め込みもできそうだが使いこなせていない</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/vim-markdown-paste-from-clipboard/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/vim-markdown-paste-from-clipboard/cover.png" class="feed-item-image" alt="Vimにスクショを直接Markdownで貼り付ける" width="300"></div>
+
+    <span class="feed-item-title">Vimにスクショを直接Markdownで貼り付ける</span>
+    <span class="feed-item-date">2020年4月30日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/vim-markdown-image-tool/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/posts/vim-markdown-image-tool/dog.jpg" class="feed-item-image" alt="VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法" width="300"></div>
+
+    <span class="feed-item-title">VimでMarkdown形式でブログ記事を書くときに簡単に画像を埋め込む方法</span>
+    <span class="feed-item-date">2020年3月31日</span>
+    <span class="feed-item-date"></span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 06 May 2025 15:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 May 2025 11:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
       <link>https://www.tokoro.me/tags/ai/</link>
-      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/ai/</guid>
       <description></description>
@@ -20,18 +20,63 @@
     <item>
       <title>blog</title>
       <link>https://www.tokoro.me/tags/blog/</link>
-      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/blog/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>chatgpt</title>
+      <link>https://www.tokoro.me/tags/chatgpt/</link>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/chatgpt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>cursor</title>
       <link>https://www.tokoro.me/tags/cursor/</link>
-      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/cursor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdown</title>
+      <link>https://www.tokoro.me/tags/markdown/</link>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>productivity</title>
+      <link>https://www.tokoro.me/tags/productivity/</link>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/productivity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>https://www.tokoro.me/tags/vscode/</link>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writing</title>
+      <link>https://www.tokoro.me/tags/writing/</link>
+      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/writing/</guid>
       <description></description>
     </item>
     
@@ -41,24 +86,6 @@
       <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://www.tokoro.me/tags/markdown/</link>
-      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vscode</title>
-      <link>https://www.tokoro.me/tags/vscode/</link>
-      <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/vscode/</guid>
       <description></description>
     </item>
     
