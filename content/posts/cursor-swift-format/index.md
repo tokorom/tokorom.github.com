@@ -4,8 +4,9 @@ date: 2025-05-14T11:22:00+09:00
 draft: false
 author: tokorom
 authors: [tokorom]
-tags: ["cursor", "vscode", "swift", "format", "development", "productivity", "code-style"]
+tags: ["cursor", "vscode", "swift", "format", "development", "productivity", "code-style", "lint"]
 images: [/posts/cursor-swift-format/top.png]
+description: "Cursor/VSCodeでSwiftコードを書く際のswift-formatの設定と活用方法を解説。ファイル保存時の自動Lint、自動format、効率的な開発環境の構築方法を紹介します。"
 canonical: https://spinners.work
 ---
 
@@ -13,11 +14,11 @@ canonical: https://spinners.work
 
 先日よりCursorでiOSアプリ開発をするようになり、これまでVimでやっていたことを順々にCursorに移植しています。
 
-その中の１つが [`swift-format`](https://github.com/swiftlang/swift-format) です。
+その中の1つが [`swift-format`](https://github.com/swiftlang/swift-format) です。
 わたしは現在編集中のファイルのみ`swift-format`でチェックするのが好みです。
 
 - プロジェクト全体を`swift-format`にかけるのはビルドのタイミング
-- ファイルを保存したタイミングでそのファイルだけを`swift-format`
+- ファイルを保存したタイミングでそのファイルだけを`swift-format`でチェック
 
 という区分けをしています。
 
@@ -36,6 +37,7 @@ Xcodeに内蔵された`swift-format`で特定のファイルをチェックす�
 ```shell
 xcrun swift-format lint Sample/Sample.swift 
 ```
+
 ## Cursor/VSCodeのタスク
 
 これをCursor/VSCodeのタスクに設定したのが以下です。
@@ -86,9 +88,9 @@ xcrun swift-format lint Sample/Sample.swift
 これをどうにかする方法として、
 
 - [`Run On Save`](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave) というプラグインを使う
-- `editor.codeActionsOnSave` の設定でやりくりする
+- `editor.codeActionsOnSave` の設定で対応する
 
-などもありそうでしたが、今回は、より簡易な方法としてファイル保存のキーボードショートカットで「ファイル保存」「swift-format lint」をやってしまうことにしました。
+などもありそうでしたが、今回は、より簡易な方法としてファイル保存のキーボードショートカットで「ファイル保存」「swift-format lint」を実行することにしました。
 わたしはVSCodeVimを使っているので`settings.json`に以下を加えました。
 
 ```json
@@ -112,7 +114,7 @@ xcrun swift-format lint Sample/Sample.swift
 
 ## Problemsパネルでの表示
 
-この設定をしてファイル保存し、実際に問題となるコードがある場合、CursorのProblemsパネルにこんな感じで表示されます。
+この設定をしてファイル保存し、実際に問題となるコードがある場合、CursorのProblemsパネルに以下のように表示されます。
 
 ![problems](problems.png)
 
@@ -146,14 +148,14 @@ xcrun swift-format format --in-place Sample/Sample.swift
 }
 ```
 
-あとは、これを *Run Task* で実行するなり、お好みのキーボードショートカットで呼ぶ出すようにするだけです。
+あとは、これを *Run Task* で実行するなり、お好みのキーボードショートカットで呼び出すようにするだけです。
 
 ## まとめ
 
-- Cursor/VSCodeから`swift-format`を使うのは簡単
-- VSCodeのProblemsの仕組みに乗せるのも簡単
-- swift-formatの単体実行はビルドと違って一瞬で終わるため問題を早期発見するのに役立つ
+- Cursor/VSCodeから`swift-format`を使うのは簡単です
+- VSCodeのProblemsの仕組みに乗せるのも簡単です
+- swift-formatの単体実行はビルドと違って一瞬で終わるため、問題を早期発見するのに役立ちます
 
 Cursorで快適にSwiftを書くためにぜひご活用ください。
 
-※ファイル保存のタイミングでswift-formatを走らせる部分ですが、VCCodeオフィシャルな設定項目でこうやると簡単だよ、といったアドバイスも是非！
+※ファイル保存のタイミングでswift-formatを実行する部分ですが、VSCodeオフィシャルな設定項目で簡単に実現する方法があれば、アドバイスをいただけると幸いです！
