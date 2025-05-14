@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>code-style on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/code-style/</link>
+    <description>Recent content in code-style on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Wed, 14 May 2025 11:22:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/code-style/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cursor/VSCodeで編集中にswift-format</title>
+      <link>https://www.tokoro.me/posts/cursor-swift-format/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/cursor-swift-format/</guid>
+      <description>先日よりCursorでiOSアプリ開発をするようになり、これまでVimでやっていたことを順々にCursorに移植しています。
+その中の1つが swift-format です。 わたしは現在編集中のファイルのみswift-formatでチェックするのが好みです。
+プロジェクト全体をswift-formatにかけるのはビルドのタイミング ファイルを保存したタイミングでそのファイルだけをswift-formatでチェック という区分けをしています。
+実際にCursorでswift-formatを利用している様子がこちらです。Problemsでの一覧表示や自動整形にも対応しています。
+swift-formatの使い方 Xcodeに内蔵されたswift-formatで特定のファイルをチェックするコマンドは以下です。
+xcrun swift-format lint Sample/Sample.swift Cursor/VSCodeのタスク これをCursor/VSCodeのタスクに設定したのが以下です。
+{ &amp;quot;label&amp;quot;: &amp;quot;Lint Current File&amp;quot;, &amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;, &amp;quot;command&amp;quot;: &amp;quot;zsh&amp;quot;, &amp;quot;args&amp;quot;: [ &amp;quot;-c&amp;quot;, &amp;quot;if [ \&amp;quot;${fileExtname}\&amp;quot; = \&amp;quot;.swift\&amp;quot; ]; then xcrun swift-format lint \&amp;quot;${file}\&amp;quot;; fi&amp;quot; ], &amp;quot;problemMatcher&amp;quot;: [ { &amp;quot;owner&amp;quot;: &amp;quot;swift-format&amp;quot;, &amp;quot;fileLocation&amp;quot;: [&amp;quot;absolute&amp;quot;], &amp;quot;pattern&amp;quot;: { &amp;quot;regexp&amp;quot;: &amp;quot;^(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$&amp;quot;, &amp;quot;file&amp;quot;: 1, &amp;quot;line&amp;quot;: 2, &amp;quot;column&amp;quot;: 3, &amp;quot;severity&amp;quot;: 4, &amp;quot;message&amp;quot;: 5 } } ], &amp;quot;presentation&amp;quot;: { &amp;quot;reveal&amp;quot;: &amp;quot;silent&amp;quot;, &amp;quot;revealProblems&amp;quot;: &amp;quot;onProblem&amp;quot; } } 基本的には xcrun swift-format lint \&amp;quot;${file}\&amp;quot; というコマンドを実行するだけです。</description>
+    </item>
+    
+  </channel>
+</rss>

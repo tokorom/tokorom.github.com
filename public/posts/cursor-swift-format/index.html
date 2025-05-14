@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Cursor/VSCodeで編集中にswift-format | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="先日よりCursorでiOSアプリ開発をするようになり、これまでVimでやっていたことを順々にCursorに移植しています。
+その中の1つが swift-format です。 わたしは現在編集中のファイルのみswift-formatでチェックするのが好みです。
+プロジェクト全体をswift-formatにかけるのはビルドのタイミング ファイルを保存したタイミングでそのファイルだけをswift-formatでチェック という区分けをしています。
+実際にCursorでswift-formatを利用している様子がこちらです。Problemsでの一覧表示や自動整形にも対応しています。
+swift-formatの使い方 Xcodeに内蔵されたswift-formatで特定のファイルをチェックするコマンドは以下です。
+xcrun swift-format lint Sample/Sample.swift Cursor/VSCodeのタスク これをCursor/VSCodeのタスクに設定したのが以下です。
+{ &quot;label&quot;: &quot;Lint Current File&quot;, &quot;type&quot;: &quot;shell&quot;, &quot;command&quot;: &quot;zsh&quot;, &quot;args&quot;: [ &quot;-c&quot;, &quot;if [ \&quot;${fileExtname}\&quot; = \&quot;.swift\&quot; ]; then xcrun swift-format lint \&quot;${file}\&quot;; fi&quot; ], &quot;problemMatcher&quot;: [ { &quot;owner&quot;: &quot;swift-format&quot;, &quot;fileLocation&quot;: [&quot;absolute&quot;], &quot;pattern&quot;: { &quot;regexp&quot;: &quot;^(.*):(\\d&#43;):(\\d&#43;):\\s&#43;(error|warning):\\s&#43;(.*)$&quot;, &quot;file&quot;: 1, &quot;line&quot;: 2, &quot;column&quot;: 3, &quot;severity&quot;: 4, &quot;message&quot;: 5 } } ], &quot;presentation&quot;: { &quot;reveal&quot;: &quot;silent&quot;, &quot;revealProblems&quot;: &quot;onProblem&quot; } } 基本的には xcrun swift-format lint \&quot;${file}\&quot; というコマンドを実行するだけです。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Cursor/VSCodeで編集中にswift-format | TOKOROM BLOG" property="og:title"><meta content="先日よりCursorでiOSアプリ開発をするようになり、これまでVimでやっていたことを順々にCursorに移植しています。
+その中の1つが swift-format です。 わたしは現在編集中のファイルのみswift-formatでチェックするのが好みです。
+プロジェクト全体をswift-formatにかけるのはビルドのタイミング ファイルを保存したタイミングでそのファイルだけをswift-formatでチェック という区分けをしています。
+実際にCursorでswift-formatを利用している様子がこちらです。Problemsでの一覧表示や自動整形にも対応しています。
+swift-formatの使い方 Xcodeに内蔵されたswift-formatで特定のファイルをチェックするコマンドは以下です。
+xcrun swift-format lint Sample/Sample.swift Cursor/VSCodeのタスク これをCursor/VSCodeのタスクに設定したのが以下です。
+{ &quot;label&quot;: &quot;Lint Current File&quot;, &quot;type&quot;: &quot;shell&quot;, &quot;command&quot;: &quot;zsh&quot;, &quot;args&quot;: [ &quot;-c&quot;, &quot;if [ \&quot;${fileExtname}\&quot; = \&quot;.swift\&quot; ]; then xcrun swift-format lint \&quot;${file}\&quot;; fi&quot; ], &quot;problemMatcher&quot;: [ { &quot;owner&quot;: &quot;swift-format&quot;, &quot;fileLocation&quot;: [&quot;absolute&quot;], &quot;pattern&quot;: { &quot;regexp&quot;: &quot;^(.*):(\\d&#43;):(\\d&#43;):\\s&#43;(error|warning):\\s&#43;(.*)$&quot;, &quot;file&quot;: 1, &quot;line&quot;: 2, &quot;column&quot;: 3, &quot;severity&quot;: 4, &quot;message&quot;: 5 } } ], &quot;presentation&quot;: { &quot;reveal&quot;: &quot;silent&quot;, &quot;revealProblems&quot;: &quot;onProblem&quot; } } 基本的には xcrun swift-format lint \&quot;${file}\&quot; というコマンドを実行するだけです。" property="og:description"><meta content="https://www.tokoro.me/posts/cursor-swift-format/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/cursor-swift-format/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/cursor-swift-format/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Cursor/VSCodeで編集中にswift-format</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年5月14日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/cursor">
+              cursor
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/vscode">
+              vscode
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/format">
+              format
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/development">
+              development
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/productivity">
+              productivity
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/code-style">
+              code-style
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/lint">
+              lint
+          </a>
+          /</div><div class="content">
+      <p><img src="top.png" alt="top"></p>
+<p>先日よりCursorでiOSアプリ開発をするようになり、これまでVimでやっていたことを順々にCursorに移植しています。</p>
+<p>その中の1つが <a href="https://github.com/swiftlang/swift-format"><code>swift-format</code></a> です。
+わたしは現在編集中のファイルのみ<code>swift-format</code>でチェックするのが好みです。</p>
+<ul>
+<li>プロジェクト全体を<code>swift-format</code>にかけるのはビルドのタイミング</li>
+<li>ファイルを保存したタイミングでそのファイルだけを<code>swift-format</code>でチェック</li>
+</ul>
+<p>という区分けをしています。</p>
+<p>実際にCursorでswift-formatを利用している様子がこちらです。Problemsでの一覧表示や自動整形にも対応しています。</p>
+<iframe width="560" height="315"
+    src="https://www.youtube.com/embed/ZsqB8RmT7Gs?autoplay=1&loop=1&playlist=ZsqB8RmT7Gs"
+    title="YouTube video player" frameborder="0"
+    allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<h2 id="swift-formatの使い方">swift-formatの使い方</h2>
+<p>Xcodeに内蔵された<code>swift-format</code>で特定のファイルをチェックするコマンドは以下です。</p>
+<pre><code class="language-shell">xcrun swift-format lint Sample/Sample.swift 
+</code></pre>
+<h2 id="cursorvscodeのタスク">Cursor/VSCodeのタスク</h2>
+<p>これをCursor/VSCodeのタスクに設定したのが以下です。</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Lint Current File&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;zsh&quot;,
+    &quot;args&quot;: [
+        &quot;-c&quot;,
+        &quot;if [ \&quot;${fileExtname}\&quot; = \&quot;.swift\&quot; ]; then xcrun swift-format lint \&quot;${file}\&quot;; fi&quot;
+    ],
+    &quot;problemMatcher&quot;: [
+        {
+            &quot;owner&quot;: &quot;swift-format&quot;,
+            &quot;fileLocation&quot;: [&quot;absolute&quot;],
+            &quot;pattern&quot;: {
+                &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$&quot;,
+                &quot;file&quot;: 1,
+                &quot;line&quot;: 2,
+                &quot;column&quot;: 3,
+                &quot;severity&quot;: 4,
+                &quot;message&quot;: 5
+            }
+        }
+    ],
+    &quot;presentation&quot;: {
+        &quot;reveal&quot;: &quot;silent&quot;,
+        &quot;revealProblems&quot;: &quot;onProblem&quot;
+    }
+}
+</code></pre>
+<p>基本的には <code>xcrun swift-format lint \&quot;${file}\&quot;</code> というコマンドを実行するだけです。</p>
+<p>以下、設定についての説明です。</p>
+<ul>
+<li><code>problemMatcher</code>
+<ul>
+<li>この設定にマッチしたerrorやwarningをProblemsと認識され、Problemsパネルに一覧表示されたり、VSCodeの仕組みを利用できます</li>
+</ul>
+</li>
+<li><code>presentation</code>
+<ul>
+<li><code>&quot;reveal&quot;: &quot;silent&quot;</code>は問題が発生しなければターミナルパネル（実行結果）を表示しない設定です</li>
+<li><code>&quot;revealProblems&quot;: &quot;onProblem&quot;</code>は問題が発生したらProblemsパネルを自動で開く設定です</li>
+</ul>
+</li>
+</ul>
+<h2 id="ファイル保存で自動実行">ファイル保存で自動実行</h2>
+<p>調べた限りですと、Cursor/VSCodeの公式な設定で「ファイル保存時に特定のタスクを実行する」ということはできないようです。
+これをどうにかする方法として、</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave"><code>Run On Save</code></a> というプラグインを使う</li>
+<li><code>editor.codeActionsOnSave</code> の設定で対応する</li>
+</ul>
+<p>などもありそうでしたが、今回は、より簡易な方法としてファイル保存のキーボードショートカットで「ファイル保存」「swift-format lint」を実行することにしました。
+わたしはVSCodeVimを使っているので<code>settings.json</code>に以下を加えました。</p>
+<pre><code class="language-json">&quot;vim.normalModeKeyBindingsNonRecursive&quot;: [
+    {
+        &quot;before&quot;: [&quot;&lt;leader&gt;&quot;, &quot;w&quot;],
+        &quot;commands&quot;: [
+            {
+                &quot;command&quot;: &quot;workbench.action.files.save&quot;
+            },
+            {
+                &quot;command&quot;: &quot;workbench.action.tasks.runTask&quot;,
+                &quot;args&quot;: &quot;Lint Current File&quot;
+            }
+        ]
+    }
+]
+</code></pre>
+<p>わたしはキーボードを <strong>Space, w</strong> と打つとファイルを保存するようにしているので、これをしたときに同時に先ほど追加した <strong>Lint Current File</strong> というタスクを実行し、現在編集中のファイルだけ<code>swift-format lint</code>されるようになりました。</p>
+<h2 id="problemsパネルでの表示">Problemsパネルでの表示</h2>
+<p>この設定をしてファイル保存し、実際に問題となるコードがある場合、CursorのProblemsパネルに以下のように表示されます。</p>
+<p><img src="problems.png" alt="problems"></p>
+<p>もちろん、このパネルから問題を選んでそのコード行にジャンプすることもできますし、これらの問題を各ファイルでインライン表示することも可能です。</p>
+<p><img src="inline.png" alt="inline"></p>
+<h2 id="自動整形">自動整形</h2>
+<p><code>swift-format</code>は以下のコマンドで自動整形もできますので、もちろんこれをCursorで実行することも可能です。</p>
+<pre><code class="language-shell">xcrun swift-format format --in-place Sample/Sample.swift
+</code></pre>
+<p>これを実行するタスクがこちらです。</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Format Current File&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;zsh&quot;,
+    &quot;args&quot;: [
+        &quot;-c&quot;,
+        &quot;if [ \&quot;${fileExtname}\&quot; = \&quot;.swift\&quot; ]; then xcrun swift-format format --in-place \&quot;${file}\&quot;; fi&quot;
+    ],
+    &quot;presentation&quot;: {
+        &quot;reveal&quot;: &quot;silent&quot;
+    },
+    &quot;problemMatcher&quot;: []
+}
+</code></pre>
+<p>あとは、これを <em>Run Task</em> で実行するなり、お好みのキーボードショートカットで呼び出すようにするだけです。</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>Cursor/VSCodeから<code>swift-format</code>を使うのは簡単です</li>
+<li>VSCodeのProblemsの仕組みに乗せるのも簡単です</li>
+<li>swift-formatの単体実行はビルドと違って一瞬で終わるため、問題を早期発見するのに役立ちます</li>
+</ul>
+<p>Cursorで快適にSwiftを書くためにぜひご活用ください。</p>
+<p>※ファイル保存のタイミングでswift-formatを実行する部分ですが、VSCodeオフィシャルな設定項目で簡単に実現する方法があれば、アドバイスをいただけると幸いです！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swiftui-hackathon/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/apple/swiftui.png" class="feed-item-image" alt="SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告" width="300"></div>
+
+    <span class="feed-item-title">SwiftUIアプリを24時間で作ってリリースするひとりハッカソンの結果報告</span>
+    <span class="feed-item-date">2020年1月27日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/user_notification/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">iOS 10でついに通知許可ダイアログの操作をハンドリングできるようになったよ</span>
+    <span class="feed-item-date">2016年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/has-associated-objects/">
+    <div class="feed-item-image-wrapper"><img data-src="https://raw.githubusercontent.com/tokorom/tokorom.github.com/images/images/blackbook.jpg" class="feed-item-image" alt="Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）" width="300"></div>
+
+    <span class="feed-item-title">Swiftのextensionでstored propertyを追加する？（黒魔術は閉じ込める）</span>
+    <span class="feed-item-date">2015年11月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/defer-to-deinit/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Swiftでdeinitまで処理をdeferする</span>
+    <span class="feed-item-date">2015年10月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/iosdc2023-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/iosdc2023-shareplay/top.jpg" class="feed-item-image" alt="[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ" width="300"></div>
+
+    <span class="feed-item-title">[iOSDC Japan 2023] SharePlayの歴史と進化 - そしてvisionOSへ</span>
+    <span class="feed-item-date">2023年9月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

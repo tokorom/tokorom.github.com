@@ -7,7 +7,79 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 08 May 2025 11:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 May 2025 11:22:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>code-style</title>
+      <link>https://www.tokoro.me/tags/code-style/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/code-style/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cursor</title>
+      <link>https://www.tokoro.me/tags/cursor/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/cursor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development</title>
+      <link>https://www.tokoro.me/tags/development/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>format</title>
+      <link>https://www.tokoro.me/tags/format/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/format/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lint</title>
+      <link>https://www.tokoro.me/tags/lint/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/lint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>productivity</title>
+      <link>https://www.tokoro.me/tags/productivity/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/productivity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swift</title>
+      <link>https://www.tokoro.me/tags/swift/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/swift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>https://www.tokoro.me/tags/vscode/</link>
+      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>AI</title>
       <link>https://www.tokoro.me/tags/ai/</link>
@@ -36,38 +108,11 @@
     </item>
     
     <item>
-      <title>cursor</title>
-      <link>https://www.tokoro.me/tags/cursor/</link>
-      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/cursor/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>markdown</title>
       <link>https://www.tokoro.me/tags/markdown/</link>
       <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>productivity</title>
-      <link>https://www.tokoro.me/tags/productivity/</link>
-      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/productivity/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vscode</title>
-      <link>https://www.tokoro.me/tags/vscode/</link>
-      <pubDate>Thu, 08 May 2025 11:00:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/vscode/</guid>
       <description></description>
     </item>
     
@@ -95,15 +140,6 @@
       <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/ios/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>swift</title>
-      <link>https://www.tokoro.me/tags/swift/</link>
-      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/swift/</guid>
       <description></description>
     </item>
     
