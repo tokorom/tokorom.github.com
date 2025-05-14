@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.tokoro.me/tags/code-style/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/cursor/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/cursor-swift-format/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/development/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/format/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/lint/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/productivity/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/swift/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/vscode/</loc>
+    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
+  </url><url>
     <loc>https://www.tokoro.me/tags/ai/</loc>
     <lastmod>2025-05-08T11:00:00+09:00</lastmod>
   </url><url>
@@ -11,28 +47,10 @@
     <loc>https://www.tokoro.me/tags/chatgpt/</loc>
     <lastmod>2025-05-08T11:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/tags/cursor/</loc>
-    <lastmod>2025-05-08T11:00:00+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/posts/writing-blog-with-cursor-ai/</loc>
     <lastmod>2025-05-08T11:00:00+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/markdown/</loc>
-    <lastmod>2025-05-08T11:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/posts/</loc>
-    <lastmod>2025-05-08T11:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/productivity/</loc>
-    <lastmod>2025-05-08T11:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/</loc>
-    <lastmod>2025-05-08T11:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/</loc>
-    <lastmod>2025-05-08T11:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/vscode/</loc>
     <lastmod>2025-05-08T11:00:00+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/writing/</loc>
@@ -48,9 +66,6 @@
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2024-06-25T10:56:06+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/swift/</loc>
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/swiftui/</loc>
