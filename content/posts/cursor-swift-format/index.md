@@ -1,55 +1,159 @@
 ---
 title: "Cursor/VSCodeで編集中にswift-format"
-date: 2024-03-26T15:00:00+09:00
+date: 2025-05-14T11:22:00+09:00
 draft: false
+author: tokorom
 authors: [tokorom]
 tags: ["cursor", "vscode", "swift", "format", "development", "productivity", "code-style"]
 images: [/posts/cursor-swift-format/top.png]
-description: "Cursor/VSCodeでSwiftコードを書く際のswift-formatの設定と活用方法を解説。コードスタイルの自動整形、設定のカスタマイズ、効率的な開発環境の構築方法を紹介します。"
+canonical: https://spinners.work
 ---
 
 ![top](top.png)
 
-## swift-formatとは
+先日よりCursorでiOSアプリ開発をするようになり、これまでVimでやっていたことを順々にCursorに移植しています。
 
-## Cursor/VSCodeでの設定方法
+その中の１つが [`swift-format`](https://github.com/swiftlang/swift-format) です。
+わたしは現在編集中のファイルのみ`swift-format`でチェックするのが好みです。
 
-### 前提条件
+- プロジェクト全体を`swift-format`にかけるのはビルドのタイミング
+- ファイルを保存したタイミングでそのファイルだけを`swift-format`
 
-### インストール手順
+という区分けをしています。
 
-### 設定ファイルの作成
+実際にCursorでswift-formatを利用している様子がこちらです。Problemsでの一覧表示や自動整形にも対応しています。
 
-## 基本的な使い方
+<iframe width="560" height="315"
+    src="https://www.youtube.com/embed/ZsqB8RmT7Gs?autoplay=1&loop=1&playlist=ZsqB8RmT7Gs"
+    title="YouTube video player" frameborder="0"
+    allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
 
-### コマンドラインでの実行
+## swift-formatの使い方
 
-### エディタからの実行
+Xcodeに内蔵された`swift-format`で特定のファイルをチェックするコマンドは以下です。
 
-### 自動フォーマットの設定
+```shell
+xcrun swift-format lint Sample/Sample.swift 
+```
+## Cursor/VSCodeのタスク
 
-## カスタマイズ
+これをCursor/VSCodeのタスクに設定したのが以下です。
 
-### ルールの設定
+```json
+{
+    "label": "Lint Current File",
+    "type": "shell",
+    "command": "zsh",
+    "args": [
+        "-c",
+        "if [ \"${fileExtname}\" = \".swift\" ]; then xcrun swift-format lint \"${file}\"; fi"
+    ],
+    "problemMatcher": [
+        {
+            "owner": "swift-format",
+            "fileLocation": ["absolute"],
+            "pattern": {
+                "regexp": "^(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "severity": 4,
+                "message": 5
+            }
+        }
+    ],
+    "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem"
+    }
+}
+```
 
-### 除外設定
+基本的には `xcrun swift-format lint \"${file}\"` というコマンドを実行するだけです。
 
-### プロジェクト固有の設定
+以下、設定についての説明です。
 
-## トラブルシューティング
+- `problemMatcher`
+    - この設定にマッチしたerrorやwarningをProblemsと認識され、Problemsパネルに一覧表示されたり、VSCodeの仕組みを利用できます
+- `presentation`
+    - `"reveal": "silent"`は問題が発生しなければターミナルパネル（実行結果）を表示しない設定です
+    - `"revealProblems": "onProblem"`は問題が発生したらProblemsパネルを自動で開く設定です
 
-### よくある問題と解決方法
+## ファイル保存で自動実行
 
-### パフォーマンスの最適化
+調べた限りですと、Cursor/VSCodeの公式な設定で「ファイル保存時に特定のタスクを実行する」ということはできないようです。
+これをどうにかする方法として、
 
-## ベストプラクティス
+- [`Run On Save`](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave) というプラグインを使う
+- `editor.codeActionsOnSave` の設定でやりくりする
 
-### チーム開発での活用
+などもありそうでしたが、今回は、より簡易な方法としてファイル保存のキーボードショートカットで「ファイル保存」「swift-format lint」をやってしまうことにしました。
+わたしはVSCodeVimを使っているので`settings.json`に以下を加えました。
 
-### CI/CDでの活用
+```json
+"vim.normalModeKeyBindingsNonRecursive": [
+    {
+        "before": ["<leader>", "w"],
+        "commands": [
+            {
+                "command": "workbench.action.files.save"
+            },
+            {
+                "command": "workbench.action.tasks.runTask",
+                "args": "Lint Current File"
+            }
+        ]
+    }
+]
+```
 
-### コードレビューでの活用
+わたしはキーボードを **Space, w** と打つとファイルを保存するようにしているので、これをしたときに同時に先ほど追加した **Lint Current File** というタスクを実行し、現在編集中のファイルだけ`swift-format lint`されるようになりました。
+
+## Problemsパネルでの表示
+
+この設定をしてファイル保存し、実際に問題となるコードがある場合、CursorのProblemsパネルにこんな感じで表示されます。
+
+![problems](problems.png)
+
+もちろん、このパネルから問題を選んでそのコード行にジャンプすることもできますし、これらの問題を各ファイルでインライン表示することも可能です。
+
+![inline](inline.png)
+
+## 自動整形
+
+`swift-format`は以下のコマンドで自動整形もできますので、もちろんこれをCursorで実行することも可能です。
+
+```shell
+xcrun swift-format format --in-place Sample/Sample.swift
+```
+
+これを実行するタスクがこちらです。
+
+```json
+{
+    "label": "Format Current File",
+    "type": "shell",
+    "command": "zsh",
+    "args": [
+        "-c",
+        "if [ \"${fileExtname}\" = \".swift\" ]; then xcrun swift-format format --in-place \"${file}\"; fi"
+    ],
+    "presentation": {
+        "reveal": "silent"
+    },
+    "problemMatcher": []
+}
+```
+
+あとは、これを *Run Task* で実行するなり、お好みのキーボードショートカットで呼ぶ出すようにするだけです。
 
 ## まとめ
 
-## 参考リンク 
+- Cursor/VSCodeから`swift-format`を使うのは簡単
+- VSCodeのProblemsの仕組みに乗せるのも簡単
+- swift-formatの単体実行はビルドと違って一瞬で終わるため問題を早期発見するのに役立つ
+
+Cursorで快適にSwiftを書くためにぜひご活用ください。
+
+※ファイル保存のタイミングでswift-formatを走らせる部分ですが、VCCodeオフィシャルな設定項目でこうやると簡単だよ、といったアドバイスも是非！
