@@ -1,6 +1,5 @@
 ---
-title: cursor-ios-build-run
-title: "CursorでiOSアプリのBuild&Runをする"
+title: "CursorでiOSアプリのBuild&Run"
 date: 2025-05-19T18:20:00+09:00
 draft: false
 author: tokorom
@@ -12,36 +11,35 @@ canonical: https://spinners.work
 
 ![top](top.png)
 
-CursorでiOSアプリ開発を本格的に実施するようになり1ヶ月弱が経過しました。
-今のところ無事にVimからの以降に成功しています。
+CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。
+今のところ無事にVimからの移行に成功しています。
 
-前回、 [Cursorでswift-formatする記事](/posts/cursor-swift-format)を書きましたが、今回はBuild&Runです。
+前回、[Cursorでswift-formatする記事](/posts/cursor-swift-format)を書きましたが、今回はBuild&Runについて解説します。
 
 ## Build&Runを実施する方法の候補
 
-CursorでiOSアプリのBuildをするには以下の方法が考えられます。
+CursorでiOSアプリのBuildを行うには、以下の方法が考えられます。
 
 - Taskで`xcodebuild`を実行して`problemMatcher`にかける
-- [SweetPad](https://github.com/sweetpad-dev/sweetpad)などのプラグインを使う
-- BuildはXcodeでと割り切る
+- [SweetPad](https://github.com/sweetpad-dev/sweetpad)などのプラグインを使用する
+- BuildはXcodeで行うと割り切る
 
-わたしははじめ`xcodebuild`から試しました。
-結果としてはBuild自体は問題なくでき、BuilエラーdをProblemsに取り込むことも問題ありませんでした。
+わたしは最初に`xcodebuild`から試してみました。
+結果として、Build自体は問題なく実行でき、BuildエラーをProblemsに取り込むことも問題ありませんでした。
 
-しかし、`xcodebuild`とXcodeでのBuildは厳密には違うらしく、どうしてもXcodeのほうがBuildが速く終わるのです[^1]。
-[^1]: `xcodebuild`を使いこなしている人ならXcodeと全く同じスピードでBuildさせられる？
+しかし、`xcodebuild`とXcodeでのBuildは厳密には異なり、どうしてもXcodeのほうがBuildが速く終わるのです[^1]。
+[^1]: `xcodebuild`を使いこなしている方であれば、Xcodeと同等のスピードでBuildを実行できる可能性があります。
 
-*SweetPad*などのプラグインも便利そうですが、そのBuildは`xcodebuild`を使う実装になっているとのことでした。また、わたしは老害なのでまだ困ってもいない部分で大きなプラグインを入れるのに抵抗があるため、今のところ`SweetPad`の導入は見送っています。
+*SweetPad*などのプラグインも便利そうですが、そのBuildは`xcodebuild`を使用する実装になっているとのことでした。また、わたしは老害なので、まだ困っていない部分で大きなプラグインを導入することに抵抗があるため、今のところ*SweetPad*の導入は見送っています。
 
 ## Build&RunはXcodeに任せる
 
 最終的に、わたしはBuild&RunはXcodeに任せることにしました。
-
-それが最もBuildが速く、そしてその後すぐにiPhone実機などでRunするのもスムーズだったためです。
+それが最もBuildが速く、その後すぐにiPhone実機などでRunするのもスムーズだったためです。
 
 ### Buildするタスク
 
-CursorからXcodeにBuildを実行するのはタスク経由で`oascript`を叩くだけです:
+CursorからXcodeにBuildを実行するのは、タスク経由で`osascript`を実行するだけです：
 
 ```json
 {
@@ -59,13 +57,13 @@ CursorからXcodeにBuildを実行するのはタスク経由で`oascript`を叩
 このタスクでは、
 
 - Xcodeをアクティブにして
-- **Cmd + b** キーを押している
+- **Cmd + b** キーを押す
 
-だけです。
+という操作を行っています。
 
 ### Runするタスク
 
-そのため、Runをしたいならこの設定を少し変えて **Cmd + r** キーを叩くようにするだけです:
+Runを実行したい場合は、この設定を少し変更して **Cmd + r** キーを押すようにするだけです：
 
 ```json
 {
@@ -82,8 +80,8 @@ CursorからXcodeにBuildを実行するのはタスク経由で`oascript`を叩
 
 ### 現在のプロジェクトをXcodeで開くタスク
 
-ついでに、このBuild&Runのタスクはあくまでも現在開いているXcodeプロジェクトでBuild&Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。
-そこもタスクでやりたいなら:
+このBuild&Runのタスクは、あくまでも現在開いているXcodeプロジェクトでBuild&Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。
+そこもタスクで実行したい場合は、以下のような設定が使えます：
 
 ```json
 {
@@ -98,10 +96,7 @@ CursorからXcodeにBuildを実行するのはタスク経由で`oascript`を叩
 }
 ```
 
-などが使えます。
-
-これでも概ね十分でしょうが、*XXX.xcworkspace*を開くようにしたいとか、プロジェクトごとに開くものを明示したかったので、わたしは以下のように`.vscode/.env`に設定した環境変数を使うようにしました。
-
+これでも概ね十分ですが、*XXX.xcworkspace*を開くようにしたい場合や、プロジェクトごとに開くものを明示したい場合は、わたしは以下のように`.vscode/.env`に設定した環境変数を使用するようにしました。
 
 ```json
 {
@@ -116,16 +111,15 @@ CursorからXcodeにBuildを実行するのはタスク経由で`oascript`を叩
 }
 ```
 
-具体的にはプロジェクトルートの`.vscode/env`に:
+具体的には、プロジェクトルートの`.vscode/env`に以下のように設定します：
 
 ```
 XCODE_TARGET=Sample.xcworkspace
 ```
 
-と`XCODE_TARGET`を設定します。
-こうすることで、プロジェクトごとにXcodeで開く対象を明示できるようになりました。
+この`XCODE_TARGET`環境変数を設定することで、プロジェクトごとにXcodeで開く対象を明示できるようになりました。
 
-なお、この`XCODE_TARGET`環境変数は後からXcodeのBuildエラーをCursorに取り込む際にも使います。
+なお、この`XCODE_TARGET`環境変数は、後述するXcodeのBuildエラーをCursorに取り込む際にも使用します。
 
 ### ここまででも十分？
 
@@ -134,29 +128,29 @@ XCODE_TARGET=Sample.xcworkspace
 - Cursorから指示を出してXcodeでBuild
     - Buildに成功してRunしたければそのままXcodeでRun
     - Buildエラーが出たらXcodeで確認してCursorに戻って修正
-- 必要ならCursorから直接Runもできる
+- 必要ならCursorから直接Runも可能
 
-状態になりましたので、ここまででも十分使えるかと思います。
+という状態になりましたので、ここまででも十分に使用できると考えています。
 
 ### XcodeでのBuildエラーをCursorに取り込む
 
-しかしできればCursorで直接`xcodebuild`を叩くときのように、Xcodeで出たBuildエラーをCursorに取り込めれば最高です。
+できれば、Cursorで直接`xcodebuild`を実行するときのように、Xcodeで発生したBuildエラーをCursorに取り込めれば最高です。
 
-Build結果のログからエラーを抽出してあげればなんとかなりそうです。
+Build結果のログからエラーを抽出できれば実現できそうです。
 
-しかしXcodeのビルド結果は`*.xcactivitylog`という特殊な形式のログになっていてテキスト情報をそのまま得ることができません。
+しかし、Xcodeのビルド結果は`*.xcactivitylog`という特殊な形式のログになっており、テキスト情報をそのまま取得することができません。
 また、プロジェクトごとにこの`*.xcactivitylog`の場所を探すのも大変です。
 
-と困っていたのですが、[XCLogParser](https://github.com/MobileNativeFoundation/XCLogParser)というこれを解決してくれるコマンドラインツールがありました。もともとSpotify製？だったようです。
-これを使うと:
+この問題を解決するために、[XCLogParser](https://github.com/MobileNativeFoundation/XCLogParser)というコマンドラインツールがあります。もともとSpotify製だったようです。
+これを使用すると：
 
 ```shell
 xclogparser parse --xcodeproj Sample.xcodeproj --reporter flatJson 
 ```
 
-と`xcodeproj`もしくは`xcworkspace`を指定するだけで簡単に`*.xcactivitylog`の中身を収集できます。
+と`xcodeproj`もしくは`xcworkspace`を指定するだけで、簡単に`*.xcactivitylog`の中身を収集できます。
 
-このParse結果にもいくらか癖があるため、わたしは`xclogparser`を叩いて`problemMatcher`にかけるために以下のスクリプトを使っています:
+このParse結果にもいくつかの癖があるため、わたしは`xclogparser`を実行して`problemMatcher`にかけるために以下のスクリプトを使用しています：
 
 ```shell
 #!/bin/zsh
@@ -204,10 +198,9 @@ xclogparser parse \
   --reporter flatJson | \
   jq '[.[].errors[], .[].warnings[]] | flatten | .[]' | \
   jq -r '(if .documentURL == "" then .detail else (.documentURL | gsub("^file://"; "")) + ":" + (.startingLineNumber | tostring) + ":" + (.startingColumnNumber | tostring) + ":" + (if .severity == 2 then " error: " else " warning: " end) + .title end)'
-
 ```
 
-このスクリプトに関する細かい説明はしませんが、このスクリプトを以下のタスクから呼び出しています:
+このスクリプトを以下のタスクから呼び出しています：
 
 ```json
 {
@@ -235,7 +228,7 @@ xclogparser parse \
 }
 ```
 
-あとはXcodeでのBuild後にCursorでこのタスクを呼び出せばCursorのPloblemsパネルにXcodeでのBuildエラーがそのまま取り込まれます。
+XcodeでのBuild後にCursorでこのタスクを実行すれば、CursorのProblemsパネルにXcodeでのBuildエラーがそのまま取り込まれます。
 
 ![problems](problems.png)
 
