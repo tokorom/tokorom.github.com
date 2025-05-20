@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 14 May 2025 11:22:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 May 2025 18:20:00 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,31 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CursorでiOSアプリのBuild&amp;Run</title>
+      <link>https://www.tokoro.me/posts/cursor-ios-build-run/</link>
+      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/cursor-ios-build-run/</guid>
+      <description>
+        CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。 今のところ無事にVimからの移行に成功しています。
+前回、Cursorでswift-formatする記事を書きましたが、今回はBuild&amp;amp;Runについて解説します。
+Build&amp;amp;Runを実施する方法の候補 CursorでiOSアプリのBuildを行うには、以下の方法が考えられます。
+Taskでxcodebuildを実行してproblemMatcherにかける SweetPadなどのプラグインを使用する BuildはXcodeで行うと割り切る わたしは最初にxcodebuildから試してみました。 結果として、Build自体は問題なく実行でき、BuildエラーをProblemsに取り込むことも問題ありませんでした。
+しかし、xcodebuildとXcodeでのBuildは厳密には異なり、どうしてもXcodeのほうがBuildが速く終わるのです1。
+SweetPadなどのプラグインも便利そうですが、そのBuildはxcodebuildを使用する実装になっているとのことでした。また、わたしは老害なので、まだ困っていない部分で大きなプラグインを導入することに抵抗があるため、今のところSweetPadの導入は見送っています。
+Build&amp;amp;RunはXcodeに任せる 最終的に、わたしはBuild&amp;amp;RunはXcodeに任せることにしました。 それが最もBuildが速く、その後すぐにiPhone実機などでRunするのもスムーズだったためです。
+Buildするタスク CursorからXcodeにBuildを実行するのは、タスク経由でosascriptを実行するだけです：
+{ &amp;quot;label&amp;quot;: &amp;quot;Build Project&amp;quot;, &amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;, &amp;quot;command&amp;quot;: &amp;quot;osascript&amp;quot;, &amp;quot;args&amp;quot;: [ &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;Xcode\&amp;quot; to activate&amp;quot;, &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;System Events\&amp;quot; to keystroke \&amp;quot;b\&amp;quot; using {command down}&amp;quot; ], &amp;quot;problemMatcher&amp;quot;: [] } このタスクでは、
+Xcodeをアクティブにして Cmd + b キーを押す という操作を行っています。
+Runするタスク Runを実行したい場合は、この設定を少し変更して Cmd + r キーを押すようにするだけです：
+{ &amp;quot;label&amp;quot;: &amp;quot;Run Project&amp;quot;, &amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;, &amp;quot;command&amp;quot;: &amp;quot;osascript&amp;quot;, &amp;quot;args&amp;quot;: [ &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;Xcode\&amp;quot; to activate&amp;quot;, &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;System Events\&amp;quot; to keystroke \&amp;quot;r\&amp;quot; using {command down}&amp;quot; ], &amp;quot;problemMatcher&amp;quot;: [] } 現在のプロジェクトをXcodeで開くタスク このBuild&amp;amp;Runのタスクは、あくまでも現在開いているXcodeプロジェクトでBuild&amp;amp;Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。 そこもタスクで実行したい場合は、以下のような設定が使えます：
+      </description>
+      
+      <coverImage>https://www.tokoro.me/posts/cursor-ios-build-run/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>Cursor/VSCodeで編集中にswift-format</title>
@@ -564,30 +589,6 @@ iPhone/iPadの「設定」を開きます。
       </description>
       
       <coverImage>https://www.tokoro.me/images/ios-sandbox/top.jpg</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>Human Interface GuidelinesのApp Clipsの章の日本語訳</title>
-      <link>https://www.tokoro.me/posts/hig-app-clips/</link>
-      <pubDate>Tue, 07 Jul 2020 15:27:31 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/hig-app-clips/</guid>
-      <description>
-        前回、HIGのWidgetsの章を日本語訳した記事が好評だったので、今回はWidgesと同じくiOS 14の目玉機能の「App Clips」についても日本語訳しました。 Human Interface Guidelines (HIG) の App Clips がソースです。
-2020年7月8日時点のものを訳します。
-前回同様、訳しながらドキュメントの意図が正確に分からなかった部分や主観で大きく意訳した箇所は注釈に明記します。
-App Clips App Clipはアプリの軽量版で、ユーザーにアプリをダウンロード・インストールさせずに、日常のタスクを素早く実行させることができます。 ユーザーは様々な状況や目的でApp Clipを見つけ、利用できます。 物理的な場所では、NFCタグや視覚的なコードをスキャンしてApp Clipを起動します。 デバイス上では、位置情報に基づくSiriからの提案、地図アプリ、ウェブサイトのSmart App Banners、メッセージアプリで友達が共有してくれたリンクをタップする、などからApp Clipsを起動します。
-あなたのアプリが、限られた時間の中でタスクを実行するのに役立つ体験（in-the-moment experience）を提供しているなら、App Clipを導入することを考えてみましょう。 例えば、
-レンタル自転車にNFCタグを付け、それをスキャンしてApp Clipを起動し、その自転車をレンタルしてもらうことができます。 コーヒーショップでは、ウェブサイトにSmart App Bannerを設置して、そこからすぐに注文できる事前注文用のApp Clipを提供することができます。ユーザーはメッセージアプリでそのウェブサイトへのリンクを友達1に共有し、共有された友達もそのリンクをタップするだけでApp Clipから注文できます。 レストランでは、ユーザーが地図アプリやSiriからの提案からApp Clipを起動できるようにしたり、テーブルでNFCタグをスキャンしてもらいApp Clipで食事の支払いをするようにできます。 美術館では、来館者に展示品の名札の横にあるQRコード2をスキャンしてもらい、App ClipでARコンテンツを表示したり、音声解説を提供したりできます。 App Clipは、アプリをインストールしていないユーザーにアプリの機能の一部をシェアできる強力な方法です。 開発者向けのガイドは App Clips を参照してください。
-優れたApp Clipのデザイン 本質的な機能にフォーカスしましょう。 App Clipのインタラクションは素早く、集中して行われるべきです。 目の前のタスクを達成するために必要な機能に限定してください。 高度な機能や複雑な機能はアプリのために取っておきましょう。
-App Clipをマーケティング目的だけに使用してはいけません。 App Clipは真の価値を提供し、人々がタスクを達成するのに役立つものでなければなりません。 サービスや製品を宣伝するための手段として使用しないでください。
-直線的で使いやすく、焦点を絞ったユーザーインターフェースをデザインしましょう。 App Clipには、タブバーや複雑なナビゲーション、設定があってはいけません。 画面の数や入力フォームの数も最小限に抑えましょう。 余分な情報を削り、できる限りシンプルなユーザーインターフェースにしてください。
-起動時には、最適な画面を表示しましょう。 不要なステップをスキップして、ユーザーの現在の状況に最も適した画面をすぐに表示するようにしてください。
-ユーザーがすぐに利用できるようにしましょう。 App Clipには本当に必要なアセットのみ含めてください。 スプラッシュ画面を入れるなどしてユーザーに起動を待たせるようなことをしてはいけません。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/hig-app-clips/top.png</coverImage>
       
     </item>
     

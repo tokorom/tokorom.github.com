@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 14 May 2025 11:22:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/development/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 May 2025 18:20:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/development/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CursorでiOSアプリのBuild&amp;Run</title>
+      <link>https://www.tokoro.me/posts/cursor-ios-build-run/</link>
+      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/cursor-ios-build-run/</guid>
+      <description>CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。 今のところ無事にVimからの移行に成功しています。
+前回、Cursorでswift-formatする記事を書きましたが、今回はBuild&amp;amp;Runについて解説します。
+Build&amp;amp;Runを実施する方法の候補 CursorでiOSアプリのBuildを行うには、以下の方法が考えられます。
+Taskでxcodebuildを実行してproblemMatcherにかける SweetPadなどのプラグインを使用する BuildはXcodeで行うと割り切る わたしは最初にxcodebuildから試してみました。 結果として、Build自体は問題なく実行でき、BuildエラーをProblemsに取り込むことも問題ありませんでした。
+しかし、xcodebuildとXcodeでのBuildは厳密には異なり、どうしてもXcodeのほうがBuildが速く終わるのです1。
+SweetPadなどのプラグインも便利そうですが、そのBuildはxcodebuildを使用する実装になっているとのことでした。また、わたしは老害なので、まだ困っていない部分で大きなプラグインを導入することに抵抗があるため、今のところSweetPadの導入は見送っています。
+Build&amp;amp;RunはXcodeに任せる 最終的に、わたしはBuild&amp;amp;RunはXcodeに任せることにしました。 それが最もBuildが速く、その後すぐにiPhone実機などでRunするのもスムーズだったためです。
+Buildするタスク CursorからXcodeにBuildを実行するのは、タスク経由でosascriptを実行するだけです：
+{ &amp;quot;label&amp;quot;: &amp;quot;Build Project&amp;quot;, &amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;, &amp;quot;command&amp;quot;: &amp;quot;osascript&amp;quot;, &amp;quot;args&amp;quot;: [ &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;Xcode\&amp;quot; to activate&amp;quot;, &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;System Events\&amp;quot; to keystroke \&amp;quot;b\&amp;quot; using {command down}&amp;quot; ], &amp;quot;problemMatcher&amp;quot;: [] } このタスクでは、
+Xcodeをアクティブにして Cmd + b キーを押す という操作を行っています。
+Runするタスク Runを実行したい場合は、この設定を少し変更して Cmd + r キーを押すようにするだけです：
+{ &amp;quot;label&amp;quot;: &amp;quot;Run Project&amp;quot;, &amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;, &amp;quot;command&amp;quot;: &amp;quot;osascript&amp;quot;, &amp;quot;args&amp;quot;: [ &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;Xcode\&amp;quot; to activate&amp;quot;, &amp;quot;-e&amp;quot;, &amp;quot;tell application \&amp;quot;System Events\&amp;quot; to keystroke \&amp;quot;r\&amp;quot; using {command down}&amp;quot; ], &amp;quot;problemMatcher&amp;quot;: [] } 現在のプロジェクトをXcodeで開くタスク このBuild&amp;amp;Runのタスクは、あくまでも現在開いているXcodeプロジェクトでBuild&amp;amp;Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。 そこもタスクで実行したい場合は、以下のような設定が使えます：</description>
+    </item>
+    
     <item>
       <title>Cursor/VSCodeで編集中にswift-format</title>
       <link>https://www.tokoro.me/posts/cursor-swift-format/</link>
