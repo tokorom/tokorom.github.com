@@ -1,6 +1,6 @@
 ---
 title: "CursorでiOSアプリのBuild&Run"
-date: 2025-05-19T18:20:00+09:00
+date: 2025-05-20T10:30:00+09:00
 draft: false
 author: tokorom
 authors: [tokorom]
