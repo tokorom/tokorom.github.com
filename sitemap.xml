@@ -2,16 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.tokoro.me/tags/build/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/cursor/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/cursor-ios-build-run/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/development/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/ios/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/productivity/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/run/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/simulator/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/xcode/</loc>
+    <lastmod>2025-05-19T18:20:00+09:00</lastmod>
+  </url><url>
     <loc>https://www.tokoro.me/tags/code-style/</loc>
     <lastmod>2025-05-14T11:22:00+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/tags/cursor/</loc>
-    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/posts/cursor-swift-format/</loc>
-    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/development/</loc>
     <lastmod>2025-05-14T11:22:00+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/format/</loc>
@@ -20,19 +50,7 @@
     <loc>https://www.tokoro.me/tags/lint/</loc>
     <lastmod>2025-05-14T11:22:00+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/posts/</loc>
-    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/productivity/</loc>
-    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/tags/swift/</loc>
-    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/</loc>
-    <lastmod>2025-05-14T11:22:00+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/</loc>
     <lastmod>2025-05-14T11:22:00+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/vscode/</loc>
@@ -63,9 +81,6 @@
     <lastmod>2025-05-06T15:00:00+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/posts/wwdc24-whats-new-in-swiftui/</loc>
-    <lastmod>2024-06-25T10:56:06+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/ios/</loc>
     <lastmod>2024-06-25T10:56:06+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/swiftui/</loc>
@@ -313,9 +328,6 @@
   </url><url>
     <loc>https://www.tokoro.me/posts/swift-partial-application/</loc>
     <lastmod>2014-07-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/xcode/</loc>
-    <lastmod>2014-05-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/posts/xcode-versioning/</loc>
     <lastmod>2014-05-19T00:00:00+00:00</lastmod>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>CursorでiOSアプリのBuild&amp;Run | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。 今のところ無事にVimからの移行に成功しています。
+前回、Cursorでswift-formatする記事を書きましたが、今回はBuild&amp;Runについて解説します。
+Build&amp;Runを実施する方法の候補 CursorでiOSアプリのBuildを行うには、以下の方法が考えられます。
+Taskでxcodebuildを実行してproblemMatcherにかける SweetPadなどのプラグインを使用する BuildはXcodeで行うと割り切る わたしは最初にxcodebuildから試してみました。 結果として、Build自体は問題なく実行でき、BuildエラーをProblemsに取り込むことも問題ありませんでした。
+しかし、xcodebuildとXcodeでのBuildは厳密には異なり、どうしてもXcodeのほうがBuildが速く終わるのです1。
+SweetPadなどのプラグインも便利そうですが、そのBuildはxcodebuildを使用する実装になっているとのことでした。また、わたしは老害なので、まだ困っていない部分で大きなプラグインを導入することに抵抗があるため、今のところSweetPadの導入は見送っています。
+Build&amp;RunはXcodeに任せる 最終的に、わたしはBuild&amp;RunはXcodeに任せることにしました。 それが最もBuildが速く、その後すぐにiPhone実機などでRunするのもスムーズだったためです。
+Buildするタスク CursorからXcodeにBuildを実行するのは、タスク経由でosascriptを実行するだけです：
+{ &quot;label&quot;: &quot;Build Project&quot;, &quot;type&quot;: &quot;shell&quot;, &quot;command&quot;: &quot;osascript&quot;, &quot;args&quot;: [ &quot;-e&quot;, &quot;tell application \&quot;Xcode\&quot; to activate&quot;, &quot;-e&quot;, &quot;tell application \&quot;System Events\&quot; to keystroke \&quot;b\&quot; using {command down}&quot; ], &quot;problemMatcher&quot;: [] } このタスクでは、
+Xcodeをアクティブにして Cmd &#43; b キーを押す という操作を行っています。
+Runするタスク Runを実行したい場合は、この設定を少し変更して Cmd &#43; r キーを押すようにするだけです：
+{ &quot;label&quot;: &quot;Run Project&quot;, &quot;type&quot;: &quot;shell&quot;, &quot;command&quot;: &quot;osascript&quot;, &quot;args&quot;: [ &quot;-e&quot;, &quot;tell application \&quot;Xcode\&quot; to activate&quot;, &quot;-e&quot;, &quot;tell application \&quot;System Events\&quot; to keystroke \&quot;r\&quot; using {command down}&quot; ], &quot;problemMatcher&quot;: [] } 現在のプロジェクトをXcodeで開くタスク このBuild&amp;Runのタスクは、あくまでも現在開いているXcodeプロジェクトでBuild&amp;Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。 そこもタスクで実行したい場合は、以下のような設定が使えます："><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="CursorでiOSアプリのBuild&amp;Run | TOKOROM BLOG" property="og:title"><meta content="CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。 今のところ無事にVimからの移行に成功しています。
+前回、Cursorでswift-formatする記事を書きましたが、今回はBuild&amp;Runについて解説します。
+Build&amp;Runを実施する方法の候補 CursorでiOSアプリのBuildを行うには、以下の方法が考えられます。
+Taskでxcodebuildを実行してproblemMatcherにかける SweetPadなどのプラグインを使用する BuildはXcodeで行うと割り切る わたしは最初にxcodebuildから試してみました。 結果として、Build自体は問題なく実行でき、BuildエラーをProblemsに取り込むことも問題ありませんでした。
+しかし、xcodebuildとXcodeでのBuildは厳密には異なり、どうしてもXcodeのほうがBuildが速く終わるのです1。
+SweetPadなどのプラグインも便利そうですが、そのBuildはxcodebuildを使用する実装になっているとのことでした。また、わたしは老害なので、まだ困っていない部分で大きなプラグインを導入することに抵抗があるため、今のところSweetPadの導入は見送っています。
+Build&amp;RunはXcodeに任せる 最終的に、わたしはBuild&amp;RunはXcodeに任せることにしました。 それが最もBuildが速く、その後すぐにiPhone実機などでRunするのもスムーズだったためです。
+Buildするタスク CursorからXcodeにBuildを実行するのは、タスク経由でosascriptを実行するだけです：
+{ &quot;label&quot;: &quot;Build Project&quot;, &quot;type&quot;: &quot;shell&quot;, &quot;command&quot;: &quot;osascript&quot;, &quot;args&quot;: [ &quot;-e&quot;, &quot;tell application \&quot;Xcode\&quot; to activate&quot;, &quot;-e&quot;, &quot;tell application \&quot;System Events\&quot; to keystroke \&quot;b\&quot; using {command down}&quot; ], &quot;problemMatcher&quot;: [] } このタスクでは、
+Xcodeをアクティブにして Cmd &#43; b キーを押す という操作を行っています。
+Runするタスク Runを実行したい場合は、この設定を少し変更して Cmd &#43; r キーを押すようにするだけです：
+{ &quot;label&quot;: &quot;Run Project&quot;, &quot;type&quot;: &quot;shell&quot;, &quot;command&quot;: &quot;osascript&quot;, &quot;args&quot;: [ &quot;-e&quot;, &quot;tell application \&quot;Xcode\&quot; to activate&quot;, &quot;-e&quot;, &quot;tell application \&quot;System Events\&quot; to keystroke \&quot;r\&quot; using {command down}&quot; ], &quot;problemMatcher&quot;: [] } 現在のプロジェクトをXcodeで開くタスク このBuild&amp;Runのタスクは、あくまでも現在開いているXcodeプロジェクトでBuild&amp;Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。 そこもタスクで実行したい場合は、以下のような設定が使えます：" property="og:description"><meta content="https://www.tokoro.me/posts/cursor-ios-build-run/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/cursor-ios-build-run/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/cursor-ios-build-run/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">CursorでiOSアプリのBuild&amp;Run</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年5月19日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/cursor">
+              cursor
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              ios
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/xcode">
+              xcode
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/development">
+              development
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/build">
+              build
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/run">
+              run
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/simulator">
+              simulator
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/productivity">
+              productivity
+          </a>
+          /</div><div class="content">
+      <p><img src="top.png" alt="top"></p>
+<p>CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。
+今のところ無事にVimからの移行に成功しています。</p>
+<p>前回、<a href="/posts/cursor-swift-format">Cursorでswift-formatする記事</a>を書きましたが、今回はBuild&amp;Runについて解説します。</p>
+<h2 id="buildrunを実施する方法の候補">Build&amp;Runを実施する方法の候補</h2>
+<p>CursorでiOSアプリのBuildを行うには、以下の方法が考えられます。</p>
+<ul>
+<li>Taskで<code>xcodebuild</code>を実行して<code>problemMatcher</code>にかける</li>
+<li><a href="https://github.com/sweetpad-dev/sweetpad">SweetPad</a>などのプラグインを使用する</li>
+<li>BuildはXcodeで行うと割り切る</li>
+</ul>
+<p>わたしは最初に<code>xcodebuild</code>から試してみました。
+結果として、Build自体は問題なく実行でき、BuildエラーをProblemsに取り込むことも問題ありませんでした。</p>
+<p>しかし、<code>xcodebuild</code>とXcodeでのBuildは厳密には異なり、どうしてもXcodeのほうがBuildが速く終わるのです<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p><em>SweetPad</em>などのプラグインも便利そうですが、そのBuildは<code>xcodebuild</code>を使用する実装になっているとのことでした。また、わたしは老害なので、まだ困っていない部分で大きなプラグインを導入することに抵抗があるため、今のところ<em>SweetPad</em>の導入は見送っています。</p>
+<h2 id="buildrunはxcodeに任せる">Build&amp;RunはXcodeに任せる</h2>
+<p>最終的に、わたしはBuild&amp;RunはXcodeに任せることにしました。
+それが最もBuildが速く、その後すぐにiPhone実機などでRunするのもスムーズだったためです。</p>
+<h3 id="buildするタスク">Buildするタスク</h3>
+<p>CursorからXcodeにBuildを実行するのは、タスク経由で<code>osascript</code>を実行するだけです：</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Build Project&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;osascript&quot;,
+    &quot;args&quot;: [
+        &quot;-e&quot;, &quot;tell application \&quot;Xcode\&quot; to activate&quot;,
+        &quot;-e&quot;, &quot;tell application \&quot;System Events\&quot; to keystroke \&quot;b\&quot; using {command down}&quot;
+    ],
+    &quot;problemMatcher&quot;: []
+}
+</code></pre>
+<p>このタスクでは、</p>
+<ul>
+<li>Xcodeをアクティブにして</li>
+<li><strong>Cmd + b</strong> キーを押す</li>
+</ul>
+<p>という操作を行っています。</p>
+<h3 id="runするタスク">Runするタスク</h3>
+<p>Runを実行したい場合は、この設定を少し変更して <strong>Cmd + r</strong> キーを押すようにするだけです：</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Run Project&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;osascript&quot;,
+    &quot;args&quot;: [
+        &quot;-e&quot;, &quot;tell application \&quot;Xcode\&quot; to activate&quot;,
+        &quot;-e&quot;, &quot;tell application \&quot;System Events\&quot; to keystroke \&quot;r\&quot; using {command down}&quot;
+    ],
+    &quot;problemMatcher&quot;: []
+}
+</code></pre>
+<h3 id="現在のプロジェクトをxcodeで開くタスク">現在のプロジェクトをXcodeで開くタスク</h3>
+<p>このBuild&amp;Runのタスクは、あくまでも現在開いているXcodeプロジェクトでBuild&amp;Runするだけですので、あらかじめ対象のプロジェクトをXcodeで開いておく必要があります。
+そこもタスクで実行したい場合は、以下のような設定が使えます：</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Open in Xcode&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;zsh&quot;,
+    &quot;args&quot;: [
+        &quot;-c&quot;,
+        &quot;open -a Xcode *.xcodeproj&quot;
+    ],
+    &quot;problemMatcher&quot;: []
+}
+</code></pre>
+<p>これでも概ね十分ですが、<em>XXX.xcworkspace</em>を開くようにしたい場合や、プロジェクトごとに開くものを明示したい場合は、わたしは以下のように<code>.vscode/.env</code>に設定した環境変数を使用するようにしました。</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Open in Xcode&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;zsh&quot;,
+    &quot;args&quot;: [
+        &quot;-c&quot;,
+        &quot;source ${workspaceFolder}/.vscode/.env; if [ -n \&quot;$XCODE_TARGET\&quot; ]; then open -a Xcode \&quot;$XCODE_TARGET\&quot;; else open -a Xcode *.xcodeproj; fi; echo \&quot;Set XCODE_TARGET in .vscode.env if necessary.\&quot;&quot;
+    ],
+    &quot;problemMatcher&quot;: []
+}
+</code></pre>
+<p>具体的には、プロジェクトルートの<code>.vscode/env</code>に以下のように設定します：</p>
+<pre><code>XCODE_TARGET=Sample.xcworkspace
+</code></pre>
+<p>この<code>XCODE_TARGET</code>環境変数を設定することで、プロジェクトごとにXcodeで開く対象を明示できるようになりました。</p>
+<p>なお、この<code>XCODE_TARGET</code>環境変数は、後述するXcodeのBuildエラーをCursorに取り込む際にも使用します。</p>
+<h3 id="ここまででも十分">ここまででも十分？</h3>
+<p>これまでの設定で、</p>
+<ul>
+<li>Cursorから指示を出してXcodeでBuild
+<ul>
+<li>Buildに成功してRunしたければそのままXcodeでRun</li>
+<li>Buildエラーが出たらXcodeで確認してCursorに戻って修正</li>
+</ul>
+</li>
+<li>必要ならCursorから直接Runも可能</li>
+</ul>
+<p>という状態になりましたので、ここまででも十分に使用できると考えています。</p>
+<h3 id="xcodeでのbuildエラーをcursorに取り込む">XcodeでのBuildエラーをCursorに取り込む</h3>
+<p>できれば、Cursorで直接<code>xcodebuild</code>を実行するときのように、Xcodeで発生したBuildエラーをCursorに取り込めれば最高です。</p>
+<p>Build結果のログからエラーを抽出できれば実現できそうです。</p>
+<p>しかし、Xcodeのビルド結果は<code>*.xcactivitylog</code>という特殊な形式のログになっており、テキスト情報をそのまま取得することができません。
+また、プロジェクトごとにこの<code>*.xcactivitylog</code>の場所を探すのも大変です。</p>
+<p>この問題を解決するために、<a href="https://github.com/MobileNativeFoundation/XCLogParser">XCLogParser</a>というコマンドラインツールがあります。もともとSpotify製だったようです。
+これを使用すると：</p>
+<pre><code class="language-shell">xclogparser parse --xcodeproj Sample.xcodeproj --reporter flatJson 
+</code></pre>
+<p>と<code>xcodeproj</code>もしくは<code>xcworkspace</code>を指定するだけで、簡単に<code>*.xcactivitylog</code>の中身を収集できます。</p>
+<p>このParse結果にもいくつかの癖があるため、わたしは<code>xclogparser</code>を実行して<code>problemMatcher</code>にかけるために以下のスクリプトを使用しています：</p>
+<pre><code class="language-shell">#!/bin/zsh
+
+# エラーが発生したら即座に終了
+set -e
+
+WORKSPACE_FOLDER=&quot;$1&quot;
+
+cd &quot;$WORKSPACE_FOLDER&quot;
+echo &quot;WORKSPACE_FOLDER: $WORKSPACE_FOLDER&quot;
+
+# 環境変数の読み込み
+if [ -f &quot;.vscode/.env&quot; ]; then
+    source &quot;.vscode/.env&quot;
+else
+    echo &quot;Warning: .vscode/.env file not found&quot;
+fi
+
+# XCODE_TARGET未指定なら*.xcodeprojを探す
+if [ -z &quot;$XCODE_TARGET&quot; ]; then
+    echo &quot;Warning: XCODE_TARGET is not defined in .vscode/.env&quot;
+    XCODE_TARGET=$(find . -maxdepth 1 -type d -name &quot;*.xcodeproj&quot; | head -n 1)
+fi
+
+echo &quot;XCODE_TARGET: $XCODE_TARGET&quot;
+
+# 引数の決定
+if [[ &quot;$XCODE_TARGET&quot; == *.xcodeproj ]]; then
+    TARGET_FLAG=&quot;--xcodeproj&quot;
+    TARGET=&quot;$WORKSPACE_FOLDER/$XCODE_TARGET&quot;
+elif [[ &quot;$XCODE_TARGET&quot; == *.xcworkspace ]]; then
+    TARGET_FLAG=&quot;--workspace&quot;
+    TARGET=&quot;$WORKSPACE_FOLDER/$XCODE_TARGET&quot;
+else
+    TARGET_FLAG=&quot;--project&quot;
+    TARGET=&quot;$XCODE_TARGET&quot;
+fi
+
+echo &quot;TARGET: $TARGET_FLAG $TARGET&quot;
+
+# xclogparserを使用してビルドの問題を収集
+xclogparser parse \
+  $TARGET_FLAG $TARGET \
+  --reporter flatJson | \
+  jq '[.[].errors[], .[].warnings[]] | flatten | .[]' | \
+  jq -r '(if .documentURL == &quot;&quot; then .detail else (.documentURL | gsub(&quot;^file://&quot;; &quot;&quot;)) + &quot;:&quot; + (.startingLineNumber | tostring) + &quot;:&quot; + (.startingColumnNumber | tostring) + &quot;:&quot; + (if .severity == 2 then &quot; error: &quot; else &quot; warning: &quot; end) + .title end)'
+</code></pre>
+<p>このスクリプトを以下のタスクから呼び出しています：</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;Collect Build Problems&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;$HOME/.cursor/scripts/collect-build-problems-default.sh ${workspaceFolder}&quot;,
+    &quot;problemMatcher&quot;: [
+        {
+            &quot;owner&quot;: &quot;xcode&quot;,
+            &quot;fileLocation&quot;: [&quot;absolute&quot;],
+            &quot;pattern&quot;: {
+                &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$&quot;,
+                &quot;file&quot;: 1,
+                &quot;line&quot;: 2,
+                &quot;column&quot;: 3,
+                &quot;severity&quot;: 4,
+                &quot;message&quot;: 5
+            }
+        }
+    ],
+    &quot;presentation&quot;: {
+        &quot;reveal&quot;: &quot;always&quot;,
+        &quot;revealProblems&quot;: &quot;onProblem&quot;
+    }
+}
+</code></pre>
+<p>XcodeでのBuild後にCursorでこのタスクを実行すれば、CursorのProblemsパネルにXcodeでのBuildエラーがそのまま取り込まれます。</p>
+<p><img src="problems.png" alt="problems"></p>
+<p>わたしはこのタスクをファイルの保存時にも呼び出すようにしていてそれで必要十分と感じていますが、必要なら定期的に叩くようにして自動でBuildエラーの解消を反映してもらうのも良いかもしれません。</p>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>わたしはコードを書くのはCursorで、Build&amp;RunはXcodeでと役割を分けていて、今のところ快適です</li>
+<li>必要ならXcodeでのBuildエラーをCursorのProblemsとして取り込むこともできます</li>
+</ul>
+<h2 id="おまけ-cursorでxcodebuildコマンドを叩きたいなら">おまけ: Cursorでxcodebuildコマンドを叩きたいなら</h2>
+<p>この運用にする前に使っていた<code>xcodebuild</code>を叩くタスクはこちら:</p>
+<pre><code class="language-json">{
+    &quot;label&quot;: &quot;xcodebuild&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;xcodebuild&quot;,
+    &quot;args&quot;: [
+        &quot;-project&quot;, &quot;Sample.xcodeproj&quot;,
+        &quot;-scheme&quot;, &quot;sample&quot;,
+        &quot;build&quot;,
+    ],
+    &quot;group&quot;: {
+        &quot;kind&quot;: &quot;build&quot;,
+        &quot;isDefault&quot;: true
+    },
+    &quot;problemMatcher&quot;: [
+        {
+            &quot;owner&quot;: &quot;xcode&quot;,
+            &quot;fileLocation&quot;: [&quot;absolute&quot;],
+            &quot;pattern&quot;: {
+                &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$&quot;,
+                &quot;file&quot;: 1,
+                &quot;line&quot;: 2,
+                &quot;column&quot;: 3,
+                &quot;severity&quot;: 4,
+                &quot;message&quot;: 5,
+            },
+        }
+    ]
+}
+</code></pre>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><code>xcodebuild</code>とXcodeのGUIでのビルドはそもそも役割が違い、主には<code>xcodebuild</code>は毎回プロビジョニング関連の通信が走るなどの違いがあるようです&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode-versioning/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">これがXcodeでのバージョニングの決定版になるかも</span>
+    <span class="feed-item-date">2014年5月19日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/pbxproj-merge/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcodeのプロジェクトファイル（pbxproj）がコンフリクトしまくるのをなんとかしたい！</span>
+    <span class="feed-item-date">2014年2月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/xcode5-preview/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Xcode 5: TDD/CIまわりに強力なアップデート(Appleがサイトで公開している範囲内で)</span>
+    <span class="feed-item-date">2013年6月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/objc-subscripting/">
+    <div class="feed-item-image-wrapper"></div>
+
+    <span class="feed-item-title">Objective-Cで独自クラスに[]でアクセスする</span>
+    <span class="feed-item-date">2012年8月12日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-ios-build-run/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-ios-build-run/top.png" class="feed-item-image" alt="CursorでiOSアプリのBuild&amp;Run" width="300"></div>
+
+    <span class="feed-item-title">CursorでiOSアプリのBuild&amp;Run</span>
+    <span class="feed-item-date">2025年5月19日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>
