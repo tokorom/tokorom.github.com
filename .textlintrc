@@ -1,0 +1,12 @@
+{
+    "plugins": ["markdown"],
+    "rules": {
+        "preset-ja-technical-writing": {
+            "ja-no-mixed-dearu-desumasu": {
+                "preferInBody": "desumasu",
+                "preferInHeaders": "neutral"
+            }
+        },
+        "spellcheck-tech-word": true
+    }
+}
