@@ -18,13 +18,13 @@ WWDC25のセッション [SwiftUIの新機能](https://developer.apple.com/jp/vi
 
 ![adopt_new_design](adopt_new_design.png)
 
-アプリを新しいXcode(SDK)でリビルドするだけで全プラットフォームでLiquid Glassデザインが適用されます。
+アプリを新しいXcode（SDK）でリビルドするだけで、全プラットフォームでLiquid Glassデザインが適用されます。
 
 ![tabview](tabview.png)
 
-例えば、**ナビゲーションコンテナ**が一新され、**タブバー**や**ツールバー**もコンパクトな新スタイルに変わり、これらはナビゲーション遷移時にアイテムがなめらかにモーフィング（形状変化）します。
-iPadOSやmacOSの**サイドバー**も半透明のガラスのようなあしらいになり、背後のコンテンツが映り込むデザインになります。
-もちろん**トグル**、**セグメントコントロール**、**スライダー**など標準UIコントロールもデザイン刷新され、プラットフォーム全体で統一感のあるモダンな見た目になります。
+例えば、**ナビゲーションコンテナ**が一新され、**タブバー**や**ツールバー**もコンパクトな新スタイルに変更されました。これらはナビゲーション遷移時にアイテムがなめらかにモーフィング（形状変化）します。
+iPadOSやmacOSの**サイドバー**も半透明のガラスのようなデザインになり、背後のコンテンツが映り込むようになりました。
+もちろん**トグル**、**セグメントコントロール**、**スライダー**など標準UIコントロールもデザイン刷新され、プラットフォーム全体で統一感のあるモダンな見た目になっています。
 
 <div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
@@ -37,8 +37,8 @@ Build a SwiftUI app with the new design
 
 ![toolbarspacer](toolbarspacer.png)
 
-ToolbarSpacerでツールバー項目のセクション分けを調整できるようになりました。
-このサンプルでは、上下の矢印ボタンのグループと、設定ボタンの間に固定スペーサを入れて分離しています。
+`ToolbarSpacer`を使用することで、ツールバー項目のセクション分けを調整できるようになりました。
+このサンプルでは、上下の矢印ボタンのグループと、設定ボタンの間に固定スペーサを配置して分離しています。
 
 ```swift
 .toolbar {
@@ -212,7 +212,7 @@ windowResizeAnchor
 
 ## パフォーマンスの大幅向上
 
-![alt text](performance.png)
+![performance](performance.png)
 
 パフォーマンス改善にも注力されたとのことです。特に、大量のデータをリストで扱う際のパフォーマンスが22倍速くなるケースもあるとのこと。
 
@@ -275,7 +275,7 @@ struct LoadingArc: Shape {
 
 ## 3次元レイアウト
 
-![alt text](3dlayout.png)
+![3dlayout](3dlayout.png)
 
 visionOSに`Alignment3D`や`spatialOverlay`が加わり、立体的なレイアウトがより簡単になります。
 
@@ -507,12 +507,12 @@ What’s new in widgets
 
 ## WebView
 
-![alt text](webview.png)
+![webview](webview.png)
 
 SwiftUIに`WebView`が追加されました（これまではUIKitのWebViewを埋め込んで利用する必要がありました）。
 
-`Observable`な`WebPage`オブジェクトを使うことで、ページの読み込みやタイトル、URLなども監視できます。
-もちろん、ページ遷移やリロードもコードから制御できます。
+`Observable`な`WebPage`オブジェクトを使用することで、ページの読み込み状態やタイトル、URLなどを監視できます。
+また、ページ遷移やリロードもコードから制御可能です。
 
 ```swift
 import SwiftUI
@@ -535,8 +535,8 @@ struct InAppBrowser: View {
 }
 ```
 
-SwiftUIの`WebView`は以下にも対応しています。
-- カスタムUser-Agent
+SwiftUIの`WebView`は以下の機能にも対応しています：
+- カスタムUser-Agentの設定
 - JavaScriptの実行
 - カスタムURLスキームのハンドリング
 
@@ -595,7 +595,7 @@ Chart3D
 
 ## ドラッグ＆ドロップの強化
 
-![alt text](dragdrop.png)
+![dragdrop](dragdrop.png)
 
 新しい`draggable`と`dragContainer`を使うことで複数の項目を同時にドラッグできるようになりました。
 
@@ -663,7 +663,7 @@ dragPreviewsFormation
 
 ## リッチテキスト
 
-![alt text](richtext.png)
+![richtext](richtext.png)
 
 `TextEditor`に`AttributedString`を渡すことで、太字、イタリック、色の変更などの装飾をサポートしたリッチテキストが扱えるようになりました。
 
