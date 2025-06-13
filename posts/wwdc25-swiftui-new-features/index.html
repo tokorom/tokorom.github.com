@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>WWDC25 SwiftUIの新機能のまとめ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="WWDC25のセッション SwiftUIの新機能 で紹介されたSwiftUI新機能をカテゴリごとにまとめます。 昨年のWWDC24のSwiftUIの新機能から引き続き盛りだくさんなアップデートですね！
+Liquid Glassデザインの適用 アプリを新しいXcode（SDK）でリビルドするだけで、全プラットフォームでLiquid Glassデザインが適用されます。
+例えば、ナビゲーションコンテナが一新され、タブバーやツールバーもコンパクトな新スタイルに変更されました。これらはナビゲーション遷移時にアイテムがなめらかにモーフィング（形状変化）します。 iPadOSやmacOSのサイドバーも半透明のガラスのようなデザインになり、背後のコンテンツが映り込むようになりました。 もちろんトグル、セグメントコントロール、スライダーなど標準UIコントロールもデザイン刷新され、プラットフォーム全体で統一感のあるモダンな見た目になっています。
+Build a SwiftUI app with the new design ToolbarSpacer ToolbarSpacerを使用することで、ツールバー項目のセクション分けを調整できるようになりました。 このサンプルでは、上下の矢印ボタンのグループと、設定ボタンの間に固定スペーサを配置して分離しています。
+.toolbar { ToolbarItemGroup(placement: .primaryAction) { UpButton() DownButton() } ToolbarSpacer(.fixed, placement: .primaryAction) ToolbarItem(placement: .primaryAction) { SettingsButton() } } ToolbarSpacer Liquid Glassへの着色 ツールバーの特定のボタンを目立たせたいなど、必要ならLiquid Glass UIにtintで着色できます。
+.toolbar { ToolbarItem(placement: .primaryAction) { SaveLocationButton() .buttonStyle(.borderedProminent) .tint(.pink) } } カスタムビューにもこの新デザインを取り入れることが可能です。SwiftUIに新登場したビュー修飾子.glassEffect()を使うと、任意のビューに周囲の背景を映し込むガラス風のブラー効果を適用できます。例えば次のようにボタンにglassEffect()を付与すれば、背後が透けるスタイリッシュなボタンになります。
+Button(&quot;To Top&quot;, systemImage: &quot;chevron.up&quot;) { // 上にスクロールする処理 } .padding() .glassEffect() Searchableの刷新 .searchableによる検索UIは、iPhoneでは画面下部に表示されるよう変更されました。一方、iPadやmacOSでは画面右上に表示されるなど、プラットフォームに応じて適切な場所に表示されます。
+NavigationSplitView { Text(&quot;Sidebar&quot;) } detail: { Text(&quot;Detail&quot;) } ."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="WWDC25 SwiftUIの新機能のまとめ | TOKOROM BLOG" property="og:title"><meta content="WWDC25のセッション SwiftUIの新機能 で紹介されたSwiftUI新機能をカテゴリごとにまとめます。 昨年のWWDC24のSwiftUIの新機能から引き続き盛りだくさんなアップデートですね！
+Liquid Glassデザインの適用 アプリを新しいXcode（SDK）でリビルドするだけで、全プラットフォームでLiquid Glassデザインが適用されます。
+例えば、ナビゲーションコンテナが一新され、タブバーやツールバーもコンパクトな新スタイルに変更されました。これらはナビゲーション遷移時にアイテムがなめらかにモーフィング（形状変化）します。 iPadOSやmacOSのサイドバーも半透明のガラスのようなデザインになり、背後のコンテンツが映り込むようになりました。 もちろんトグル、セグメントコントロール、スライダーなど標準UIコントロールもデザイン刷新され、プラットフォーム全体で統一感のあるモダンな見た目になっています。
+Build a SwiftUI app with the new design ToolbarSpacer ToolbarSpacerを使用することで、ツールバー項目のセクション分けを調整できるようになりました。 このサンプルでは、上下の矢印ボタンのグループと、設定ボタンの間に固定スペーサを配置して分離しています。
+.toolbar { ToolbarItemGroup(placement: .primaryAction) { UpButton() DownButton() } ToolbarSpacer(.fixed, placement: .primaryAction) ToolbarItem(placement: .primaryAction) { SettingsButton() } } ToolbarSpacer Liquid Glassへの着色 ツールバーの特定のボタンを目立たせたいなど、必要ならLiquid Glass UIにtintで着色できます。
+.toolbar { ToolbarItem(placement: .primaryAction) { SaveLocationButton() .buttonStyle(.borderedProminent) .tint(.pink) } } カスタムビューにもこの新デザインを取り入れることが可能です。SwiftUIに新登場したビュー修飾子.glassEffect()を使うと、任意のビューに周囲の背景を映し込むガラス風のブラー効果を適用できます。例えば次のようにボタンにglassEffect()を付与すれば、背後が透けるスタイリッシュなボタンになります。
+Button(&quot;To Top&quot;, systemImage: &quot;chevron.up&quot;) { // 上にスクロールする処理 } .padding() .glassEffect() Searchableの刷新 .searchableによる検索UIは、iPhoneでは画面下部に表示されるよう変更されました。一方、iPadやmacOSでは画面右上に表示されるなど、プラットフォームに応じて適切な場所に表示されます。
+NavigationSplitView { Text(&quot;Sidebar&quot;) } detail: { Text(&quot;Detail&quot;) } ." property="og:description"><meta content="https://www.tokoro.me/posts/wwdc25-swiftui-new-features/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc25-swiftui-new-features/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc25-swiftui-new-features/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">WWDC25 SwiftUIの新機能のまとめ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年6月13日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swiftui">
+              SwiftUI
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/tvos">
+              tvOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/macos">
+              macOS
+          </a>
+          /</div><div class="content">
+      <p><img src="top.png" alt="top"></p>
+<p>WWDC25のセッション <a href="https://developer.apple.com/jp/videos/play/wwdc2025/256/">SwiftUIの新機能</a> で紹介されたSwiftUI新機能をカテゴリごとにまとめます。
+<a href="/posts/wwdc24-whats-new-in-swiftui/">昨年のWWDC24のSwiftUIの新機能</a>から引き続き盛りだくさんなアップデートですね！</p>
+<h2 id="liquid-glassデザインの適用">Liquid Glassデザインの適用</h2>
+<p><img src="adopt_new_design.png" alt="adopt_new_design"></p>
+<p>アプリを新しいXcode（SDK）でリビルドするだけで、全プラットフォームでLiquid Glassデザインが適用されます。</p>
+<p><img src="tabview.png" alt="tabview"></p>
+<p>例えば、<strong>ナビゲーションコンテナ</strong>が一新され、<strong>タブバー</strong>や<strong>ツールバー</strong>もコンパクトな新スタイルに変更されました。これらはナビゲーション遷移時にアイテムがなめらかにモーフィング（形状変化）します。
+iPadOSやmacOSの<strong>サイドバー</strong>も半透明のガラスのようなデザインになり、背後のコンテンツが映り込むようになりました。
+もちろん<strong>トグル</strong>、<strong>セグメントコントロール</strong>、<strong>スライダー</strong>など標準UIコントロールもデザイン刷新され、プラットフォーム全体で統一感のあるモダンな見た目になっています。</p>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/323/">
+Build a SwiftUI app with the new design
+</a>
+</div>
+<h2 id="toolbarspacer">ToolbarSpacer</h2>
+<p><img src="toolbarspacer.png" alt="toolbarspacer"></p>
+<p><code>ToolbarSpacer</code>を使用することで、ツールバー項目のセクション分けを調整できるようになりました。
+このサンプルでは、上下の矢印ボタンのグループと、設定ボタンの間に固定スペーサを配置して分離しています。</p>
+<pre><code class="language-swift">.toolbar {
+    ToolbarItemGroup(placement: .primaryAction) {
+        UpButton()
+        DownButton()
+    }
+
+    ToolbarSpacer(.fixed, placement: .primaryAction)
+
+    ToolbarItem(placement: .primaryAction) {
+        SettingsButton()
+    }
+}
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/toolbarspacer">
+ToolbarSpacer
+</a>
+</div>
+<h2 id="liquid-glassへの着色">Liquid Glassへの着色</h2>
+<p><img src="tint.png" alt="tint"></p>
+<p>ツールバーの特定のボタンを目立たせたいなど、必要ならLiquid Glass UIに<code>tint</code>で着色できます。</p>
+<pre><code class="language-swift">.toolbar {
+    ToolbarItem(placement: .primaryAction) {
+        SaveLocationButton()
+            .buttonStyle(.borderedProminent)
+            .tint(.pink)
+    }
+}
+</code></pre>
+<p>カスタムビューにもこの新デザインを取り入れることが可能です。SwiftUIに新登場したビュー修飾子<code>.glassEffect()</code>を使うと、任意のビューに周囲の背景を映し込むガラス風のブラー効果を適用できます。例えば次のようにボタンに<code>glassEffect()</code>を付与すれば、背後が透けるスタイリッシュなボタンになります。</p>
+<pre><code class="language-swift">Button(&quot;To Top&quot;, systemImage: &quot;chevron.up&quot;) {
+    // 上にスクロールする処理
+}
+.padding()
+.glassEffect()
+</code></pre>
+<h2 id="searchableの刷新">Searchableの刷新</h2>
+<p><img src="searchable_iphone.png" alt="alt text">
+<img src="searchable_ipad.png" alt="alt text"></p>
+<p><code>.searchable</code>による検索UIは、iPhoneでは画面下部に表示されるよう変更されました。一方、iPadやmacOSでは画面右上に表示されるなど、プラットフォームに応じて適切な場所に表示されます。</p>
+<pre><code class="language-swift">NavigationSplitView {
+    Text(&quot;Sidebar&quot;)
+} detail: {
+    Text(&quot;Detail&quot;)
+}
+.searchable(
+    text: $query,
+    prompt: &quot;What are you looking for?&quot;
+)
+</code></pre>
+<h2 id="tabrole-search">Tab(role: .search)</h2>
+<p><img src="search_tab.png" alt="search_tab">
+<img src="search_tab2.png" alt="search_tab2"></p>
+<p>タブバーに検索UIを含むこともできるようになりました。
+<code>TabView</code>の要素として<code>Tab(role: .saerch)</code>を加えるだけです。
+この検索タブを選択すると、タブバーがモーフィングして検索フィールドに変化します。</p>
+<pre><code class="language-swift">TabView {
+    Tab(&quot;Summary&quot;, systemImage: &quot;heart&quot;) {
+        NavigationStack {
+            Text(&quot;Summary&quot;)
+        }
+    }
+    Tab(&quot;Sharing&quot;, systemImage: &quot;person.2&quot;) {
+        NavigationStack {
+            Text(&quot;Sharing&quot;)
+        }
+    }
+    Tab(role: .search) {
+        NavigationStack {
+            Text(&quot;Search&quot;)
+        }
+    }
+}
+.searchable(text: $text)
+</code></pre>
+<h2 id="カスタムビューもliquid-glassに">カスタムビューもLiquid Glassに</h2>
+<p><img src="custom_requid.png" alt="custom_requid"></p>
+<p><code>glassEffect</code>モディファイアにより、カスタムビューにもLiquid Glassを適用できます。</p>
+<pre><code class="language-swift">Button(&quot;To Top&quot;, systemImage: &quot;chevron.up&quot;) {
+    scrollToTop()
+}
+.padding()
+.glassEffect()
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/glasseffect(_:in:isenabled:)/">
+glassEffect
+</a>
+</div>
+<h2 id="ipadのメニューバー対応">iPadのメニューバー対応</h2>
+<p><img src="ipad_menu.png" alt="alt text"></p>
+<p>これまでmacOSアプリにメニューバーを表示するために使われていた<code>commands</code>モディファイアがiPadOSでも使えるようになりました。</p>
+<pre><code class="language-swift">WindowGroup {
+    RootView()
+}
+.commands {
+    TextEditingCommands()
+}
+</code></pre>
+<h2 id="ipadのマルチウィンドウ対応">iPadのマルチウィンドウ対応</h2>
+<p><img src="multiwindow.png" alt="alt text"></p>
+<p>iPadOSがマルチウィンドウに対応しました。これに伴いiPadOS用アプリのウィンドウが自由にリサイズできるようになります。</p>
+<p>開発者目線では対応負荷は高いですが、たとえば標準のSplit Viewを使っていればウィンドウサイズに応じて自動でレイアウトが変わるなどのサポートを受けられます。</p>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/208/">
+Elevate the design of your iPad app
+</a>
+</div>
+<h2 id="windowresizeanchor">windowResizeAnchor</h2>
+<p><img src="resizeanchor.png" alt="alt text"></p>
+<p>macOSではウィンドウリサイズ時のアニメーションのアンカーポイント（どこが固定されるか）を指定して調整することができるようになりました。
+このサンプルでは上部が固定さう、リサイズに伴い下部が伸縮するようになります。</p>
+<pre><code class="language-swift">TabView(selection: $selection.animation()) {
+    Tab(&quot;General&quot;, systemImage: &quot;gear&quot;, value: .general) { Text(&quot;一般&quot;) }
+    Tab(&quot;Sections&quot;, systemImage: &quot;list.bullet&quot;, value: .sections) { Text(&quot;セクション&quot;) }
+}
+.windowResizeAnchor(.top)
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/windowresizeanchor(_:)/">
+windowResizeAnchor
+</a>
+</div>
+<h2 id="パフォーマンスの大幅向上">パフォーマンスの大幅向上</h2>
+<p><img src="performance.png" alt="performance"></p>
+<p>パフォーマンス改善にも注力されたとのことです。特に、大量のデータをリストで扱う際のパフォーマンスが22倍速くなるケースもあるとのこと。</p>
+<p>スクロール処理も改善され、高速スクロール時のフレーム落ちが起きにくくなりました。</p>
+<p>また、SwiftUIのアプリのパフォーマンスを改善するための診断ツールもInstrumentsに追加されました。これによりSwiftUIのビューの更新やレイアウト処理のボトルネックを視覚的に捉えやすくなります。</p>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/306/">
+Optimize SwiftUI performance with Instruments
+</a>
+</div>
+<h2 id="swift-concurrency">Swift Concurrency</h2>
+<p>Swift Concurrencyについては以下のセッションビデオがあります。</p>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/268/">
+Embracing Swift Concurrency
+</a>
+</div>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/266/">
+Explore concurrency in SwiftUI
+</a>
+</div>
+<h2 id="animatableマクロ">Animatableマクロ</h2>
+<p><code>Animatable</code>マクロにより、従来は自分で書かなければならなかったコードを削減できます。
+たとえば、１つのプロパティをアニメーション対象から除外したい場合、<code>@AnimatableIgnored</code>をつけるだけです。</p>
+<pre><code class="language-swift">@Animatable
+struct LoadingArc: Shape {
+    var center: CGPoint
+    var radius: CGFloat
+    var startAngle: Angle
+    var endAngle: Angle
+    @AnimatableIgnored var drawPathClockwise: Bool
+
+    func path(in rect: CGRect) -&gt; Path {
+        // Creates a `Path` arc using properties
+        return Path()
+    }
+}
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/animatable()">
+@Animatable
+</a>
+</div>
+<h2 id="3次元レイアウト">3次元レイアウト</h2>
+<p><img src="3dlayout.png" alt="3dlayout"></p>
+<p>visionOSに<code>Alignment3D</code>や<code>spatialOverlay</code>が加わり、立体的なレイアウトがより簡単になります。</p>
+<pre><code class="language-swift">@Binding var timeAlignment: Alignment3D
+
+var body: some View {
+    Model3D(named: &quot;Map&quot;)
+        .spatialOverlay(
+            alignment: timeAlignment
+        ) {
+            Sun()
+        }
+}
+</code></pre>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/273/">
+Meet SwiftUI spatial layout
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/alignment3d/">
+Alignment3D
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/spatialoverlay(alignment:content:)/">
+spatialOverlay
+</a>
+</div>
+<h2 id="manipulable">manipulable</h2>
+<p><img src="manipulabl.png" alt="alt text"></p>
+<p>visionOSではSwiftUIとRealityKitの連携も強化されています。</p>
+<p><code>maniputable</code>モディファイアで3Dモデルをユーザーが掴んで移動できるようになります。</p>
+<p>また、<code>SurfaceSnappingInfo</code>を監視することで、モデルが置かれている現実世界の面（机や壁など）を知ることもできます。</p>
+<pre><code class="language-swift">@Environment(\.surfaceSnappingInfo) var snappingInfo: SurfaceSnappingInfo
+
+var body: some View {
+    VStackLayout().depthAlignment(.center) {
+        waterBottleView
+            .manipulable()
+
+        Pedestal()
+            .opacity(snappingInfo.classification == .table ? 1.0 : 0.0)
+    }
+}
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/manipulable(using:)/">
+manipulable
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/surfacesnappinginfo">
+SurfaceSnappingInfo
+</a>
+</div>
+<h2 id="visionosのウィンドウボリュームシーン">visionOSのウィンドウ、ボリューム、シーン</h2>
+<p>その他、visionOSではウィンドウの復元ができるようになったり、新しいシーンタイプが加えられました。</p>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/290/">
+Set the scene with SwiftUI in visionOS
+</a>
+</div>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/317/">
+What’s new in visionOS 26
+</a>
+</div>
+<h2 id="scene-bridging">Scene bridging</h2>
+<p>Scene bredging APIにより、UIKitアプリやAppKitアプリとSwiftUIのシーンが相互運用できるようになります。
+それにより例えば、VolumeやImmersive Spaceを直接UIKitアプリで直接扱えるようにもなります。</p>
+<h2 id="remote-immersive-space">Remote Immersive Space</h2>
+<p>RemoteImmersiveSpaceにより、visionOS用のImmersive SpaceをmacOS上でレンダリングしてプレビューできるようになりました。
+Vision Proシミュレータのようなものをサードパーティアプリでも再現できるイメージかと思います。</p>
+<h2 id="assistive-access">Assistive Access</h2>
+<p><img src="assistveaccess.png" alt="alt text"></p>
+<pre><code class="language-swift">@main
+struct PhotoWalk: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+
+        AssistiveAccess {
+            AssistiveAccessContentView()
+        }
+    }
+}
+</code></pre>
+<p>認知障害のあるユーザー向けのViewを表示するための<code>AssistiveAccess</code>も追加されました。</p>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/238/">
+Customize your app for Assistive Access
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/assistiveaccess/">
+AssistiveAccess
+</a>
+</div>
+<h2 id="appkit連携強化">AppKit連携強化</h2>
+<ul>
+<li><code>NSWindow</code>からSwiftUIの<code>View</code>を含むシートを表示できる</li>
+<li><code>NSGestureRecognizerRepresentable</code>でAppKitのジェスチャーをSwiftUIにブリッジできる</li>
+<li>Interface BuilderでNSHostingViewを使用できる</li>
+</ul>
+<h2 id="realitykit連携強化">RealityKit連携強化</h2>
+<p><img src="realitykit_presentation.png" alt="alt text"></p>
+<ul>
+<li>RealityKitエンティティが<code>Observable</code>に</li>
+<li>Coordinate Conversion APIの強化</li>
+<li>RealityKitのエンティティからSwiftUIを直接ポップオーバー表示</li>
+<li>アタッチメントコンポーネント</li>
+<li>アニメーションの同期</li>
+<li>コンポーネントへのバインド</li>
+<li>RealityVieのサイズ関連の動作が新しく</li>
+</ul>
+<pre><code class="language-swift">RealityView { c in
+    let mapEntity = Entity()
+
+    let popover = Entity()
+    mapEntity.addChild(popover)
+    popover.components[PresentationComponent.self] = PresentationComponent(
+        isPresented: $popoverPresented,
+        configuration: .popover(arrowEdge: .bottom),
+        content: DetailsView()
+    )
+}
+</code></pre>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/274/">
+Better together: SwiftUI and RealityKit
+</a>
+</div>
+<h2 id="watchosとmacosのカスタムコントロールサポート">watchOSとmacOSのカスタムコントロールサポート</h2>
+<p><img src="custom_control.png" alt="alt text"></p>
+<p>iOS/iPadOSがサポートしていたコントロールセンターのカスタムコントロールをwatchOSとmacOSもサポートしました。</p>
+<h2 id="visionosとcarplayのwidgetサポート">visionOSとCarPlayのWidgetサポート</h2>
+<p><img src="visionos_widget.png" alt="alt text"></p>
+<p>visionOSとCarPlayもWidgetをサポートしました。</p>
+<p>また、Widgetをどの程度の詳細さで表示するかの指示もOSから受けられるようになりました。
+具体的には、visionOSでユーザーがWidgetから遠い位置にいると<code>simplified</code>レベルになり、他のOSでは常に<code>default</code>レベルになるとのことです。</p>
+<pre><code class="language-swift">import SwiftUI
+import WidgetKit
+
+struct PhotoCountdownView: View {
+    @Environment(\.levelOfDetail) var levelOfDetail: LevelOfDetail
+    var body: some View {
+        switch levelOfDetail {
+        case .default:
+            RecentPhotosView()
+        case .simplified:
+            CountdownView()
+        default:
+            Text(&quot;Unknown level of detail&quot;)
+        }
+    }
+}
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/widgetkit/levelofdetail/">
+LevelOfDetail
+</a>
+</div>
+<p>その他、以下のアップデートもあります。</p>
+<ul>
+<li>CarPlayのライブアクティビティサポート</li>
+<li>プッシュベースの更新</li>
+<li>watchOSでの関連性の新API</li>
+</ul>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/278/">
+What’s new in widgets
+</a>
+</div>
+<h2 id="webview">WebView</h2>
+<p><img src="webview.png" alt="webview"></p>
+<p>SwiftUIに<code>WebView</code>が追加されました（これまではUIKitのWebViewを埋め込んで利用する必要がありました）。</p>
+<p><code>Observable</code>な<code>WebPage</code>オブジェクトを使用することで、ページの読み込み状態やタイトル、URLなどを監視できます。
+また、ページ遷移やリロードもコードから制御可能です。</p>
+<pre><code class="language-swift">import SwiftUI
+import WebKit
+
+struct InAppBrowser: View {
+    @State private var page = WebPage()
+
+    var body: some View {
+        WebView(page)
+            .ignoresSafeArea()
+            .onAppear {
+                page.load(URLRequest(url: sunshineMountainURL))
+            }
+    }
+
+    var sunshineMountainURL: URL {
+        URL(string: &quot;sunshineMountainURL&quot;)!
+    }
+}
+</code></pre>
+<p>SwiftUIの<code>WebView</code>は以下の機能にも対応しています：</p>
+<ul>
+<li>カスタムUser-Agentの設定</li>
+<li>JavaScriptの実行</li>
+<li>カスタムURLスキームのハンドリング</li>
+</ul>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/231/">
+Meet WebKit for SwiftUI
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/webkit/webview-swift.struct">
+WebView
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/webkit/webpage/">
+WebPage
+</a>
+</div>
+<h2 id="3dチャート">3Dチャート</h2>
+<p><img src="3d_chart.png" alt="alt text"></p>
+<p>Swift Chartsが3Dをサポートしました。</p>
+<pre><code class="language-swift">Chart3D {
+    SurfacePlot(
+        x: &quot;x&quot;, y: &quot;y&quot;, z: &quot;z&quot;) { x, y in
+            sin(x) * cos(y)
+        }
+        .foregroundStyle(Gradient(colors: [.orange, .pink]))
+}
+.chartXScale(domain: -3 ... 3)
+.chartYScale(domain: -3 ... 3)
+.chartZScale(domain: -3 ... 3)
+</code></pre>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/jp/videos/play/wwdc2025/313/">
+Bring Swift Charts to the third dimension
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/charts/chart3d/">
+Chart3D
+</a>
+</div>
+<h2 id="ドラッグドロップの強化">ドラッグ＆ドロップの強化</h2>
+<p><img src="dragdrop.png" alt="dragdrop"></p>
+<p>新しい<code>draggable</code>と<code>dragContainer</code>を使うことで複数の項目を同時にドラッグできるようになりました。</p>
+<p><code>dragConfiguration</code>でドラッグ操作をカスタマイズともできます。</p>
+<p>ドラッグ中の見た目を変えるための<code>dragPreviewsFormation</code>も加わりました。</p>
+<pre><code class="language-swift">import SwiftUI
+
+struct DragDropExample: View {
+    @State private var selectedPhotos: [Photo.ID] = []
+    var body: some View {
+        ScrollView {
+            LazyVGrid(columns: gridColumns) {
+                ForEach(model.photos) { photo in
+                    view(photo: photo)
+                        .draggable(containerItemID: photo.id)
+                }
+            }
+        }
+        .dragContainer(for: Photo.self, selection: selectedPhotos) { draggedIDs in
+            photos(ids: draggedIDs)
+        }
+        .dragConfiguration(DragConfiguration(allowMove: false, allowDelete: true))
+            .onDragSessionUpdated { session in
+                let ids = session.draggedItemIDs(for: Photo.ID.self)
+                    if session.phase == .ended(.delete) {
+                        trash(ids)
+                        deletePhotos(ids)
+                    }
+            }
+        .dragPreviewsFormation(.stack)
+    }
+}
+</code></pre>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/draggable(for🆔_:)">
+draggable
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/dragcontainer(for:in:_:)/">
+dragContainer
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/dragconfiguration(_:)/">
+dragConfiguration
+</a>
+</div>
+<div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+<a href="https://developer.apple.com/documentation/swiftui/view/dragpreviewsformation(_:)/">
+dragPreviewsFormation
+</a>
+</div>
+<h2 id="リッチテキスト">リッチテキスト</h2>
+<p><img src="richtext.png" alt="richtext"></p>
+<p><code>TextEditor</code>に<code>AttributedString</code>を渡すことで、太字、イタリック、色の変更などの装飾をサポートしたリッチテキストが扱えるようになりました。</p>
+<p>しかも書式設定用のツールバーも標準で用意されていますのでリッチテキストエディターが簡単に実現できます。</p>
+<pre><code class="language-swift">struct CommentEditor: View {
+    @Binding var commentText: AttributedString
+
+    var body: some View {
+        TextEditor(text: $commentText)
+    }
+}
+</code></pre>
+<h2 id="まとめ">まとめ</h2>
+<p>今年も昨年に引き続き盛りだくさんなアップデートでした。
+このまとめをするのにだいぶ時間を食うため迷いましたが、<a href="/posts/wwdc24-whats-new-in-swiftui/">WWDC24のまとめ</a>も結果として自分で何度も見返す<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>ことになったため、今年もがんばってまとめました。</p>
+<p>直近ではアップデート内容のキャッチアップ、1年後2年後にはこれらのAPIを実際に使えるようになったときのインデックスとして利用できれば幸いです。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>このまとめの存在を忘れていたのに新APIについてGoogle検索をするとなぜか自分のまとめに行き着いたり&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc2021-keynote/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc2021-keynote/top.png" class="feed-item-image" alt="WWDC21 Keynote iOS 15についての発表の復習" width="300"></div>
+
+    <span class="feed-item-title">WWDC21 Keynote iOS 15についての発表の復習</span>
+    <span class="feed-item-date">2021年6月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/swift-superellipse/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/swift-superellipse/top.png" class="feed-item-image" alt="スーパー楕円UIをiOS&#43;Swiftで実装する" width="300"></div>
+
+    <span class="feed-item-title">スーパー楕円UIをiOS&#43;Swiftで実装する</span>
+    <span class="feed-item-date">2021年1月29日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-ios-build-run/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-ios-build-run/top.png" class="feed-item-image" alt="CursorでiOSアプリのBuild&amp;Run" width="300"></div>
+
+    <span class="feed-item-title">CursorでiOSアプリのBuild&amp;Run</span>
+    <span class="feed-item-date">2025年5月20日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

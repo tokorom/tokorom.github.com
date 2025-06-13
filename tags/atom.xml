@@ -7,11 +7,74 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 19 May 2025 18:20:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Jun 2025 15:00:36 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ios</title>
+      <link>https://www.tokoro.me/tags/ios/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/ios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macOS</title>
+      <link>https://www.tokoro.me/tags/macos/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swift</title>
+      <link>https://www.tokoro.me/tags/swift/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/swift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swiftui</title>
+      <link>https://www.tokoro.me/tags/swiftui/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/swiftui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tvos</title>
+      <link>https://www.tokoro.me/tags/tvos/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/tvos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>visionOS</title>
+      <link>https://www.tokoro.me/tags/visionos/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/visionos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WWDC</title>
+      <link>https://www.tokoro.me/tags/wwdc/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/tags/wwdc/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>build</title>
       <link>https://www.tokoro.me/tags/build/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/build/</guid>
       <description></description>
@@ -20,7 +83,7 @@
     <item>
       <title>cursor</title>
       <link>https://www.tokoro.me/tags/cursor/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/cursor/</guid>
       <description></description>
@@ -29,25 +92,16 @@
     <item>
       <title>development</title>
       <link>https://www.tokoro.me/tags/development/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>ios</title>
-      <link>https://www.tokoro.me/tags/ios/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/ios/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>productivity</title>
       <link>https://www.tokoro.me/tags/productivity/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/productivity/</guid>
       <description></description>
@@ -56,7 +110,7 @@
     <item>
       <title>run</title>
       <link>https://www.tokoro.me/tags/run/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/run/</guid>
       <description></description>
@@ -65,7 +119,7 @@
     <item>
       <title>simulator</title>
       <link>https://www.tokoro.me/tags/simulator/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/simulator/</guid>
       <description></description>
@@ -74,7 +128,7 @@
     <item>
       <title>xcode</title>
       <link>https://www.tokoro.me/tags/xcode/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/xcode/</guid>
       <description></description>
@@ -104,15 +158,6 @@
       <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/lint/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>swift</title>
-      <link>https://www.tokoro.me/tags/swift/</link>
-      <pubDate>Wed, 14 May 2025 11:22:00 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/swift/</guid>
       <description></description>
     </item>
     
@@ -176,33 +221,6 @@
       <pubDate>Tue, 06 May 2025 15:00:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>swiftui</title>
-      <link>https://www.tokoro.me/tags/swiftui/</link>
-      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/swiftui/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>visionOS</title>
-      <link>https://www.tokoro.me/tags/visionos/</link>
-      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/visionos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>WWDC</title>
-      <link>https://www.tokoro.me/tags/wwdc/</link>
-      <pubDate>Tue, 25 Jun 2024 10:56:06 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/wwdc/</guid>
       <description></description>
     </item>
     
@@ -455,15 +473,6 @@
       <pubDate>Wed, 06 Jun 2018 14:09:34 +0900</pubDate>
       
       <guid>https://www.tokoro.me/tags/lottie/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tvos</title>
-      <link>https://www.tokoro.me/tags/tvos/</link>
-      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.tokoro.me/tags/tvos/</guid>
       <description></description>
     </item>
     

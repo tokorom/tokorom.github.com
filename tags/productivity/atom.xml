@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 19 May 2025 18:20:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/productivity/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 May 2025 10:30:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/productivity/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CursorでiOSアプリのBuild&amp;Run</title>
       <link>https://www.tokoro.me/posts/cursor-ios-build-run/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/posts/cursor-ios-build-run/</guid>
       <description>CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。 今のところ無事にVimからの移行に成功しています。

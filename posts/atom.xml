@@ -7,11 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 19 May 2025 18:20:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Jun 2025 15:00:36 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WWDC25 SwiftUIの新機能のまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc25-swiftui-new-features/</link>
+      <pubDate>Fri, 13 Jun 2025 15:00:36 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc25-swiftui-new-features/</guid>
+      <description>WWDC25のセッション SwiftUIの新機能 で紹介されたSwiftUI新機能をカテゴリごとにまとめます。 昨年のWWDC24のSwiftUIの新機能から引き続き盛りだくさんなアップデートですね！
+Liquid Glassデザインの適用 アプリを新しいXcode（SDK）でリビルドするだけで、全プラットフォームでLiquid Glassデザインが適用されます。
+例えば、ナビゲーションコンテナが一新され、タブバーやツールバーもコンパクトな新スタイルに変更されました。これらはナビゲーション遷移時にアイテムがなめらかにモーフィング（形状変化）します。 iPadOSやmacOSのサイドバーも半透明のガラスのようなデザインになり、背後のコンテンツが映り込むようになりました。 もちろんトグル、セグメントコントロール、スライダーなど標準UIコントロールもデザイン刷新され、プラットフォーム全体で統一感のあるモダンな見た目になっています。
+Build a SwiftUI app with the new design ToolbarSpacer ToolbarSpacerを使用することで、ツールバー項目のセクション分けを調整できるようになりました。 このサンプルでは、上下の矢印ボタンのグループと、設定ボタンの間に固定スペーサを配置して分離しています。
+.toolbar { ToolbarItemGroup(placement: .primaryAction) { UpButton() DownButton() } ToolbarSpacer(.fixed, placement: .primaryAction) ToolbarItem(placement: .primaryAction) { SettingsButton() } } ToolbarSpacer Liquid Glassへの着色 ツールバーの特定のボタンを目立たせたいなど、必要ならLiquid Glass UIにtintで着色できます。
+.toolbar { ToolbarItem(placement: .primaryAction) { SaveLocationButton() .buttonStyle(.borderedProminent) .tint(.pink) } } カスタムビューにもこの新デザインを取り入れることが可能です。SwiftUIに新登場したビュー修飾子.glassEffect()を使うと、任意のビューに周囲の背景を映し込むガラス風のブラー効果を適用できます。例えば次のようにボタンにglassEffect()を付与すれば、背後が透けるスタイリッシュなボタンになります。
+Button(&amp;quot;To Top&amp;quot;, systemImage: &amp;quot;chevron.up&amp;quot;) { // 上にスクロールする処理 } .padding() .glassEffect() Searchableの刷新 .searchableによる検索UIは、iPhoneでは画面下部に表示されるよう変更されました。一方、iPadやmacOSでは画面右上に表示されるなど、プラットフォームに応じて適切な場所に表示されます。
+NavigationSplitView { Text(&amp;quot;Sidebar&amp;quot;) } detail: { Text(&amp;quot;Detail&amp;quot;) } .</description>
+    </item>
+    
     <item>
       <title>CursorでiOSアプリのBuild&amp;Run</title>
       <link>https://www.tokoro.me/posts/cursor-ios-build-run/</link>
-      <pubDate>Mon, 19 May 2025 18:20:00 +0900</pubDate>
+      <pubDate>Tue, 20 May 2025 10:30:00 +0900</pubDate>
       
       <guid>https://www.tokoro.me/posts/cursor-ios-build-run/</guid>
       <description>CursorでiOSアプリ開発を本格的に実施するようになり、1ヶ月弱が経過しました。 今のところ無事にVimからの移行に成功しています。
