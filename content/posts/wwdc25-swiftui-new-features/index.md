@@ -78,16 +78,6 @@ ToolbarSpacer
 }
 ```
 
-カスタムビューにもこの新デザインを取り入れることが可能です。SwiftUIに新登場したビュー修飾子`.glassEffect()`を使うと、任意のビューに周囲の背景を映し込むガラス風のブラー効果を適用できます。例えば次のようにボタンに`glassEffect()`を付与すれば、背後が透けるスタイリッシュなボタンになります。
-
-```swift
-Button("To Top", systemImage: "chevron.up") {
-    // 上にスクロールする処理
-}
-.padding()
-.glassEffect()
-```
-
 ## Searchableの刷新
 
 ![alt text](searchable_iphone.png)
