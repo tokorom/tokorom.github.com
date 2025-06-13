@@ -5,7 +5,9 @@
             "ja-no-mixed-dearu-desumasu": {
                 "preferInBody": "desumasu",
                 "preferInHeaders": "neutral"
-            }
+            },
+            "no-exclamation-question-mark": false,
+            "ja-no-weak-phrase": false
         },
         "spellcheck-tech-word": true
     }

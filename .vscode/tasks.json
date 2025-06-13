@@ -21,6 +21,12 @@
                 "focus": false,
                 "panel": "shared",
             }
+        },
+        {
+            "label": "Open Article Directory in Terminal",
+            "type": "shell",
+            "command": "open -a Terminal \"${fileDirname}\"",
+            "problemMatcher": []
         }
     ],
 }
