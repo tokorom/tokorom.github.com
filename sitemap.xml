@@ -2,34 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.tokoro.me/posts/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/swiftui/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/visionos/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/widget/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/wwdc/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/wwdc25/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/</loc>
+    <lastmod>2025-06-16T18:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://www.tokoro.me/tags/ios/</loc>
     <lastmod>2025-06-13T15:00:36+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/macos/</loc>
     <lastmod>2025-06-13T15:00:36+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/posts/</loc>
-    <lastmod>2025-06-13T15:00:36+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/tags/swift/</loc>
     <lastmod>2025-06-13T15:00:36+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/tags/swiftui/</loc>
-    <lastmod>2025-06-13T15:00:36+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/</loc>
-    <lastmod>2025-06-13T15:00:36+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/</loc>
-    <lastmod>2025-06-13T15:00:36+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/tags/tvos/</loc>
-    <lastmod>2025-06-13T15:00:36+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/visionos/</loc>
-    <lastmod>2025-06-13T15:00:36+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/wwdc/</loc>
     <lastmod>2025-06-13T15:00:36+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/posts/wwdc25-swiftui-new-features/</loc>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>WWDC25 visionOS用Widgetについてのまとめ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="visionOS 26 で 空間Widget（ウィジェット） がサポートされましたね！ この記事では空間Widgetでできることをサンプルコードを交えて解説します。
+空間Widgetとは iOSやmacOS同様にWidgetKitで構築したWidgetをvisionOSにも表示できます。
+visionOSが他OSと大きく違うのはWidgetを現実世界の机や壁に設置できるところです。 机の上など水平面に設置したWidgetは自動でユーザーのほうに向きます。
+机の上に配置 壁に設置 Widgetのサイズ Widgetのサイズは以下５種類から選べます。
+Small 158x158pt Medium 354x158pt Large 354x354pt Extra Large Portrait 354x550pt Extra Large Landscape 550x354pt どのWidgetもユーザーが任意にリサイズ（縦横比は変わらず75%から125%の範囲内で）できます。
+どのサイズをサポートするかは従来のiOSなどのWidgetと同様にsupportedFamiliesモディファイアで指定できます。
+.supportedFamilies( [.systemExtraLarge, .systemExtraLargePortrait] ) 素材 visionOSのWidgetは素材が Paper(紙) なのか Glass(ガラス) なのかを指定できます。
+Paperは印刷物のようなリアルなあしらいになり、Glassなら前景と背景の間に深みが出ます。
+PaperとGlassで周辺環境の明るさによる見え方の違いも出てきます。
+素材はwidgetTextureモディファイアで指定できます。
+.widgetTexture(.paper) マウントスタイル マウントスタイルとして以下２つをユーザーが選択可能です。
+Recessed 埋没したようなスタイル Elevated 浮き上がったようなスタイル 壁面に設置する場合はどちらのスタイルも選べますが、机など水平面に設置する場合はElevatedのみです。そのため、マウントスタイルとしてRecessedしかサポートしていない場合、水平面に設置できなくなります。
+デフォルトで両方のマウントスタイルをサポートしますが、必要ならsupportedMountingStylesモディファイアでどちらか片方のみに限定できます。
+.supportedMountingStyles([.recessed]) 距離によるUIの変更 visionOSのWidgetは他OSのWidgetと違い、現実世界に設置されるためユーザーからの距離が遠くなることもあります。
+そのため、ユーザーからの距離を検知してUIを変更できます。 例えば、ユーザーが離れたら表示項目を減らしてより大きなフォントで表示するなどです。
+.default 距離が近い .simplified 距離が遠い 距離による切り替えはlevelOfDetail environment variable により可能で、以下２種の値を検知できます。
+.default デフォルト/距離が近い .simplfied 簡易表示/距離が遠い @Environment(\."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="WWDC25 visionOS用Widgetについてのまとめ | TOKOROM BLOG" property="og:title"><meta content="visionOS 26 で 空間Widget（ウィジェット） がサポートされましたね！ この記事では空間Widgetでできることをサンプルコードを交えて解説します。
+空間Widgetとは iOSやmacOS同様にWidgetKitで構築したWidgetをvisionOSにも表示できます。
+visionOSが他OSと大きく違うのはWidgetを現実世界の机や壁に設置できるところです。 机の上など水平面に設置したWidgetは自動でユーザーのほうに向きます。
+机の上に配置 壁に設置 Widgetのサイズ Widgetのサイズは以下５種類から選べます。
+Small 158x158pt Medium 354x158pt Large 354x354pt Extra Large Portrait 354x550pt Extra Large Landscape 550x354pt どのWidgetもユーザーが任意にリサイズ（縦横比は変わらず75%から125%の範囲内で）できます。
+どのサイズをサポートするかは従来のiOSなどのWidgetと同様にsupportedFamiliesモディファイアで指定できます。
+.supportedFamilies( [.systemExtraLarge, .systemExtraLargePortrait] ) 素材 visionOSのWidgetは素材が Paper(紙) なのか Glass(ガラス) なのかを指定できます。
+Paperは印刷物のようなリアルなあしらいになり、Glassなら前景と背景の間に深みが出ます。
+PaperとGlassで周辺環境の明るさによる見え方の違いも出てきます。
+素材はwidgetTextureモディファイアで指定できます。
+.widgetTexture(.paper) マウントスタイル マウントスタイルとして以下２つをユーザーが選択可能です。
+Recessed 埋没したようなスタイル Elevated 浮き上がったようなスタイル 壁面に設置する場合はどちらのスタイルも選べますが、机など水平面に設置する場合はElevatedのみです。そのため、マウントスタイルとしてRecessedしかサポートしていない場合、水平面に設置できなくなります。
+デフォルトで両方のマウントスタイルをサポートしますが、必要ならsupportedMountingStylesモディファイアでどちらか片方のみに限定できます。
+.supportedMountingStyles([.recessed]) 距離によるUIの変更 visionOSのWidgetは他OSのWidgetと違い、現実世界に設置されるためユーザーからの距離が遠くなることもあります。
+そのため、ユーザーからの距離を検知してUIを変更できます。 例えば、ユーザーが離れたら表示項目を減らしてより大きなフォントで表示するなどです。
+.default 距離が近い .simplified 距離が遠い 距離による切り替えはlevelOfDetail environment variable により可能で、以下２種の値を検知できます。
+.default デフォルト/距離が近い .simplfied 簡易表示/距離が遠い @Environment(\." property="og:description"><meta content="https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/top.png" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc25-visionos-widget-summary/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">WWDC25 visionOS用Widgetについてのまとめ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年6月16日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/widget">
+              Widget
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc25">
+              WWDC25
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swiftui">
+              SwiftUI
+          </a>
+          /</div><div class="content">
+      <p><img src="top.png" alt="top"></p>
+<p><strong>visionOS 26</strong> で <strong>空間Widget（ウィジェット）</strong> がサポートされましたね！
+この記事では空間Widgetでできることをサンプルコードを交えて解説します。</p>
+<h2 id="空間widgetとは">空間Widgetとは</h2>
+<p>iOSやmacOS同様に<code>WidgetKit</code>で構築したWidgetをvisionOSにも表示できます。</p>
+<p>visionOSが他OSと大きく違うのはWidgetを現実世界の机や壁に設置できるところです。
+机の上など水平面に設置したWidgetは自動でユーザーのほうに向きます。</p>
+<figure style="display: flex; gap: 20px; margin: 20px 0;">
+  <figure style="flex: 1;">
+    <img src="on_desk.png" alt="机の上に配置されたWidget">
+    <figcaption style="text-align: center; margin-top: 8px;"><b>机の上に配置</b></figcaption>
+  </figure>
+  <figure style="flex: 1;">
+    <img src="on_wall.png" alt="壁に配置されたWidget">
+    <figcaption style="text-align: center; margin-top: 8px;"><b>壁に設置</b></figcaption>
+  </figure>
+</figure>
+<h2 id="widgetのサイズ">Widgetのサイズ</h2>
+<p>Widgetのサイズは以下５種類から選べます。</p>
+<ul>
+<li><strong>Small</strong> 158x158pt</li>
+<li><strong>Medium</strong> 354x158pt</li>
+<li><strong>Large</strong> 354x354pt</li>
+<li><strong>Extra Large Portrait</strong> 354x550pt</li>
+<li><strong>Extra Large Landscape</strong> 550x354pt</li>
+</ul>
+<p><img src="size.png" alt="size"></p>
+<p>どのWidgetもユーザーが任意にリサイズ（縦横比は変わらず75%から125%の範囲内で）できます。</p>
+<p><img src="scale.png" alt="scale"></p>
+<p>どのサイズをサポートするかは従来のiOSなどのWidgetと同様に<code>supportedFamilies</code>モディファイアで指定できます。</p>
+<pre><code class="language-swift">.supportedFamilies(
+    [.systemExtraLarge, .systemExtraLargePortrait]
+)
+</code></pre>
+<h2 id="素材">素材</h2>
+<p><img src="paper.png" alt="material"></p>
+<p>visionOSのWidgetは素材が <strong>Paper(紙)</strong> なのか <strong>Glass(ガラス)</strong> なのかを指定できます。</p>
+<p><strong>Paper</strong>は印刷物のようなリアルなあしらいになり、<strong>Glass</strong>なら前景と背景の間に深みが出ます。</p>
+<p><img src="glass_dark.png" alt="glass_dark"></p>
+<p><strong>Paper</strong>と<strong>Glass</strong>で周辺環境の明るさによる見え方の違いも出てきます。</p>
+<p>素材は<code>widgetTexture</code>モディファイアで指定できます。</p>
+<pre><code class="language-swift">.widgetTexture(.paper)
+</code></pre>
+<h2 id="マウントスタイル">マウントスタイル</h2>
+<p><img src="elvated.png" alt="elvated"></p>
+<p>マウントスタイルとして以下２つをユーザーが選択可能です。</p>
+<ul>
+<li><strong>Recessed</strong> 埋没したようなスタイル</li>
+<li><strong>Elevated</strong> 浮き上がったようなスタイル</li>
+</ul>
+<p>壁面に設置する場合はどちらのスタイルも選べますが、机など水平面に設置する場合は<strong>Elevated</strong>のみです。そのため、マウントスタイルとして<strong>Recessed</strong>しかサポートしていない場合、水平面に設置できなくなります。</p>
+<p>デフォルトで両方のマウントスタイルをサポートしますが、必要なら<code>supportedMountingStyles</code>モディファイアでどちらか片方のみに限定できます。</p>
+<pre><code class="language-swift">.supportedMountingStyles([.recessed])
+</code></pre>
+<h2 id="距離によるuiの変更">距離によるUIの変更</h2>
+<p><img src="proximity.png" alt="proximity"></p>
+<p>visionOSのWidgetは他OSのWidgetと違い、現実世界に設置されるためユーザーからの距離が遠くなることもあります。</p>
+<p>そのため、ユーザーからの距離を検知してUIを変更できます。
+例えば、ユーザーが離れたら表示項目を減らしてより大きなフォントで表示するなどです。</p>
+<figure style="display: flex; gap: 20px; margin: 20px 0;">
+  <figure style="flex: 1;">
+    <img src="proximity_default.png.png" alt="距離が近い">
+    <figcaption style="text-align: center; margin-top: 8px;"><b>.default 距離が近い</b></figcaption>
+  </figure>
+  <figure style="flex: 1;">
+    <img src="proximity_simplified.png.png" alt="距離が遠い">
+    <figcaption style="text-align: center; margin-top: 8px;"><b>.simplified 距離が遠い</b></figcaption>
+  </figure>
+</figure>
+<p>距離による切り替えは<code>levelOfDetail</code> environment variable により可能で、以下２種の値を検知できます。</p>
+<ul>
+<li><code>.default</code> デフォルト/距離が近い</li>
+<li><code>.simplfied</code> 簡易表示/距離が遠い</li>
+</ul>
+<pre><code class="language-swift">@Environment(\.levelOfDetail) var levelOfDetail
+
+var body: some View {
+    VStack {
+        if levelOfDetail == .simplified {
+            SimpleView()
+        } else {
+            DefaultView()
+        }
+    }
+}
+</code></pre>
+<h2 id="レンダリングモード">レンダリングモード</h2>
+<p><img src="setting.png" alt="setting"></p>
+<p>デフォルトではvisionOSのWidgetはフルカラーで表示されますが、ユーザーが特定の色でのアクセントモードやモノクロモードに変更もできます。</p>
+<p><img src="tint.png" alt="tint"></p>
+<p>具体的には以下３種のレンダリングモードがあります。</p>
+<ul>
+<li><code>.fullColor</code> フルカラー</li>
+<li><code>.accented</code> 特定の色</li>
+<li><code>.vibrant</code> モノクロ</li>
+</ul>
+<p>これらのモードへの対応はvisionOSが自動である程度やってくれますが、必要ならアプリごとにカスタマイズできます。</p>
+<p>具体的には<code>widgetRenderingMode</code> environment variable により振り分けます。</p>
+<p>アクセントモード（<code>.accented</code>）では、白や黒で強調表示させたいViewを<code>.widgetAccentable</code>モディファイアで明示できます。</p>
+<pre><code class="language-swift">@Environment(\.widgetRenderingMode) var widgetRenderingMode
+
+var body: some View {
+    ZStack {
+       switch renderingMode {
+        case .fullColor:
+           Text(&quot;Full color&quot;)
+        case .accented:
+           ZStack {
+               Circle(...)
+               VStack {
+                   Text(&quot;Accented&quot;)
+                       .widgetAccentable()
+                   Text(&quot;Normal&quot;)
+               }
+           }
+        case .vibrant:
+           Text(&quot;Full color&quot;)
+        }
+    }
+}
+</code></pre>
+<h2 id="まとめ">まとめ</h2>
+<p>待望の空間Widgetに、たくさんのアプリが対応してくれるのが楽しみですね！</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-visionos-widget-summary/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-visionos-widget-summary/top.png" class="feed-item-image" alt="WWDC25 visionOS用Widgetについてのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 visionOS用Widgetについてのまとめ</span>
+    <span class="feed-item-date">2025年6月16日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-ios-build-run/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-ios-build-run/top.png" class="feed-item-image" alt="CursorでiOSアプリのBuild&amp;Run" width="300"></div>
+
+    <span class="feed-item-title">CursorでiOSアプリのBuild&amp;Run</span>
+    <span class="feed-item-date">2025年5月20日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/basic-settings-for-blog-writing/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/basic-settings-for-blog-writing/top.png" class="feed-item-image" alt="Cursor/VSCodeでブログ記事を書くときの基本設定" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeでブログ記事を書くときの基本設定</span>
+    <span class="feed-item-date">2025年5月6日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>
