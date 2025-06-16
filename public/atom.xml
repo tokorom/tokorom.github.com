@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Fri, 13 Jun 2025 15:00:36 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 16 Jun 2025 18:00:00 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,36 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WWDC25 visionOS用Widgetについてのまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/</link>
+      <pubDate>Mon, 16 Jun 2025 18:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/</guid>
+      <description>
+        visionOS 26 で 空間Widget（ウィジェット） がサポートされましたね！ この記事では空間Widgetでできることをサンプルコードを交えて解説します。
+空間Widgetとは iOSやmacOS同様にWidgetKitで構築したWidgetをvisionOSにも表示できます。
+visionOSが他OSと大きく違うのはWidgetを現実世界の机や壁に設置できるところです。 机の上など水平面に設置したWidgetは自動でユーザーのほうに向きます。
+机の上に配置 壁に設置 Widgetのサイズ Widgetのサイズは以下５種類から選べます。
+Small 158x158pt Medium 354x158pt Large 354x354pt Extra Large Portrait 354x550pt Extra Large Landscape 550x354pt どのWidgetもユーザーが任意にリサイズ（縦横比は変わらず75%から125%の範囲内で）できます。
+どのサイズをサポートするかは従来のiOSなどのWidgetと同様にsupportedFamiliesモディファイアで指定できます。
+.supportedFamilies( [.systemExtraLarge, .systemExtraLargePortrait] ) 素材 visionOSのWidgetは素材が Paper(紙) なのか Glass(ガラス) なのかを指定できます。
+Paperは印刷物のようなリアルなあしらいになり、Glassなら前景と背景の間に深みが出ます。
+PaperとGlassで周辺環境の明るさによる見え方の違いも出てきます。
+素材はwidgetTextureモディファイアで指定できます。
+.widgetTexture(.paper) マウントスタイル マウントスタイルとして以下２つをユーザーが選択可能です。
+Recessed 埋没したようなスタイル Elevated 浮き上がったようなスタイル 壁面に設置する場合はどちらのスタイルも選べますが、机など水平面に設置する場合はElevatedのみです。そのため、マウントスタイルとしてRecessedしかサポートしていない場合、水平面に設置できなくなります。
+デフォルトで両方のマウントスタイルをサポートしますが、必要ならsupportedMountingStylesモディファイアでどちらか片方のみに限定できます。
+.supportedMountingStyles([.recessed]) 距離によるUIの変更 visionOSのWidgetは他OSのWidgetと違い、現実世界に設置されるためユーザーからの距離が遠くなることもあります。
+そのため、ユーザーからの距離を検知してUIを変更できます。 例えば、ユーザーが離れたら表示項目を減らしてより大きなフォントで表示するなどです。
+.default 距離が近い .simplified 距離が遠い 距離による切り替えはlevelOfDetail environment variable により可能で、以下２種の値を検知できます。
+.default デフォルト/距離が近い .simplfied 簡易表示/距離が遠い @Environment(\.
+      </description>
+      
+      <coverImage>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/top.png</coverImage>
+      
+    </item>
     
     <item>
       <title>WWDC25 SwiftUIの新機能のまとめ</title>
@@ -531,40 +561,6 @@ let g:vim_swift_format_executable = &#39;swift-format&#39; let g:vim_swift_forma
       </description>
       
       <coverImage>https://www.tokoro.me/images/vim-swift-format/top.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>iOSアプリの本番環境でのテストをプロモーションコードを使って行うマニュアル</title>
-      <link>https://www.tokoro.me/posts/ios-promocode/</link>
-      <pubDate>Tue, 21 Jul 2020 11:48:23 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/ios-promocode/</guid>
-      <description>
-        Photo by JJ Ying on Unsplash
-これは、プログラマー向けではなく、社内や社外のテスト担当者さん向けのマニュアルとして作成したものです。
-2020年7月現在のApp Store Connectを使って、スクショ多めで具体的な操作方法をまとめます。
-プロモーションコードの用途 公式な用途 プロモーションコードの用途ですがAppleのドキュメントでは、
-報道関係者やインフルエンサーがAppのApp内課金をいち早く利用できるようにするため
-とプロモーション用であることが説明されています。
-リリース前のテスト用途 この他、アプリ開発者の間では、リリース前に
-App Storeに公開されるアプリと全く同じものをテスト するためにも使われています。
-プロモーションコードを使わなくてもTestflightによりほとんどのテストは可能ですが、場合によっては、
-Testflightでのテスト時にはテストの効率化のためのデバッグ機能を入れていて、App Storeで公開するアプリのみデバッグ機能を除外している Testflightでのテストだと購入のテストにAppleのSandbox環境が使われてしまうが、どうしてもProduction環境での購入テストをやっておきたい などの理由により アプリをApp Storeで公開する前の最終テスト として利用できます。
-プロモーションコードを発行できる条件 プロモーションコードは 審査が通って公開が可能な状態 のアプリに対してのみ発行できます。
-そのため、App Storeで公開する前にプロモーションコードでのテストをしたい場合、
-アプリを審査に出す際に「このバージョンを手動でリリースする」を選択しておく 審査に通ったらプロモーションコードを発行してテストする テストが完了したら「このバージョンをリリースする」ボタンでアプリをApp Storeに公開する という手順を踏む必要があります。
-プロモーションコードの発行手順 App Store Connectにログインする https://appstoreconnect.apple.com/ にログインします。
-Q. アカウントがないのでログインできません
-A. 担当のかた or アプリの開発者に問い合わせてアカウントをもらってください
-ログインしたら マイApp をクリックして プロモーションコードを発行する対象のアプリ を開きます。
-プロモーションコードのページを開く アプリのページを開いたら画面上側の 機能 を選択し、画面左側の プロモーションコード を選択してプロモーションコードのページを開きます。
-このページでプロモーションコードの発行や、過去に発行したコードの履歴を確認できます。
-プロモーションコードを発行する プロモーションコードのページの Appプロモーションコード セクションがアプリのプロモーションコードを発行するためのセクションです。
-ここの一番右の数量のフィールドに 1 を入力します。もし複数のプロモーションコードを一度に発行したい場合はその数を入力してください。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/ios-promocode/top.jpg</coverImage>
       
     </item>
     

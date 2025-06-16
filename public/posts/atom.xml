@@ -7,7 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Fri, 13 Jun 2025 15:00:36 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Jun 2025 18:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/posts/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WWDC25 visionOS用Widgetについてのまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/</link>
+      <pubDate>Mon, 16 Jun 2025 18:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/</guid>
+      <description>visionOS 26 で 空間Widget（ウィジェット） がサポートされましたね！ この記事では空間Widgetでできることをサンプルコードを交えて解説します。
+空間Widgetとは iOSやmacOS同様にWidgetKitで構築したWidgetをvisionOSにも表示できます。
+visionOSが他OSと大きく違うのはWidgetを現実世界の机や壁に設置できるところです。 机の上など水平面に設置したWidgetは自動でユーザーのほうに向きます。
+机の上に配置 壁に設置 Widgetのサイズ Widgetのサイズは以下５種類から選べます。
+Small 158x158pt Medium 354x158pt Large 354x354pt Extra Large Portrait 354x550pt Extra Large Landscape 550x354pt どのWidgetもユーザーが任意にリサイズ（縦横比は変わらず75%から125%の範囲内で）できます。
+どのサイズをサポートするかは従来のiOSなどのWidgetと同様にsupportedFamiliesモディファイアで指定できます。
+.supportedFamilies( [.systemExtraLarge, .systemExtraLargePortrait] ) 素材 visionOSのWidgetは素材が Paper(紙) なのか Glass(ガラス) なのかを指定できます。
+Paperは印刷物のようなリアルなあしらいになり、Glassなら前景と背景の間に深みが出ます。
+PaperとGlassで周辺環境の明るさによる見え方の違いも出てきます。
+素材はwidgetTextureモディファイアで指定できます。
+.widgetTexture(.paper) マウントスタイル マウントスタイルとして以下２つをユーザーが選択可能です。
+Recessed 埋没したようなスタイル Elevated 浮き上がったようなスタイル 壁面に設置する場合はどちらのスタイルも選べますが、机など水平面に設置する場合はElevatedのみです。そのため、マウントスタイルとしてRecessedしかサポートしていない場合、水平面に設置できなくなります。
+デフォルトで両方のマウントスタイルをサポートしますが、必要ならsupportedMountingStylesモディファイアでどちらか片方のみに限定できます。
+.supportedMountingStyles([.recessed]) 距離によるUIの変更 visionOSのWidgetは他OSのWidgetと違い、現実世界に設置されるためユーザーからの距離が遠くなることもあります。
+そのため、ユーザーからの距離を検知してUIを変更できます。 例えば、ユーザーが離れたら表示項目を減らしてより大きなフォントで表示するなどです。
+.default 距離が近い .simplified 距離が遠い 距離による切り替えはlevelOfDetail environment variable により可能で、以下２種の値を検知できます。
+.default デフォルト/距離が近い .simplfied 簡易表示/距離が遠い @Environment(\.</description>
+    </item>
+    
     <item>
       <title>WWDC25 SwiftUIの新機能のまとめ</title>
       <link>https://www.tokoro.me/posts/wwdc25-swiftui-new-features/</link>
