@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="新しいアプリアイコン WWDC25で新しいアプリアイコンの形式が発表されましたね。
+iOS/iPadOS 26以降では、これまでvisionOSやtvOSがサポートしていたような複数レイヤーのアイコンをサポートするようになりました。
+Icon Composer 新しいアプリアイコンの詳細についてここでは書きませんが、新しい形式のアプリアイコンを作るためのIcon Composerという専用ツールもリリースされました。
+アプリアイコンのファイル これまではiOS/visionOS/tvOS用にそれぞれ別のアイコン画像をXcode上で設定していました。 しかし、新しいアプリアイコンは.iconという拡張子の１つのファイルにパッケージングされ、その１つの.iconファイルを適用すれば、全てのプラットフォームのアプリアイコンが含められるようになりました。
+Xcodeプロジェクトへの取り込み方法 ということで、デザイナーさんがIcon Composerで作ってくれた新しいアプリアイコンを適用しよう！と思ったのですが、WWDC25のセッションビデオを探してもなかなかその情報が見つかりません。
+探してみたところ、こちらのドキュメントの最後のほうに明記されていました！
+Add your Icon Composer file to an Xcode project
+If you create your Icon Composer file outside of Xcode, you can add it to your Xcode project anytime to view your icon in Simulator and on real devices. Just drag the Icon Composer file from Finder to the project navigator, and Xcode provides feedback on where to drop it in a target folder."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む | TOKOROM BLOG" property="og:title"><meta content="新しいアプリアイコン WWDC25で新しいアプリアイコンの形式が発表されましたね。
+iOS/iPadOS 26以降では、これまでvisionOSやtvOSがサポートしていたような複数レイヤーのアイコンをサポートするようになりました。
+Icon Composer 新しいアプリアイコンの詳細についてここでは書きませんが、新しい形式のアプリアイコンを作るためのIcon Composerという専用ツールもリリースされました。
+アプリアイコンのファイル これまではiOS/visionOS/tvOS用にそれぞれ別のアイコン画像をXcode上で設定していました。 しかし、新しいアプリアイコンは.iconという拡張子の１つのファイルにパッケージングされ、その１つの.iconファイルを適用すれば、全てのプラットフォームのアプリアイコンが含められるようになりました。
+Xcodeプロジェクトへの取り込み方法 ということで、デザイナーさんがIcon Composerで作ってくれた新しいアプリアイコンを適用しよう！と思ったのですが、WWDC25のセッションビデオを探してもなかなかその情報が見つかりません。
+探してみたところ、こちらのドキュメントの最後のほうに明記されていました！
+Add your Icon Composer file to an Xcode project
+If you create your Icon Composer file outside of Xcode, you can add it to your Xcode project anytime to view your icon in Simulator and on real devices. Just drag the Icon Composer file from Finder to the project navigator, and Xcode provides feedback on where to drop it in a target folder." property="og:description"><meta content="https://www.tokoro.me/posts/import-icon-composer-icons-into-xcode-project/icons.png" property="og:image"><meta content="https://www.tokoro.me/posts/import-icon-composer-icons-into-xcode-project/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/import-icon-composer-icons-into-xcode-project/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2025年6月18日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc25">
+              WWDC25
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/xcode">
+              Xcode
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/design">
+              Design
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/macos">
+              macOS
+          </a>
+          /</div><div class="content">
+      <p><img src="icons.png" alt="icons"></p>
+<h2 id="新しいアプリアイコン">新しいアプリアイコン</h2>
+<p>WWDC25で新しいアプリアイコンの形式が発表されましたね。</p>
+<p>iOS/iPadOS 26以降では、これまでvisionOSやtvOSがサポートしていたような複数レイヤーのアイコンをサポートするようになりました。</p>
+<h2 id="icon-composer">Icon Composer</h2>
+<p><img src="top.png" alt="top"></p>
+<p>新しいアプリアイコンの詳細についてここでは書きませんが、新しい形式のアプリアイコンを作るための<a href="https://developer.apple.com/icon-composer/">Icon Composer</a>という専用ツールもリリースされました。</p>
+<h2 id="アプリアイコンのファイル">アプリアイコンのファイル</h2>
+<p>これまではiOS/visionOS/tvOS用にそれぞれ別のアイコン画像をXcode上で設定していました。
+しかし、新しいアプリアイコンは<code>.icon</code>という拡張子の１つのファイルにパッケージングされ、その１つの<code>.icon</code>ファイルを適用すれば、全てのプラットフォームのアプリアイコンが含められるようになりました。</p>
+<h2 id="xcodeプロジェクトへの取り込み方法">Xcodeプロジェクトへの取り込み方法</h2>
+<p>ということで、デザイナーさんがIcon Composerで作ってくれた新しいアプリアイコンを適用しよう！と思ったのですが、WWDC25のセッションビデオを探してもなかなかその情報が見つかりません。</p>
+<p>探してみたところ、<a href="https://developer.apple.com/documentation/xcode/creating-your-app-icon-using-icon-composer">こちらのドキュメント</a>の最後のほうに明記されていました！</p>
+<blockquote>
+<p>Add your Icon Composer file to an Xcode project</p>
+</blockquote>
+<blockquote>
+<p>If you create your Icon Composer file outside of Xcode, you can add it to your Xcode project anytime to view your icon in Simulator and on real devices.
+Just drag the Icon Composer file from Finder to the project navigator, and Xcode provides feedback on where to drop it in a target folder. Alternatively, choose Add Files from the Add button at the bottom of the project navigator and select your Icon Composer file in the dialog that appears.
+In the project editor, select the target and the General tab. Under App Icons and Launch Screen, ensure that the name in the App Icon text field matches the name of the Icon Composer file without the extension. You can have multiple Icon Composer files in your project but only one that matches the name in the App Icon text field.</p>
+</blockquote>
+<p>とても簡単です。</p>
+<ul>
+<li>Xcodeプロジェクトに<code>.icon</code>ファイルを追加する</li>
+<li><code>General</code>タブの<code>App Icon</code>に<code>.icon</code>ファイルのファイル名（拡張子を省く）を書く</li>
+</ul>
+<p><img src="setting.png" alt="setting"></p>
+<p>これだけで全プラットフォームのアプリアイコンを設定可能です。
+これまでよりずいぶん簡単になりましたね（ただしデザイナーさんは大変になりますね）。</p>
+<p>なお、<code>include all app icon assets</code>は理由がなければチェックをつけておくほうが良さそうです。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h2 id="まとめ">まとめ</h2>
+<p>新しいアプリアイコンを設定するには<code>.icon</code>ファイルをXcodeにドラッグ＆ドロップしてApp Iconにファイル名を書くだけ！</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>正直このオプションについては詳しくわかっていませんが <a href="https://developer.apple.com/documentation/xcode/configuring-your-app-icon">https://developer.apple.com/documentation/xcode/configuring-your-app-icon</a> に説明がありました&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc25-visionos-widget-summary/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-visionos-widget-summary/top.png" class="feed-item-image" alt="WWDC25 visionOS用Widgetについてのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 visionOS用Widgetについてのまとめ</span>
+    <span class="feed-item-date">2025年6月16日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/visionos-simplest-full-immersion-space-app/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-simplest-full-immersion-space-app/top.png" class="feed-item-image" alt="[visionOS] 最もシンプルな完全没入空間を試すサンプルコード" width="300"></div>
+
+    <span class="feed-item-title">[visionOS] 最もシンプルな完全没入空間を試すサンプルコード</span>
+    <span class="feed-item-date">2023年9月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/visionos-volume-3dmodel/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/visionos-volume-3dmodel/top.png" class="feed-item-image" alt="[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する" width="300"></div>
+
+    <span class="feed-item-title">[visionOSアプリ練習] SwiftUIアプリで3Dモデルを表示する</span>
+    <span class="feed-item-date">2023年6月26日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/potatotips-74-shareplay/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/potatotips-74-shareplay/top.png" class="feed-item-image" alt="potatotips #74 で「5分でSharePlay入門」のLTをしました" width="300"></div>
+
+    <span class="feed-item-title">potatotips #74 で「5分でSharePlay入門」のLTをしました</span>
+    <span class="feed-item-date">2021年6月28日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/import-icon-composer-icons-into-xcode-project/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/import-icon-composer-icons-into-xcode-project/icons.png" class="feed-item-image" alt="Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む" width="300"></div>
+
+    <span class="feed-item-title">Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</span>
+    <span class="feed-item-date">2025年6月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-visionos-widget-summary/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-visionos-widget-summary/top.png" class="feed-item-image" alt="WWDC25 visionOS用Widgetについてのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 visionOS用Widgetについてのまとめ</span>
+    <span class="feed-item-date">2025年6月16日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-ios-build-run/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-ios-build-run/top.png" class="feed-item-image" alt="CursorでiOSアプリのBuild&amp;Run" width="300"></div>
+
+    <span class="feed-item-title">CursorでiOSアプリのBuild&amp;Run</span>
+    <span class="feed-item-date">2025年5月20日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/writing-blog-with-cursor-ai/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/writing-blog-with-cursor-ai/top.png" class="feed-item-image" alt="CursorでAIの支援を得ながらブログ記事を書く" width="300"></div>
+
+    <span class="feed-item-title">CursorでAIの支援を得ながらブログ記事を書く</span>
+    <span class="feed-item-date">2025年5月8日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>

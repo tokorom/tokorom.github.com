@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>design on TOKOROM BLOG</title>
+    <title>Design on TOKOROM BLOG</title>
     <link>https://www.tokoro.me/tags/design/</link>
-    <description>Recent content in design on TOKOROM BLOG</description>
+    <description>Recent content in Design on TOKOROM BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 23 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tokoro.me/tags/design/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Jun 2025 19:00:37 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/design/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</title>
+      <link>https://www.tokoro.me/posts/import-icon-composer-icons-into-xcode-project/</link>
+      <pubDate>Wed, 18 Jun 2025 19:00:37 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/import-icon-composer-icons-into-xcode-project/</guid>
+      <description>新しいアプリアイコン WWDC25で新しいアプリアイコンの形式が発表されましたね。
+iOS/iPadOS 26以降では、これまでvisionOSやtvOSがサポートしていたような複数レイヤーのアイコンをサポートするようになりました。
+Icon Composer 新しいアプリアイコンの詳細についてここでは書きませんが、新しい形式のアプリアイコンを作るためのIcon Composerという専用ツールもリリースされました。
+アプリアイコンのファイル これまではiOS/visionOS/tvOS用にそれぞれ別のアイコン画像をXcode上で設定していました。 しかし、新しいアプリアイコンは.iconという拡張子の１つのファイルにパッケージングされ、その１つの.iconファイルを適用すれば、全てのプラットフォームのアプリアイコンが含められるようになりました。
+Xcodeプロジェクトへの取り込み方法 ということで、デザイナーさんがIcon Composerで作ってくれた新しいアプリアイコンを適用しよう！と思ったのですが、WWDC25のセッションビデオを探してもなかなかその情報が見つかりません。
+探してみたところ、こちらのドキュメントの最後のほうに明記されていました！
+Add your Icon Composer file to an Xcode project
+If you create your Icon Composer file outside of Xcode, you can add it to your Xcode project anytime to view your icon in Simulator and on real devices. Just drag the Icon Composer file from Finder to the project navigator, and Xcode provides feedback on where to drop it in a target folder.</description>
+    </item>
+    
     <item>
       <title>iOS 7はもっさりか？比較検証してみた</title>
       <link>https://www.tokoro.me/posts/ios7-design/</link>
