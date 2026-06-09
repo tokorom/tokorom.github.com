@@ -105,7 +105,7 @@ Xcode 27のライブプレビューにリサイズハンドルが追加され、
 
 <div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-<a href="https://developer.apple.com/videos/play/wwdc2026/226/">
+<a href="https://developer.apple.com/videos/play/wwdc2026/278/">
 Modernize your UIKit app
 </a>
 </div>
@@ -405,7 +405,7 @@ LazyVGrid {
 
 <div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-<a href="https://developer.apple.com/videos/play/wwdc2026/241/">
+<a href="https://developer.apple.com/videos/play/wwdc2026/271/">
 Code-along: Build powerful drag and drop in SwiftUI
 </a>
 </div>
