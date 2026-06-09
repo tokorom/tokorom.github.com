@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>WWDC26 Platforms State of the Unionのまとめ | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="Platforms State of the Union - WWDC26 WWDC26のセッション Platforms State of the Union で発表された、Appleプラットフォームの最新テクノロジー、フレームワーク、開発ツールのアップデート内容を技術アーカイブとして整理します。
+今年度のアップデートは、「Apple Intelligenceの進化」、「プラットフォームの機能向上（デザイン・Swift/SwiftUI）」、「デベロッパの生産性強化（Xcode・AIエージェント）」 の3つを主要な柱として構成されています。
+1. Apple Intelligence &amp; 生成AIインテグレーション Apple Intelligenceのコアとなるのは、オンデバイスおよびプライベートクラウドで安全に動作する最新の Apple Foundation Model です。
+Foundation Model フレームワーク Foundation Modelフレームワークを介して、Apple Intelligenceを支えるLLMへSwift APIから直接アクセス可能です。
+マルチモーダル入力の対応: テキストに加え、プロンプトへの画像添付による画像認識機能が追加されました。 Visionフレームワークの統合: OCR（光学文字認識）やデバイス上での高速なバーコード認識機能など、Visionの専門ツールがモデルのツールとして利用可能になりました。 プライベートクラウドの無償開放: App Storeでのダウンロード数が200万以下のデベロッパアカウントに対し、プライベートクラウド上のApple Foundation ModelをクラウドAPIコストなしで利用可能にしました。 サードパーティ製サーバーモデルのサポート: ClaudeやGeminiなどの外部LLMへの呼び出しに対応。ツールコーリングやガイド付き生成などの高度な機能も制御できます。 Language Model プロトコル: プロトコルに準拠することで、開発者は任意のモデルプロバイダのSwiftパッケージを作成し、アプリに最適なモデルを自由に選択可能です。 オープンソース化: 今夏後半にFoundation Modelフレームワーク自体をオープンソース化し、サーバーサイドを含むマルチプラットフォームで同じSwift APIを利用可能にする予定です。 Platforms State of the Union (Session Video) Dynamic Profile 複雑なワークフローやマルチエージェントを少ないコードで構築するための新しい宣言型APIです。LanguageModelSession を継続的に更新し、状況に応じてProfile（AIエージェントの役割、インストラクション、使用するツールやモデル）を切り替えることができます。
+同じセッション内でモデルやプロファイルを切り替えても、単一の連続したトランスクリプト（会話履歴）が共有されるため、少ないプロンプトで文脈に沿った回答が得られます。
+struct CraftProfile: LanguageModelSession.DynamicProfile { var viewModel: CraftOrchestrator var body: some DynamicProfile { switch viewModel."><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="WWDC26 Platforms State of the Unionのまとめ | TOKOROM BLOG" property="og:title"><meta content="Platforms State of the Union - WWDC26 WWDC26のセッション Platforms State of the Union で発表された、Appleプラットフォームの最新テクノロジー、フレームワーク、開発ツールのアップデート内容を技術アーカイブとして整理します。
+今年度のアップデートは、「Apple Intelligenceの進化」、「プラットフォームの機能向上（デザイン・Swift/SwiftUI）」、「デベロッパの生産性強化（Xcode・AIエージェント）」 の3つを主要な柱として構成されています。
+1. Apple Intelligence &amp; 生成AIインテグレーション Apple Intelligenceのコアとなるのは、オンデバイスおよびプライベートクラウドで安全に動作する最新の Apple Foundation Model です。
+Foundation Model フレームワーク Foundation Modelフレームワークを介して、Apple Intelligenceを支えるLLMへSwift APIから直接アクセス可能です。
+マルチモーダル入力の対応: テキストに加え、プロンプトへの画像添付による画像認識機能が追加されました。 Visionフレームワークの統合: OCR（光学文字認識）やデバイス上での高速なバーコード認識機能など、Visionの専門ツールがモデルのツールとして利用可能になりました。 プライベートクラウドの無償開放: App Storeでのダウンロード数が200万以下のデベロッパアカウントに対し、プライベートクラウド上のApple Foundation ModelをクラウドAPIコストなしで利用可能にしました。 サードパーティ製サーバーモデルのサポート: ClaudeやGeminiなどの外部LLMへの呼び出しに対応。ツールコーリングやガイド付き生成などの高度な機能も制御できます。 Language Model プロトコル: プロトコルに準拠することで、開発者は任意のモデルプロバイダのSwiftパッケージを作成し、アプリに最適なモデルを自由に選択可能です。 オープンソース化: 今夏後半にFoundation Modelフレームワーク自体をオープンソース化し、サーバーサイドを含むマルチプラットフォームで同じSwift APIを利用可能にする予定です。 Platforms State of the Union (Session Video) Dynamic Profile 複雑なワークフローやマルチエージェントを少ないコードで構築するための新しい宣言型APIです。LanguageModelSession を継続的に更新し、状況に応じてProfile（AIエージェントの役割、インストラクション、使用するツールやモデル）を切り替えることができます。
+同じセッション内でモデルやプロファイルを切り替えても、単一の連続したトランスクリプト（会話履歴）が共有されるため、少ないプロンプトで文脈に沿った回答が得られます。
+struct CraftProfile: LanguageModelSession.DynamicProfile { var viewModel: CraftOrchestrator var body: some DynamicProfile { switch viewModel." property="og:description"><meta content="https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/images/apple_intelligence_architecture.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc26_platforms_state_of_the_union/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">WWDC26 Platforms State of the Unionのまとめ</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2026年6月9日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swiftui">
+              SwiftUI
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/visionos">
+              visionOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/tvos">
+              tvOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/macos">
+              macOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/appleintelligence">
+              AppleIntelligence
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/xcode">
+              Xcode
+          </a>
+          /</div><div class="content">
+      <h1 id="platforms-state-of-the-union---wwdc26">Platforms State of the Union - WWDC26</h1>
+<p>WWDC26のセッション <a href="https://developer.apple.com/videos/play/wwdc2026/102/">Platforms State of the Union</a> で発表された、Appleプラットフォームの最新テクノロジー、フレームワーク、開発ツールのアップデート内容を技術アーカイブとして整理します。</p>
+<p><img src="images/agenda_overview.jpg" alt="Platforms State of the Union"></p>
+<p>今年度のアップデートは、<strong>「Apple Intelligenceの進化」</strong>、<strong>「プラットフォームの機能向上（デザイン・Swift/SwiftUI）」</strong>、<strong>「デベロッパの生産性強化（Xcode・AIエージェント）」</strong> の3つを主要な柱として構成されています。</p>
+<hr>
+<h2 id="1-apple-intelligence--生成aiインテグレーション">1. Apple Intelligence &amp; 生成AIインテグレーション</h2>
+<p>Apple Intelligenceのコアとなるのは、オンデバイスおよびプライベートクラウドで安全に動作する最新の <strong>Apple Foundation Model</strong> です。</p>
+<p><img src="images/apple_intelligence_architecture.jpg" alt="Apple Intelligence Architecture"></p>
+<h3 id="foundation-model-フレームワーク">Foundation Model フレームワーク</h3>
+<p>Foundation Modelフレームワークを介して、Apple Intelligenceを支えるLLMへSwift APIから直接アクセス可能です。</p>
+<ul>
+<li><strong>マルチモーダル入力の対応</strong>: テキストに加え、プロンプトへの画像添付による画像認識機能が追加されました。</li>
+<li><strong>Visionフレームワークの統合</strong>: OCR（光学文字認識）やデバイス上での高速なバーコード認識機能など、Visionの専門ツールがモデルのツールとして利用可能になりました。</li>
+<li><strong>プライベートクラウドの無償開放</strong>: App Storeでのダウンロード数が200万以下のデベロッパアカウントに対し、プライベートクラウド上のApple Foundation ModelをクラウドAPIコストなしで利用可能にしました。</li>
+<li><strong>サードパーティ製サーバーモデルのサポート</strong>: ClaudeやGeminiなどの外部LLMへの呼び出しに対応。ツールコーリングやガイド付き生成などの高度な機能も制御できます。</li>
+<li><strong>Language Model プロトコル</strong>: プロトコルに準拠することで、開発者は任意のモデルプロバイダのSwiftパッケージを作成し、アプリに最適なモデルを自由に選択可能です。</li>
+<li><strong>オープンソース化</strong>: 今夏後半にFoundation Modelフレームワーク自体をオープンソース化し、サーバーサイドを含むマルチプラットフォームで同じSwift APIを利用可能にする予定です。</li>
+</ul>
+<div style="background-color: #fffef0; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+<a href="https://developer.apple.com/videos/play/wwdc2026/102/">
+Platforms State of the Union (Session Video)
+</a>
+</div>
+<h3 id="dynamic-profile">Dynamic Profile</h3>
+<p>複雑なワークフローやマルチエージェントを少ないコードで構築するための新しい宣言型APIです。<code>LanguageModelSession</code> を継続的に更新し、状況に応じてProfile（AIエージェントの役割、インストラクション、使用するツールやモデル）を切り替えることができます。</p>
+<p><img src="images/foundation_models_utilities_details.jpg" alt="Dynamic Profiles Details"></p>
+<p>同じセッション内でモデルやプロファイルを切り替えても、単一の連続したトランスクリプト（会話履歴）が共有されるため、少ないプロンプトで文脈に沿った回答が得られます。</p>
+<pre><code class="language-swift">struct CraftProfile: LanguageModelSession.DynamicProfile {
+    var viewModel: CraftOrchestrator
+    
+    var body: some DynamicProfile {
+        switch viewModel.mode {
+        case .brainstorm:
+            Profile {
+                Instructions {
+                    &quot;You are a warm and friendly expert crafting assistant. Your job is to help the user explore and define their craft project. When the user shares photos, identify the craft type, colors, materials, and any relevant details. Then generate craft project ideas that best fit what you see and the user's request. Recommend simple beginner-level crafts that require few pieces, unless the user explicitly requests something more complex.&quot;
+                }
+                .model(PrivateCloudComputeLanguageModel())
+                .temperature(1.0)
+            }
+        case .tutorial:
+            Profile {
+                Instructions {
+                    &quot;You explain origami and craft jargon to beginners. Try to use those specific craft supplies in the tutorial.&quot;
+                    if viewModel.isTutorialReady {
+                        &quot;You may also be asked to evaluate the user's work from a photo. When this happens, match it against the tutorial steps to provide specific, constructive feedback. Be warm and supportive - highlight what they did well before suggesting improvements. Reference the specific step they appear to be on.&quot;
+                    }
+                }
+                CalculatePaperSizeTool()
+                ConvertMeasurementTool()
+                MovePhotoToStepTool(viewModel: viewModel)
+                
+                .model(PrivateCloudComputeLanguageModel())
+                .reasoningLevel(.deep)
+            }
+        case .terminology:
+            Profile {
+                Instructions {
+                    &quot;You explain origami and craft jargon to beginners. Explain in 1-3 short sentences. Plain language. No preamble. If given the step, ground the answer in what they're physically doing. For follow-ups: answer directly, don't restate the term.&quot;
+                }
+                .model(SystemLanguageModel())
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="ai向けデベロッパツール群">AI向けデベロッパツール群</h3>
+<ul>
+<li><strong>Evaluationフレームワーク</strong>: プロンプトのテストおよび出力結果の評価を行い、挙動をシステム的に検証。</li>
+<li><strong>Foundation Model Instrument</strong>: モデルの動作、推論時間、トークン使用量をInstrumentsで視覚化・デバッグ。</li>
+<li><strong><code>fm</code> コマンドラインツール</strong>: ターミナルから直接モデルにプロンプトを提供して動作確認が可能。</li>
+<li><strong>Core Spotlight RAG</strong>: アプリのローカル検索インデックスを活用したRAG（検索拡張生成）ツールをサポート。</li>
+</ul>
+<hr>
+<h2 id="2-core-ai--machine-learning">2. Core AI &amp; Machine Learning</h2>
+<p>オンデバイス上でモデルを実行するためのローレベルフレームワークとして、<strong>Core AI</strong> が新たに導入されました。</p>
+<p><img src="images/core_ai_visual_debugger.jpg" alt="Core AI Framework"></p>
+<ul>
+<li><strong>妥協のないパフォーマンス</strong>: メモリセーフなSwift APIにより、Apple Siliconに最適化された速度を発揮します。</li>
+<li><strong>詳細な制御</strong>: インタレスト管理、モデルの特化、カスタムGPUカーネル記述まで対応する広範なチューニング機能を提供。</li>
+<li><strong>Pythonエコシステムとの統合</strong>: PyTorchモデルをCore AIランタイム向けに変換・最適化するPythonベースのツールを提供。</li>
+<li><strong>Core AI Debugger &amp; Instruments</strong>: 事前コンパイル、元のPythonソースコードのテンソル値までトレース可能なビジュアルデバッガを提供。</li>
+<li><strong>高いスケーラビリティ</strong>: iPhoneでのリアルタイムカメラ解析（ビジョンモデル）から、Mac上での数十億パラメータLLMによる複雑なワークフロー実行まで対応。</li>
+</ul>
+<h3 id="mlxのアップデート">MLXのアップデート</h3>
+<p>Appleシリコンに最適化されたオープンソースのアレイフレームワーク <strong>MLX</strong> は、新たに <strong>Metal 4</strong> および <strong>GPU Neural Accelerator</strong> をサポート。Thunderbolt経由 of RDMAにより、複数台のMacを連結させた大規模な分散トレーニングへ拡張可能になりました。</p>
+<hr>
+<h2 id="3-app-intents--siri">3. App Intents &amp; Siri</h2>
+<p>App Intentsフレームワークを使用することで、アプリのコンテンツとアクションを記述し、Apple Intelligence（Siri）と深く統合できます。</p>
+<p><img src="images/app_intents_siri_schemas.jpg" alt="App Intents Siri Integration"></p>
+<h3 id="システムスキーマsystem-schemas">システムスキーマ（System Schemas）</h3>
+<p>Siriがアプリのコンテキストを正しく推論するための標準構造として「スキーマ」が用意されています。</p>
+<ul>
+<li><strong>Entity Schema</strong>: アプリが扱うコンテンツや概念（例: <code>Message</code>、<code>Contact</code>）を記述。</li>
+<li><strong>Intent Schema</strong>: アプリが実行できるアクション（例: <code>sendMessage</code>）を記述。</li>
+</ul>
+<p>システム定義のスキーマを使用するため、将来的にSiriの言語モデルのアップデートや、新しい言語・地域の方言サポートが追加された場合でも、デベロッパ側のコードを変更することなくそのまま機能します。</p>
+<h4 id="spotlightインデックスの同期">Spotlightインデックスの同期</h4>
+<p>アプリのコンテンツをSpotlightのセマンティックインデックスに提供することで、ユーザーがアプリの情報を素早く発見できるようになり、Siriによるパーソナルコンテキストの理解を助けます。</p>
+<pre><code class="language-swift">actor ModelManager {
+    func indexEntities() throws {
+        let contactEntities = try fetchRecentContacts(limit: nil).map(\.entity)
+        let conversationEntities = try fetchRecentConversations(limit: nil).map(\.entity)
+        let messageEntities = try fetchRecentMessages(limit: nil).map(\.entity)
+        
+        Task.detached {
+            do {
+                try await CSSearchableIndex.default().indexAppEntities(contactEntities)
+                try await CSSearchableIndex.default().indexAppEntities(conversationEntities)
+                try await CSSearchableIndex.default().indexAppEntities(messageEntities)
+            } catch {
+                print(&quot;Failed to index entities in Spotlight: \(error)&quot;)
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="intent-schemaの実装">Intent Schemaの実装</h4>
+<p>アクションを記述する場合は <code>@AppIntent</code> マクロを使用します。以下はメッセージ送信をSiriに開放する例です。</p>
+<pre><code class="language-swift">struct SendMessageIntent: AppIntent {
+    @Parameter var destination: MessageDestination
+    @Parameter var subject: AttributedString?
+    @Parameter var content: AttributedString?
+    @Parameter(supportedContentTypes: [.image]) var attachments: [IntentFile]
+    @Parameter(supportedContentTypes: [.audio]) var audioMessage: IntentFile?
+    @Parameter var locations: [PlaceDescriptor]
+    @Parameter var links: [URL]
+    @Parameter var scheduledDate: Date?
+    
+    static let title = LocalizedStringResource(&quot;Send Message&quot;)
+    
+    @Dependency var model: ModelManager
+    
+    func perform() async throws -&gt; some ReturnsValue&lt;[MessageEntity]&gt; {
+        let recipientIDs = destination.persons.map(\.id)
+        let messageText = content.flatMap { String($0.characters) } ?? &quot;&quot;
+        let messageIDs = try await model.sendMessage(
+            toRecipientIDs: recipientIDs,
+            conversationID: nil,
+            messageText: messageText,
+            attachments: attachments
+        )
+        let messages = try await model.messageEntities(for: messageIDs)
+        return .result(value: messages)
+    }
+}
+</code></pre>
+<h3 id="view-annotations-api-オンスクリーン認識">View Annotations API (オンスクリーン認識)</h3>
+<p>画面上の要素とApp Entityを関連付けることで、ユーザーが画面内の情報（「この写真」「2つ目のメッセージ」など）を曖昧に指し示しながらSiriに指示を送ることができるようになります。</p>
+<pre><code class="language-swift">ForEach(messages) { message in
+    MessageRow(message: message, modelManager: modelManager)
+        .appEntityIdentifier(EntityIdentifier(for: MessageEntity.self, identifier: message.id))
+}
+</code></pre>
+<hr>
+<h2 id="4-プラットフォームデザインの洗練">4. プラットフォームデザインの洗練</h2>
+<p>昨年導入された「Liquid Glass」デザイン言語がさらに洗練され、一貫性とパーソナライズ性が高められています。</p>
+<p><img src="images/liquid_glass_contrast_details.jpg" alt="Liquid Glass Contrast Details"></p>
+<h3 id="liquid-glassの改良">Liquid Glassの改良</h3>
+<ul>
+<li><strong>視認性の向上</strong>: 奥行きや境界をより明確にするため、エッジの陰影を暗めに、鏡面ハイライトをより明るく強調する調整が加えられました。</li>
+<li><strong>不透明度調整スライダー</strong>: システム設定にスライダーが追加され、ユーザーは「ウルトラクリア」から「完全な不透明」まで好みの透明度を選べるようになります。既存のLiquid Glass対応アプリは再ビルド不要で自動適用されます。</li>
+<li><strong>アクセシビリティ連携</strong>: 「透明度を下げる」「コントラストを上げる」設定に自動追従するほか、macOS 27ではウィンドウの境界を示す「枠線を表示（Show borders）」環境値のサポートが追加されました。</li>
+</ul>
+<h3 id="サイドバー--ツールバーの刷新">サイドバー &amp; ツールバーの刷新</h3>
+<ul>
+<li><strong>エッジ・トゥ・エッジ・サイドバー</strong>: MacおよびiPadのサイドバーがエッジまで拡張され、構造が一層明確になりました。</li>
+<li><strong>アクセントカラーの復活</strong>: サイドバー内のアイコンにアプリ独自のアクセントカラーを適用できるようになり、キーウィンドウの識別性も高められました。</li>
+<li><strong>macOSの角丸（Corner Radii）</strong>: macOS上の全ウィンドウの角丸に一律の急角度なカーブが適用され、システム全体の統一感が向上。</li>
+<li><strong>スクロールエッジ効果</strong>: スクロール中にコンテンツがツールバーの下に入り込む際、ツールバーが動的に不透明化してテキストのコントラストと可読性を保ちます。標準のツールバーに自動適用されるほか、<code>safeAreaBar(_:)</code> や <code>scrollEdgeEffectStyle(_:)</code> APIでカスタマイズも可能です。</li>
+<li><strong>メニュー内アクションアイコンの制御</strong>: iPadOSおよびmacOSでメニュー表示時の重要アクションのアイコンのデフォルト表示状態を設定できる <code>labelStyle(titleAndIcon)</code> などのAPIが導入されました。</li>
+</ul>
+<h3 id="アイコンエフェクト">アイコンエフェクト</h3>
+<ul>
+<li><strong>Icon Composer</strong>: Liquid Glassの多層レイヤー構造を持つアプリアイコンをデザインできるようになりました。屈折やガラス特有の反射効果を調整するための新しいアノテーション（注釈）機能や、実機での見た目を確認できるインタラクティブプレビューを搭載。</li>
+</ul>
+<hr>
+<h2 id="5-アプリのサイズ変更と適応性-iphone-mirroring--ipados">5. アプリのサイズ変更と適応性 (iPhone Mirroring &amp; iPadOS)</h2>
+<p>iOSアプリがiPadOS上でサイズ変更可能な状態で表示される機会や、macOS上の「iPhoneミラーリング」を通じて実行される機会が増えたことに伴い、多様なアスペクト比・画面サイズに対応するための適応機能が強化されました。</p>
+<ul>
+<li><strong>自動有効化</strong>: 最新のSDKでリビルドするだけで、iOSアプリの動的なリサイズ機能が自動的に有効になります。</li>
+<li><strong>Auto LayoutとTrait Collectionの重視</strong>: 従来のサイズクラス（Regular / Compact）に加え、シミュレータやXcodeプレビューで様々なサイズのアスペクト比を動的に変更して確認できるテスト機能が追加されました。</li>
+<li><strong>コーディングエージェントの診断支援</strong>: XcodeのAIエージェント向けに、サイズ変更時のレイアウト破壊や表示崩れを検出・自動修正するための専用スキルが追加されています。</li>
+</ul>
+<hr>
+<h2 id="6-swiftui-の大幅な進化">6. SwiftUI の大幅な進化</h2>
+<h3 id="swiftuiの採用拡大">SwiftUIの採用拡大</h3>
+<p>NotionのSwiftUI移行や、オープンソースのGodotエンジンを用いたMac/iPadゲーム「The Goat」の開発、Apple内部における新しいSiriアプリやLogic Pro（Creator Studio）でのSwiftUIの活用など、パフォーマンスとクロスプラットフォームでのUI一貫性を理由とするSwiftUIの導入事例が紹介されています。</p>
+<p><img src="images/notion_app_swiftui_transition.jpg" alt="Notion SwiftUI Transition"></p>
+<h3 id="新たなインタラクション">新たなインタラクション</h3>
+<ul>
+<li><strong>ドラッグによる並べ替え</strong>: リストやグリッド、スタックなどあらゆるコンテナに対し、簡単なコードで並べ替え機能を追加できます。</li>
+</ul>
+<pre><code class="language-swift">LazyVStack {
+    ForEach(cranes) { crane in
+        CraneRow(crane)
+            .reorderable()
+    }
+}
+.reorderContainer(for: Crane.self) { difference in
+    difference.apply(to: &amp;cranes)
+}
+</code></pre>
+<ul>
+<li><strong>スワイプアクションの拡張</strong>: リスト以外の任意のスクロール可能なコンテナに対し、スワイプ操作によるクイックアクションを追加できます。</li>
+</ul>
+<pre><code class="language-swift">ScrollView {
+    LazyVStack(spacing: 16) {
+        ForEach(model.cranes) { crane in
+            CraneRow(crane)
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) { ... }
+                    Button { ... }
+                }
+        }
+    }
+    .swipeActionsContainer()
+}
+</code></pre>
+<ul>
+<li><strong>テキスト選択の柔軟性</strong>: iOSにおける <code>textSelection(.enabled)</code> がTextField/TextEditorと同様の正確な部分選択をサポート。macOSではカスタムテキストレンダリングや縦書き（Vertical Text）のサポートが追加されました。</li>
+</ul>
+<h3 id="パフォーマンス向上スピード">パフォーマンス向上（スピード）</h3>
+<ul>
+<li><strong>共通コントロール基盤</strong>: SwiftUI、AppKit、UIKitのアーキテクチャ統合が進み、多数の標準コントロールが共通の基盤コードを共有するようになりました。これにより、macOSのメニューピッカーで大量のアイテムを処理する際の描画パフォーマンスが飛躍的に向上しました。</li>
+<li><strong>不要レイアウト計算の削減</strong>: ネストされたスタックレイアウトにおいて、子ビューの冗長な複数回計測処理を省略。レイアウトのサイズ計算に要する時間が従来の半分（1/2）になりました。</li>
+<li><strong>Lazy State初期化</strong>: ビューの再初期化のたびに一時インスタンスが作られていた <code>@State</code> オブジェクトが遅延処理（遅延評価）されるように変更。マクロへの移行と合わせて不要なメモリ確保と処理が自動的に削減されます。</li>
+<li><strong>AsyncImageの自動キャッシュ</strong>: 標準のHTTPキャッシュを使用して取得済み画像をキャッシュし、同一の画像URLに対する不要な多重ダウンロードを防ぐようになりました。</li>
+</ul>
+<h3 id="新機能">新機能</h3>
+<ul>
+<li><strong>ツールバー優先度制御</strong>: 画面幅が狭まった際の挙動を制御する <code>visibilityPriority(.high)</code> が追加。重要度の低いアイテムを自動的に「オーバーフローメニュー」へ退避させるメニューコンテナや、どのようなレイアウト状態でもアイテムを必ず右端に固定する <code>topBarPinnedTrailing</code> プレースメントが提供されます。</li>
+<li><strong>ドキュメントインフラの刷新</strong>: <code>DocumentGroup</code> 内のファイルURLに対するきめ細かな直接アクセスが追加され、ファイルの必要な部分だけを読み込み、変更された箇所だけを差分書き込みする（PagesやXcodeと同等の）高効率なI/Oカスタマイズが可能になりました。</li>
+<li><strong>Spatial Preview</strong>: macOSアプリの3Dオブジェクトや空間モデルをリアルタイムでApple Vision Proの空間にストリーミングし、空間上で直接プレビュー、編集、共有できるAPIが追加されました。</li>
+</ul>
+<p><img src="images/swiftui_new_features_bento_grid.jpg" alt="SwiftUI Features Bento Grid"></p>
+<hr>
+<h2 id="7-swift-64">7. Swift 6.4</h2>
+<h3 id="swiftのシステムレイヤーへの適用拡大">Swiftのシステムレイヤーへの適用拡大</h3>
+<p>Swiftはモバイルアプリ開発にとどまらず、CやC++の安全な後継として、サーバー、ベアメタルファームウェア、デバイスドライバ、さらにはmacOS 27のカーネルコンポーネントに至るまで広く採用され始めています。</p>
+<ul>
+<li><strong>WebKitの移行</strong>: SafariのコアレンダリングエンジンであるWebKit（巨大なC++コードベース）において、安全なC++相互運用性を活用し、コアコンポーネントのSwiftへの置き換えが段階的に進んでいます。</li>
+<li><strong>QUICトランスポートのSwift実装</strong>: ネットワークスタックのQUIC実装をSwiftで書き直し、SwiftNIOとの統合を経てオープンソース公開される予定です。</li>
+<li><strong>TrueTypeフォントエンジン</strong>: メモリ安全性の強化のため、歴史的なCの実装コードがSwiftで完全に再実装されました。</li>
+</ul>
+<h3 id="言語およびコンパイラのアップデート">言語およびコンパイラのアップデート</h3>
+<ul>
+<li><strong>available属性の簡略化</strong>: プラットフォームごとの記述をまとめられる <code>anyAppleOS</code> 指定が導入されました。</li>
+<li><strong>deferブロック内のawait対応</strong>: 非同期処理を含むクリーンアップコードを <code>defer</code> ブロック内で実行できるようになりました。</li>
+<li><strong>コンパイル警告の制御</strong>: 特定のコードブロックにおいて警告を一時的に非表示にしたり、厳格に対処すべきファイルのみ警告をコンパイルエラーへ昇格させたりする細かな制御が可能になりました。</li>
+<li><strong>型チェッカーの診断向上</strong>: 深いネストのSwiftUIビュー等で頻発していた「式の型チェックが妥当な時間内に実行できません」というコンパイラエラーが大幅に解消。正常にビルドが完了するか、エラーの原因となる具体的な行やタイポを正確に提示するようコンパイラ診断が強化されました。</li>
+</ul>
+<h3 id="intel-macの終焉とapple-siliconへの完全移行">Intel Macの終焉とApple Siliconへの完全移行</h3>
+<p>macOS TahoeがIntel Macをサポートする最後のリリースとなり、Apple Silicon（単一アーキテクチャ）への移行が完了しました。これにより、Mac App StoreではApple Silicon専用バイナリの配布が可能となり、ダウンロードサイズの削減と検証コストの低減をもたらします。
+また、旧デザインとの互換性サポートが廃止され、Xcode 27で再コンパイルされたアプリには最新のLiquid Glassデザインが自動的に適用されます。</p>
+<hr>
+<h2 id="8-xcode-27--生産性ツール">8. Xcode 27 &amp; 生産性ツール</h2>
+<p>今年のXcodeのアップデートは、<strong>「インテリジェンス（AIエージェントの導入）」</strong> と <strong>「日々の開発エクスペリエンス（動作速度と信頼性の向上）」</strong> の2つのテーマに基づいて設計されています。</p>
+<p><img src="images/xcode_claude_coding_agent.jpg" alt="Xcode Claude Coding Agent"></p>
+<h3 id="インテリジェントな開発支援-ai-agents">インテリジェントな開発支援 (AI Agents)</h3>
+<ul>
+<li><strong>Agent Client Protocol (ACP) のサポート</strong>: Xcodeに適合する任意の外部AIエージェントを取り込むことができるプロトコルを追加。本日からXcode 26のアップデートとしてACPサポートとGoogle Geminiの連係が利用可能です。</li>
+<li><strong>Model Context Protocol (MCP) の活用</strong>: エージェントがXcodeから直接ドキュメントを検索したり、プレビューを実行したり、FigmaやGitHubなどの外部サービスに接続するためのブリッジを提供します。</li>
+<li><strong>Xcode 27のエージェントシステム</strong>: プロジェクトの文脈理解、診断ログの解析、プレビュー生成、バリアントのテスト、ローカライズなど、あらゆるフェーズにエージェントが組み込まれ並行して作業可能です。</li>
+</ul>
+<h3 id="xcode-27-エクスペリエンスの向上">Xcode 27 エクスペリエンスの向上</h3>
+<ul>
+<li><strong>30%の軽量化</strong>: アプリケーションサイズを軽量化し、開発者用ドキュメントやエージェント等はバックグラウンドで必要に応じてダウンロードする仕組みに変更。</li>
+<li><strong>信頼性と速度の改善</strong>: プロジェクトの読み込み速度向上、コンソールの大量ログ処理の円滑化、デバッグセッションでの式の評価速度向上、主要なクラッシュやスピン（応答なし）のバグ修正を実施。</li>
+<li><strong>iCloud同期設定</strong>: 新しいMacをセットアップする際、前環境のXcode設定やGit configがiCloudを介して自動的にインポートされます。</li>
+<li><strong>ノーコンフィグ・セットアップ</strong>: [New Project] からテンプレートを選ぶと、プロジェクト名やバンドルIDを入力することなくエディタが即座に起動し、プロトタイピングや新規APIの実験がすぐに始められます（後からの設定も可能）。</li>
+<li><strong>ツールバーカスタマイズ &amp; テーマ</strong>: ツールバーのドラッグ＆ドロップ編集に対応。「Emerald」「Neon Noir」「Coral Reef」などの新しいUIテーマが追加され、複数プロジェクトを異なるテーマで起動して一目で見分けることが可能です。</li>
+</ul>
+<h3 id="previews--device-hub">Previews &amp; Device Hub</h3>
+<ul>
+<li><strong>バリアントのグリッドプレビュー</strong>: 列挙型（<code>CaseIterable</code>）をプレビューに渡すことで、すべての状態（Enumパターン）を一覧表示するマルチプレビューグリッドがサポートされました。</li>
+</ul>
+<pre><code class="language-swift">enum CraftStage: CaseIterable {
+    case planning
+    case gathering
+    case folding
+    case finished
+}
+
+#Preview(arguments: CraftStage.allCases) { stage in
+    WashiTapeStageView(stage: stage)
+}
+</code></pre>
+<p><img src="images/xcode_preview_variants_grid.jpg" alt="Xcode Previews Grid Variants"></p>
+<ul>
+<li><strong>Device Hub</strong>: シミュレータに代わる新しいデバイスコントロールセンターです。実機およびシミュレータを一元管理し、ダークモード切り替え、フォントサイズ調整、位置情報変更などのシステムテストをシミュレータの利便性と実機の忠実度を兼ね備えたウインドウから直接操作可能です。また、物理デバイス（実機）の画面をMacに映し出してキーボードとマウスで直接操作することもサポートされました。</li>
+</ul>
+<hr>
+<h2 id="9-aiエージェントを用いた機能構築と修正の実例">9. AIエージェントを用いた機能構築と修正の実例</h2>
+<p>セッション内では、Xcode 27のAIエージェントを活用したOrigamiアプリの新機能実装デモが行われ、その一連のワークフローが提示されました。</p>
+<h3 id="機能設計からコード生成の流れ">機能設計からコード生成の流れ</h3>
+<ol>
+<li><strong>指示の入力</strong>: プロジェクト詳細から書籍アイコンをタップして起動する「Choose-Your-Own-Adventure（ストーリー生成）」機能の実装指示をエージェントに提示。</li>
+<li><strong>インタラクティブな設計整合</strong>: エージェントがプロジェクトのビュー構造、Foundation Modelsのドキュメントを解析。プラン作成前に「選択肢の数はブランチごとにいくつか（2または3択）」などの質問を開発者に投げかけ、整合をとった上で設計図（SwiftData構造ダイアグラムを含む）を出力。</li>
+<li><strong>ビューファースト開発</strong>: <code>StorySetupSheet</code> → <code>StoryChoiceBar</code> → <code>StoryView</code> の順でビューコンポーネントを先行構築し、プレビューを生成。</li>
+<li><strong>モデルと状態永続化の接続</strong>: Foundation Modelsの <code>@Generable</code> と <code>@Guide</code> アノテーションを使用し、<code>LanguageModelSession</code> を介して生成データを <code>SwiftData</code>（<code>storySessionJSON</code>）にシームレスに永続化。</li>
+</ol>
+<h3 id="エージェントによるテストとデバッグ">エージェントによるテストとデバッグ</h3>
+<p>デバイス上での動作確認において、エージェントは自らシミュレータを操作してバグを検出し、その修正プロセスを自動実行します。</p>
+<ul>
+<li><strong>バグ検出と自動修正</strong>:
+<ul>
+<li>プロジェクト名が重複して文章に埋め込まれるバグや、選択肢が固定されるバグを検知し、<code>StoryViewModel</code> の生成プロンプトとツールバインドを修正。</li>
+</ul>
+</li>
+<li><strong>ローカライズ自動化</strong>:
+<ul>
+<li>文字列カタログ（String Catalog）を解析し、アプリ内のすべての表示テキスト（90箇所）をフランス語へバッチ翻訳・適用。</li>
+</ul>
+</li>
+</ul>
+<h4 id="クラッシュログの解析と修正">クラッシュログの解析と修正</h4>
+<p>エージェントは、Xcodeに表示されたデバイス上の上位クラッシュ一覧からクラッシュ原因を特定し、コードの修正まで完結させます。</p>
+<p><img src="images/xcode_crash_reporter_logs.jpg" alt="Xcode Crash Reporter Logs"></p>
+<hr>
+<h2 id="10-まとめ">10. まとめ</h2>
+<p>WWDC26のPlatforms State of the Unionで示された内容は、AIモデルを単にAPIで叩く存在から、<code>Dynamic Profile</code> や <code>Core AI</code>、<code>App Intents</code> システムスキーマによってOSレベルで完全に統合された <strong>「インテリジェント・プラットフォーム」</strong> への飛躍です。</p>
+<p>また、デベロッパが向き合う統合開発環境であるXcode自体も、<code>Agent Client Protocol</code> や <code>Device Hub</code>、<code>テーマカスタマイズ</code> によって、エージェントと人間がシームレスに並行作業できるパーソナルな仕事場へと刷新されています。
+これらのアップデートは、最新のXcode 26およびXcode 27ベータ版を導入することで順次キャッチアップ可能です。</p>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/import-icon-composer-icons-into-xcode-project/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/import-icon-composer-icons-into-xcode-project/icons.png" class="feed-item-image" alt="Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む" width="300"></div>
+
+    <span class="feed-item-title">Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</span>
+    <span class="feed-item-date">2025年6月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc25-visionos-widget-summary/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-visionos-widget-summary/top.png" class="feed-item-image" alt="WWDC25 visionOS用Widgetについてのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 visionOS用Widgetについてのまとめ</span>
+    <span class="feed-item-date">2025年6月16日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc26_platforms_state_of_the_union/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc26_platforms_state_of_the_union/images/apple_intelligence_architecture.jpg" class="feed-item-image" alt="WWDC26 Platforms State of the Unionのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC26 Platforms State of the Unionのまとめ</span>
+    <span class="feed-item-date">2026年6月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/import-icon-composer-icons-into-xcode-project/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/import-icon-composer-icons-into-xcode-project/icons.png" class="feed-item-image" alt="Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む" width="300"></div>
+
+    <span class="feed-item-title">Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</span>
+    <span class="feed-item-date">2025年6月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-visionos-widget-summary/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-visionos-widget-summary/top.png" class="feed-item-image" alt="WWDC25 visionOS用Widgetについてのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 visionOS用Widgetについてのまとめ</span>
+    <span class="feed-item-date">2025年6月16日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-ios-build-run/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-ios-build-run/top.png" class="feed-item-image" alt="CursorでiOSアプリのBuild&amp;Run" width="300"></div>
+
+    <span class="feed-item-title">CursorでiOSアプリのBuild&amp;Run</span>
+    <span class="feed-item-date">2025年5月20日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/cursor-swift-format/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/cursor-swift-format/top.png" class="feed-item-image" alt="Cursor/VSCodeで編集中にswift-format" width="300"></div>
+
+    <span class="feed-item-title">Cursor/VSCodeで編集中にswift-format</span>
+    <span class="feed-item-date">2025年5月14日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>
