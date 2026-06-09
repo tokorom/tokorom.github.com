@@ -377,4 +377,3 @@ enum CraftStage: CaseIterable {
 WWDC26のPlatforms State of the Unionで示された内容は、AIモデルを単にAPIで叩く存在から、`Dynamic Profile` や `Core AI`、`App Intents` システムスキーマによってOSレベルで完全に統合された **「インテリジェント・プラットフォーム」** への飛躍です。
 
 また、デベロッパが向き合う統合開発環境であるXcode自体も、`Agent Client Protocol` や `Device Hub`、`テーマカスタマイズ` によって、エージェントと人間がシームレスに並行作業できるパーソナルな仕事場へと刷新されています。
-これらのアップデートは、最新のXcode 26およびXcode 27ベータ版を導入することで順次キャッチアップ可能です。
