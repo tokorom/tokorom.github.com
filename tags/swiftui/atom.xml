@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 16 Jun 2025 18:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jun 2026 12:00:00 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swiftui/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WWDC26 Platforms State of the Unionのまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/</link>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/</guid>
+      <description>Platforms State of the Union - WWDC26 WWDC26のセッション Platforms State of the Union で発表された、Appleプラットフォームの最新テクノロジー、フレームワーク、開発ツールのアップデート内容を技術アーカイブとして整理します。
+今年度のアップデートは、「Apple Intelligenceの進化」、「プラットフォームの機能向上（デザイン・Swift/SwiftUI）」、「デベロッパの生産性強化（Xcode・AIエージェント）」 の3つを主要な柱として構成されています。
+1. Apple Intelligence &amp;amp; 生成AIインテグレーション Apple Intelligenceのコアとなるのは、オンデバイスおよびプライベートクラウドで安全に動作する最新の Apple Foundation Model です。
+Foundation Model フレームワーク Foundation Modelフレームワークを介して、Apple Intelligenceを支えるLLMへSwift APIから直接アクセス可能です。
+マルチモーダル入力の対応: テキストに加え、プロンプトへの画像添付による画像認識機能が追加されました。 Visionフレームワークの統合: OCR（光学文字認識）やデバイス上での高速なバーコード認識機能など、Visionの専門ツールがモデルのツールとして利用可能になりました。 プライベートクラウドの無償開放: App Storeでのダウンロード数が200万以下のデベロッパアカウントに対し、プライベートクラウド上のApple Foundation ModelをクラウドAPIコストなしで利用可能にしました。 サードパーティ製サーバーモデルのサポート: ClaudeやGeminiなどの外部LLMへの呼び出しに対応。ツールコーリングやガイド付き生成などの高度な機能も制御できます。 Language Model プロトコル: プロトコルに準拠することで、開発者は任意のモデルプロバイダのSwiftパッケージを作成し、アプリに最適なモデルを自由に選択可能です。 オープンソース化: 今夏後半にFoundation Modelフレームワーク自体をオープンソース化し、サーバーサイドを含むマルチプラットフォームで同じSwift APIを利用可能にする予定です。 Platforms State of the Union (Session Video) Dynamic Profile 複雑なワークフローやマルチエージェントを少ないコードで構築するための新しい宣言型APIです。LanguageModelSession を継続的に更新し、状況に応じてProfile（AIエージェントの役割、インストラクション、使用するツールやモデル）を切り替えることができます。
+同じセッション内でモデルやプロファイルを切り替えても、単一の連続したトランスクリプト（会話履歴）が共有されるため、少ないプロンプトで文脈に沿った回答が得られます。
+struct CraftProfile: LanguageModelSession.DynamicProfile { var viewModel: CraftOrchestrator var body: some DynamicProfile { switch viewModel.</description>
+    </item>
+    
     <item>
       <title>WWDC25 visionOS用Widgetについてのまとめ</title>
       <link>https://www.tokoro.me/posts/wwdc25-visionos-widget-summary/</link>

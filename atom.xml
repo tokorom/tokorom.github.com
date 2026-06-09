@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 18 Jun 2025 19:00:37 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 12:00:00 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,26 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WWDC26 Platforms State of the Unionのまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/</link>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/</guid>
+      <description>
+        Platforms State of the Union - WWDC26 WWDC26のセッション Platforms State of the Union で発表された、Appleプラットフォームの最新テクノロジー、フレームワーク、開発ツールのアップデート内容を技術アーカイブとして整理します。
+今年度のアップデートは、「Apple Intelligenceの進化」、「プラットフォームの機能向上（デザイン・Swift/SwiftUI）」、「デベロッパの生産性強化（Xcode・AIエージェント）」 の3つを主要な柱として構成されています。
+1. Apple Intelligence &amp;amp; 生成AIインテグレーション Apple Intelligenceのコアとなるのは、オンデバイスおよびプライベートクラウドで安全に動作する最新の Apple Foundation Model です。
+Foundation Model フレームワーク Foundation Modelフレームワークを介して、Apple Intelligenceを支えるLLMへSwift APIから直接アクセス可能です。
+マルチモーダル入力の対応: テキストに加え、プロンプトへの画像添付による画像認識機能が追加されました。 Visionフレームワークの統合: OCR（光学文字認識）やデバイス上での高速なバーコード認識機能など、Visionの専門ツールがモデルのツールとして利用可能になりました。 プライベートクラウドの無償開放: App Storeでのダウンロード数が200万以下のデベロッパアカウントに対し、プライベートクラウド上のApple Foundation ModelをクラウドAPIコストなしで利用可能にしました。 サードパーティ製サーバーモデルのサポート: ClaudeやGeminiなどの外部LLMへの呼び出しに対応。ツールコーリングやガイド付き生成などの高度な機能も制御できます。 Language Model プロトコル: プロトコルに準拠することで、開発者は任意のモデルプロバイダのSwiftパッケージを作成し、アプリに最適なモデルを自由に選択可能です。 オープンソース化: 今夏後半にFoundation Modelフレームワーク自体をオープンソース化し、サーバーサイドを含むマルチプラットフォームで同じSwift APIを利用可能にする予定です。 Platforms State of the Union (Session Video) Dynamic Profile 複雑なワークフローやマルチエージェントを少ないコードで構築するための新しい宣言型APIです。LanguageModelSession を継続的に更新し、状況に応じてProfile（AIエージェントの役割、インストラクション、使用するツールやモデル）を切り替えることができます。
+同じセッション内でモデルやプロファイルを切り替えても、単一の連続したトランスクリプト（会話履歴）が共有されるため、少ないプロンプトで文脈に沿った回答が得られます。
+struct CraftProfile: LanguageModelSession.DynamicProfile { var viewModel: CraftOrchestrator var body: some DynamicProfile { switch viewModel.
+      </description>
+      
+      <coverImage>https://www.tokoro.me/posts/wwdc26_platforms_state_of_the_union/images/apple_intelligence_architecture.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</title>
@@ -525,31 +545,6 @@ iOS 11 Programmingの第12章に掲載したものです https://peaks.cc/books/
       </description>
       
       <coverImage>https://www.tokoro.me/images/iosdc2020/top.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>自宅のインターネット接続環境を改善して通信速度を30Mbpsから400Mbpsにした経緯</title>
-      <link>https://www.tokoro.me/posts/improve-my-internet-connection/</link>
-      <pubDate>Mon, 07 Sep 2020 16:56:36 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/improve-my-internet-connection/</guid>
-      <description>
-        Photo by Franck V. on Unsplash
-改善のきっかけ 自宅のインターネット接続環境は、改善前は通信速度が 10Mbps〜40Mbps 程度でした。
-これで特に不満もなく使っていたのですが、同じプロバイダーを使っている同僚の @kudakurage が
-「IPv6にしてWi-Fiルーターをいいやつに変えたら500Mbps以上出るようになったよ」
-と教えてくれたので、 絶対に負けてられない！ せっかくなので自分も改善してみよう！ と思ったのがきっかけです。
-前置き 私はネットワークに関する専門的な知識を持ち合わせていないため、おかしなことを書いたりしているかもしれません。
-間違いなどありましたらよろしければ Twitter までご連絡ください。
-以下、速度計測は全て Fast.com で実施しています 以下、速度計測は全て無線接続で実施しています 有線接続では計測していません Wi-Fi 6での計測はiPhone 11 Proを利用しています 改善前の状態 Key Value 通信速度 10〜40Mbps プロバイダー Interlink ZOOT NEXT IP IPv4 接続方式 PPPoE LANケーブル CAT6のフラットケーブル Wi-Fiルーター Apple AirMac Time Capsule Wi-Fi規格 Wi-Fi 5 (11ac) 上で同僚と同じプロバイダーと書きましたが、正確には「IIJmioひかり」と固定IP用に「Interlink ZOOT NEXT」の2つのプロバイダーを契約しており、同僚は「IIJmioひかり」を常用していて私は「Interlink ZOOT NEXT」を常用していました。というのに後から気づいたため、はじめはInterlinkのほうで計測しています。IIJmioのほうに切り替えても速度はそれほど変わらなかった記憶があります。
-LANケーブルだけ変えた後 せっかくなのでいっきに全部変えてしまうのでなく、１要素ずつ変更して速度計測することにしました。
-まず一発目に「これは効果はないだろうなあ」と思いつつも、LANケーブルだけ新調しました。 光回線の終端装置（ONU）とWi-FiルーターをつなぐLANケーブルです。
-LANケーブルを新しいものに変えて計測したところ&amp;hellip;
-いきなり最大 130Mbps まで速度が跳ね上がってしまいました。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/improve-my-internet-connection/top.jpg</coverImage>
       
     </item>
     
