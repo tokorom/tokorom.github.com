@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iPadOS on TOKOROM BLOG</title>
+    <link>https://www.tokoro.me/tags/ipados/</link>
+    <description>Recent content in iPadOS on TOKOROM BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 09 Jun 2026 14:33:32 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/ipados/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WWDC26 SwiftUIの新機能のまとめ</title>
+      <link>https://www.tokoro.me/posts/wwdc26_whats_new_in_swiftui/</link>
+      <pubDate>Tue, 09 Jun 2026 14:33:32 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc26_whats_new_in_swiftui/</guid>
+      <description>WWDC26のセッション SwiftUIの新機能 で紹介されたSwiftUIの主要なアップデートをまとめます。
+SwiftUIの新機能 0. はじめにまとめ ざっくりとは以下のアップデートがあります。
+Liquid Glassが改善 ドキュメントベースのアプリが作りやすく 全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように confirmationDialogとalertでitem-bindingが使えるように AsyncImageのcache対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 17 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でリビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
+Liquid Glassは洗練された外観を持ち、新しいLiquid Glassスライダーに自動的に対応してティントを調整します。
+macOSでは、Liquid Glassのカスタム要素を「インタラクティブ」としてマークすると、ユーザーのクリックにより流動的に反応します。これはマウスポインターでうまく動作するように最適化されています。
+ウィンドウの制御とアクティブ状態の検知 iPadやMacでは、非アクティブなウィンドウは独特の外観になり、アイコンとテキストが自動的に薄くなってアクティブなウィンドウが区別しやすくなります。
+この動作を細かく制御するために、新しい環境変数 appearsActive が導入されました。ウィンドウが非アクティブのときに、サイドバーのカスタムアカウントボタンなどの不透明度を下げるカスタマイズが可能です。
+struct SidebarFooterView: View { @Environment(\.appearsActive) private var appearsActive var body: some View { MyAccountView() .opacity(appearsActive ? 1 : 0.5) } } appearsActive メニューバーのカスタマイズ iPadとMacのメニューバーには、デフォルトで最小限のアイコンが表示され、主要なアクション専用になります。しかし、labelStyle(.</description>
+    </item>
+    
+  </channel>
+</rss>
