@@ -7,7 +7,7 @@
 
 <meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="WWDC26のセッション SwiftUIの新機能 で紹介されたSwiftUIの主要なアップデートをまとめます。
 SwiftUIの新機能 0. はじめにまとめ ざっくりとは以下のアップデートがあります。
-Liquid Glassが改善 ドキュメントベースのアプリが作りやすく 全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように confirmationDialogとalertでitem-bindingが使えるように AsyncImageのcache対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 17 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でリビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
+Liquid Glassが改善 ドキュメントベースのアプリが作りやすく あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応 confirmationDialogとalertでitem-bindingが使えるように AsyncImageのHTTPキャッシュ対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 27 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
 Liquid Glassは洗練された外観を持ち、新しいLiquid Glassスライダーに自動的に対応してティントを調整します。
 macOSでは、Liquid Glassのカスタム要素を「インタラクティブ」としてマークすると、ユーザーのクリックにより流動的に反応します。これはマウスポインターでうまく動作するように最適化されています。
 ウィンドウの制御とアクティブ状態の検知 iPadやMacでは、非アクティブなウィンドウは独特の外観になり、アイコンとテキストが自動的に薄くなってアクティブなウィンドウが区別しやすくなります。
@@ -18,7 +18,7 @@ struct SidebarFooterView: View { @Environment(\.appearsActive) private var appea
 <meta content="website" property="og:type">
 <meta content="WWDC26 SwiftUIの新機能のまとめ | TOKOROM BLOG" property="og:title"><meta content="WWDC26のセッション SwiftUIの新機能 で紹介されたSwiftUIの主要なアップデートをまとめます。
 SwiftUIの新機能 0. はじめにまとめ ざっくりとは以下のアップデートがあります。
-Liquid Glassが改善 ドキュメントベースのアプリが作りやすく 全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように confirmationDialogとalertでitem-bindingが使えるように AsyncImageのcache対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 17 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でリビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
+Liquid Glassが改善 ドキュメントベースのアプリが作りやすく あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応 confirmationDialogとalertでitem-bindingが使えるように AsyncImageのHTTPキャッシュ対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 27 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
 Liquid Glassは洗練された外観を持ち、新しいLiquid Glassスライダーに自動的に対応してティントを調整します。
 macOSでは、Liquid Glassのカスタム要素を「インタラクティブ」としてマークすると、ユーザーのクリックにより流動的に反応します。これはマウスポインターでうまく動作するように最適化されています。
 ウィンドウの制御とアクティブ状態の検知 iPadやMacでは、非アクティブなウィンドウは独特の外観になり、アイコンとテキストが自動的に薄くなってアクティブなウィンドウが区別しやすくなります。
@@ -99,16 +99,16 @@ SwiftUIの新機能
 <ul>
 <li>Liquid Glassが改善</li>
 <li>ドキュメントベースのアプリが作りやすく</li>
-<li>全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように</li>
+<li>あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応</li>
 <li>confirmationDialogとalertでitem-bindingが使えるように</li>
-<li>AsyncImageのcache対応</li>
+<li>AsyncImageのHTTPキャッシュ対応</li>
 <li>@Stateの改善</li>
 <li>@ContentBuilderによる型チェックの高速化</li>
-<li>Xcode 17 Agent Skillsの導入</li>
+<li>Xcode 27 Agent Skillsの導入</li>
 </ul>
 <h2 id="1-refreshed-look-and-feel洗練された外観と操作感">1. Refreshed look and feel（洗練された外観と操作感）</h2>
 <h3 id="liquid-glassデザインの自動更新">Liquid Glassデザインの自動更新</h3>
-<p>iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でリビルドするだけで、アプリに刷新された <strong>Liquid Glassデザイン</strong> が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。</p>
+<p>iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でビルドするだけで、アプリに刷新された <strong>Liquid Glassデザイン</strong> が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。</p>
 <p><img src="images/liquid_glass_slider_tint.jpg" alt="liquid_glass_slider_tint"></p>
 <p>Liquid Glassは洗練された外観を持ち、新しいLiquid Glassスライダーに自動的に対応してティントを調整します。</p>
 <p><img src="images/macos_interactive_hover.jpg" alt="macos_interactive_hover"></p>
@@ -147,7 +147,7 @@ appearsActive
 <p><img src="images/store_menu_item_icon.jpg" alt="store_menu_item_icon"></p>
 <h3 id="iphoneアプリのサイズ変更対応">iPhoneアプリのサイズ変更対応</h3>
 <p>iOS 27では、iPhoneアプリもサイズ変更可能（リサイズ対応）になります。</p>
-<p>Xcode 27のライブプレビューにリサイズハンドルが追加され、iPhone Mirroringの動作や、iPadでiPhoneアプリとして実行された場合のレイアウト変更（サイズクラスの対応）を即座にプレビュー・テストできるようになりました。</p>
+<p>Xcode 27のライブプレビューにリサイズハンドルが追加され、iPhone Mirroringでの動作や、iPadでiPhoneアプリとして実行された場合のレイアウト変更（サイズクラスの対応）を即座にプレビュー・テストできるようになりました。</p>
 <p><img src="images/ipad_iphone_app_resize.jpg" alt="ipad_iphone_app_resize"></p>
 <h4 id="uikitとswiftuiが混在するアプリの注意点">UIKitとSwiftUIが混在するアプリの注意点</h4>
 <p>画面のジオメトリを正しく決定する方法、ビューのサイズ設定にidiomではなくサイズクラスを使用すること、インターフェースの向きの変更への対応などを考慮する必要があります。詳細は「Modernize your UIKit app」セッションを参照してください。</p>
@@ -307,6 +307,8 @@ struct StickerPlacements { /* ... */ }
 <h4 id="readabledocumentによる読み込み">ReadableDocumentによる読み込み</h4>
 <p><code>WritableDocument</code> に対応する対として、読み込み側には <code>ReadableDocument</code> プロトコルと <code>DocumentReader</code> が提供され、重いディスク読み込み処理をバックグラウンドで処理できます。</p>
 <p><img src="images/snapshot_writer_reader_concept.jpg" alt="snapshot_writer_reader_concept"></p>
+<h3 id="ドキュメントurlへのダイレクトアクセス">ドキュメントURLへのダイレクトアクセス</h3>
+<p>今回のDocument APIでは、<code>FileDocument</code> / <code>ReferenceFileDocument</code> をベースにしたドキュメントで、ドキュメントURLへ直接アクセスするためのサポートも追加されています。大きなドキュメントを扱う場合や、ドキュメント内のリソースを必要に応じて読み書きしたい場合に、上記のスナップショットベースの読み書き最適化と組み合わせて使える改善です。</p>
 <h3 id="複数フォーマットでの保存サポート">複数フォーマットでの保存サポート</h3>
 <p>同じドキュメントを、独自のパッケージ形式だけでなくPNG画像など他のフォーマットでもエクスポートできるように、<code>writableContentTypes</code> に複数のUTTypeを登録できます。</p>
 <pre><code class="language-swift">@Observable
@@ -450,7 +452,7 @@ swipeActionsContainer
 <h2 id="4-data-flow-and-performanceデータフローとパフォーマンス">4. Data flow and performance（データフローとパフォーマンス）</h2>
 <h3 id="asyncimageのhttpキャッシングの標準サポート">AsyncImageのHTTPキャッシングの標準サポート</h3>
 <p>これまで <code>AsyncImage</code> は画像をメモリに保持していなかったため、画面外にスクロールして戻ると再読み込みが発生していました。</p>
-<p>iOS 27 / macOS 17 以降では、<code>AsyncImage</code> が標準の <strong>HTTPキャッシュ機能</strong> を自動的にサポートし、キャッシュヘッダーを尊重してデータをキャッシュするようになりました。コードの変更は不要で、すべてのアプリで自動的に有効化されます。</p>
+<p>iOS 27 / macOS 17 以降では、<code>AsyncImage</code> が標準の <strong>HTTPキャッシュ機能</strong> を自動的にサポートし、キャッシュヘッダーを尊重してデータをキャッシュするようになりました。コードの変更は不要で、自動的に有効化されます。</p>
 <h4 id="ダウンロードのカスタマイズ">ダウンロードのカスタマイズ</h4>
 <p>キャッシュポリシーを個別に設定する場合や、長期のカスタムキャッシュを使用する場合は、独自の <code>URLRequest</code> やカスタム <code>URLSession</code> を定義して <code>asyncImageURLSession</code> モディファイアに渡すことができます。</p>
 <pre><code class="language-swift">@Observable class StickerStore {
@@ -479,7 +481,7 @@ asyncImageURLSession
 </div>
 <h3 id="observableクラスの-state初期化がlazyに">@Observableクラスの @State初期化がlazyに</h3>
 <p>親ビューの再レンダリングによってビューの構造体が再作成される際、従来の挙動では <code>@State</code> 内に定義された <code>@Observable</code> クラスインスタンスもその都度新しく初期化され（その後破棄される）、不要なパフォーマンスオーバーヘッドとなっていました。</p>
-<p>Xcode27以降では、<code>@State</code> プロパティでインスタンス化されるクラスが自動的に <strong>lazy（遅延初期化）</strong> となり、ビューのライフタイム中に一度だけ初期化されるように最適化されました。</p>
+<p>Xcode27以降では、<code>@State</code> が <code>DynamicProperty</code> からマクロへ変わったことで、<code>@State</code> プロパティでインスタンス化されるクラスが <strong>lazy（遅延初期化）</strong> となり、ビューのライフタイム中に一度だけ初期化されるように最適化されました。</p>
 <pre><code class="language-swift">@Observable class StickerStore { }
 
 struct StickerStoreView: View {
@@ -495,6 +497,7 @@ struct StickerStoreView: View {
 <p><img src="images/state_lazy_initialization_concept.jpg" alt="state_lazy_initialization_concept"></p>
 <p>この挙動変更は、<code>@Observable</code> が導入された最初のOSバージョン（iOS 17、macOS 14 等）まで自動的に <strong>バックポート適用</strong> されます。</p>
 <p><img src="images/state_lazy_backport_os.jpg" alt="state_lazy_backport_os"></p>
+<p>なお、<code>@State</code> にデフォルト値を指定しつつ <code>init</code> 内でも同じプロパティへ代入しているコードでは、マクロ化の影響で source-breaking change になる場合があります。その場合は不要なデフォルト値を削除し、<code>init</code> 内の初期化に一本化します。</p>
 <h3 id="コンパイラ型チェックの高速化と-contentbuilder">コンパイラ型チェックの高速化と ContentBuilder</h3>
 <p>ビューが深くネストされた構造（<code>Section</code> や <code>Group</code>、<code>ForEach</code> の入れ子）では、コンパイラがどのオーバーロード候補（ビュービルダーかテーブル行ビルダーかなど）を使用すべきか判断するために、膨大な型チェックの組み合わせパスを検証する必要があり、ビルド時に「型チェックの時間が長すぎます」というコンパイルエラーが発生することがありました。</p>
 <p><img src="images/type_checking_single_path.jpg" alt="type_checking_single_path"></p>
@@ -505,14 +508,14 @@ func stickerLibraryView() -&gt; some View {
   // ...
 }
 </code></pre>
-<p><code>ContentBuilder</code> は既存の <code>ViewBuilder</code> の進化形で、iOSの最小デプロイターゲットに関わらず使用でき、Xcode 27 を使用したSwiftUIの型チェックのビルドパフォーマンスを大幅に向上させます。</p>
+<p><code>ContentBuilder</code> は既存の <code>ViewBuilder</code> の進化形で、最小デプロイメントターゲットに関わらず使用でき、Xcode 27 を使用したSwiftUIの型チェックのビルドパフォーマンスを大幅に向上させます。</p>
 <div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
 <a href="https://developer.apple.com/documentation/swiftui/contentbuilder">
 ContentBuilder
 </a>
 </div>
-<h3 id="xcode-27-エージェントスキルagent-skills">Xcode 27 エージェントスキル（Agent Skills）</h3>
+<h2 id="5-xcode-27-エージェントスキルagent-skills">5. Xcode 27 エージェントスキル（Agent Skills）</h2>
 <p><img src="images/agent_skills_export_command.jpg" alt="agent_skills_export_command"></p>
 <p>開発環境の支援機能として、Xcode 27 の Coding Assistant 向けに新しい2つのエージェントスキルが導入されました。</p>
 <ul>
@@ -527,12 +530,12 @@ ContentBuilder
 <ul>
 <li>Liquid Glassが改善</li>
 <li>ドキュメントベースのアプリが作りやすく</li>
-<li>全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように</li>
+<li>あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応</li>
 <li>confirmationDialogとalertでitem-bindingが使えるように</li>
-<li>AsyncImageのcache対応</li>
+<li>AsyncImageのHTTPキャッシュ対応</li>
 <li>@Stateの改善</li>
 <li>@ContentBuilderによる型チェックの高速化</li>
-<li>Xcode 17 Agent Skillsの導入</li>
+<li>Xcode 27 Agent Skillsの導入</li>
 </ul>
 
   </div>
