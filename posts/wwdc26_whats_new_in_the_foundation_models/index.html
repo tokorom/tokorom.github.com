@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<title>WWDC26 Foundation Modelフレームワークの新機能 | TOKOROM BLOG</title>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible"><meta name="description" content="WWDC26のセッション Foundation Modelフレームワークの新機能 で紹介された内容を、後から見返しやすいように整理します。
+Appleの説明では、Foundation Modelsは OS内外との統合、より幅広いモデル対応、そして エージェント体験を構築するための新しいプリミティブ が大きなテーマです。具体的には、モデルのアップデート、Vision対応、Private Cloud Compute、モデル抽象化、システムツール、Dynamic Profile、Evaluations、Mac向けツール、Python SDK、オープンソース化が紹介されています。
+Foundation Models frameworkのオープンソース化 Foundation Modelsフレームワークは、本セッションで紹介された多くの新しいAPIを含めてオープンソースになります。コアフレームワークに加えて、次のOSバージョンアップを待たずに更新される Foundation Models framework utilities も公開されます。
+関連ドキュメント: Foundation Models Documentation / Foundation Models updates / Foundation Models framework utilitiesのGitHubリポジトリ
+新しいオンデバイスモデル このリリースでは、新しいオンデバイスモデルが登場します。Appleの説明では、ゼロから再構築され、知性、ロジック、ツール呼び出しが向上しています。
+iOS 26.4では、モデルのコンテキストサイズを検査するAPIと、命令・プロンプト・トランスクリプトのトークン数を数えるAPIがリリースされました。今後はこれらを活用して、アプリを実行中のハードウェアに適応させることが推奨されています。
+// Context size and token counting let model = SystemLanguageModel() print(model.contextSize) // 8192 let count = try await model.tokenCount(for: &quot;What are the Japanese characters for origami?&quot;) print(count) ガードレールも改善されています。AppleはiOS 26.4で誤検知を減らす調整を行い、iOS 27でもさらに改善を続けていると説明しています。"><meta name="author" content="tokorom">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@tokorom" name="twitter:site">
+<meta content="website" property="og:type">
+<meta content="WWDC26 Foundation Modelフレームワークの新機能 | TOKOROM BLOG" property="og:title"><meta content="WWDC26のセッション Foundation Modelフレームワークの新機能 で紹介された内容を、後から見返しやすいように整理します。
+Appleの説明では、Foundation Modelsは OS内外との統合、より幅広いモデル対応、そして エージェント体験を構築するための新しいプリミティブ が大きなテーマです。具体的には、モデルのアップデート、Vision対応、Private Cloud Compute、モデル抽象化、システムツール、Dynamic Profile、Evaluations、Mac向けツール、Python SDK、オープンソース化が紹介されています。
+Foundation Models frameworkのオープンソース化 Foundation Modelsフレームワークは、本セッションで紹介された多くの新しいAPIを含めてオープンソースになります。コアフレームワークに加えて、次のOSバージョンアップを待たずに更新される Foundation Models framework utilities も公開されます。
+関連ドキュメント: Foundation Models Documentation / Foundation Models updates / Foundation Models framework utilitiesのGitHubリポジトリ
+新しいオンデバイスモデル このリリースでは、新しいオンデバイスモデルが登場します。Appleの説明では、ゼロから再構築され、知性、ロジック、ツール呼び出しが向上しています。
+iOS 26.4では、モデルのコンテキストサイズを検査するAPIと、命令・プロンプト・トランスクリプトのトークン数を数えるAPIがリリースされました。今後はこれらを活用して、アプリを実行中のハードウェアに適応させることが推奨されています。
+// Context size and token counting let model = SystemLanguageModel() print(model.contextSize) // 8192 let count = try await model.tokenCount(for: &quot;What are the Japanese characters for origami?&quot;) print(count) ガードレールも改善されています。AppleはiOS 26.4で誤検知を減らす調整を行い、iOS 27でもさらに改善を続けていると説明しています。" property="og:description"><meta content="https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/images/model-provider-integrations.jpg" property="og:image"><meta content="https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/"  property="og:url"><meta content="TOKOROM BLOG" property="og:site_name">
+<link href="/images/favicon.ico" rel="shortcut icon">
+
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+    
+
+
+
+    
+        
+    
+        
+            <link rel="stylesheet" href="/dist/main.658097b14612c65a4f31.min.css">
+        
+    
+
+
+
+
+  <link rel='canonical' href='https://spinners.work/posts/wwdc26_whats_new_in_the_foundation_models/'>
+</head>
+<body>
+    
+
+    
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" id="navbar-main-menu">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="https://www.tokoro.me"><img src="/images/top_logo.png" alt="TOKOROM" height="30"></a>
+    </div>
+</nav>
+
+
+<article class="content-page entry-body">
+  <h1 class="page-title">WWDC26 Foundation Modelフレームワークの新機能</h1>
+
+  <div class="entry-data">
+    <span class="entry-data-date">2026年6月10日</span>
+  </div><div class="tags my-3"><a class="badge badge-pill badge-light border mr-2" href="/tags/wwdc">
+              WWDC
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/swift">
+              Swift
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/foundationmodels">
+              FoundationModels
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/appleintelligence">
+              AppleIntelligence
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/ios">
+              iOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/macos">
+              macOS
+          </a>
+          /<a class="badge badge-pill badge-light border mr-2" href="/tags/watchos">
+              watchOS
+          </a>
+          /</div><div class="content">
+      <p>WWDC26のセッション <a href="https://developer.apple.com/jp/videos/play/wwdc2026/241/">Foundation Modelフレームワークの新機能</a> で紹介された内容を、後から見返しやすいように整理します。</p>
+<p>Appleの説明では、Foundation Modelsは <strong>OS内外との統合</strong>、<strong>より幅広いモデル対応</strong>、そして <strong>エージェント体験を構築するための新しいプリミティブ</strong> が大きなテーマです。具体的には、モデルのアップデート、Vision対応、Private Cloud Compute、モデル抽象化、システムツール、Dynamic Profile、Evaluations、Mac向けツール、Python SDK、オープンソース化が紹介されています。</p>
+<h2 id="foundation-models-frameworkのオープンソース化">Foundation Models frameworkのオープンソース化</h2>
+<p>Foundation Modelsフレームワークは、本セッションで紹介された多くの新しいAPIを含めてオープンソースになります。コアフレームワークに加えて、次のOSバージョンアップを待たずに更新される <a href="https://github.com/apple/foundation-models-utilities"><strong>Foundation Models framework utilities</strong></a> も公開されます。</p>
+<p><img src="images/foundation-models-framework-utilities.jpg" alt="Foundation Models framework utilities"></p>
+<p>関連ドキュメント: <a href="https://developer.apple.com/documentation/foundationmodels">Foundation Models Documentation</a> / <a href="https://developer.apple.com/documentation/Updates/FoundationModels">Foundation Models updates</a> / <a href="https://github.com/apple/foundation-models-utilities">Foundation Models framework utilitiesのGitHubリポジトリ</a></p>
+<h2 id="新しいオンデバイスモデル">新しいオンデバイスモデル</h2>
+<p>このリリースでは、新しいオンデバイスモデルが登場します。Appleの説明では、ゼロから再構築され、知性、ロジック、ツール呼び出しが向上しています。</p>
+<p>iOS 26.4では、モデルのコンテキストサイズを検査するAPIと、命令・プロンプト・トランスクリプトのトークン数を数えるAPIがリリースされました。今後はこれらを活用して、アプリを実行中のハードウェアに適応させることが推奨されています。</p>
+<pre><code class="language-swift">// Context size and token counting
+  
+  let model = SystemLanguageModel()
+  print(model.contextSize)
+  // 8192
+  
+  let count = try await model.tokenCount(for: &quot;What are the Japanese characters for origami?&quot;)
+  print(count)
+</code></pre>
+<p>ガードレールも改善されています。AppleはiOS 26.4で誤検知を減らす調整を行い、iOS 27でもさらに改善を続けていると説明しています。</p>
+<h2 id="vision-image-understanding">Vision: image understanding</h2>
+<p>オンデバイスモデルにはVision機能も追加されました。これにより、テキストとともに画像添付ファイルをプロンプトへ挿入し、モデルに画像について質問できます。</p>
+<p><img src="images/vision-image-understanding-prompt.jpg" alt="画像添付を使ったプロンプト"></p>
+<pre><code class="language-swift">// Attachable image types
+
+  let response = try await session.respond {
+      &quot;What animal is this?&quot;
+      Attachment(UIImage(...))
+  }
+</code></pre>
+<p>画像添付ファイルは、<code>UIImage</code>、<code>NSImage</code>、<code>CGImage</code>、Core Image型、Pixel Buffer、ファイルURLなど、さまざまな型から作成できます。</p>
+<p>モデルはあらゆるサイズとアスペクト比の画像をサポートします。特定の形状へのトリミングやパディングは不要です。ただし、大きな画像ほどトークンを消費し、レイテンシが増加する点には注意が必要です。</p>
+<p>関連ドキュメント: <a href="https://developer.apple.com/documentation/FoundationModels/analyzing-images-with-multimodal-prompting">Analyzing images with multimodal prompting</a></p>
+<h2 id="private-cloud-compute">Private Cloud Compute</h2>
+<p>さらに処理能力が必要な場合は、新しい <a href="https://developer.apple.com/documentation/FoundationModels/adding-server-side-intelligence-with-private-cloud-compute"><code>PrivateCloudComputeLanguageModel</code></a> でAppleのサーバーモデルを利用できます。</p>
+<p><img src="images/private-cloud-compute-model.jpg" alt="Private Cloud Computeモデル"></p>
+<p>Private Cloud Computeモデルは、Apple Intelligence機能の多くを支えるモデルと同じ系統として説明されています。オンデバイスモデルより大きく、32,000トークンのコンテキストウィンドウを持ち、リーズニングにも対応します。</p>
+<p>Private Cloud Computeは、モデルのインスタンスを作成し、それを使って <code>LanguageModelSession</code> を初期化するだけで利用できます。プロンプト送信時には <code>contextOptions</code> でリーズニングレベルを指定できます。<code>ReasoningLevel</code> は、モデルが応答前に考える量を制御します。深いリーズニングは追加の計算と引き換えに、より良い応答を生成します。</p>
+<p>Appleは、Private Cloud Computeの利点として、アカウント設定・認証・APIキー保存が不要であること、プロンプトが保存されないこと、独立した研究者が検証できることを強調しています。</p>
+<p>また、Private Cloud Computeにより、Foundation ModelフレームワークをwatchOSにも展開できます。watchOS 27から、手首でも強力なインテリジェンス機能を利用できます。</p>
+<p>PCCはクラウドAPIコストなしで利用可能で、Appleの説明では「first-time downloadsが200万件未満」のデベロッパに提供されます。ユーザーは毎日PCCにアクセスでき、iCloud+に登録している場合は利用上限がさらに高くなります。なお、利用には対応OSやEntitlementの追加など条件があります。</p>
+<h2 id="model-abstraction-layer">Model abstraction layer</h2>
+<p><img src="images/language-model-protocol-implementations.jpg" alt="LanguageModelプロトコルと既存実装"></p>
+<p>刷新されたオンデバイスモデルとPrivate Cloud Computeモデルに加えて、Appleはモデル抽象化レイヤーを開放します。これは、ほぼあらゆる言語モデルをFoundation Modelフレームワークで使えるようにするためのものです。</p>
+<p>抽象化レイヤーは新しい <code>LanguageModel</code> プロトコルを中心に構築されます。関連する基本概念はApple公式の<a href="https://developer.apple.com/documentation/foundationmodels/languagemodelsession"><code>LanguageModelSession</code></a>ドキュメントでも確認できます。ローカルモデルとサーバーモデルのどちらも <code>LanguageModelSession</code> を支えられます。</p>
+<p><code>SystemLanguageModel</code> や <code>PrivateCloudComputeLanguageModel</code> はすでにこのプロトコルに準拠しています。さらに、MacのApple Neural EngineやGPUで多数のローカルモデルを実行するための <code>CoreAILanguageModel</code> と <code>MLXLanguageModel</code> もオープンソース化されます。</p>
+<p><img src="images/coreai-mlx-language-models.jpg" alt="CoreAIとMLXの言語モデル実装"></p>
+<h2 id="partner-model-integrations">Partner model integrations</h2>
+<p>Appleは、さまざまなフロンティアサーバーモデルへのアクセスも紹介しました。AnthropicとGoogleがSwiftパッケージを公開し、最新モデルへのアクセスを提供します。</p>
+<p><img src="images/third-party-model-integration.jpg" alt="サードパーティモデルの統合"></p>
+<p>利用方法は、Swift Package Managerで言語モデルパッケージをインポートし、使用するモデルを初期化して、セッション作成時に渡すだけです。以降の処理は同じです。</p>
+<p>一方で、サードパーティのサーバーモデルを使う場合は、認証と請求の両方をデベロッパが処理する必要があります。Appleは、アプリのバイナリに秘密鍵を保存せず、OAuthなどの安全な仕組みでアクセストークンを取得し、Keychainを使って安全に保存するよう説明しています。</p>
+<p>サードパーティモデル使用時は通常トークンごとに請求されるため、使用量を追跡できるAPIも追加されています。</p>
+<pre><code class="language-swift">// Inspecting usage
+  
+  let response = try await session.respond(
+      to: &quot;Recommend a craft that doesn't require scissors.&quot;,
+      contextOptions: ContextOptions(reasoningLevel: .light)
+  )
+
+  print(response.usage.input.totalTokenCount)
+  print(response.usage.input.cachedTokenCount)
+
+  print(response.usage.output.totalTokenCount)
+  print(response.usage.output.reasoningTokenCount)
+</code></pre>
+<p>セッションと応答には <code>usage</code> プロパティが追加され、入力・出力トークン数、キャッシュから読み込まれた入力トークン数、リーズニングに使用された応答トークン数を確認できます。</p>
+<h2 id="system-tools-vision-and-spotlight">System tools: Vision and Spotlight</h2>
+<p><code>LanguageModelSession</code> を強化するシステム提供のツールも追加されました。</p>
+<p>Foundation Modelsには2つのネイティブツールが追加されました。<code>BarcodeReaderTool</code> はバーコードから情報を読み取れるようにし、<code>OCRTool</code> は画像から構造化テキストを抽出できるようにします。どちらもVisionフレームワークの機能に支えられています。</p>
+<p>Spotlightを使った検索ツールも導入されます。これは完全ローカルなRetrieval-Augmented Generation（RAG）を実装するためのSpotlightベースの検索ツールとのことです。</p>
+<p><img src="images/spotlight-system-tool.jpg" alt="Spotlightを使ったシステムツール"></p>
+<p>RAGは、モデルに最新の個人的またはドメイン知識へのアクセスを与える技術です。このツールでは、Spotlightインデックスと特別に処理されたクエリを活用します。</p>
+<p><img src="images/retrieval-augmented-generation.jpg" alt="SpotlightによるRetrieval-Augmented Generation"></p>
+<h2 id="dynamic-profiles-for-agentic-apps">Dynamic Profiles for agentic apps</h2>
+<p>Dynamic Profileは、エージェント体験を構築するための新しいプリミティブです。</p>
+<p>関連ドキュメント: <a href="https://developer.apple.com/documentation/FoundationModels/composing-dynamic-sessions-with-instructions-and-profiles">Composing dynamic sessions with instructions and profiles</a></p>
+<p>従来の実装では、モードが変わるたびに元のトランスクリプトを取り出し、新しい命令とツールを持つセッションを作り直す必要がありました。</p>
+<p>Dynamic Profileは、それらを改善し、コンテキストで重要なことに集中できるようにする宣言的APIです。</p>
+<p>シンプルなDynamic Profileは、<code>LanguageModelSession.DynamicProfile</code> に準拠したstructとして宣言します。</p>
+<pre><code class="language-swift">// Describing the profile for craft app
+
+  struct CraftProfile: LanguageModelSession.DynamicProfile {
+      var body: some DynamicProfile {
+          Profile {
+              Instructions {
+                  &quot;&quot;&quot;
+                  You are an expert crafting assistant. \
+                  Record craft project image analyses   \
+                  using the recordImageAnalysis tool.
+                  &quot;&quot;&quot;
+              }
+              RecordImageAnalysisTool()
+          }
+      }
+  }
+
+  let session = LanguageModelSession(
+      profile: CraftProfile()
+  )
+</code></pre>
+<p><code>body</code> プロパティには <code>Profile</code> を含めます。<code>Profile</code> では、その時点でコンテキストに存在すべき命令とツールを指定できます。<code>LanguageModelSession</code> はDynamic Profileで初期化できます。</p>
+<h3 id="モデルと設定の動的な構成">モデルと設定の動的な構成</h3>
+<p>Dynamic Profileは、命令やツールだけでなく、モデルや設定も動的に切り替えられます。</p>
+<p><img src="images/dynamic-profile-routing-diagram.jpg" alt="Dynamic Profileによるモード切り替え"></p>
+<p>クラフト分析のような素早いタスクには <code>SystemLanguageModel</code> で十分です。一方、ブレインストーミングでは深い推論を設定したPrivate Cloud Computeを指定できます。</p>
+<p>これらの設定はModifierで記述します。</p>
+<pre><code class="language-swift">// Describing the profile for craft app
+  
+  struct CraftProfile: LanguageModelSession.DynamicProfile {
+      let states: CraftProjectStates
+
+      var body: some DynamicProfile {
+          switch states.mode {
+          case .craftAnalysis:
+              Profile {
+                  Instructions { /* ... */ }
+                  RecordImageAnalysisTool()
+                  SwitchModeTool(states: states)
+              }
+          case .brainstorm:
+              Profile {
+                  Instructions { /* ... */ }
+                  BrainstormRecordTool()
+              }
+              .model(states.privateCloudCompute)
+              .reasoningLevel(.deep)
+          }
+      }
+  }
+</code></pre>
+<p>ここでは、PCCを指定する <code>.model(...)</code> と、モデルに十分に考えさせる <code>.reasoningLevel(.deep)</code> が使われています。</p>
+<p>重要なのは、Dynamic Profileが常に単一のアクティブな <code>Profile</code> に解決されることです。条件分岐でどの <code>Profile</code> をアクティブにするかを選び、frameworkが移行を処理します。</p>
+<p><img src="images/dynamic-profile-demo.jpg" alt="Dynamic Profileのデモ画面"></p>
+<p>Appleは、このAPIを使用する際は、プライバシー境界、モデル機能、コストを考慮するよう説明しています。</p>
+<h2 id="evaluation-framework">Evaluation framework</h2>
+<p>言語モデルは本質的に非決定論的であるため、動作の予測が難しくなります。Evaluationsフレームワークは、インテリジェンス機能の品質を測定するための新しいSwiftフレームワークです。</p>
+<p>Evaluationフレームワークを使うと、プロンプトを調整しながら精度を定量化できます。Appleは、このフレームワークをアプリデベロッパのためのものとして説明しており、変更の統計的影響を理解し、自信を持ってアプリをリリースするために役立つとしています。</p>
+<p><img src="images/evaluation-editor.jpg" alt="Evaluationの編集画面"></p>
+<p>関連リンク: <a href="https://developer.apple.com/documentation/foundationmodels/evaluating-prompts-to-measure-performance-and-improve-model-responses">Evaluating prompts to measure performance and improve model responses</a></p>
+<h2 id="fm-command-line-tool">fm command line tool</h2>
+<p>macOS 27では、Foundation Modelsをコマンドラインで利用できます。<code>fm</code> CLIはApple Foundation Modelsを使う新しい方法で、端末からオンデバイスモデルとPCCにアクセスできます。</p>
+<p><code>fm chat</code> を使うと、アプリ機能のためにモデルを試せます。セッションでは「折り紙の文脈で谷折りとは何を意味するか？」を尋ねる例が示されました。</p>
+<p><img src="images/fm-chat-output.jpg" alt="fm chatの出力例"></p>
+<p><code>fm</code> はシェルスクリプトに組み込み、ドキュメントの要約、情報抽出、コンテンツ生成などにも使えます。例として、ランダムな名前の写真に対して、画像の内容に基づく説明的なファイル名を生成するデモが紹介されました。</p>
+<p><img src="images/fm-renaming-images-result.jpg" alt="画像内容に基づくファイル名生成"></p>
+<h2 id="foundation-models-sdk-for-python">Foundation Models SDK for Python</h2>
+<p>Pythonエコシステムで作業するデータサイエンティストや研究者向けには、<a href="https://github.com/apple/python-apple-fm-sdk">Foundation Models SDK for Python</a> が提供されます。GitHubの説明では、macOS上のApple Intelligenceの中核にあるオンデバイスモデルへアクセスするためのPythonバインディングです。</p>
+<p>Python SDKは、Swift Foundation Modelsフレームワークを動かすものと同じオンデバイスモデルへの直接アクセスを提供します。モデルの利用可能性を確認し、数行のPythonで応答を生成できます。</p>
+<pre><code class="language-swift"># Foundation Models SDK for Python
+  
+  import apple_fm_sdk as fm
+
+  model = fm.SystemLanguageModel()
+
+  # Check the model's availability
+  is_available, reason = model.is_available()
+
+  if is_available:
+
+      # Create a session
+      session = fm.LanguageModelSession(model=model)
+
+      # Generate a response
+      response = await session.respond(prompt=&quot;Hello!&quot;)
+      print(response)
+</code></pre>
+<p>SDKにはSwiftフレームワークのコア機能が含まれており、プロンプトから構造化された応答を得られます。</p>
+<h2 id="open-source-and-framework-utilities">Open source and framework utilities</h2>
+<p><a href="https://github.com/apple/foundation-models-utilities">Foundation Models framework utilities</a>には、LLMを使った新しいプラクティスを探索するためのビルディングブロックが含まれます。</p>
+<p>噛み砕いて言えば、最近のAIアプリでよく使われる仕組みを、OSリリースを待たずに試せる部品集という位置付けです。</p>
+<p>例えば、トランスクリプト管理のためのProfile Modifierや手続き型知識読み込みのためのスキルAPIを提供します。また、Chat Completions APIと互換性のあるインターフェースで利用できる言語モデルも提供します。</p>
+<p><img src="images/framework-utilities-building-blocks.jpg" alt="Foundation Models framework utilitiesの構成要素"></p>
+<p>Appleは、Foundation Modelsフレームワークのコアもオープンソースになると説明しました。これにより、Swiftが動く環境、Linuxサーバーも含めて、LLMとの対話に使えるようになります。</p>
+<p>AnthropicやGoogleなどのモデルプロバイダーに加え、CoreAIとMLXのインテグレーションも含め、どこでも任意のモデルを実行できるようになる、という位置づけです。</p>
+<p><img src="images/model-provider-integrations.jpg" alt="モデルプロバイダーとCoreAI/MLXの統合"></p>
+<h2 id="関連セッション関連リンク">関連セッション＆関連リンク</h2>
+<ul>
+<li><a href="https://developer.apple.com/documentation/FoundationModels/origami-crafting-a-dynamic-tutorial-for-apple-intelligence">サンプルコード  Origami: Crafting a dynamic tutorial for Apple Intelligence</a></li>
+<li><a href="https://developer.apple.com/jp/videos/play/wwdc2026/242/">Foundation Modelフレームワークによる、エージェントを活用したアプリ体験の構築</a></li>
+<li><a href="https://developer.apple.com/jp/videos/play/wwdc2026/298/">Evaluationsフレームワークについて</a></li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>新しいオンデバイスモデルは、知性・ロジック・ツール呼び出しが向上</li>
+<li>画像理解ができるようになり、画像添付をプロンプトに含められる</li>
+<li>Private Cloud Computeにより、より大きなコンテキストとリーズニングを利用できる</li>
+<li><code>LanguageModel</code> プロトコルにより、ローカル・サーバー・サードパーティモデルを同じ抽象化で扱える</li>
+<li><code>usage</code> により、トークン使用量を追跡できる</li>
+<li>VisionとSpotlightのシステムツールが追加される</li>
+<li>Dynamic Profileにより、エージェント的なアプリ体験のコンテキスト管理を宣言的に書ける</li>
+<li>Evaluationフレームワークにより、プロンプト変更の品質影響を測定できる</li>
+<li><code>fm</code> CLIとPython SDKにより、アプリ外のワークフローでもFoundation Modelsを利用できる</li>
+<li>Foundation Models frameworkとutilitiesがオープンソース化される</li>
+</ul>
+
+  </div>
+</article>
+
+
+<div class="wrapper">
+  <div class="entry-feed-title">Related Entries</div>
+  <div class="entry-feed"><div class="feed-item">
+  
+  <a href="/posts/wwdc26_whats_new_in_swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc26_whats_new_in_swiftui/images/liquid_glass_slider_tint.jpg" class="feed-item-image" alt="WWDC26 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC26 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2026年6月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc26_platforms_state_of_the_union/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc26_platforms_state_of_the_union/images/apple_intelligence_architecture.jpg" class="feed-item-image" alt="WWDC26 Platforms State of the Unionまとめ ― Foundation Models・SwiftUI・Xcode 27の注目アップデート" width="300"></div>
+
+    <span class="feed-item-title">WWDC26 Platforms State of the Unionまとめ ― Foundation Models・SwiftUI・Xcode 27の注目アップデート</span>
+    <span class="feed-item-date">2026年6月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/wwdc24-whats-new-in-swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/wwdc24-whats-new-in-swiftui/top.jpg" class="feed-item-image" alt="[WWDC24] SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">[WWDC24] SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2024年6月25日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-app-clips/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-app-clips/top.png" class="feed-item-image" alt="Human Interface GuidelinesのApp Clipsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのApp Clipsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月7日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+<div class="feed-item">
+  
+  <a href="/posts/hig-widgets/">
+    <div class="feed-item-image-wrapper"><img data-src="/images/hig-widgets/top.png" class="feed-item-image" alt="Human Interface GuidelinesのWidgetsの章の日本語訳" width="300"></div>
+
+    <span class="feed-item-title">Human Interface GuidelinesのWidgetsの章の日本語訳</span>
+    <span class="feed-item-date">2020年7月2日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+</div>
+  <div class="entry-feed-title">Latest Entries</div>
+  <div class="entry-feed">
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc26_whats_new_in_the_foundation_models/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc26_whats_new_in_the_foundation_models/images/model-provider-integrations.jpg" class="feed-item-image" alt="WWDC26 Foundation Modelフレームワークの新機能" width="300"></div>
+
+    <span class="feed-item-title">WWDC26 Foundation Modelフレームワークの新機能</span>
+    <span class="feed-item-date">2026年6月10日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc26_whats_new_in_swiftui/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc26_whats_new_in_swiftui/images/liquid_glass_slider_tint.jpg" class="feed-item-image" alt="WWDC26 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC26 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2026年6月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc26_platforms_state_of_the_union/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc26_platforms_state_of_the_union/images/apple_intelligence_architecture.jpg" class="feed-item-image" alt="WWDC26 Platforms State of the Unionまとめ ― Foundation Models・SwiftUI・Xcode 27の注目アップデート" width="300"></div>
+
+    <span class="feed-item-title">WWDC26 Platforms State of the Unionまとめ ― Foundation Models・SwiftUI・Xcode 27の注目アップデート</span>
+    <span class="feed-item-date">2026年6月9日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/import-icon-composer-icons-into-xcode-project/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/import-icon-composer-icons-into-xcode-project/icons.png" class="feed-item-image" alt="Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む" width="300"></div>
+
+    <span class="feed-item-title">Icon Composerで作ったアイコンをXcodeプロジェクトに取り込む</span>
+    <span class="feed-item-date">2025年6月18日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-visionos-widget-summary/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-visionos-widget-summary/top.png" class="feed-item-image" alt="WWDC25 visionOS用Widgetについてのまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 visionOS用Widgetについてのまとめ</span>
+    <span class="feed-item-date">2025年6月16日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+      <div class="feed-item">
+  
+  <a href="/posts/wwdc25-swiftui-new-features/">
+    <div class="feed-item-image-wrapper"><img data-src="/posts/wwdc25-swiftui-new-features/top.png" class="feed-item-image" alt="WWDC25 SwiftUIの新機能のまとめ" width="300"></div>
+
+    <span class="feed-item-title">WWDC25 SwiftUIの新機能のまとめ</span>
+    <span class="feed-item-date">2025年6月13日</span>
+    <span class="feed-item-date">tokorom</span>
+  </a>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+    <footer class="footer">
+  <div class="wrapper">
+    <div class="footer-contents-team">
+      <h2 class="footer-contents-title">OWNER</h2>
+      <div class="footer-contents-team-item">
+        <img class="footer-contents-team-item-avatar" src="/images/tokorom.jpg" width="50" />
+        <div class="footer-contents-team-item-position">Tokoro Yuta</div>
+        <div class="footer-contents-team-item-name">所 友太</div>
+        <div class="footer-contents-team-item-bio">
+          合同会社Spinners所属のiOSプログラマー。<br />
+          著書に『iPhoneプログラミングUIKit詳解リファレンス』『よくわかるAuto Layout（監修）』『iOS 11/12 Programming』など。
+        </div>
+        <div class="footer-contents-team-item-footer">
+          <a class="footer-contents-team-item-footer-button" href="https://twitter.com/tokorom"><img src="/images/twitter.svg" alt="twiiter" /></a>
+          <a class="footer-contents-team-item-footer-button" href="https://github.com/tokorom"><img src="/images/github.svg" alt="github" /></a>
+          <a class="footer-contents-team-item-footer-link" href="https://www.spinners.work">www.spinners.work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    
+        Copyright © tokorom. All Rights Reserved.
+    
+  </div>
+</footer>
+
+    
+    
+        
+    
+        
+            <script src="/dist/main.afe12a577ea5a571a021.min.js"></script>
+        
+    
+
+
+
+<script>
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-396J65F7R6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-396J65F7R6');
+</script>
+
+
+</body>
+</html>
