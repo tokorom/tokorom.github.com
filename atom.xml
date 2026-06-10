@@ -25,7 +25,7 @@
       <description>
         WWDC26のセッション SwiftUIの新機能 で紹介されたSwiftUIの主要なアップデートをまとめます。
 SwiftUIの新機能 0. はじめにまとめ ざっくりとは以下のアップデートがあります。
-Liquid Glassが改善 ドキュメントベースのアプリが作りやすく 全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように confirmationDialogとalertでitem-bindingが使えるように AsyncImageのcache対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 17 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でリビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
+Liquid Glassが改善 ドキュメントベースのアプリが作りやすく あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応 confirmationDialogとalertでitem-bindingが使えるように AsyncImageのHTTPキャッシュ対応 @Stateの改善 @ContentBuilderによる型チェックの高速化 Xcode 27 Agent Skillsの導入 1. Refreshed look and feel（洗練された外観と操作感） Liquid Glassデザインの自動更新 iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でビルドするだけで、アプリに刷新された Liquid Glassデザイン が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
 Liquid Glassは洗練された外観を持ち、新しいLiquid Glassスライダーに自動的に対応してティントを調整します。
 macOSでは、Liquid Glassのカスタム要素を「インタラクティブ」としてマークすると、ユーザーのクリックにより流動的に反応します。これはマウスポインターでうまく動作するように最適化されています。
 ウィンドウの制御とアクティブ状態の検知 iPadやMacでは、非アクティブなウィンドウは独特の外観になり、アイコンとテキストが自動的に薄くなってアクティブなウィンドウが区別しやすくなります。
