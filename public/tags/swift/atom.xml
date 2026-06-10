@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jun 2026 14:33:32 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swift/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Jun 2026 10:30:49 +0900</lastBuildDate><atom:link href="https://www.tokoro.me/tags/swift/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WWDC26 Foundation Modelフレームワークの新機能</title>
+      <link>https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/</link>
+      <pubDate>Wed, 10 Jun 2026 10:30:49 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/</guid>
+      <description>WWDC26のセッション Foundation Modelフレームワークの新機能 で紹介された内容を、後から見返しやすいように整理します。
+Appleの説明では、Foundation Modelsは OS内外との統合、より幅広いモデル対応、そして エージェント体験を構築するための新しいプリミティブ が大きなテーマです。具体的には、モデルのアップデート、Vision対応、Private Cloud Compute、モデル抽象化、システムツール、Dynamic Profile、Evaluations、Mac向けツール、Python SDK、オープンソース化が紹介されています。
+Foundation Models frameworkのオープンソース化 Foundation Modelsフレームワークは、本セッションで紹介された多くの新しいAPIを含めてオープンソースになります。コアフレームワークに加えて、次のOSバージョンアップを待たずに更新される Foundation Models framework utilities も公開されます。
+関連ドキュメント: Foundation Models Documentation / Foundation Models updates / Foundation Models framework utilitiesのGitHubリポジトリ
+新しいオンデバイスモデル このリリースでは、新しいオンデバイスモデルが登場します。Appleの説明では、ゼロから再構築され、知性、ロジック、ツール呼び出しが向上しています。
+iOS 26.4では、モデルのコンテキストサイズを検査するAPIと、命令・プロンプト・トランスクリプトのトークン数を数えるAPIがリリースされました。今後はこれらを活用して、アプリを実行中のハードウェアに適応させることが推奨されています。
+// Context size and token counting let model = SystemLanguageModel() print(model.contextSize) // 8192 let count = try await model.tokenCount(for: &amp;quot;What are the Japanese characters for origami?&amp;quot;) print(count) ガードレールも改善されています。AppleはiOS 26.4で誤検知を減らす調整を行い、iOS 27でもさらに改善を続けていると説明しています。</description>
+    </item>
+    
     <item>
       <title>WWDC26 SwiftUIの新機能のまとめ</title>
       <link>https://www.tokoro.me/posts/wwdc26_whats_new_in_swiftui/</link>

@@ -2,41 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.tokoro.me/tags/ios/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
+    <loc>https://www.tokoro.me/tags/appleintelligence/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/tags/ipados/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
+    <loc>https://www.tokoro.me/tags/foundationmodels/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/ios/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/macos/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/posts/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/swift/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/watchos/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/wwdc/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/</loc>
+    <lastmod>2026-06-10T10:30:49+09:00</lastmod>
+  </url><url>
+    <loc>https://www.tokoro.me/tags/ipados/</loc>
     <lastmod>2026-06-09T14:33:32+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/swiftui/</loc>
     <lastmod>2026-06-09T14:33:32+09:00</lastmod>
   </url><url>
-    <loc>https://www.tokoro.me/tags/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/watchos/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/wwdc/</loc>
-    <lastmod>2026-06-09T14:33:32+09:00</lastmod>
-  </url><url>
     <loc>https://www.tokoro.me/posts/wwdc26_whats_new_in_swiftui/</loc>
     <lastmod>2026-06-09T14:33:32+09:00</lastmod>
-  </url><url>
-    <loc>https://www.tokoro.me/tags/appleintelligence/</loc>
-    <lastmod>2026-06-09T12:00:00+09:00</lastmod>
   </url><url>
     <loc>https://www.tokoro.me/tags/tvos/</loc>
     <lastmod>2026-06-09T12:00:00+09:00</lastmod>

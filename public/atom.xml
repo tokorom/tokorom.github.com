@@ -6,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Copyright © tokorom. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 09 Jun 2026 14:33:32 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 10:30:49 +0900</lastBuildDate>
     <image>
       <url>https://www.tokoro.me/img/hugo.png</url>
       <title>GoHugo.io</title>
@@ -15,6 +15,26 @@
     
 	<atom:link href="https://www.tokoro.me/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WWDC26 Foundation Modelフレームワークの新機能</title>
+      <link>https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/</link>
+      <pubDate>Wed, 10 Jun 2026 10:30:49 +0900</pubDate>
+      
+      <guid>https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/</guid>
+      <description>
+        WWDC26のセッション Foundation Modelフレームワークの新機能 で紹介された内容を、後から見返しやすいように整理します。
+Appleの説明では、Foundation Modelsは OS内外との統合、より幅広いモデル対応、そして エージェント体験を構築するための新しいプリミティブ が大きなテーマです。具体的には、モデルのアップデート、Vision対応、Private Cloud Compute、モデル抽象化、システムツール、Dynamic Profile、Evaluations、Mac向けツール、Python SDK、オープンソース化が紹介されています。
+Foundation Models frameworkのオープンソース化 Foundation Modelsフレームワークは、本セッションで紹介された多くの新しいAPIを含めてオープンソースになります。コアフレームワークに加えて、次のOSバージョンアップを待たずに更新される Foundation Models framework utilities も公開されます。
+関連ドキュメント: Foundation Models Documentation / Foundation Models updates / Foundation Models framework utilitiesのGitHubリポジトリ
+新しいオンデバイスモデル このリリースでは、新しいオンデバイスモデルが登場します。Appleの説明では、ゼロから再構築され、知性、ロジック、ツール呼び出しが向上しています。
+iOS 26.4では、モデルのコンテキストサイズを検査するAPIと、命令・プロンプト・トランスクリプトのトークン数を数えるAPIがリリースされました。今後はこれらを活用して、アプリを実行中のハードウェアに適応させることが推奨されています。
+// Context size and token counting let model = SystemLanguageModel() print(model.contextSize) // 8192 let count = try await model.tokenCount(for: &amp;quot;What are the Japanese characters for origami?&amp;quot;) print(count) ガードレールも改善されています。AppleはiOS 26.4で誤検知を減らす調整を行い、iOS 27でもさらに改善を続けていると説明しています。
+      </description>
+      
+      <coverImage>https://www.tokoro.me/posts/wwdc26_whats_new_in_the_foundation_models/images/model-provider-integrations.jpg</coverImage>
+      
+    </item>
     
     <item>
       <title>WWDC26 SwiftUIの新機能のまとめ</title>
@@ -511,38 +531,6 @@ nnoremap ze &amp;lt;S-v&amp;gt;!deepl-cui-swift -s JA -w&amp;lt;CR&amp;gt; とze
       </description>
       
       <coverImage>https://www.tokoro.me/images/commit-message-inline-translation/top.png</coverImage>
-      
-    </item>
-    
-    <item>
-      <title>iOS14で戻るボタンのタイトルを空欄にするきちんとした方法</title>
-      <link>https://www.tokoro.me/posts/ios14_blank_back_button/</link>
-      <pubDate>Mon, 26 Oct 2020 17:02:15 +0900</pubDate>
-      
-      <guid>https://www.tokoro.me/posts/ios14_blank_back_button/</guid>
-      <description>
-        先にまとめ if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; } でOK！
-概要 iOS14のアップデートの1つに、
-ナビゲーションバーの戻るボタンを長押しすると、画面遷移のヒストリーが表示され、いくつか前の画面までいっきに戻ることができる というのがありますよね。
-ユーザー目線ではたいへん便利な機能ですが、例えば、デザイン的に「戻るのタイトルを空欄」にしていたりすると、
-と、この長押し時の戻り先リストも空欄になってしまうなどの問題が出てきます。
-iOS13以前の方法 iOS13以前では、例えば、
-Xcodeで該当画面（戻り先の画面）のNavigation ItemのBack Buttonに空白を1つ入れるなどして、戻るのタイトルを消すワークアラウンドがありました。
-しかし、これをすると、iOS 14以降では長押し時の戻り先リストがおかしくなってしまうわけです。
-iOS14でのきちんとした方法 そのため、まずiOS14ではBack Buttonの設定はいじらないようにしましょう1。
-そうすると当然、
-このように戻るボタンのところに画面名が表示されてしまいます。
-そのうえで、iOS14から追加されたUINavigationItemのbackButtonDisplayModeを設定します。
-https://developer.apple.com/documentation/uikit/uinavigationitem/3656350-backbuttondisplaymode
-戻り先のUIViewControllerで、
-if #available(iOS 14.0, *) { navigationItem.backButtonDisplayMode = .minimal } else { navigationItem.backButtonTitle = &amp;quot; &amp;quot; } と navigationItem.backButtonDisplayMode に .minimal を設定することで、戻るボタンのタイトルが非表示になります。
-また、Back Buttonなどもいじっていないため、戻るボタン長押し時の戻り先のリストも、
-のようにきちんと表示されます。
-UINavigationItem.BackButtonDisplayMode なお、backButtonDisplayMode には以下の３種の値を設定できます。
-BackButtonDisplayMode 挙動 default デフォルト値はこれで従来の挙動。具体的には画面のスペースに応じて「前画面のnavigationItem.backButtonTitle」「前画面のtitle」「Back（戻る）」「空欄」の優先順位でいずれかが表示される generic スペースがあれば「Back（戻る）」を表示、なければ空欄 minimal 常に空欄 例えば、先ほどの画面にgenericを設定した時のサンプルはこちらです。
-      </description>
-      
-      <coverImage>https://www.tokoro.me/images/ios14_blank_back_button/top.png</coverImage>
       
     </item>
     
