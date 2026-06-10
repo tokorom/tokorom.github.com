@@ -26,18 +26,18 @@ SwiftUIの新機能
 
 - Liquid Glassが改善
 - ドキュメントベースのアプリが作りやすく
-- 全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように
+- あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応
 - confirmationDialogとalertでitem-bindingが使えるように
-- AsyncImageのcache対応
+- AsyncImageのHTTPキャッシュ対応
 - @Stateの改善
 - @ContentBuilderによる型チェックの高速化
-- Xcode 17 Agent Skillsの導入
+- Xcode 27 Agent Skillsの導入
 
 ## 1. Refreshed look and feel（洗練された外観と操作感）
 
 ### Liquid Glassデザインの自動更新
 
-iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でリビルドするだけで、アプリに刷新された **Liquid Glassデザイン** が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
+iOS 27 / macOS 17 / iPadOS 27 向けにXcode 27でビルドするだけで、アプリに刷新された **Liquid Glassデザイン** が自動的に適用されます。コードを1行も変更することなく、最新のUI外観を得ることができます。
 
 ![liquid_glass_slider_tint](images/liquid_glass_slider_tint.jpg)
 
@@ -96,7 +96,7 @@ CommandMenu("Stickers") {
 
 iOS 27では、iPhoneアプリもサイズ変更可能（リサイズ対応）になります。
 
-Xcode 27のライブプレビューにリサイズハンドルが追加され、iPhone Mirroringの動作や、iPadでiPhoneアプリとして実行された場合のレイアウト変更（サイズクラスの対応）を即座にプレビュー・テストできるようになりました。
+Xcode 27のライブプレビューにリサイズハンドルが追加され、iPhone Mirroringでの動作や、iPadでiPhoneアプリとして実行された場合のレイアウト変更（サイズクラスの対応）を即座にプレビュー・テストできるようになりました。
 
 ![ipad_iphone_app_resize](images/ipad_iphone_app_resize.jpg)
 
@@ -299,6 +299,10 @@ struct Writer<Snapshot>: DocumentWriter {
 
 ![snapshot_writer_reader_concept](images/snapshot_writer_reader_concept.jpg)
 
+### ドキュメントURLへのダイレクトアクセス
+
+今回のDocument APIでは、`FileDocument` / `ReferenceFileDocument` をベースにしたドキュメントで、ドキュメントURLへ直接アクセスするためのサポートも追加されています。大きなドキュメントを扱う場合や、ドキュメント内のリソースを必要に応じて読み書きしたい場合に、上記のスナップショットベースの読み書き最適化と組み合わせて使える改善です。
+
 ### 複数フォーマットでの保存サポート
 
 同じドキュメントを、独自のパッケージ形式だけでなくPNG画像など他のフォーマットでもエクスポートできるように、`writableContentTypes` に複数のUTTypeを登録できます。
@@ -486,7 +490,7 @@ struct StickerCanvasView: View {
 
 これまで `AsyncImage` は画像をメモリに保持していなかったため、画面外にスクロールして戻ると再読み込みが発生していました。
 
-iOS 27 / macOS 17 以降では、`AsyncImage` が標準の **HTTPキャッシュ機能** を自動的にサポートし、キャッシュヘッダーを尊重してデータをキャッシュするようになりました。コードの変更は不要で、すべてのアプリで自動的に有効化されます。
+iOS 27 / macOS 17 以降では、`AsyncImage` が標準の **HTTPキャッシュ機能** を自動的にサポートし、キャッシュヘッダーを尊重してデータをキャッシュするようになりました。コードの変更は不要で、自動的に有効化されます。
 
 #### ダウンロードのカスタマイズ
 キャッシュポリシーを個別に設定する場合や、長期のカスタムキャッシュを使用する場合は、独自の `URLRequest` やカスタム `URLSession` を定義して `asyncImageURLSession` モディファイアに渡すことができます。
@@ -522,7 +526,7 @@ asyncImageURLSession
 
 親ビューの再レンダリングによってビューの構造体が再作成される際、従来の挙動では `@State` 内に定義された `@Observable` クラスインスタンスもその都度新しく初期化され（その後破棄される）、不要なパフォーマンスオーバーヘッドとなっていました。
 
-Xcode27以降では、`@State` プロパティでインスタンス化されるクラスが自動的に **lazy（遅延初期化）** となり、ビューのライフタイム中に一度だけ初期化されるように最適化されました。
+Xcode27以降では、`@State` が `DynamicProperty` からマクロへ変わったことで、`@State` プロパティでインスタンス化されるクラスが **lazy（遅延初期化）** となり、ビューのライフタイム中に一度だけ初期化されるように最適化されました。
 
 ```swift
 @Observable class StickerStore { }
@@ -544,6 +548,8 @@ struct StickerStoreView: View {
 
 ![state_lazy_backport_os](images/state_lazy_backport_os.jpg)
 
+なお、`@State` にデフォルト値を指定しつつ `init` 内でも同じプロパティへ代入しているコードでは、マクロ化の影響で source-breaking change になる場合があります。その場合は不要なデフォルト値を削除し、`init` 内の初期化に一本化します。
+
 ### コンパイラ型チェックの高速化と ContentBuilder
 
 ビューが深くネストされた構造（`Section` や `Group`、`ForEach` の入れ子）では、コンパイラがどのオーバーロード候補（ビュービルダーかテーブル行ビルダーかなど）を使用すべきか判断するために、膨大な型チェックの組み合わせパスを検証する必要があり、ビルド時に「型チェックの時間が長すぎます」というコンパイルエラーが発生することがありました。
@@ -561,7 +567,7 @@ func stickerLibraryView() -> some View {
 }
 ```
 
-`ContentBuilder` は既存の `ViewBuilder` の進化形で、iOSの最小デプロイターゲットに関わらず使用でき、Xcode 27 を使用したSwiftUIの型チェックのビルドパフォーマンスを大幅に向上させます。
+`ContentBuilder` は既存の `ViewBuilder` の進化形で、最小デプロイメントターゲットに関わらず使用でき、Xcode 27 を使用したSwiftUIの型チェックのビルドパフォーマンスを大幅に向上させます。
 
 <div style="background-color: #e6f3ff; padding: 10px; border-radius: 8px; border: 1px solid #e6e6e6; width: 100%;">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -570,7 +576,7 @@ ContentBuilder
 </a>
 </div>
 
-### Xcode 27 エージェントスキル（Agent Skills）
+## 5. Xcode 27 エージェントスキル（Agent Skills）
 
 ![agent_skills_export_command](images/agent_skills_export_command.jpg)
 
@@ -592,10 +598,9 @@ xcrun agent skills export
 
 - Liquid Glassが改善
 - ドキュメントベースのアプリが作りやすく
-- 全てのコンテナ内で要素の並び替えやスワイプアクションを使えるように
+- あらゆるコンテナでの並び替えと、List以外のビューでのスワイプアクションに対応
 - confirmationDialogとalertでitem-bindingが使えるように
-- AsyncImageのcache対応
+- AsyncImageのHTTPキャッシュ対応
 - @Stateの改善
 - @ContentBuilderによる型チェックの高速化
-- Xcode 17 Agent Skillsの導入
-
+- Xcode 27 Agent Skillsの導入
